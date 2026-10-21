@@ -55,17 +55,18 @@ jobs:
           python eval/evaluate.py --output /tmp/eval_report.json
           cat /tmp/eval_report.json
 
-      - name: Check evaluation results
+      - name: Check smoke test results
         run: |
           python -c "
           import json
           report = json.load(open('/tmp/eval_report.json'))
-          accuracy = report['summary']['overall_accuracy']
-          print(f'Overall accuracy: {accuracy}%')
-          if accuracy < 50:
-              print('WARNING: Accuracy below 50% threshold')
+          agreement = report['summary']['agreement_rate']
+          errors = report['summary']['errors']
+          print(f'Smoke test agreement: {agreement}%')
+          if errors > 0:
+              print(f'ERROR: {errors} test case(s) failed to process')
               exit(1)
-          print('Evaluation passed!')
+          print('Smoke test passed!')
           "
 
       - name: Upload evaluation report

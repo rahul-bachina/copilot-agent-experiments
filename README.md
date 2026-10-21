@@ -2,7 +2,7 @@
 
 A series of small, well-documented AI agent experiments exploring practical applications of Microsoft Copilot, Azure AI Foundry, and Power Platform technologies.
 
-**By [Rahul Bachina](https://www.linkedin.com/in/rahulbachina/)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Azure AI Foundry, Copilot Studio, and GitHub Copilot.
+**By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Azure AI Foundry, Copilot Studio, and GitHub Copilot.
 
 ## About This Series
 
@@ -38,7 +38,7 @@ Each experiment is self-contained in its own folder under `experiments/`. Naviga
 
 ```bash
 # Clone the repo
-git clone https://github.com/rahulbachina/copilot-agent-experiments.git
+git clone https://github.com/rahul-bachina/copilot-agent-experiments.git
 cd copilot-agent-experiments
 
 # Try an experiment in mock mode (no Azure credentials needed)
@@ -76,8 +76,8 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) for de
 
 ## Connect
 
-- 🔗 [LinkedIn](https://www.linkedin.com/in/rahulbachina/)
-- 💬 Questions? Open an issue or reach out on LinkedIn
+- 🔗 [GitHub](https://github.com/rahul-bachina)
+- 💬 Questions? Open an issue
 
 ---
 
