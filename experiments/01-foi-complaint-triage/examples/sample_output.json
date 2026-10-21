@@ -1,0 +1,103 @@
+{
+  "triage_id": "TRG-20261021-EXAM01",
+  "timestamp": "2026-10-21T10:30:00Z",
+  "extracted_asks": [
+    {
+      "ask_id": 1,
+      "summary": "All correspondence between Planning and developers about Riverside Park",
+      "source_quote": "All correspondence (including emails, letters, and meeting notes) between the Council's Planning Department and any property developers regarding the proposed development at Riverside Park, from January 2024 to present.",
+      "specificity": "broad",
+      "date_range_specified": true,
+      "estimated_scope": "wide"
+    },
+    {
+      "ask_id": 2,
+      "summary": "Environmental impact assessments for Riverside Park",
+      "source_quote": "Any environmental impact assessments conducted for the Riverside Park development site.",
+      "specificity": "specific",
+      "date_range_specified": false,
+      "estimated_scope": "narrow"
+    },
+    {
+      "ask_id": 3,
+      "summary": "Pre-application discussions with developers",
+      "source_quote": "Details of any pre-application discussions or advice given to developers for this site.",
+      "specificity": "broad",
+      "date_range_specified": false,
+      "estimated_scope": "moderate"
+    },
+    {
+      "ask_id": 4,
+      "summary": "Planning Committee meeting minutes",
+      "source_quote": "Minutes from any Planning Committee meetings where this development was discussed.",
+      "specificity": "specific",
+      "date_range_specified": false,
+      "estimated_scope": "moderate"
+    },
+    {
+      "ask_id": 5,
+      "summary": "Public objections to the development",
+      "source_quote": "Records of any objections received from members of the public regarding this proposed development.",
+      "specificity": "specific",
+      "date_range_specified": false,
+      "estimated_scope": "moderate"
+    }
+  ],
+  "classification": {
+    "primary_type": "mixed",
+    "secondary_types": ["foi_request", "eir_request"],
+    "confidence": "high",
+    "rationale": "This is primarily an FOI request but includes environmental impact assessments which fall under EIR. The request for environmental assessments should be handled under EIR 2004, which has different exemptions and public interest test.",
+    "indicators": ["freedom of information act 2000", "provide me with the following information", "environmental impact assessments"]
+  },
+  "routing": {
+    "suggested_department": "Planning",
+    "suggested_team": "FOI/EIR Team with Planning liaison",
+    "alternative_routes": [
+      {
+        "department": "Information Governance",
+        "team": "Central FOI Team",
+        "reason": "If Planning team capacity is limited"
+      }
+    ],
+    "external_referral_needed": false
+  },
+  "flags": {
+    "urgency_level": "standard",
+    "safeguarding_concern": false,
+    "requires_immediate_human_review": false,
+    "legal_action_mentioned": false,
+    "media_interest_indicated": false
+  },
+  "cost_limit_assessment": {
+    "likely_exceeds_limit": true,
+    "assessment_rationale": "Request for 'all correspondence' over an extended period (Jan 2024 to present) is likely to require significant search time across email systems, shared drives, and paper files. The five distinct asks compound this.",
+    "scope_concerns": [
+      "Request covers 'all correspondence' - very broad scope",
+      "Time period of over 2 years for correspondence",
+      "Multiple distinct asks requiring separate searches"
+    ],
+    "refinement_suggestions": [
+      "Consider narrowing to correspondence with specific named developers",
+      "Focus on key decision points rather than all correspondence",
+      "Specify which aspects of environmental assessment are most relevant"
+    ],
+    "clarification_needed": true,
+    "draft_clarification_letter": "Dear Requester,\n\nThank you for your request for information about the Riverside Park development.\n\nWe are keen to help you access the information you need. However, to ensure we can respond effectively within the statutory timeframe, it would be helpful if you could provide some additional clarity.\n\nYour request for 'all correspondence' between Planning and developers covers a substantial period and may include a large volume of material. To help us focus our search:\n\n- Are there particular developers or companies you are most interested in?\n- Is there a specific decision or event related to the development you are researching?\n- Would summary documents or key decision records meet your needs, rather than all correspondence?\n\nFor the environmental impact assessments, could you let us know if you are looking for the formal EIA submissions, or also screening/scoping opinions?\n\nPlease feel free to call us on [number] if you would like to discuss this - we are happy to help you refine the request.\n\nYours faithfully,\n[Information Governance Team]"
+  },
+  "bulk_submission_signals": {
+    "detected": false,
+    "note": "This is informational only. Bulk/templated requests remain valid and must be processed according to FOI/EIR requirements."
+  },
+  "summary": {
+    "one_line": "Mixed FOI/EIR request about Riverside Park planning development with 5 asks",
+    "key_topics": ["Planning", "Development", "Environment"],
+    "recommended_action": "Engage with requester to clarify scope of 'all correspondence' before commencing search. Handle environmental elements under EIR."
+  },
+  "metadata": {
+    "model_version": "example-v0.1",
+    "processing_mode": "mock",
+    "input_character_count": 892,
+    "input_word_count": 156
+  }
+}

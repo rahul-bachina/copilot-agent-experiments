@@ -1,0 +1,234 @@
+{
+  "_metadata": {
+    "description": "Synthetic evaluation dataset for FOI Complaint Triage Agent",
+    "version": "1.0.0",
+    "created": "2026-10-21",
+    "note": "ALL DATA IN THIS FILE IS SYNTHETIC/FICTIONAL. No real personal data, real requests, or real individuals are represented. Created for testing and demonstration purposes only.",
+    "count": 12
+  },
+  "test_cases": [
+    {
+      "id": "EVAL-001",
+      "name": "Simple FOI - council expenditure",
+      "input_text": "Dear Council,\n\nUnder the Freedom of Information Act 2000, I request information about council expenditure on external consultants for the financial year 2025-2026.\n\nSpecifically, please provide:\n1. Total amount spent on external consultants\n2. Names of consultancy firms used\n3. Purpose of each consultancy engagement over £10,000\n\nPlease respond within 20 working days.\n\nYours faithfully,\nA. Citizen",
+      "expected": {
+        "classification": {
+          "primary_type": "foi_request",
+          "confidence": "high"
+        },
+        "ask_count_min": 3,
+        "flags": {
+          "urgency_level": "standard",
+          "safeguarding_concern": false,
+          "requires_immediate_human_review": false
+        },
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": false
+        },
+        "bulk_submission_signals": {
+          "detected": false
+        }
+      }
+    },
+    {
+      "id": "EVAL-002",
+      "name": "EIR request - air quality",
+      "input_text": "Hello,\n\nI am requesting environmental information under the Environmental Information Regulations 2004.\n\nPlease provide all air quality monitoring data collected at the High Street monitoring station for the period January 2025 to September 2026, including:\n- Nitrogen dioxide (NO2) levels\n- Particulate matter (PM2.5 and PM10) readings\n- Any exceedances of legal limits\n\nI understand you must respond within 20 working days.\n\nThank you",
+      "expected": {
+        "classification": {
+          "primary_type": "eir_request",
+          "confidence": "high"
+        },
+        "ask_count_min": 3,
+        "flags": {
+          "urgency_level": "standard",
+          "safeguarding_concern": false
+        },
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": false
+        }
+      }
+    },
+    {
+      "id": "EVAL-003",
+      "name": "Subject Access Request",
+      "input_text": "Dear Data Protection Officer,\n\nUnder the UK GDPR and Data Protection Act 2018, I am making a Subject Access Request.\n\nI request a copy of all personal data you hold about me, including:\n- Any case files or records\n- Notes from any meetings or phone calls\n- Internal emails that mention me\n- Any decisions made about me and the reasoning\n\nMy details are:\nName: Jane Smith\nAddress: 45 Oak Lane, Townsville\nDOB: 15/03/1985\n\nPlease provide this within one calendar month.\n\nRegards,\nJane Smith",
+      "expected": {
+        "classification": {
+          "primary_type": "subject_access_request",
+          "confidence": "high"
+        },
+        "ask_count_min": 1,
+        "flags": {
+          "urgency_level": "standard",
+          "safeguarding_concern": false
+        },
+        "routing": {
+          "suggested_team_contains": "data protection"
+        }
+      }
+    },
+    {
+      "id": "EVAL-004",
+      "name": "Complaint with FOI elements",
+      "input_text": "I am absolutely DISGUSTED with the way your housing department has treated my family. We have been waiting over a year for repairs to our council property and nothing has been done despite multiple reports.\n\nThe damp is making my children ill and you do NOTHING. This is unacceptable and I am considering legal action.\n\nI also want to know:\n1. How many other tenants have complained about repair delays this year?\n2. What is your average repair completion time?\n3. Who is responsible for approving repair works?\n\nI expect a full response and apology.\n\nDisgusted tenant",
+      "expected": {
+        "classification": {
+          "primary_type": "mixed"
+        },
+        "flags": {
+          "urgency_level": "elevated",
+          "legal_action_mentioned": true
+        },
+        "routing": {
+          "suggested_department_contains": "housing"
+        }
+      }
+    },
+    {
+      "id": "EVAL-005",
+      "name": "Safeguarding concern - vulnerable person",
+      "input_text": "Please help me. I am disabled and rely on your adult social care services. My carer has not come for three days and I cannot leave my bed. I have no food and my medication is running out.\n\nI have tried calling the office but nobody answers. I don't know what to do. I am scared.\n\nI want to know why my care has stopped and who cancelled it. Please, someone help me.\n\nMary, 78 years old",
+      "expected": {
+        "classification": {
+          "primary_type": "complaint"
+        },
+        "flags": {
+          "urgency_level": "critical",
+          "safeguarding_concern": true,
+          "requires_immediate_human_review": true
+        },
+        "routing": {
+          "suggested_department_contains": "social"
+        }
+      }
+    },
+    {
+      "id": "EVAL-006",
+      "name": "Very broad FOI - likely exceeds cost limit",
+      "input_text": "Under FOI, please provide:\n\n1. All emails sent and received by the Chief Executive over the last 5 years\n2. Complete records of all council meetings since 2015\n3. Every document relating to any contract over £1,000 awarded in the last decade\n4. All correspondence with central government departments\n5. Complete staff organograms for each year since 2010\n6. All internal audit reports ever produced\n7. Every complaint received about any council service\n\nI require this information urgently.",
+      "expected": {
+        "classification": {
+          "primary_type": "foi_request"
+        },
+        "ask_count_min": 5,
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": true,
+          "clarification_needed": true
+        },
+        "flags": {
+          "urgency_level": "standard"
+        }
+      }
+    },
+    {
+      "id": "EVAL-007",
+      "name": "Template/bulk submission signals",
+      "input_text": "Dear Freedom of Information Officer,\n\nI am writing to make a request for information under the Freedom of Information Act 2000.\n\nIn accordance with Section 1(1) of the Act, I would like to request the following information:\n\n1. Please state how many data breaches your organisation has reported to the Information Commissioner's Office in each of the last three financial years.\n\n2. Please provide a summary of each breach, including the type of data involved and the number of individuals affected.\n\n3. Please confirm what actions were taken following each breach.\n\nPursuant to Section 10 of the Act, I would expect a response within 20 working days. If you require any clarification, please do not hesitate to contact me.\n\nIf any information is exempt, please cite the specific exemption and provide reasoning for why the public interest favours withholding the information.\n\nI look forward to your response.\n\nYours faithfully,\nConcerned Citizen",
+      "expected": {
+        "classification": {
+          "primary_type": "foi_request",
+          "confidence": "high"
+        },
+        "bulk_submission_signals": {
+          "detected": true
+        },
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": false
+        }
+      }
+    },
+    {
+      "id": "EVAL-008",
+      "name": "NHS complaint with health concerns",
+      "input_text": "I am writing to complain about the care my mother received at General Hospital.\n\nShe was admitted on 5th October with chest pains. Despite being in obvious distress, she waited 8 hours in A&E before being seen. When she was finally admitted, staff seemed rushed and dismissive.\n\nWorse, she was discharged after just one night even though she could barely walk. Two days later she was readmitted with a heart attack.\n\nI believe the premature discharge put her life at risk. I want:\n1. A full investigation into her care\n2. An explanation of the discharge decision\n3. Assurance this won't happen to others\n\nI am also requesting her complete medical records for this period.\n\nI have copied my MP on this email and will be contacting the press if I don't receive a satisfactory response.",
+      "expected": {
+        "classification": {
+          "primary_type": "mixed"
+        },
+        "flags": {
+          "urgency_level": "elevated",
+          "media_interest_indicated": true
+        },
+        "routing": {
+          "external_referral_needed": true
+        }
+      }
+    },
+    {
+      "id": "EVAL-009",
+      "name": "Benefits complaint - DWP referral",
+      "input_text": "My Universal Credit was stopped without warning and now I can't pay my rent or feed my kids. The DWP website says I need to contact you about housing benefit but nobody will help me.\n\nI've been sanctioned for missing an appointment but I was in hospital - I have the letter to prove it. This is WRONG.\n\nI need to know:\n- Why was my claim stopped?\n- What information do you share with DWP about me?\n- How do I appeal this decision?\n\nI don't know how I'm going to survive. This is causing me severe mental distress.",
+      "expected": {
+        "classification": {
+          "primary_type": "complaint"
+        },
+        "flags": {
+          "urgency_level": "elevated",
+          "safeguarding_concern": false
+        },
+        "routing": {
+          "suggested_department_contains": "benefit",
+          "external_referral_needed": true
+        }
+      }
+    },
+    {
+      "id": "EVAL-010",
+      "name": "Planning objection with EIR request",
+      "input_text": "Re: Planning Application 2026/1234 - Warehouse Development, Green Belt Lane\n\nI strongly object to this application. Building a warehouse on green belt land will:\n- Destroy wildlife habitat\n- Increase HGV traffic through residential streets  \n- Worsen air pollution in an area already exceeding limits\n\nUnder EIR, please provide:\n1. The ecological survey submitted with this application\n2. Traffic assessment data\n3. Any correspondence between Planning and the applicant prior to submission\n4. Details of any similar applications approved in green belt land in the last 5 years\n\nI reserve the right to speak at the Planning Committee meeting.\n\nA Concerned Resident",
+      "expected": {
+        "classification": {
+          "primary_type": "eir_request"
+        },
+        "ask_count_min": 4,
+        "routing": {
+          "suggested_department_contains": "planning"
+        },
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": false
+        }
+      }
+    },
+    {
+      "id": "EVAL-011",
+      "name": "Simple complaint - bin collection",
+      "input_text": "Our bins haven't been collected for 3 weeks now. Every time I call the helpline I get put on hold for 45 minutes. This is ridiculous.\n\nThe smell is terrible and there are rats appearing in the alley. Please sort this out immediately.\n\nMr Johnson\n14 Maple Street",
+      "expected": {
+        "classification": {
+          "primary_type": "complaint",
+          "confidence": "high"
+        },
+        "ask_count_min": 1,
+        "flags": {
+          "urgency_level": "standard",
+          "safeguarding_concern": false
+        },
+        "cost_limit_assessment": {
+          "likely_exceeds_limit": false
+        },
+        "routing": {
+          "suggested_department_contains": "waste"
+        }
+      }
+    },
+    {
+      "id": "EVAL-012",
+      "name": "Urgent child safeguarding",
+      "input_text": "I need to report something about my neighbour's children. I can hear screaming and crying most nights. The children look thin and frightened when I see them. They are often outside in the cold without proper clothes.\n\nThe oldest one, maybe 8 or 9, told me yesterday that she's scared to go home because 'daddy gets angry'. I'm very worried about their safety.\n\nI don't know if this is the right place to contact but someone needs to help these children. Please treat this urgently.\n\nA worried neighbour\n(I wish to remain anonymous)",
+      "expected": {
+        "classification": {
+          "primary_type": "other"
+        },
+        "flags": {
+          "urgency_level": "critical",
+          "safeguarding_concern": true,
+          "requires_immediate_human_review": true
+        },
+        "routing": {
+          "suggested_department_contains": "social"
+        }
+      }
+    }
+  ]
+}

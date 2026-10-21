@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/rahulbachina/copilot-agent-experiments/experiments/01-foi-complaint-triage/schema/triage_output.schema.json",
+  "title": "FOI Complaint Triage Output",
+  "description": "Structured triage output for FOI requests, EIR requests, subject access requests, and complaints to UK public bodies",
+  "type": "object",
+  "required": [
+    "triage_id",
+    "timestamp",
+    "extracted_asks",
+    "classification",
+    "routing",
+    "flags",
+    "cost_limit_assessment",
+    "bulk_submission_signals"
+  ],
+  "properties": {
+    "triage_id": {
+      "type": "string",
+      "description": "Unique identifier for this triage output",
+      "pattern": "^TRG-[0-9]{8}-[A-Z0-9]{6}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when triage was performed"
+    },
+    "extracted_asks": {
+      "type": "array",
+      "description": "Distinct questions or requests extracted from the submission",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ask_id", "summary", "source_quote", "specificity"],
+        "properties": {
+          "ask_id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Sequential identifier for this ask"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief summary of what is being asked",
+            "maxLength": 200
+          },
+          "source_quote": {
+            "type": "string",
+            "description": "Direct quote from the original text supporting this ask"
+          },
+          "specificity": {
+            "type": "string",
+            "enum": ["specific", "broad", "unclear"],
+            "description": "How specific and answerable the ask is"
+          },
+          "date_range_specified": {
+            "type": "boolean",
+            "description": "Whether the ask includes a specific date range"
+          },
+          "estimated_scope": {
+            "type": "string",
+            "enum": ["narrow", "moderate", "wide", "very_wide"],
+            "description": "Estimated scope of records that would need to be searched"
+          }
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "required": ["primary_type", "confidence", "rationale"],
+      "description": "Classification of the submission type",
+      "properties": {
+        "primary_type": {
+          "type": "string",
+          "enum": ["foi_request", "eir_request", "subject_access_request", "complaint", "mixed", "other"],
+          "description": "Primary classification of the submission"
+        },
+        "secondary_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["foi_request", "eir_request", "subject_access_request", "complaint", "other"]
+          },
+          "description": "Additional applicable classifications if mixed"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "Confidence level in the classification"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation of why this classification was chosen",
+          "maxLength": 500
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key phrases or indicators that led to this classification"
+        }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "required": ["suggested_department", "suggested_team"],
+      "description": "Suggested routing for the submission",
+      "properties": {
+        "suggested_department": {
+          "type": "string",
+          "description": "Suggested department category to handle this request"
+        },
+        "suggested_team": {
+          "type": "string",
+          "description": "Suggested team or function within the department"
+        },
+        "alternative_routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "department": { "type": "string" },
+              "team": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          },
+          "description": "Alternative routing options if primary is unavailable"
+        },
+        "external_referral_needed": {
+          "type": "boolean",
+          "description": "Whether this may need referral to another public body"
+        },
+        "external_referral_suggestion": {
+          "type": "string",
+          "description": "Suggested external body if referral needed"
+        }
+      }
+    },
+    "flags": {
+      "type": "object",
+      "required": ["urgency_level", "safeguarding_concern", "requires_immediate_human_review"],
+      "description": "Priority and safeguarding flags",
+      "properties": {
+        "urgency_level": {
+          "type": "string",
+          "enum": ["standard", "elevated", "urgent", "critical"],
+          "description": "Urgency level for processing"
+        },
+        "urgency_reasons": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Reasons for elevated urgency"
+        },
+        "safeguarding_concern": {
+          "type": "boolean",
+          "description": "Whether there are safeguarding concerns (vulnerability, risk to life, etc.)"
+        },
+        "safeguarding_details": {
+          "type": "string",
+          "description": "Details of safeguarding concern if present"
+        },
+        "requires_immediate_human_review": {
+          "type": "boolean",
+          "description": "Whether this needs immediate escalation to a human"
+        },
+        "escalation_reason": {
+          "type": "string",
+          "description": "Reason for immediate escalation if required"
+        },
+        "vulnerability_indicators": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Indicators of requester vulnerability"
+        },
+        "legal_action_mentioned": {
+          "type": "boolean",
+          "description": "Whether legal action is mentioned or implied"
+        },
+        "media_interest_indicated": {
+          "type": "boolean",
+          "description": "Whether media interest is mentioned or implied"
+        }
+      }
+    },
+    "cost_limit_assessment": {
+      "type": "object",
+      "required": ["likely_exceeds_limit", "assessment_rationale"],
+      "description": "Assessment of whether the request may exceed FOI cost limits",
+      "properties": {
+        "likely_exceeds_limit": {
+          "type": "boolean",
+          "description": "Whether the request is likely to exceed the appropriate cost limit (£450 for most public authorities, £600 for central government)"
+        },
+        "assessment_rationale": {
+          "type": "string",
+          "description": "Explanation of the cost assessment"
+        },
+        "scope_concerns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific concerns about the breadth of the request"
+        },
+        "refinement_suggestions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Suggestions for how the requester could narrow their request"
+        },
+        "clarification_needed": {
+          "type": "boolean",
+          "description": "Whether clarification should be requested"
+        },
+        "draft_clarification_letter": {
+          "type": "string",
+          "description": "Draft clarification letter if needed, following ICO guidance (polite, no accusation of AI use)"
+        }
+      }
+    },
+    "bulk_submission_signals": {
+      "type": "object",
+      "required": ["detected"],
+      "description": "Signals that this may be part of a bulk/template campaign (information only, never grounds for rejection)",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether bulk/template signals were detected"
+        },
+        "signals": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific signals detected (e.g., template language, campaign phrases)"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Confidence in bulk detection"
+        },
+        "note": {
+          "type": "string",
+          "default": "This is informational only. Bulk/templated requests remain valid and must be processed according to FOI/EIR requirements.",
+          "description": "Reminder that bulk signals do not affect validity"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "description": "Human-readable summary for staff",
+      "properties": {
+        "one_line": {
+          "type": "string",
+          "description": "One-line summary of the submission",
+          "maxLength": 150
+        },
+        "key_topics": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key topics or themes in the submission"
+        },
+        "recommended_action": {
+          "type": "string",
+          "description": "Recommended next action for staff"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Processing metadata",
+      "properties": {
+        "model_version": {
+          "type": "string",
+          "description": "Version of the triage model used"
+        },
+        "processing_mode": {
+          "type": "string",
+          "enum": ["live", "mock"],
+          "description": "Whether this was processed in live or mock mode"
+        },
+        "input_character_count": {
+          "type": "integer",
+          "description": "Character count of input text"
+        },
+        "input_word_count": {
+          "type": "integer",
+          "description": "Word count of input text"
+        }
+      }
+    }
+  }
+}
