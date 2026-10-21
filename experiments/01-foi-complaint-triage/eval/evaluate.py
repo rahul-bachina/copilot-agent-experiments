@@ -2,10 +2,12 @@
 """
 Evaluation script for FOI Complaint Triage Agent.
 
-Runs the triage agent against the synthetic dataset and reports per-field accuracy.
+Runs the triage agent against the synthetic dataset as a pipeline smoke test.
+Mock mode results verify the code works but say nothing about model accuracy
+(mock responses are rule-based and tuned to the synthetic set).
 
 Usage:
-    python evaluate.py                    # Run evaluation in mock mode
+    python evaluate.py                    # Run smoke test in mock mode
     python evaluate.py --live             # Run with Azure AI (requires credentials)
     python evaluate.py --output report.json  # Save detailed report
 """
@@ -185,18 +187,18 @@ def run_evaluation(mock: bool = True, dataset_path: Path = None) -> dict:
             "passed": passed,
             "failed": failed,
             "errors": errors,
-            "overall_accuracy": round(accuracy * 100, 1)
+            "agreement_rate": round(accuracy * 100, 1)
         },
-        "field_accuracy": field_stats,
+        "field_agreement": field_stats,
         "mode": "mock" if mock else "live",
         "cases": results
     }
     
-    print(f"\nResults: {passed}/{total} passed ({report['summary']['overall_accuracy']}%)")
+    print(f"\nSmoke test: {passed}/{total} cases processed ({report['summary']['agreement_rate']}% agreement)")
     print(f"Errors: {errors}")
-    print("\nPer-field accuracy:")
+    print("\nPer-field smoke test agreement:")
     for field, stats in field_stats.items():
-        print(f"  {field}: {stats['accuracy']}% ({stats['passed']}/{stats['total']})")
+        print(f"  {field}: {stats['passed']}/{stats['total']}")
     
     return report
 

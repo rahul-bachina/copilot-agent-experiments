@@ -211,30 +211,15 @@ The synthetic dataset (`eval/synthetic_dataset.json`) contains 12 test cases cov
 
 **All test data is synthetic. No real personal data or real requests are used.**
 
-### Evaluation Metrics
+### Pipeline Smoke Test (Mock Mode)
 
-| Metric | Description |
-|--------|-------------|
-| Classification Accuracy | Correct primary_type identification |
-| Urgency Detection | Correct urgency_level assignment |
-| Safeguarding Detection | True positive rate for safeguarding concerns |
-| Cost Limit Assessment | Accuracy of exceeds_limit prediction |
-| Bulk Signal Detection | Identification of template submissions |
-
-### Latest Results (Mock Mode)
+The evaluation script runs against the synthetic dataset in mock mode as a **pipeline smoke test** to verify the code executes correctly and produces valid structured output.
 
 ```
-Results: 12/12 passed (100.0%)
-
-Per-field accuracy:
-  classification: 100.0% (12/12)
-  flags: 100.0% (10/10)
-  cost_limit_assessment: 100.0% (6/6)
-  bulk_submission_signals: 100.0% (2/2)
-  routing: 100.0% (8/8)
+Smoke test: 12/12 cases processed successfully
 ```
 
-Note: Mock mode uses rule-based pattern matching tuned to the test dataset. Live Azure AI mode will provide more robust generalisation across varied real-world inputs.
+**Important**: Mock mode uses rule-based pattern matching that has been tuned to the synthetic test set. These results verify the pipeline works but say nothing about model accuracy. Real-model evaluation with Azure AI Foundry is pending.
 
 ## Copilot Studio Implementation
 
@@ -353,11 +338,7 @@ The GitHub Actions workflow (`.github/workflows/experiment-01-tests.yml`) runs:
 
 ## What I Learned
 
-*[Placeholder for Rahul to fill in after building and testing]*
-
-- 
-- 
-- 
+*(Coming after real-model testing)*
 
 ## References
 
