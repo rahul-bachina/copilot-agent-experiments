@@ -1,0 +1,134 @@
+name: Experiment 01 - FOI Triage Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/01-foi-complaint-triage/**'
+      - '.github/workflows/experiment-01-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/01-foi-complaint-triage/**'
+      - '.github/workflows/experiment-01-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/01-foi-complaint-triage
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: experiments/01-foi-complaint-triage/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: |
+          python -m pytest tests/ -v --tb=short
+
+      - name: Validate JSON schema
+        run: |
+          python -c "import json; json.load(open('schema/triage_output.schema.json'))"
+          echo "Schema is valid JSON"
+
+      - name: Run triage agent smoke test (mock mode)
+        run: |
+          python src/triage_agent.py --mock --input examples/sample_request.txt > /tmp/smoke_output.json
+          python -c "import json; d=json.load(open('/tmp/smoke_output.json')); assert 'triage_id' in d; print('Smoke test passed')"
+
+      - name: Run evaluation (mock mode)
+        run: |
+          python eval/evaluate.py --output /tmp/eval_report.json
+          cat /tmp/eval_report.json
+
+      - name: Check evaluation results
+        run: |
+          python -c "
+          import json
+          report = json.load(open('/tmp/eval_report.json'))
+          accuracy = report['summary']['overall_accuracy']
+          print(f'Overall accuracy: {accuracy}%')
+          if accuracy < 50:
+              print('WARNING: Accuracy below 50% threshold')
+              exit(1)
+          print('Evaluation passed!')
+          "
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-report
+          path: /tmp/eval_report.json
+          retention-days: 30
+
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/01-foi-complaint-triage
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install linting tools
+        run: |
+          pip install ruff
+
+      - name: Run linter
+        run: |
+          ruff check src/ eval/ --ignore E501
+        continue-on-error: true
+
+  schema-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/01-foi-complaint-triage
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install jsonschema
+        run: pip install jsonschema
+
+      - name: Validate sample output against schema
+        run: |
+          python -c "
+          import json
+          from jsonschema import validate, Draft7Validator
+
+          schema = json.load(open('schema/triage_output.schema.json'))
+          sample = json.load(open('examples/sample_output.json'))
+
+          Draft7Validator.check_schema(schema)
+          print('Schema is valid Draft-07')
+
+          validate(instance=sample, schema=schema)
+          print('Sample output validates against schema')
+          "
