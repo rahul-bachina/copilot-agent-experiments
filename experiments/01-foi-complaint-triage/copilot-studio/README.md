@@ -8,7 +8,7 @@ This guide explains how to recreate the FOI Complaint Triage Agent in Microsoft 
 
 The Copilot Studio implementation provides:
 - A conversational interface for staff to submit FOI requests/complaints for triage
-- Integration with Azure AI Foundry via Power Automate for AI processing
+- Integration with Microsoft Foundry via Power Automate for AI processing
 - Structured output displayed in the conversation
 
 ## Architecture
@@ -17,7 +17,7 @@ The Copilot Studio implementation provides:
 graph LR
     A[Staff User] --> B[Copilot Studio Agent]
     B --> C[Power Automate Flow]
-    C --> D[Azure AI Foundry]
+    C --> D[Microsoft Foundry]
     D --> C
     C --> B
     B --> A
@@ -27,7 +27,7 @@ graph LR
 
 - Microsoft 365 license with Copilot Studio access
 - Power Automate Premium (for HTTP connector)
-- Azure AI Foundry resource with GPT-4o deployment
+- Microsoft Foundry resource with GPT-4o deployment
 - Azure OpenAI endpoint and API key
 
 ## Step 1: Create the Copilot Agent

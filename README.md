@@ -1,8 +1,8 @@
 # Copilot Agent Experiments
 
-A series of small, well-documented AI agent experiments exploring practical applications of Microsoft Copilot, Azure AI Foundry, and Power Platform technologies.
+A series of small, well-documented AI agent experiments exploring practical applications of Microsoft Copilot, Microsoft Foundry, and Power Platform technologies.
 
-**By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Azure AI Foundry, Copilot Studio, and GitHub Copilot.
+**By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Microsoft Foundry, Copilot Studio, and GitHub Copilot.
 
 ## About This Series
 
@@ -10,7 +10,7 @@ Each experiment in this repository tackles a real-world problem with AI agents, 
 
 - 🎯 Clear problem statement and context
 - 🏗️ Architecture diagrams and design rationale
-- 💻 Working code (Python + Azure AI Foundry)
+- 💻 Working code (Python + Microsoft Foundry)
 - 🤖 Copilot Studio implementation guides
 - 📊 Evaluation datasets and metrics
 - 📝 Responsible AI considerations
@@ -31,7 +31,7 @@ Each experiment is self-contained in its own folder under `experiments/`. Naviga
 ### Prerequisites
 
 - Python 3.10+
-- Azure subscription (for Azure AI Foundry) — or use `--mock` mode for demos
+- Azure subscription (for Microsoft Foundry) — or use `--mock` mode for demos
 - Copilot Studio license (for low-code implementations)
 
 ### Quick Start

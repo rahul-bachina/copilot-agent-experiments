@@ -46,7 +46,7 @@ flowchart LR
     
     subgraph Processing
         B --> C[Triage Agent]
-        C --> D{Azure AI Foundry<br>or Mock Mode}
+        C --> D{Microsoft Foundry<br>or Mock Mode}
         D --> E[Structured Output]
     end
     
@@ -75,7 +75,7 @@ flowchart LR
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | Triage Agent | Python | Core processing logic |
-| AI Backend | Azure AI Foundry (GPT-4o) | Natural language understanding |
+| AI Backend | Microsoft Foundry (GPT-4o) | Natural language understanding |
 | Mock Mode | Rule-based Python | Testing without credentials |
 | Schema | JSON Schema | Structured output validation |
 | Copilot Studio | Low-code alternative | Conversational interface option |
@@ -95,7 +95,7 @@ flowchart LR
 ### Prerequisites
 
 - Python 3.10+
-- (Optional) Azure AI Foundry credentials
+- (Optional) Microsoft Foundry credentials
 
 ### Installation
 
@@ -114,7 +114,7 @@ python src/triage_agent.py --mock --input examples/sample_request.txt
 echo "I request information about council spending..." | python src/triage_agent.py --mock
 ```
 
-### Run with Azure AI Foundry
+### Run with Microsoft Foundry
 
 ```bash
 # Set environment variables
@@ -219,7 +219,7 @@ The evaluation script runs against the synthetic dataset in mock mode as a **pip
 Smoke test: 12/12 cases processed successfully
 ```
 
-**Important**: Mock mode uses rule-based pattern matching that has been tuned to the synthetic test set. These results verify the pipeline works but say nothing about model accuracy. Real-model evaluation with Azure AI Foundry is pending.
+**Important**: Mock mode uses rule-based pattern matching that has been tuned to the synthetic test set. These results verify the pipeline works but say nothing about model accuracy. Real-model evaluation with Microsoft Foundry is pending.
 
 ## Copilot Studio Implementation
 
@@ -229,7 +229,7 @@ This includes:
 - Step-by-step build guide (not an importable solution)
 - System prompt for the agent
 - Topic designs
-- Power Automate flow to connect to Azure AI Foundry
+- Power Automate flow to connect to Microsoft Foundry
 
 ## Responsible AI Notes
 

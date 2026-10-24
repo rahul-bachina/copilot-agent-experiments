@@ -1,11 +1,11 @@
 # Power Automate Flow Design: FOI Triage Analysis
 
-This document describes how to build the Power Automate flow that connects Copilot Studio to Azure AI Foundry for FOI triage analysis.
+This document describes how to build the Power Automate flow that connects Copilot Studio to Microsoft Foundry for FOI triage analysis.
 
 ## Prerequisites
 
 - Power Automate Premium license (for HTTP connector)
-- Azure AI Foundry / Azure OpenAI resource
+- Microsoft Foundry / Azure OpenAI resource
 - API endpoint URL and key (store in Azure Key Vault for production)
 
 ## Flow Overview
@@ -250,11 +250,11 @@ For production, store the API key in Azure Key Vault:
 - Power Automate Premium required for HTTP connector
 - Consider caching for repeated identical submissions (rare in practice)
 
-## Alternative: Direct Azure AI Foundry Agent
+## Alternative: Direct Microsoft Foundry Agent
 
-If your organisation uses Azure AI Foundry agents, you can:
+If your organisation uses Microsoft Foundry agents, you can:
 
-1. Deploy the agent in Azure AI Foundry
+1. Deploy the agent in Microsoft Foundry
 2. Use the Azure AI connector in Power Automate
 3. Call the agent directly instead of raw chat completion
 
