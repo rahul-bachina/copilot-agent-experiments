@@ -1,0 +1,36 @@
+{#-
+  Simple header: four links, search, and the repository.
+  The left-hand catalogue menu is hidden. Experiment pages are reached from the home cards.
+-#}
+{% set src = page.file.src_uri if page and page.file else "" %}
+{% set on_experiments = src.startswith("experiments/") %}
+{% set home_url = nav.homepage.url | url if nav.homepage else "index.html" %}
+<header class="md-header site-header" data-md-component="header">
+  <div class="site-header__inner">
+    <a class="brand" href="{{ home_url }}">
+      <span class="brand-icon" aria-hidden="true">✳</span>
+      <span class="brand-name">Copilot<span class="brand-sub">Agent experiments</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{{ home_url }}#experiments" {% if on_experiments %}aria-current="page"{% endif %}>Experiments</a>
+      {% for item in nav %}
+        {% if item.title in ["Governance", "Roadmap", "About"] %}
+          <a href="{{ item.url | url }}" {% if item.active %}aria-current="page"{% endif %}>{{ item.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <div class="site-tools">
+      {% if "material/search" in config.plugins %}
+        <label class="site-search" for="__search">
+          <span class="visually-hidden">Search</span>
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+      {% endif %}
+      <a class="repo-link" href="{{ config.repo_url }}">View on GitHub</a>
+    </div>
+  </div>
+  {% if "material/search" in config.plugins %}
+    {% include "partials/search.html" %}
+  {% endif %}
+</header>

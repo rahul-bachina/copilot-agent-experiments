@@ -1,1 +1,8 @@
 {% extends "base.html" %}
+
+{% block content %}
+  {% if page and page.file and page.file.src_uri != "index.md" %}
+    <p class="back-link"><a href="{{ (nav.homepage.url | url) if nav.homepage else 'index.html' }}#experiments">Back to the experiments</a></p>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

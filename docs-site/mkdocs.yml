@@ -27,25 +27,11 @@ theme:
   custom_dir: overrides
   font: false
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: black
-      accent: indigo
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark colour scheme
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light colour scheme
+    scheme: default
+    primary: white
+    accent: teal
   features:
     - navigation.footer
-    - navigation.tracking
-    - navigation.sections
-    - navigation.expand
     - navigation.top
     - toc.follow
     - search.suggest
@@ -86,7 +72,7 @@ nav:
   - Experiments:
       - FOI and complaint triage: experiments/01-foi-complaint-triage.md
       - Consumer Duty complaint intake: experiments/02-consumer-duty-complaint-intake.md
-  - Governance and security: governance.md
+  - Governance: governance.md
   - Roadmap: roadmap.md
   - About: about.md
   - Adding a page: adding-an-experiment.md

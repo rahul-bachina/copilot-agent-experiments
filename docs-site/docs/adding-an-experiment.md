@@ -28,8 +28,8 @@ mkdocs build --strict
     - Source, linking to the folder on GitHub
 3. Give every image a text alternative that says what the picture shows. Do not leave `alt` empty.
 4. If the experiment has `docs/architecture_diagram.png`, add a row to `DIAGRAMS` in `docs-site/hooks.py`. The hook copies the file at build time. Do not commit a second copy of the PNG.
-5. Add the page to `nav` in `docs-site/mkdocs.yml`.
-6. Add a card on the home page. Use one status: Available, Blueprint, Planned, or Archived. Say what is actually runnable. Autonomy level in the card.
+5. Add the page under `Experiments` in `nav` in `docs-site/mkdocs.yml`. The header people see stays at four links: Experiments, Governance, Roadmap, About.
+6. Add a card on the home page, and keep the roadmap list in step with any planned name. Use one status: Available, Blueprint, Planned, or Archived. Say what is actually runnable. Autonomy level on an available card.
 7. Do not invent figures, client names, testimonials, or model scores. If you quote a smoke test, say it is a smoke test and point at the file or command that produced it.
 8. Use UK English. Write Microsoft Foundry. Do not write the retired product name.
 9. Run `mkdocs build --strict` and open the new page.
