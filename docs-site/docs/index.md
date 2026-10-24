@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Five starters you can read today
+## Six starters you can read today
 
 </div>
 
@@ -203,6 +203,31 @@ The clock and the mock triage run locally. Nothing is sent, and nothing is writt
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 06 · M003 · NHS and public bodies · Autonomy A0</p>
+
+### Policy questions for NHS corporate services
+
+Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The register runs locally. Nothing is published, sent, or decided for a person.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/06-nhs-policy-qa.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/06-nhs-policy-qa)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -225,16 +250,6 @@ The clock and the mock triage run locally. Nothing is sent, and nothing is writt
 
 <article class="plan-card" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · M003</p>
-
-### NHS and public-sector policy question and answer
-
-Not started. It would answer questions from published policy. There is no corpus and no agent.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
 <p class="card-kicker"><span class="status status-planned">Planned</span> · V010</p>
 
 ### Consultation themes
@@ -245,7 +260,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, and UK02 now have briefings. The other names are still only names.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, and M003 now have briefings. V010 is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -306,11 +321,11 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 ## Before you rely on a page
 
 - These pages describe the repository as it stood on 24 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
-- There are no client names, testimonials, or measured savings in the repository.
+- There are no client names or testimonials. Experiment 06 records a design for measuring time with a stopwatch. The figures in its smoke report are synthetic fixture arithmetic, not a study of staff.
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

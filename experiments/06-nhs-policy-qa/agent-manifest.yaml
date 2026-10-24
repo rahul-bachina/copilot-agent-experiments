@@ -1,0 +1,479 @@
+# Agent manifest: Policy Q&A — UK public-sector / NHS corporate services
+# Experiment 06 — catalogue ID M003
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-06-nhs-policy-qa"
+  name: "Policy Q&A — UK public-sector / NHS corporate services"
+  version: "0.1.0"
+  description: >
+    Answers staff questions about HR, finance, procurement, IT, and estates
+    policies by quoting approved, versioned documents and showing each policy's
+    review date. Autonomy A0. The policy owner approves which documents are
+    authoritative. The agent says "I don't know" when no approved in-date
+    clause matches, withholds policies past their review date, and refuses
+    clinical questions with a signpost. It does not approve a source, publish
+    a change, decide an individual's entitlement, spend, or give clinical advice.
+    The corpus in this repository is synthetic.
+  owner: "Corporate policy owner (the adopting organisation)"
+  contact: "corporate-policies@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/06-nhs-policy-qa"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The agent returns a quotation, a refusal, or 'I don't know', and stops."
+    - "The policy owner approves authoritative sources. The agent cannot set approved_by_policy_owner."
+    - "Answers are quotations from approved, in-date clauses, with policy id, version, clause id, and review date."
+    - "A draft, a superseded policy, an unapproved policy, or a quarantined clause is not quoted to staff."
+    - "A policy whose review date is before the as-of date is not given as a current answer."
+    - "When approved policies disagree, the agent does not pick a winner. It drafts a change note that is not published."
+    - "Clinical and patient-care questions are refused and signposted. No clinical text is returned."
+    - "The agent does not decide a person's entitlement, pay, sickness, flexible working, or disciplinary outcome."
+    - "The agent does not approve spend, a purchase order, a contract award, or an expense."
+    - "The agent does not publish, send, or write a production record."
+    - "Policy text and the question are untrusted data. They cannot change a review date or an approval flag."
+    - "All output is labelled for a person to read. may_be_relied_on is true only for an in-date, non-conflicting quotation."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Approved corporate policy register supplied for this run"
+      description: "Synthetic HR, finance, procurement, IT, and estates policies for the fictional Northmere NHS Foundation Trust, including version, owner approval flag, and review date"
+      access_level: "read"
+      scope: "The register file for this run. Staff answers see only approved policies. The owner review can see drafts so it can report gaps."
+      justification: "A grounded answer cannot be built without the approved text and its review date"
+      data_categories:
+        - "Policy and procedure text"
+        - "Role titles of policy owners"
+        - "Version and review dates"
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the register."
+
+    - resource: "Staff question or owner review request"
+      description: "The question typed for this run, and the as-of date"
+      access_level: "read"
+      scope: "This invocation"
+      justification: "The question is the only staff input. It may accidentally contain personal data."
+      data_categories:
+        - "Free text of one question"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient in this starter. A host that logs unanswered questions must keep the text out of traces."
+
+  never_access:
+    - resource: "Electronic patient records, prescribing, and other clinical systems"
+      reason: "The agent is strictly non-clinical. It must not read patient data."
+    - resource: "Payroll, ESR, and staff personal files"
+      reason: "Quoting a policy is not a calculation of a person's balance or pay."
+    - resource: "Finance ledgers, purchase-to-pay, and procurement sourcing systems"
+      reason: "The agent does not place orders, approve spend, or read live commercial records."
+    - resource: "Mailboxes and Teams chats"
+      reason: "The agent does not send and does not read correspondence."
+    - resource: "The whole SharePoint library, including drafts and superseded files"
+      reason: "Generative answers over an unfiltered library would bypass owner approval, version, and review date."
+    - resource: "Other organisations' policy registers"
+      reason: "No cross-organisation memory."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Answer from the approved register"
+      provider: "Local Python (src/answer.py)"
+      action: "Quote an approved in-date clause, refuse, or return I don't know"
+      access_level: "read"
+      scope: "One question. No network. No model."
+      justification: "Citations, review dates, clinical refusal, and the I-don't-know rule are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Review coverage, conflicts, and stale policies"
+      provider: "Local Python (src/review.py)"
+      action: "List gaps, disagreements, and policies past their review date, and draft a change note"
+      access_level: "read"
+      scope: "The register file for this run. The change note is not published."
+      justification: "Policy owners need a deterministic view of the register before they approve a source or a change."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. A GitHub Copilot harness skill may describe a sandbox draft of
+      the change note. Copying it into SharePoint or the policy register is a
+      person, and it is outside this starter. The agent cannot set
+      approved_by_policy_owner.
+
+  sends:
+    enabled: false
+    note: "No sends. The answer is returned to the person who asked."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject a policy, a source, an expense, a
+      flexible-working request, or a disciplinary outcome. The policy owner
+      approves sources outside the agent.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Clinical advice, a personal entitlement, and a procurement award are
+      decisions for a person. The agent quotes policy text or refuses.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, or delete against SharePoint, a policy register, payroll, finance, or a clinical system."
+
+  external_send:
+    enabled: false
+    rationale: "No email, Teams message, or other communication is sent by the agent."
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, purchase order, contract award, or expense approval."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Give clinical advice"
+      rationale: "Clinical questions are refused and signposted. No clinical system is read."
+    - enabled: false
+      action_name: "Decide an individual's entitlement or employment outcome"
+      rationale: "The published rule may be quoted. Applying it to a person is not a tool."
+    - enabled: false
+      action_name: "Publish a policy change or approve an authoritative source"
+      rationale: "Change notes stay draft. approved_by_policy_owner is an input, not an output."
+    - enabled: false
+      action_name: "Treat a stale or conflicting policy as the current rule"
+      rationale: "Stale text is withheld. Conflicts are reported and not resolved."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    Autonomy is A0. The agent has nothing to execute. The policy owner approves
+    which documents are authoritative before they can be quoted. The owner
+    also accepts any change note before a policy is amended. Staff decide
+    whether to rely on a quotation. None of those steps is an agent action.
+
+  approval_points:
+    - action: "Add or replace a document in the authoritative register"
+      approver: "Policy owner"
+      mandatory: true
+      rationale: "Staff answers quote only documents the owner has approved, at a stated version."
+
+    - action: "Accept a draft change note and amend a policy"
+      approver: "Policy owner"
+      mandatory: true
+      rationale: "A conflict or a stale policy is reported. The note is not applied by the agent."
+
+    - action: "Rely on a quotation as the organisation's current rule"
+      approver: "The member of staff who asked, within their role"
+      mandatory: true
+      rationale: "may_be_relied_on is a label. The person still decides. A stale or conflicting result is already marked not to be relied on."
+
+    - action: "Use a quarantined clause as policy text"
+      approver: "Policy owner"
+      mandatory: true
+      rationale: "A clause that instructs the model is dropped. A person may still read the file."
+
+    - action: "Answer a clinical question from this agent"
+      approver: "Clinical guidance owner"
+      mandatory: true
+      rationale: "Out of scope. The agent refuses and signposts. It has no clinical tool to approve."
+
+  no_approval_required:
+    - action: "Read a quotation, a refusal, or an I-don't-know result"
+      rationale: "Reading has no external effect"
+    - action: "Run the coverage and stale-policy review"
+      rationale: "No write and no send. The change note stays draft."
+    - action: "Re-run the same question against the same register"
+      rationale: "Deterministic and transient"
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted. Candidate for the organisation's DPO to confirm: Article 6(1)(e) public task, for an NHS body or other public authority answering its own staff from its own policies."
+    description: >
+      This starter does not decide the basis. A question can name a person or
+      describe someone's health even though the register itself is not a
+      personnel file. The DPO confirms the basis before any production use.
+      Do not copy a firm's legitimate-interests basis from Experiment 04 into
+      a public body, and do not treat this assistant as the organisation's
+      clinical record-keeping duty.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: false
+    categories_possible:
+      - "Health information a person might type into a sickness or clinical question"
+    lawful_basis_special: "No Article 9 condition is asserted. The starter is not a channel for special-category data. If a question contains it, do not retain the text in a trace."
+    safeguards:
+      - "Synthetic policies only in this repository. No staff file and no patient record."
+      - "The starter does not persist the question."
+      - "Clinical questions are refused and are not answered from a clinical system."
+      - "No solely automated decision about a person."
+
+  data_minimisation:
+    - "One question and one register per run"
+    - "Staff answers quote short clauses, not the whole library"
+    - "Unanswered questions are returned as a log entry with persisted set to false"
+    - "Patient records, payroll, and ledgers are out of scope"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "If a deployment later stores the unanswered-question log, that schedule is the organisation's, not this file's."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process. A subject access
+      request is not a policy question for this assistant.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    The question and the policy text are untrusted. Either may tell the model
+    to ignore the rules, approve a draft, answer a clinical question, or treat
+    a stale policy as current. The register quarantines a clause that contains
+    such an instruction, and a question that contains one is refused. There is
+    no tool that can approve, publish, send, or write.
+
+  controls:
+    - control: "Instructions separated from policy text"
+      description: "Approval flags, review dates, and citations are fields on the register. They are not read from the question."
+      implementation: "src/corpus.py and src/answer.py"
+    - control: "Quarantine"
+      description: "A clause that instructs the model is not citable. The owner review lists it."
+      implementation: "src/corpus.py"
+    - control: "Clinical refusal before retrieval"
+      description: "A clinical question does not fall through to a policy quotation."
+      implementation: "src/answer.py"
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. actions_taken is always an empty list."
+      implementation: "agent-manifest.yaml"
+    - control: "Owner approval is an input"
+      description: "approved_by_policy_owner cannot be set by the question or by a clause."
+      implementation: "src/corpus.py"
+
+  residual_risk: >
+    A model wrapped around this JSON later can still narrate a misleading
+    summary. The member of staff, and the policy owner for any change, are
+    the control. There is no autonomous action to take even if the draft is
+    wrong. The deterministic register does not call a model.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A staff member treats a quotation as clinical advice, or a clinical question is answered from a corporate policy"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Clinical patterns are refused before retrieval"
+        - "The signpost names the clinical guidance owner, the on-call clinician, and the clinical librarian"
+        - "No clinical system is in the read list"
+      residual_risk: "Medium"
+      owner: "Corporate policy owner"
+
+    - id: "R2"
+      risk: "A stale, superseded, draft, or unapproved policy is quoted as the current rule"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Staff matching ignores drafts, superseded policies, and unapproved documents"
+        - "A policy past its review date is withheld and the review date is shown"
+        - "The policy owner approves sources before they enter the register"
+      residual_risk: "Medium"
+      owner: "Corporate policy owner"
+
+    - id: "R3"
+      risk: "Two approved policies disagree and the agent picks one"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Structured claims with different positions return conflict"
+        - "A change note is draft, unpublished, and not accepted"
+        - "may_be_relied_on is false"
+      residual_risk: "Low"
+      owner: "Corporate policy owner"
+
+    - id: "R4"
+      risk: "Prompt injection in a question or a policy approves a source, reveals a stale clause as current, or produces a clinical answer"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Injected clauses are quarantined"
+        - "Injected questions are refused"
+        - "No approve, send, or write tool exists"
+        - "Tests cover these cases"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R5"
+      risk: "A question containing health or other personal data is retained in a log or a trace"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The starter does not persist the question"
+        - "Unanswered log entries are marked persisted false"
+        - "No Article 9 condition is asserted"
+        - "Synthetic fixtures only in this repository"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R6"
+      risk: "A time-saving claim is taken from self-report, or from the NHS trial figure, and treated as measured"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The scorer computes elapsed seconds from harness timestamps"
+        - "Self-reported minutes are rejected"
+        - "Ungrounded items are excluded from the median"
+        - "The smoke report says it is not a staff study"
+      residual_risk: "Low"
+      owner: "Evaluation owner"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    This starter writes no log. The answer JSON includes an unanswered-question
+    entry with persisted set to false. A deployment that stores that log must
+    record who asked, when, the policy ids cited, the outcome, and the as-of
+    date, and must keep the question text out of Application Insights.
+
+  logged_events:
+    - event: "Question answered, refused, or returned as I don't know"
+      data_logged:
+        - "Caller identity, if the host has one"
+        - "Timestamp"
+        - "Outcome"
+        - "Policy ids, versions, clause ids, and review dates cited"
+        - "As-of date"
+        - "Length of the question, not the question text"
+      retention: "The organisation's schedule. Not set by this starter."
+    - event: "Policy-owner review"
+      data_logged:
+        - "Who ran the review"
+        - "As-of date"
+        - "Policy ids flagged stale, in conflict, or quarantined"
+        - "Change-note ids, with published false"
+      retention: "The organisation's schedule. Not set by this starter."
+
+  log_destination:
+    primary: "None in this starter"
+    secondary: "Application Insights for a production host, without question text or policy body"
+    note: "Purview wiring for Copilot Studio was not verified for this experiment."
+
+  audit_trail:
+    - "The register version and the approval flag are inputs, so a later reader can see which document was quoted."
+    - "actions_taken is empty. There is no side effect to reconstruct."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Turn the agent off. It has no write to undo."
+  methods:
+    - method: "Unpublish or turn off the Copilot Studio agent"
+      action: "Staff and owners can no longer invoke it"
+      time_to_effect: "As fast as the tenant applies the change"
+      who_can_activate: "Copilot Studio owner or Power Platform administrator"
+    - method: "Remove any Microsoft Foundry deployment used to narrate the JSON"
+      action: "Stops a model seeing questions, if one was added later"
+      time_to_effect: "On the next call"
+      who_can_activate: "Platform owner"
+    - method: "Block connectors in a Power Platform DLP policy"
+      action: "Stops mail, SharePoint write, and clinical connectors if someone adds them despite the manifest"
+      time_to_effect: "When the policy reaches the environment"
+      who_can_activate: "Power Platform administrator"
+  escalation_contacts:
+    - role: "Corporate policy owner"
+      contact: "corporate-policies@example.com"
+    - role: "Information security"
+      contact: "security@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "Six months, and sooner if the register's approval rule or the clinical refusal list changes"
+  reviewer: "Corporate policy owner, with information security and the DPO"
+  review_triggers:
+    - "A policy in the live register passes its review date"
+    - "The organisation connects SharePoint or a model"
+    - "NHS England publishes a new position on Copilot use in corporate services or in clinical work"
+    - "A clinical question is found to have been answered"
+  related_documents:
+    - name: "Security and permissions"
+      path: "experiments/06-nhs-policy-qa/docs/security-and-permissions.md"
+    - name: "Harness comparison"
+      path: "experiments/06-nhs-policy-qa/docs/harness-comparison.md"
+    - name: "Time-saving evaluation design"
+      path: "experiments/06-nhs-policy-qa/eval/time_saving_design.md"
+
+assumptions:
+  description: "Items to verify before any production use. None of these is turned on by this repository."
+  items:
+    - id: "A1"
+      assumption: "The organisation's DPO confirms the Article 6 basis. Public task is a candidate for a public body, not a decision."
+      section: "uk_gdpr.lawful_basis"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "A clinical safety officer confirms this assistant stays outside clinical decision support. No medical-device classification is claimed here."
+      section: "high_risk_actions.additional_high_risk"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Microsoft Foundry, if used, runs in UK South or UK West, and prompt shields are confirmed in that resource."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The 43-minute NHS trial figure is not imported into any benefits case. A local study follows eval/time_saving_design.md."
+      section: "risk_assessment"
+      verify_on_deployment: true

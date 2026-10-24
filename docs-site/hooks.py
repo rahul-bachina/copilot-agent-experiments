@@ -25,6 +25,9 @@ DIAGRAMS = {
     "experiments/05-awaabs-law-hazard-triage/docs/architecture_diagram.png": (
         "experiments/img/05-awaabs-architecture.png"
     ),
+    "experiments/06-nhs-policy-qa/docs/architecture_diagram.png": (
+        "experiments/img/06-nhs-policy-architecture.png"
+    ),
 }
 
 
