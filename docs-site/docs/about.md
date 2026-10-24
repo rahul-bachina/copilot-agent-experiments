@@ -9,8 +9,9 @@ The source of truth is the [GitHub repository](https://github.com/rahul-bachina/
 ## Contact
 
 - GitHub: [github.com/rahul-bachina](https://github.com/rahul-bachina)
-- LinkedIn: `LINKEDIN_URL_PLACEHOLDER` — replace this token with Rahul Bachina's profile URL. It is blank on purpose. Do not guess it.
 - Questions about an experiment: open an issue on the repository.
+
+<!-- TODO: add LinkedIn URL -->
 
 ## Licence
 
