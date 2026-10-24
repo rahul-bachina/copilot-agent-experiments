@@ -368,6 +368,7 @@ The GitHub Actions workflow (`.github/workflows/experiment-01-tests.yml`) runs:
 - [FOI Act 2000](https://www.legislation.gov.uk/ukpga/2000/36/contents)
 - [Environmental Information Regulations 2004](https://www.legislation.gov.uk/uksi/2004/3391/contents/made)
 - [UK GDPR / Data Protection Act 2018](https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted)
+- [Harnesses in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview), retrieved 24 October 2026
 
 ## License
 
