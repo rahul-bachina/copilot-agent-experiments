@@ -42,6 +42,12 @@ class TestSchemaValidity:
         Draft7Validator.check_schema(schema)
 
 
+def _load_manifest(relative: str):
+    manifest_path = REPO_ROOT / relative
+    with open(manifest_path) as f:
+        return yaml.safe_load(f)
+
+
 class TestExperiment01Manifest:
     """Test the Experiment 01 FOI triage agent manifest."""
 
@@ -77,6 +83,40 @@ class TestExperiment01Manifest:
         for action in ["approve_reject", "regulated_decision", "production_record_change",
                        "external_send", "spend_transact"]:
             assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+
+
+class TestEveryExperimentManifest:
+    """Every agent-manifest.yaml under experiments/ has to validate."""
+
+    def test_all_manifests_validate(self, schema):
+        manifests = sorted(Path(REPO_ROOT / "experiments").rglob("agent-manifest.yaml"))
+        assert manifests, "expected at least one agent manifest"
+        for manifest_path in manifests:
+            with open(manifest_path) as handle:
+                manifest = yaml.safe_load(handle)
+            validate(instance=manifest, schema=schema)
+
+    def test_experiment_04_is_a0_and_does_not_decide(self, schema):
+        manifest = _load_manifest(
+            "experiments/04-fca-cryptoasset-readiness/agent-manifest.yaml"
+        )
+        validate(instance=manifest, schema=schema)
+        assert manifest["agent"]["id"] == "exp-04-fca-cryptoasset-readiness"
+        assert manifest["autonomy"]["level"] == "A0"
+        assert manifest["autonomy"]["auto_actions_enabled"] is False
+        assert manifest["tools"]["writes"]["enabled"] is False
+        assert manifest["tools"]["sends"]["enabled"] is False
+        high_risk = manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
 
 
 class TestInvalidA3Autonomy:
