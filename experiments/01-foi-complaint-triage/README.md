@@ -78,7 +78,8 @@ flowchart LR
 | AI Backend | Microsoft Foundry (GPT-4o) | Natural language understanding |
 | Mock Mode | Rule-based Python | Testing without credentials |
 | Schema | JSON Schema | Structured output validation |
-| Copilot Studio | Low-code alternative | Conversational interface option |
+| Copilot Studio, standard harness | Topics and one flow | Staff paste a submission and the existing triage flow returns JSON |
+| Copilot Studio, GitHub Copilot harness | Skills on the same core | Follow-up on the asks, the classification, and the draft letter |
 
 ## How It Works
 
@@ -221,15 +222,13 @@ Smoke test: 12/12 cases processed successfully
 
 **Important**: Mock mode uses rule-based pattern matching that has been tuned to the synthetic test set. These results verify the pipeline works but say nothing about model accuracy. Real-model evaluation with Microsoft Foundry is pending.
 
-## Copilot Studio Implementation
+## Two Copilot Studio harnesses
 
-For a low-code alternative using Microsoft Copilot Studio, see [copilot-studio/README.md](copilot-studio/README.md).
+Both call `src/triage_agent.py` and stop at the approval points already in [agent-manifest.yaml](agent-manifest.yaml). Neither harness approves, rejects, sends, or writes a case. The comparison is [docs/harness-comparison.md](docs/harness-comparison.md).
 
-This includes:
-- Step-by-step build guide (not an importable solution)
-- System prompt for the agent
-- Topic designs
-- Power Automate flow to connect to Microsoft Foundry
+**Standard harness (lead intake).** Topics, one Power Automate flow, and the instructions to paste. The steps are unchanged. See [copilot-studio/README.md](copilot-studio/README.md), [copilot-studio/system-prompt.md](copilot-studio/system-prompt.md), and [copilot-studio/power-automate-flow.md](copilot-studio/power-automate-flow.md). This is a build guide, not an importable solution.
+
+**GitHub Copilot harness.** A Copilot Studio authoring and orchestration framework for the follow-up questions around the same JSON. It is not the GitHub Copilot service. Skills, tool contracts, and the same approval gates are in [docs/github-copilot-harness.md](docs/github-copilot-harness.md) and [skills/](skills/). Microsoft bills that harness in Copilot Credits. Prices were not copied. See the comparison note before spending them.
 
 ## Responsible AI Notes
 
@@ -321,14 +320,20 @@ experiments/01-foi-complaint-triage/
 │   ├── synthetic_dataset.json    # Test cases
 │   └── evaluate.py               # Evaluation script
 ├── tests/
-│   └── test_triage_agent.py      # Unit tests
+│   ├── test_triage_agent.py      # Unit tests
+│   └── test_skills.py            # SKILL.md metadata and approval gates
 ├── copilot-studio/
-│   ├── README.md                 # Build guide
+│   ├── README.md                 # Standard-harness build guide
 │   ├── system-prompt.md          # Agent instructions
 │   └── power-automate-flow.md    # Flow design
+├── skills/
+│   ├── triage-submission/SKILL.md
+│   └── draft-clarification-letter/SKILL.md
 └── docs/
     ├── architecture_diagram.png      # Architecture diagram
     ├── generate_diagram.py           # Diagram generation script
+    ├── github-copilot-harness.md     # GitHub Copilot harness build note
+    ├── harness-comparison.md         # Which harness to use
     └── security-and-permissions.md   # Security guide for governance readers
 ```
 

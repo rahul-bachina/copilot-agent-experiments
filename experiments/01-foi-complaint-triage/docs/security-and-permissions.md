@@ -190,6 +190,8 @@ All agent output is advisory. Human staff must review and approve before any act
 | View triage output | Staff can view analysis without approval |
 | Re-run triage on same submission | No external effect |
 
+The standard-harness topics and the GitHub Copilot harness skills use this list as it stands. Neither harness adds an approval point, and neither is given a send or a write. See [harness-comparison.md](harness-comparison.md).
+
 ---
 
 ## UK GDPR Compliance
