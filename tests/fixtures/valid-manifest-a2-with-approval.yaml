@@ -1,0 +1,100 @@
+# Valid manifest: A2 autonomy with high-risk action properly approved
+# This fixture demonstrates a valid A2 agent that enables external_send
+# with proper human approval.
+
+$schema: "../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "valid-a2-agent"
+  name: "Valid A2 Agent with Approval"
+  version: "1.0.0"
+  description: "This agent correctly enables external_send with human approval"
+
+autonomy:
+  level: "A2"
+  human_in_the_loop: true
+
+data_access:
+  reads:
+    - resource: "Customer correspondence"
+      access_level: "read"
+      justification: "Required for response drafting"
+  never_access:
+    - resource: "Financial data"
+      reason: "Not needed for correspondence"
+
+tools:
+  allowed:
+    - tool: "Email tool"
+      action: "Draft and send email"
+  writes:
+    enabled: false
+  sends:
+    enabled: true
+    note: "Sends enabled with human approval"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "Agent does not approve or reject"
+  regulated_decision:
+    enabled: false
+    rationale: "Agent does not make regulated decisions"
+  production_record_change:
+    enabled: false
+    rationale: "Agent does not modify records"
+  external_send:
+    enabled: true
+    human_approval:
+      required: true
+      approver: "Customer Service Manager"
+      approval_process: "Manager reviews draft before send"
+      sla: "Within 4 hours"
+    rationale: "Agent drafts responses; manager approves before sending"
+  spend_transact:
+    enabled: false
+    rationale: "Agent has no financial capability"
+
+human_approval:
+  approval_points:
+    - action: "Send customer email"
+      approver: "Customer Service Manager"
+      mandatory: true
+      rationale: "All external communications require manager approval"
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(b) - Contract"
+    description: "Processing for customer service contract performance"
+
+risk_assessment:
+  risks:
+    - id: "R1"
+      risk: "Incorrect response sent to customer"
+      likelihood: "Low"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Manager approval required"
+        - "Template-based responses"
+      residual_risk: "Low"
+      owner: "Customer Service Lead"
+
+logging_and_audit:
+  logged_events:
+    - event: "Email sent"
+      data_logged:
+        - "Timestamp"
+        - "Recipient"
+        - "Approving manager"
+
+kill_switch:
+  methods:
+    - method: "Disable email connector"
+      action: "Block in DLP policy"
+      time_to_effect: "Immediate"
+      who_can_activate: "IT Admin"
+
+review:
+  next_review_date: "2027-06-01"
+  review_frequency: "6 months"

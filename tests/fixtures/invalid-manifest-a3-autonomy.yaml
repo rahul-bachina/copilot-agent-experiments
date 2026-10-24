@@ -1,0 +1,70 @@
+# Invalid manifest: Uses A3 autonomy level (not permitted in this catalogue)
+# This fixture is used to test that schema validation correctly rejects A3.
+
+$schema: "../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "invalid-a3-agent"
+  name: "Invalid A3 Agent"
+  version: "1.0.0"
+  description: "This agent incorrectly claims A3 autonomy which is not permitted"
+
+autonomy:
+  level: "A3"  # INVALID: A3 not permitted
+  human_in_the_loop: false
+
+data_access:
+  reads:
+    - resource: "Test data"
+      access_level: "read"
+      justification: "Testing"
+  never_access:
+    - resource: "Sensitive data"
+      reason: "Not needed"
+
+tools:
+  allowed:
+    - tool: "Test tool"
+      action: "Test action"
+  writes:
+    enabled: false
+  sends:
+    enabled: false
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "Disabled"
+  regulated_decision:
+    enabled: false
+    rationale: "Disabled"
+  production_record_change:
+    enabled: false
+    rationale: "Disabled"
+  external_send:
+    enabled: false
+    rationale: "Disabled"
+  spend_transact:
+    enabled: false
+    rationale: "Disabled"
+
+human_approval:
+  approval_points: []
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(f)"
+
+risk_assessment:
+  risks: []
+
+logging_and_audit:
+  logged_events: []
+
+kill_switch:
+  methods:
+    - method: "Disable"
+      action: "Turn off"
+
+review:
+  next_review_date: "2027-01-01"

@@ -1,0 +1,72 @@
+# Invalid manifest: Enables a high-risk action without human approval
+# This fixture tests that schema validation rejects enabled high-risk actions
+# that lack a named human approver.
+
+$schema: "../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "invalid-no-approval"
+  name: "Invalid No Approval Agent"
+  version: "1.0.0"
+  description: "This agent incorrectly enables external_send without human approval"
+
+autonomy:
+  level: "A2"
+  human_in_the_loop: true
+
+data_access:
+  reads:
+    - resource: "Test data"
+      access_level: "read"
+      justification: "Testing"
+  never_access:
+    - resource: "Sensitive data"
+      reason: "Not needed"
+
+tools:
+  allowed:
+    - tool: "Email tool"
+      action: "Send email"
+  writes:
+    enabled: false
+  sends:
+    enabled: true
+    note: "Sends enabled but high_risk_actions missing approval"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "Disabled"
+  regulated_decision:
+    enabled: false
+    rationale: "Disabled"
+  production_record_change:
+    enabled: false
+    rationale: "Disabled"
+  external_send:
+    enabled: true  # INVALID: enabled without human_approval
+    rationale: "Incorrectly enabled without approval"
+  spend_transact:
+    enabled: false
+    rationale: "Disabled"
+
+human_approval:
+  approval_points: []
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(f)"
+
+risk_assessment:
+  risks: []
+
+logging_and_audit:
+  logged_events: []
+
+kill_switch:
+  methods:
+    - method: "Disable"
+      action: "Turn off"
+
+review:
+  next_review_date: "2027-01-01"
