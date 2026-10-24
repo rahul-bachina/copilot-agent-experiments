@@ -36,11 +36,11 @@ A statutory clock and draft triage for a social landlord in England. The officer
 
 <article class="plan-card" id="m003" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · M003</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · M003 · Autonomy A0</p>
 
-## NHS and public-sector policy question and answer
+## Policy questions for NHS corporate services
 
-Not started. It would answer questions from published policy. There is no corpus and no agent.
+A quotation from an approved corporate policy, with its version and review date, or "I don't know". Clinical questions are refused. The policy owner approves sources. [Read the briefing](experiments/06-nhs-policy-qa.md).
 
 </article>
 
