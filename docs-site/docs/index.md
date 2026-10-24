@@ -36,7 +36,7 @@ Every experiment in the catalogue is held to the same rules. The [agent manifest
 
 ## Experiments
 
-Two experiments are in the repository.
+Two experiments are in the repository. The controls are set out on [Governance and security](governance.md). Names that are not started are on the [roadmap](roadmap.md). No date is attached to them.
 
 Status labels used on this site:
 

@@ -32,6 +32,7 @@ Thank you for your interest in contributing! This is a learning-focused reposito
 - Update READMEs when changing functionality
 - Include examples where helpful
 - Be clear about what is a guide vs runnable code
+- Briefing pages live in `docs-site/`. To add one, follow [docs-site/docs/adding-an-experiment.md](docs-site/docs/adding-an-experiment.md).
 
 ### Agent Manifests (Required)
 

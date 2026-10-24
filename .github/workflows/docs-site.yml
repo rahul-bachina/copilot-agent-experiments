@@ -1,5 +1,8 @@
 # Strict build of the briefing site on every pull request and on every push to main.
-# Publishing is not part of this workflow yet.
+# Pushes to main also publish with the official Pages actions.
+# An administrator must set Settings > Pages > Build and deployment > Source
+# to GitHub Actions before that publish can succeed. Do not choose
+# "Deploy from a branch".
 
 name: Documentation site
 
@@ -12,6 +15,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: docs-site-${{ github.ref }}
@@ -42,3 +47,22 @@ jobs:
         env:
           NO_MKDOCS_2_WARNING: "1"
         run: mkdocs build --strict
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs-site/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
