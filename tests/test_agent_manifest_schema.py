@@ -85,6 +85,43 @@ class TestExperiment01Manifest:
             assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
 
 
+class TestExperiment03Manifest:
+    """Test the Experiment 03 inventory and assurance-pack manifest."""
+
+    @pytest.fixture
+    def experiment_03_manifest(self):
+        """Load the Experiment 03 agent manifest."""
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "03-agent-inventory-atrs-assurance"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as f:
+            return yaml.safe_load(f)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_03_manifest):
+        """Experiment 03 manifest should be valid."""
+        validate(instance=experiment_03_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_03_manifest):
+        """Experiment 03 should be autonomy level A1."""
+        assert experiment_03_manifest["autonomy"]["level"] == "A1"
+
+    def test_all_high_risk_actions_disabled(self, experiment_03_manifest):
+        """Experiment 03 should have all high-risk actions disabled."""
+        high_risk = experiment_03_manifest["high_risk_actions"]
+        for action in ["approve_reject", "regulated_decision", "production_record_change",
+                       "external_send", "spend_transact"]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+
+    def test_additional_high_risk_actions_disabled(self, experiment_03_manifest):
+        """Publishing an ATRS record and marking a manifest approved stay off."""
+        additional = experiment_03_manifest["high_risk_actions"]["additional_high_risk"]
+        assert additional
+        assert all(item["enabled"] is False for item in additional)
+
+
 class TestEveryExperimentManifest:
     """Every agent-manifest.yaml under experiments/ has to validate."""
 

@@ -6,11 +6,11 @@ Items still marked Planned are names only. No date is promised. When a folder ex
 
 <article class="plan-card" id="g010" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · G010</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · G010</p>
 
 ## Agent inventory and ATRS assurance pack
 
-Not started. The name is a list of agents and the fields an Algorithmic Transparency Recording Standard record asks for. There is no inventory and no pack here.
+Available as [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). It drafts an inventory pack from one record. It does not approve a lifecycle status, submit an ATRS record, or connect to Dataverse.
 
 </article>
 
@@ -56,4 +56,4 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-The same list is on the [home page](index.md#planned-experiments).
+The cards still marked Planned are on the [home page](index.md#planned-experiments).

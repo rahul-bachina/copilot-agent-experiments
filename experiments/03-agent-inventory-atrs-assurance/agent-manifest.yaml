@@ -1,0 +1,415 @@
+# Agent manifest: Agent Inventory, Lifecycle and ATRS / AI Assurance Pack
+# Experiment 03 — catalogue ID G010. G006 and G007 are the evaluations inside the pack.
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-03-agent-inventory-atrs-assurance"
+  name: "Agent Inventory, Lifecycle and ATRS Assurance Pack"
+  version: "0.1.0"
+  description: >
+    Drafts an inventory row, an Algorithmic Transparency Recording Standard
+    record, a mapping to the AI Playbook for the UK Government, a DPIA
+    skeleton, a Data (Use and Access) Act 2025 Article 22A to 22D screen, an
+    FCA-style AI inventory row, and a permissions manifest. Autonomy A1.
+    The governance owner approves every lifecycle status change. The agent
+    never approves a status, a manifest, a DPIA, or an ATRS submission, and
+    it never sends or publishes.
+  owner: "Governance owner"
+  contact: "governance-inventory@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/03-agent-inventory-atrs-assurance"
+
+autonomy:
+  level: "A1"
+  level_description: "Human approves every lifecycle status change. Outputs are drafts."
+  constraints:
+    - "The governance owner approves every lifecycle status change before it is recorded as applied"
+    - "The agent NEVER marks a manifest, an assurance pack, a DPIA, or an ATRS record approved"
+    - "The agent NEVER emails the ATRS team or anyone else"
+    - "The agent NEVER writes a Dataverse production row or any other system of record"
+    - "The agent NEVER decides ATRS mandatory scope, a DUAA outcome, or that a firm has met an FCA expectation"
+    - "G006 findings wait for a security reviewer. G007 thresholds wait for an evaluation owner"
+    - "Autonomy A3 is refused if an inventory row asks for it"
+    - "All output is marked draft"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Inventory record supplied for this run"
+      description: "One synthetic or caller-supplied inventory record. The worked examples are Experiments 01 and 02."
+      access_level: "read"
+      scope: "A single record per run. No browsing of a live tenant."
+      justification: "The drafts copy fields from the record. They do not invent the missing ones."
+      data_categories:
+        - "Agent name, owner role, and description"
+        - "Recorded data-protection facts"
+        - "Free text that might describe special-category processing"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. This starter does not persist the record."
+    - resource: "ATRS field catalogue and published guidance links in src/catalogue.py"
+      description: "Reference numbers and field names from ATRS template v4.0, plus source URLs."
+      access_level: "read"
+      scope: "Static file in this experiment"
+      justification: "Drafts have to use the published field identifiers"
+      may_contain_personal_data: false
+    - resource: "Agent manifest schema"
+      description: "schemas/agent-manifest.schema.json at the repository root"
+      access_level: "read"
+      scope: "The schema file"
+      justification: "The generator validates every draft it emits"
+      may_contain_personal_data: false
+  never_access:
+    - resource: "Dataverse production tables"
+      reason: "The CSV fixtures are files in the repository. There is no connection."
+    - resource: "Mailboxes and the ATRS submission inbox"
+      reason: "The agent does not send."
+    - resource: "Live case files from Experiment 01 or Experiment 02"
+      reason: "Those experiments are described as inventory examples. Their case text is not read."
+    - resource: "Companies House, legislation.gov.uk, or GOV.UK at runtime"
+      reason: "Sources were read while the catalogue was written. A run does not fetch them."
+
+tools:
+  allowed:
+    - tool: "Assurance pack builder"
+      provider: "Local Python (src/pack.py)"
+      action: "Draft ATRS, playbook, DPIA, DUAA, and FCA-style artefacts from one record"
+      access_level: "read"
+      scope: "One inventory record. No network."
+      justification: "The pack is a deterministic draft. A model must not invent statutory text or ATRS answers."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Lifecycle proposal"
+      provider: "Local Python (src/lifecycle.py)"
+      action: "Propose a status change and apply it only when an external governance-owner decision is supplied"
+      access_level: "read"
+      scope: "The record in memory for this call. No Dataverse write."
+      justification: "Every status change needs the governance owner. The function does not mint that decision."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Permissions manifest generator"
+      provider: "Local Python (src/generate_manifest.py)"
+      action: "Draft agent-manifest.yaml and validate it against the repository schema"
+      access_level: "read"
+      scope: "One inventory record"
+      justification: "A manifest is a permissions draft. Validation is deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Prompt-injection findings (G006)"
+      provider: "Local Python (src/evaluations.py)"
+      action: "List injection patterns found in the record or in an untrusted instruction"
+      access_level: "read"
+      scope: "Strings on the record and one instruction string"
+      justification: "Findings go to a security reviewer. The tool does not clear the agent."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Groundedness findings (G007)"
+      provider: "Local Python (src/evaluations.py)"
+      action: "Check that ATRS answers were copied from the inventory, and flag a stale review date"
+      access_level: "read"
+      scope: "The draft and the record"
+      justification: "The 180-day threshold is a draft. The evaluation owner has not approved it."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: >
+      No writes. A caller may save a YAML file on their own machine. That is
+      not a Dataverse update and it is not an approval.
+  sends:
+    enabled: false
+    note: "No email, no ATRS submission, and no message to a governance owner."
+
+human_approval:
+  description: >
+    The governance owner approves every lifecycle status change. Viewing a
+    draft does not need a separate approval. Relying on a draft does.
+  approval_points:
+    - action: "Change the lifecycle status of an inventoried agent"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "Catalogue control for G010. The core will not apply a change without an external decision from this role."
+    - action: "Treat an assurance pack as ready to rely on"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "The pack is a draft. Stale and injection flags do not clear themselves."
+    - action: "Submit or publish an ATRS record"
+      approver: "Senior responsible owner, plus the organisation's own clearance"
+      mandatory: true
+      rationale: "The ATRS guidance asks for internal clearance before a record is sent to the ATRS team. This agent does not send it."
+    - action: "Accept G006 findings as a completed security review"
+      approver: "Security reviewer"
+      mandatory: true
+      rationale: "Catalogue checkpoint for G006. The evaluation only lists findings."
+    - action: "Approve the G007 staleness threshold"
+      approver: "Evaluation owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for G007. 180 days is a draft threshold."
+    - action: "Sign a DPIA"
+      approver: "The organisation's sign-off roles, including the DPO's advice"
+      mandatory: true
+      rationale: "The skeleton leaves every sign-off blank."
+  no_approval_required:
+    - action: "Generate a draft pack or a draft manifest from a record the caller supplied"
+      rationale: "No write, no send, and the approved flag stays false."
+    - action: "Re-run the same record"
+      rationale: "The core is deterministic. The same record and the same as-of date produce the same draft."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject an agent, a lifecycle status, a manifest, or an assurance pack."
+  regulated_decision:
+    enabled: false
+    rationale: >
+      ATRS scope, a DUAA outcome, and whether a firm has met an FCA expectation
+      are left to people. The screens are drafts.
+  production_record_change:
+    enabled: false
+    rationale: "No Dataverse write and no other production update. A status change in a system of record is outside this starter."
+  external_send:
+    enabled: false
+    rationale: "Nothing is emailed, including to the ATRS team."
+  spend_transact:
+    enabled: false
+    rationale: "No payment, contract, or licence purchase."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish an ATRS record"
+      rationale: "Publication needs the organisation's clearance and is not a tool of this agent."
+    - enabled: false
+      action_name: "Mark a manifest approved"
+      rationale: "The generator refuses an approve flag and writes approved false."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen in this starter"
+    description: >
+      A public body and a firm do not share a basis. Article 6(1)(e) may be
+      the public-task basis a body considers. Article 6(1)(c) or another basis
+      may be what a firm considers. This starter does not choose. The DPO
+      confirms a basis before any production processing of a real inventory.
+    secondary: "Do not copy Experiment 01's public-task basis or Experiment 02's legal-obligation basis without the DPO."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Free text in an inventory description that quotes health or other special-category facts about a real process"
+    lawful_basis_special: "Not asserted. No Article 9 condition and no Data Protection Act 2018 Schedule 1 condition is claimed."
+    safeguards:
+      - "Worked examples are synthetic"
+      - "The starter does not persist the record"
+      - "A DPIA skeleton is not a DPIA"
+      - "The DUAA screen is not a finding that processing is lawful"
+  data_minimisation:
+    - "One inventory record per run"
+    - "Gaps stay gaps. Missing ATRS answers are not filled in"
+    - "Experiments 01 and 02 are described. Their case text is not loaded"
+  retention:
+    agent_retention: "None in this starter."
+    note: "If a deployment stores drafts in Dataverse, the organisation sets the retention. It is not set here."
+  data_residency:
+    region: "UK"
+    note: "This starter does not call Microsoft Foundry. A later model call, if added, should be in a UK region and would need a manifest change."
+  data_subject_rights:
+    note: "The agent does not answer access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Inventory text and any instruction pasted with a run are untrusted. They
+    may say to mark the pack approved, change a lifecycle status, or send the
+    record. The core treats that text as data.
+  controls:
+    - control: "No tool with a side effect"
+      description: "Writes and sends are disabled. The approved flag is hard-coded false on every draft."
+      implementation: "src/pack.py and src/manifest_generator.py"
+    - control: "Lifecycle gate"
+      description: "A status changes only when an external decision from the governance owner is supplied. The module does not mint approval ids."
+      implementation: "src/lifecycle.py"
+    - control: "G006 findings"
+      description: "Injection patterns are listed. The security reviewer is not replaced."
+      implementation: "src/evaluations.py"
+    - control: "Schema validation"
+      description: "A manifest that would claim autonomy A3 is not emitted."
+      implementation: "src/manifest_generator.py"
+  residual_risk: "A misleading draft can still be read as if it were a decision. The governance owner is the control. There is no send behind a bad draft."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A draft ATRS record is emailed to the ATRS team or published as if it were cleared"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "may_be_emailed and may_be_submitted are false"
+        - "The ATRS contact is stored as a do-not-email reminder, not as a recipient"
+        - "No send tool exists"
+      residual_risk: "Medium"
+      owner: "Governance owner"
+    - id: "R2"
+      risk: "A lifecycle status is recorded as approved because the model said so"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core is deterministic and does not call a model"
+        - "An approval id with the generator prefix is rejected"
+        - "approved_by_this_tool stays false"
+      residual_risk: "Low"
+      owner: "Governance owner"
+    - id: "R3"
+      risk: "The DUAA screen is treated as a lawful-basis decision"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "lawful is null"
+        - "The screen cites section 80 and does not reproduce a rewritten Act"
+        - "Article 22D regulations are explicitly not read"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R4"
+      risk: "A stale inventory is used after the tool or the law has changed"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "G007 flags a review date older than 180 days"
+        - "The threshold is marked as not approved by the evaluation owner"
+      residual_risk: "Medium"
+      owner: "Evaluation owner"
+    - id: "R5"
+      risk: "Prompt injection in an inventory description is followed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Instructions do not change status, send, or the approved flag"
+        - "G006 lists the patterns for a security reviewer"
+      residual_risk: "Low"
+      owner: "Security reviewer"
+
+logging_and_audit:
+  description: >
+    This starter writes no log. Before a deployment, log who ran a draft, the
+    inventory id, the as-of date, validation errors, and the external approval
+    id if a person later applies a status. Do not log a full inventory narrative
+    in an application trace if it may contain personal data.
+  logged_events:
+    - event: "Draft pack requested"
+      data_logged:
+        - "Timestamp"
+        - "Caller identity"
+        - "Inventory id"
+        - "As-of date"
+      retention: "The organisation's governance schedule. Not set here."
+    - event: "Manifest validation result"
+      data_logged:
+        - "Inventory id"
+        - "Pass or fail"
+        - "Error messages that do not echo the narrative"
+      retention: "The organisation's governance schedule. Not set here."
+    - event: "External lifecycle decision presented"
+      data_logged:
+        - "Inventory id"
+        - "From status and to status"
+        - "External approval id"
+        - "Approver role"
+        - "Whether this tool approved it, which is always no"
+      retention: "Keep with the inventory row if the status is relied on."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "A deployment might use Dataverse auditing or Application Insights. Neither is wired here."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail or for a Dataverse write"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+    - method: "Remove the Dataverse security role"
+      action: "Take the read role off the agent identity so it cannot see the inventory"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Governance owner"
+      contact: "governance-inventory@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+    - role: "Security reviewer"
+      contact: "security-review@example.com"
+
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months, and sooner if ATRS, the AI Playbook, DUAA regulations, or the manifest schema change"
+  reviewer: "The adopting organisation's governance owner and DPO. Not a named person in this starter."
+  review_triggers:
+    - "A new ATRS template after v4.0"
+    - "Commencement or regulations under Article 22D"
+    - "A change to the AI Playbook principles list"
+    - "A proposal to add a Dataverse write or a mail connector"
+    - "An evaluation owner setting a different staleness threshold"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Dataverse table design"
+      path: "docs/dataverse.md"
+    - name: "Harness comparison"
+      path: "docs/harness-comparison.md"
+    - name: "Copilot Studio standard harness"
+      path: "copilot-studio/README.md"
+
+atrs_mapping:
+  note: >
+    This mapping is a draft index. It is not an ATRS record for this agent.
+    The generator fills template v4.0 fields from an inventory record.
+  mappings:
+    - atrs_field: "1.1 Name"
+      manifest_section: "agent.name"
+    - atrs_field: "2.1.3 Senior responsible owner"
+      manifest_section: "agent.owner"
+    - atrs_field: "2.3.2 Human review"
+      manifest_section: "human_approval"
+    - atrs_field: "2.5.2 Risks and mitigations"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The organisation confirms these before relying on a draft."
+  items:
+    - id: "A1"
+      assumption: "ATRS template v4.0 field names were read from the GOV.UK workbook on 24 October 2026 and have not been replaced"
+      section: "src/catalogue.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The DPO will choose a lawful basis and, if needed, an Article 9 condition. This manifest does not choose them."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Contact addresses on example.com are placeholders"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No Dataverse connector is added without editing this manifest in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The 180-day staleness threshold is a draft until an evaluation owner approves it"
+      section: "src/catalogue.py"
+      verify_on_deployment: true

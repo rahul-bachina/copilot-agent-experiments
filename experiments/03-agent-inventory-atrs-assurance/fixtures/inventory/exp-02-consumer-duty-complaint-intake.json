@@ -1,0 +1,122 @@
+{
+  "governance_owner_role": "Governance owner",
+  "lifecycle_status": "proposed",
+  "explicit_consent": "unknown",
+  "article_9_2_g": "unknown",
+  "contract_or_authorised_by_law": "unknown",
+  "safeguard_information": "unknown",
+  "safeguard_representations": "unknown",
+  "safeguard_human_intervention": "unknown",
+  "safeguard_contest": "unknown",
+  "third_party_involvement": "No",
+  "third_party_name": "N/A",
+  "companies_house_number": "N/A",
+  "third_party_role": "N/A",
+  "procurement_procedure_type": "N/A",
+  "third_party_data_access_terms": "N/A",
+  "data_reads": [
+    {
+      "resource": "Complaint text supplied by the handler",
+      "justification": "The intake cannot be drafted without the complaint the handler supplied",
+      "may_contain_personal_data": true
+    }
+  ],
+  "never_access": [
+    {
+      "resource": "Dynamics 365 Customer Service production data",
+      "reason": "The starter has no production connector"
+    }
+  ],
+  "tools": [
+    {
+      "tool": "DISP clock",
+      "action": "Calculate dates from handler-confirmed inputs",
+      "access_level": "read"
+    }
+  ],
+  "risk_rows": [
+    {
+      "id": "R1",
+      "risk": "A wrong classification makes a handler miss a DISP deadline",
+      "likelihood": "Medium",
+      "impact": "High",
+      "residual_risk": "Medium"
+    }
+  ],
+  "recorded_events": [
+    {
+      "from_status": "proposed",
+      "to_status": "assurance_drafted",
+      "requested_by": "Inventory drafter",
+      "reason": "Example proposal only. No governance owner decision is attached.",
+      "applied": false,
+      "approved_by_this_tool": false,
+      "external_approval_id": "",
+      "approver_role": "",
+      "external_decision": ""
+    }
+  ],
+  "inventory_id": "exp-02-consumer-duty-complaint-intake",
+  "catalogue_id": "C006",
+  "name": "Complaint Intake Agent — UK Consumer Duty / DISP edition",
+  "version": "0.1.0",
+  "sector": "fca_firm",
+  "organisation_name": "Northbridge Mutual (fictional firm used in Experiment 02)",
+  "team": "Complaints operations",
+  "senior_responsible_owner_role": "Complaints operations lead",
+  "contact_email": "complaints-intake@example.com",
+  "website_url": "https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake",
+  "atrs_phase": "Pre-deployment",
+  "region": "UK",
+  "autonomy_level": "A1",
+  "source_reviewed_on": "2026-10-24",
+  "experiment_path": "experiments/02-consumer-duty-complaint-intake",
+  "processing_regime": "uk_gdpr",
+  "processes_personal_data": "yes",
+  "special_category_data": "yes",
+  "profiling": "no",
+  "meaningful_human_involvement": "yes",
+  "significant_effect": "none",
+  "significant_effect_note": "Upholding, rejecting, or setting redress can have a significant effect. Those decisions are outside the agent. This row screens the intake draft only.",
+  "lawful_basis": "Article 6(1)(c) — legal obligation",
+  "one_sentence_description": "A starter that turns one complaint into a draft intake, with DISP dates calculated in Python.",
+  "public_description": "The tool helps a complaints handler structure one inbound complaint: what was said, whether it meets the Handbook definition of a complaint, product and root cause, characteristics to review, the DISP clock, a Consumer Duty outcome to accept or change, and a draft acknowledgement. The handler decides. The clock is code.",
+  "detailed_description": "The handler pastes one complaint and enters the receipt date. A mock intake proposes classification fields. src/disp_clock.py calculates dates from inputs the handler confirms. The acknowledgement is a draft and the manifest says it must not be sent by the agent.",
+  "benefits": "Dates come from code rather than from a model. No reduction in complaints-handling time is claimed.",
+  "previous_process": "Handlers read the complaint and calculated dates themselves. This repository does not replace a named firm process.",
+  "alternatives_considered": "The non-model part, the DISP clock, is the piece that runs today. A Microsoft Foundry extractor is described and not built.",
+  "operational_process": "The handler confirms the route before a payment-services or e-money clock is treated as operative, validates every classification and the severity, and sends or files outside the agent.",
+  "human_review": "A handler validates every classification and every severity. Exceptional circumstances are a flag a person sets. The agent does not uphold, reject, or redress.",
+  "frequency_and_scale": "Not deployed. The synthetic set has 22 fixtures. That is not an operational volume.",
+  "required_training": "Not recorded. Handlers would need the firm's own DISP procedure, which is not in this repository.",
+  "appeals_and_review": "N/A for the agent's output. Referral to the Financial Ombudsman Service is disabled in the manifest.",
+  "system_architecture": "Python for the clock and the mock intake. Copilot Studio, Microsoft Foundry, and Dynamics 365 Customer Service are described as a later shape. Nothing in the folder calls a model or a CRM.",
+  "system_input": "One complaint text, a receipt date, and route inputs the handler has typed.",
+  "system_output": "A draft intake and clock JSON. The acknowledgement is marked so it is not sent as it stands.",
+  "maintenance": "Handbook text was read on 24 October 2026. The manifest next review is 24 April 2027, sooner if DISP changes.",
+  "models_summary": "No model is called. The mock intake is a keyword stand-in.",
+  "model_name": "No deployed model. Keyword stand-in for the smoke test.",
+  "model_version": "N/A",
+  "model_task": "Propose intake fields. Dates are not a model task.",
+  "model_input": "The complaint text.",
+  "model_output": "Draft fields and a draft acknowledgement. DISP dates are copied from the clock.",
+  "model_architecture": "Rule-based keyword stand-in plus a deterministic date calculator. Not a trained model.",
+  "model_performance": "eval/smoke_report.json is a mock smoke test of the keyword stand-in. It is not a model score.",
+  "datasets_and_purposes": "22 synthetic complaints for the smoke test. Not used to train a model.",
+  "development_data_description": "Invented complaints about the fictional firm Northbridge Mutual.",
+  "data_modality": "Text",
+  "data_quantities": "22 synthetic cases in the smoke test.",
+  "development_sensitive_attributes": "Invented text can mention health or bereavement. No real customer.",
+  "data_completeness": "The fixtures are written to exercise the rules. They are not a complaints population.",
+  "data_cleaning": "None.",
+  "data_collection": "Written for the repository.",
+  "development_data_access": "Repository readers.",
+  "development_data_sharing": "N/A.",
+  "operational_data_sources": "Text and dates the handler supplies for one run.",
+  "operational_sensitive_attributes": "A real complaint can include health information. The starter does not assert an Article 9 condition.",
+  "operational_data_processing": "The clock uses the receipt date and the route. It does not clean a data set.",
+  "operational_data_access": "The starter does not persist the complaint text.",
+  "operational_data_sharing": "N/A. The agent does not send.",
+  "impact_assessments": "No DPIA is linked. The manifest says the page is not a DPIA and does not assert an Article 9 condition.",
+  "risks_and_mitigations": "The manifest records a wrong classification, a missed vulnerability characteristic, prompt injection, special-category retention, and stale Handbook text. Residual risk is not all Low."
+}
