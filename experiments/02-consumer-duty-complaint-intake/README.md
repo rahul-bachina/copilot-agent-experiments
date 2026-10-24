@@ -6,7 +6,7 @@ A starter for FCA-regulated firms. It helps a complaints handler turn an inbound
 
 **Autonomy A1.** A handler validates every classification and every severity. The agent does not send, write a production record, close a case, uphold or reject a complaint, or decide redress.
 
-This revision contains the permissions manifest, the deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and the build notes for Copilot Studio, Microsoft Foundry and Dynamics 365 Customer Service. Nothing here calls a model.
+This revision contains the permissions manifest, the deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and the build notes for both Copilot Studio harnesses, Microsoft Foundry and Dynamics 365 Customer Service. Nothing here calls a model.
 
 Stack: Copilot Studio, Dynamics 365 Customer Service, and Power Platform. The clock itself is Python in the standard library, so a handler can run the dates without a tenant.
 
@@ -117,10 +117,20 @@ Payment-services complaint received Thursday 24 December 2026. On the England an
 
 This is not legal advice and it is not a statement of the firm's compliance.
 
+## Two Copilot Studio harnesses
+
+Both call `src/disp_clock.py` and `src/intake.py`, and both stop at the approval points already in [agent-manifest.yaml](agent-manifest.yaml). Neither harness sends, writes a case, upholds, or labels the customer. The comparison is [docs/harness-comparison.md](docs/harness-comparison.md).
+
+**Standard harness (lead intake).** Topics and one clock action. The steps are unchanged. See [copilot-studio/README.md](copilot-studio/README.md) and [copilot-studio/system-prompt.md](copilot-studio/system-prompt.md). This is a build guide, not an importable solution.
+
+**GitHub Copilot harness.** A Copilot Studio authoring and orchestration framework for a handler's follow-up questions on the same draft. It is not the GitHub Copilot service. Skills, tool contracts, and the same approval gates are in [docs/github-copilot-harness.md](docs/github-copilot-harness.md) and [skills/](skills/). Microsoft bills that harness in Copilot Credits. Prices were not copied.
+
 ## Where the rest of the starter lives
 
 - Architecture, including the Mermaid diagram: [docs/architecture.md](docs/architecture.md). The rendered diagram is [docs/architecture_diagram.png](docs/architecture_diagram.png).
-- Copilot Studio topics and the clock action: [copilot-studio/README.md](copilot-studio/README.md). Instructions to paste: [copilot-studio/system-prompt.md](copilot-studio/system-prompt.md).
+- Which harness to use: [docs/harness-comparison.md](docs/harness-comparison.md).
+- Standard harness: [copilot-studio/README.md](copilot-studio/README.md). Instructions to paste: [copilot-studio/system-prompt.md](copilot-studio/system-prompt.md).
+- GitHub Copilot harness: [docs/github-copilot-harness.md](docs/github-copilot-harness.md) and [skills/](skills/).
 - Microsoft Foundry path: [docs/foundry.md](docs/foundry.md).
 - Dynamics 365 Customer Service, read-only and draft-only: [docs/dynamics-365-customer-service.md](docs/dynamics-365-customer-service.md).
 - Permissions: [docs/security-and-permissions.md](docs/security-and-permissions.md) and [agent-manifest.yaml](agent-manifest.yaml).
@@ -138,11 +148,16 @@ experiments/02-consumer-duty-complaint-intake/
 ├── copilot-studio/
 │   ├── README.md
 │   └── system-prompt.md
+├── skills/
+│   ├── draft-complaint-intake/SKILL.md
+│   └── calculate-disp-clock/SKILL.md
 ├── docs/
 │   ├── architecture.md
 │   ├── architecture_diagram.png
 │   ├── foundry.md
 │   ├── dynamics-365-customer-service.md
+│   ├── github-copilot-harness.md
+│   ├── harness-comparison.md
 │   ├── security-and-permissions.md
 │   └── generate_diagram.py
 ├── eval/
@@ -163,6 +178,7 @@ experiments/02-consumer-duty-complaint-intake/
 - [PRIN 2A.1](https://www.handbook.fca.org.uk/handbook/PRIN/2A/1.html), last updated 26 June 2026 on that retrieval
 - [FG21/1](https://www.fca.org.uk/publication/finalised-guidance/fg21-1.pdf), paragraphs 2.5 and 2.9
 - [Bank holidays](https://www.gov.uk/bank-holidays)
+- [Harnesses in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview), retrieved 24 October 2026
 
 ## Licence
 

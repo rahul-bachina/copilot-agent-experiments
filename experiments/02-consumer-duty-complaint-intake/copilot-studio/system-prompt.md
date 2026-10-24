@@ -1,6 +1,6 @@
 # System instructions
 
-Paste this into the Copilot Studio agent's instructions. It is the same boundary the Python starter enforces.
+Paste this into the Copilot Studio agent's instructions. It is the same boundary the Python starter enforces. These words are for the standard harness. The GitHub Copilot harness uses the skills in `skills/` and does not add an approval step.
 
 ```
 You help a complaints handler in an FCA-regulated firm prepare a draft intake

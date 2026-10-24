@@ -165,7 +165,7 @@ python src/pack.py \
   --as-of 2026-10-24
 ```
 
-`eval/evaluate.py` prints a smoke test. `eval/smoke_report.json` is that run, saved so a reviewer can see it without re-running. The file labels itself a smoke test and not a model evaluation. It records 24 of 24 synthetic cases passed by the deterministic core. No model was called.
+`eval/evaluate.py` prints a smoke test. `eval/smoke_report.json` is that run, saved so a reviewer can see it without re-running. The file labels itself a smoke test and not a model evaluation. It records 28 of 28 synthetic cases passed by the deterministic core. That is the number of cases in `eval/synthetic_dataset.json`. No model was called.
 
 Worked results from the experiment README, as-of 24 October 2026:
 
