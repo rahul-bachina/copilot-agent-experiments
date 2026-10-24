@@ -61,7 +61,7 @@ For UK public bodies. Takes a long FOI request, Environmental Information Regula
 
 The repository README marks this experiment complete. That means the starter is written. It does not mean a live model has been scored, and it does not mean a tenant has been configured.
 
-[Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage)
+[Read the briefing](experiments/01-foi-complaint-triage.md) · [Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage)
 
 </div>
 
@@ -75,7 +75,7 @@ For FCA-regulated firms. Helps a complaints handler turn one inbound complaint i
 
 The repository README marks this as a starter. The clock and the mock intake run on a laptop. Nothing in the folder calls a model. Copilot Studio, Microsoft Foundry and Dynamics 365 Customer Service are build notes.
 
-[Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake)
+[Read the briefing](experiments/02-consumer-duty-complaint-intake.md) · [Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake)
 
 </div>
 
