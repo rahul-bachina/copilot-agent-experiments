@@ -33,6 +33,19 @@ Thank you for your interest in contributing! This is a learning-focused reposito
 - Include examples where helpful
 - Be clear about what is a guide vs runnable code
 
+### Agent Manifests (Required)
+
+Every experiment must include an `agent-manifest.yaml` that defines the agent's permissions, data access, and governance controls. The manifest must:
+
+1. **Validate against the schema** at `schemas/agent-manifest.schema.json`
+2. **Use autonomy level A0, A1, or A2** — A3 (fully autonomous) is not permitted in this catalogue
+3. **Declare all high-risk actions** (approve/reject, regulated decisions, production writes, external sends, spending) as either disabled or with explicit human approval
+4. **Document UK GDPR compliance** including lawful basis and special category data handling
+5. **Include a risk assessment** with likelihood, impact, controls, and residual risk
+6. **Define kill switch mechanisms** for immediate agent disablement
+
+Run `python -m pytest tests/test_agent_manifest_schema.py` to validate your manifest locally before submitting.
+
 ### Responsible AI
 - Never include real personal data
 - Clearly mark synthetic/test data
