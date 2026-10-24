@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Two starters you can read today
+## Starters you can read today
 
 </div>
 
@@ -128,6 +128,31 @@ The clock and the mock intake run locally. Nothing in the folder calls a model.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 03 · G010 · Autonomy A1</p>
+
+### Agent inventory and ATRS assurance pack
+
+Draft an ATRS record, a playbook mapping, a DPIA skeleton, a DUAA screen, and an FCA-style inventory row. The governance owner approves every lifecycle status change.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+Drafts only. Nothing is approved, sent, or written to Dataverse.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/03-agent-inventory-atrs-assurance.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/03-agent-inventory-atrs-assurance)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -147,16 +172,6 @@ The clock and the mock intake run locally. Nothing in the folder calls a model.
 </div>
 
 <div class="plan-grid" markdown="1">
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · G010</p>
-
-### Agent inventory and ATRS assurance pack
-
-Not started. The name is a list of agents and the fields an Algorithmic Transparency Recording Standard record asks for. There is no inventory and no pack here.
-
-</article>
 
 <article class="plan-card" markdown="1">
 
@@ -224,7 +239,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 ### Human approval
 
-Consequential actions need a named person, or they are switched off. Both current starters switch them off.
+Consequential actions need a named person, or they are switched off. The starters in the repository switch them off.
 
 </article>
 
@@ -265,7 +280,7 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiment 02 is for FCA-regulated firms. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiment 02 is for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

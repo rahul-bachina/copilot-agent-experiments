@@ -83,7 +83,7 @@ Public-sector bodies use the [Algorithmic Transparency Recording Standard](https
 
 This repository does not submit an ATRS record. The deploying organisation does. Experiment 02 has no ATRS mapping. A firm does not become ATRS-compliant by adopting that starter.
 
-A future experiment, G010, is named on the roadmap as an inventory and assurance pack. It is not in the repository.
+Experiment 03, catalogue ID G010, drafts an ATRS record and the rest of an assurance pack from one inventory row. The drafts are not submitted. See [Agent inventory and ATRS assurance pack](experiments/03-agent-inventory-atrs-assurance.md).
 
 ## Synthetic data
 
@@ -97,6 +97,7 @@ Smoke tests check that code runs. They are not model scores. The counts are on t
 | --- | --- |
 | 01 | Turn the Copilot Studio agent off. Revoke the key in Key Vault. Block access with Conditional Access. Block the connector with a Power Platform DLP policy. |
 | 02 | Turn the Copilot Studio agent off. Remove the Foundry access. If a connector was added despite the default, block it with DLP. |
+| 03 | Turn the Copilot Studio agent off. Block mail and Dataverse write connectors with DLP. Remove a Dataverse read role if one was granted. None of these is provisioned in the starter. |
 
 Times in the manifests are the platform's, not a measured drill. Escalation contacts are placeholders. Replace them before anyone relies on the page.
 
@@ -105,4 +106,5 @@ Times in the manifests are the platform's, not a measured drill. Escalation cont
 - [`validate-agent-manifests.yml`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/.github/workflows/validate-agent-manifests.yml) checks the schema, validates each manifest, and checks that the invalid fixtures are rejected.
 - Experiment 01's workflow runs unit tests, schema validation, and a mock-mode smoke test.
 - Experiment 02's workflow runs the unit tests, including the intake safety tests, and the mock evaluation.
+- Experiment 03's workflow runs the unit tests, a pack and manifest smoke test, and the deterministic evaluation.
 - This site's workflow runs `mkdocs build --strict` on every pull request.

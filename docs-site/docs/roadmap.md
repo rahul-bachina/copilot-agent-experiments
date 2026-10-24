@@ -1,16 +1,16 @@
 # Roadmap
 
-These five experiments are named and not started. There is no design and no code in the repository. No date is promised. When one becomes a folder under `experiments/`, it gets a briefing and a manifest, and the status here changes. Until then, the name is not a commitment of scope.
+G010 is now [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). The other four are named and not started. There is no design and no code for those four. No date is promised. When one of them becomes a folder under `experiments/`, it gets a briefing and a manifest, and the status here changes. Until then, the name is not a commitment of scope.
 
 <div class="plan-grid" markdown="1">
 
 <article class="plan-card" id="g010" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · G010</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · G010</p>
 
 ## Agent inventory and ATRS assurance pack
 
-Not started. The name is a list of agents and the fields an Algorithmic Transparency Recording Standard record asks for. There is no inventory and no pack here.
+Available as [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). It drafts an inventory pack from one record. It does not approve a lifecycle status, submit an ATRS record, or connect to Dataverse.
 
 </article>
 
@@ -56,4 +56,4 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-The same list is on the [home page](index.md#planned-experiments).
+The four that are still planned are on the [home page](index.md#planned-experiments).
