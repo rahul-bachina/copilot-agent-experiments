@@ -11,7 +11,10 @@ import calendar
 import re
 from datetime import date
 
-from .sources import APPLICATION_WINDOW_CLOSES, APPLICATION_WINDOW_OPENS, REGIME_COMMENCEMENT
+try:
+    from .sources import APPLICATION_WINDOW_CLOSES, APPLICATION_WINDOW_OPENS, REGIME_COMMENCEMENT
+except ImportError:  # running as a script: python src/dates.py is not the entry point, but siblings are
+    from sources import APPLICATION_WINDOW_CLOSES, APPLICATION_WINDOW_OPENS, REGIME_COMMENCEMENT
 
 _MONTHS = {name.lower(): number for number, name in enumerate(calendar.month_name) if name}
 

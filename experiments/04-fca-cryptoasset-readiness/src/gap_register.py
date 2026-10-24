@@ -13,17 +13,30 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from .checklist import REQUIREMENTS
-from .currency import assess_catalogue, assess_document_date, parse_iso
-from .dates import date_observations
-from .injection import scan_document
-from .sources import (
-    DEFAULT_DOCUMENT_STALE_AFTER_DAYS,
-    DEFAULT_STALE_AFTER_DAYS,
-    KEY_DATES,
-    LAST_VERIFIED,
-    SOURCES,
-)
+try:
+    from .checklist import REQUIREMENTS
+    from .currency import assess_catalogue, assess_document_date, parse_iso
+    from .dates import date_observations
+    from .injection import scan_document
+    from .sources import (
+        DEFAULT_DOCUMENT_STALE_AFTER_DAYS,
+        DEFAULT_STALE_AFTER_DAYS,
+        KEY_DATES,
+        LAST_VERIFIED,
+        SOURCES,
+    )
+except ImportError:  # python src/gap_register.py puts src/ on the path, not the package
+    from checklist import REQUIREMENTS
+    from currency import assess_catalogue, assess_document_date, parse_iso
+    from dates import date_observations
+    from injection import scan_document
+    from sources import (
+        DEFAULT_DOCUMENT_STALE_AFTER_DAYS,
+        DEFAULT_STALE_AFTER_DAYS,
+        KEY_DATES,
+        LAST_VERIFIED,
+        SOURCES,
+    )
 
 DISCLAIMER = (
     "DRAFT FOR HUMAN REVIEW. This output is not regulatory advice and it is not "
