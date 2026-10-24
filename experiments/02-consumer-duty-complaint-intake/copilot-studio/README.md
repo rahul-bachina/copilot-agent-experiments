@@ -1,6 +1,8 @@
-# Copilot Studio
+# Copilot Studio standard harness
 
 A build guide, not a solution you can import. Copilot Studio agents do not travel well as a zip, and this repository does not pretend otherwise.
+
+This is the **standard harness**. The topics, the clock action, and the approval points below are unchanged. The Copilot Studio **GitHub Copilot harness** calls the same Python clock and the same mock intake, and is documented in [../docs/github-copilot-harness.md](../docs/github-copilot-harness.md). Read [../docs/harness-comparison.md](../docs/harness-comparison.md) before choosing. Do not upload the skills onto this agent. Microsoft's harness overview, retrieved 24 October 2026, describes the standard harness as the option where you define the topics and paths.
 
 The agent is for a complaints handler. It is not a customer-facing bot. A customer chatting with it would be a different product, with a different risk, and it is out of scope.
 
