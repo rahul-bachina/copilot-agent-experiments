@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/rahul-bachina/copilot-agent-experiments/schemas/agent-manifest.schema.json",
   "title": "Agent Manifest Schema",
-  "description": "Schema for AI agent permissions manifests in copilot-agent-experiments. Defines agent identity, data access, tools, human approval points, GDPR compliance, risk assessment, and governance controls. This catalogue only permits autonomy levels A0, A1, and A2 (never A3). High-risk actions (approve, reject, regulated decisions, production writes, external sends, spending) must either be disabled or have explicit human approval.",
+  "description": "Schema for AI agent permissions manifests in copilot-agent-experiments. Defines agent identity, data access, tools, human approval points, GDPR compliance, risk assessment, and governance controls. This catalogue only permits autonomy levels A0, A1, and A2 (never A3). High-risk actions (approve, reject, regulated decisions, production writes, external sends, spending) must either be disabled or have explicit human approval. See docs/autonomy-levels.md for level definitions.",
   "type": "object",
   "required": [
     "agent",

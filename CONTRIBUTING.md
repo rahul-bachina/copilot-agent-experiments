@@ -38,7 +38,7 @@ Thank you for your interest in contributing! This is a learning-focused reposito
 Every experiment must include an `agent-manifest.yaml` that defines the agent's permissions, data access, and governance controls. The manifest must:
 
 1. **Validate against the schema** at `schemas/agent-manifest.schema.json`
-2. **Use autonomy level A0, A1, or A2** — A3 (fully autonomous) is not permitted in this catalogue
+2. **Use autonomy level A0, A1, or A2** — A3 (fully autonomous) is not permitted in this catalogue (see [docs/autonomy-levels.md](docs/autonomy-levels.md) for definitions)
 3. **Declare all high-risk actions** (approve/reject, regulated decisions, production writes, external sends, spending) as either disabled or with explicit human approval
 4. **Document UK GDPR compliance** including lawful basis and special category data handling
 5. **Include a risk assessment** with likelihood, impact, controls, and residual risk

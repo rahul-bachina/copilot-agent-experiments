@@ -473,13 +473,14 @@ kill_switch:
       who_can_activate: "Power Platform administrators"
 
   escalation_contacts:
-    # ASSUMPTION: Update with actual contacts on deployment
+    # Deployment-specific: Update with actual contacts on deployment
+    # Using example.gov.uk (reserved domain) as placeholder
     - role: "IT Service Desk"
-      contact: "servicedesk@example.gov.uk"
+      contact: "servicedesk@example.gov.uk"  # Deployment-specific
     - role: "Information Security"
-      contact: "security@example.gov.uk"
+      contact: "security@example.gov.uk"  # Deployment-specific
     - role: "Data Protection Officer"
-      contact: "dpo@example.gov.uk"
+      contact: "dpo@example.gov.uk"  # Deployment-specific
 
 # =============================================================================
 # REVIEW AND GOVERNANCE
