@@ -35,6 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 03 | [Agent inventory and ATRS assurance pack](experiments/03-agent-inventory-atrs-assurance/) | Draft an ATRS record, a playbook mapping, a DPIA skeleton, a DUAA screen, and an FCA-style inventory row. The governance owner approves every lifecycle status change. | ✅ Starter |
 | 04 | [FCA cryptoasset authorisation readiness](experiments/04-fca-cryptoasset-readiness/) | Draft a gap register against pinned FCA cryptoasset pages. The Compliance Officer or MLRO owns every gap conclusion. Autonomy A0. | ✅ Starter |
 | 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
+| 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
 
 ## Getting Started
 
@@ -81,6 +82,12 @@ cd ../05-awaabs-law-hazard-triage
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/statutory_clock.py --aware-at 2026-01-08T09:00:00+00:00 --category significant --hazard-family damp_mould_fungal_growth --social-home-in-england --approve-category --approve-clock
+
+# Experiment 07 needs no credentials either. The codebook is deterministic.
+cd ../07-consultation-themes
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
 ```
 
 ## Repository Structure
@@ -108,7 +115,8 @@ copilot-agent-experiments/
     │   ├── eval/                  # Evaluation data and scripts
     │   ├── docs/                  # Architecture and security docs
     │   └── examples/              # Sample inputs/outputs
-    └── 05-awaabs-law-hazard-triage/
+    ├── 05-awaabs-law-hazard-triage/
+    └── 07-consultation-themes/
 ```
 
 ## Agent Governance

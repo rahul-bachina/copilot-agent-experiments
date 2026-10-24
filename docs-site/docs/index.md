@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Five starters you can read today
+## Six starters you can read today
 
 </div>
 
@@ -203,6 +203,31 @@ The clock and the mock triage run locally. Nothing is sent, and nothing is writt
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 07 · V010 · Public bodies · Autonomy A1</p>
+
+### Consultation themes
+
+Code one consultation question. The analyst approves the framework and every sampled assignment. Minority views stay, with response IDs.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The codebook runs locally. Nothing is published, and a response cannot approve the framework.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/07-consultation-themes.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/07-consultation-themes)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -233,19 +258,9 @@ Not started. It would answer questions from published policy. There is no corpus
 
 </article>
 
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · V010</p>
-
-### Consultation themes
-
-Not started. It would group themes from a consultation. There is no consultation text and no method.
-
-</article>
-
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, and UK02 now have briefings. The other names are still only names.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, and V010 now have briefings. M003 is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -310,7 +325,7 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

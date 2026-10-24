@@ -46,11 +46,11 @@ Not started. It would answer questions from published policy. There is no corpus
 
 <article class="plan-card" id="v010" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · V010</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · V010 · Autonomy A1</p>
 
 ## Consultation themes
 
-Not started. It would group themes from a consultation. There is no consultation text and no method.
+A codebook for one consultation question. The analyst approves the framework and every sampled assignment. Minority views stay, with response IDs. [Read the briefing](experiments/07-consultation-themes.md).
 
 </article>
 
