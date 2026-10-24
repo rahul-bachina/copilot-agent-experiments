@@ -16,6 +16,9 @@ DIAGRAMS = {
     "experiments/02-consumer-duty-complaint-intake/docs/architecture_diagram.png": (
         "experiments/img/02-consumer-duty-architecture.png"
     ),
+    "experiments/04-fca-cryptoasset-readiness/docs/architecture_diagram.png": (
+        "experiments/img/04-fca-cryptoasset-architecture.png"
+    ),
 }
 
 

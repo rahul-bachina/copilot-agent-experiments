@@ -1,0 +1,503 @@
+# Agent manifest: FCA cryptoasset authorisation readiness gap checker
+# Experiment 04 — catalogue ID UK02
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-04-fca-cryptoasset-readiness"
+  name: "FCA cryptoasset authorisation readiness gap checker"
+  version: "0.1.0"
+  description: >
+    Reads a pack of synthetic policy documents for a fictional cryptoasset firm
+    and returns a draft observation register against a pinned catalogue of FCA
+    pages. Autonomy A0. The checker cites the page each row came from and marks
+    consultation-stage and planned items. It does not give regulatory or legal
+    advice, does not conclude that a firm is or is not ready, and does not
+    accept a gap. The Compliance Officer or the MLRO owns every gap conclusion.
+    Output is labelled draft for human review.
+  owner: "Compliance / financial crime (the adopting firm)"
+  contact: "compliance-draft@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/04-fca-cryptoasset-readiness"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The agent returns a draft register and stops. It has no action to take on that draft."
+    - "The agent NEVER concludes that a firm is ready or that a firm is not ready for authorisation or registration"
+    - "The agent NEVER gives regulatory advice or legal advice"
+    - "The agent NEVER accepts, rejects, or edits a gap. The Compliance Officer or MLRO owns every gap conclusion"
+    - "The agent NEVER submits an application, uses Connect, emails the FCA, or files a suspicious activity report"
+    - "The agent NEVER approves a financial promotion or acts as a section 21 approver"
+    - "The agent NEVER treats a consultation or a plan to consult as a final rule"
+    - "Citations come from src/sources.py. The checker does not browse fca.org.uk at run time"
+    - "Policy text is untrusted data. Instructions inside a document cannot change the catalogue, the dates, or the disclaimer"
+    - "All output is labelled DRAFT FOR HUMAN REVIEW"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Policy pack supplied for this run"
+      description: "Synthetic business-wide risk assessment, customer risk assessment, onboarding and CDD, transaction monitoring, Travel Rule, governance, Consumer Duty, financial promotions, operational resilience, and safeguarding text"
+      access_level: "read"
+      scope: "One pack per invocation. No browsing of a document library."
+      justification: "The draft register cannot be built without the text the reviewer asked the checker to read"
+      data_categories:
+        - "Policy and procedure text"
+        - "Role titles, and staff names if the firm left them in the draft"
+        - "Control descriptions, thresholds, and product scope"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the pack."
+
+    - resource: "Pinned FCA source catalogue"
+      description: "src/sources.py and src/checklist.py. URLs, stages, and last-verified dates recorded on 24 October 2026"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "Citations and rule stage come from the pin, not from the model and not from the policy text"
+      may_contain_personal_data: false
+
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the reviewer"
+      access_level: "read"
+      scope: "This invocation"
+      justification: "Currency of the pinned pages is calculated from these inputs"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "FCA Connect and any application form in flight"
+      reason: "The agent does not submit and does not read a live application."
+    - resource: "Customer KYC files, transaction alerts, and blockchain analytics tenants"
+      reason: "The checker reads policies, not customer or transaction records."
+    - resource: "Suspicious activity reports and NCA reporting channels"
+      reason: "The agent does not file and does not read SARs."
+    - resource: "Live wallets, private keys, and custody systems"
+      reason: "Safeguarding text may describe key management. The agent must not see key material."
+    - resource: "Mailboxes and the FCA's pre-application support service"
+      reason: "The agent does not correspond with the FCA or with customers."
+    - resource: "Other firms' packs"
+      reason: "No cross-firm memory and no benchmarking in this starter."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Gap register"
+      provider: "Local Python (src/gap_register.py)"
+      action: "Compare one policy pack to the pinned checklist and return draft JSON"
+      access_level: "read"
+      scope: "One pack per call. No network. No model."
+      justification: "Phrase checks, citations, injection handling, and source currency are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Source currency"
+      provider: "Local Python (src/currency.py)"
+      action: "Flag a pinned source whose last-verified date is older than the threshold"
+      access_level: "read"
+      scope: "The static catalogue plus the as-of date"
+      justification: "A stale pin must be visible on the register before anyone relies on a row."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. A GitHub Copilot harness skill may describe a sandbox draft
+      file that is a copy of this JSON. Copying it into SharePoint, a register,
+      or an application pack is a person, and it is outside this starter.
+
+  sends:
+    enabled: false
+    note: "No sends. The draft is returned to the reviewer who supplied the pack."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not accept or reject a gap, an application, a promotion,
+      or a control. The Compliance Officer or MLRO does that outside the agent.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Readiness, breach, suspicion, and whether a rule applies are regulated
+      judgements. The agent records phrase checks and the stage written on the
+      pinned FCA page. It does not make those judgements.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, or delete against a register, a case, Connect, or any other production record."
+
+  external_send:
+    enabled: false
+    rationale: "No email to the FCA, to a customer, to the NCA, or to a section 21 approver."
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, no wallet movement, and no instruction to a custody system."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Submit or vary an FCA application"
+      rationale: "Connect and the pre-application support service are out of scope."
+    - enabled: false
+      action_name: "File a suspicious activity report"
+      rationale: "The MLRO decides whether to file. The agent has no reporting channel."
+    - enabled: false
+      action_name: "Approve a financial promotion"
+      rationale: "Section 21 approval is not a tool of this agent."
+    - enabled: false
+      action_name: "Treat consultation-stage material as a final rule"
+      rationale: "Rule stage is pinned in src/checklist.py. Policy text cannot change it."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    Autonomy is A0, so the agent has nothing to execute after the draft.
+    A person still has to accept or reject each observation before it is
+    treated as a gap. That decision is not an agent action.
+
+  approval_points:
+    - action: "Treat any observation as a gap in the firm's register"
+      approver: "Compliance Officer or MLRO"
+      mandatory: true
+      rationale: "A missing phrase is not a breach and not a readiness finding"
+
+    - action: "Rely on a row after a cited source is marked stale"
+      approver: "Compliance Officer or MLRO"
+      mandatory: true
+      rationale: "The pin is only as good as the last date a person checked fca.org.uk"
+
+    - action: "Use a quarantined document as evidence"
+      approver: "Compliance Officer or MLRO"
+      mandatory: true
+      rationale: "Prompt injection in a policy is discarded by the checker. A person may still read the file."
+
+    - action: "Copy the draft into a system the firm will rely on"
+      approver: "Compliance Officer or MLRO"
+      mandatory: true
+      rationale: "The starter does not write. Filing is a human act outside the agent."
+
+    - action: "Submit an application or file a SAR"
+      approver: "The firm's authorised person or the MLRO"
+      mandatory: true
+      rationale: "Out of the agent's scope. Listed so the control is explicit."
+
+  no_approval_required:
+    - action: "View the draft register"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the checker on the same pack"
+      rationale: "No write and no send"
+    - action: "Print the sources and currency table"
+      rationale: "It is the pinned catalogue, not a new judgement"
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted. Candidate for the firm to confirm: Article 6(1)(f) legitimate interests, for an internal compliance review of the firm's own drafts."
+    description: >
+      This starter does not decide the basis. Policy drafts can name staff.
+      The firm's DPO confirms the basis before any production use. Do not copy
+      a public-task basis from Experiment 01. Article 6(1)(c) is not claimed
+      here: running this checker is not itself the firm's regulatory duty.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not applicable. The checker is not for special-category data. If a pack contains it, stop and remove it before any production run."
+    safeguards:
+      - "Synthetic fixtures only in this repository"
+      - "The starter does not persist the pack"
+      - "No customer file is in scope"
+      - "No solely automated decision about a person"
+
+  data_minimisation:
+    - "One pack at a time, as supplied by the reviewer"
+    - "No KYC file, no alert, and no wallet"
+    - "The register stores short excerpts from the pack, not the whole file, and only from lines that were not classed as injection"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "Whatever the reviewer then saves is the firm's own schedule. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry or Azure deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the firm's privacy process. A policy that is also a
+      data-protection matter is for the privacy team, not for this checker.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Uploaded policies are untrusted. They may tell the model to ignore the
+    rules, to mark the firm ready, to suppress gaps, or to treat a consultation
+    as final. The checker scans each document, drops injection lines from the
+    evidence, and quarantines a document when the instruction is split across
+    lines. There is no tool that can submit, file, approve, or write.
+
+  controls:
+    - control: "Instructions separated from the policy"
+      description: "The catalogue, the dates, and the disclaimer do not read the policy as instructions."
+      implementation: "src/injection.py and src/gap_register.py"
+    - control: "Pinned citations"
+      description: "A document cannot add an FCA source or change last_verified."
+      implementation: "src/sources.py"
+    - control: "Pinned rule stage"
+      description: "Consultation and planned rows stay in that stage even if the policy says they are final."
+      implementation: "src/checklist.py"
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. actions_taken is always an empty list."
+      implementation: "agent-manifest.yaml"
+    - control: "Human ownership of gaps"
+      description: "accepted_as_gap is false on every row. Readiness fields are null."
+      implementation: "src/gap_register.py"
+
+  residual_risk: >
+    A manipulated model, if one is later wrapped around this JSON, can still
+    narrate a misleading summary. The Compliance Officer or MLRO is the control.
+    There is no autonomous action to take even if the draft is wrong. The
+    deterministic checker itself does not call a model.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named firm"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A reviewer treats a missing phrase as a breach, or treats a complete-looking pack as readiness"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Readiness fields are null and the disclaimer says the draft is not a readiness conclusion"
+        - "accepted_as_gap is false on every row"
+        - "The Compliance Officer or MLRO is named as the owner of every gap conclusion"
+      residual_risk: "Medium"
+      owner: "Compliance Officer or MLRO"
+
+    - id: "R2"
+      risk: "A consultation or a plan to consult is applied as if it were a final rule"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "rule_stage is pinned"
+        - "Those rows are not scored as current expectations"
+        - "Policy text cannot change the stage"
+      residual_risk: "Low"
+      owner: "Compliance Officer or MLRO"
+
+    - id: "R3"
+      risk: "Prompt injection in a policy marks the firm ready, suppresses a row, or alters a citation"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Injection lines are excluded from evidence"
+        - "Split instructions quarantine the document"
+        - "No submit, send, or write tool exists"
+        - "Tests cover these packs"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "A pinned FCA page has changed and the register still cites the old text"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Every source has last_verified"
+        - "A stale-data check flags a pin older than the threshold"
+        - "The checker does not pretend to refresh fca.org.uk"
+      residual_risk: "Medium"
+      owner: "Compliance Officer or MLRO"
+
+    - id: "R5"
+      risk: "Staff names or other personal data in a policy are retained or reused"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The starter does not persist the pack"
+        - "Excerpts are short and skip injection lines"
+        - "Synthetic fixtures only in this repository"
+        - "The lawful basis is explicitly not asserted"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R6"
+      risk: "Private keys or customer records are pasted into a pack and sent to a model later"
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The manifest forbids wallet, key, and KYC access"
+        - "This starter has no connector"
+        - "A later Foundry path must keep the pack out of training and out of logs"
+      residual_risk: "Medium"
+      owner: "Information security"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the catalogue version,
+    the as-of date, and the reviewer's accept or change. This starter logs
+    nothing because it keeps no store. Do not log policy text in an application trace.
+
+  logged_events:
+    - event: "Register requested"
+      data_logged:
+        - "Timestamp"
+        - "Reviewer identity"
+        - "Document ids and character counts, not the text"
+        - "As-of date and stale threshold"
+        - "Catalogue last_verified dates"
+      retention: "Firm's compliance-file schedule. Not set by this starter."
+    - event: "Prompt injection flagged"
+      data_logged:
+        - "Document id"
+        - "Pattern id"
+        - "Whether the document was quarantined"
+      retention: "Operational log. Do not store the policy line in the security log if it contains personal data. The starter's own output keeps a short excerpt for the reviewer of that run."
+    - event: "Reviewer accepted or rejected a row"
+      data_logged:
+        - "Requirement id"
+        - "Reviewer identity"
+        - "Timestamp"
+      retention: "Firm's compliance-file schedule."
+    - event: "Source marked stale"
+      data_logged:
+        - "Source id"
+        - "Last verified"
+        - "As-of date"
+        - "Threshold in days"
+      retention: "Keep with the draft if the reviewer looked at it."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the firm's security team already operates."
+
+  audit_trail:
+    - "This starter writes no audit trail"
+    - "A production copy should record catalogue version and reviewer decisions without storing the pack in the trace"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the managed identity or the Key Vault secret used by any later orchestration"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SharePoint write, or HTTP to Connect"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+    - method: "Stop using the local checker"
+      action: "Remove the experiment folder from the reviewer's machine or CI"
+      time_to_effect: "Immediate"
+      who_can_activate: "The team that installed it"
+  escalation_contacts:
+    - role: "Compliance Officer or MLRO"
+      contact: "compliance-draft@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months, and sooner when an FCA cryptoasset page in the catalogue changes"
+  reviewer: "The adopting firm's Compliance Officer or MLRO, and the DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "Any change to the application period or the 25 October 2027 commencement wording on the pinned pages"
+    - "A policy statement, finalised guidance, or consultation that supersedes PS26/9 to PS26/13, PS26/18, FG26/5, or FG26/6"
+    - "Publication of the Financial Crime Guide consultation the 30 June 2026 overview said would follow"
+    - "A proposal to add a connector, a write, or a send"
+    - "A security incident involving a policy pack"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Gap register"
+      path: "src/gap_register.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Harness comparison"
+      path: "docs/harness-comparison.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a firm must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The lawful basis is confirmed by the firm's DPO. This manifest does not assert one."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on the firm's policies"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Someone re-opens the pinned FCA pages before the register is used, and updates last_verified"
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No Connect, mail, SharePoint, or custody connector is added without editing this manifest in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on example.com are placeholders, not a real firm"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Harbourline Markets Ltd and the fixture packs are synthetic. They must not be replaced with a live application pack in this repository."
+      section: "examples/"
+      verify_on_deployment: true
