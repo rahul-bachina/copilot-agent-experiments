@@ -6,7 +6,7 @@ A starter for FCA-regulated firms. It helps a complaints handler turn an inbound
 
 **Autonomy A1.** A handler validates every classification and every severity. The agent does not send, write a production record, close a case, uphold or reject a complaint, or decide redress.
 
-This revision contains the scaffold, the permissions manifest, the deterministic DISP clock, 22 synthetic fixtures, and a mock intake used only as a smoke test. Copilot Studio, Microsoft Foundry and Dynamics 365 notes follow. Nothing here calls a model.
+This revision contains the permissions manifest, the deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and the build notes for Copilot Studio, Microsoft Foundry and Dynamics 365 Customer Service. Nothing here calls a model.
 
 Stack: Copilot Studio, Dynamics 365 Customer Service, and Power Platform. The clock itself is Python in the standard library, so a handler can run the dates without a tenant.
 
@@ -117,6 +117,14 @@ Payment-services complaint received Thursday 24 December 2026. On the England an
 
 This is not legal advice and it is not a statement of the firm's compliance.
 
+## Where the rest of the starter lives
+
+- Architecture, including the Mermaid diagram: [docs/architecture.md](docs/architecture.md). The rendered diagram is [docs/architecture_diagram.png](docs/architecture_diagram.png).
+- Copilot Studio topics and the clock action: [copilot-studio/README.md](copilot-studio/README.md). Instructions to paste: [copilot-studio/system-prompt.md](copilot-studio/system-prompt.md).
+- Microsoft Foundry path: [docs/foundry.md](docs/foundry.md).
+- Dynamics 365 Customer Service, read-only and draft-only: [docs/dynamics-365-customer-service.md](docs/dynamics-365-customer-service.md).
+- Permissions: [docs/security-and-permissions.md](docs/security-and-permissions.md) and [agent-manifest.yaml](agent-manifest.yaml).
+
 ## Project structure
 
 ```
@@ -127,6 +135,16 @@ experiments/02-consumer-duty-complaint-intake/
 ├── src/
 │   ├── disp_clock.py
 │   └── intake.py
+├── copilot-studio/
+│   ├── README.md
+│   └── system-prompt.md
+├── docs/
+│   ├── architecture.md
+│   ├── architecture_diagram.png
+│   ├── foundry.md
+│   ├── dynamics-365-customer-service.md
+│   ├── security-and-permissions.md
+│   └── generate_diagram.py
 ├── eval/
 │   ├── synthetic_dataset.json
 │   ├── evaluate.py

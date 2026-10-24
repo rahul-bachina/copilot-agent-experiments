@@ -23,6 +23,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | # | Name | Description | Status |
 |---|------|-------------|--------|
 | 01 | [FOI Complaint Triage](experiments/01-foi-complaint-triage/) | Triage long FOI requests and complaints into structured data for public sector staff | ✅ Complete |
+| 02 | [Complaint Intake — Consumer Duty / DISP](experiments/02-consumer-duty-complaint-intake/) | Draft a DISP complaint intake for a handler. Dates are computed in code. The agent does not send, decide, or write a case. | ✅ Starter |
 
 ## Getting Started
 
@@ -45,6 +46,12 @@ cd copilot-agent-experiments
 cd experiments/01-foi-complaint-triage
 pip install -r requirements.txt
 python src/triage_agent.py --mock --input examples/sample_request.txt
+
+# Experiment 02 needs no credentials either. The DISP clock is deterministic.
+cd ../02-consumer-duty-complaint-intake
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/disp_clock.py --received 2026-01-02 --route general
 ```
 
 ## Repository Structure
@@ -60,7 +67,8 @@ copilot-agent-experiments/
 ├── tests/
 │   └── test_agent_manifest_schema.py  # Schema validation tests
 └── experiments/
-    └── 01-foi-complaint-triage/
+    ├── 01-foi-complaint-triage/
+    └── 02-consumer-duty-complaint-intake/
         ├── README.md              # Experiment documentation
         ├── agent-manifest.yaml    # Permissions and governance manifest
         ├── requirements.txt
