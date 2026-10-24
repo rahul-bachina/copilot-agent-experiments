@@ -1,6 +1,6 @@
 # Roadmap
 
-These five experiments are named and not started. There is no design and no code in the repository. No date is promised. When one becomes a folder under `experiments/`, it gets a briefing and a manifest, and the status here changes. Until then, the name is not a commitment of scope.
+These four experiments are named and not started. There is no design and no code in the repository. No date is promised. When one becomes a folder under `experiments/`, it gets a briefing and a manifest, and the status here changes. Until then, the name is not a commitment of scope.
 
 <div class="plan-grid" markdown="1">
 
@@ -21,16 +21,6 @@ Not started. The name is a list of agents and the fields an Algorithmic Transpar
 ## FCA cryptoasset authorisation readiness
 
 Not started. It would be for firms preparing for FCA cryptoasset authorisation. There is no checklist, no policy text, and no agent.
-
-</article>
-
-<article class="plan-card" id="uk01" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK01</p>
-
-## Awaab's Law hazard triage
-
-Not started. The name points at housing hazard reports under Awaab's Law. There is no triage flow and no sample data.
 
 </article>
 
