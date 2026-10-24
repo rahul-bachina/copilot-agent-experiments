@@ -195,6 +195,53 @@ class TestExperiment05Manifest:
         assert experiment_05_manifest["tools"]["sends"]["enabled"] is False
 
 
+class TestExperiment06Manifest:
+    """Test the Experiment 06 NHS corporate policy Q&A manifest."""
+
+    @pytest.fixture
+    def experiment_06_manifest(self):
+        manifest_path = REPO_ROOT / "experiments" / "06-nhs-policy-qa" / "agent-manifest.yaml"
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_06_manifest):
+        """Experiment 06 manifest should be valid."""
+        validate(instance=experiment_06_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_06_manifest):
+        """Experiment 06 should be autonomy level A0."""
+        assert experiment_06_manifest["autonomy"]["level"] == "A0"
+        assert experiment_06_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_06_manifest):
+        """Experiment 06 should have all high-risk actions disabled."""
+        high_risk = experiment_06_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_06_manifest):
+        """Nothing is sent, published, or written to a policy register."""
+        assert experiment_06_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_06_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_policy_owner_approves_sources(self, experiment_06_manifest):
+        """The human checkpoint is the policy owner, and it is mandatory."""
+        points = experiment_06_manifest["human_approval"]["approval_points"]
+        source_approval = next(
+            point for point in points if "authoritative register" in point["action"]
+        )
+        assert source_approval["approver"] == "Policy owner"
+        assert source_approval["mandatory"] is True
+
+
 class TestExperiment07Manifest:
     """Test the Experiment 07 consultation-theme manifest."""
 
