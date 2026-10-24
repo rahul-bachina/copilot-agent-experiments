@@ -1,0 +1,497 @@
+# Agent manifest: Public Consultation Theme Agent
+# Experiment 07 — V010, "essay to data" for councils, regulators, NHS, charities
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-07-consultation-themes"
+  name: "Public Consultation Theme Agent"
+  version: "0.1.0"
+  description: >
+    Helps a consultation analyst code free-text responses for a UK public body
+    or charity. The deterministic core redacts identifiers it knows, flags
+    prompt injection inside responses, clusters duplicate and campaign text,
+    and codes responses against a human-approved theme framework. Counts carry
+    a Wilson interval. Minority codes and uncoded responses are kept. Every
+    theme lists response IDs. Autonomy A1. An analyst approves the framework
+    and every sampled assignment. The agent never publishes the analysis,
+    writes a production record, sends externally, or decides the policy.
+    ThemeFinder from i.AI is an optional adapter, not vendored code.
+  owner: "Consultation analysis"
+  contact: "consultation-themes@example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/07-consultation-themes"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves the theme framework and every sampled assignment"
+  constraints:
+    - "The catalogue row is A0 because the work is analysis. This starter is A1, which is the maximum used here, because the framework and the sample are approval gates."
+    - "A response cannot approve the framework, accept a sample row, publish the analysis, or send it."
+    - "The agent NEVER publishes a consultation analysis or a policy recommendation"
+    - "The agent NEVER sends email or any other external message"
+    - "The agent NEVER writes a consultation platform, a Dataverse row, or any other production record"
+    - "The agent NEVER decides the policy the consultation is about"
+    - "Minority themes, uncoded responses, and campaign copies stay in the audit trail"
+    - "Headline counts are provisional until the analyst has approved the framework and every sampled assignment"
+    - "All output is a draft"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Consultation responses supplied by the analyst"
+      description: "A CSV or JSON export the analyst has placed in the run. Synthetic in this repository."
+      access_level: "read"
+      scope: "One consultation question per invocation. No browsing of other consultations."
+      justification: "The coding cannot be drafted without the responses the analyst has asked it to read"
+      data_categories:
+        - "Free-text answers"
+        - "Response identifiers assigned by the body"
+        - "Contact details if a respondent typed them into the answer"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient in this starter. The audit stores redacted text, not the raw identifiers this module recognised."
+
+    - resource: "Theme framework supplied by the analyst"
+      description: "Theme ids, labels, and keywords. Unapproved until the approval record says otherwise."
+      access_level: "read"
+      scope: "The framework for this question"
+      justification: "Coding is against a codebook a person owns"
+      may_contain_personal_data: false
+
+    - resource: "Analyst approval record"
+      description: "Framework approval, stale-data acknowledgement, and one decision per sampled response. This is a separate object from the responses."
+      access_level: "read"
+      scope: "The decisions the analyst has entered for this run"
+      justification: "The gates are explicit inputs. They are not inferred from response text."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "i.AI Consult production storage, including the S3 path named in the ThemeFinder README"
+      reason: "This starter does not connect to Consult and does not upload responses."
+    - resource: "Other consultations and other respondents' records outside this export"
+      reason: "No profiling across exercises."
+    - resource: "Email, case management, and committee systems"
+      reason: "The agent does not send and does not file."
+    - resource: "A respondent's wider customer, patient, or housing record"
+      reason: "Not required to draft a theme count."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Intake status"
+      provider: "Local Python (src/pipeline.py intake_status)"
+      action: "Count responses, redact known identifiers, flag injection, cluster duplicates"
+      access_level: "read"
+      scope: "The export supplied for this run. No theme coding."
+      justification: "The standard harness shows status before any coding."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Theme analysis"
+      provider: "Local Python (src/pipeline.py analyse)"
+      action: "Code responses to an analyst-supplied framework and build the audit trail"
+      access_level: "read"
+      scope: "One question. Deterministic codebook unless the adapter is explicitly asked to call ThemeFinder."
+      justification: "Draft counts, uncertainty, minority views, and response IDs."
+      human_approval_required: true
+      output_requires_human_review: true
+
+    - tool: "ThemeFinder adapter"
+      provider: "Optional import of themefinder (not installed in this starter)"
+      action: "Map redacted responses to the already approved framework, or propose themes that stay unapproved"
+      access_level: "read"
+      scope: "Redacted text only. No S3 upload. No theme-clustering rule that drops small themes."
+      justification: "Interop with i.AI's MIT-licensed package when a body chooses to install it."
+      human_approval_required: true
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the analyst. Filing it is the
+      analyst's action in the body's own system.
+
+  sends:
+    enabled: false
+    note: "No sends. The analysis is not emailed and is not published by the agent."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not accept or reject a consultation proposal, and it does
+      not approve its own framework. Framework approval is an input the analyst
+      supplies. A response cannot supply it.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Theme counts can inform a public decision. Making that decision is out of
+      scope. The draft contains no recommendation.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, or delete against a consultation system or any other production record."
+
+  external_send:
+    enabled: false
+    rationale: "Publishing and sending are disabled. An instruction inside a response cannot enable them."
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, grant, or other transaction."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish the consultation analysis"
+      rationale: "Publication is a decision for the body. The agent has no publish action."
+    - enabled: false
+      action_name: "Drop a minority theme or a campaign response"
+      rationale: "The core keeps those rows in the audit. A response cannot switch the rule off."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    Two gates sit in front of an analyst-reviewed draft. The analyst approves
+    the theme framework. The analyst then accepts, corrects, or rejects every
+    row in the review sample. Rows outside the sample are not individually
+    approved, and the draft says so. Neither gate can be satisfied by text
+    inside a response.
+
+  approval_points:
+    - action: "Approve the theme framework"
+      approver: "Consultation analyst"
+      mandatory: true
+      rationale: "The codebook is the method. A model proposal is not a method."
+
+    - action: "Accept, correct, or reject each sampled theme assignment"
+      approver: "Consultation analyst"
+      mandatory: true
+      rationale: "Every row the sampler selected has to be decided before the draft is marked analyst-reviewed."
+
+    - action: "Acknowledge a stale retrieval date"
+      approver: "Consultation analyst"
+      mandatory: true
+      rationale: "A set retrieved too long before the analysis date stays blocked until a person records that they know."
+
+    - action: "Publish or rely on the counts"
+      approver: "The body's consultation owner"
+      mandatory: true
+      rationale: "Out of the agent's scope. Listed so the control is explicit. The agent cannot do it."
+
+  no_approval_required:
+    - action: "View intake status"
+      rationale: "Counts of rows, redactions, and clusters have no external effect."
+    - action: "Re-run the codebook on the same export"
+      rationale: "No write and no send. The status stays blocked until the gates are met."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "To be confirmed by the body. Article 6(1)(e) public task is the usual candidate for a council or NHS consultation. It is not asserted here."
+    description: >
+      This starter does not decide the lawful basis. A charity may not be able
+      to rely on public task. The DPO confirms the basis before any live export
+      is processed. The repository contains synthetic text only.
+    secondary: "Not asserted."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, if a respondent describes a condition or a disability in the answer"
+    lawful_basis_special: >
+      Not asserted. The body must identify an Article 9 condition before
+      production use. This starter does not claim a Data Protection Act 2018
+      Schedule 1 condition.
+    safeguards:
+      - "Known identifier patterns are redacted before coding and before any optional model call"
+      - "A word-list flag marks that a response may indicate special-category data. It does not become a theme."
+      - "The audit stores redacted text"
+      - "No profile of the respondent is built"
+      - "No solely automated decision about a person"
+
+  data_minimisation:
+    - "One question at a time, from an export the analyst supplies"
+    - "Raw identifier values recognised by this module are not copied into the audit"
+    - "Names and free-text addresses are not detected. Do not treat redaction as complete."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The body's consultation retention applies to whatever the analyst then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment, if one is added, should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not answer access, erasure, or objection requests.
+      Those go through the body's privacy process. A consultation answer that
+      is also a data-protection request must be flagged for that team.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Consultation answers are untrusted. They may tell the tool to ignore the
+    rules, approve the framework, drop minority views, or publish the report.
+    Those sentences are data. They are flagged, the row stays in the audit,
+    and the row is forced into the review sample. They do not change the gates.
+
+  controls:
+    - control: "Instructions separated from the response"
+      description: "Approval is a separate object. Response text is never parsed as configuration."
+    - control: "Pattern flags"
+      description: "Instruction-shaped phrases are flagged in src/safeguards.py. A policy view that merely disagrees with the council is not itself a flag."
+    - control: "No tools with side effects"
+      description: "Writes, sends, and publication are disabled in this manifest."
+    - control: "Optional model sees redacted text only"
+      description: "The ThemeFinder adapter sends redacted text and a fixed system prompt. The response is not copied into that prompt."
+    - control: "Human sample"
+      description: "Every flagged row is in the sample the analyst must decide."
+
+  residual_risk: >
+    A phrase that does not match the patterns can still influence a human
+    reader, and a future model could still draft a misleading label. The
+    analyst is the control. There is no publish action to take even if the
+    draft is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named body"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A small theme is dropped and the public account of the consultation is skewed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Framework themes with support below the minority rule stay in minority_views"
+        - "Framework themes with no support stay visible with an empty response list"
+        - "ThemeFinder's non-negligible-response rule is not called"
+      residual_risk: "Medium"
+      owner: "Consultation analysis"
+
+    - id: "R2"
+      risk: "A campaign is counted as many independent views, or is deleted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Exact, near-duplicate, and repeated-sentence clusters are reported"
+        - "The unique-voice proportion counts a cluster once"
+        - "Every response ID stays on the theme and in the audit"
+      residual_risk: "Medium"
+      owner: "Consultation analysis"
+
+    - id: "R3"
+      risk: "Prompt injection inside a response approves the framework, hides a theme, or publishes the draft"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No publish or send tool exists"
+        - "Approval is not read from response text"
+        - "Flagged rows are sampled"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "Personal data in a response is copied into the audit or into a model call"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Known UK identifier patterns are redacted"
+        - "The optional adapter receives redacted text"
+        - "Names are a documented gap, not a claimed detection"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R5"
+      risk: "A stale export is coded as if it were the current consultation"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The retrieval date is compared with the analysis date"
+        - "A stale set cannot be marked analyst-reviewed until the analyst acknowledges it"
+      residual_risk: "Low"
+      owner: "Consultation analysis"
+
+    - id: "R6"
+      risk: "Keyword coding misses paraphrase and the counts look more certain than they are"
+      likelihood: "High"
+      impact: "Medium"
+      inherent_risk: "High"
+      controls:
+        - "Uncoded rows are kept and sampled"
+        - "The Wilson interval is labelled as proportion uncertainty, not model confidence"
+        - "The draft says rows outside the sample were not individually checked"
+      residual_risk: "Medium"
+      owner: "Consultation analysis"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    The draft itself is the audit for this starter: every theme lists response
+    IDs, and every response lists its themes, cluster, redaction types, and
+    sample decision. A production deployment should also log who ran the tool
+    and which ThemeFinder version was imported, without storing raw identifiers.
+
+  logged_events:
+    - event: "Analysis drafted"
+      data_logged:
+        - "Timestamp"
+        - "Analyst reference from the approval record, if any"
+        - "Consultation id and question id"
+        - "Engine name: deterministic_fallback or themefinder"
+        - "Response count, not the raw text"
+      retention: "The body's consultation-file schedule. Not set by this starter."
+    - event: "Sample decision recorded"
+      data_logged:
+        - "Response id"
+        - "Decision: accept, correct, or reject"
+        - "Analyst reference"
+      retention: "Keep with the consultation file if the counts are relied on."
+    - event: "Identifier redacted"
+      data_logged:
+        - "Response id"
+        - "Identifier type"
+        - "Not the raw value"
+      retention: "Operational log. Do not add the raw value back."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the body's security team already operates. Do not log raw consultation text in an application trace."
+
+  audit_trail:
+    - "Theme to response IDs"
+    - "Response to theme IDs, cluster id, and sample decision"
+    - "Redaction types without raw identifier values"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove the Microsoft Foundry deployment access"
+      action: "Revoke the key or the managed-identity role used by an optional ThemeFinder client"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Do not install ThemeFinder"
+      action: "Leave the package uninstalled. The core then stays on the codebook."
+      time_to_effect: "Immediate"
+      who_can_activate: "The team that owns the environment"
+  escalation_contacts:
+    - role: "Consultation analysis lead"
+      contact: "consultation-themes@example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@example.gov.uk"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months, and sooner if the body starts a live consultation on this code"
+  reviewer: "The adopting body's consultation owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A proposal to publish counts from this draft"
+    - "A proposal to install ThemeFinder or to point it at a model"
+    - "A ThemeFinder release that changes find_themes or theme_mapping"
+    - "A security incident or a complaint about a published consultation analysis"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Pipeline"
+      path: "src/pipeline.py"
+    - name: "ThemeFinder adapter"
+      path: "src/themefinder_adapter.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Harness comparison"
+      path: "docs/harness-comparison.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+
+# =============================================================================
+# ATRS MAPPING
+# =============================================================================
+atrs_mapping:
+  note: >
+    A consultation analysis that significantly influences a public decision may
+    fall inside ATRS scope for a central government body. This manifest is a
+    prompt for that record. It is not a submitted record. Experiment 03 can
+    draft the pack. This experiment does not.
+  mappings:
+    - atrs_field: "How the algorithm works"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a body must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The lawful basis and any Article 9 condition are confirmed by the body's DPO before a live export is used"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Production inference, if ThemeFinder is connected, runs in Microsoft Foundry in a UK region and is not trained on the responses"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The keyword codebook is a starting point. The analyst will change it. Paraphrase will be missed until they do."
+      section: "src/pipeline.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Contact addresses on example.gov.uk are placeholders, not a real body"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "ThemeFinder remains optional. Installing it is a separate decision, and the package's incubation warning still applies."
+      section: "src/themefinder_adapter.py"
+      verify_on_deployment: true

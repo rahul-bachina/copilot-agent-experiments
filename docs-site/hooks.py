@@ -28,6 +28,9 @@ DIAGRAMS = {
     "experiments/06-nhs-policy-qa/docs/architecture_diagram.png": (
         "experiments/img/06-nhs-policy-architecture.png"
     ),
+    "experiments/07-consultation-themes/docs/architecture_diagram.png": (
+        "experiments/img/07-consultation-architecture.png"
+    ),
 }
 
 

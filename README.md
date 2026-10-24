@@ -36,6 +36,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 04 | [FCA cryptoasset authorisation readiness](experiments/04-fca-cryptoasset-readiness/) | Draft a gap register against pinned FCA cryptoasset pages. The Compliance Officer or MLRO owns every gap conclusion. Autonomy A0. | ✅ Starter |
 | 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
 | 06 | [Policy questions for NHS corporate services](experiments/06-nhs-policy-qa/) | Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources. Autonomy A0. | ✅ Starter |
+| 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
 
 ## Getting Started
 
@@ -88,6 +89,12 @@ cd ../06-nhs-policy-qa
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/answer.py --question "How much notice do I need to book annual leave?" --as-of 2026-10-24
+
+# Experiment 07 needs no credentials either. The codebook is deterministic.
+cd ../07-consultation-themes
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
 ```
 
 ## Repository Structure
@@ -116,7 +123,8 @@ copilot-agent-experiments/
     │   ├── docs/                  # Architecture and security docs
     │   └── examples/              # Sample inputs/outputs
     ├── 05-awaabs-law-hazard-triage/
-    └── 06-nhs-policy-qa/
+    ├── 06-nhs-policy-qa/
+    └── 07-consultation-themes/
 ```
 
 ## Agent Governance
