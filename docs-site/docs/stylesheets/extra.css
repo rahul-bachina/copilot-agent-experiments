@@ -1,0 +1,120 @@
+/* System fonts. The theme is told not to load a font from a third party. */
+:root {
+  --md-text-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --md-code-font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;
+}
+
+/* Dark navy on white. White text on this navy clears WCAG 2.2 AA. */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0b3a5b;
+  --md-primary-fg-color--light: #3d6d92;
+  --md-primary-fg-color--dark: #07263d;
+  --md-primary-bg-color: #ffffff;
+  --md-accent-fg-color: #0b3a5b;
+  --md-typeset-a-color: #0b3a5b;
+}
+
+/* Same header colour in dark mode. Links are a light blue, not the navy. */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0b3a5b;
+  --md-primary-fg-color--light: #8eb4d4;
+  --md-primary-fg-color--dark: #07263d;
+  --md-primary-bg-color: #ffffff;
+  --md-accent-fg-color: #c5dff5;
+  --md-typeset-a-color: #c5dff5;
+}
+
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-weight: 650;
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 650;
+}
+
+.md-typeset a:focus-visible,
+.md-header a:focus-visible,
+.md-nav a:focus-visible,
+.md-search__input:focus-visible,
+.md-typeset button:focus-visible {
+  outline: 3px solid #0b3a5b;
+  outline-offset: 3px;
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:focus-visible,
+[data-md-color-scheme="slate"] .md-nav a:focus-visible,
+[data-md-color-scheme="slate"] .md-search__input:focus-visible {
+  outline-color: #f2c14e;
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.exp-card {
+  margin: 0;
+  padding: 1rem 1.1rem 0.4rem;
+  border: 1px solid #6b7280;
+  border-radius: 0.35rem;
+  background: var(--md-default-bg-color);
+}
+
+.exp-card h3 {
+  margin-top: 0.6rem;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 0.2rem;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+.status-available { background-color: #0c4a38; }
+.status-blueprint { background-color: #0b3a5b; }
+.status-planned { background-color: #5c3d08; }
+.status-archived { background-color: #3a3a3a; }
+
+.exp-meta {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.callout {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #0b3a5b;
+  background: #f4f7fa;
+  color: #1a1a1a;
+}
+
+[data-md-color-scheme="slate"] .callout {
+  border-left-color: #c5dff5;
+  background: #1a2833;
+  color: #f4f7fa;
+}
+
+.md-typeset img {
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #6b7280;
+}
+
+.md-typeset table {
+  display: block;
+  overflow-x: auto;
+}
