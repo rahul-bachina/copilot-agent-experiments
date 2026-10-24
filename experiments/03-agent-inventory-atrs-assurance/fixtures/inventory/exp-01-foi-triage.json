@@ -1,0 +1,122 @@
+{
+  "governance_owner_role": "Governance owner",
+  "lifecycle_status": "proposed",
+  "explicit_consent": "unknown",
+  "article_9_2_g": "unknown",
+  "contract_or_authorised_by_law": "unknown",
+  "safeguard_information": "unknown",
+  "safeguard_representations": "unknown",
+  "safeguard_human_intervention": "unknown",
+  "safeguard_contest": "unknown",
+  "third_party_involvement": "No",
+  "third_party_name": "N/A",
+  "companies_house_number": "N/A",
+  "third_party_role": "N/A",
+  "procurement_procedure_type": "N/A",
+  "third_party_data_access_terms": "N/A",
+  "data_reads": [
+    {
+      "resource": "Submission text supplied by a member of staff",
+      "justification": "The brief cannot be drafted without the submission the officer asked the starter to read",
+      "may_contain_personal_data": true
+    }
+  ],
+  "never_access": [
+    {
+      "resource": "Case-management production records",
+      "reason": "The starter has no production connector"
+    }
+  ],
+  "tools": [
+    {
+      "tool": "Local triage",
+      "action": "Draft a structured brief from one submission",
+      "access_level": "read"
+    }
+  ],
+  "risk_rows": [
+    {
+      "id": "R1",
+      "risk": "A draft classification is treated as the authority's FOI decision",
+      "likelihood": "Medium",
+      "impact": "High",
+      "residual_risk": "Medium"
+    }
+  ],
+  "recorded_events": [
+    {
+      "from_status": "proposed",
+      "to_status": "in_design",
+      "requested_by": "Inventory drafter",
+      "reason": "Example proposal only. No governance owner decision is attached.",
+      "applied": false,
+      "approved_by_this_tool": false,
+      "external_approval_id": "",
+      "approver_role": "",
+      "external_decision": ""
+    }
+  ],
+  "inventory_id": "exp-01-foi-triage",
+  "catalogue_id": "UK00",
+  "name": "FOI Complaint Triage Agent",
+  "version": "1.0.0",
+  "sector": "public",
+  "organisation_name": "Synthetic example body — not a real authority",
+  "team": "Information Rights Team",
+  "senior_responsible_owner_role": "Information rights lead",
+  "contact_email": "foi-triage-support@example.gov.uk",
+  "website_url": "https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage",
+  "atrs_phase": "Pre-deployment",
+  "region": "UK",
+  "autonomy_level": "A1",
+  "source_reviewed_on": "2026-10-24",
+  "experiment_path": "experiments/01-foi-complaint-triage",
+  "processing_regime": "uk_gdpr",
+  "processes_personal_data": "yes",
+  "special_category_data": "yes",
+  "profiling": "no",
+  "meaningful_human_involvement": "yes",
+  "significant_effect": "none",
+  "significant_effect_note": "An FOI or SAR response can have a legal effect. That response is made by a member of staff. This row screens the agent, not the officer's decision.",
+  "lawful_basis": "Article 6(1)(e) - Public task",
+  "one_sentence_description": "A starter that turns one FOI, EIR, SAR, or complaint submission into a structured brief for a member of staff.",
+  "public_description": "The tool reads one submission a member of staff pastes and drafts a structured brief: asks, a suggested classification, routing, urgency flags, and a clarification letter. It is used so staff spend less time breaking up long requests. A person decides what to send and how to classify the request.",
+  "detailed_description": "Staff paste one submission. The starter extracts asks with source quotes, proposes FOI, EIR, SAR, complaint, or mixed, suggests a team, and flags safeguarding words for a person. The runnable code in this repository is a local triage with a mock path. It does not decide the request and it does not send the clarification letter.",
+  "benefits": "A structured brief can make a long submission easier to route. The benefit is unmeasured. No saving is claimed.",
+  "previous_process": "Staff read the submission and made notes without this starter. There is no deployed predecessor in this repository.",
+  "alternatives_considered": "A shorter web form was the non-model alternative. It was not built. A model call is described in the experiment notes and is not required to run the mock path.",
+  "operational_process": "The officer pastes one submission, reads the draft brief, and accepts or changes the classification. Sending a response and writing a case stay outside the agent.",
+  "human_review": "The officer approves the classification and every draft response before anything is relied on. The manifest disables send, production write, and approve or reject.",
+  "frequency_and_scale": "Not deployed. No count of decisions or users is recorded.",
+  "required_training": "Not recorded for a deployment. The repository README is the only staff-facing note.",
+  "appeals_and_review": "N/A for the agent's own output, because the agent does not make the FOI decision. A statutory internal review of a public body's response is outside this starter.",
+  "system_architecture": "A local Python starter and a Copilot Studio build guide. No tenant is connected. The permissions manifest is experiments/01-foi-complaint-triage/agent-manifest.yaml.",
+  "system_input": "One free-text submission supplied by a member of staff for that run.",
+  "system_output": "A structured draft brief and, where the flow produces one, a draft clarification letter marked for a person to edit.",
+  "maintenance": "The manifest review date is 24 October 2026, with the next review on 24 April 2027. No retraining schedule exists because no model is deployed.",
+  "models_summary": "No production model. The starter can run a mock path. A Microsoft Foundry deployment is described and not built.",
+  "model_name": "No deployed model. Mock path only in this revision.",
+  "model_version": "N/A",
+  "model_task": "Propose a classification and a draft brief for a person to accept or change.",
+  "model_input": "The submission text the officer pasted.",
+  "model_output": "Draft fields. The officer's decision is not an output of the tool.",
+  "model_architecture": "The repository revision under test does not call a model. The mock path is deterministic test code, not a trained model.",
+  "model_performance": "No live model score is recorded. Any smoke test in the experiment is a smoke test of local code.",
+  "datasets_and_purposes": "Synthetic fixtures in the experiment. They are not a training set.",
+  "development_data_description": "Synthetic submissions written for the repository. No live case file was used.",
+  "data_modality": "Text",
+  "data_quantities": "Not a training corpus. Fixture counts live with the experiment, not as a model-development set.",
+  "development_sensitive_attributes": "The synthetic text can imitate health or safeguarding words. It is invented.",
+  "data_completeness": "The fixtures are not a sample of a real request population.",
+  "data_cleaning": "None as model preprocessing. The mock path does not clean a training set.",
+  "data_collection": "Written for the repository. Original context is a worked example, not an operational collection.",
+  "development_data_access": "Repository readers. No separate store.",
+  "development_data_sharing": "N/A. The fixtures are in a public repository and contain no real personal data.",
+  "operational_data_sources": "Text a member of staff pastes for one run. This starter does not retrieve a case file.",
+  "operational_sensitive_attributes": "A real submission could contain personal data and special-category data, including health or safeguarding detail. This inventory row does not contain a real submission.",
+  "operational_data_processing": "The starter does not describe a production preprocessing step.",
+  "operational_data_access": "The Python starter does not persist the submission. A deployment would have to set its own retention.",
+  "operational_data_sharing": "N/A in this starter. Nothing is sent.",
+  "impact_assessments": "No completed DPIA is linked. The manifest records a UK GDPR basis for the starter and says it is not a DPIA.",
+  "risks_and_mitigations": "The manifest records risks such as a wrong exemption, a missed deadline, and prompt injection, with the officer as the control. Those rows are not repeated as if they had been accepted for a named authority."
+}

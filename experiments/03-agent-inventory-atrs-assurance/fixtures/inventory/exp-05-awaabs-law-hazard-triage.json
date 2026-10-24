@@ -1,0 +1,122 @@
+{
+  "governance_owner_role": "Governance owner",
+  "lifecycle_status": "proposed",
+  "explicit_consent": "unknown",
+  "article_9_2_g": "unknown",
+  "contract_or_authorised_by_law": "unknown",
+  "safeguard_information": "unknown",
+  "safeguard_representations": "unknown",
+  "safeguard_human_intervention": "unknown",
+  "safeguard_contest": "unknown",
+  "third_party_involvement": "No",
+  "third_party_name": "N/A",
+  "companies_house_number": "N/A",
+  "third_party_role": "N/A",
+  "procurement_procedure_type": "N/A",
+  "third_party_data_access_terms": "N/A",
+  "data_reads": [
+    {
+      "resource": "Hazard report supplied by the officer",
+      "justification": "The triage cannot be drafted without the report the officer supplied",
+      "may_contain_personal_data": true
+    }
+  ],
+  "never_access": [
+    {
+      "resource": "Housing management and repairs production systems",
+      "reason": "The starter has no production connector"
+    }
+  ],
+  "tools": [
+    {
+      "tool": "Statutory clock",
+      "action": "Calculate Awaab's Law dates from officer-confirmed inputs",
+      "access_level": "read"
+    }
+  ],
+  "risk_rows": [
+    {
+      "id": "R1",
+      "risk": "A date is treated as operative before the officer has approved the category and the clock",
+      "likelihood": "Medium",
+      "impact": "High",
+      "residual_risk": "Medium"
+    }
+  ],
+  "recorded_events": [
+    {
+      "from_status": "proposed",
+      "to_status": "assurance_drafted",
+      "requested_by": "Inventory drafter",
+      "reason": "Example proposal only. No governance owner decision is attached.",
+      "applied": false,
+      "approved_by_this_tool": false,
+      "external_approval_id": "",
+      "approver_role": "",
+      "external_decision": ""
+    }
+  ],
+  "inventory_id": "exp-05-awaabs-law-hazard-triage",
+  "catalogue_id": "UK01",
+  "name": "Awaab's Law hazard triage and statutory clock",
+  "version": "0.1.0",
+  "sector": "public",
+  "organisation_name": "Synthetic example body — not a real landlord",
+  "team": "Housing repairs and complaints",
+  "senior_responsible_owner_role": "Housing officer",
+  "contact_email": "hazards-triage@example.com",
+  "website_url": "https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/05-awaabs-law-hazard-triage",
+  "atrs_phase": "Pre-deployment",
+  "region": "England",
+  "autonomy_level": "A1",
+  "source_reviewed_on": "2026-10-24",
+  "experiment_path": "experiments/05-awaabs-law-hazard-triage",
+  "processing_regime": "uk_gdpr",
+  "processes_personal_data": "yes",
+  "special_category_data": "yes",
+  "profiling": "no",
+  "meaningful_human_involvement": "yes",
+  "significant_effect": "none",
+  "significant_effect_note": "A repair decision, a tenant-facing summary, and a reasonable-endeavours defence can have a significant effect. Those decisions are outside the agent. This row screens the draft triage only.",
+  "lawful_basis": "Article 6(1)(c) — legal obligation",
+  "one_sentence_description": "A starter that turns one tenant hazard report into a draft triage, with Awaab's Law dates calculated in Python.",
+  "public_description": "The tool proposes a hazard family and category, calculates timeframes in code, flags vulnerability characteristics without labelling the tenant, drafts a written summary, and drafts a reasonable-endeavours record from steps an officer entered. The officer approves the category, the clock, and every summary.",
+  "detailed_description": "src/statutory_clock.py calculates dates. A date is operative only when the officer has confirmed that the home is a social home in England, has approved the category, and has approved the clock, and the phase is in force. Phase 2 and Phase 3 are not given an operative clock. The agent does not send, does not write a housing system, and does not decide that a defence is made out.",
+  "benefits": "Dates come from code rather than from a model. No reduction in repairs time is claimed.",
+  "previous_process": "An officer read the report and calculated dates. This repository does not replace a named landlord's process.",
+  "alternatives_considered": "The clock is the piece that runs in the standard library. A Microsoft Foundry extractor is described and not built.",
+  "operational_process": "The officer approves the hazard category and the clock before a date is treated as operative, reviews any vulnerability characteristic before it is recorded, and sends or files outside the agent.",
+  "human_review": "An officer approves the category, the clock, and every tenant-facing summary. The agent does not refer a complaint to the Housing Ombudsman and does not book accommodation.",
+  "frequency_and_scale": "Not deployed. The synthetic reports are fixtures. That is not an operational volume.",
+  "required_training": "Not recorded. Officers would need the landlord's own procedure, which is not in this repository.",
+  "appeals_and_review": "N/A for the agent's output. Referral to the Housing Ombudsman is disabled. The draft can include published escalation information.",
+  "system_architecture": "Python for the clock and a mock triage. Copilot Studio, Power Platform, and Microsoft Foundry are described. Nothing in the folder calls a model or a housing system.",
+  "system_input": "One hazard report, an awareness time, and category inputs the officer has approved.",
+  "system_output": "A draft triage, clock JSON, and a reasonable-endeavours record built only from steps the officer entered.",
+  "maintenance": "The regulations and guidance were read on 24 October 2026. Phase 2 was still a draft instrument. The manifest next review is 24 April 2027, sooner if commencement changes.",
+  "models_summary": "No model is called. The mock triage is a keyword stand-in.",
+  "model_name": "No deployed model. Keyword stand-in for the smoke test.",
+  "model_version": "N/A",
+  "model_task": "Propose a hazard family and category. Dates are not a model task.",
+  "model_input": "The report text.",
+  "model_output": "Draft fields and a draft summary. Dates are copied from the clock.",
+  "model_architecture": "Rule-based keyword stand-in plus a deterministic date calculator. Not a trained model.",
+  "model_performance": "eval/smoke_report.json is a mock smoke test of the keyword stand-in. It is not a model score.",
+  "datasets_and_purposes": "Synthetic hazard reports for the smoke test. Not used to train a model.",
+  "development_data_description": "Invented reports. No landlord is named.",
+  "data_modality": "Text",
+  "data_quantities": "Synthetic cases in the smoke test. Not an operational caseload.",
+  "development_sensitive_attributes": "Invented text can mention health. No real tenant.",
+  "data_completeness": "The fixtures are written to exercise the rules. They are not a repairs population.",
+  "data_cleaning": "None.",
+  "data_collection": "Written for the repository.",
+  "development_data_access": "Repository readers.",
+  "development_data_sharing": "N/A.",
+  "operational_data_sources": "Text and times the officer supplies for one run.",
+  "operational_sensitive_attributes": "A real report can include health information. The Experiment 05 manifest does not assert an Article 9 condition. The landlord confirms the basis.",
+  "operational_data_processing": "The clock uses the awareness time and the approved category. It does not clean a data set.",
+  "operational_data_access": "The starter does not persist the report.",
+  "operational_data_sharing": "N/A. The agent does not send.",
+  "impact_assessments": "No DPIA is linked. The manifest names Article 6(1)(c) as a lead basis for the landlord to confirm. It does not assert Article 6(1)(e) for every landlord, and it does not assert an Article 9 condition.",
+  "risks_and_mitigations": "A wrong category or an invented date can miss a statutory timeframe. The officer approves the category and the clock. Phases that are not in force are not given an operative date."
+}
