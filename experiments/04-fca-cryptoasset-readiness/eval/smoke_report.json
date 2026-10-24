@@ -1,0 +1,1962 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "SYNTHETIC. Harbourline Markets Ltd is invented. Not a real firm and not a model evaluation.",
+  "firm_in_fixtures": "Harbourline Markets Ltd (synthetic, invented)",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "EVAL-01",
+      "name": "Custody pack with a promotions phrase missing",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_source_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "R-BWRA-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-BWRA-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-BWRA-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-BWRA-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CRA-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-CRA-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-03",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-03",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-04",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-04.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-FP-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-FP-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-FP-03",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-FP-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-SG-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-SG-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-SG-02",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-SG-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-MARC-01",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-MARC-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-GOV-03",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-GOV-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CD-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-CD-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-OR-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-OR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-OR-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-OR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CON-01",
+          "passed": true,
+          "detail": "not_scored_consultation_or_planned"
+        },
+        {
+          "field": "R-CON-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-GOV-03.rule_stage",
+          "passed": true,
+          "detail": "final_not_yet_in_force"
+        },
+        {
+          "field": "R-CON-01.rule_stage",
+          "passed": true,
+          "detail": "consultation"
+        },
+        {
+          "field": "R-CON-03.rule_stage",
+          "passed": true,
+          "detail": "planned_consultation"
+        },
+        {
+          "field": "R-CON-06.rule_stage",
+          "passed": true,
+          "detail": "planned_consultation"
+        },
+        {
+          "field": "date_observations",
+          "passed": true,
+          "detail": "none"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-02",
+      "name": "Travel Rule document not supplied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "document_not_supplied"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-02",
+          "passed": true,
+          "detail": "document_not_supplied"
+        },
+        {
+          "field": "R-TR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-04",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-TR-04.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-03",
+      "name": "Travel Rule text without a flow of funds or sunrise handling",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-02",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-TR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-03",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-TR-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-04",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-TR-04.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-04",
+      "name": "Monitoring without thresholds",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-TM-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-03",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-TM-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-05",
+      "name": "Fiat monitoring only",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-TM-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-02",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-TM-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TM-03",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TM-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-06",
+      "name": "Injection on the evidence line",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "any_source_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-07",
+      "name": "Injection split across lines quarantines the file",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "document_quarantined_prompt_injection"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-02",
+          "passed": true,
+          "detail": "document_quarantined_prompt_injection"
+        },
+        {
+          "field": "R-TR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-08",
+      "name": "Policy text cannot promote a consultation or move last_verified",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "any_source_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "R-CON-01",
+          "passed": true,
+          "detail": "not_scored_consultation_or_planned"
+        },
+        {
+          "field": "R-CON-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CON-01.rule_stage",
+          "passed": true,
+          "detail": "consultation"
+        },
+        {
+          "field": "R-CON-03.rule_stage",
+          "passed": true,
+          "detail": "planned_consultation"
+        },
+        {
+          "field": "R-CON-01.mentioned",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-09",
+      "name": "Clean mention of GC26/4 stays a consultation",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "R-CON-01",
+          "passed": true,
+          "detail": "not_scored_consultation_or_planned"
+        },
+        {
+          "field": "R-CON-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CON-01.rule_stage",
+          "passed": true,
+          "detail": "consultation"
+        },
+        {
+          "field": "R-CON-01.mentioned",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-10",
+      "name": "Pinned sources older than 90 days",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_source_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "R-FP-03",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-FP-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-11",
+      "name": "Stablecoin issuer without backing-asset wording",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-SG-02",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-SG-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-MARC-01",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-MARC-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-SG-02.rule_stage",
+          "passed": true,
+          "detail": "final_not_yet_in_force"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-12",
+      "name": "Wrong application-window and commencement dates",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "date_observations",
+          "passed": true,
+          "detail": "2026-12-31, 2028-01-01"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-13",
+      "name": "Empty pack",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "R-BWRA-01",
+          "passed": true,
+          "detail": "document_not_supplied"
+        },
+        {
+          "field": "R-BWRA-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-TR-01",
+          "passed": true,
+          "detail": "document_not_supplied"
+        },
+        {
+          "field": "R-TR-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-FP-01",
+          "passed": true,
+          "detail": "document_not_supplied"
+        },
+        {
+          "field": "R-FP-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-SG-02",
+          "passed": true,
+          "detail": "not_indicated_in_the_text"
+        },
+        {
+          "field": "R-SG-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-CON-01",
+          "passed": true,
+          "detail": "not_scored_consultation_or_planned"
+        },
+        {
+          "field": "R-CON-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-14",
+      "name": "Promotions policy names a risk warning",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-FP-03",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-FP-03.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-FP-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-FP-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-15",
+      "name": "Trading platform pack does not mention market abuse",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-MARC-01",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-MARC-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-MARC-01.rule_stage",
+          "passed": true,
+          "detail": "final_not_yet_in_force"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-16",
+      "name": "Policy dated 2024 is older than the document threshold",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "bwra.document_currency",
+          "passed": true,
+          "detail": "stale"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-17",
+      "name": "MLRO title does not satisfy the money-laundering senior-manager phrase",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-GOV-01",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-GOV-01.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "R-GOV-02",
+          "passed": true,
+          "detail": "signal_not_found"
+        },
+        {
+          "field": "R-GOV-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-18",
+      "name": "Title classifies a Travel Rule file when the type is omitted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HUMAN REVIEW"
+        },
+        {
+          "field": "readiness_conclusion",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "firm_not_ready",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "regulatory_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "legal_advice",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_accepted_any_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "row_count",
+          "passed": true,
+          "detail": "35"
+        },
+        {
+          "field": "forbidden_conclusion_phrases",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "R-TR-02",
+          "passed": true,
+          "detail": "signal_present"
+        },
+        {
+          "field": "R-TR-02.accepted_as_gap",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "travel.doc_type",
+          "passed": true,
+          "detail": "travel_rule"
+        }
+      ]
+    }
+  ]
+}

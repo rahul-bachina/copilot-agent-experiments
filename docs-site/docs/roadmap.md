@@ -1,6 +1,6 @@
 # Roadmap
 
-G010 is now [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). The other four are named and not started. There is no design and no code for those four. No date is promised. When one of them becomes a folder under `experiments/`, it gets a briefing and a manifest, and the status here changes. Until then, the name is not a commitment of scope.
+Items still marked Planned are names only. No date is promised. When a folder exists under `experiments/`, the card links to the briefing. Until then, the name is not a commitment of scope.
 
 <div class="plan-grid" markdown="1">
 
@@ -16,11 +16,11 @@ Available as [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). 
 
 <article class="plan-card" id="uk02" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK02</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · UK02 · Autonomy A0</p>
 
 ## FCA cryptoasset authorisation readiness
 
-Not started. It would be for firms preparing for FCA cryptoasset authorisation. There is no checklist, no policy text, and no agent.
+A deterministic draft register against pinned FCA pages. The Compliance Officer or MLRO owns every gap conclusion. [Read the briefing](experiments/04-fca-cryptoasset-readiness.md).
 
 </article>
 
@@ -56,4 +56,4 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-The four that are still planned are on the [home page](index.md#planned-experiments).
+The cards still marked Planned are on the [home page](index.md#planned-experiments).

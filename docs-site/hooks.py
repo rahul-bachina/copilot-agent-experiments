@@ -19,6 +19,9 @@ DIAGRAMS = {
     "experiments/03-agent-inventory-atrs-assurance/docs/architecture_diagram.png": (
         "experiments/img/03-agent-inventory-architecture.png"
     ),
+    "experiments/04-fca-cryptoasset-readiness/docs/architecture_diagram.png": (
+        "experiments/img/04-fca-cryptoasset-architecture.png"
+    ),
 }
 
 

@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Starters you can read today
+## Four starters you can read today
 
 </div>
 
@@ -153,6 +153,31 @@ Drafts only. Nothing is approved, sent, or written to Dataverse.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 04 · UK02 · FCA firms · Autonomy A0</p>
+
+### FCA cryptoasset authorisation readiness
+
+Read a synthetic policy pack and draft an observation register against pinned FCA pages. The Compliance Officer or MLRO owns every gap conclusion.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+No readiness finding, no regulatory advice, and no application is submitted. The checker runs locally.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/04-fca-cryptoasset-readiness.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/04-fca-cryptoasset-readiness)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -172,16 +197,6 @@ Drafts only. Nothing is approved, sent, or written to Dataverse.
 </div>
 
 <div class="plan-grid" markdown="1">
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK02</p>
-
-### FCA cryptoasset authorisation readiness
-
-Not started. It would be for firms preparing for FCA cryptoasset authorisation. There is no checklist, no policy text, and no agent.
-
-</article>
 
 <article class="plan-card" markdown="1">
 
@@ -215,7 +230,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a> for the same list, with nothing promised beyond the name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010 and UK02 now have briefings. The other names are still only names.</p>
 
 <section class="principles" markdown="1">
 
@@ -239,7 +254,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 ### Human approval
 
-Consequential actions need a named person, or they are switched off. The starters in the repository switch them off.
+Consequential actions need a named person, or they are switched off. These starters switch them off.
 
 </article>
 
@@ -280,7 +295,7 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiment 02 is for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

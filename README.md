@@ -33,6 +33,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 01 | [FOI Complaint Triage](experiments/01-foi-complaint-triage/) | Triage long FOI requests and complaints into structured data for public sector staff | ✅ Complete |
 | 02 | [Complaint Intake — Consumer Duty / DISP](experiments/02-consumer-duty-complaint-intake/) | Draft a DISP complaint intake for a handler. Dates are computed in code. The agent does not send, decide, or write a case. | ✅ Starter |
 | 03 | [Agent inventory and ATRS assurance pack](experiments/03-agent-inventory-atrs-assurance/) | Draft an ATRS record, a playbook mapping, a DPIA skeleton, a DUAA screen, and an FCA-style inventory row. The governance owner approves every lifecycle status change. | ✅ Starter |
+| 04 | [FCA cryptoasset authorisation readiness](experiments/04-fca-cryptoasset-readiness/) | Draft a gap register against pinned FCA cryptoasset pages. The Compliance Officer or MLRO owns every gap conclusion. Autonomy A0. | ✅ Starter |
 
 ## Getting Started
 
@@ -67,6 +68,12 @@ cd ../03-agent-inventory-atrs-assurance
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/pack.py --inventory fixtures/inventory/exp-01-foi-triage.json --as-of 2026-10-24
+
+# Experiment 04 needs no credentials either. The gap register is deterministic.
+cd ../04-fca-cryptoasset-readiness
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/gap_register.py --pack examples/harbourline --as-of 2026-10-24
 ```
 
 ## Repository Structure
@@ -84,7 +91,8 @@ copilot-agent-experiments/
 └── experiments/
     ├── 01-foi-complaint-triage/
     ├── 02-consumer-duty-complaint-intake/
-    └── 03-agent-inventory-atrs-assurance/
+    ├── 03-agent-inventory-atrs-assurance/
+    └── 04-fca-cryptoasset-readiness/
         ├── README.md              # Experiment documentation
         ├── agent-manifest.yaml    # Permissions and governance manifest
         ├── requirements.txt
