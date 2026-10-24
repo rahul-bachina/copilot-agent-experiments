@@ -4,6 +4,14 @@ A series of small, well-documented AI agent experiments exploring practical appl
 
 **By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Microsoft Foundry, Copilot Studio, and GitHub Copilot.
 
+## Briefing site
+
+A site for heads of service, complaints and FOI leads, data protection officers, security leads, and architects is built from [`docs-site/`](docs-site/).
+
+Expected address, once an administrator sets GitHub Pages to deploy from GitHub Actions:
+
+<https://rahul-bachina.github.io/copilot-agent-experiments/>
+
 ## About This Series
 
 Each experiment in this repository tackles a real-world problem with AI agents, providing:

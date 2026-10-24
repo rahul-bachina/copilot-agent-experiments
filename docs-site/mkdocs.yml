@@ -1,0 +1,92 @@
+site_name: Copilot agent experiments
+site_description: >-
+  Practical, governed Microsoft agent starters for UK public bodies and
+  FCA-regulated firms. Humans approve consequential actions.
+site_url: https://rahul-bachina.github.io/copilot-agent-experiments/
+site_author: Rahul Bachina
+repo_url: https://github.com/rahul-bachina/copilot-agent-experiments
+repo_name: rahul-bachina/copilot-agent-experiments
+edit_uri: edit/main/docs-site/docs/
+copyright: Copyright &copy; 2026 Rahul Bachina. MIT Licence.
+
+docs_dir: docs
+site_dir: site
+
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    not_found: warn
+    absolute_links: warn
+    unrecognized_links: warn
+    anchors: warn
+
+theme:
+  name: material
+  language: en
+  custom_dir: overrides
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark colour scheme
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light colour scheme
+  features:
+    - navigation.footer
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rahul-bachina
+      name: Rahul Bachina on GitHub
+
+hooks:
+  - hooks.py
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Experiments:
+      - FOI and complaint triage: experiments/01-foi-complaint-triage.md
+      - Consumer Duty complaint intake: experiments/02-consumer-duty-complaint-intake.md
+  - Governance and security: governance.md
+  - Roadmap: roadmap.md
+  - About: about.md
+  - Adding a page: adding-an-experiment.md
