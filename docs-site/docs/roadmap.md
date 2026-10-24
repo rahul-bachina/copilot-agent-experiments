@@ -26,11 +26,11 @@ A deterministic draft register against pinned FCA pages. The Compliance Officer 
 
 <article class="plan-card" id="uk01" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK01</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · UK01 · Autonomy A1</p>
 
 ## Awaab's Law hazard triage
 
-Not started. The name points at housing hazard reports under Awaab's Law. There is no triage flow and no sample data.
+A statutory clock and draft triage for a social landlord in England. The officer approves the category, the clock, and every summary. [Read the briefing](experiments/05-awaabs-law-hazard-triage.md).
 
 </article>
 

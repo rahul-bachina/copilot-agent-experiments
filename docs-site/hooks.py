@@ -19,6 +19,9 @@ DIAGRAMS = {
     "experiments/04-fca-cryptoasset-readiness/docs/architecture_diagram.png": (
         "experiments/img/04-fca-cryptoasset-architecture.png"
     ),
+    "experiments/05-awaabs-law-hazard-triage/docs/architecture_diagram.png": (
+        "experiments/img/05-awaabs-architecture.png"
+    ),
 }
 
 

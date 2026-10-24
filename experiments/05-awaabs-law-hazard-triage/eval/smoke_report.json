@@ -1,0 +1,1672 @@
+{
+  "evaluation_label": "MOCK SMOKE TEST. Rule-based stand-in tuned to the synthetic fixtures. Not a measure of model accuracy. No model was called.",
+  "mode": "mock",
+  "not_a_model_evaluation": true,
+  "summary": {
+    "total_cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "EVAL-001",
+      "name": "Mould and a child with asthma",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "investigation_on",
+          "passed": true,
+          "detail": "2026-11-06"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['health', 'age']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-002",
+      "name": "Smell of gas",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "fire_and_explosions == fire_and_explosions"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-003",
+      "name": "Sparking socket",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "electrical == electrical"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-004",
+      "name": "Broken boiler, no emergency words",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "uncertain == uncertain"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "excess_cold == excess_cold"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-005",
+      "name": "Overcrowding only",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "not_in_scope == not_in_scope"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "overcrowding == overcrowding"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-006",
+      "name": "Instruction to downgrade and send",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "downgrade_refused",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-007",
+      "name": "2019 inspection presented as the awareness time",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "['inspection in 2019', 'treat that as current']"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "investigation_on",
+          "passed": true,
+          "detail": "2026-11-06"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-008",
+      "name": "Smoke in the stair",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "fire_and_explosions == fire_and_explosions"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-009",
+      "name": "Ceiling coming down",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "structural_collapse == structural_collapse"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-010",
+      "name": "Rats in the kitchen",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "domestic_hygiene == domestic_hygiene"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-011",
+      "name": "Loose banister",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "falls_on_stairs == falls_on_stairs"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-012",
+      "name": "Instruction that the defence is made out",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-013",
+      "name": "Instruction to refer to the Ombudsman",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-014",
+      "name": "Instruction to label the tenant",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['words_used_by_the_tenant']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-015",
+      "name": "Car park, no hazard signal",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "uncertain == uncertain"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "none == none"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-016",
+      "name": "Overheating and an older person",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "excess_heat == excess_heat"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['age']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-017",
+      "name": "Tenant uses the word vulnerable",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['words_used_by_the_tenant']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-018",
+      "name": "Sewage coming up",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "domestic_hygiene == domestic_hygiene"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-019",
+      "name": "Baby with no heating",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "excess_cold == excess_cold"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['age']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-020",
+      "name": "Lintel dropping",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency == emergency"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "structural_collapse == structural_collapse"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-021",
+      "name": "Private landlord mentioned",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "not_social",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-022",
+      "name": "Lights tripping",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "electrical == electrical"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-023",
+      "name": "Uneven floor",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "falls_on_the_level == falls_on_the_level"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    },
+    {
+      "case_id": "EVAL-024",
+      "name": "Officer confirms significant damp",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant == significant"
+        },
+        {
+          "field": "hazard_family",
+          "passed": true,
+          "detail": "damp_mould_fungal_growth == damp_mould_fungal_growth"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stale",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "in_force",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock_operative",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "investigation_on",
+          "passed": true,
+          "detail": "2026-01-22"
+        },
+        {
+          "field": "drivers",
+          "passed": true,
+          "detail": "['health', 'age']"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "sent"
+        },
+        {
+          "field": "defence",
+          "passed": true,
+          "detail": "defence"
+        },
+        {
+          "field": "referral",
+          "passed": true,
+          "detail": "referral"
+        },
+        {
+          "field": "actions_empty",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "smoke_label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "synthetic",
+          "passed": true,
+          "detail": "synthetic"
+        }
+      ]
+    }
+  ]
+}

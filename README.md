@@ -33,6 +33,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 01 | [FOI Complaint Triage](experiments/01-foi-complaint-triage/) | Triage long FOI requests and complaints into structured data for public sector staff | ✅ Complete |
 | 02 | [Complaint Intake — Consumer Duty / DISP](experiments/02-consumer-duty-complaint-intake/) | Draft a DISP complaint intake for a handler. Dates are computed in code. The agent does not send, decide, or write a case. | ✅ Starter |
 | 04 | [FCA cryptoasset authorisation readiness](experiments/04-fca-cryptoasset-readiness/) | Draft a gap register against pinned FCA cryptoasset pages. The Compliance Officer or MLRO owns every gap conclusion. Autonomy A0. | ✅ Starter |
+| 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
 
 ## Getting Started
 
@@ -67,6 +68,12 @@ cd ../04-fca-cryptoasset-readiness
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/gap_register.py --pack examples/harbourline --as-of 2026-10-24
+
+# Experiment 05 needs no credentials either. The statutory clock is deterministic.
+cd ../05-awaabs-law-hazard-triage
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/statutory_clock.py --aware-at 2026-01-08T09:00:00+00:00 --category significant --hazard-family damp_mould_fungal_growth --social-home-in-england --approve-category --approve-clock
 ```
 
 ## Repository Structure
@@ -84,15 +91,16 @@ copilot-agent-experiments/
 └── experiments/
     ├── 01-foi-complaint-triage/
     ├── 02-consumer-duty-complaint-intake/
-    └── 04-fca-cryptoasset-readiness/
-        ├── README.md              # Experiment documentation
-        ├── agent-manifest.yaml    # Permissions and governance manifest
-        ├── requirements.txt
-        ├── src/                   # Python implementation
-        ├── copilot-studio/        # Copilot Studio guides
-        ├── eval/                  # Evaluation data and scripts
-        ├── docs/                  # Architecture and security docs
-        └── examples/              # Sample inputs/outputs
+    ├── 04-fca-cryptoasset-readiness/
+    │   ├── README.md              # Experiment documentation
+    │   ├── agent-manifest.yaml    # Permissions and governance manifest
+    │   ├── requirements.txt
+    │   ├── src/                   # Python implementation
+    │   ├── copilot-studio/        # Copilot Studio guides
+    │   ├── eval/                  # Evaluation data and scripts
+    │   ├── docs/                  # Architecture and security docs
+    │   └── examples/              # Sample inputs/outputs
+    └── 05-awaabs-law-hazard-triage/
 ```
 
 ## Agent Governance

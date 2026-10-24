@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Three starters you can read today
+## Four starters you can read today
 
 </div>
 
@@ -153,6 +153,31 @@ No readiness finding, no regulatory advice, and no application is submitted. The
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 05 · UK01 · Social landlords · Autonomy A1</p>
+
+### Awaab's Law hazard triage
+
+Turn one tenant report into a draft triage and a statutory clock. The officer approves the category, the clock, and every summary.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The clock and the mock triage run locally. Nothing is sent, and nothing is written to a housing system.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/05-awaabs-law-hazard-triage.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/05-awaabs-law-hazard-triage)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -185,16 +210,6 @@ Not started. The name is a list of agents and the fields an Algorithmic Transpar
 
 <article class="plan-card" markdown="1">
 
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK01</p>
-
-### Awaab's Law hazard triage
-
-Not started. The name points at housing hazard reports under Awaab's Law. There is no triage flow and no sample data.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
 <p class="card-kicker"><span class="status status-planned">Planned</span> · M003</p>
 
 ### NHS and public-sector policy question and answer
@@ -215,7 +230,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. UK02 now has a briefing. The other names are still only names.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. UK01 and UK02 now have briefings. The other names are still only names.</p>
 
 <section class="principles" markdown="1">
 
@@ -280,7 +295,7 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. They are not interchangeable. Experiment 04 does not decide that a firm is ready for authorisation.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 05 is for social landlords in England. They are not interchangeable. Experiment 04 does not decide that a firm is ready for authorisation.
 
 Nothing in the repository is marked Blueprint or Archived.
 
