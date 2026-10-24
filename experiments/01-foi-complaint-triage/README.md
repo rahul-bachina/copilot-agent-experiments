@@ -279,6 +279,19 @@ If this agent were deployed in a public-facing context, it would likely require 
 
 This experiment is for internal staff decision support, not for direct interaction with the public.
 
+### Permissions and Security
+
+This agent operates at **Autonomy Level A1** (human approves everything). For full governance documentation:
+
+- **[Agent Manifest](agent-manifest.yaml)** — Machine-readable permissions, data access, risk assessment, and controls
+- **[Security and Permissions Guide](docs/security-and-permissions.md)** — Human-readable explanation for governance, DPO, and security readers
+
+Key points:
+- The agent **never** sends communications, writes to systems, or makes decisions autonomously
+- All high-risk actions are disabled
+- Human review is mandatory for all outputs
+- UK GDPR compliant (Article 6(1)(e) public task; Article 9(2)(g) for special category data)
+
 ### Limitations
 
 1. **Mock mode is rule-based**: The mock implementation uses simple keyword matching and won't match live AI quality
@@ -290,19 +303,20 @@ This experiment is for internal staff decision support, not for direct interacti
 
 ```
 experiments/01-foi-complaint-triage/
-├── README.md                 # This file
-├── requirements.txt          # Python dependencies
+├── README.md                     # This file
+├── agent-manifest.yaml           # Permissions and governance manifest
+├── requirements.txt              # Python dependencies
 ├── src/
 │   ├── __init__.py
-│   ├── triage_agent.py       # Main agent implementation
-│   ├── models.py             # Pydantic output models
-│   ├── prompts.py            # System and user prompts
-│   └── mock_responses.py     # Mock mode implementation
+│   ├── triage_agent.py           # Main agent implementation
+│   ├── models.py                 # Pydantic output models
+│   ├── prompts.py                # System and user prompts
+│   └── mock_responses.py         # Mock mode implementation
 ├── schema/
-│   └── triage_output.schema.json  # JSON Schema for output
+│   └── triage_output.schema.json # JSON Schema for output
 ├── examples/
-│   ├── sample_request.txt    # Example input
-│   └── sample_output.json    # Example output
+│   ├── sample_request.txt        # Example input
+│   └── sample_output.json        # Example output
 ├── eval/
 │   ├── synthetic_dataset.json    # Test cases
 │   └── evaluate.py               # Evaluation script
@@ -313,8 +327,9 @@ experiments/01-foi-complaint-triage/
 │   ├── system-prompt.md          # Agent instructions
 │   └── power-automate-flow.md    # Flow design
 └── docs/
-    ├── architecture_diagram.png  # Architecture diagram
-    └── generate_diagram.py       # Diagram generation script
+    ├── architecture_diagram.png      # Architecture diagram
+    ├── generate_diagram.py           # Diagram generation script
+    └── security-and-permissions.md   # Security guide for governance readers
 ```
 
 ## Running Tests
