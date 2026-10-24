@@ -1,93 +1,277 @@
-# Copilot agent experiments
+---
+hide:
+  - navigation
+  - toc
+  - footer
+---
 
-This site explains the agent experiments in [rahul-bachina/copilot-agent-experiments](https://github.com/rahul-bachina/copilot-agent-experiments). Each experiment is a small, documented starting point on the Microsoft stack: Power Platform, Copilot Studio, Microsoft Foundry, and GitHub Copilot.
+<div class="hero" markdown="1">
 
-The repository is the source of truth. These pages are a briefing for people who have to decide whether a starter is fit to try. They are not a product, a procurement framework, or a completed compliance assessment.
+<div markdown="1">
 
-The pages were written from the repository as it stood on 24 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
+<p class="eyebrow">An open experiment library</p>
 
-## Who it is for
+# Useful agents. Clear boundaries. Humans in control.
 
-The briefings are written for people who own the service, the risk, or the design:
+<p class="intro">Practical Microsoft agent starters for UK public bodies and FCA-regulated firms. See what each one does, where it stops, and which controls come first.</p>
 
-- heads of service
-- FOI and complaints leads
-- data protection officers
-- chief information security officers and security architects
-- solution architects who may rebuild a starter in their own tenant
+<div class="actions" markdown="1">
 
-Developers still work from the source folders. This site does not replace those READMEs. It states the problem, the limit of the agent, and the controls in plain English.
+[Explore the experiments](#experiments){ .button }
+[Read the governance brief](governance.md){ .text-link }
 
-Experiment 01 is for UK public bodies handling information requests and complaints. Experiment 02 is for FCA-regulated firms handling complaints under DISP and the Consumer Duty. They are not interchangeable.
+</div>
 
-## Governance principles
+<p class="hero-note">Open source. Synthetic data. A person approves any consequential action.</p>
 
-Every experiment in the catalogue is held to the same rules. The [agent manifest schema](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/schemas/agent-manifest.schema.json) checks several of them in continuous integration. A manifest that fails the schema is not accepted.
+</div>
 
-| Principle | What it means here |
-| --- | --- |
-| Autonomy A0, A1 or A2 only | The agent may analyse, suggest, or take low-risk steps. Fully autonomous action (A3) is rejected by the schema. Definitions are in [docs/autonomy-levels.md](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/docs/autonomy-levels.md). |
-| Human approval for any consequential action | Approving or rejecting, a regulated decision, a production record change, an external send, and spending must be switched off or named to a human approver. Both current experiments switch them off. |
-| Least privilege | The manifest lists what the agent may read and what it must never access. Writes and sends are separate switches. |
-| Synthetic data | Samples, fixtures and smoke tests use invented text. The repository is not a place for live cases. |
-| A permissions manifest for each agent | `agent-manifest.yaml` sits in the experiment folder. It names the owner, the autonomy level, the tools, the approval points, the UK GDPR position, the risks and the kill switch. |
-| UK GDPR | Lawful basis, special-category data, retention and residency are fields in the manifest. They are a prompt for the organisation's own assessment, not a finished DPIA. The public-body basis in experiment 01 is not the basis for the firm in experiment 02. |
-| Algorithmic Transparency Recording Standard | A public-sector deployment may need an ATRS record. Experiment 01 maps manifest fields to ATRS fields. This repository does not submit a record. |
+<div class="workflow" markdown="1">
 
-## Experiments
+<p class="workflow-top"><span>How the starters work</span><span>1 to 3</span></p>
 
-Two experiments are in the repository. The controls are set out on [Governance and security](governance.md). Names that are not started are on the [roadmap](roadmap.md). No date is attached to them.
+<ol>
+<li>
+<p class="step-kicker">1. Input</p>
+<p><strong>A request comes in.</strong> Synthetic text in this repository. Defined permissions.</p>
+</li>
+<li>
+<p class="step-kicker">2. Agent assistance</p>
+<p><strong>Structure, classify, suggest.</strong> A draft to support a decision.</p>
+</li>
+<li class="human">
+<p class="step-kicker">3. Human review</p>
+<p><strong>The decision stays with a person.</strong> Staff check every output before anyone relies on it.</p>
+</li>
+</ol>
 
-Status labels used on this site:
+<p class="workflow-foot"><span>External sends are switched off.</span><span>Production writes are switched off.</span></p>
 
-| Label | Meaning |
-| --- | --- |
-| <span class="status status-available">Available</span> | The experiment is in the repository. You can run the parts the briefing marks as runnable. A build guide is not a tenant you can import. |
-| <span class="status status-blueprint">Blueprint</span> | The design is written down. The runnable agent is not in the repository. |
-| <span class="status status-planned">Planned</span> | Named as future work. No design and no code in the repository. No date is promised. |
-| <span class="status status-archived">Archived</span> | Withdrawn from the catalogue and kept so the record is still there. |
+</div>
 
-Nothing in the repository is marked Blueprint or Archived today.
+</div>
+
+<div class="stack-strip" markdown="1">
+
+<p class="stack-label">Built on the Microsoft stack</p>
+
+- Power Platform
+- Copilot Studio
+- Microsoft Foundry
+- GitHub Copilot
+
+</div>
+
+<div class="section-heading" id="experiments" markdown="1">
+
+<div markdown="1">
+
+<p class="eyebrow">The experiments</p>
+
+## Two starters you can read today
+
+</div>
+
+<p>Different services. The same rule: a person decides.</p>
+
+</div>
 
 <div class="exp-grid" markdown="1">
 
-<div class="exp-card" markdown="1">
+<article class="exp-card" markdown="1">
 
-<p class="exp-meta"><span class="status status-available">Available</span> · Autonomy A1 · Experiment 01</p>
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 01 · Public sector · Autonomy A1</p>
 
 ### FOI and complaint triage
 
-For UK public bodies. Takes a long FOI request, Environmental Information Regulations request, subject access request or complaint and returns a structured brief for a member of staff. Staff decide. The agent does not send, write to a case system, or reject a request.
+Turn a long information request or complaint into a structured brief for a member of staff. The person decides.
 
-The repository README marks this experiment complete. That means the starter is written. It does not mean a live model has been scored, and it does not mean a tenant has been configured.
+<div class="boundary" markdown="1">
 
-[Read the briefing](experiments/01-foi-complaint-triage.md) · [Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage)
+<span>The boundary</span>
+
+No sending, no case-system writes, and no rejection of a request.
 
 </div>
 
-<div class="exp-card" markdown="1">
+<div class="card-links" markdown="1">
 
-<p class="exp-meta"><span class="status status-available">Available</span> · Autonomy A1 · Experiment 02 · C006</p>
+[Read the briefing](experiments/01-foi-complaint-triage.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 02 · C006 · FCA firms · Autonomy A1</p>
 
 ### Consumer Duty complaint intake
 
-For FCA-regulated firms. Helps a complaints handler turn one inbound complaint into a draft intake, and calculates DISP dates in Python rather than in a model. The handler validates every classification and every severity.
+Turn one complaint into a draft intake. DISP dates are calculated in Python. A handler checks every classification and the severity.
 
-The repository README marks this as a starter. The clock and the mock intake run on a laptop. Nothing in the folder calls a model. Copilot Studio, Microsoft Foundry and Dynamics 365 Customer Service are build notes.
+<div class="boundary" markdown="1">
 
-[Read the briefing](experiments/02-consumer-duty-complaint-intake.md) · [Source folder](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake)
+<span>The boundary</span>
+
+The clock and the mock intake run locally. Nothing in the folder calls a model.
 
 </div>
 
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/02-consumer-duty-complaint-intake.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake)
+
 </div>
 
-## What these pages will not claim
+</article>
 
-- No client names, testimonials, or measured savings. None are in the repository.
-- A smoke test in mock mode is a check that the code runs on synthetic text. It is not a model score. Where a smoke-test count is quoted, it is labelled as one.
-- No page here is legal advice, a data protection impact assessment, or an ATRS submission.
-- Contact addresses on `example.gov.uk` and `example.com` in the manifests are placeholders.
+</div>
 
-## Licence
+<p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
 
-The repository is under the MIT Licence. Copyright 2026 Rahul Bachina. See [LICENSE](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/LICENSE).
+<div class="section-heading" markdown="1">
+
+<div markdown="1">
+
+<p class="eyebrow">Roadmap</p>
+
+## Planned experiments
+
+</div>
+
+<p>Named only. No design, no code, and no date.</p>
+
+</div>
+
+<div class="plan-grid" markdown="1">
+
+<article class="plan-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-planned">Planned</span> · G010</p>
+
+### Agent inventory and ATRS assurance pack
+
+Not started. The name is a list of agents and the fields an Algorithmic Transparency Recording Standard record asks for. There is no inventory and no pack here.
+
+</article>
+
+<article class="plan-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-planned">Planned</span> · UK02</p>
+
+### FCA cryptoasset authorisation readiness
+
+Not started. It would be for firms preparing for FCA cryptoasset authorisation. There is no checklist, no policy text, and no agent.
+
+</article>
+
+<article class="plan-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-planned">Planned</span> · UK01</p>
+
+### Awaab's Law hazard triage
+
+Not started. The name points at housing hazard reports under Awaab's Law. There is no triage flow and no sample data.
+
+</article>
+
+<article class="plan-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-planned">Planned</span> · M003</p>
+
+### NHS and public-sector policy question and answer
+
+Not started. It would answer questions from published policy. There is no corpus and no agent.
+
+</article>
+
+<article class="plan-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-planned">Planned</span> · V010</p>
+
+### Consultation themes
+
+Not started. It would group themes from a consultation. There is no consultation text and no method.
+
+</article>
+
+</div>
+
+<p class="note"><a href="roadmap/">Open the roadmap</a> for the same list, with nothing promised beyond the name.</p>
+
+<section class="principles" markdown="1">
+
+<div class="section-heading" markdown="1">
+
+<div markdown="1">
+
+<p class="eyebrow">Governance</p>
+
+## The limit is part of the design
+
+</div>
+
+<p>Every starter has a permissions manifest, named approval points, and a way to switch it off.</p>
+
+</div>
+
+<div class="principle-grid" markdown="1">
+
+<article class="principle-card" markdown="1">
+
+### Human approval
+
+Consequential actions need a named person, or they are switched off. Both current starters switch them off.
+
+</article>
+
+<article class="principle-card" markdown="1">
+
+### Least privilege
+
+The manifest lists what may be read, and what must never be read. Writes and sends are separate switches. Autonomy is A0, A1, or A2.
+
+</article>
+
+<article class="principle-card" markdown="1">
+
+### Synthetic data
+
+Samples and smoke tests use invented text. Live cases do not belong in this repository.
+
+</article>
+
+<article class="principle-card" markdown="1">
+
+### UK GDPR and ATRS
+
+The manifest is a prompt for the organisation's own assessment. It is not a finished DPIA, and this site does not submit an ATRS record.
+
+</article>
+
+</div>
+
+<p class="note"><a href="governance.md">Read the governance brief</a>.</p>
+
+</section>
+
+## Before you rely on a page
+
+- These pages describe the repository as it stood on 24 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
+- There are no client names, testimonials, or measured savings in the repository.
+- A smoke test checks that code runs on synthetic text. It is not a model score.
+- This site is not legal advice, a data protection impact assessment, or an ATRS submission.
+- Contact addresses on `example.gov.uk` and `example.com` are placeholders.
+- Experiment 01 is for public bodies. Experiment 02 is for FCA-regulated firms. They are not interchangeable.
+
+Nothing in the repository is marked Blueprint or Archived.
+
+| Label | Meaning |
+| --- | --- |
+| <span class="status status-available">Available</span> | In the repository. The briefing says which parts you can run. A build guide is not a tenant you can import. |
+| <span class="status status-blueprint">Blueprint</span> | The design is written down. The runnable agent is not in the repository. |
+| <span class="status status-planned">Planned</span> | Named as future work. No date. |
+| <span class="status status-archived">Archived</span> | Withdrawn, and kept so the record is still there. |
