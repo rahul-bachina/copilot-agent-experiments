@@ -1,0 +1,725 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/rahul-bachina/copilot-agent-experiments/schemas/agent-manifest.schema.json",
+  "title": "Agent Manifest Schema",
+  "description": "Schema for AI agent permissions manifests in copilot-agent-experiments. Defines agent identity, data access, tools, human approval points, GDPR compliance, risk assessment, and governance controls.",
+  "type": "object",
+  "required": [
+    "agent",
+    "autonomy",
+    "data_access",
+    "tools",
+    "human_approval",
+    "uk_gdpr",
+    "risk_assessment",
+    "logging_and_audit",
+    "kill_switch",
+    "review"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "agent": {
+      "type": "object",
+      "description": "Agent identity and metadata",
+      "required": ["id", "name", "version", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the agent",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable agent name",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version of the agent",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of agent purpose and function",
+          "minLength": 10
+        },
+        "owner": {
+          "type": "string",
+          "description": "Team or individual responsible for the agent"
+        },
+        "contact": {
+          "type": "string",
+          "description": "Contact email or channel for agent issues"
+        },
+        "repository": {
+          "type": "string",
+          "description": "Source code repository URL"
+        },
+        "experiment_path": {
+          "type": "string",
+          "description": "Path within repository to this experiment"
+        }
+      }
+    },
+    "autonomy": {
+      "type": "object",
+      "description": "Agent autonomy level and constraints",
+      "required": ["level", "human_in_the_loop"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "Autonomy level (A1=human approves all, A2=human approves some, A3=agent acts autonomously)",
+          "enum": ["A1", "A2", "A3"]
+        },
+        "level_description": {
+          "type": "string",
+          "description": "Human-readable description of the autonomy level"
+        },
+        "constraints": {
+          "type": "array",
+          "description": "Explicit constraints on agent behaviour",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_in_the_loop": {
+          "type": "boolean",
+          "description": "Whether human approval is required for actions"
+        },
+        "auto_actions_enabled": {
+          "type": "boolean",
+          "description": "Whether agent can take automatic actions"
+        }
+      }
+    },
+    "data_access": {
+      "type": "object",
+      "description": "Data the agent may and may not access",
+      "required": ["reads", "never_access"],
+      "properties": {
+        "reads": {
+          "type": "array",
+          "description": "Data sources the agent may read",
+          "items": {
+            "$ref": "#/definitions/dataAccessEntry"
+          }
+        },
+        "never_access": {
+          "type": "array",
+          "description": "Data sources the agent must never access",
+          "items": {
+            "type": "object",
+            "required": ["resource", "reason"],
+            "properties": {
+              "resource": {
+                "type": "string",
+                "description": "Name of the data resource"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Reason for prohibition"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "object",
+      "description": "Tools and actions available to the agent",
+      "required": ["allowed", "writes", "sends"],
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "description": "Tools the agent may use",
+          "items": {
+            "$ref": "#/definitions/toolEntry"
+          }
+        },
+        "writes": {
+          "type": "object",
+          "description": "Write capabilities",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether write operations are enabled"
+            },
+            "note": {
+              "type": "string",
+              "description": "Explanation of write policy"
+            },
+            "allowed_writes": {
+              "type": "array",
+              "description": "Specific write operations allowed (if enabled)",
+              "items": {
+                "$ref": "#/definitions/toolEntry"
+              }
+            }
+          }
+        },
+        "sends": {
+          "type": "object",
+          "description": "Communication capabilities",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether sending communications is enabled"
+            },
+            "note": {
+              "type": "string",
+              "description": "Explanation of sends policy"
+            },
+            "allowed_sends": {
+              "type": "array",
+              "description": "Specific send operations allowed (if enabled)",
+              "items": {
+                "$ref": "#/definitions/toolEntry"
+              }
+            }
+          }
+        }
+      }
+    },
+    "human_approval": {
+      "type": "object",
+      "description": "Human approval requirements",
+      "required": ["approval_points"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Overview of human approval policy"
+        },
+        "approval_points": {
+          "type": "array",
+          "description": "Actions requiring human approval",
+          "items": {
+            "type": "object",
+            "required": ["action", "approver", "mandatory"],
+            "properties": {
+              "action": {
+                "type": "string",
+                "description": "Action requiring approval"
+              },
+              "approver": {
+                "type": "string",
+                "description": "Role that must approve"
+              },
+              "mandatory": {
+                "type": "boolean",
+                "description": "Whether approval is mandatory"
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Reason approval is required"
+              },
+              "sla": {
+                "type": "string",
+                "description": "Service level expectation for approval"
+              }
+            }
+          }
+        },
+        "no_approval_required": {
+          "type": "array",
+          "description": "Actions that do not require approval",
+          "items": {
+            "type": "object",
+            "required": ["action", "rationale"],
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "uk_gdpr": {
+      "type": "object",
+      "description": "UK GDPR compliance information",
+      "required": ["lawful_basis"],
+      "properties": {
+        "lawful_basis": {
+          "type": "object",
+          "description": "Lawful basis for processing",
+          "required": ["primary"],
+          "properties": {
+            "primary": {
+              "type": "string",
+              "description": "Primary lawful basis (Article 6 reference)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Explanation of lawful basis"
+            },
+            "secondary": {
+              "type": "string",
+              "description": "Secondary lawful basis if applicable"
+            },
+            "secondary_description": {
+              "type": "string"
+            }
+          }
+        },
+        "special_category_data": {
+          "type": "object",
+          "description": "Special category data handling",
+          "properties": {
+            "may_process": {
+              "type": "boolean",
+              "description": "Whether special category data may be processed"
+            },
+            "categories_possible": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Types of special category data that may be encountered"
+            },
+            "lawful_basis_special": {
+              "type": "string",
+              "description": "Article 9 basis for special category processing"
+            },
+            "condition": {
+              "type": "string",
+              "description": "DPA 2018 Schedule 1 condition"
+            },
+            "safeguards": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Safeguards for special category processing"
+            }
+          }
+        },
+        "data_minimisation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Data minimisation measures"
+        },
+        "retention": {
+          "type": "object",
+          "description": "Data retention policy",
+          "properties": {
+            "agent_retention": {
+              "type": "string",
+              "description": "How long agent retains data"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "data_residency": {
+          "type": "object",
+          "description": "Data residency requirements",
+          "properties": {
+            "region": {
+              "type": "string",
+              "description": "Required data residency region"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "data_subject_rights": {
+          "type": "object",
+          "description": "How data subject rights are handled",
+          "properties": {
+            "note": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "prompt_injection": {
+      "type": "object",
+      "description": "Prompt injection handling",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["control", "description"],
+            "properties": {
+              "control": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "implementation": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "residual_risk": {
+          "type": "string"
+        }
+      }
+    },
+    "risk_assessment": {
+      "type": "object",
+      "description": "Risk assessment for the agent",
+      "required": ["risks"],
+      "properties": {
+        "methodology": {
+          "type": "string",
+          "description": "Risk assessment methodology used"
+        },
+        "date_assessed": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of assessment"
+        },
+        "risks": {
+          "type": "array",
+          "description": "Identified risks",
+          "items": {
+            "$ref": "#/definitions/riskEntry"
+          }
+        }
+      }
+    },
+    "logging_and_audit": {
+      "type": "object",
+      "description": "Logging and audit requirements",
+      "required": ["logged_events"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "logged_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["event"],
+            "properties": {
+              "event": {
+                "type": "string"
+              },
+              "data_logged": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "retention": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "log_destination": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string"
+            },
+            "secondary": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "audit_trail": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "kill_switch": {
+      "type": "object",
+      "description": "Mechanisms to disable the agent",
+      "required": ["methods"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["method", "action"],
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "time_to_effect": {
+                "type": "string"
+              },
+              "who_can_activate": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "escalation_contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "contact": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "description": "Review and governance schedule",
+      "required": ["next_review_date"],
+      "properties": {
+        "last_review_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "next_review_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "review_frequency": {
+          "type": "string"
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "review_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "atrs_mapping": {
+      "type": "object",
+      "description": "Mapping to Algorithmic Transparency Recording Standard",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "atrs_field": {
+                "type": "string"
+              },
+              "manifest_section": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "object",
+      "description": "Documented assumptions requiring verification",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "assumption"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "assumption": {
+                "type": "string"
+              },
+              "section": {
+                "type": "string"
+              },
+              "verify_on_deployment": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dataAccessEntry": {
+      "type": "object",
+      "required": ["resource", "access_level", "justification"],
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "Name of the data resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what this resource contains"
+        },
+        "access_level": {
+          "type": "string",
+          "enum": ["read", "write", "read-write"],
+          "description": "Level of access"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of access (e.g., single record, all records)"
+        },
+        "justification": {
+          "type": "string",
+          "description": "Business justification for access"
+        },
+        "data_categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Categories of data in this resource"
+        },
+        "may_contain_personal_data": {
+          "type": "boolean",
+          "description": "Whether this resource may contain personal data"
+        },
+        "may_contain_special_category_data": {
+          "type": "boolean",
+          "description": "Whether this resource may contain special category data"
+        },
+        "retention": {
+          "type": "string",
+          "description": "Retention policy for this data access"
+        }
+      }
+    },
+    "toolEntry": {
+      "type": "object",
+      "required": ["tool", "action"],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "description": "Name of the tool"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Provider or platform for the tool"
+        },
+        "action": {
+          "type": "string",
+          "description": "What action this tool performs"
+        },
+        "access_level": {
+          "type": "string",
+          "enum": ["read", "write", "read-write"],
+          "description": "Access level for this tool"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of tool access"
+        },
+        "justification": {
+          "type": "string",
+          "description": "Business justification for this tool"
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "description": "Whether human approval is needed to use this tool"
+        },
+        "output_requires_human_review": {
+          "type": "boolean",
+          "description": "Whether tool output must be reviewed by human"
+        }
+      }
+    },
+    "riskEntry": {
+      "type": "object",
+      "required": ["id", "risk", "likelihood", "impact", "controls", "residual_risk"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Risk identifier"
+        },
+        "risk": {
+          "type": "string",
+          "description": "Description of the risk"
+        },
+        "likelihood": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"],
+          "description": "Likelihood of risk occurring"
+        },
+        "impact": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"],
+          "description": "Impact if risk occurs"
+        },
+        "inherent_risk": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"],
+          "description": "Risk level before controls"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Controls to mitigate the risk"
+        },
+        "residual_risk": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"],
+          "description": "Risk level after controls"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Risk owner"
+        }
+      }
+    }
+  }
+}
