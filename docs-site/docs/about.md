@@ -6,6 +6,8 @@ The catalogue is published so UK government bodies and FCA-regulated firms can s
 
 The source of truth is the [GitHub repository](https://github.com/rahul-bachina/copilot-agent-experiments). These pages are the briefing.
 
+People extending the catalogue can follow [Adding a page](adding-an-experiment.md).
+
 ## Contact
 
 - GitHub: [github.com/rahul-bachina](https://github.com/rahul-bachina)
