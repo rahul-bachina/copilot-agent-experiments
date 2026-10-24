@@ -55,7 +55,8 @@ The red boxes are not tools. The dotted lines mean a person may do those things 
 | `src/disp_clock.py` | Deterministic DISP dates for England and Wales | A model, and not a decision that the complaint is in time for the Ombudsman |
 | `src/intake.py` | Keyword smoke-test stand-in, tuned to the synthetic fixtures | A measure of model quality |
 | Microsoft Foundry | Optional extractor and drafter. See [foundry.md](foundry.md) | A source of dates, upholds, or sends |
-| Copilot Studio | Handler-facing topic. See [../copilot-studio/README.md](../copilot-studio/README.md) | An importable solution |
+| Copilot Studio, standard harness | Handler-facing topics and one clock action. See [../copilot-studio/README.md](../copilot-studio/README.md) | An importable solution |
+| Copilot Studio, GitHub Copilot harness | Skills for the same intake and the same clock. See [harness-comparison.md](harness-comparison.md) | The GitHub Copilot service, and not a second set of approval points |
 | Dynamics 365 Customer Service | Optional read, or a draft the handler owns. See [dynamics-365-customer-service.md](dynamics-365-customer-service.md) | A system the agent updates |
 
 ## Run sequence
@@ -65,6 +66,10 @@ The red boxes are not tools. The dotted lines mean a person may do those things 
 3. `calculate_disp_clock` produces the dates from those confirmed inputs. A suggested PSD or EMD route is not applied until the handler confirms it. Without the provider's opening days, the 15-day and 35-day dates are non-operative.
 4. A draft acknowledgement is assembled for the handler. It says it must not be sent as it stands.
 5. The handler accepts or changes every classification and the severity. Anything after that — sending, filing, upholding, redress — happens outside the agent.
+
+## Two harnesses, one clock
+
+The standard harness runs the intake as topics, with the clock as the only action. The GitHub Copilot harness runs the handler's follow-up questions as skills, and it calls the same `calculate_disp_clock` and the same `intake()`. The approval points do not change with the harness. The comparison is in [harness-comparison.md](harness-comparison.md).
 
 ## Why the clock is not in the prompt
 
