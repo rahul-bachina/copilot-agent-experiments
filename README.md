@@ -55,16 +55,37 @@ copilot-agent-experiments/
 ├── LICENSE                   # MIT License
 ├── CONTRIBUTING.md           # Contribution guidelines
 ├── .gitignore
+├── schemas/
+│   └── agent-manifest.schema.json  # Reusable schema for agent permissions
+├── tests/
+│   └── test_agent_manifest_schema.py  # Schema validation tests
 └── experiments/
     └── 01-foi-complaint-triage/
-        ├── README.md         # Experiment documentation
+        ├── README.md              # Experiment documentation
+        ├── agent-manifest.yaml    # Permissions and governance manifest
         ├── requirements.txt
-        ├── src/              # Python implementation
-        ├── copilot-studio/   # Copilot Studio guides
-        ├── eval/             # Evaluation data and scripts
-        ├── docs/             # Architecture diagrams
-        └── examples/         # Sample inputs/outputs
+        ├── src/                   # Python implementation
+        ├── copilot-studio/        # Copilot Studio guides
+        ├── eval/                  # Evaluation data and scripts
+        ├── docs/                  # Architecture and security docs
+        └── examples/              # Sample inputs/outputs
 ```
+
+## Agent Governance
+
+Every experiment in this repository includes an **agent manifest** (`agent-manifest.yaml`) that defines:
+
+- **Agent identity** and purpose
+- **Autonomy level** (A0, A1, or A2 — A3 is not permitted in this catalogue)
+- **Data access** — what the agent may read and must never access
+- **Tools and actions** — with explicit controls on writes and sends
+- **High-risk actions** — must be disabled or have named human approval
+- **Human approval points** — who approves what
+- **UK GDPR compliance** — lawful basis, special category data, retention
+- **Risk assessment** — likelihood, impact, controls, residual risk
+- **Kill switch** — how to disable the agent immediately
+
+See the [Agent Manifest Schema](schemas/agent-manifest.schema.json) for the full specification.
 
 ## Contributing
 
