@@ -156,6 +156,45 @@ class TestEveryExperimentManifest:
             assert extra["enabled"] is False
 
 
+class TestExperiment05Manifest:
+    """Test the Experiment 05 Awaab's Law hazard-triage manifest."""
+
+    @pytest.fixture
+    def experiment_05_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "05-awaabs-law-hazard-triage" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_05_manifest):
+        """Experiment 05 manifest should be valid."""
+        validate(instance=experiment_05_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_05_manifest):
+        """Experiment 05 should be autonomy level A1."""
+        assert experiment_05_manifest["autonomy"]["level"] == "A1"
+
+    def test_all_high_risk_actions_disabled(self, experiment_05_manifest):
+        """Experiment 05 should have all high-risk actions disabled."""
+        high_risk = experiment_05_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_05_manifest):
+        """Nothing is sent to a tenant or written to a housing system."""
+        assert experiment_05_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_05_manifest["tools"]["sends"]["enabled"] is False
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 
