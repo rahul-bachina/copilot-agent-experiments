@@ -195,6 +195,48 @@ class TestExperiment05Manifest:
         assert experiment_05_manifest["tools"]["sends"]["enabled"] is False
 
 
+class TestExperiment07Manifest:
+    """Test the Experiment 07 consultation-theme manifest."""
+
+    @pytest.fixture
+    def experiment_07_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "07-consultation-themes" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_07_manifest):
+        """Experiment 07 manifest should be valid."""
+        validate(instance=experiment_07_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_07_manifest):
+        """Experiment 07 should be autonomy level A1, not above."""
+        level = experiment_07_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1"}
+
+    def test_all_high_risk_actions_disabled(self, experiment_07_manifest):
+        """Experiment 07 should have all high-risk actions disabled."""
+        high_risk = experiment_07_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_07_manifest):
+        """Nothing is published, sent, or written to a consultation system."""
+        assert experiment_07_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_07_manifest["tools"]["sends"]["enabled"] is False
+        assert experiment_07_manifest["autonomy"]["human_in_the_loop"] is True
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 
