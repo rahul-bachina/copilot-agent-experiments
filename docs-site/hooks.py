@@ -2,11 +2,16 @@
 
 Copies each experiment's architecture diagram into the site tree so the
 published page uses the file from the experiment folder. Also sets the
-HTML language to British English.
+HTML language to British English, gives header icons a fixed size, and
+embeds the stylesheets in each page.
 """
 
 from pathlib import Path
+import re
 import shutil
+
+STYLESHEET = re.compile(r'<link rel="stylesheet" href="([^"]+)">')
+SVG_TAG = re.compile(r"<svg\b([^>]*)>", re.IGNORECASE)
 
 # Repository path -> path under the MkDocs docs directory.
 DIAGRAMS = {
@@ -44,10 +49,51 @@ def on_pre_build(config, **kwargs):
         )
 
 
+def _size_inline_svgs(html: str) -> str:
+    """Icons ship without width or height. With no stylesheet they fill the window."""
+
+    def repl(match: re.Match) -> str:
+        attrs = match.group(1)
+        if re.search(r"\bwidth\s*=", attrs, re.IGNORECASE):
+            return match.group(0)
+        return f"<svg{attrs} width=\"24\" height=\"24\">"
+
+    return SVG_TAG.sub(repl, html)
+
+
+def _embed_stylesheets(html: str, html_path: Path, site_dir: Path) -> str:
+    """Keep the linked files, and repeat them in the page.
+
+    A failed stylesheet request otherwise leaves the search icon at the
+    size of the window. Relative addresses in these files are data URIs,
+    so embedding them does not point images at the wrong folder.
+    """
+
+    def repl(match: re.Match) -> str:
+        href = match.group(1)
+        if href.startswith(("http://", "https://", "//")):
+            return match.group(0)
+        css_path = (html_path.parent / href).resolve()
+        try:
+            css_path.relative_to(site_dir)
+        except ValueError:
+            return match.group(0)
+        if not css_path.is_file():
+            return match.group(0)
+        css = css_path.read_text(encoding="utf-8")
+        if "</style>" in css.lower():
+            return match.group(0)
+        return match.group(0) + "\n<style>\n" + css + "\n</style>"
+
+    return STYLESHEET.sub(repl, html)
+
+
 def on_post_build(config, **kwargs):
     site_dir = Path(config.site_dir).resolve()
     for html_path in site_dir.rglob("*.html"):
         text = html_path.read_text(encoding="utf-8")
         updated = text.replace('<html lang="en"', '<html lang="en-GB"', 1)
+        updated = _size_inline_svgs(updated)
+        updated = _embed_stylesheets(updated, html_path, site_dir)
         if updated != text:
             html_path.write_text(updated, encoding="utf-8")
