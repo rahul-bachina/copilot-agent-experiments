@@ -6,7 +6,7 @@ This agent takes a long free-text FOI request or complaint and outputs
 structured triage data to help UK public sector staff.
 
 Usage:
-    # With Azure AI Foundry (requires credentials)
+    # With Microsoft Foundry (requires credentials)
     python triage_agent.py --input request.txt
     
     # With mock mode (no credentials needed)

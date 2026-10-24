@@ -1,0 +1,571 @@
+# Agent Manifest: FOI Complaint Triage Agent
+# Experiment 01 - Permissions, data access, and governance controls
+# Version: 1.0.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-01-foi-triage"
+  name: "FOI Complaint Triage Agent"
+  version: "1.0.0"
+  description: >
+    Assists UK public sector staff in triaging Freedom of Information (FOI) requests,
+    Environmental Information Regulations (EIR) requests, Subject Access Requests (SARs),
+    and complaints. The agent analyses free-text submissions and produces structured
+    triage output for human review. It never makes decisions, sends communications,
+    or takes action autonomously.
+  owner: "Information Rights Team"
+  contact: "foi-triage-support@example.gov.uk"  # Deployment-specific: update on deployment
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/01-foi-complaint-triage"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "Agent NEVER sends emails, messages, or any external communications"
+    - "Agent NEVER writes to databases, case management systems, or external storage"
+    - "Agent NEVER approves, rejects, or closes requests"
+    - "Agent NEVER makes final decisions - humans always decide"
+    - "Agent NEVER auto-rejects requests based on content, origin, or perceived AI generation"
+    - "All agent output is advisory and requires human review before action"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS - READS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Submission text"
+      description: "Free-text FOI/EIR/SAR/complaint submissions pasted by staff"
+      access_level: "read"
+      scope: "Single submission at a time, as provided by authorised staff"
+      justification: "Core function: analyse submission text to produce triage output"
+      data_categories:
+        - "Correspondence content"
+        - "Requester names (if included in submission)"
+        - "Contact details (if included in submission)"
+        - "Subject matter of request"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true  # Health, political opinions may appear in complaints
+      retention: "Transient - processed in memory, not persisted by agent"
+
+    - resource: "System prompt and configuration"
+      description: "Agent instructions and classification guidelines"
+      access_level: "read"
+      scope: "Static configuration files"
+      justification: "Required for agent operation"
+      may_contain_personal_data: false
+
+  # ASSUMPTION: In production deployment, the agent may need read access to:
+  # - Organisation structure (for routing suggestions)
+  # - Previous similar requests (for pattern detection)
+  # These would require additional data access entries.
+
+  never_access:
+    - resource: "Case management systems"
+      reason: "Agent provides analysis only; staff access case systems directly"
+    - resource: "HR records"
+      reason: "Not required for triage function"
+    - resource: "Financial systems"
+      reason: "Not required for triage function"
+    - resource: "Email systems"
+      reason: "Agent does not send communications"
+    - resource: "Requester identity databases"
+      reason: "Triage based on content, not requester identity"
+    - resource: "Previous request history by requester"
+      reason: "Each request assessed on own merits; no profiling"
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Text analysis (LLM inference)"
+      provider: "Microsoft Foundry (Azure OpenAI Service)"
+      action: "Analyse submission text"
+      access_level: "read"
+      scope: "Single submission per invocation"
+      justification: "Core function: NLU for classification and extraction"
+      human_approval_required: false  # Analysis is automatic
+      output_requires_human_review: true  # Output must be reviewed
+
+    - tool: "JSON schema validation"
+      provider: "Local Python (jsonschema)"
+      action: "Validate output structure"
+      access_level: "read"
+      scope: "Agent output only"
+      justification: "Ensure output conforms to expected schema"
+      human_approval_required: false
+
+  writes:
+    enabled: false
+    note: >
+      This agent does not write to any external systems. All output is returned
+      to the staff member's interface for review. Staff take any subsequent
+      actions (logging, case creation, responses) through standard systems.
+
+  sends:
+    enabled: false
+    note: >
+      This agent never sends emails, messages, or any communications.
+      Draft clarification letters are provided as text for staff to review,
+      edit, and send through normal channels.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+# Each high-risk action must be either disabled or have explicit human approval.
+# This section is required by the schema to ensure governance of sensitive actions.
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      This agent never approves or rejects requests. It provides triage analysis
+      only. All approval/rejection decisions are made by human staff through
+      standard processes.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      This agent does not make regulated decisions. FOI/EIR response decisions,
+      exemption applications, and SAR responses are made by human staff. The
+      agent provides classification and routing suggestions only.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      This agent does not write to case management systems, databases, or any
+      production records. Staff update records through standard systems after
+      reviewing agent output.
+
+  external_send:
+    enabled: false
+    rationale: >
+      This agent never sends emails, letters, or any external communications.
+      Draft clarification letters are provided as text for staff to review,
+      edit, and send through normal channels.
+
+  spend_transact:
+    enabled: false
+    rationale: >
+      This agent has no capability to spend money, authorise payments, or
+      execute any financial transactions.
+
+# =============================================================================
+# HUMAN APPROVAL POINTS
+# =============================================================================
+human_approval:
+  description: >
+    All agent output is advisory. Human staff must review and approve before
+    any action is taken on the underlying request.
+
+  approval_points:
+    - action: "Accept triage classification"
+      approver: "FOI/Complaints Officer"
+      mandatory: true
+      rationale: "Human must confirm request type before processing"
+
+    - action: "Act on routing suggestion"
+      approver: "FOI/Complaints Officer"
+      mandatory: true
+      rationale: "Human decides actual routing; agent only suggests"
+
+    - action: "Escalate safeguarding concern"
+      approver: "FOI/Complaints Officer or Safeguarding Lead"
+      mandatory: true
+      rationale: "Critical decisions require human judgment; agent flags only"
+      sla: "Flagged concerns should be reviewed within 1 hour"  # ASSUMPTION: Organisation-specific
+
+    - action: "Send clarification letter"
+      approver: "FOI/Complaints Officer"
+      mandatory: true
+      rationale: "Agent drafts only; human reviews, edits, and sends"
+
+    - action: "Apply cost limit assessment"
+      approver: "FOI/Complaints Officer"
+      mandatory: true
+      rationale: "Cost decisions have legal implications; human must verify"
+
+  no_approval_required:
+    - action: "View triage output"
+      rationale: "Staff can view analysis without approval"
+    - action: "Re-run triage on same submission"
+      rationale: "No external effect; staff may re-analyse"
+
+# =============================================================================
+# UK GDPR COMPLIANCE
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(e) - Public task"
+    description: >
+      Processing is necessary for the performance of a task carried out in the
+      public interest or in the exercise of official authority. FOI/EIR/SAR
+      handling is a statutory duty for UK public authorities.
+    secondary: "Article 6(1)(c) - Legal obligation"
+    secondary_description: >
+      Public authorities are legally obliged to respond to FOI, EIR, and SAR
+      requests within statutory timeframes.
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health data (in complaints about health services)"
+      - "Political opinions (in some complaints)"
+      - "Trade union membership (in some employment-related requests)"
+      - "Religious or philosophical beliefs (rare, in some complaints)"
+    lawful_basis_special: "Article 9(2)(g) - Substantial public interest"
+    condition: "Schedule 1, Part 2, Paragraph 6 - Statutory and government purposes"
+    safeguards:
+      - "Processing limited to triage/classification only"
+      - "No decisions made on special category data"
+      - "Human review mandatory before any action"
+      - "Data not persisted beyond session"
+
+  data_minimisation:
+    - "Agent processes only the submission text provided"
+    - "No additional data retrieval about requester"
+    - "Output contains only necessary classification and routing information"
+
+  retention:
+    agent_retention: "None - transient processing only"
+    note: >
+      The agent does not persist submission data. Retention of triage outputs
+      is handled by the organisation's case management system according to
+      their retention schedule.
+    # ASSUMPTION: Organisation has separate retention policy for case records
+
+  data_residency:
+    region: "UK"
+    note: >
+      Production deployment must use UK-based Azure region (UK South or UK West)
+      to ensure data residency compliance.
+    # ASSUMPTION: Deployment will use Azure UK regions
+
+  data_subject_rights:
+    note: >
+      The agent itself does not handle data subject rights requests.
+      These are handled through the organisation's standard DPA/GDPR procedures.
+      SARs processed by this agent are for triage only; fulfilment is handled
+      by human staff through appropriate systems.
+
+# =============================================================================
+# PROMPT INJECTION HANDLING
+# =============================================================================
+prompt_injection:
+  description: >
+    Submissions may contain adversarial content attempting to manipulate agent
+    behaviour. The agent is configured with defences but human review remains
+    the primary control.
+
+  controls:
+    - control: "System prompt hardening"
+      description: "Clear separation of instructions from user content"
+      implementation: "Structured prompt with explicit boundaries"
+
+    - control: "Output schema enforcement"
+      description: "Agent must produce valid JSON matching schema"
+      implementation: "Azure OpenAI structured outputs with strict mode"
+
+    - control: "Content filtering"
+      description: "Azure AI Content Safety filters on input and output"
+      implementation: "Microsoft Foundry prompt shields"
+      # Note: Configure content filtering in Microsoft Foundry deployment
+
+    - control: "Human review"
+      description: "All output reviewed by trained staff"
+      implementation: "UI requires explicit staff action on each output"
+
+    - control: "No external actions"
+      description: "Even if manipulated, agent cannot take external action"
+      implementation: "A1 autonomy level - no writes, no sends"
+
+  residual_risk: >
+    Prompt injection could cause incorrect classification or misleading output.
+    Mitigated by mandatory human review and no autonomous actions.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x Impact matrix (Low/Medium/High)"
+  date_assessed: "2026-10-24"
+
+  risks:
+    - id: "R1"
+      risk: "Incorrect classification leads to delayed response"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Mandatory human review of all classifications"
+        - "Confidence levels shown to staff"
+        - "Rationale provided for each classification"
+      residual_risk: "Low"
+      owner: "FOI/Complaints Team Lead"
+
+    - id: "R2"
+      risk: "Missed safeguarding concern"
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Conservative flagging (false positives preferred)"
+        - "Critical flags shown prominently in UI"
+        - "Staff training on safeguarding procedures"
+        - "Agent supplements, not replaces, existing safeguarding processes"
+      residual_risk: "Low"
+      owner: "Safeguarding Lead"
+
+    - id: "R3"
+      risk: "Prompt injection causes misleading output"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "System prompt hardening"
+        - "Azure AI Content Safety filtering"
+        - "Structured output enforcement"
+        - "Mandatory human review"
+        - "No autonomous actions possible"
+      residual_risk: "Low"
+      owner: "Information Security"
+
+    - id: "R4"
+      risk: "Bias in classification or routing suggestions"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Regular evaluation against synthetic test cases"
+        - "Human review of all routing decisions"
+        - "No decisions based on requester identity"
+        - "Bulk/template signals informational only"
+      residual_risk: "Low"
+      owner: "FOI/Complaints Team Lead"
+
+    - id: "R5"
+      risk: "Data breach via Azure OpenAI service"
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "Medium"
+      controls:
+        - "Azure OpenAI data processing agreement"
+        - "UK data residency (Azure UK region)"
+        - "No training on customer data (Azure commitment)"
+        - "API key stored in Azure Key Vault"
+        - "Network security (private endpoints where available)"
+      residual_risk: "Low"
+      owner: "Information Security"
+
+    - id: "R6"
+      risk: "Service unavailability during critical request"
+      likelihood: "Low"
+      impact: "Low"
+      inherent_risk: "Low"
+      controls:
+        - "Fallback to manual triage (existing process)"
+        - "Agent is optional efficiency tool, not required"
+        - "Azure SLA for OpenAI service"
+      residual_risk: "Low"
+      owner: "IT Operations"
+
+    - id: "R7"
+      risk: "Unauthorised access to triage outputs"
+      likelihood: "Low"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Microsoft Entra ID authentication"
+        - "Role-based access control"
+        - "Audit logging of all access"
+        - "Conditional Access policies"
+      residual_risk: "Low"
+      owner: "Information Security"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    All agent invocations are logged for audit, debugging, and compliance purposes.
+    Logs must be retained according to organisation retention policy.
+
+  logged_events:
+    - event: "Agent invocation"
+      data_logged:
+        - "Timestamp"
+        - "User ID (Entra ID)"
+        - "Session ID"
+        - "Input character/word count (not content)"
+      retention: "As per organisation audit policy"  # ASSUMPTION: Typically 7 years for FOI
+
+    - event: "Triage output generated"
+      data_logged:
+        - "Triage ID"
+        - "Classification result"
+        - "Flags raised"
+        - "Processing mode (live/mock)"
+      retention: "As per organisation audit policy"
+
+    - event: "Safeguarding flag raised"
+      data_logged:
+        - "Triage ID"
+        - "Flag type"
+        - "Timestamp"
+        - "Reviewing officer ID"
+      retention: "As per safeguarding policy"  # ASSUMPTION: Often longer retention
+
+    - event: "Error or failure"
+      data_logged:
+        - "Error type"
+        - "Timestamp"
+        - "User ID"
+        - "Error message (sanitised)"
+      retention: "As per IT operations policy"
+
+  log_destination:
+    primary: "Application Insights"  # ASSUMPTION: Azure deployment
+    secondary: "Organisation SIEM"  # ASSUMPTION: For security monitoring
+    note: "Deployment-specific: configure appropriate log destinations"
+
+  audit_trail:
+    - "All triage outputs linked to originating user"
+    - "Modification of agent configuration logged"
+    - "Access to logs restricted to authorised personnel"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: >
+    Mechanisms to immediately disable the agent if issues are detected.
+
+  methods:
+    - method: "Disable Copilot Studio agent"
+      action: "Set agent to 'Off' in Copilot Studio admin"
+      time_to_effect: "Immediate"
+      who_can_activate: "Copilot Studio administrators"
+
+    - method: "Revoke API key"
+      action: "Disable or rotate API key in Azure Key Vault"
+      time_to_effect: "Immediate"
+      who_can_activate: "Key Vault administrators"
+
+    - method: "Conditional Access block"
+      action: "Apply Conditional Access policy blocking access to agent"
+      time_to_effect: "Within minutes"
+      who_can_activate: "Entra ID administrators"
+
+    - method: "Power Platform DLP policy"
+      action: "Block connector in DLP policy"
+      time_to_effect: "Within minutes"
+      who_can_activate: "Power Platform administrators"
+
+  escalation_contacts:
+    # Deployment-specific: Update with actual contacts on deployment
+    # Using example.gov.uk (reserved domain) as placeholder
+    - role: "IT Service Desk"
+      contact: "servicedesk@example.gov.uk"  # Deployment-specific
+    - role: "Information Security"
+      contact: "security@example.gov.uk"  # Deployment-specific
+    - role: "Data Protection Officer"
+      contact: "dpo@example.gov.uk"  # Deployment-specific
+
+# =============================================================================
+# REVIEW AND GOVERNANCE
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months"
+  reviewer: "Information Governance Board"  # ASSUMPTION: Update for organisation
+
+  review_triggers:
+    - "Significant change to agent functionality"
+    - "Security incident involving the agent"
+    - "Change in regulatory requirements"
+    - "Safeguarding concern related to agent output"
+    - "Significant change in usage patterns"
+
+  related_documents:
+    - name: "Security and Permissions Guide"
+      path: "docs/security-and-permissions.md"
+    - name: "Architecture Documentation"
+      path: "README.md"
+    - name: "Triage Output Schema"
+      path: "schema/triage_output.schema.json"
+
+# =============================================================================
+# ATRS MAPPING
+# =============================================================================
+# Mapping to Algorithmic Transparency Recording Standard fields
+# See: https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub
+atrs_mapping:
+  note: >
+    If this agent is deployed for public-facing or decision-support use,
+    an ATRS entry may be required. The mappings below indicate which
+    manifest sections correspond to ATRS fields.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access.reads"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+    - atrs_field: "Impact assessment"
+      manifest_section: "uk_gdpr"
+
+# =============================================================================
+# ASSUMPTIONS LOG
+# =============================================================================
+assumptions:
+  description: >
+    Items marked as assumptions require verification or customisation
+    during deployment. Search this file for 'ASSUMPTION' comments.
+
+  items:
+    - id: "A1"
+      assumption: "Production uses Azure UK region for data residency"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+
+    - id: "A2"
+      assumption: "Organisation has retention policy for case records"
+      section: "uk_gdpr.retention"
+      verify_on_deployment: true
+
+    - id: "A3"
+      assumption: "Safeguarding concerns reviewed within 1 hour"
+      section: "human_approval.approval_points"
+      verify_on_deployment: true
+
+    - id: "A4"
+      assumption: "Application Insights used for logging"
+      section: "logging_and_audit.log_destination"
+      verify_on_deployment: true
+
+    - id: "A5"
+      assumption: "Contact details for kill switch escalation"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+
+    - id: "A6"
+      assumption: "Review by Information Governance Board"
+      section: "review.reviewer"
+      verify_on_deployment: true

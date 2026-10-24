@@ -1,0 +1,129 @@
+name: Validate Agent Manifests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/**/agent-manifest.yaml'
+      - 'schemas/agent-manifest.schema.json'
+      - 'tests/test_agent_manifest_schema.py'
+      - 'tests/fixtures/**'
+      - '.github/workflows/validate-agent-manifests.yml'
+      - 'requirements-dev.txt'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/**/agent-manifest.yaml'
+      - 'schemas/agent-manifest.schema.json'
+      - 'tests/test_agent_manifest_schema.py'
+      - 'tests/fixtures/**'
+      - '.github/workflows/validate-agent-manifests.yml'
+      - 'requirements-dev.txt'
+  workflow_dispatch:
+
+jobs:
+  validate-manifests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Validate JSON Schema is valid Draft-07
+        run: |
+          python -c "
+          import json
+          from jsonschema import Draft7Validator
+          schema = json.load(open('schemas/agent-manifest.schema.json'))
+          Draft7Validator.check_schema(schema)
+          print('Schema is valid JSON Schema Draft-07')
+          "
+
+      - name: Find all agent manifests
+        id: find-manifests
+        run: |
+          manifests=$(find experiments -name 'agent-manifest.yaml' -type f)
+          echo "Found manifests:"
+          echo "$manifests"
+          echo "manifests<<EOF" >> $GITHUB_OUTPUT
+          echo "$manifests" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Validate each agent manifest against schema
+        run: |
+          python -c "
+          import json
+          import yaml
+          from jsonschema import validate, Draft7Validator
+          from pathlib import Path
+
+          schema = json.load(open('schemas/agent-manifest.schema.json'))
+          manifests = list(Path('experiments').rglob('agent-manifest.yaml'))
+
+          if not manifests:
+              print('WARNING: No agent manifests found')
+              exit(0)
+
+          errors = []
+          for manifest_path in manifests:
+              print(f'Validating {manifest_path}...')
+              try:
+                  with open(manifest_path) as f:
+                      manifest = yaml.safe_load(f)
+                  validate(instance=manifest, schema=schema)
+                  print(f'  ✓ Valid')
+              except Exception as e:
+                  print(f'  ✗ Invalid: {e}')
+                  errors.append((manifest_path, str(e)))
+
+          if errors:
+              print(f'\n{len(errors)} manifest(s) failed validation')
+              exit(1)
+          else:
+              print(f'\nAll {len(manifests)} manifest(s) valid')
+          "
+
+      - name: Run pytest schema validation tests
+        run: |
+          python -m pytest tests/test_agent_manifest_schema.py -v
+
+      - name: Verify invalid fixtures are rejected
+        run: |
+          python -c "
+          import json
+          import yaml
+          from jsonschema import validate, ValidationError
+          from pathlib import Path
+
+          schema = json.load(open('schemas/agent-manifest.schema.json'))
+          invalid_fixtures = list(Path('tests/fixtures').glob('invalid-*.yaml'))
+
+          if not invalid_fixtures:
+              print('WARNING: No invalid fixtures found')
+              exit(0)
+
+          for fixture_path in invalid_fixtures:
+              print(f'Verifying {fixture_path.name} is rejected...')
+              with open(fixture_path) as f:
+                  fixture = yaml.safe_load(f)
+              try:
+                  validate(instance=fixture, schema=schema)
+                  print(f'  ✗ SHOULD HAVE FAILED but passed')
+                  exit(1)
+              except ValidationError as e:
+                  print(f'  ✓ Correctly rejected')
+
+          print(f'\nAll {len(invalid_fixtures)} invalid fixture(s) correctly rejected')
+          "

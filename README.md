@@ -1,8 +1,8 @@
 # Copilot Agent Experiments
 
-A series of small, well-documented AI agent experiments exploring practical applications of Microsoft Copilot, Azure AI Foundry, and Power Platform technologies.
+A series of small, well-documented AI agent experiments exploring practical applications of Microsoft Copilot, Microsoft Foundry, and Power Platform technologies.
 
-**By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Azure AI Foundry, Copilot Studio, and GitHub Copilot.
+**By [Rahul Bachina](https://github.com/rahul-bachina)** — UK-based Microsoft-stack AI builder specialising in Power Platform, Microsoft Foundry, Copilot Studio, and GitHub Copilot.
 
 ## About This Series
 
@@ -10,7 +10,7 @@ Each experiment in this repository tackles a real-world problem with AI agents, 
 
 - 🎯 Clear problem statement and context
 - 🏗️ Architecture diagrams and design rationale
-- 💻 Working code (Python + Azure AI Foundry)
+- 💻 Working code (Python + Microsoft Foundry)
 - 🤖 Copilot Studio implementation guides
 - 📊 Evaluation datasets and metrics
 - 📝 Responsible AI considerations
@@ -31,7 +31,7 @@ Each experiment is self-contained in its own folder under `experiments/`. Naviga
 ### Prerequisites
 
 - Python 3.10+
-- Azure subscription (for Azure AI Foundry) — or use `--mock` mode for demos
+- Azure subscription (for Microsoft Foundry) — or use `--mock` mode for demos
 - Copilot Studio license (for low-code implementations)
 
 ### Quick Start
@@ -55,16 +55,37 @@ copilot-agent-experiments/
 ├── LICENSE                   # MIT License
 ├── CONTRIBUTING.md           # Contribution guidelines
 ├── .gitignore
+├── schemas/
+│   └── agent-manifest.schema.json  # Reusable schema for agent permissions
+├── tests/
+│   └── test_agent_manifest_schema.py  # Schema validation tests
 └── experiments/
     └── 01-foi-complaint-triage/
-        ├── README.md         # Experiment documentation
+        ├── README.md              # Experiment documentation
+        ├── agent-manifest.yaml    # Permissions and governance manifest
         ├── requirements.txt
-        ├── src/              # Python implementation
-        ├── copilot-studio/   # Copilot Studio guides
-        ├── eval/             # Evaluation data and scripts
-        ├── docs/             # Architecture diagrams
-        └── examples/         # Sample inputs/outputs
+        ├── src/                   # Python implementation
+        ├── copilot-studio/        # Copilot Studio guides
+        ├── eval/                  # Evaluation data and scripts
+        ├── docs/                  # Architecture and security docs
+        └── examples/              # Sample inputs/outputs
 ```
+
+## Agent Governance
+
+Every experiment in this repository includes an **agent manifest** (`agent-manifest.yaml`) that defines:
+
+- **Agent identity** and purpose
+- **Autonomy level** (A0, A1, or A2 — A3 is not permitted in this catalogue)
+- **Data access** — what the agent may read and must never access
+- **Tools and actions** — with explicit controls on writes and sends
+- **High-risk actions** — must be disabled or have named human approval
+- **Human approval points** — who approves what
+- **UK GDPR compliance** — lawful basis, special category data, retention
+- **Risk assessment** — likelihood, impact, controls, residual risk
+- **Kill switch** — how to disable the agent immediately
+
+See the [Agent Manifest Schema](schemas/agent-manifest.schema.json) for the full specification.
 
 ## Contributing
 
