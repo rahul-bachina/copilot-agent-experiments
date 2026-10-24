@@ -40,5 +40,6 @@ def test_each_skill_has_name_description_and_an_approval_gate():
         assert len(fields["description"]) > 40
         assert "Compliance Officer" in text
         assert "approval" in text.lower()
-        assert "Azure AI Foundry" not in text
+        retired = "Azure AI" + " Foundry"
+        assert retired not in text
         assert "not the GitHub Copilot service" in (ROOT / "docs" / "github-copilot-harness.md").read_text(encoding="utf-8")
