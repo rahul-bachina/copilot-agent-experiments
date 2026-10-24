@@ -1,0 +1,494 @@
+# Agent manifest: Complaint Intake Agent
+# Experiment 02 — UK Consumer Duty / DISP edition (catalogue ID C006)
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-02-consumer-duty-complaint-intake"
+  name: "Complaint Intake Agent — UK Consumer Duty / DISP edition"
+  version: "0.1.0"
+  description: >
+    Helps a complaints handler in an FCA-regulated firm structure an inbound
+    complaint: extract the facts, test them against the DISP glossary definition
+    of a complaint, suggest product and root cause, flag possible vulnerability
+    characteristics for human review without labelling the customer, calculate
+    DISP timescales in deterministic code, map the facts to Consumer Duty
+    outcomes, and draft an internal acknowledgement. Autonomy A1. The agent
+    never sends, writes a production record, closes a case, upholds or rejects
+    a complaint, or decides redress.
+  owner: "Complaints operations"
+  contact: "complaints-intake@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/02-consumer-duty-complaint-intake"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "A handler validates every classification and every severity before anything is relied on"
+    - "The agent NEVER sends an acknowledgement, summary resolution communication, holding response, final response, or any other communication"
+    - "The agent NEVER creates, updates, resolves, or closes a Dynamics 365 case or any other production record"
+    - "The agent NEVER upholds, rejects, or closes a complaint"
+    - "The agent NEVER decides redress, a refund, a goodwill payment, or a fee waiver"
+    - "The agent NEVER refers a complaint to the Financial Ombudsman Service"
+    - "The agent NEVER labels a customer as vulnerable and NEVER writes a vulnerability marker to a customer record"
+    - "DISP dates come from the deterministic clock in src/disp_clock.py, not from model output"
+    - "All output is advisory and is marked draft"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Complaint text supplied by the handler"
+      description: "One inbound email, web-form submission, or call transcript, pasted or uploaded by an authorised handler for this run"
+      access_level: "read"
+      scope: "Single complaint per invocation. No browsing of the case book."
+      justification: "The intake cannot be drafted without the complaint the handler has asked it to read"
+      data_categories:
+        - "Complaint narrative"
+        - "Names and contact details if the complainant included them"
+        - "Product and account references if the complainant included them"
+        - "Free text that may describe health, bereavement, or financial difficulty"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text."
+
+    - resource: "Handler-confirmed clock inputs"
+      description: "Receipt date, route (general, PSD, EMD, or mixed), and any PSP closed dates or proclaimed bank holidays the handler has entered"
+      access_level: "read"
+      scope: "Fields the handler types for this calculation"
+      justification: "The DISP clock is deterministic only once a human has set the inputs the Handbook leaves to the firm"
+      may_contain_personal_data: false
+
+    - resource: "System prompt and clock configuration"
+      description: "Agent instructions and the statutory England and Wales bank-holiday rules in src/disp_clock.py"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "Required to run the intake and the clock"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Dynamics 365 Customer Service production data"
+      reason: "This starter has no production connector. A later read-only connector would be a deployment decision, added here before it is switched on."
+    - resource: "Customer vulnerability markers or special-category flags on a CRM record"
+      reason: "Characteristics are flagged in the draft for a human. They are not read back from, or written to, a customer profile."
+    - resource: "Core banking, policy administration, and payment systems"
+      reason: "Not required to draft an intake. Balance and transaction lookups are out of scope."
+    - resource: "Email and SMS gateways"
+      reason: "The agent does not send."
+    - resource: "Financial Ombudsman Service case systems"
+      reason: "The agent does not refer complaints and does not look up FOS cases."
+    - resource: "Other customers' complaints"
+      reason: "No profiling and no root-cause mining across the book in this starter."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "DISP clock"
+      provider: "Local Python (src/disp_clock.py)"
+      action: "Calculate DISP dates from handler-confirmed inputs"
+      access_level: "read"
+      scope: "One complaint's dates per call. No network. No model."
+      justification: "Timescales are a statutory count. A language model must not produce them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Extract fields, propose classification, draft the acknowledgement"
+      access_level: "read"
+      scope: "The single complaint text supplied for this run"
+      justification: "Natural-language extraction and drafting. Dates, outcomes, and sends stay outside the model."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output schema validation"
+      provider: "Local Python"
+      action: "Check the draft intake against the output schema"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "Rejects a draft that is missing a required field or that contains a prohibited decision"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the handler. Filing it on a case,
+      if the handler chooses to, is done by the handler in Dynamics 365.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The acknowledgement is a draft for the handler to edit and
+      send through the firm's usual channel.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not uphold, reject, or close a complaint. Those are
+      decisions for an authorised handler under DISP 1.4 and the firm's procedure.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Classification, severity, the PSD/EMD route, exceptional circumstances,
+      vulnerability characteristics, and any Consumer Duty mapping are proposals.
+      A handler validates each one. The agent does not decide a breach of the
+      Consumer Duty and does not decide redress.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create, update, resolve, or close against Dynamics 365 or any other
+      production record. No vulnerability marker is written to a customer.
+
+  external_send:
+    enabled: false
+    rationale: >
+      Acknowledgements and responses are regulated communications. The agent
+      drafts only. A handler sends through the firm's channel.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, refund, ex-gratia, or fee waiver can be instructed."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Refer to the Financial Ombudsman Service"
+      rationale: "Referral is the complainant's step, or a handler's, never the agent's."
+    - enabled: false
+      action_name: "Label the customer as vulnerable"
+      rationale: >
+        FG21/1 paragraph 2.9 says firms should not apply the label 'vulnerable'
+        in dealings with customers. The agent flags a characteristic for a handler.
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    Every classification and every severity is validated by a handler before
+    it is relied on. The agent has no path that acts on its own output.
+
+  approval_points:
+    - action: "Accept or correct the complaint classification"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "Whether the matter is a DISP complaint changes the clock and the record"
+
+    - action: "Confirm product, root cause, and severity"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "These fields drive routing and Consumer Duty management information"
+
+    - action: "Confirm the route passed to the DISP clock"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "General, PSD, EMD, and mixed complaints use different rules"
+
+    - action: "Confirm exceptional circumstances before using the 35-business-day date"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "DISP 1.6.2AR(2) is a human judgement about reasons beyond the firm's control"
+
+    - action: "Review a vulnerability characteristic before it is recorded"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "The flag is a prompt. Recording it is a decision about special-category data."
+
+    - action: "Edit and send the acknowledgement"
+      approver: "Complaints handler"
+      mandatory: true
+      rationale: "DISP 1.6.1R requires the firm to send it. The agent only drafts."
+
+    - action: "Uphold, reject, redress, or close"
+      approver: "Authorised complaints decision-maker"
+      mandatory: true
+      rationale: "Out of the agent's scope. Listed so the control is explicit."
+
+  no_approval_required:
+    - action: "View the draft intake"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run extraction on the same text"
+      rationale: "No write and no send"
+    - action: "Calculate the clock from inputs the handler has already typed"
+      rationale: "The arithmetic is deterministic. Relying on the route still requires the confirmation above."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(c) — legal obligation"
+    description: >
+      Handling a complaint in line with DISP is a regulatory obligation of the
+      firm. This starter does not decide the basis. The firm's DPO confirms it
+      before any production use. Article 6(1)(b) may also be relevant where the
+      complaint is about performing the customer contract.
+    secondary: "To be confirmed by the firm. Do not copy the public-task basis from Experiment 01."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, if the complainant describes a condition (FG21/1 health driver)"
+      - "Data about a life event that may reveal health, such as a bereavement described in clinical terms"
+    lawful_basis_special: >
+      Not asserted. The firm must identify an Article 9 condition before
+      production use. This starter does not claim Schedule 1 of the Data
+      Protection Act 2018 applies.
+    safeguards:
+      - "The draft quotes the words that prompted a flag and names the driver"
+      - "The customer is not labelled vulnerable"
+      - "Nothing is written to a customer record"
+      - "A handler reviews the flag before it is recorded anywhere"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One complaint at a time, as supplied by the handler"
+    - "No lookup of the customer's wider file in this starter"
+    - "The clock stores dates and a route, not the narrative"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The firm's complaints-file retention applies to whatever the handler then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. That is a deployment choice, not something this repository can enforce."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the firm's privacy process. A complaint that is also
+      a data-protection request must be flagged for the privacy team, not answered by the agent.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Complaint text is untrusted. It may tell the model to ignore the rules,
+    to uphold the complaint, or to send a reply. The clock does not read the
+    narrative. The model is not given a tool that can send, write, or decide.
+
+  controls:
+    - control: "Instructions separated from the complaint"
+      description: "The complaint is data. It cannot change the system instructions."
+    - control: "Deterministic clock"
+      description: "Dates are computed in Python from handler-confirmed inputs."
+    - control: "Schema rejects prohibited decisions"
+      description: "A draft that upholds, rejects, closes, or sets redress fails validation."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled in this manifest."
+    - control: "Human validation"
+      description: "A handler checks classification and severity on every complaint."
+
+  residual_risk: >
+    A manipulated model can still draft a misleading summary. The handler is
+    the control. There is no autonomous action to take even if the draft is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named firm"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A wrong classification makes a handler miss a DISP deadline"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The handler confirms the route before the date is relied on"
+        - "PSD and EMD dates stay non-operative until the PSP calendar is supplied"
+        - "The eight-week date is calendar arithmetic, not a model guess"
+      residual_risk: "Medium"
+      owner: "Complaints operations"
+
+    - id: "R2"
+      risk: "A vulnerability characteristic is missed, or a customer is labelled"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Flags are proposals, with the quoted words"
+        - "The label 'vulnerable' is prohibited in the output"
+        - "No write to a customer record"
+      residual_risk: "Medium"
+      owner: "Complaints operations"
+
+    - id: "R3"
+      risk: "Prompt injection produces an uphold, a redress figure, or a send instruction"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No send or write tool exists"
+        - "Schema and tests reject prohibited actions"
+        - "Handler review is mandatory"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "Special-category data in a complaint is retained or reused"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Starter does not persist the text"
+        - "Article 9 basis is explicitly not asserted"
+        - "Synthetic fixtures only in this repository"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R5"
+      risk: "Stale Handbook text after the future DISP 1.6 version dated 25 October 2027"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The clock records the retrieval date and the future-version warning"
+        - "Review trigger on regulatory change"
+      residual_risk: "Medium"
+      owner: "Complaints operations"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version, the
+    clock inputs, and the handler's accept or change. This starter logs nothing
+    because it keeps no store. The fields below are the minimum a firm should
+    switch on before live use.
+
+  logged_events:
+    - event: "Intake requested"
+      data_logged:
+        - "Timestamp"
+        - "Handler identity"
+        - "Character count of the complaint, not the text"
+      retention: "Firm's complaints-file schedule. Not set by this starter."
+    - event: "Clock calculated"
+      data_logged:
+        - "Receipt date"
+        - "Route"
+        - "Whether the PSP calendar was supplied"
+        - "Whether exceptional circumstances were flagged by a human"
+        - "The dates returned and the rule ids"
+      retention: "Keep with the complaint file if the handler relies on the dates."
+    - event: "Handler validated or changed a field"
+      data_logged:
+        - "Field name"
+        - "Handler identity"
+        - "Timestamp"
+      retention: "Firm's complaints-file schedule."
+    - event: "Draft rejected by schema"
+      data_logged:
+        - "Validation error code"
+        - "Timestamp"
+      retention: "Operational log. Do not store the complaint text in the error."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the firm's security team already operates. Do not log complaint text in an application trace."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove the Microsoft Foundry deployment access"
+      action: "Revoke the key or the managed-identity role used by the agent"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for Dynamics 365 or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Complaints operations lead"
+      contact: "complaints-intake@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months, and sooner if DISP or PRIN 2A changes"
+  reviewer: "The adopting firm's complaints owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "The future DISP 1.6 version dated 25 October 2027, or any earlier Handbook change"
+    - "A change to England and Wales bank holidays by proclamation"
+    - "A proposal to add a Dynamics 365 or email connector"
+    - "A security incident or a upheld complaint about the agent's draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "DISP clock"
+      path: "src/disp_clock.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Dynamics 365 Customer Service"
+      path: "docs/dynamics-365-customer-service.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a firm must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The firm's complaint handling is in England and Wales for the bank-holiday calendar"
+      section: "src/disp_clock.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6(1)(c) is the right lead basis, and an Article 9 condition will be chosen before any live special-category processing"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on the firm's complaints"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No Dynamics 365 connector is added without updating this manifest to a read-only or draft-only scope"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on example.com are placeholders, not a real firm"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
