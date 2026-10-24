@@ -68,7 +68,7 @@ python -m pytest tests/ -v
 python eval/evaluate.py
 ```
 
-`eval/evaluate.py` prints a **smoke test** of 24 synthetic cases. `eval/smoke_report.json` is that run. It is not a model score.
+`eval/evaluate.py` prints a **smoke test** of 28 synthetic cases. `eval/smoke_report.json` is that run: 28 of 28 passed. It is not a model score.
 
 Draft a pack and a manifest:
 
