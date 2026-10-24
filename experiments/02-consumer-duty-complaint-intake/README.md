@@ -6,7 +6,7 @@ A starter for FCA-regulated firms. It helps a complaints handler turn an inbound
 
 **Autonomy A1.** A handler validates every classification and every severity. The agent does not send, write a production record, close a case, uphold or reject a complaint, or decide redress.
 
-This revision contains the scaffold, the permissions manifest, and the deterministic DISP clock. Intake extraction, fixtures, the evaluation harness, and the Copilot Studio, Microsoft Foundry and Dynamics 365 notes are added in the commits that follow. Nothing here calls a model.
+This revision contains the scaffold, the permissions manifest, the deterministic DISP clock, 22 synthetic fixtures, and a mock intake used only as a smoke test. Copilot Studio, Microsoft Foundry and Dynamics 365 notes follow. Nothing here calls a model.
 
 Stack: Copilot Studio, Dynamics 365 Customer Service, and Power Platform. The clock itself is Python in the standard library, so a handler can run the dates without a tenant.
 
@@ -72,7 +72,10 @@ Python 3.10 or newer. No Azure credentials and no network.
 cd experiments/02-consumer-duty-complaint-intake
 python -m pip install -r requirements.txt
 python -m pytest tests/ -v
+python eval/evaluate.py
 ```
+
+`eval/evaluate.py` prints a **mock smoke test**. The 22 fixtures are synthetic and the classifier is a keyword stand-in tuned to them. `eval/smoke_report.json` is that same run, saved so a reviewer can see it without re-running. It is not a model score. A live Microsoft Foundry run has not been done.
 
 Calculate one clock:
 
@@ -110,7 +113,7 @@ Payment-services complaint received Thursday 24 December 2026. On the England an
 - DISP 1.6, retrieved on 24 October 2026, showed a future version dated 25 October 2027. This module encodes the text retrieved that day, not the future version.
 - DISP 1.6.4R (written acceptance can disapply the eight-week rule for a non-PSD complaint) is described in the output and is not applied automatically. DISP 1.6.4AG says it does not affect the PSD/EMD rule.
 - The wording required by DISP 1 Annex 3R is not copied here. It was not opened.
-- Mock or smoke-test results, when they are added, will be labelled as such. This clock is not a mock. Its dates are the calculation.
+- `eval/smoke_report.json` is a mock smoke test of the keyword stand-in. It is not a model score. The DISP clock dates in that run are the deterministic calculation, not a guess.
 
 This is not legal advice and it is not a statement of the firm's compliance.
 
@@ -122,10 +125,14 @@ experiments/02-consumer-duty-complaint-intake/
 ├── agent-manifest.yaml
 ├── requirements.txt
 ├── src/
-│   ├── __init__.py
-│   └── disp_clock.py
+│   ├── disp_clock.py
+│   └── intake.py
+├── eval/
+│   ├── synthetic_dataset.json
+│   ├── evaluate.py
+│   └── smoke_report.json
+├── examples/
 └── tests/
-    └── test_disp_clock.py
 ```
 
 ## References opened for this revision

@@ -1,0 +1,152 @@
+{
+  "intake_id": "INT-20261001-F9599F",
+  "evaluation_label": "MOCK SMOKE TEST. Rule-based stand-in tuned to the synthetic fixtures. Not a measure of model accuracy. No model was called.",
+  "processing_mode": "mock",
+  "received_on": "2026-10-01",
+  "complaint": {
+    "meets_disp_definition": true,
+    "expression_of_dissatisfaction": true,
+    "harm_alleged": [
+      "financial_loss"
+    ],
+    "about_a_financial_service": true,
+    "handler_must_confirm": true,
+    "rule": "Handbook glossary 'complaint', https://handbook.fca.org.uk/glossary/G197"
+  },
+  "product": {
+    "suggested": "current_account",
+    "handler_must_confirm": true
+  },
+  "root_cause": {
+    "suggested": "fees_and_charges",
+    "taxonomy": "Starter taxonomy for the fictional firm Northbridge Mutual. Not an FCA taxonomy.",
+    "handler_must_confirm": true
+  },
+  "severity": {
+    "suggested": "standard",
+    "requires_prompt_human_review": false,
+    "handler_must_confirm": true
+  },
+  "vulnerability_characteristics": {
+    "customer_labelled_vulnerable": false,
+    "flags": [],
+    "note": "FG21/1 paragraph 2.5 drivers, for a handler to review. The customer has not been labelled vulnerable (FG21/1 paragraph 2.9)."
+  },
+  "consumer_duty": {
+    "outcomes_touched": [
+      "price_and_value"
+    ],
+    "breach_found": false,
+    "note": "Mapping only, against PRIN 2A.3 to PRIN 2A.6. Not a finding that the firm has breached the Consumer Duty."
+  },
+  "route": {
+    "suggested": "general",
+    "applied_to_clock": "general",
+    "handler_confirmed": false
+  },
+  "disp_clock": {
+    "received_on": "2026-10-01",
+    "calendar": "england-and-wales",
+    "route": "general",
+    "exceptional_circumstances": false,
+    "psp_opening_calendar_supplied": false,
+    "deadlines": [
+      {
+        "name": "Summary resolution route closes",
+        "on": "2026-10-06",
+        "rule": "DISP 1.5.1R",
+        "operative": true,
+        "note": "Close of the third business day following the day of receipt. The day of receipt is not counted. 'Close of business' is not given an hour in DISP 1.5, so this is a date. The route applies only if the complainant has indicated acceptance (DISP 1.5.2AR). This function does not decide acceptance. A summary resolution communication must still be sent (DISP 1.5.4R)."
+      },
+      {
+        "name": "Prompt acknowledgement",
+        "on": null,
+        "rule": "DISP 1.6.1R",
+        "operative": true,
+        "note": "A prompt written acknowledgement is required. DISP 1.6.1R does not set a number of days. No acknowledgement deadline has been invented."
+      },
+      {
+        "name": "Final or other written response",
+        "on": "2026-11-26",
+        "rule": "DISP 1.6.2R",
+        "operative": true,
+        "note": "By the end of eight weeks after receipt. Eight weeks is fifty-six days. The date is not moved if it falls on a weekend or bank holiday. DISP 1.6.4R can disapply DISP 1.6.2R where the complainant has already accepted a qualifying response in writing. That is a human judgement, and it does not apply here unless the handler records it outside this clock."
+      }
+    ],
+    "operative_final_response_due_on": "2026-11-26",
+    "operative_final_response_rule": "DISP 1.6.2R",
+    "fos": {
+      "may_refer_from_if_no_qualifying_response": "2026-11-27",
+      "may_refer_from_operative": true,
+      "rule_if_firm_has_not_responded": "DISP 2.8.1R(2)",
+      "six_month_last_day_to_refer": null,
+      "six_month_rule": "DISP 2.8.2R(1)",
+      "six_month_runs_from": null,
+      "longstop": {
+        "six_years_after_event": null,
+        "three_years_after_awareness": null,
+        "later_of_the_two": null,
+        "rule": "DISP 2.8.2R(2)",
+        "awareness_is_a_human_judgement": true,
+        "exceptions_not_applied": [
+          "DISP 2.8.2R(3) exceptional circumstances, which the Ombudsman decides",
+          "DISP 2.8.2R(4) Ombudsman Transitional Order",
+          "DISP 2.8.2R(5) respondent consent, which cannot be withdrawn once given",
+          "The written-acknowledgement saving in DISP 2.8.2R(2)"
+        ]
+      }
+    },
+    "handler_must_confirm": [
+      "That the matter is a complaint, using the Handbook glossary definition",
+      "The route: general, PSD, EMD, or mixed",
+      "Whether the complainant has accepted a response, before anyone relies on the three-business-day route",
+      "Whether exceptional circumstances under DISP 1.6.2AR(2) exist, before anyone relies on day 35",
+      "The PSP's real opening days, before anyone relies on a 15-day or 35-day date",
+      "The London date of receipt, if the source timestamp is near midnight"
+    ],
+    "final_response_must_cover": [
+      "DISP 1.6.2R(1)(d) or DISP 1.6.4R(3): the Financial Ombudsman Service standard explanatory leaflet",
+      "The Financial Ombudsman Service website address",
+      "That the complainant may refer the complaint to the Financial Ombudsman Service",
+      "The wording in DISP 1 Annex 3R on whether the respondent consents to waive the DISP 2.8.2R or DISP 2.8.7R time limits. This module does not reproduce that wording."
+    ],
+    "notes": [
+      "Calculated in code from the rules cited. A model must not replace these dates.",
+      "Not a decision to uphold, reject, close, or pay redress. Not legal advice.",
+      "Business day for DISP 1.5 is Handbook glossary 'business day' (1)(a): not a Saturday, Sunday, Christmas Day, Good Friday or a bank holiday in England and Wales.",
+      "Business day for DISP 1.6.2A and for the business-day periods in DISP 2.8 is glossary limb (3): a day the payment service provider is open for business as required for the execution of a payment transaction. Bank holidays are not that definition.",
+      "Proclaimed one-off bank holidays, and bank holidays moved by proclamation, are included only if the caller passes them.",
+      "This calendar is England and Wales. Do not use it for a complaint handled on the Scottish or Northern Ireland bank-holiday calendar.",
+      "DISP 1.6, as retrieved on 24 October 2026, showed a future version dated 25 October 2027. That future text is not encoded."
+    ],
+    "references": {
+      "DISP 1.5": "https://handbook.fca.org.uk/handbook/disp1/disp1s5",
+      "DISP 1.6": "https://www.handbook.fca.org.uk/handbook/DISP/1/6.html",
+      "DISP 2.8": "https://www.handbook.fca.org.uk/handbook/DISP/2/8.html",
+      "business day": "https://handbook.fca.org.uk/glossary/G120",
+      "complaint": "https://handbook.fca.org.uk/glossary/G197",
+      "PRIN 2A.1": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/1.html",
+      "England and Wales bank holidays": "https://www.gov.uk/bank-holidays"
+    }
+  },
+  "acknowledgement_draft": {
+    "status": "draft_for_handler",
+    "may_be_sent_by_agent": false,
+    "text": "DRAFT FOR A HANDLER. Do not send.\n\nReceived 2026-10-01. Thank you for telling us you are unhappy. We have received this and a handler is dealing with it. On the general DISP 1.6.2R count, a written response is due by the end of 2026-11-26. This draft does not uphold or reject the complaint and does not offer redress. A person must check it, edit it, and send it through the firm's own channel."
+  },
+  "security": {
+    "prompt_injection_detected": false,
+    "prompt_injection_signals": [],
+    "stale_data_signals": [],
+    "actions_taken": []
+  },
+  "decisions_not_taken": [
+    "uphold",
+    "reject",
+    "redress",
+    "close",
+    "send",
+    "vulnerability_label",
+    "fos_referral"
+  ]
+}
