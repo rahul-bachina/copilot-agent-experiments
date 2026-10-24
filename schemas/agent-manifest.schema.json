@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/rahul-bachina/copilot-agent-experiments/schemas/agent-manifest.schema.json",
   "title": "Agent Manifest Schema",
-  "description": "Schema for AI agent permissions manifests in copilot-agent-experiments. Defines agent identity, data access, tools, human approval points, GDPR compliance, risk assessment, and governance controls.",
+  "description": "Schema for AI agent permissions manifests in copilot-agent-experiments. Defines agent identity, data access, tools, human approval points, GDPR compliance, risk assessment, and governance controls. This catalogue only permits autonomy levels A0, A1, and A2 (never A3). High-risk actions (approve, reject, regulated decisions, production writes, external sends, spending) must either be disabled or have explicit human approval.",
   "type": "object",
   "required": [
     "agent",
@@ -14,7 +14,8 @@
     "risk_assessment",
     "logging_and_audit",
     "kill_switch",
-    "review"
+    "review",
+    "high_risk_actions"
   ],
   "properties": {
     "$schema": {
@@ -72,8 +73,8 @@
       "properties": {
         "level": {
           "type": "string",
-          "description": "Autonomy level (A1=human approves all, A2=human approves some, A3=agent acts autonomously)",
-          "enum": ["A1", "A2", "A3"]
+          "description": "Autonomy level. A0=no autonomous capability (read-only analysis). A1=human approves all actions. A2=human approves high-risk actions. A3 is NOT PERMITTED in this catalogue.",
+          "enum": ["A0", "A1", "A2"]
         },
         "level_description": {
           "type": "string",
@@ -536,6 +537,46 @@
         }
       }
     },
+    "high_risk_actions": {
+      "type": "object",
+      "description": "Declaration of high-risk actions and their controls. Each action category must be either disabled or have explicit human approval. High-risk actions include: approving/rejecting requests, making regulated decisions, changing production records, sending external communications, spending/transacting.",
+      "required": [
+        "approve_reject",
+        "regulated_decision",
+        "production_record_change",
+        "external_send",
+        "spend_transact"
+      ],
+      "properties": {
+        "approve_reject": {
+          "$ref": "#/definitions/highRiskActionEntry",
+          "description": "Approving or rejecting requests, applications, claims, etc."
+        },
+        "regulated_decision": {
+          "$ref": "#/definitions/highRiskActionEntry",
+          "description": "Making decisions subject to regulatory requirements (e.g., Consumer Duty, FOI response, benefits determination)"
+        },
+        "production_record_change": {
+          "$ref": "#/definitions/highRiskActionEntry",
+          "description": "Creating, updating, or deleting records in production systems"
+        },
+        "external_send": {
+          "$ref": "#/definitions/highRiskActionEntry",
+          "description": "Sending emails, messages, letters, or other communications externally"
+        },
+        "spend_transact": {
+          "$ref": "#/definitions/highRiskActionEntry",
+          "description": "Spending money, authorising payments, or executing financial transactions"
+        },
+        "additional_high_risk": {
+          "type": "array",
+          "description": "Additional high-risk actions specific to this agent",
+          "items": {
+            "$ref": "#/definitions/highRiskActionEntry"
+          }
+        }
+      }
+    },
     "atrs_mapping": {
       "type": "object",
       "description": "Mapping to Algorithmic Transparency Recording Standard",
@@ -718,6 +759,78 @@
         "owner": {
           "type": "string",
           "description": "Risk owner"
+        }
+      }
+    },
+    "highRiskActionEntry": {
+      "type": "object",
+      "description": "A high-risk action that must be either disabled or have human approval",
+      "required": ["enabled"],
+      "oneOf": [
+        {
+          "properties": {
+            "enabled": {
+              "const": false
+            },
+            "rationale": {
+              "type": "string",
+              "description": "Why this action is disabled"
+            }
+          },
+          "required": ["enabled"]
+        },
+        {
+          "properties": {
+            "enabled": {
+              "const": true
+            },
+            "human_approval": {
+              "type": "object",
+              "required": ["required", "approver"],
+              "properties": {
+                "required": {
+                  "const": true,
+                  "description": "Human approval must be required when action is enabled"
+                },
+                "approver": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Named role or individual who approves this action"
+                },
+                "approval_process": {
+                  "type": "string",
+                  "description": "Description of the approval process"
+                },
+                "sla": {
+                  "type": "string",
+                  "description": "Service level for approval"
+                }
+              }
+            },
+            "rationale": {
+              "type": "string",
+              "description": "Why this action is enabled and how it is controlled"
+            }
+          },
+          "required": ["enabled", "human_approval"]
+        }
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this high-risk action is enabled for the agent"
+        },
+        "action_name": {
+          "type": "string",
+          "description": "Name of the specific action (for additional_high_risk entries)"
+        },
+        "human_approval": {
+          "type": "object",
+          "description": "Human approval requirements (required if enabled=true)"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation of why action is enabled/disabled"
         }
       }
     }

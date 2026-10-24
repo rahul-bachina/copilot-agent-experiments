@@ -122,6 +122,46 @@ tools:
       edit, and send through normal channels.
 
 # =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+# Each high-risk action must be either disabled or have explicit human approval.
+# This section is required by the schema to ensure governance of sensitive actions.
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      This agent never approves or rejects requests. It provides triage analysis
+      only. All approval/rejection decisions are made by human staff through
+      standard processes.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      This agent does not make regulated decisions. FOI/EIR response decisions,
+      exemption applications, and SAR responses are made by human staff. The
+      agent provides classification and routing suggestions only.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      This agent does not write to case management systems, databases, or any
+      production records. Staff update records through standard systems after
+      reviewing agent output.
+
+  external_send:
+    enabled: false
+    rationale: >
+      This agent never sends emails, letters, or any external communications.
+      Draft clarification letters are provided as text for staff to review,
+      edit, and send through normal channels.
+
+  spend_transact:
+    enabled: false
+    rationale: >
+      This agent has no capability to spend money, authorise payments, or
+      execute any financial transactions.
+
+# =============================================================================
 # HUMAN APPROVAL POINTS
 # =============================================================================
 human_approval:
