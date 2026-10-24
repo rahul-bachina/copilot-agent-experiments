@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Consultation intake tool input",
+  "description": "Least-privilege input for intake status. The tool counts rows, redacts known identifiers, and clusters duplicates. It does not code themes, publish, send, or write.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch", "as_of"],
+  "properties": {
+    "batch": {
+      "type": "object",
+      "description": "One consultation export supplied by the analyst. Synthetic in this repository.",
+      "additionalProperties": false,
+      "required": ["consultation_id", "question_id", "question", "responses"],
+      "properties": {
+        "consultation_id": {"type": "string"},
+        "body": {"type": "string"},
+        "question_id": {"type": "string"},
+        "question": {"type": "string"},
+        "responses_retrieved_on": {"type": "string", "description": "YYYY-MM-DD. Omit it and the set is treated as stale."},
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["response_id", "text"],
+            "properties": {
+              "response_id": {"type": "string"},
+              "text": {"type": "string"},
+              "question_id": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "description": "Analysis date, YYYY-MM-DD, entered by the analyst."
+    }
+  }
+}

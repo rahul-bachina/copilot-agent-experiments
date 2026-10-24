@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Consultation analysis tool input",
+  "description": "Least-privilege input for theme coding. There is no publish, send, or write field. Approval is a separate object the analyst supplies. Response text cannot fill it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch", "framework", "as_of"],
+  "properties": {
+    "batch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consultation_id", "question_id", "question", "responses"],
+      "properties": {
+        "consultation_id": {"type": "string"},
+        "body": {"type": "string"},
+        "question_id": {"type": "string"},
+        "question": {"type": "string"},
+        "responses_retrieved_on": {"type": "string"},
+        "responses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["response_id", "text"],
+            "properties": {
+              "response_id": {"type": "string"},
+              "text": {"type": "string"},
+              "question_id": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["themes"],
+      "properties": {
+        "framework_id": {"type": "string"},
+        "themes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["theme_id", "label", "keywords"],
+            "properties": {
+              "theme_id": {"type": "string"},
+              "label": {"type": "string"},
+              "description": {"type": "string"},
+              "keywords": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Analyst decisions. Absent means the draft stays blocked.",
+      "properties": {
+        "framework_approved": {"type": "boolean"},
+        "approver_role": {"type": "string"},
+        "approver_reference": {"type": "string"},
+        "approved_on": {"type": "string"},
+        "stale_acknowledged": {"type": "boolean"},
+        "sample_decisions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["decision"],
+            "properties": {
+              "decision": {"type": "string", "enum": ["accept", "correct", "reject"]},
+              "theme_ids": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "as_of": {"type": "string"},
+    "engine": {
+      "type": "string",
+      "enum": ["deterministic", "themefinder"],
+      "description": "deterministic is the codebook. themefinder calls the adapter and falls back if the call fails."
+    }
+  }
+}
