@@ -7,6 +7,7 @@ embeds the stylesheets in each page.
 """
 
 from pathlib import Path
+from urllib.parse import urlparse
 import re
 import shutil
 
@@ -76,24 +77,41 @@ def _size_inline_svgs(html: str) -> str:
     return SVG_TAG.sub(repl, html)
 
 
-def _embed_stylesheets(html: str, html_path: Path, site_dir: Path) -> str:
+def _stylesheet_path(href: str, html_path: Path, site_dir: Path, site_url: str) -> Path | None:
+    """Resolve a stylesheet link to a file inside the built site."""
+    if href.startswith(("http://", "https://", "//")):
+        return None
+    if href.startswith("/"):
+        site_path = urlparse(site_url).path if site_url else ""
+        prefix = site_path.rstrip("/")
+        if prefix and (href == prefix or href.startswith(prefix + "/")):
+            relative = href[len(prefix):].lstrip("/")
+        else:
+            relative = href.lstrip("/")
+        css_path = (site_dir / relative).resolve()
+    else:
+        css_path = (html_path.parent / href).resolve()
+    try:
+        css_path.relative_to(site_dir)
+    except ValueError:
+        return None
+    if not css_path.is_file():
+        return None
+    return css_path
+
+
+def _embed_stylesheets(html: str, html_path: Path, site_dir: Path, site_url: str) -> str:
     """Keep the linked files, and repeat them in the page.
 
     A failed stylesheet request otherwise leaves the search icon at the
     size of the window. Relative addresses in these files are data URIs,
-    so embedding them does not point images at the wrong folder.
+    so embedding them does not point images at the wrong folder. The 404
+    page links stylesheets from the site root, so those are resolved there.
     """
 
     def repl(match: re.Match) -> str:
-        href = match.group(1)
-        if href.startswith(("http://", "https://", "//")):
-            return match.group(0)
-        css_path = (html_path.parent / href).resolve()
-        try:
-            css_path.relative_to(site_dir)
-        except ValueError:
-            return match.group(0)
-        if not css_path.is_file():
+        css_path = _stylesheet_path(match.group(1), html_path, site_dir, site_url)
+        if css_path is None:
             return match.group(0)
         css = css_path.read_text(encoding="utf-8")
         if "</style>" in css.lower():
@@ -105,10 +123,11 @@ def _embed_stylesheets(html: str, html_path: Path, site_dir: Path) -> str:
 
 def on_post_build(config, **kwargs):
     site_dir = Path(config.site_dir).resolve()
+    site_url = config.site_url or ""
     for html_path in site_dir.rglob("*.html"):
         text = html_path.read_text(encoding="utf-8")
         updated = text.replace('<html lang="en"', '<html lang="en-GB"', 1)
         updated = _size_inline_svgs(updated)
-        updated = _embed_stylesheets(updated, html_path, site_dir)
+        updated = _embed_stylesheets(updated, html_path, site_dir, site_url)
         if updated != text:
             html_path.write_text(updated, encoding="utf-8")
