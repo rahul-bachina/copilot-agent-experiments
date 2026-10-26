@@ -1,0 +1,495 @@
+# Agent manifest: Travel Rule exception triage
+# Experiment 10 — catalogue ID UK05
+# Version: 0.1.0
+# Last reviewed: 2026-10-26
+# Next review: 2027-04-26
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-10-travel-rule-exception-triage"
+  name: "Travel Rule Exception Triage Agent"
+  version: "0.1.0"
+  description: >
+    Helps an analyst at a UK cryptoasset business triage one cryptoasset
+    transfer for missing or non-corresponding originator and beneficiary
+    information, including a transfer to or from a jurisdiction the firm
+    has recorded as not yet applying the Travel Rule. Autonomy A1. The
+    agent explains the fields and proposes hold, return, or escalate, with
+    reasons. An analyst decides. The agent never holds, returns, rejects,
+    or releases a transfer, never files a suspicious activity report, and
+    never contacts a counterparty.
+  owner: "Financial crime operations"
+  contact: "travel-rule-triage@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/10-travel-rule-exception-triage"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "An analyst decides hold, return, or escalate. The agent only proposes."
+    - "The agent NEVER holds, delays, returns, rejects, or releases a transfer"
+    - "The agent NEVER makes a cryptoasset available to a beneficiary"
+    - "The agent NEVER files, drafts, or suppresses a suspicious activity report"
+    - "The agent NEVER contacts a counterparty, a customer, or the FCA"
+    - "The agent NEVER writes a production record, a case, or a wallet"
+    - "Information checks come from the deterministic core in src/triage.py, not from model output"
+    - "All output is advisory and is marked draft for analyst review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic or firm-supplied transfer record"
+      description: "A single transfer the analyst pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One transfer per invocation. No browsing of the transfer book."
+      justification: "The triage cannot describe missing fields without the record the analyst has supplied"
+      data_categories:
+        - "Originator and beneficiary names as supplied on the record"
+        - "Account numbers or unique transaction identifiers"
+        - "A firm-supplied sterling equivalent"
+        - "The firm's recorded Travel Rule status for the counterparty jurisdiction"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the record."
+
+    - resource: "Analyst-confirmed inputs"
+      description: "As-of date, firm role, and whether linked transfers were included in the sterling figure"
+      access_level: "read"
+      scope: "Fields the analyst types for this run"
+      justification: "Regulation 64C leaves linkage and the sterling equivalent to the firm. The core does not infer them."
+      may_contain_personal_data: false
+
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Every regulatory sentence the core uses is pinned, with the date it was opened"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Wallets, private keys, and blockchain nodes"
+      reason: "The agent does not move a cryptoasset and does not look up a live address."
+    - resource: "Travel Rule messaging networks and counterparty directories"
+      reason: "The agent does not contact a counterparty and does not send a Travel Rule message."
+    - resource: "Customer due-diligence files beyond the fields the analyst pastes"
+      reason: "Correspondence is checked only against the Part 3 name the analyst has typed for this transfer."
+    - resource: "Suspicious activity report systems and the National Crime Agency gateway"
+      reason: "The agent does not draft or file a report."
+    - resource: "FCA Connect and the FCA reporting channel"
+      reason: "Repeated-failure reporting under regulation 64D(5) or 64E(5) is a person's step."
+    - resource: "Other customers' transfers"
+      reason: "Linkage is an input. The agent does not search the book."
+    - resource: "Experiment 04 policy packs"
+      reason: "This agent does not re-score an authorisation pack. It triages one transfer."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Travel Rule triage"
+      provider: "Local Python (src/triage.py)"
+      action: "Compare one transfer with the pinned information checklist and propose options"
+      access_level: "read"
+      scope: "One transfer. No network. No model."
+      justification: "Missing fields and the £800 limb are a statutory comparison. A language model must not produce them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. Citations, options, and the empty decision stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a decision or an action"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that holds, returns, releases, files, or contacts is not a valid result"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the analyst. Filing it, if the
+      analyst chooses to, is done by the analyst in the firm's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. A request for missing information is a firm step. The agent
+      does not contact the counterparty, the customer, or the FCA.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not hold, return, reject, or release a transfer.
+      Those are the analyst's decision. The output leaves the decision empty.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Whether information is missing is a field comparison against the pinned
+      text. Whether to delay, return, make available, or escalate is a
+      regulated judgement for an analyst. The agent proposes options and
+      does not take them. It does not decide that the firm has breached
+      the Money Laundering Regulations.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a case system, a Travel Rule log, a
+      wallet, or any other production record.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent does not contact a counterparty cryptoasset business, a
+      customer, law enforcement, or the FCA.
+
+  spend_transact:
+    enabled: false
+    rationale: "No transfer is made, returned, or released. No fee is spent."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "File or draft a suspicious activity report"
+      rationale: "The MLRO decides whether to file. This agent does not draft the narrative. That is a different catalogue item."
+    - enabled: false
+      action_name: "Make a cryptoasset available to the beneficiary"
+      rationale: "Regulation 64D and regulation 64G speak to the firm. The agent has no tool that makes an asset available."
+    - enabled: false
+      action_name: "Report repeated failure to the FCA"
+      rationale: "Regulations 64D(5) and 64E(5) are firm duties. The agent can point at a marker the firm has already set. It does not report."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The analyst decides hold, return, or escalate. The agent has no path
+    that acts on its own proposal. Approving a proposal in the chat does
+    not execute it.
+
+  approval_points:
+    - action: "Decide hold, return, or escalate"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "Catalogue checkpoint for UK05. The core leaves analyst_decision null."
+
+    - action: "Treat a field as missing or as non-corresponding"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "The core compares supplied fields. A truncated name or a wallet-attribution doubt is for the analyst."
+
+    - action: "Rely on a counterparty Travel Rule status"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "A stale or unknown status is not relied on. The analyst refreshes the firm's register."
+
+    - action: "Rely on the checklist after a pinned source is marked stale"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "The core does not download legislation.gov.uk, the FCA, or JMLSG."
+
+    - action: "Confirm a regulation 64A exclusion before treating Part 7A as not applicable"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "The core does not confirm that both parties are cryptoasset businesses acting on their own behalf."
+
+    - action: "Request missing information from a counterparty"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "Regulation 64D(2)(a) is a firm duty. The agent does not contact anyone."
+
+    - action: "File a suspicious activity report or report repeated failure to the FCA"
+      approver: "MLRO or other authorised person"
+      mandatory: true
+      rationale: "Outside the agent, including after a proposal is accepted."
+
+  no_approval_required:
+    - action: "View the draft triage"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the same record"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the firm's lawful basis. A candidate for
+      the DPO to confirm, before any production use, is Article 6(1)(c),
+      legal obligation, because Part 7A of the Money Laundering Regulations
+      requires the firm to collect and check this information. Do not copy
+      the public-task basis from Experiment 01.
+    secondary: "Article 6(1)(f) may also be relevant for an internal draft. The firm confirms it."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. A date and place of birth on a transfer is not treated here as special-category data. The firm confirms."
+    safeguards:
+      - "One transfer at a time, as supplied by the analyst"
+      - "Nothing is written to a customer record"
+      - "Samples in this repository are synthetic"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "The core reads the fields on the record. It does not retrieve a customer file."
+    - "Wallet addresses in the samples are labelled synthetic and are not live addresses."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The firm's Travel Rule record-keeping applies to whatever the analyst then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the firm's privacy process.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Transfer notes and name fields are untrusted. They may tell the model
+    to release the transfer, file or suppress a report, or contact the
+    counterparty. The core does not read the network. The model is not
+    given a tool that can hold, return, release, file, or send.
+
+  controls:
+    - control: "Instructions separated from the record"
+      description: "Notes and names are data. A field that is itself an instruction is quarantined and does not count as information received."
+    - control: "Deterministic checklist"
+      description: "Missing fields, the £800 limb, and the empty decision are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set the analyst's decision is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled in this manifest."
+    - control: "Human decision"
+      description: "Hold, return, and escalate remain null until an analyst decides outside the agent."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The analyst
+    is the control. There is no autonomous action to take even if the brief is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named firm"
+  date_assessed: "2026-10-26"
+  risks:
+    - id: "R1"
+      risk: "A missing field is treated as a breach, or a complete record is treated as permission to release"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The decision stays null"
+        - "Release is not an option the core can set"
+        - "The analyst decides hold, return, or escalate"
+      residual_risk: "Medium"
+      owner: "Financial crime operations"
+
+    - id: "R2"
+      risk: "The August 2023 JMLSG euro threshold is applied after the statutory substitution to £800"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The operative threshold is £800 from the revised regulation 64C(4) and 64G(1)(b)"
+        - "The JMLSG euro figure is recorded and is not used"
+        - "A test locks that choice"
+      residual_risk: "Low"
+      owner: "Financial crime operations"
+
+    - id: "R3"
+      risk: "A stale jurisdiction flag is treated as a sunrise issue, or a sunrise receipt is treated as waiving regulation 64D"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A status older than the threshold is not relied on"
+        - "The FCA statement is not treated as a waiver"
+        - "Both points are tested"
+      residual_risk: "Medium"
+      owner: "Financial crime operations"
+
+    - id: "R4"
+      risk: "Prompt injection releases a transfer, files a report, or contacts a counterparty"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No such tool exists"
+        - "Injected name fields do not count as information received"
+        - "Tests cover release, SAR, and contact instructions"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R5"
+      risk: "Personal data on a live transfer is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic"
+        - "Samples use invented firms and labelled-fake wallet strings"
+        - "The starter does not persist the record"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R6"
+      risk: "A pinned page changes and the checklist is still treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Each source has last_verified"
+        - "Older than the threshold is stale and is not silently refreshed"
+      residual_risk: "Medium"
+      owner: "Financial crime operations"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the transfer id, and the analyst's later decision. This starter
+    logs nothing because it keeps no store.
+
+  logged_events:
+    - event: "Triage requested"
+      data_logged:
+        - "Timestamp"
+        - "Analyst identity"
+        - "Transfer id"
+        - "Whether the record was marked synthetic"
+      retention: "Firm's Travel Rule record-keeping. Not set by this starter."
+    - event: "Checklist result"
+      data_logged:
+        - "Exception category ids"
+        - "Whether any source was stale"
+        - "Whether a decision was left null"
+      retention: "Keep with the transfer file if the analyst relies on the draft."
+    - event: "Analyst recorded hold, return, or escalate"
+      data_logged:
+        - "Decision"
+        - "Analyst identity"
+        - "Timestamp"
+      retention: "Firm's schedule. The agent does not write this event."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the firm already operates. Do not log the transfer narrative in an application trace."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, Travel Rule messaging, or a case system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Financial crime operations lead"
+      contact: "travel-rule-triage@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-26"
+  next_review_date: "2027-04-26"
+  review_frequency: "6 months, and sooner if Part 7A, the FCA statement, or the JMLSG annex changes"
+  reviewer: "The adopting firm's MLRO and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to regulation 64C, 64D, 64E, or 64G, including the £800 sum"
+    - "A change to the FCA Travel Rule statement"
+    - "A JMLSG revision of Sector 22 Annex I"
+    - "A proposal to add a connector that can message a counterparty or file a report"
+    - "A security incident involving a draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Triage core"
+      path: "src/triage.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a firm must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The sterling figure is the firm's own equivalent at initiation, including linked transfers where the firm says so. This core does not convert."
+      section: "src/triage.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6(1)(c) is a candidate basis only. The firm confirms it before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on the firm's transfers"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No messaging, wallet, or case connector is added without updating this manifest"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on example.com are placeholders. Harbourline Markets Ltd is the invented firm from Experiment 04."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The JMLSG ministerial-approval news page did not show a date when opened on 26 October 2026. The fact of approval is the page's sentence. The date is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
