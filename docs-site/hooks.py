@@ -40,6 +40,9 @@ DIAGRAMS = {
     "experiments/08-uk-pii-redaction-gateway/docs/architecture_diagram.png": (
         "experiments/img/08-uk-pii-architecture.png"
     ),
+    "experiments/09-casework-correspondence-draft/docs/architecture_diagram.png": (
+        "experiments/img/09-casework-architecture.png"
+    ),
 }
 
 
