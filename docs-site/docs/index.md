@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Seven starters you can read today
+## Eight starters you can read today
 
 </div>
 
@@ -253,6 +253,31 @@ The codebook runs locally. Nothing is published, and a response cannot approve t
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 08 · O005 · Autonomy A1</p>
+
+### UK identifier PII gateway
+
+Propose redactions for UK identifiers before text goes to a model. A privacy reviewer approves the output. The gateway does not release it.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The detectors run locally. The proposal is not anonymised, and nothing is released.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/08-uk-pii-redaction-gateway.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/08-uk-pii-redaction-gateway)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -271,7 +296,7 @@ The codebook runs locally. Nothing is published, and a response cannot approve t
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, M003, and V010 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, M003, V010, and O005 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -336,7 +361,7 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 08 proposes redactions of UK identifiers for another experiment to call. A privacy reviewer approves the proposal before any release. The gateway does not release the text and does not describe it as anonymised. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

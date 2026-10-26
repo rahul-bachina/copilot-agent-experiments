@@ -37,6 +37,9 @@ DIAGRAMS = {
     "experiments/07-consultation-themes/docs/architecture_diagram.png": (
         "experiments/img/07-consultation-architecture.png"
     ),
+    "experiments/08-uk-pii-redaction-gateway/docs/architecture_diagram.png": (
+        "experiments/img/08-uk-pii-architecture.png"
+    ),
 }
 
 

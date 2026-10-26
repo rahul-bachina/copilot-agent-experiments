@@ -37,6 +37,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
 | 06 | [Policy questions for NHS corporate services](experiments/06-nhs-policy-qa/) | Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources. Autonomy A0. | ✅ Starter |
 | 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
+| 08 | [Sensitive Data Redaction Agent — UK identifier PII gateway](experiments/08-uk-pii-redaction-gateway/) | Propose redactions for UK identifiers before text goes to a model. Checksums run where a published rule exists. A privacy reviewer approves the output. The agent does not release it and does not describe it as anonymised. | ✅ Starter |
 
 ## Getting Started
 
@@ -95,6 +96,12 @@ cd ../07-consultation-themes
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
+
+# Experiment 08 needs no credentials either. The detectors are deterministic.
+cd ../08-uk-pii-redaction-gateway
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/gateway.py --input examples/sample_input.txt --caller exp-08-readme
 ```
 
 ## Repository Structure
@@ -124,7 +131,8 @@ copilot-agent-experiments/
     │   └── examples/              # Sample inputs/outputs
     ├── 05-awaabs-law-hazard-triage/
     ├── 06-nhs-policy-qa/
-    └── 07-consultation-themes/
+    ├── 07-consultation-themes/
+    └── 08-uk-pii-redaction-gateway/
 ```
 
 ## Agent Governance

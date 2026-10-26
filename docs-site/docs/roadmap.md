@@ -54,6 +54,16 @@ A codebook for one consultation question. The analyst approves the framework and
 
 </article>
 
+<article class="plan-card" id="o005" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · O005 · Autonomy A1</p>
+
+## UK identifier PII gateway
+
+A deterministic proposal for UK identifiers, with a DPO audit record that omits the raw values. A privacy reviewer approves the redacted output. The agent does not release it and does not describe it as anonymised. [Read the briefing](experiments/08-uk-pii-redaction-gateway.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
