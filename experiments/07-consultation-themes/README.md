@@ -40,7 +40,7 @@ ThemeFinder is the open-source package associated with that work. It is an incub
 - Replacing i.AI Consult, or claiming Consult's reported agreement rate.
 - Vendoring ThemeFinder.
 - Calling ThemeFinder's consultation-setup path, which the upstream README describes as uploading to an i.AI S3 bucket.
-- Using ThemeFinder's clustering rule that expects a non-negligible number of responses. That rule can hide a small theme. This core does not call it.
+- Calling ThemeFinder's `theme_clustering` or `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack`. Read from `main` on 26 October 2026: clustering returns only themes above `significance_percentage` (10 by default) unless `return_all_themes` is true. The rule reports themes with few responses. It does not remove them. This core calls neither.
 - Deciding that a person is vulnerable, or building a profile of a respondent.
 - Legal advice, a DPIA, or an Algorithmic Transparency Recording Standard submission. Experiment 03 drafts those records. This folder does not.
 
@@ -87,7 +87,7 @@ On the synthetic set, with no approval record:
 - The special-category flag is a word list. It is not a diagnosis and it is not a reason to create a theme.
 - Wilson intervals treat unique voices as independent Bernoulli trials. Campaign clustering is only as good as the rules above. Coding error is outside the interval. The output says this.
 - The review sample is not the whole set once the set is large. Rows outside the sample are not individually approved. The draft says so. A body that needs every row checked has to widen the sample. The module will not pretend the sample was a census.
-- ThemeFinder was not executed in this repository. The adapter's expected inputs are taken from the upstream API as read on 24 October 2026. If a later release changes the mapping columns, the adapter falls back to the codebook and records the reason.
+- ThemeFinder was not executed in this repository. The adapter's expected inputs are taken from the upstream API as read on 24 October 2026. The clustering return and rule 2 were re-read from `main` on 26 October 2026: `theme_clustering` returns only themes above `significance_percentage` (10 by default) unless `return_all_themes` is true, and rule 2 reports sparse themes rather than removing them. If a later release changes the mapping columns, the adapter falls back to the codebook and records the reason.
 - `__version__` on ThemeFinder's `main` branch was `0.8.0` that day. The PyPI page listed 0.8.2. Neither version is installed here.
 - This is not legal advice and it is not a statement that a consultation was fairly reported.
 

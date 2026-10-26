@@ -104,7 +104,8 @@ def main() -> None:
         3.0,
         "Deterministic core — same code for both harnesses",
         "Python codebook. Optional ThemeFinder adapter, MIT, not vendored.\n"
-        "Falls back if the package is missing. Does not call the rule that drops small themes.\n"
+        "Falls back if the package is missing. Does not call theme_clustering\n"
+        "(default return: themes above 10%) or the rule that reports sparse themes.\n"
         "Campaign copies count once in the proportion and stay in the audit.\n"
         "A response cannot approve the framework or publish the draft.",
         "#f4f4f4",

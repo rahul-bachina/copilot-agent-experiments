@@ -32,12 +32,12 @@ The same inputs produce the same JSON. Tests and CI do not install ThemeFinder a
 
 ## ThemeFinder boundary
 
-Verified from the public repository on 24 October 2026, not by executing the package:
+Verified from the public repository on 24 October 2026, not by executing the package. The clustering return and rule 2 were re-read from `main` on 26 October 2026:
 
 - [i-dot-ai/themefinder](https://github.com/i-dot-ai/themefinder), licence file [`LICENCE`](https://github.com/i-dot-ai/themefinder/blob/main/LICENCE), MIT, copyright (c) 2024 i.AI.
 - The README calls it an incubation project and says it is not recommended for critical use cases yet.
 - `find_themes` and `theme_mapping` are the two functions the adapter knows how to call. `theme_mapping` is the one used once a framework exists, because it maps onto themes the analyst already holds.
-- `theme_clustering` and `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack` are not called. They can set a small theme aside.
+- `theme_clustering` and `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack` are not called. `theme_clustering` returns only themes above `significance_percentage` (10 by default) unless `return_all_themes=True`. `rule_2_themes_must_have_a_non_negligible_number_of_responses` returns themes under 0.1% of the mapping or with fewer than 5 responses, and the exported wrapper reports that list. Neither removes a theme from the caller's data.
 - The README's consultation-setup path uploads to an i.AI S3 bucket. This core does not call it.
 
 Vendoring was rejected because of that size and that upload path, not because the MIT licence forbids a copy. A copy would have needed the copyright notice. There is no copy.

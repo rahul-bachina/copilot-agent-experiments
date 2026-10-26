@@ -36,7 +36,7 @@ The GitHub Copilot harness is a Copilot Studio authoring and orchestration frame
 
 Counts use unique voices after clustering. Campaign copies remain in the audit and on the theme's response ID list. The Wilson interval is the sampling uncertainty of that proportion. It is not a model confidence, and it does not include coding error. A framework theme with a little support is listed under minority views. A framework theme with no support is listed with an empty response ID list, so a missing code is visible.
 
-The optional adapter can call ThemeFinder's `theme_mapping` onto the approved framework, or `find_themes` for an unapproved proposal. It does not call the upstream rule that sets aside themes with few responses, and it does not call the upstream setup task that uploads to an i.AI bucket. If the package is missing or the call fails, the codebook is the result and the output says so.
+The optional adapter can call ThemeFinder's `theme_mapping` onto the approved framework, or `find_themes` for an unapproved proposal. It does not call `theme_clustering`. On `main`, read on 26 October 2026, that function returns only themes above `significance_percentage` (10 by default) unless `return_all_themes` is true. It does not call `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack`, which reports themes with few responses and does not remove them. It does not call the upstream setup task that uploads to an i.AI bucket. If the package is missing or the call fails, the codebook is the result and the output says so.
 
 ## What it does not do
 
@@ -148,7 +148,7 @@ Use the synthetic fixtures if you rebuild either harness. Do not paste a real co
 - Identifier redaction does not cover names or addresses written in words.
 - The Wilson interval treats unique voices as independent trials. Coding error sits outside it.
 - On a large export the sample is not every row. This synthetic run samples 20 of 24 because the inclusion rules are wide on a small set. A body that needs every row checked has to widen the sample. The module will not pretend a sample was a census.
-- ThemeFinder was not executed here. The adapter's expected inputs were read from the public API on 24 October 2026. `__version__` on GitHub `main` was 0.8.0 that day. The PyPI page listed 0.8.2. Neither is installed. If a later release changes the mapping columns, the adapter falls back to the codebook.
+- ThemeFinder was not executed here. The adapter's expected inputs were read from the public API on 24 October 2026. `__version__` on GitHub `main` was 0.8.0 that day. The PyPI page listed 0.8.2. Neither is installed. The clustering return and rule 2 were re-read from `main` on 26 October 2026: `theme_clustering` returns only themes above `significance_percentage` (10 by default) unless `return_all_themes` is true, and rule 2 reports sparse themes rather than removing them. If a later release changes the mapping columns, the adapter falls back to the codebook.
 - The GitHub Copilot harness price was not measured. Learn says that harness uses Copilot Credits. No pound figure is stated.
 - This is not legal advice and it is not a statement that a consultation was fairly reported.
 
