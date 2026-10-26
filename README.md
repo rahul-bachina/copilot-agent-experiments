@@ -37,6 +37,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
 | 06 | [Policy questions for NHS corporate services](experiments/06-nhs-policy-qa/) | Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources. Autonomy A0. | ✅ Starter |
 | 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
+| 10 | [Travel Rule exception triage](experiments/10-travel-rule-exception-triage/) | Draft a reading of one synthetic cryptoasset transfer: missing or mismatched originator and beneficiary information, including a sunrise jurisdiction. The analyst decides hold, return, or escalate. Autonomy A1. The agent does not hold, return, release, file, or contact a counterparty. | ✅ Starter |
 
 ## Getting Started
 
@@ -95,6 +96,12 @@ cd ../07-consultation-themes
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
+
+# Experiment 10 needs no credentials either. The Travel Rule checklist is deterministic.
+cd ../10-travel-rule-exception-triage
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/triage.py --input examples/sample_transfer.json --as-of 2026-10-26
 ```
 
 ## Repository Structure
@@ -124,7 +131,8 @@ copilot-agent-experiments/
     │   └── examples/              # Sample inputs/outputs
     ├── 05-awaabs-law-hazard-triage/
     ├── 06-nhs-policy-qa/
-    └── 07-consultation-themes/
+    ├── 07-consultation-themes/
+    └── 10-travel-rule-exception-triage/
 ```
 
 ## Agent Governance
