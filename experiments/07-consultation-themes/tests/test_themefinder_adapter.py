@@ -46,7 +46,7 @@ class FakeThemeFinder:
         }
 
     def theme_clustering(self, *args, **kwargs):
-        raise AssertionError("theme_clustering drops small themes and must not be called")
+        raise AssertionError("theme_clustering must not be called")
 
     def rule_2_themes_must_have_a_non_negligible_number_of_responses_slack(self, *args, **kwargs):
         raise AssertionError("rule_2 must not be called")

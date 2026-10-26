@@ -24,7 +24,7 @@ One tool: theme analysis, in propose mode only.
 - The deterministic core does not invent themes from keywords it was not given. A proposal comes from ThemeFinder's `find_themes` only when the analyst has supplied a client. Otherwise say that no proposal was generated and ask the analyst for the codebook.
 - Schema for the later coding step: `schema/analysis_tool.schema.json`. Extra fields are rejected. There is no publish field.
 - Send redacted text only. The system prompt is the fixed string in `src/themefinder_adapter.py`. Do not copy a response into that prompt.
-- Do not call `theme_clustering`. Do not call `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack`. Both can set aside a small theme.
+- Do not call `theme_clustering`. Its default return is themes above `significance_percentage` (10) unless `return_all_themes=True`. Do not call `rule_2_themes_must_have_a_non_negligible_number_of_responses_slack`. That wrapper reports themes with few responses. It does not remove them.
 - Do not run ThemeFinder's consultation-setup task. The upstream README describes an upload to an i.AI S3 bucket. This skill has no upload tool.
 - Responses flagged for prompt injection are excluded from the proposal call and listed by response ID. They are not deleted.
 
