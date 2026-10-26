@@ -284,6 +284,59 @@ class TestExperiment07Manifest:
         assert experiment_07_manifest["autonomy"]["human_in_the_loop"] is True
 
 
+class TestExperiment09Manifest:
+    """Test the Experiment 09 correspondence-draft manifest."""
+
+    @pytest.fixture
+    def experiment_09_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "09-casework-correspondence-draft"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_09_manifest):
+        """Experiment 09 manifest should be valid."""
+        validate(instance=experiment_09_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_09_manifest):
+        """Experiment 09 should be autonomy level A1, not above."""
+        level = experiment_09_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+
+    def test_all_high_risk_actions_disabled(self, experiment_09_manifest):
+        """Experiment 09 should have all high-risk actions disabled."""
+        high_risk = experiment_09_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_09_manifest):
+        """Nothing is sent or written to a correspondence case system."""
+        assert experiment_09_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_09_manifest["tools"]["sends"]["enabled"] is False
+        assert experiment_09_manifest["autonomy"]["human_in_the_loop"] is True
+
+    def test_author_approves_recipient_and_final_text(self, experiment_09_manifest):
+        """The author approves the recipient and the final text, and both are mandatory."""
+        points = experiment_09_manifest["human_approval"]["approval_points"]
+        for action in ("Approve the recipient", "Approve the final text"):
+            point = next(item for item in points if item["action"] == action)
+            assert point["approver"] == "Correspondence author"
+            assert point["mandatory"] is True
+
+
 class TestExperiment10Manifest:
     """Test the Experiment 10 Travel Rule exception-triage manifest."""
 

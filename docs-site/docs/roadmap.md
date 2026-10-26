@@ -64,6 +64,16 @@ A codebook for one consultation question. The analyst approves the framework and
 
 </article>
 
+<article class="plan-card" id="o008" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · O008 · Autonomy A1</p>
+
+## Correspondence draft
+
+A draft reply for ministerial, MP, or resident casework. The author approves the recipient and the final text. Lines are cited, or the draft says there is a gap. [Read the briefing](experiments/09-casework-correspondence-draft.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

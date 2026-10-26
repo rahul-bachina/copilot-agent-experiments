@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Eight starters you can read today
+## Nine starters you can read today
 
 </div>
 
@@ -255,6 +255,31 @@ The codebook runs locally. Nothing is published, and a response cannot approve t
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 09 · O008 · Public bodies · Autonomy A1</p>
+
+### Correspondence draft
+
+Draft one reply for ministerial, MP, or resident casework. The author approves the recipient and the final text. A policy sentence is a supplied line, or the draft says there is a gap.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The clock runs locally. Nothing is sent, and the letter cannot choose its own recipient.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/09-casework-correspondence-draft.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/09-casework-correspondence-draft)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 10 · UK05 · FCA firms · Autonomy A1</p>
 
 ### Travel Rule exception triage
@@ -296,7 +321,7 @@ The checklist runs locally. Nothing is held, returned, released, filed, or sent 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, M003, and V010 now have briefings. UK05 now has a briefing too. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, M003, V010, and O008 now have briefings. UK05 now has a briefing too. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -356,12 +381,12 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 
 ## Before you rely on a page
 
-- These pages describe the repository as it stood on 24 October 2026. Experiment 10 was added on 26 October 2026, and its pinned sources were opened that day. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
+- These pages describe the repository as it stood on 24 October 2026, except the Experiment 09 briefing, which was checked on 26 October 2026. Experiment 10 was added on 26 October 2026, and its pinned sources were opened that day. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
 - There are no client names or testimonials. Experiment 06 records a design for measuring time with a stopwatch. The figures in its smoke report are synthetic fixture arithmetic, not a study of staff.
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 09 drafts one correspondence reply for a department, an agency, or a council. It does not send, and it does not invent a line to take. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 
