@@ -37,6 +37,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
 | 06 | [Policy questions for NHS corporate services](experiments/06-nhs-policy-qa/) | Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources. Autonomy A0. | ✅ Starter |
 | 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
+| 09 | [Correspondence Draft Agent](experiments/09-casework-correspondence-draft/) | Draft one ministerial, MP, or resident reply. The author approves the recipient and the final text. Dates and line citations come from code. The agent does not send or invent a policy position. | ✅ Starter |
 
 ## Getting Started
 
@@ -95,6 +96,12 @@ cd ../07-consultation-themes
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
+
+# Experiment 09 needs no credentials either. The casework clock is deterministic.
+cd ../09-casework-correspondence-draft
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/draft.py --received 2026-01-02 --as-of 2026-10-26 --input examples/sample_letter.txt --confirm-target --confirm-channel
 ```
 
 ## Repository Structure
@@ -124,7 +131,8 @@ copilot-agent-experiments/
     │   └── examples/              # Sample inputs/outputs
     ├── 05-awaabs-law-hazard-triage/
     ├── 06-nhs-policy-qa/
-    └── 07-consultation-themes/
+    ├── 07-consultation-themes/
+    └── 09-casework-correspondence-draft/
 ```
 
 ## Agent Governance
