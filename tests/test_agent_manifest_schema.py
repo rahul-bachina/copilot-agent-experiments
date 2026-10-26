@@ -337,6 +337,59 @@ class TestExperiment09Manifest:
             assert point["mandatory"] is True
 
 
+class TestExperiment10Manifest:
+    """Test the Experiment 10 Travel Rule exception-triage manifest."""
+
+    @pytest.fixture
+    def experiment_10_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "10-travel-rule-exception-triage"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_10_manifest):
+        """Experiment 10 manifest should be valid."""
+        validate(instance=experiment_10_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_10_manifest):
+        """Experiment 10 should be autonomy level A1, not above."""
+        level = experiment_10_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1"}
+        assert experiment_10_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_10_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_10_manifest):
+        """Experiment 10 should have all high-risk actions disabled."""
+        high_risk = experiment_10_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_10_manifest):
+        """Nothing is sent, filed, or written to a transfer system."""
+        assert experiment_10_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_10_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_analyst_decides_hold_return_or_escalate(self, experiment_10_manifest):
+        """The human checkpoint is the analyst, and it is mandatory."""
+        points = experiment_10_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Decide hold"))
+        assert decision["approver"] == "Analyst"
+        assert decision["mandatory"] is True
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

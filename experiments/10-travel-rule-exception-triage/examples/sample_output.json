@@ -1,0 +1,226 @@
+{
+  "label": "DRAFT FOR ANALYST REVIEW",
+  "catalogue_id": "UK05",
+  "experiment": "10-travel-rule-exception-triage",
+  "related_experiment": "experiments/04-fca-cryptoasset-readiness",
+  "transfer_id": "SYN-TR-1042",
+  "synthetic": true,
+  "model_called": false,
+  "network_called": false,
+  "actions_taken": [],
+  "analyst_decision": null,
+  "decisions_not_taken": [
+    "hold",
+    "return",
+    "reject",
+    "release",
+    "file_sar",
+    "contact_counterparty",
+    "report_to_fca",
+    "make_cryptoasset_available"
+  ],
+  "flags": {
+    "transfer_held_by_agent": false,
+    "transfer_returned_by_agent": false,
+    "transfer_rejected_by_agent": false,
+    "transfer_released_by_agent": false,
+    "sar_filed": false,
+    "counterparty_contacted": false,
+    "fca_report_made": false,
+    "cryptoasset_made_available_by_agent": false,
+    "fca_statement_treated_as_waiver": false,
+    "exclusion_confirmed_by_agent": false,
+    "jmlsg_euro_threshold_used": false
+  },
+  "human_review": {
+    "approver": "Analyst",
+    "decision_required": [
+      "hold",
+      "return",
+      "escalate"
+    ],
+    "agent_recorded_decision": null
+  },
+  "firm_name": "Harbourline Markets Ltd",
+  "firm_role": "beneficiary",
+  "as_of": "2026-10-26",
+  "catalogue_last_verified": "2026-10-26",
+  "threshold_gbp": 800,
+  "jmlsg_euro_threshold_used": false,
+  "threshold": {
+    "operative": true,
+    "value_gbp": "1200",
+    "at_or_over_800": true,
+    "paragraph_6_must_accompany": true,
+    "linked_transfers_assessed": true
+  },
+  "sunrise": {
+    "recorded_status": "not_in_force",
+    "status_recorded_on": "2026-10-01",
+    "relied_on": true,
+    "is_sunrise_on_relied_status": true,
+    "word_used_by_fca_page": "a jurisdiction without the Travel Rule",
+    "word_used_by_jmlsg_paragraph_10": "sunrise issue"
+  },
+  "exception_categories": [
+    "non_corresponding_information",
+    "sunrise_jurisdiction",
+    "missing_information"
+  ],
+  "missing": [
+    {
+      "field": "beneficiary.account_number",
+      "provision": "regulation 64C(5)(c)"
+    }
+  ],
+  "mismatches": [
+    {
+      "field": "beneficiary.name",
+      "provision": "regulation 64D(1)(b)",
+      "on_transfer": "Sam R",
+      "part3": "Sam Rivera"
+    }
+  ],
+  "options": [
+    {
+      "id": "hold",
+      "proposed": true,
+      "reason": "Regulation 64D(2)(c)(i) says the firm must consider whether to delay making the cryptoasset available until the information is received or any discrepancy is resolved. The agent does not delay it.",
+      "provisions": [
+        "regulation 64D(2)(c)(i)"
+      ],
+      "agent_will_not_take": true
+    },
+    {
+      "id": "return",
+      "proposed": true,
+      "reason": "Regulation 64D(2)(c)(ii) says the firm must consider whether, if the information is not received or the discrepancy is not resolved within a reasonable time, to return the cryptoasset. No number of days was found for a reasonable time. JMLSG Annex I paragraphs 32 and 33 discuss the operational risk of a return and say a return is not itself a Travel Rule transfer. Paragraph 33 is not applied as a statutory exclusion. The agent does not return the transfer.",
+      "provisions": [
+        "regulation 64D(2)(c)(ii)"
+      ],
+      "agent_will_not_take": true
+    },
+    {
+      "id": "escalate",
+      "proposed": false,
+      "reason": "No marker on this record proposes escalation. The analyst may still escalate. The agent does not.",
+      "provisions": [],
+      "agent_will_not_take": true
+    }
+  ],
+  "firm_steps_for_a_person": [
+    {
+      "id": "request_missing_information_from_counterparty",
+      "agent_will_not_take": true,
+      "detail": "regulation 64D(2)(a) requires the firm to request the missing information. The core does not contact the counterparty."
+    }
+  ],
+  "explanation": [
+    "The beneficiary name on the transfer does not match the Part 3 name, ignoring case and spacing. JMLSG Annex I paragraph 24 says a truncated name can have an explanation. The core does not clear the mismatch.",
+    "The firm's register says this jurisdiction does not have the Travel Rule. JMLSG Annex I paragraph 10 calls this the sunrise issue and points to FCA communications. On a receipt with missing or incomplete information, the FCA statement says the firm takes the status into account in a risk-based assessment of whether to make the cryptoassets available. The statement is not treated as a waiver of regulation 64D.",
+    "The sunrise factor does not remove the regulation 64D request, delay, and return considerations. fca_statement_treated_as_waiver is false."
+  ],
+  "rules_current": true,
+  "any_source_stale": false,
+  "sources_and_currency": [
+    {
+      "id": "mlr-part-7a",
+      "title": "Money Laundering Regulations 2017, Part 7A (Cryptoasset transfers)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/part/7A",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "si-2022-860",
+      "title": "Money Laundering and Terrorist Financing (Amendment) (No. 2) Regulations 2022",
+      "url": "https://www.legislation.gov.uk/uksi/2022/860/regulation/1",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "si-2026-621-reg-32",
+      "title": "Money Laundering and Terrorist Financing (Amendment) Regulations 2026, regulation 32",
+      "url": "https://www.legislation.gov.uk/uksi/2026/621/regulation/32",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "fca-travel-rule",
+      "title": "FCA sets out expectations for UK cryptoasset businesses complying with the Travel Rule",
+      "url": "https://www.fca.org.uk/news/statements/fca-sets-out-expectations-uk-cryptoasset-businesses-complying-travel-rule",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "jmlsg-annex-i-2023",
+      "title": "JMLSG Part II, Sector 22 Annex I, Cryptoasset transfers (Travel Rule), August 2023",
+      "url": "https://www.jmlsg.org.uk/wp-content/uploads/2023/08/Board-approved_JMLSG-Guidance_Part-II-Sector-22-Annex-I_Aug2023.pdf",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "jmlsg-revisions",
+      "title": "JMLSG revisions list",
+      "url": "https://www.jmlsg.org.uk/revisions/",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    },
+    {
+      "id": "jmlsg-hmt-approval",
+      "title": "JMLSG: ministerial approval of Sector 22 guidance",
+      "url": "https://www.jmlsg.org.uk/latest-news/ministerial-approval-of-jmlsg-guidance-6/",
+      "last_verified": "2026-10-26",
+      "stale": false,
+      "body_opened": true
+    }
+  ],
+  "unverified": [
+    {
+      "id": "reasonable-time",
+      "statement": "No number of days was found for 'a reasonable time' in regulation 64D(2)(c)(ii), regulation 64E(2)(b)(ii), or the JMLSG paragraphs opened."
+    },
+    {
+      "id": "jmlsg-approval-date",
+      "statement": "The JMLSG ministerial-approval page states that approval was received. It did not show a date when opened on 26 October 2026."
+    },
+    {
+      "id": "jmlsg-annex-not-revised-for-800",
+      "statement": "The revisions page did not list an Annex I later than August 2023. That does not prove no other version exists. Paragraphs 13 and 45 of the PDF that was opened still say 1,000 euros."
+    },
+    {
+      "id": "fca-statement-not-a-waiver",
+      "statement": "The FCA statement does not say that a sunrise receipt waives regulation 64D. This starter does not treat it as a waiver. Whether a court or the FCA would read it that way was not decided."
+    },
+    {
+      "id": "regulation-14a-not-opened",
+      "statement": "Regulation 14A, which defines a cryptoasset exchange provider and a custodian wallet provider, was not opened. The checklist uses the Part 7A cross-reference and does not restate the definition."
+    },
+    {
+      "id": "sanctions-and-poca-not-opened",
+      "statement": "The sanctions regime and the Proceeds of Crime Act 2002 were not opened. A firm marker is passed through as a reason to escalate. It is not a legal analysis, and it is not a suspicious activity report."
+    },
+    {
+      "id": "three-working-days-not-calculated",
+      "statement": "Regulation 64B defines a working day using bank holidays in any part of the United Kingdom. That calendar is not encoded, so no due date is returned for regulation 64C(2)."
+    },
+    {
+      "id": "harness-licensing-beyond-overview",
+      "statement": "The Copilot Studio harness overview was opened on 26 October 2026. The separate billing and standard-harness licensing articles were not re-opened that day. Licence coverage beyond the overview is unverified."
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": [],
+    "quarantined_fields": [],
+    "prohibited_payload_keys_ignored": []
+  },
+  "same_business_exclusion_applied": false,
+  "batch_file_read": false
+}
