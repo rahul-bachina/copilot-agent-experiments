@@ -43,6 +43,9 @@ DIAGRAMS = {
     "experiments/09-casework-correspondence-draft/docs/architecture_diagram.png": (
         "experiments/img/09-casework-architecture.png"
     ),
+    "experiments/10-travel-rule-exception-triage/docs/architecture_diagram.png": (
+        "experiments/img/10-travel-rule-architecture.png"
+    ),
 }
 
 

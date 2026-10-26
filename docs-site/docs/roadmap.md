@@ -24,6 +24,16 @@ A deterministic draft register against pinned FCA pages. The Compliance Officer 
 
 </article>
 
+<article class="plan-card" id="uk05" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK05 · Autonomy A1</p>
+
+## Travel Rule exception triage
+
+A draft reading of one synthetic cryptoasset transfer. The analyst decides hold, return, or escalate. It follows [Experiment 04](experiments/04-fca-cryptoasset-readiness.md). [Read the briefing](experiments/10-travel-rule-exception-triage.md).
+
+</article>
+
 <article class="plan-card" id="uk01" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · UK01 · Autonomy A1</p>

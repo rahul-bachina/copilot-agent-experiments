@@ -39,6 +39,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
 | 08 | [Sensitive Data Redaction Agent — UK identifier PII gateway](experiments/08-uk-pii-redaction-gateway/) | Propose redactions for UK identifiers before text goes to a model. Checksums run where a published rule exists. A privacy reviewer approves the output. The agent does not release it and does not describe it as anonymised. | ✅ Starter |
 | 09 | [Correspondence Draft Agent](experiments/09-casework-correspondence-draft/) | Draft one ministerial, MP, or resident reply. The author approves the recipient and the final text. Dates and line citations come from code. The agent does not send or invent a policy position. | ✅ Starter |
+| 10 | [Travel Rule exception triage](experiments/10-travel-rule-exception-triage/) | Draft a reading of one synthetic cryptoasset transfer: missing or mismatched originator and beneficiary information, including a sunrise jurisdiction. The analyst decides hold, return, or escalate. Autonomy A1. The agent does not hold, return, release, file, or contact a counterparty. | ✅ Starter |
 
 ## Getting Started
 
@@ -109,6 +110,12 @@ cd ../09-casework-correspondence-draft
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/draft.py --received 2026-01-02 --as-of 2026-10-26 --input examples/sample_letter.txt --confirm-target --confirm-channel
+
+# Experiment 10 needs no credentials either. The Travel Rule checklist is deterministic.
+cd ../10-travel-rule-exception-triage
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/triage.py --input examples/sample_transfer.json --as-of 2026-10-26
 ```
 
 ## Repository Structure
@@ -140,7 +147,8 @@ copilot-agent-experiments/
     ├── 06-nhs-policy-qa/
     ├── 07-consultation-themes/
     ├── 08-uk-pii-redaction-gateway/
-    └── 09-casework-correspondence-draft/
+    ├── 09-casework-correspondence-draft/
+    └── 10-travel-rule-exception-triage/
 ```
 
 ## Agent Governance
