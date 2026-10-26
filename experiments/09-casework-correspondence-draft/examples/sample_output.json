@@ -1,0 +1,160 @@
+{
+  "case_id": "CWD-20260102-585AD4",
+  "processing_mode": "mock",
+  "evaluation_label": "MOCK SMOKE TEST. Rule-based stand-in tuned to the synthetic fixtures. Not a measure of model accuracy. No model was called.",
+  "organisation": "Department for Civic Spaces (fictional)",
+  "library_id": "civic-spaces-synthetic-v1",
+  "received_on": "2026-01-02",
+  "as_of": "2026-10-26",
+  "regime": "central_government",
+  "classification": {
+    "channel": "mp",
+    "indicators": [
+      "mp"
+    ],
+    "campaign_flag": false,
+    "complaints_process_flag": false,
+    "media_flag": false,
+    "welsh_language_review": false,
+    "specialist_route": null,
+    "ministerial_reply_proposed": true,
+    "channel_confirmed": true,
+    "ministerial_reply_confirmed": false,
+    "author_must_confirm_channel": true
+  },
+  "asks": [
+    "park_hours"
+  ],
+  "lines_cited": [
+    {
+      "id": "LTT-PARKS-01",
+      "topic": "park_hours",
+      "reason": "current",
+      "status": "current",
+      "effective_on": "2026-01-01",
+      "review_due_on": "2027-06-01",
+      "text": "Parks looked after by the fictional Department for Civic Spaces stay open from 07:00 until dusk. This line states no plan to close them at 16:00."
+    }
+  ],
+  "lines_refused": [
+    {
+      "id": "LTT-PARKS-00",
+      "topic": "park_hours",
+      "reason": "withdrawn",
+      "status": "withdrawn",
+      "effective_on": "2024-01-01",
+      "review_due_on": "2025-01-01",
+      "text": "Withdrawn line. Parks close at 16:00. Do not use this line."
+    }
+  ],
+  "gaps": [],
+  "lines_withheld_because_specialist_route": [],
+  "incoming_reference": "CS-1001",
+  "sla": {
+    "regime": "central_government",
+    "target_working_days": 20,
+    "target_confirmed": true,
+    "channel_confirmed": true,
+    "operative": true,
+    "operative_due_on": "2026-01-30",
+    "reference_due_on": "2026-01-30",
+    "ceiling_working_days": 20,
+    "ceiling_applies": true,
+    "reason": null,
+    "counting_rule": "The first working day is the first England and Wales working day on or after the calendar day after receipt. Cabinet Office Guide to Handling Correspondence, September 2024, paragraph 9. PDF retrieved 26 October 2026. The Guide does not define working day. This count uses the England and Wales bank-holiday calendar in working_days.py.",
+    "holding_reply_clears_deadline": false,
+    "holding_reply_note": "Guide paragraph 20, retrieved 26 October 2026. A holding reply does not clear the case. This clock does not move the date, and the agent does not send a holding reply.",
+    "transfer_clocks_calculated": false,
+    "transfer_note": "Guide paragraph 21 times a transfer request (within one working day) and the receiving department's response (three working days for ministerial correspondence, five for public correspondence) from the transfer. This agent does not send a transfer, so those dates are not calculated. Paragraph 24's three-working-day contribution is also not calculated.",
+    "calendar": "England and Wales bank holidays, plus any extra closed dates the author passed. Scotland and Northern Ireland are not encoded.",
+    "guide": {
+      "title": "Guide to Handling Correspondence",
+      "edition": "September 2024",
+      "url": "https://assets.publishing.service.gov.uk/media/66d99762608fb761b681111d/Guide_to_Handling_Correspondence_-_September_2024__1_.pdf",
+      "retrieved_on": "2026-10-26",
+      "paragraphs": [
+        9,
+        20,
+        21,
+        40
+      ]
+    },
+    "correspondence_hub": {
+      "url": "https://www.gov.uk/guidance/government-correspondence-hub",
+      "retrieved_on": "2026-10-26",
+      "note": "The hub says departments will aim to respond within 20 working days, and that correspondence is separate from FOI, SAR, and complaints processes. Page last updated 25 September 2026 on the copy retrieved 26 October 2026."
+    }
+  },
+  "vulnerability": {
+    "flags": [],
+    "person_labelled_vulnerable": false,
+    "requires_immediate_human_review": false,
+    "do_not_auto_close": true,
+    "case_auto_closed": false,
+    "note": "A flag quotes words from the letter. It does not label the person, and it is not written to a case record. Immediate-risk wording needs a person before anyone else relies on the draft."
+  },
+  "recipient": {
+    "proposed_role": "The correspondent's parliamentary office. The September 2024 Guide, paragraph 15, says a reply to an MP or Peer is sent to their office. The author types the address.",
+    "approved": false,
+    "approved_recipient": null,
+    "approved_by": null,
+    "approval_source": "not_approved",
+    "may_be_chosen_by_agent": false,
+    "letter_text_cannot_approve": true
+  },
+  "draft": {
+    "text": "DRAFT \u2014 NOT SENT. The author approves the recipient and the final text.\n\nProposed route: The correspondent's parliamentary office. The September 2024 Guide, paragraph 15, says a reply to an MP or Peer is sent to their office. The author types the address.\n\nRecipient approved: no.\n\nIncoming reference quoted: CS-1001.\n\nThank you for the letter from a fictional parliamentary office. A ministerial signature is proposed, not confirmed.\n\nParks looked after by the fictional Department for Civic Spaces stay open from 07:00 until dusk. This line states no plan to close them at 16:00.\n\n[Cited line: LTT-PARKS-01. Status: current. Review due: 2027-06-01.]\n\nNothing has been sent. No case record has been written. No ATRS record has been published.",
+    "may_be_sent_by_agent": false,
+    "policy_sentences_are_cited_lines_only": true,
+    "uncited_policy_claims": []
+  },
+  "atrs_draft": {
+    "status": "draft_for_the_organisations_single_point_of_contact",
+    "not_submitted": true,
+    "mandatory_scope_decided": false,
+    "tool_name": "Correspondence Draft Agent, fictional Department for Civic Spaces",
+    "purpose": "Draft a reply that cites supplied lines to take, or flags a gap. A person approves the recipient and the final text.",
+    "phase": "not_deployed",
+    "human_oversight": "The author approves the recipient and the final text. The agent does not send, does not write a case, and does not publish this record.",
+    "precedents_opened": [
+      {
+        "name": "DfE Correspondence Drafter",
+        "url": "https://www.gov.uk/algorithmic-transparency-records/dfe-correspondence-drafter",
+        "retrieved_on": "2026-10-26",
+        "what_the_record_says": "The record describes an internal drafter that searches standard lines and briefing packs. Staff review, edit, and copy the text into an email, and check the address. The phase on the record is Beta/Pilot. This starter is not that tool."
+      },
+      {
+        "name": "FCDO Correspondence Triage",
+        "url": "https://www.gov.uk/algorithmic-transparency-records/fcdo-correspondence-triage",
+        "retrieved_on": "2026-10-26",
+        "what_the_record_says": "The record describes a triage tool for ministerial correspondence, treat official, and member-of-the-public non-policy enquiries. It says the tool does not write responses, which staff prepare, sign off, and release. This starter is not that tool. It drafts, and it still does not send or write a case."
+      }
+    ],
+    "dwp_correspondence_drafter": "not_cited",
+    "note": "A DWP correspondence-drafting ATRS record was not opened for this experiment, so none is cited. Whether a deployment is inside the ATRS mandatory scope is for the organisation's single point of contact. This draft does not decide it."
+  },
+  "security": {
+    "prompt_injection_detected": false,
+    "prompt_injection_signals": [],
+    "stale_data_signals": [],
+    "actions_taken": [],
+    "letter_named_an_address": false
+  },
+  "decisions_not_taken": [
+    "send",
+    "final_recipient",
+    "policy_invention",
+    "production_case_write",
+    "atrs_publication",
+    "no_reply",
+    "transfer_send",
+    "foi_exemption",
+    "complaint_outcome",
+    "vulnerability_label"
+  ],
+  "sources": {
+    "guide_url": "https://assets.publishing.service.gov.uk/media/66d99762608fb761b681111d/Guide_to_Handling_Correspondence_-_September_2024__1_.pdf",
+    "guide_retrieved_on": "2026-10-26",
+    "lines_are_synthetic": true
+  }
+}
