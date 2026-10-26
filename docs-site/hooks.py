@@ -37,6 +37,9 @@ DIAGRAMS = {
     "experiments/07-consultation-themes/docs/architecture_diagram.png": (
         "experiments/img/07-consultation-architecture.png"
     ),
+    "experiments/09-casework-correspondence-draft/docs/architecture_diagram.png": (
+        "experiments/img/09-casework-architecture.png"
+    ),
 }
 
 
