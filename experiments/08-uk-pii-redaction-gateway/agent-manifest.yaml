@@ -1,0 +1,497 @@
+# Agent manifest: Sensitive Data Redaction Agent
+# Experiment 08 — UK identifier PII gateway (catalogue ID O005)
+# Version: 0.1.0
+# Last reviewed: 2026-10-26
+# Next review: 2027-04-26
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-08-uk-pii-redaction-gateway"
+  name: "Sensitive Data Redaction Agent — UK identifier PII gateway"
+  version: "0.1.0"
+  description: >
+    Proposes redactions of UK identifiers in one text — National Insurance
+    number, NHS number, sort code and account number, UK postcode, Companies
+    House number, and a GB IBAN or a labelled Unique Taxpayer Reference —
+    and returns a DPO audit record that does not contain the raw values.
+    Autonomy A1. A privacy reviewer approves the redacted output before
+    release. The agent never releases or sends that output, and it never
+    describes the output as anonymised. Deterministic detectors do the
+    work. A model is optional and off by default.
+  owner: "Privacy reviewer, with the calling team's DPO"
+  contact: "pii-gateway@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/08-uk-pii-redaction-gateway"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything that leaves the draft"
+  constraints:
+    - "A privacy reviewer approves the redacted output before anyone releases it"
+    - "The agent NEVER releases, sends, files, or copies the redacted output"
+    - "The agent NEVER claims the output is anonymised, de-identified, or safe to publish"
+    - "The agent NEVER writes a production record or a token vault"
+    - "The agent NEVER approves its own proposal"
+    - "Checksums come from src/identifiers.py, not from model output"
+    - "Model suggestions are off unless the caller opts in, and they still need the reviewer"
+    - "All output is a proposal and is marked as not for release"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Text supplied by the caller"
+      description: "One free-text string another experiment, or a reviewer, asks the gateway to scan"
+      access_level: "read"
+      scope: "Single text per invocation. No browsing of a case store."
+      justification: "The spans cannot be proposed without the text the caller submitted"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "NHS number, which can sit in a health context"
+        - "National Insurance number, sort code, account number, postcode, company number"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text. The audit record stores a hash, not the text."
+
+    - resource: "Caller metadata"
+      description: "An experiment id, an optional rules date, and whether reversible tokens were requested"
+      access_level: "read"
+      scope: "Fields the caller passes for this run"
+      justification: "The DPO log has to say which experiment asked, and which rule pin was in force"
+      may_contain_personal_data: false
+
+    - resource: "Pinned identifier rules"
+      description: "The format and checksum rules in src/identifiers.py, pinned 2026-10-26"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "Detection has to be reproducible without a network call"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "NHS Personal Demographics Service and other patient records"
+      reason: "The gateway does not look up an NHS number. A checksum is not a trace."
+    - resource: "HMRC and DWP systems"
+      reason: "A National Insurance shape is not verified against a live record."
+    - resource: "Companies House register"
+      reason: "A company-number shape is not looked up at runtime. The one 404 check in the README was a point-in-time fixture check."
+    - resource: "Bank sort-code directory and payment systems"
+      reason: "Sort codes are not modulus-checked against Pay.UK and no payment is made."
+    - resource: "Mailboxes, Teams, and external send connectors"
+      reason: "The agent does not send."
+    - resource: "The reversible token vault, once the caller has stored it"
+      reason: "This starter does not persist the map and does not read it back."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "UK identifier detectors"
+      provider: "Local Python (src/detectors.py, src/identifiers.py)"
+      action: "Find UK identifier spans with published checksums where they exist"
+      access_level: "read"
+      scope: "The single text supplied for this run. No network. No model."
+      justification: "Identifier shapes and the NHS modulus 11 check are deterministic. A language model must not be the checksum."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Optional model suggestion"
+      provider: "Not called by default. A later Microsoft Foundry or Azure Language deployment would be a caller-supplied adapter."
+      action: "Suggest extra spans the deterministic rules do not cover"
+      access_level: "read"
+      scope: "The same single text. Off unless the caller passes an adapter and opts in to applying suggestions."
+      justification: "Names and free text are out of the deterministic scope. A suggestion is still a proposal."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Proposal schema check"
+      provider: "Local Python (src/gateway.py)"
+      action: "Reject a proposal that claims anonymisation or that releases output"
+      access_level: "read"
+      scope: "The proposal for this run"
+      justification: "The flags output_is_anonymised and agent_may_release are fixed false. A bad proposal does not leave the function."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The proposal is returned to the caller. The audit record is
+      part of that return value. This starter does not persist it and does
+      not write a token vault.
+
+  sends:
+    enabled: false
+    note: >
+      No sends and no release. record_reviewer_decision can mark a proposal
+      approved for a person to release later. It does not release it.
+      release() raises ReleaseForbidden.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject its own redaction. A privacy
+      reviewer does that, outside the agent's tools. The Python function
+      record_reviewer_decision refuses every role except "Privacy reviewer"
+      and still cannot release.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Whether text is anonymous, whether it may be published, and whether a
+      disclosure meets UK GDPR is for the organisation. The gateway only
+      proposes spans. It does not decide a data-protection outcome.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No write to a case system, a Purview label store, a Key Vault, or any
+      other production record. The reversible map is returned only when asked
+      for, and only in the response, marked as not persisted.
+
+  external_send:
+    enabled: false
+    rationale: >
+      Redacted output is still not safe to send by default, and the agent
+      has no send tool. A privacy reviewer approves before a person releases
+      it through the organisation's own channel.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, refund, or other transaction can be instructed."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Release the redacted output"
+      rationale: "release() always raises. Approval in the returned JSON is not a release."
+    - enabled: false
+      action_name: "Claim the output is anonymised"
+      rationale: "output_is_anonymised is fixed false. ICO guidance treats this kind of replacement as short of anonymisation."
+    - enabled: false
+      action_name: "Store the reversible token vault"
+      rationale: "The starter does not persist the map. Storing it is a deployment decision for Key Vault, not an agent action."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    A privacy reviewer approves the redacted output before release. The
+    agent has no path that releases, sends, or stores that output.
+
+  approval_points:
+    - action: "Approve the redacted output before release"
+      approver: "Privacy reviewer"
+      mandatory: true
+      rationale: "Missed identifiers are a disclosure risk. The reviewer sees the proposal before anyone relies on it."
+
+    - action: "Accept or reject each model suggestion before it is treated as a redaction"
+      approver: "Privacy reviewer"
+      mandatory: true
+      rationale: "A model span has no checksum. Applying it is a human decision. The default is not to apply it."
+
+    - action: "Decide whether a reversible token vault may be stored"
+      approver: "Privacy reviewer"
+      mandatory: true
+      rationale: "A reversible map is additional personal data. This starter does not store it."
+
+    - action: "Release or send the redacted output"
+      approver: "Privacy reviewer"
+      mandatory: true
+      rationale: "Out of the agent's scope even after the proposal is approved. Listed so the control is explicit."
+
+  no_approval_required:
+    - action: "View the redaction proposal"
+      rationale: "Reading a proposal has no external effect"
+    - action: "Re-run detection on the same text"
+      rationale: "No write, no send, and no release"
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted by this starter"
+    description: >
+      The gateway is a shared component. A public body and a firm do not
+      share one Article 6 basis. The caller confirms its own basis before
+      production use. This starter does not copy Experiment 01's public-task
+      basis or Experiment 02's legal-obligation basis.
+    secondary: "To be confirmed by the caller. Article 6(1)(c) or 6(1)(e) may be relevant. This file does not choose."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, where an NHS number or the surrounding text reveals health data"
+      - "Any special-category detail a person wrote into the free text"
+    lawful_basis_special: >
+      Not asserted. The caller must identify an Article 9 condition before
+      production use. This starter does not claim a Schedule 1 condition of
+      the Data Protection Act 2018.
+    safeguards:
+      - "The audit record stores a hash, offsets, and the detector. It does not store the identifier."
+      - "The output says it is not anonymised. ICO guidance, read on 26 October 2026, distinguishes anonymisation from pseudonymisation."
+      - "Nothing is released by the agent"
+      - "A privacy reviewer approves the proposal before a person releases it"
+      - "Reversible tokens are not persisted here"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One text at a time, as supplied by the caller"
+    - "No lookup of the person, the company, or the account"
+    - "The audit record omits the raw identifier"
+    - "Names, emails, and telephone numbers are not collected by the deterministic detectors"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "If the caller stores the audit record, that schedule is the caller's. Do not store the source text in the same row as a reversible map."
+
+  data_residency:
+    region: "UK"
+    note: "A production model adapter, if one is added, should use UK South or UK West. This repository cannot enforce that. The deterministic path makes no network call."
+
+  data_subject_rights:
+    note: >
+      The gateway does not handle access, erasure, or objection requests.
+      Those go through the caller's privacy process. A reversible map, if
+      the caller stores one, is in scope of those rights. This starter
+      does not hold it.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    The text is untrusted. It may say it is already anonymised, tell the
+    model to skip redaction, or tell the agent to send the result. The
+    detectors do not follow instructions. There is no release tool.
+
+  controls:
+    - control: "Instructions are not rules"
+      description: "Phrases such as 'do not redact' and 'fully anonymised' are recorded as signals. Detection still runs."
+    - control: "Deterministic checksums"
+      description: "NHS modulus 11 and the IBAN rearrangement run in Python."
+    - control: "Fixed flags"
+      description: "output_is_anonymised and agent_may_release cannot be set true."
+    - control: "No tools with side effects"
+      description: "Writes, sends, and release are disabled in this manifest."
+    - control: "Privacy reviewer"
+      description: "A person approves the proposal before anyone releases it."
+
+  residual_risk: >
+    A span can be missed. The reviewer is the control for release. There is
+    no autonomous send even if the proposal is wrong. The smoke test states
+    the known misses. It is not a live recall figure.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-26"
+  risks:
+    - id: "R1"
+      risk: "A missed UK identifier is later sent to a model or published"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Known false negatives are listed in the proposal and the README"
+        - "The output says it is not anonymised"
+        - "A privacy reviewer approves before release, and the agent cannot release"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+    - id: "R2"
+      risk: "A harmless number is redacted and a handler loses a reference they needed"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Date-shaped sort codes are left unless labelled"
+        - "Unlabelled continuous 10-digit strings are not treated as NHS numbers"
+        - "The reviewer can reject the proposal"
+      residual_risk: "Medium"
+      owner: "Privacy reviewer"
+
+    - id: "R3"
+      risk: "Prompt injection produces a release, a send, or an anonymisation claim"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "release() raises"
+        - "The anonymisation flag is fixed false"
+        - "Tests cover those instructions"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "A reversible token map is logged next to the redacted text"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The map is a separate object and is omitted unless requested"
+        - "The audit record is tested to exclude the raw value"
+        - "This starter does not persist either object"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R5"
+      risk: "Pinned format rules drift from HMRC, NHS, or Companies House"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "rules_pinned_on is on every proposal"
+        - "An earlier rules_as_of is flagged and does not switch the rules off"
+        - "Review trigger on a change to those sources"
+      residual_risk: "Medium"
+      owner: "Privacy reviewer"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    The proposal includes a DPO audit record. This starter does not write it
+    to a store. The record hashes the input and lists entity types, offsets,
+    detectors, and checksum results. It does not include the raw identifier.
+    A production caller should store that record, not the source text, in a
+    UK-resident log the DPO can read.
+
+  logged_events:
+    - event: "Redaction proposed"
+      data_logged:
+        - "Timestamp"
+        - "Caller experiment id"
+        - "SHA-256 of the input and the character count"
+        - "rules_pinned_on and whether the caller supplied an earlier rules date"
+        - "Whether a model adapter was used"
+        - "One row per finding: entity type, offsets, detector, checksum result, placeholder, value_recorded false"
+      retention: "Caller's privacy schedule. Not set by this starter."
+    - event: "Span not redacted, where the rules deliberately skipped it"
+      data_logged:
+        - "Reason, such as date-shaped sort code or failed NHS checksum without a label"
+        - "Offsets"
+        - "Not the raw value"
+      retention: "Same schedule as the proposal, if the caller keeps it."
+    - event: "Reviewer decision recorded in the returned JSON"
+      data_logged:
+        - "Decision: approve, reject, or return_for_edit"
+        - "Reviewer role"
+        - "Timestamp"
+        - "agent_may_release still false"
+      retention: "Caller's privacy schedule."
+    - event: "Release attempted"
+      data_logged:
+        - "The exception ReleaseForbidden"
+        - "No output body"
+      retention: "Operational log, if the caller chooses to record the exception."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store. Do not put raw identifiers or the reversible map in Application Insights traces."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the gateway being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Stop calling propose()"
+      action: "Remove the import from the calling experiment and turn off the Copilot Studio topic"
+      time_to_effect: "Immediate once the caller is changed or the topic is off"
+      who_can_activate: "The calling team's owner, or a Copilot Studio administrator"
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove a model adapter's access"
+      action: "Revoke the managed identity or the Key Vault secret used by an optional Foundry or Language deployment"
+      time_to_effect: "Immediate for new calls. The deterministic path does not use that secret."
+      who_can_activate: "Foundry, Language, or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, HTTP to an external host, or a case system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Privacy reviewer"
+      contact: "pii-gateway@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-26"
+  next_review_date: "2027-04-26"
+  review_frequency: "6 months, and sooner if HMRC, NHS, or Companies House changes an identifier rule"
+  reviewer: "The adopting organisation's privacy reviewer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to NIM39110 prefix rules, the NHS number modulus 11 steps, or Companies House prefixes"
+    - "A change to the ICO anonymisation guidance that this starter relies on for the 'not anonymised' wording"
+    - "A proposal to call Azure AI Language, Microsoft Foundry, or a send connector"
+    - "A security incident or a missed identifier in a real disclosure"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Gateway"
+      path: "src/gateway.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Calling the gateway"
+      path: "docs/calling-the-gateway.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The caller's Article 6 basis, and an Article 9 condition if health data is in scope, are confirmed by that organisation's DPO"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The pinned rules of 26 October 2026 are still the rules the organisation wants. An earlier rules_as_of is a warning, not a switch."
+      section: "src/identifiers.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if a model adapter is added later, runs in the UK and is not trained on the caller's text"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No mail, case-system, or Companies House connector is added without a manifest change in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on example.com are placeholders, not an organisation"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "A reversible map, if used, is stored by the caller in Key Vault or an equivalent, separate from the DPO log"
+      section: "logging_and_audit"
+      verify_on_deployment: true

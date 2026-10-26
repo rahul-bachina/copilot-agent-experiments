@@ -284,6 +284,54 @@ class TestExperiment07Manifest:
         assert experiment_07_manifest["autonomy"]["human_in_the_loop"] is True
 
 
+class TestExperiment08Manifest:
+    """Test the Experiment 08 UK identifier PII gateway manifest."""
+
+    @pytest.fixture
+    def experiment_08_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "08-uk-pii-redaction-gateway" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_08_manifest):
+        """Experiment 08 manifest should be valid."""
+        validate(instance=experiment_08_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_08_manifest):
+        """Experiment 08 should be autonomy level A1."""
+        assert experiment_08_manifest["autonomy"]["level"] == "A1"
+        assert experiment_08_manifest["autonomy"]["auto_actions_enabled"] is False
+        assert experiment_08_manifest["autonomy"]["human_in_the_loop"] is True
+
+    def test_all_high_risk_actions_disabled(self, experiment_08_manifest):
+        """Experiment 08 should have all high-risk actions disabled."""
+        high_risk = experiment_08_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_08_manifest):
+        """Nothing is sent, released, or written to a production store."""
+        assert experiment_08_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_08_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_privacy_reviewer_approves_before_release(self, experiment_08_manifest):
+        """The human checkpoint is a privacy reviewer, and it is mandatory."""
+        points = experiment_08_manifest["human_approval"]["approval_points"]
+        release = next(point for point in points if point["action"].startswith("Approve the redacted"))
+        assert release["approver"] == "Privacy reviewer"
+        assert release["mandatory"] is True
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 
