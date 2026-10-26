@@ -1,0 +1,29 @@
+{
+  "tools": [
+    {
+      "name": "propose_redaction",
+      "implementation": "propose",
+      "reads": ["caller-supplied text"],
+      "writes": false,
+      "sends": false,
+      "releases": false,
+      "persists_raw_values": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_reviewer_decision",
+      "implementation": "record_reviewer_decision",
+      "reads": ["proposal"],
+      "writes": false,
+      "sends": false,
+      "releases": false,
+      "persists_raw_values": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Privacy reviewer"
+    }
+  ]
+}

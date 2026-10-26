@@ -1,0 +1,1635 @@
+{
+  "evaluation_label": "SMOKE TEST of deterministic rules on synthetic fixtures. Not a model evaluation. Not a live false-negative rate. No model was called.",
+  "mode": "deterministic_rules",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "output_is_anonymised": false,
+  "summary": {
+    "total_cases": 30,
+    "passed": 30,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0,
+    "known_miss_cases": 6,
+    "planted_type_hits": 21,
+    "planted_type_misses": 6,
+    "unplanted_type_hits": 0,
+    "recall_on_planted_types_percent": 77.8,
+    "precision_on_detected_types_percent": 100.0,
+    "note": "Counted by identifier type on these synthetic fixtures, not by span and not on live text. A known miss is still a miss in the recall figure."
+  },
+  "cases": [
+    {
+      "case_id": "E01",
+      "name": "Spaced National Insurance example",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino"
+      ],
+      "detected": [
+        "nino"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E02",
+      "name": "Compact National Insurance example",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino"
+      ],
+      "detected": [
+        "nino"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E03",
+      "name": "Prefix NIM39110 says is not to be used",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino"
+      ],
+      "detected": [
+        "nino"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E04",
+      "name": "Grouped NHS number with a passing check digit",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nhs_number"
+      ],
+      "detected": [
+        "nhs_number"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nhs_number']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E05",
+      "name": "Hyphenated NHS number with a passing check digit",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nhs_number"
+      ],
+      "detected": [
+        "nhs_number"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nhs_number']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E06",
+      "name": "Labelled NHS example that fails modulus 11",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nhs_number"
+      ],
+      "detected": [
+        "nhs_number"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nhs_number']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E07",
+      "name": "Unlabelled NHS example that fails modulus 11",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E08",
+      "name": "Known miss: continuous NHS number with no label",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "nhs_number"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E09",
+      "name": "Sort code shape that is not a date",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "sort_code"
+      ],
+      "detected": [
+        "sort_code"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['sort_code']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E10",
+      "name": "Known miss: day and month left in place",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "sort_code"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E11",
+      "name": "Date-shaped sort code that is labelled",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "sort_code"
+      ],
+      "detected": [
+        "sort_code"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['sort_code']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E12",
+      "name": "Labelled account number",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "account_number"
+      ],
+      "detected": [
+        "account_number"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['account_number']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E13",
+      "name": "Known miss: unlabelled account number",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "account_number"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E14",
+      "name": "Account number shortly after a sort code",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "sort_code",
+        "account_number"
+      ],
+      "detected": [
+        "account_number",
+        "sort_code"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['account_number', 'sort_code']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E15",
+      "name": "Generic unknown postcode from the ILR annex",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "postcode"
+      ],
+      "detected": [
+        "postcode"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['postcode']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E16",
+      "name": "Known miss: postcode with the space removed",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "postcode"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E17",
+      "name": "Inward letter the ILR annex excludes",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E18",
+      "name": "Companies House prefix from the 2011 guide",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "crn"
+      ],
+      "detected": [
+        "crn"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['crn']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E19",
+      "name": "Known miss: eight digits with no company label",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "crn"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E20",
+      "name": "Labelled eight-digit company number",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "crn"
+      ],
+      "detected": [
+        "crn"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['crn']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E21",
+      "name": "Synthetic GB IBAN with a passing rearrangement",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "iban"
+      ],
+      "detected": [
+        "iban"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['iban']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E22",
+      "name": "GB IBAN shape whose check digits fail",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "iban"
+      ],
+      "detected": [
+        "iban"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['iban']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E23",
+      "name": "Labelled Unique Taxpayer Reference, checksum not claimed",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "utr"
+      ],
+      "detected": [
+        "utr"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['utr']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E24",
+      "name": "Name and email are out of scope",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E25",
+      "name": "Injection still redacts and does not release",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino"
+      ],
+      "detected": [
+        "nino"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "signals"
+        }
+      ]
+    },
+    {
+      "case_id": "E26",
+      "name": "Earlier rules date does not switch detection off",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino"
+      ],
+      "detected": [
+        "nino"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        },
+        {
+          "field": "stale_rules",
+          "passed": true,
+          "detail": "rules"
+        }
+      ]
+    },
+    {
+      "case_id": "E27",
+      "name": "Empty text is still not anonymised",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E28",
+      "name": "Two identifiers in one note",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [
+        "nino",
+        "postcode"
+      ],
+      "detected": [
+        "nino",
+        "postcode"
+      ],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "['nino', 'postcode']"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "removed"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E29",
+      "name": "Known miss: GIR 0AA is outside the six ILR shapes",
+      "status": "passed",
+      "known_miss": true,
+      "planted": [
+        "postcode"
+      ],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    },
+    {
+      "case_id": "E30",
+      "name": "Telephone number is out of scope",
+      "status": "passed",
+      "known_miss": false,
+      "planted": [],
+      "detected": [],
+      "checks": [
+        {
+          "field": "types",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "kept",
+          "passed": true,
+          "detail": "kept"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "field": "no_actions",
+          "passed": true,
+          "detail": "actions"
+        },
+        {
+          "field": "banner",
+          "passed": true,
+          "detail": "banner"
+        },
+        {
+          "field": "raw_values_logged",
+          "passed": true,
+          "detail": "audit"
+        }
+      ]
+    }
+  ]
+}
