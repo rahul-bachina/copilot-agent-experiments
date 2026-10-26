@@ -1,0 +1,508 @@
+# Agent manifest: Correspondence Draft Agent
+# Experiment 09 — UK ministerial / MP / resident casework edition (catalogue ID O008)
+# Version: 0.1.0
+# Last reviewed: 2026-10-26
+# Next review: 2027-04-26
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-09-casework-correspondence-draft"
+  name: "Correspondence Draft Agent — UK ministerial / MP / resident casework edition"
+  version: "0.1.0"
+  description: >
+    Helps a correspondence author draft one reply from supplied lines to take.
+    Proposes a channel, calculates a casework clock in deterministic code, flags
+    vulnerability wording for a person to review, and cites a current line or
+    states that no position is covered. Autonomy A1. The author approves the
+    recipient and the final text. The agent never sends, never chooses the final
+    recipient, and never invents a policy position.
+  owner: "Correspondence unit (fictional Department for Civic Spaces)"
+  contact: "correspondence-draft@example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/09-casework-correspondence-draft"
+
+autonomy:
+  level: "A1"
+  level_description: "Human approves the recipient and the final text"
+  constraints:
+    - "The author approves the recipient and the final text before anything is relied on"
+    - "The agent NEVER sends a letter, an email, a holding reply, or a transfer"
+    - "The agent NEVER chooses the final recipient from the letter text"
+    - "The agent NEVER invents a policy position. A draft cites a current line or states a gap"
+    - "The agent NEVER writes a production case record and NEVER publishes an ATRS record"
+    - "The agent NEVER decides an FOI exemption, a complaint outcome, or that no reply will be sent"
+    - "The agent NEVER labels a person as vulnerable and NEVER auto-closes a case"
+    - "Reply dates come from src/sla.py, not from model output"
+    - "All output is advisory and is marked draft"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Letter text supplied by the author"
+      description: "One inbound letter or email, pasted by an authorised author for this run"
+      access_level: "read"
+      scope: "Single letter per invocation. No mailbox browsing."
+      justification: "The draft cannot be prepared without the letter the author has asked it to read"
+      data_categories:
+        - "Correspondence narrative"
+        - "Names and contact details if the writer included them"
+        - "Free text that may describe health, housing, or immediate risk"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text."
+
+    - resource: "Author-confirmed clock inputs"
+      description: "Receipt date, regime, target working days, and any extra closed days the author has entered"
+      access_level: "read"
+      scope: "Fields the author types for this calculation"
+      justification: "The clock is deterministic only once a person has set the target the Guide leaves to the department"
+      may_contain_personal_data: false
+
+    - resource: "Synthetic lines-to-take library"
+      description: "fixtures/lines_to_take.json. Invented lines for the fictional Department for Civic Spaces"
+      access_level: "read"
+      scope: "The static library shipped with this experiment"
+      justification: "Citations have to come from a supplied library. The starter does not search a live policy store"
+      may_contain_personal_data: false
+
+    - resource: "System prompt and clock configuration"
+      description: "Agent instructions and the England and Wales bank-holiday rules in src/working_days.py"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "Required to run the drafter and the clock"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Correspondence mailboxes"
+      reason: "The author pastes one letter. The starter has no mailbox connector."
+    - resource: "Correspondence case-management systems"
+      reason: "No production read and no production write. The FCDO ATRS record describes a tool that can log a case. This starter does not."
+    - resource: "MP, peer, or constituent directories"
+      reason: "The agent must not look up a real person or choose an address."
+    - resource: "Other cases in the unit"
+      reason: "No profiling across the book."
+    - resource: "ATRS publication systems"
+      reason: "The ATRS block in the output is a draft note. It is not submitted."
+    - resource: "Email and SMS gateways"
+      reason: "The agent does not send."
+
+tools:
+  allowed:
+    - tool: "Casework clock"
+      provider: "Local Python (src/sla.py)"
+      action: "Calculate a reply date from author-confirmed inputs"
+      access_level: "read"
+      scope: "One letter's dates per call. No network. No model."
+      justification: "The deadline is a count. A language model must not produce it."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Lines library"
+      provider: "Local Python (src/lines.py)"
+      action: "Match the letter to the supplied lines and refuse stale or withdrawn lines"
+      access_level: "read"
+      scope: "The synthetic library, or a file path the author passes"
+      justification: "Policy sentences have to be verbatim lines. The matcher does not paraphrase."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Draft assembly"
+      provider: "Local Python (src/draft.py)"
+      action: "Assemble the draft from the clock and the cited lines"
+      access_level: "read"
+      scope: "The single letter supplied for this run"
+      justification: "Keeps citations, gaps, and the send flag in one checked object"
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output validation"
+      provider: "Local Python"
+      action: "Reject a draft that sends, labels a person, or pastes a refused line"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "The prohibited-action tests call this check"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the author. Filing it on a case,
+      if the author chooses to, is done by the author in the case system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The letter is a draft. The author edits it and sends it
+      through the unit's usual channel after approving the recipient and the text.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide that a letter needs no reply, and it does not
+      uphold or reject a complaint. Guide paragraph 14 is a human decision.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Channel, ministerial signature, the reply target, vulnerability flags,
+      and any policy sentence are proposals. The author approves the recipient
+      and the final text. The agent does not decide an exemption or a disclosure.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a correspondence case system. The ATRS note
+      is not written to a register.
+
+  external_send:
+    enabled: false
+    rationale: >
+      Replies are external communications. The agent drafts only. The author
+      sends through the unit's channel after approving the recipient and the text.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, grant, or funding commitment can be instructed. Lines that state no funding figure stay that way."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Choose the final recipient"
+      rationale: "The letter text cannot approve an address. Only an author argument records one, and nothing is sent."
+    - enabled: false
+      action_name: "Invent a policy position"
+      rationale: "A sentence is a verbatim current line with its id, or the draft says no position is stated."
+    - enabled: false
+      action_name: "Publish an ATRS record"
+      rationale: "The note is a draft for the organisation's single point of contact. Scope is not decided."
+    - enabled: false
+      action_name: "Label the correspondent"
+      rationale: "Flags quote words. They do not label the person and they are not written to a record."
+
+human_approval:
+  description: >
+    The author approves the recipient and the final text. The agent has no
+    path that sends or files on the strength of its own output.
+
+  approval_points:
+    - action: "Confirm the channel and whether a ministerial reply is required"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "Guide paragraphs 7 and 8 distinguish ministerial correspondence from a treat-official reply. The code only proposes."
+
+    - action: "Confirm the reply target before the due date is treated as operative"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "Paragraph 9 says the department sets the deadline, with ministerial agreement, and that it should not exceed 20 working days."
+
+    - action: "Review a vulnerability or immediate-review flag before it is recorded"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "The flag is a prompt. Recording it is a decision about special-category data. Immediate-risk wording needs a person first."
+
+    - action: "Approve the recipient"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "The agent proposes a role. It does not choose the address. Paragraph 15 says a reply to an MP or Peer goes to their office. The author types it."
+
+    - action: "Approve the final text"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "Every policy sentence has to be a line the author is willing to stand behind, or a gap they accept."
+
+    - action: "Send the letter"
+      approver: "Correspondence author"
+      mandatory: true
+      rationale: "Outside the agent even after the recipient and the text are approved. The agent has no send tool."
+
+    - action: "Decide no-reply, a transfer, an information-rights outcome, or a complaint outcome"
+      approver: "Authorised casework decision-maker"
+      mandatory: true
+      rationale: "Outside the agent. Listed so the control is explicit."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the draft on the same letter"
+      rationale: "No write and no send"
+    - action: "Calculate a reference clock from a target the author has typed"
+      rationale: "The arithmetic is deterministic. Relying on the date still needs the confirmation above."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(e) — public task"
+    description: >
+      Guide paragraph 45, in the PDF retrieved on 26 October 2026, says public
+      bodies should consider the public-task basis for correspondence, and that
+      the ICO generally discourages relying on consent alone because of the
+      imbalance of power. This starter does not decide the basis. The
+      organisation's DPO confirms it before any production use. Paragraph 46
+      says FOI, EIR, and subject-access correspondence should be considered
+      under Article 6(1)(c). This agent routes those letters out and does not
+      answer them.
+    secondary: "Article 6(1)(c) where the letter is an information-rights request. Not applied by this drafter, because it does not answer those requests."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, if the writer describes a condition"
+      - "Information about a life event that may reveal health"
+      - "Political opinions, if the letter states them"
+    lawful_basis_special: >
+      Not asserted. Guide paragraphs 47 to 50 describe bases a department could
+      consider, including Data Protection Act 2018 Schedule 1 paragraph 6 and,
+      for an MP writing for a constituent, paragraph 23. This starter does not
+      assert either condition.
+    safeguards:
+      - "The draft quotes the words that prompted a flag and names the driver"
+      - "The person is not labelled"
+      - "Nothing is written to a case record"
+      - "The author reviews the flag before it is recorded anywhere"
+      - "Immediate-risk wording stops for a person. Nobody is contacted by the agent"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One letter at a time, as supplied by the author"
+    - "An address in the letter is not copied into the approved recipient"
+    - "The clock stores dates and a target, not the narrative"
+    - "The lines library in this repository contains no personal data"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's correspondence-file retention applies to whatever the author then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. That is a deployment choice, not something this repository can enforce."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      A letter that is a subject-access request is routed to information rights
+      and is not answered here.
+
+prompt_injection:
+  description: >
+    Letter text is untrusted. It may tell the model to ignore the rules, to
+    send the reply, to approve a recipient, or to invent a position. The clock
+    does not read the narrative. The model is not given a tool that can send,
+    write, or decide.
+
+  controls:
+    - control: "Instructions separated from the letter"
+      description: "The letter is data. It cannot change the system instructions or approve a recipient."
+    - control: "Deterministic clock"
+      description: "Dates are computed in Python from author-confirmed inputs."
+    - control: "Verbatim lines"
+      description: "A policy sentence is a current line pasted with its id, or a gap that states no position."
+    - control: "Schema rejects prohibited actions"
+      description: "A draft that sends, labels a person, pastes a refused line, or submits an ATRS record fails validation."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled in this manifest."
+    - control: "Human approval"
+      description: "The author approves the recipient and the final text on every letter."
+
+  residual_risk: >
+    A manipulated model can still draft a misleading summary around the cited
+    lines. The author is the control. There is no autonomous send even if the
+    draft is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named department"
+  date_assessed: "2026-10-26"
+  risks:
+    - id: "R1"
+      risk: "A wrong channel or an unconfirmed target makes an author miss a reply deadline"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The due date stays non-operative until the author confirms the channel and the target"
+        - "A central-government target over 20 working days is not returned as a date"
+        - "Information-rights letters do not receive a correspondence due date"
+      residual_risk: "Medium"
+      owner: "Correspondence unit"
+
+    - id: "R2"
+      risk: "The draft states a position that is not in the lines, or cites a stale line"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Only a current, in-date line is pasted, with its id"
+        - "Withdrawn, overdue, and future lines are refused"
+        - "A gap says that no position is stated"
+        - "The author approves the final text"
+      residual_risk: "Medium"
+      owner: "Correspondence unit"
+
+    - id: "R3"
+      risk: "Prompt injection produces a send, a recipient, or an invented closure"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No send or write tool exists"
+        - "Letter text cannot approve a recipient"
+        - "Validation and tests reject the prohibited actions"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "An immediate-risk or special-category detail is missed, labelled, or retained"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Flags are proposals, with the quoted words"
+        - "The person is not labelled"
+        - "The starter does not persist the text and does not contact anyone"
+        - "Article 9 is explicitly not asserted"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R5"
+      risk: "A reader treats the DfE or FCDO ATRS record as a description of this starter, or treats the draft note as submitted"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The note names those records as precedents opened on 26 October 2026 and says this starter is not those tools"
+        - "not_submitted stays true and mandatory scope is not decided"
+        - "A DWP correspondence drafter is not cited, because that record was not opened"
+      residual_risk: "Low"
+      owner: "Correspondence unit"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the library id, the
+    model version if a model is later added, the clock inputs, the line ids
+    cited, and the author's approval of the recipient and the text. This
+    starter logs nothing because it keeps no store.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Author identity"
+        - "Character count of the letter, not the text"
+        - "Library id"
+      retention: "The organisation's correspondence-file schedule. Not set by this starter."
+    - event: "Clock calculated"
+      data_logged:
+        - "Receipt date"
+        - "Regime"
+        - "Target"
+        - "Whether the author confirmed the channel and the target"
+        - "Whether the letter was on the information-rights route"
+        - "The date returned and the reason code"
+      retention: "Keep with the case file if the author relies on the date."
+    - event: "Author approved the recipient or the text"
+      data_logged:
+        - "Field name"
+        - "Author identity"
+        - "Timestamp"
+        - "Line ids cited, not the letter"
+      retention: "The organisation's correspondence-file schedule."
+    - event: "Draft rejected by validation"
+      data_logged:
+        - "Validation error code"
+        - "Timestamp"
+      retention: "Operational log. Do not store the letter text in the error."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the letter in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove the Microsoft Foundry deployment access"
+      action: "Revoke the key or the managed-identity role used by the agent"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail or the case system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Correspondence unit lead"
+      contact: "correspondence-draft@example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@example.gov.uk"
+
+review:
+  last_review_date: "2026-10-26"
+  next_review_date: "2027-04-26"
+  review_frequency: "6 months, and sooner if the correspondence guide or the lines library changes"
+  reviewer: "The adopting organisation's correspondence owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A new edition of the Guide to Handling Correspondence"
+    - "A change to England and Wales bank holidays by proclamation"
+    - "A proposal to add a mailbox, SharePoint write, or case-system connector"
+    - "A line library update"
+    - "A security incident or a letter sent from an unapproved draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Casework clock"
+      path: "src/sla.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Microsoft 365"
+      path: "docs/microsoft-365.md"
+
+atrs_mapping:
+  note: >
+    Draft mapping only. The output's atrs_draft.not_submitted flag stays true.
+    This manifest does not decide mandatory scope. Precedents opened on
+    26 October 2026 are the DfE Correspondence Drafter and the FCDO
+    Correspondence Triage records. This starter is not those tools.
+  mappings:
+    - atrs_field: "Name and description"
+      manifest_section: "agent"
+    - atrs_field: "Human decisions and review"
+      manifest_section: "human_approval"
+    - atrs_field: "Phase"
+      manifest_section: "atrs_draft.phase in the tool output, which is not_deployed"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "For a department or agency, the England and Wales calendar is the right closed-day set, and the department has agreed a target that does not exceed 20 working days"
+      section: "src/sla.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6(1)(e) is the right lead basis, and an Article 9 condition will be chosen before any live special-category processing"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on the organisation's correspondence"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No mailbox, SharePoint write, or case-system connector is added without updating this manifest"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The lines library used in production is the organisation's own current lines, not the synthetic Civic Spaces file"
+      section: "src/lines.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.gov.uk are placeholders, not a department"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
