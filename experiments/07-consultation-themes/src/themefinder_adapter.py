@@ -27,8 +27,14 @@ Verified on 24 October 2026 from the public repository, not by running it:
   is rejected.
 - The README's `make setup-consultation` path uploads to an i.AI S3 bucket.
   This adapter does not call it.
-- `rule_2` and `theme_clustering` can set aside themes with few responses.
-  This adapter does not call them. Minority themes stay in the audit.
+- Re-read from `main` on 26 October 2026. `theme_clustering` in `tasks.py`
+  returns only themes above `significance_percentage` (default 10) unless
+  `return_all_themes=True`.
+  `rule_2_themes_must_have_a_non_negligible_number_of_responses` returns
+  themes under 0.1% of the mapping or with fewer than 5 responses. The
+  exported `_slack` wrapper reports that list. Neither function removes a
+  theme from the caller's data. This adapter does not call `theme_clustering`
+  or the wrapper. Minority themes stay in the audit.
 
 Vendoring would be legal under MIT if the copyright notice were kept. It is
 not appropriate here: the package depends on a language-model client and
@@ -225,7 +231,9 @@ def map_to_framework(
             "rejected_labels": [],
             "system_prompt": SYSTEM_PROMPT,
         }
-    # theme_clustering and rule_2 drop small themes. Do not call them.
+    # theme_mapping only. theme_clustering's default return is themes above
+    # significance_percentage (10) unless return_all_themes=True. rule_2
+    # reports sparse themes and does not remove them. Neither is called.
     if hasattr(module, "calls"):
         # Test double may record attribute access. Nothing to do.
         pass

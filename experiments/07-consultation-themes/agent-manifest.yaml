@@ -116,7 +116,7 @@ tools:
       provider: "Optional import of themefinder (not installed in this starter)"
       action: "Map redacted responses to the already approved framework, or propose themes that stay unapproved"
       access_level: "read"
-      scope: "Redacted text only. No S3 upload. No theme-clustering rule that drops small themes."
+      scope: "Redacted text only. No S3 upload. theme_clustering and the sparse-theme report are not called."
       justification: "Interop with i.AI's MIT-licensed package when a body chooses to install it."
       human_approval_required: true
       output_requires_human_review: true
