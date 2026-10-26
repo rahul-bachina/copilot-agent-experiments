@@ -2,6 +2,8 @@
 
 Copy this text into your Copilot Studio agent's **Settings → Generative AI → Instructions** section.
 
+These instructions are for the standard harness. The GitHub Copilot harness uses the skills in `skills/` and the same boundaries. Do not treat this file as a script that adds an approval step.
+
 ---
 
 ## Agent Instructions

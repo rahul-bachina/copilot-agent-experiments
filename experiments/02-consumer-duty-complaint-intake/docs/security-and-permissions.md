@@ -64,6 +64,8 @@ Mandatory before anyone relies on the output:
 
 Viewing a draft, re-running it, and calculating the clock from inputs the handler has typed do not need a separate approval. Relying on a suggested PSD route does.
 
+The standard-harness topics and the GitHub Copilot harness skills use this list as it stands. Neither harness adds an approval point, and neither is given a send or a write. See [harness-comparison.md](harness-comparison.md).
+
 ## Logging
 
 This starter writes no log. Before live use, log the invocation (who, when, size of the text, not the text), the clock inputs and the rule ids, the handler's edits, and any schema rejection. Keep the complaint itself on the case file only.

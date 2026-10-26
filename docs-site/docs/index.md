@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Two starters you can read today
+## Seven starters you can read today
 
 </div>
 
@@ -128,6 +128,131 @@ The clock and the mock intake run locally. Nothing in the folder calls a model.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 03 · G010 · Autonomy A1</p>
+
+### Agent inventory and ATRS assurance pack
+
+Draft an ATRS record, a playbook mapping, a DPIA skeleton, a DUAA screen, and an FCA-style inventory row. The governance owner approves every lifecycle status change.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+Drafts only. Nothing is approved, sent, or written to Dataverse.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/03-agent-inventory-atrs-assurance.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/03-agent-inventory-atrs-assurance)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 04 · UK02 · FCA firms · Autonomy A0</p>
+
+### FCA cryptoasset authorisation readiness
+
+Read a synthetic policy pack and draft an observation register against pinned FCA pages. The Compliance Officer or MLRO owns every gap conclusion.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+No readiness finding, no regulatory advice, and no application is submitted. The checker runs locally.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/04-fca-cryptoasset-readiness.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/04-fca-cryptoasset-readiness)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 05 · UK01 · Social landlords · Autonomy A1</p>
+
+### Awaab's Law hazard triage
+
+Turn one tenant report into a draft triage and a statutory clock. The officer approves the category, the clock, and every summary.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The clock and the mock triage run locally. Nothing is sent, and nothing is written to a housing system.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/05-awaabs-law-hazard-triage.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/05-awaabs-law-hazard-triage)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 06 · M003 · NHS and public bodies · Autonomy A0</p>
+
+### Policy questions for NHS corporate services
+
+Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The register runs locally. Nothing is published, sent, or decided for a person.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/06-nhs-policy-qa.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/06-nhs-policy-qa)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 07 · V010 · Public bodies · Autonomy A1</p>
+
+### Consultation themes
+
+Code one consultation question. The analyst approves the framework and every sampled assignment. Minority views stay, with response IDs.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The codebook runs locally. Nothing is published, and a response cannot approve the framework.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/07-consultation-themes.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/07-consultation-themes)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -142,65 +267,11 @@ The clock and the mock intake run locally. Nothing in the folder calls a model.
 
 </div>
 
-<p>Named only. No design, no code, and no date.</p>
+<p>Every name that was on this list now has a briefing. The roadmap keeps the cards.</p>
 
 </div>
 
-<div class="plan-grid" markdown="1">
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · G010</p>
-
-### Agent inventory and ATRS assurance pack
-
-Not started. The name is a list of agents and the fields an Algorithmic Transparency Recording Standard record asks for. There is no inventory and no pack here.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK02</p>
-
-### FCA cryptoasset authorisation readiness
-
-Not started. It would be for firms preparing for FCA cryptoasset authorisation. There is no checklist, no policy text, and no agent.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · UK01</p>
-
-### Awaab's Law hazard triage
-
-Not started. The name points at housing hazard reports under Awaab's Law. There is no triage flow and no sample data.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · M003</p>
-
-### NHS and public-sector policy question and answer
-
-Not started. It would answer questions from published policy. There is no corpus and no agent.
-
-</article>
-
-<article class="plan-card" markdown="1">
-
-<p class="card-kicker"><span class="status status-planned">Planned</span> · V010</p>
-
-### Consultation themes
-
-Not started. It would group themes from a consultation. There is no consultation text and no method.
-
-</article>
-
-</div>
-
-<p class="note"><a href="roadmap/">Open the roadmap</a> for the same list, with nothing promised beyond the name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, M003, and V010 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -224,7 +295,7 @@ Not started. It would group themes from a consultation. There is no consultation
 
 ### Human approval
 
-Consequential actions need a named person, or they are switched off. Both current starters switch them off.
+Consequential actions need a named person, or they are switched off. These starters switch them off.
 
 </article>
 
@@ -261,11 +332,11 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 ## Before you rely on a page
 
 - These pages describe the repository as it stood on 24 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
-- There are no client names, testimonials, or measured savings in the repository.
+- There are no client names or testimonials. Experiment 06 records a design for measuring time with a stopwatch. The figures in its smoke report are synthetic fixture arithmetic, not a study of staff.
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiment 02 is for FCA-regulated firms. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

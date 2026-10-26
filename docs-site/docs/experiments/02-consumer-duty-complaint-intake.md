@@ -4,7 +4,7 @@
 
 A starter for FCA-regulated firms. It helps a complaints handler turn one inbound complaint into a structured intake: what was said, whether it meets the Handbook definition of a complaint, product and root cause, characteristics a handler should review, the DISP clock, the Consumer Duty outcome the facts appear to touch, and a draft acknowledgement.
 
-The repository README marks it as a starter. That is accurate. This revision contains the permissions manifest, a deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and build notes for Copilot Studio, Microsoft Foundry, and Dynamics 365 Customer Service. Nothing in the folder calls a model.
+The repository README marks it as a starter. That is accurate. This revision contains the permissions manifest, a deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and build notes for both Copilot Studio harnesses, Microsoft Foundry, and Dynamics 365 Customer Service. Nothing in the folder calls a model.
 
 If this page and [`agent-manifest.yaml`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/agent-manifest.yaml) disagree, the manifest is the control.
 
@@ -46,7 +46,7 @@ The three-business-day route exists only if the complainant has indicated accept
 
 **The mock intake** proposes whether the text meets the glossary definition of a complaint, a product, a root cause, a severity, vulnerability characteristics, and which Consumer Duty outcome the facts appear to touch. It is a keyword stand-in tuned to the synthetic fixtures. It is not a model.
 
-**The build notes** describe a later shape: Copilot Studio for the handler, Microsoft Foundry for extraction and the draft, and the clock remaining in Python. Dynamics 365 Customer Service is described as a boundary. The starter does not connect to it.
+**The build notes** describe a later shape: Copilot Studio on either harness for the handler, Microsoft Foundry for extraction and the draft, and the clock remaining in Python. Dynamics 365 Customer Service is described as a boundary. The starter does not connect to it. The two harnesses call the same clock and stop at the same approval points.
 
 ## What it does not do
 
@@ -67,7 +67,7 @@ These are disabled in the manifest.
 
 ## How the work flows
 
-Step 5 is the human approval. Sending and filing stay outside the agent even after the handler accepts the draft.
+Step 5 is the human approval. Sending and filing stay outside the agent even after the handler accepts the draft. The standard harness and the GitHub Copilot harness both stop at that step. Neither one adds an approval point.
 
 1. The handler pastes one complaint and enters the receipt date. They confirm the route if they want a payment-services or e-money clock. A suggested route is not applied until they confirm it.
 2. Extraction proposes: complaint or not, product, root cause, severity, vulnerability characteristics with quotes, and which Consumer Duty outcome the facts appear to touch. In this folder that step is the mock intake. A Foundry call is described and not built.
@@ -84,6 +84,8 @@ flowchart TD
     C --> D
     D --> E["5. Human approval: handler validates every classification and the severity"]
     E --> F["6. Handler sends or files outside the agent"]
+
+    style E fill:#fff3cd,stroke:#997404
 ```
 
 What is not a tool of the agent, even after step 5: sending to the customer, a Dynamics 365 production write, upholding, rejecting, redress, closure, an Ombudsman referral, and a vulnerability label on the customer.
@@ -101,11 +103,28 @@ The diagram below is the file shipped in the experiment, copied into this site a
 | Python standard library | `src/disp_clock.py`. No Azure credentials and no network. |
 | Mock intake | `src/intake.py`. Keyword stand-in for extraction and the draft. |
 | pytest | The only declared dependency. Used by the unit tests. |
-| Copilot Studio | Build guide for a handler-facing agent. Not an importable solution. One action is allowed in that guide: a flow that returns the clock JSON and then stops. |
-| Power Automate | Only as that clock action, called with a locked-down identity. The guide says not to add 15 working days with the flow's own calendar. |
+| Copilot Studio, standard harness | Lead intake. Build guide for a handler-facing agent. Not an importable solution. One action is allowed in that guide: a flow that returns the clock JSON and then stops. |
+| Copilot Studio, GitHub Copilot harness | Handler follow-up on the same draft, with two skills. Not the GitHub Copilot service. The same clock and the same mock intake. Billing is in Copilot Credits. Prices were not copied. |
+| Power Automate | Only as that clock action on the standard harness, called with a locked-down identity. The guide says not to add 15 working days with the flow's own calendar. |
 | Microsoft Foundry | Optional extractor and drafter, described in `docs/foundry.md`. No Foundry resource is created here. The model is told not to calculate dates. |
 | Dynamics 365 Customer Service | Not connected. The handler pastes the complaint. A later read or a draft-only custom table is described as a boundary, and the manifest would have to change in the same change as any connector. |
 | Key Vault | Named for a key if a managed identity cannot be used, and as a way to remove Foundry access. Not provisioned. |
+
+### The two harnesses
+
+The [harness comparison](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/harness-comparison.md) is the longer note. Short version, from Microsoft Learn pages opened on 24 October 2026:
+
+The standard harness follows topics you define. It is the lead path because the intake is the same every time: paste one complaint, enter the receipt date, run the clock from inputs the handler typed, show the draft, stop. The existing build guide is that harness.
+
+The GitHub Copilot harness is a Copilot Studio runtime for multi-step work. It is not the GitHub Copilot service. Microsoft says customer data is not sent to the GitHub Copilot service when the agent runs in Copilot Studio, and that the harness can use skills, memory, and files, in a sandbox. It is billed in Copilot Credits from the moment you start building, including testing. A Microsoft 365 Copilot licence does not cover that usage, on the costs page opened the same day. This experiment's skills tell the agent to call `src/intake.py` and `src/disp_clock.py` and to stop. They do not tell it to send, uphold, or label the customer.
+
+The costs page says the standard harness is covered by a Microsoft 365 Copilot licence in Microsoft 365 channels, and billed otherwise. The article on standard-harness licensing was not opened, so this is not a licence opinion. Credit ranges on Microsoft's diagram were not copied.
+
+The harness overview says skills and memory are "Not a focus" for the standard harness. A second Microsoft table, on the agents overview, says they are "Not supported" there and "Supported" on the GitHub Copilot harness. Those two cells are not reconciled here. Do not upload the skills onto the standard-harness agent. An agent cannot be transferred from one harness to the other.
+
+Describing an agent in natural language, agent instructions, Memory, and triggers are marked preview on the agents page. The skills upload page links to "Create an agent (preview)". That article was not opened. The harness overview itself did not label the harness as preview. Whether memory can be switched off was not on the pages opened. The skills say not to store the complaint anyway.
+
+The Customer Conversation harness is not used. A customer chatting with this agent would be a different product, which the Copilot Studio guide already places out of scope.
 
 ## Security and permissions
 
@@ -188,7 +207,7 @@ python src/disp_clock.py --received 2020-05-01 \
   --extra-closed 2020-05-08 --cancel-bank-holiday 2020-05-04
 ```
 
-Use the synthetic fixtures in `eval/synthetic_dataset.json` if you rebuild the Copilot Studio topic. Do not paste a real complaint into a shared test environment. The fixtures, the sample, and the smoke report use invented people and a fictional firm, Northbridge Mutual.
+Use the synthetic fixtures in `eval/synthetic_dataset.json` if you rebuild either harness. The standard harness is [`copilot-studio/README.md`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/copilot-studio/README.md). The GitHub Copilot harness is [`docs/github-copilot-harness.md`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/github-copilot-harness.md), with skills under `skills/`. There is nothing to import. Do not paste a real complaint into a shared test environment. The fixtures, the sample, and the smoke report use invented people and a fictional firm, Northbridge Mutual. Building the GitHub Copilot harness in a tenant consumes Copilot Credits. This page does not quote a price.
 
 ## Limitations
 
@@ -200,6 +219,7 @@ Use the synthetic fixtures in `eval/synthetic_dataset.json` if you rebuild the C
 - The wording required by DISP 1 Annex 3R is not copied. The experiment says that page was not opened.
 - The mock smoke test is not a model score. A live Foundry run has not been done.
 - This is not legal advice and it is not a statement of the firm's compliance.
+- Copilot Credit prices, and which licence includes which harness, were not copied beyond the sentences on the pages opened on 24 October 2026. The full standard-harness licensing article was not opened.
 
 ## Source
 
@@ -208,3 +228,5 @@ Use the synthetic fixtures in `eval/synthetic_dataset.json` if you rebuild the C
 - [Security and permissions](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/security-and-permissions.md)
 - [Architecture note](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/architecture.md)
 - [Experiment README](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/README.md)
+- [Harness comparison](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/harness-comparison.md)
+- [GitHub Copilot harness](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/02-consumer-duty-complaint-intake/docs/github-copilot-harness.md)

@@ -4,7 +4,7 @@
 
 An assistant for UK public sector staff who triage Freedom of Information (FOI) requests, Environmental Information Regulations (EIR) requests, subject access requests (SARs), and complaints.
 
-The agent prepares a structured brief. A person decides. The repository README marks the experiment complete, which means the starter is written: Python code, a permissions manifest, a security note, and a Copilot Studio build guide. A live model evaluation is still marked as pending in that folder.
+The agent prepares a structured brief. A person decides. The repository README marks the experiment complete, which means the starter is written: Python code, a permissions manifest, a security note, and build notes for both Copilot Studio harnesses. A live model evaluation is still marked as pending in that folder.
 
 If this page and [`agent-manifest.yaml`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/agent-manifest.yaml) disagree, the manifest is the control.
 
@@ -50,7 +50,7 @@ These are switched off in the manifest, not left to the prompt.
 
 ## How the work flows
 
-The same steps are listed here and drawn below. Step 5 is the human approval. Anything after that is done by staff in the systems they already use.
+The same steps are listed here and drawn below. Step 5 is the human approval. Anything after that is done by staff in the systems they already use. The standard harness and the GitHub Copilot harness both stop at that step. Neither one adds an approval point.
 
 1. A member of staff pastes one submission.
 2. The agent reads that text, and its own instructions. It does not look up the requester.
@@ -66,6 +66,8 @@ flowchart TD
     C --> D["4. Draft triage is shown"]
     D --> E["5. Human approval by an FOI or complaints officer"]
     E --> F["6. Staff record the case and send any letter themselves"]
+
+    style E fill:#fff3cd,stroke:#997404
 ```
 
 ## Architecture diagram
@@ -82,8 +84,25 @@ The diagram below is the file shipped in the experiment, copied into this site a
 | Microsoft Foundry | Optional language-model call. The README uses a GPT-4o deployment name. No Foundry resource is created by the repository. |
 | Mock mode | Rule-based Python, so the pipeline can be tried with no credentials. |
 | JSON Schema | Checks the shape of the output. |
-| Copilot Studio and Power Automate | A build guide for a staff-facing topic that calls Foundry. It is not an importable solution. |
+| Copilot Studio, standard harness | Lead intake. Topics and one Power Automate flow call the existing triage core and show the JSON. Not an importable solution. The steps are the ones already in `copilot-studio/`. |
+| Copilot Studio, GitHub Copilot harness | Staff follow-up on the same JSON, with two skills. This harness is a Copilot Studio authoring and orchestration runtime. It is not the GitHub Copilot service. The same core and the same approval points. Billing is in Copilot Credits. Prices were not copied. |
 | Microsoft Entra ID, Conditional Access, Key Vault, Purview, Application Insights, prompt shields | Named in the security guide as the controls for a deployment. This repository does not turn them on. |
+
+### The two harnesses
+
+The [harness comparison](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/docs/harness-comparison.md) is the longer note. Short version, from Microsoft Learn pages opened on 24 October 2026:
+
+The standard harness follows topics you define. It is the lead path because the intake is the same every time: paste one submission, run the triage, show the JSON, stop. The existing build guide is that harness.
+
+The GitHub Copilot harness is a Copilot Studio runtime for multi-step work. It is not the GitHub Copilot service. Microsoft says customer data is not sent to the GitHub Copilot service when the agent runs in Copilot Studio, and that the harness can use skills, memory, and files, in a sandbox. It is billed in Copilot Credits from the moment you start building, including testing. A Microsoft 365 Copilot licence does not cover that usage, on the costs page opened the same day. This experiment's skills tell the agent to call `src/triage_agent.py` and to stop. They do not tell it to reject a request or send a letter.
+
+The costs page says the standard harness is covered by a Microsoft 365 Copilot licence in Microsoft 365 channels, and billed otherwise. The article on standard-harness licensing was not opened, so this is not a licence opinion. Credit ranges on Microsoft's diagram were not copied.
+
+The harness overview says skills and memory are "Not a focus" for the standard harness. A second Microsoft table, on the agents overview, says they are "Not supported" there and "Supported" on the GitHub Copilot harness. Those two cells are not reconciled here. Do not upload the skills onto the standard-harness agent. An agent cannot be transferred from one harness to the other.
+
+Describing an agent in natural language, agent instructions, Memory, and triggers are marked preview on the agents page. The skills upload page links to "Create an agent (preview)". That article was not opened. The harness overview itself did not label the harness as preview. Whether memory can be switched off was not on the pages opened. The skills say not to store the submission anyway.
+
+The Customer Conversation harness is not used. A requester chatting with this agent would be a different product.
 
 ## Security and permissions
 
@@ -153,7 +172,7 @@ Unit tests:
 python -m pytest tests/ -v
 ```
 
-Copilot Studio is rebuilt by hand from [`copilot-studio/README.md`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/copilot-studio/README.md). There is nothing to import.
+Either harness is rebuilt by hand. The standard harness is [`copilot-studio/README.md`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/copilot-studio/README.md). The GitHub Copilot harness is [`docs/github-copilot-harness.md`](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/docs/github-copilot-harness.md), with skills under `skills/`. There is nothing to import. Use the synthetic fixtures. Do not paste a live request into a shared test environment. Building the GitHub Copilot harness in a tenant consumes Copilot Credits. This page does not quote a price.
 
 ## Limitations
 
@@ -164,6 +183,7 @@ Copilot Studio is rebuilt by hand from [`copilot-studio/README.md`](https://gith
 - Several deployment choices are marked as assumptions in the manifest, including UK region, retention, a one-hour safeguarding review, Application Insights, the escalation contacts, and the reviewing board.
 - The security guide lists Dynamic Permissions, Dynamic Agent Risk, and Dynamic Conditional Access as announced, with availability unverified. Do not rely on them until that is confirmed.
 - "What I learned" in the experiment README is still empty, waiting on a real-model test.
+- Copilot Credit prices, and which licence includes which harness, were not copied beyond the sentences on the pages opened on 24 October 2026. The full standard-harness licensing article was not opened. Building the GitHub Copilot harness consumes credits from the start of building. This page does not quote a price.
 
 ## Source
 
@@ -171,3 +191,5 @@ Copilot Studio is rebuilt by hand from [`copilot-studio/README.md`](https://gith
 - [Permissions manifest](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/agent-manifest.yaml)
 - [Security and permissions](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/docs/security-and-permissions.md)
 - [Experiment README](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/README.md)
+- [Harness comparison](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/docs/harness-comparison.md)
+- [GitHub Copilot harness](https://github.com/rahul-bachina/copilot-agent-experiments/blob/main/experiments/01-foi-complaint-triage/docs/github-copilot-harness.md)

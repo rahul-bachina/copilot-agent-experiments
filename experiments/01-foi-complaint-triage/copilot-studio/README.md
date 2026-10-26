@@ -1,6 +1,8 @@
-# Copilot Studio Implementation Guide
+# Copilot Studio standard harness
 
 This guide explains how to recreate the FOI Complaint Triage Agent in Microsoft Copilot Studio and integrate it with Power Automate.
+
+This is the **standard harness**: the topics, the flow, and the instructions below. Those steps and the approval points in `agent-manifest.yaml` are unchanged. The Copilot Studio **GitHub Copilot harness** calls the same Python triage core and is documented in [../docs/github-copilot-harness.md](../docs/github-copilot-harness.md). Read [../docs/harness-comparison.md](../docs/harness-comparison.md) before choosing. Do not upload the skills onto this agent. Microsoft's harness overview, retrieved 24 October 2026, describes the standard harness as the option where you define the topics and paths.
 
 > **Important Note**: This is a step-by-step build guide, not an importable solution. Copilot Studio agents cannot be reliably exported as standalone files for import. You will need to manually create the agent following these instructions.
 

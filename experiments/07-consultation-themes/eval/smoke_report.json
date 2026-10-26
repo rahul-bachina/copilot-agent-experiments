@@ -1,0 +1,147 @@
+{
+  "evaluation_label": "MOCK SMOKE TEST \u2014 deterministic codebook unless a ThemeFinder client is supplied. Not a model score. Not an expert-coder comparison. Not a published consultation analysis.",
+  "mode": "mock",
+  "not_a_model_evaluation": true,
+  "not_an_expert_coder_comparison": true,
+  "engine": "deterministic_fallback",
+  "themefinder_vendored": false,
+  "synthetic_cases": 24,
+  "unapproved_status": "blocked_framework_unapproved",
+  "reviewed_status": "analyst_reviewed",
+  "unique_voices": 21,
+  "sample_size": 20,
+  "minority_theme_ids": [
+    "T-braille",
+    "T-bsl",
+    "T-volunteer"
+  ],
+  "themes": [
+    {
+      "theme_id": "T-sunday",
+      "label": "Sunday opening",
+      "submission_count": 12,
+      "unique_voice_count": 9,
+      "proportion_of_unique_voices": 0.428571,
+      "wilson_95": {
+        "low": 0.244697,
+        "high": 0.634538
+      },
+      "minority": false,
+      "response_ids": [
+        "R-01",
+        "R-02",
+        "R-03",
+        "R-04",
+        "R-11",
+        "R-14",
+        "R-15",
+        "R-16",
+        "R-17",
+        "R-18",
+        "R-21",
+        "R-24"
+      ]
+    },
+    {
+      "theme_id": "T-evening",
+      "label": "Evening opening",
+      "submission_count": 3,
+      "unique_voice_count": 3,
+      "proportion_of_unique_voices": 0.142857,
+      "wilson_95": {
+        "low": 0.049809,
+        "high": 0.346365
+      },
+      "minority": false,
+      "response_ids": [
+        "R-05",
+        "R-06",
+        "R-11"
+      ]
+    },
+    {
+      "theme_id": "T-volunteer",
+      "label": "Volunteers",
+      "submission_count": 2,
+      "unique_voice_count": 2,
+      "proportion_of_unique_voices": 0.095238,
+      "wilson_95": {
+        "low": 0.026518,
+        "high": 0.289146
+      },
+      "minority": true,
+      "response_ids": [
+        "R-07",
+        "R-08"
+      ]
+    },
+    {
+      "theme_id": "T-travel",
+      "label": "Travel to the library",
+      "submission_count": 3,
+      "unique_voice_count": 3,
+      "proportion_of_unique_voices": 0.142857,
+      "wilson_95": {
+        "low": 0.049809,
+        "high": 0.346365
+      },
+      "minority": false,
+      "response_ids": [
+        "R-09",
+        "R-10",
+        "R-11"
+      ]
+    },
+    {
+      "theme_id": "T-braille",
+      "label": "Braille stock",
+      "submission_count": 1,
+      "unique_voice_count": 1,
+      "proportion_of_unique_voices": 0.047619,
+      "wilson_95": {
+        "low": 0.008456,
+        "high": 0.226698
+      },
+      "minority": true,
+      "response_ids": [
+        "R-12"
+      ]
+    },
+    {
+      "theme_id": "T-bsl",
+      "label": "British Sign Language",
+      "submission_count": 1,
+      "unique_voice_count": 1,
+      "proportion_of_unique_voices": 0.047619,
+      "wilson_95": {
+        "low": 0.008456,
+        "high": 0.226698
+      },
+      "minority": true,
+      "response_ids": [
+        "R-13"
+      ]
+    },
+    {
+      "theme_id": "T-observatory",
+      "label": "Observatory visits",
+      "submission_count": 0,
+      "unique_voice_count": 0,
+      "proportion_of_unique_voices": 0.0,
+      "wilson_95": {
+        "low": 0.0,
+        "high": 0.154644
+      },
+      "minority": false,
+      "response_ids": []
+    }
+  ],
+  "framework_themes_with_no_support": [
+    "T-observatory"
+  ],
+  "may_be_published_by_agent": false,
+  "actions_taken": [],
+  "secrets_absent": true,
+  "errors": [],
+  "passed": true
+}

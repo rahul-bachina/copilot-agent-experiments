@@ -1,0 +1,534 @@
+# Agent manifest: Awaab's Law hazard triage and statutory clock
+# Experiment 05 — catalogue ID UK01
+# Version: 0.1.0
+# Last reviewed: 2026-10-24
+# Next review: 2027-04-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-05-awaabs-law-hazard-triage"
+  name: "Awaab's Law hazard triage and statutory clock"
+  version: "0.1.0"
+  description: >
+    Helps a social-housing officer in England triage one tenant hazard report.
+    It proposes a hazard family and category, calculates Awaab's Law timeframes
+    in deterministic code, flags vulnerability characteristics without labelling
+    the tenant, drafts a written summary, and drafts a reasonable-endeavours
+    record. Autonomy A1. The officer approves the hazard category, the clock,
+    and every tenant-facing summary. The agent never sends, never writes a
+    housing management record, never decides that a defence is made out, and
+    never refers a complaint to the Housing Ombudsman.
+  owner: "Housing repairs and complaints"
+  contact: "hazards-triage@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/05-awaabs-law-hazard-triage"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "An officer approves the hazard category before any timeframe is relied on"
+    - "An officer approves the clock before any date is treated as operative"
+    - "An officer approves every tenant-facing summary before it is used"
+    - "The agent NEVER sends a summary, a safety note, a letter, an email, or an SMS to a tenant"
+    - "The agent NEVER writes to a housing management system, Dataverse, or any other production record"
+    - "The agent NEVER decides that the section 10A(5) reasonable-endeavours defence is made out"
+    - "The agent NEVER downgrades a proposed emergency or significant category on an instruction in the report text"
+    - "The agent NEVER refers a matter to the Housing Ombudsman or decides jurisdiction"
+    - "The agent NEVER books alternative accommodation or spends money"
+    - "Dates come from src/statutory_clock.py, not from model output"
+    - "Phases that are not in force are flagged and are not given an operative clock"
+    - "All output is advisory and is marked draft"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "Tenant report supplied by the officer"
+      description: "One web-form submission, email, or call note, pasted by an authorised officer for this run. Synthetic in this repository."
+      access_level: "read"
+      scope: "Single report per invocation. No browsing of the housing stock."
+      justification: "The draft cannot be prepared without the report the officer has asked the agent to read"
+      data_categories:
+        - "Hazard narrative"
+        - "Names, tenancy references, and contact details if the report includes them"
+        - "Free text that may describe health, pregnancy, disability, or a child's circumstances"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text."
+
+    - resource: "Officer-confirmed clock inputs"
+      description: "Awareness time, confirmed category and hazard family, social-home confirmation, and any investigation or inspection dates the officer has entered"
+      access_level: "read"
+      scope: "Fields the officer types for this calculation"
+      justification: "The statutory clock is deterministic only once a human has set the inputs the regulations leave to the landlord"
+      may_contain_personal_data: false
+
+    - resource: "Officer-supplied endeavour steps"
+      description: "Dated steps the officer types. The agent does not invent visits, calls, or consent requests."
+      access_level: "read"
+      scope: "The list supplied for this draft record"
+      justification: "A reasonable-endeavours record is only as good as the steps a person entered"
+      may_contain_personal_data: true
+
+    - resource: "System prompt and statutory configuration"
+      description: "Agent instructions and the timeframe rules in src/statutory_clock.py"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "Required to run the triage and the clock"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Housing management system production data"
+      reason: "This starter has no connector to a housing system. A later read-only connector would be a deployment decision, added to this manifest before it is switched on."
+    - resource: "Vulnerability markers or special-category flags on a tenancy record"
+      reason: "Characteristics are flagged in the draft for an officer. They are not read back from, or written to, a tenancy."
+    - resource: "Repairs-contractor systems and finance systems"
+      reason: "Not required to draft a triage. Work orders and payments are out of scope."
+    - resource: "Email, SMS, and letter gateways"
+      reason: "The agent does not send."
+    - resource: "Housing Ombudsman case systems"
+      reason: "The agent provides published escalation information. It does not look up or open cases."
+    - resource: "Other tenants' reports"
+      reason: "No profiling across the stock in this starter."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Statutory clock"
+      provider: "Local Python (src/statutory_clock.py)"
+      action: "Calculate Awaab's Law timeframes from officer-confirmed inputs"
+      access_level: "read"
+      scope: "One report's dates per call. No network. No model."
+      justification: "Timeframes are a statutory count. A language model must not produce them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Propose a hazard family and category, flag characteristics, draft the summary and the endeavours record"
+      access_level: "read"
+      scope: "The single report supplied for this run"
+      justification: "Natural-language extraction and drafting. Dates, the category decision, sends, and writes stay outside the model."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output checks"
+      provider: "Local Python"
+      action: "Reject a draft that sends, writes, labels the tenant, finds a defence, or refers to the Ombudsman"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A prohibited decision must fail before an officer could mistake it for an action"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the officer. Filing it, if the
+      officer chooses to, is done by the officer in the landlord's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The written summary is a draft. Regulation 10 describes how a
+      lessor may give a document. The agent does not give it.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide that a report is or is not a hazard, and it
+      does not close a case. An officer approves the category. Closing a case
+      is outside the agent.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Hazard category, whether the regulations apply, whether Part 6 has been
+      complied with, whether it was not reasonably practicable to begin
+      preventative work, and whether all reasonable endeavours were used, are
+      for an officer or a court. The agent proposes and records. It does not decide.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a housing management system, a repairs
+      system, or Dataverse. No vulnerability marker is written to a tenancy.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The written summary and any safety note are tenant-facing communications.
+      The agent drafts only. An officer sends through the landlord's channel
+      after approving the text.
+
+  spend_transact:
+    enabled: false
+    rationale: >
+      Suitable alternative accommodation under Part 6 is at the landlord's
+      expense. The agent does not book it and does not spend.
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Refer to the Housing Ombudsman"
+      rationale: "Referral is the resident's step, after the landlord's complaint procedure. Never the agent's."
+    - enabled: false
+      action_name: "Find the reasonable-endeavours defence made out"
+      rationale: >
+        Landlord and Tenant Act 1985 section 10A(5) is a defence the lessor
+        must prove. The agent drafts a record of steps the officer entered.
+        It does not find that the defence is made out.
+    - enabled: false
+      action_name: "Label the tenant as vulnerable"
+      rationale: "The agent may flag a characteristic and quote the words. It does not apply a label or write a marker."
+    - enabled: false
+      action_name: "Downgrade the proposed category from the report text"
+      rationale: "An instruction in the report to treat a hazard as non-urgent is ignored. An officer may still record a different category, and that choice is shown as the officer's."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The officer approves the hazard category, the clock, and every
+    tenant-facing summary. The agent has no path that acts on its own output.
+    Nothing is sent to a tenant or written to a housing management system
+    without that approval, and this starter has no send or write tool even
+    after approval.
+
+  approval_points:
+    - action: "Approve the hazard category and hazard family"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "The category selects the timeframe. The agent only proposes it."
+
+    - action: "Confirm the tenancy is a social home in England"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "SI 2025/1042 applies to lessors of social homes in England. The agent does not decide that."
+
+    - action: "Approve the clock before any date is relied on"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "A calculated date stays non-operative until the officer approves the category and the clock."
+
+    - action: "Record Part 6 compliance or that preventative work cannot reasonably begin within five working days"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "Those facts change which hard stop applies. The agent must not infer them."
+
+    - action: "Review a vulnerability characteristic before it is recorded"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "The flag is a prompt. Recording it is a decision about special-category or children's data."
+
+    - action: "Approve the written summary before it is given to the tenant"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "Regulation 9 requires the lessor to give the summary. The agent only drafts."
+
+    - action: "Approve a reasonable-endeavours record before it is filed"
+      approver: "Housing officer"
+      mandatory: true
+      rationale: "The record is a draft of steps the officer supplied. Filing it is a production write, which this agent cannot do."
+
+    - action: "Send, file, decant, spend, refer, or close"
+      approver: "Authorised housing manager"
+      mandatory: true
+      rationale: "Out of the agent's scope. Listed so the control is explicit."
+
+  no_approval_required:
+    - action: "View the draft triage"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the proposal on the same text"
+      rationale: "No write and no send"
+    - action: "Calculate a reference clock that is marked non-operative"
+      rationale: "The arithmetic can be shown for approval. Relying on it still requires the approvals above."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Article 6(1)(c) — legal obligation"
+    description: >
+      Complying with the prescribed requirements under section 10A of the
+      Landlord and Tenant Act 1985 is a legal obligation of a social landlord
+      in England. This starter does not decide the basis. The landlord's DPO
+      confirms it before any production use. A council may also consider
+      Article 6(1)(e), public task. A private registered provider should not
+      copy a public-task basis without advice.
+    secondary: "To be confirmed by the landlord. Article 6(1)(e) is not asserted for every landlord."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, if the report describes asthma, another condition, disability, or pregnancy"
+      - "Information about a child in the household"
+    lawful_basis_special: >
+      Not asserted. The landlord must identify an Article 9 condition, and a
+      basis for any children's data, before production use. This starter does
+      not claim a Schedule 1 condition of the Data Protection Act 2018.
+    safeguards:
+      - "The draft quotes the words that prompted a flag and names the characteristic"
+      - "The tenant is not labelled vulnerable"
+      - "Nothing is written to a tenancy record"
+      - "An officer reviews the flag before it is recorded anywhere"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted as Articles 22A to 22D by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One report at a time, as supplied by the officer"
+    - "No lookup of the tenancy file in this starter"
+    - "The clock stores times, a category, and a hazard family, not the narrative"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The landlord's repairs and complaints retention applies to whatever the officer then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. That is a deployment choice, not something this repository can enforce."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the landlord's privacy process. A report that is also
+      a data-protection request must be flagged for the privacy team.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Report text is untrusted. It may tell the model to ignore the rules, to
+    downgrade the hazard, to send the summary, to write the housing system,
+    or to declare that reasonable endeavours are exhausted. The clock does not
+    read the narrative. The model is not given a tool that can send, write, or decide.
+
+  controls:
+    - control: "Instructions separated from the report"
+      description: "The report is data. It cannot change the system instructions."
+    - control: "Deterministic clock"
+      description: "Dates are computed in Python from officer-confirmed inputs."
+    - control: "No downgrade from the text"
+      description: "An instruction to classify the report as non-urgent does not lower the proposal."
+    - control: "Checks reject prohibited decisions"
+      description: "A draft that sends, writes, labels, finds a defence, or refers to the Ombudsman fails validation."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled in this manifest."
+    - control: "Human approval"
+      description: "An officer approves the category, the clock, and every tenant-facing summary."
+
+  residual_risk: >
+    A manipulated model can still draft a misleading summary. The officer is
+    the control. There is no autonomous action to take even if the draft is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named landlord"
+  date_assessed: "2026-10-24"
+  risks:
+    - id: "R1"
+      risk: "A wrong category makes an officer miss a statutory timeframe, or treat a phase that is not in force as if it were"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The officer approves the category and the clock"
+        - "Phase 2 and Phase 3 are flagged not in force and are not operative by default"
+        - "Dates are calendar arithmetic in Python, not a model guess"
+      residual_risk: "Medium"
+      owner: "Housing repairs and complaints"
+
+    - id: "R2"
+      risk: "A health condition or a child in the household is missed, or the tenant is labelled"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Flags are proposals, with the quoted words"
+        - "The label 'vulnerable' is prohibited in the output"
+        - "No write to a tenancy record"
+      residual_risk: "Medium"
+      owner: "Housing repairs and complaints"
+
+    - id: "R3"
+      risk: "Prompt injection produces a send, a housing-system write, a downgrade, or a defence finding"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No send or write tool exists"
+        - "Tests reject prohibited actions and downgrade instructions"
+        - "Officer approval is mandatory"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R4"
+      risk: "Special-category data in a report is retained or reused"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Starter does not persist the text"
+        - "Article 9 basis is explicitly not asserted"
+        - "Synthetic fixtures only in this repository"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R5"
+      risk: "The clock is relied on after Phase 2 is made, or the draft definition change is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The module records the retrieval date and that the amendment was still a draft"
+        - "Phase 2 stays non-operative unless a caller explicitly asserts the made instrument is in force, and even then the retrieval warning remains"
+        - "Review trigger when the amendment is made or Phase 3 is laid"
+      residual_risk: "Medium"
+      owner: "Housing repairs and complaints"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version, the
+    clock inputs, and the officer's approvals. This starter logs nothing
+    because it keeps no store. The fields below are the minimum a landlord
+    should switch on before live use. Do not log the report text in an application trace.
+
+  logged_events:
+    - event: "Triage requested"
+      data_logged:
+        - "Timestamp"
+        - "Officer identity"
+        - "Character count of the report, not the text"
+      retention: "Landlord's repairs-file schedule. Not set by this starter."
+    - event: "Clock calculated"
+      data_logged:
+        - "Awareness time"
+        - "Confirmed category and hazard family, if any"
+        - "Whether the officer approved the category and the clock"
+        - "Whether Phase 2 was asserted in force"
+        - "The dates returned and the rule ids"
+      retention: "Keep with the repairs file if the officer relies on the dates."
+    - event: "Officer approved or changed the category, the clock, or the summary"
+      data_logged:
+        - "Field name"
+        - "Officer identity"
+        - "Timestamp"
+      retention: "Landlord's repairs-file schedule."
+    - event: "Draft rejected by checks"
+      data_logged:
+        - "Validation error code"
+        - "Timestamp"
+      retention: "Operational log. Do not store the report text in the error."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the landlord's security team already operates."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove the Microsoft Foundry deployment access"
+      action: "Revoke the key or the managed-identity role used by the agent"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for a housing system, Dataverse write, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Housing repairs lead"
+      contact: "hazards-triage@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-24"
+  next_review_date: "2027-04-24"
+  review_frequency: "6 months, and sooner if the regulations or the guidance change"
+  reviewer: "The adopting landlord's housing owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "The draft Hazards in Social Housing (Prescribed Requirements) (England) (Amendment) Regulations 2026 being made, rejected, or commenced"
+    - "Any Phase 3 instrument"
+    - "A commencement date being appointed for the Renters' Rights Act 2025 amendments to section 10A"
+    - "A change to England and Wales bank holidays by proclamation"
+    - "A proposal to add a housing-system, Dataverse, or email connector"
+    - "A security incident, or a Housing Ombudsman finding about a draft the landlord relied on"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Statutory clock"
+      path: "src/statutory_clock.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Harness comparison"
+      path: "docs/harness-comparison.md"
+    - name: "Copilot Studio standard harness"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a landlord must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The home is a social home in England. The regulations apply to lessors of social homes in England. They are not a Wales, Scotland, or Northern Ireland clock, and they are not applied here to a private landlord."
+      section: "src/statutory_clock.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6(1)(c) is an appropriate lead basis for this landlord, and an Article 9 condition will be chosen before any live special-category processing"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on tenants' reports"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No housing-system or email connector is added without updating this manifest"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on example.com are placeholders, not a landlord"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Phase 2 is not treated as in force until legislation.gov.uk shows a made amendment that has come into force. On 24 October 2026 it was still a draft."
+      section: "src/statutory_clock.py"
+      verify_on_deployment: true

@@ -1,0 +1,1475 @@
+{
+  "label": "DRAFT FOR HUMAN REVIEW",
+  "catalogue_id": "UK02",
+  "experiment": "04-fca-cryptoasset-readiness",
+  "autonomy": "A0",
+  "processing_mode": "deterministic",
+  "evaluation_label": null,
+  "model_called": false,
+  "network_called": false,
+  "disclaimer": "DRAFT FOR HUMAN REVIEW. This output is not regulatory advice and it is not legal advice. It is not a conclusion on readiness for FCA authorisation or MLR registration. The Compliance Officer or the MLRO owns every gap conclusion. Each row records only whether expected wording was found in the text supplied. Consultation-stage and planned items are marked and are not scored as rules.",
+  "owner_of_gap_conclusions": "Compliance Officer / MLRO",
+  "readiness_conclusion": null,
+  "firm_ready": null,
+  "firm_not_ready": null,
+  "regulatory_advice": null,
+  "legal_advice": null,
+  "actions_taken": [],
+  "decisions_not_taken": [
+    "Make a readiness finding on authorisation or registration",
+    "Give regulatory advice",
+    "Give legal advice",
+    "Accept or reject a gap",
+    "Submit or vary an application, or use Connect",
+    "File a suspicious activity report",
+    "Approve a financial promotion",
+    "Treat a consultation or a plan to consult as a final rule",
+    "Write a production record or send a message"
+  ],
+  "as_of": "2026-10-24",
+  "catalogue_last_verified": "2026-10-24",
+  "stale_after_days": 90,
+  "document_stale_after_days": 365,
+  "firm_name": "Harbourline Markets Ltd",
+  "synthetic": true,
+  "key_dates": [
+    {
+      "id": "application-window",
+      "opens": "2026-09-30",
+      "closes": "2027-02-28",
+      "source_ids": [
+        "fca-gateway",
+        "fca-what-you-need-to-do",
+        "fca-ps26-18",
+        "fca-regime-overview"
+      ],
+      "statement": "The gateway page, last updated 30 September 2026, says the application period started on 30 September 2026 and will close on 28 February 2027. The what-you-need-to-do page says the period is open across those dates. PS26/18 uses the same dates for firms wanting to use the transitional arrangements. The 30 June 2026 overview says the window is scheduled to open and close on those dates for the savings provisions."
+    },
+    {
+      "id": "regime-commencement",
+      "date": "2027-10-25",
+      "source_ids": [
+        "fca-what-you-need-to-do",
+        "fca-regime-landing",
+        "fca-regime-overview",
+        "fca-ps26-18",
+        "fca-mlr-application"
+      ],
+      "statement": "The what-you-need-to-do page says the regime starts on 25 October 2027, when the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 take effect. The regime landing page says the regime is expected to come into force on that date. PS26/18 says the Regulations will introduce the new activities from that date. This checker pins the date and does not choose between starts and expected."
+    },
+    {
+      "id": "no-automatic-conversion",
+      "source_ids": [
+        "fca-gateway",
+        "fca-regime-overview",
+        "fca-ps26-18"
+      ],
+      "statement": "The gateway page, the 30 June 2026 overview, and PS26/18 each say that existing registrations do not convert automatically into FSMA permission."
+    },
+    {
+      "id": "travel-rule-in-force",
+      "date": "2023-09-01",
+      "source_ids": [
+        "fca-travel-rule"
+      ],
+      "statement": "The Travel Rule statement says that from 1 September 2023 UK cryptoasset businesses will be required to collect, verify and share information about cryptoasset transfers."
+    },
+    {
+      "id": "financial-promotions-regime",
+      "date": "2023-10-08",
+      "source_ids": [
+        "fca-marketing"
+      ],
+      "statement": "The marketing page says cryptoasset firms marketing to UK consumers need to comply with the financial promotions regime from 8 October 2023."
+    }
+  ],
+  "sources_and_currency": [
+    {
+      "source_id": "fca-regime-overview",
+      "title": "Overview of our cryptoassets regime policy statements",
+      "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+      "page_published": "2026-06-30",
+      "page_last_updated": "2026-06-30",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Published and last updated 30 June 2026. Names PS26/9 to PS26/13, FG26/5, FG26/6, FG26/7, GC26/4 and GC26/5, and the sourcebooks CRYPTO 2 to CRYPTO 10, CASS 7, CASS 16, CASS 17, COREPRU and CRYPTOPRU. Those PDFs and the Handbook were not opened. The page says the full scope of regulated activities expands from 25 October 2027, that existing registrations will not convert automatically, and that the application window is scheduled to open on 30 September 2026 and close on 28 February 2027 for firms that wish to rely on the savings provisions. The later gateway page is more specific about saving and transitional provisions."
+    },
+    {
+      "source_id": "fca-mlr-application",
+      "title": "Cryptoassets: what we expect to see in an application for registration",
+      "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+      "page_published": "2023-03-22",
+      "page_last_updated": "2026-06-30",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "First published 22 March 2023, last updated 30 June 2026. States that the new regime starts on 25 October 2027. Describes BWRA, CRA, CDD, on-chain and off-chain monitoring rules and thresholds, Travel Rule procedures and a flow of funds, a financial promotions policy, and the MLRO. Says registering under the MLRs does not of itself subject the firm to SM&CR. Regulation numbers below are the numbers this page uses. This checker does not interpret the MLRs."
+    },
+    {
+      "source_id": "fca-gateway",
+      "title": "Cryptoassets: how the gateway will operate",
+      "url": "https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation/how-gateway-will-operate",
+      "page_published": "2026-01-08",
+      "page_last_updated": "2026-09-30",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Last updated 30 September 2026. Says the application period started on 30 September 2026 and will close on 28 February 2027, as set out in the FCA's direction. Says MLR registration will not convert automatically. Distinguishes firms that apply during the period (saving provision if the application is not determined by commencement), firms that apply outside the period but before commencement (transitional provision: pre-existing contracts only, no new UK contracts), and firms that do not apply (run off before commencement, no saving or transitional provision). The s.21 approvers page named here was not opened."
+    },
+    {
+      "source_id": "fca-what-you-need-to-do",
+      "title": "What you need to do when preparing for the new cryptoasset regulatory regime",
+      "url": "https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation/what-you-need-to-do",
+      "page_published": "2026-04-30",
+      "page_last_updated": "2026-09-16",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Last updated 16 September 2026. Says the application period is open from 30 September 2026 to 28 February 2027, and that the regime starts on 25 October 2027 when the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 take effect. Encourages firms to carry out a gap analysis. That sentence is the FCA's, not a claim that this tool performs it."
+    },
+    {
+      "source_id": "fca-regime-landing",
+      "title": "A new regime for cryptoasset regulation",
+      "url": "https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation",
+      "page_published": "2026-01-08",
+      "page_last_updated": "2026-09-30",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Last updated 30 September 2026. Says the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 were made on 4 February 2026, and that the new regime is expected to come into force on 25 October 2027. The word expected is the landing page's. The what-you-need-to-do page says starts."
+    },
+    {
+      "source_id": "fca-ps26-18",
+      "title": "PS26/18: Cryptoasset perimeter guidance",
+      "url": "https://www.fca.org.uk/publications/policy-statements/ps26-18-cryptoasset-perimeter-guidance",
+      "page_published": "2026-09-16",
+      "page_last_updated": "2026-09-16",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Policy statement page published 16 September 2026. The PDF was not opened. The page says that from 25 October 2027 the Cryptoassets Regulations introduce new regulated activities, that existing registrations and permissions will not convert automatically, and that the application window opens on 30 September 2026 and closes on 28 February 2027 for firms wanting to use the transitional arrangements. It also says the FCA plans to consult on further perimeter guidance in late 2026."
+    },
+    {
+      "source_id": "fca-travel-rule",
+      "title": "FCA sets out expectations for UK cryptoasset businesses complying with the Travel Rule",
+      "url": "https://www.fca.org.uk/news/statements/fca-sets-out-expectations-uk-cryptoasset-businesses-complying-travel-rule",
+      "page_published": "2023-08-17",
+      "page_last_updated": "2026-02-06",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "First published 17 August 2023, last updated 6 February 2026. Says that from 1 September 2023 UK cryptoasset businesses will be required to collect, verify and share information about cryptoasset transfers. Cites Part 7A of the MLRs. Says firms remain responsible when using third-party suppliers, and sets expectations for jurisdictions where the Travel Rule is not in force. JMLSG guidance is mentioned and is not an FCA page, so it is not a source in this catalogue."
+    },
+    {
+      "source_id": "fca-marketing",
+      "title": "Cryptoasset firms marketing to UK consumers",
+      "url": "https://www.fca.org.uk/firms/cryptoassets/marketing-uk-consumers",
+      "page_published": "2023-06-08",
+      "page_last_updated": "2026-02-06",
+      "last_verified": "2026-10-24",
+      "age_days": 0,
+      "stale_after_days": 90,
+      "currency": "within_threshold",
+      "body_opened": true,
+      "pdf_opened": false,
+      "notes": "Last updated 6 February 2026. Says the financial promotions regime applies from 8 October 2023, lists four communication routes, and says promotions must be fair, clear and not misleading, with risk warnings and a 24-hour cooling-off period. Names PS23/6 and FG23/3. Those documents were not opened. The page still describes GC23/2 as a guidance consultation and still says legislation on a promotions gateway was before Parliament. This catalogue does not overwrite that sentence."
+    }
+  ],
+  "any_source_stale": false,
+  "documents": [
+    {
+      "id": "bwra",
+      "title": "Business-wide risk assessment",
+      "doc_type": "bwra",
+      "doc_type_source": "declared",
+      "character_count": 312,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "cra",
+      "title": "Customer risk assessment",
+      "doc_type": "cra",
+      "doc_type_source": "declared",
+      "character_count": 200,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "cdd",
+      "title": "Onboarding and customer due diligence",
+      "doc_type": "cdd_onboarding",
+      "doc_type_source": "declared",
+      "character_count": 264,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "tm",
+      "title": "Transaction monitoring",
+      "doc_type": "transaction_monitoring",
+      "doc_type_source": "declared",
+      "character_count": 151,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "travel",
+      "title": "Travel Rule procedure",
+      "doc_type": "travel_rule",
+      "doc_type_source": "declared",
+      "character_count": 302,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "gov",
+      "title": "Governance and SMCR preparation",
+      "doc_type": "governance_smcr",
+      "doc_type_source": "declared",
+      "character_count": 413,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "duty",
+      "title": "Consumer Duty note",
+      "doc_type": "consumer_duty",
+      "doc_type_source": "declared",
+      "character_count": 107,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "promotions",
+      "title": "Financial promotions policy",
+      "doc_type": "financial_promotions",
+      "doc_type_source": "declared",
+      "character_count": 145,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "resilience",
+      "title": "Operational resilience",
+      "doc_type": "operational_resilience",
+      "doc_type_source": "declared",
+      "character_count": 135,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    },
+    {
+      "id": "custody",
+      "title": "Safeguarding and custody",
+      "doc_type": "safeguarding_custody",
+      "doc_type_source": "declared",
+      "character_count": 129,
+      "document_currency": {
+        "document_date": "2026-09-01",
+        "age_days": 53,
+        "stale_after_days": 365,
+        "currency": "within_threshold"
+      },
+      "prompt_injection_detected": false,
+      "quarantined": false
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "documents": []
+  },
+  "date_observations": [],
+  "observations": [
+    {
+      "requirement_id": "R-BWRA-01",
+      "control_area": "bwra",
+      "title": "Business-wide risk assessment covering money laundering, terrorist financing and proliferation financing",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the AML framework should include a business-wide risk assessment and its methodology, and that a BWRA focused on money laundering, terrorist financing and proliferation financing tends to perform better. The page cites Regulations 18 and 18A of the MLRs. This checker does not interpret those regulations.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "business-wide risk assessment",
+        "money laundering",
+        "terrorist financing",
+        "proliferation"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "C. Harbourline Markets Ltd is invented. Business-wide risk assessment for money laundering, terrorist financing and proliferation financing. Customer",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-BWRA-02",
+      "control_area": "bwra",
+      "title": "BWRA covers the five risk-factor headings named on the registration page",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the BWRA should cover the risk factors in Regulation 18(2)(b): customers, products and services, geography, transactions and delivery channel.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "customer",
+        "product",
+        "geograph",
+        "transaction",
+        "delivery channel"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "financing and proliferation financing. Customers. Products and services. Geography. Transactions. Delivery channel. Inherent ri",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-BWRA-03",
+      "control_area": "bwra",
+      "title": "BWRA methodology records inherent risk, control effectiveness and residual risk",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the methodology should identify inherent risks, assess their severity, identify controls, assess control effectiveness, and calculate residual risk.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "inherent",
+        "residual",
+        "control effectiveness"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "graphy. Transactions. Delivery channel. Inherent risk, control effectiveness and residual risk are scored in the methodology.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CRA-01",
+      "control_area": "cra",
+      "title": "Customer risk assessment produces a rating that drives due diligence",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page expects a customer risk assessment with a risk-rating outcome that drives the level of due diligence.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "customer risk",
+        "risk rating",
+        "due diligence"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Customer risk assessment. The risk rating drives the level of due diligence. It aligns to the",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CRA-02",
+      "control_area": "cra",
+      "title": "Customer risk assessment refers to the business-wide risk assessment",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the CRA risk factors must align with the BWRA, and gives the example of a product treated as higher risk in both.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "business-wide risk assessment"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "evel of due diligence. It aligns to the business-wide risk assessment. Run at onboarding for each new customer and refreshed annually.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CRA-03",
+      "control_area": "cra",
+      "title": "Customer risk assessment says when it is run and when it is refreshed",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page lists, among characteristics of a good application, detailing when the CRA is run against new customers and the frequency with which it is re-run.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "onboarding",
+        "refresh"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "e business-wide risk assessment. Run at onboarding for each new customer and refreshed annually.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CDD-01",
+      "control_area": "cdd_onboarding",
+      "title": "Onboarding procedure covers customer due diligence and enhanced due diligence",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says operational procedures should cover customer due diligence and enhanced due diligence, and should show the steps rather than only recite the MLRs.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "customer due diligence",
+        "enhanced due diligence"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Customer due diligence and enhanced due diligence. Politically exposed persons and sanctions screening",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CDD-02",
+      "control_area": "cdd_onboarding",
+      "title": "Onboarding procedure covers PEPs and sanctions screening",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page lists politically exposed persons and sanctions screening among the operational procedures, and expects sanctions controls that are kept current.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "politically exposed",
+        "sanction"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "e diligence and enhanced due diligence. Politically exposed persons and sanctions screening. Acceptable identity evidence is a passport or",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CDD-03",
+      "control_area": "cdd_onboarding",
+      "title": "Onboarding procedure names the identity evidence the firm will accept",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says that where identification uses documentary evidence, the procedures should document the evidence that will be accepted and any criteria it must satisfy.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "passport"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "ning. Acceptable identity evidence is a passport or a driving licence. Suspicious activity is escalated. Tipping off is prohibit",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TM-01",
+      "control_area": "transaction_monitoring",
+      "title": "Transaction monitoring covers fiat or off-chain activity",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page expects the firm to have selected and configured a fiat (off-chain) transaction monitoring tool, and to submit the rules and thresholds.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "transaction monitoring",
+        "fiat"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Transaction monitoring covers fiat off-chain payments and on-chain transfers. Rules and thresholds are",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TM-02",
+      "control_area": "transaction_monitoring",
+      "title": "Transaction monitoring covers on-chain activity",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page expects a cryptoasset (on-chain) transaction monitoring tool as well as the fiat tool. The FCA page says the FCA does not recommend or endorse any tool.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "on-chain"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "ring covers fiat off-chain payments and on-chain transfers. Rules and thresholds are documented. Alerts are investigated.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TM-03",
+      "control_area": "transaction_monitoring",
+      "title": "Transaction monitoring states rules and thresholds",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the firm must submit the rules and thresholds set in the monitoring tools, and that they need to show how high-risk activity will be detected.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "threshold",
+        "rules"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "ments and on-chain transfers. Rules and thresholds are documented. Alerts are investigated.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TR-01",
+      "control_area": "travel_rule",
+      "title": "Travel Rule procedure covers originator and beneficiary information",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The Travel Rule statement says that from 1 September 2023 UK cryptoasset businesses will be required to collect, verify and share information about transfers. The registration page says procedures must show how beneficiary and originator details are received and transmitted, and cites Part 7A of the MLRs.",
+      "handbook_names": [
+        "MLRs Part 7A, as named on the FCA pages"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-travel-rule",
+          "title": "FCA sets out expectations for UK cryptoasset businesses complying with the Travel Rule",
+          "url": "https://www.fca.org.uk/news/statements/fca-sets-out-expectations-uk-cryptoasset-businesses-complying-travel-rule",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        },
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "travel rule",
+        "originator",
+        "beneficiary",
+        "verif"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Travel Rule procedure. Collect and verify originator and beneficiary information. Flow of f",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TR-02",
+      "control_area": "travel_rule",
+      "title": "Travel Rule material includes a flow of funds",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says Travel Rule procedures should be supported by a detailed flow of funds diagram which includes the flow of Travel Rule data, and any technology used.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "flow of funds"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "originator and beneficiary information. Flow of funds diagram includes Travel Rule data. For a jurisdiction where the Travel Rule is",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TR-03",
+      "control_area": "travel_rule",
+      "title": "Travel Rule procedure addresses a jurisdiction where the rule is not in force",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The Travel Rule statement says that when sending to a jurisdiction without the Travel Rule the firm still collects and verifies the information, and that when receiving a transfer with missing or incomplete information the firm makes a risk-based assessment, taking account of the status of the Travel Rule in the countries concerned.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-travel-rule",
+          "title": "FCA sets out expectations for UK cryptoasset businesses complying with the Travel Rule",
+          "url": "https://www.fca.org.uk/news/statements/fca-sets-out-expectations-uk-cryptoasset-businesses-complying-travel-rule",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "travel rule",
+        "jurisdiction",
+        "missing"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Travel Rule procedure. Collect and verify originator and beneficiary information. Flow of f",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-TR-04",
+      "control_area": "travel_rule",
+      "title": "Travel Rule procedure says a supplier does not remove the firm's responsibility",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The Travel Rule statement says firms remain responsible for achieving compliance even when using third-party suppliers.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-travel-rule",
+          "title": "FCA sets out expectations for UK cryptoasset businesses complying with the Travel Rule",
+          "url": "https://www.fca.org.uk/news/statements/fca-sets-out-expectations-uk-cryptoasset-businesses-complying-travel-rule",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "remains responsible"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "third-party supplier is used. The firm remains responsible.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-GOV-01",
+      "control_area": "governance_smcr",
+      "title": "Governance material names an MLRO or nominated officer",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the firm must appoint an MLRO, citing Regulation 21(3) of the MLRs, to receive disclosures under the Terrorism Act 2000 and the Proceeds of Crime Act 2002.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "mlro"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. The MLRO is the nominated officer. A senior manager on the board owns money laundering c",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-GOV-02",
+      "control_area": "governance_smcr",
+      "title": "Governance material names a senior manager or board responsibility for the MLRs",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says Regulation 21(1)(a) requires a board member or senior manager responsible for compliance with the MLRs. The page says this is often the same person as the MLRO, and need not be.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "senior manager",
+        "money laundering"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "C. The MLRO is the nominated officer. A senior manager on the board owns money laundering compliance. SM&CR statements of responsibili",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-GOV-03",
+      "control_area": "governance_smcr",
+      "title": "Governance material discusses SM&CR for the FSMA cryptoasset regime",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The 30 June 2026 overview says PS26/13 applies key Handbook obligations including SM&CR. The Handbook text was not opened. The MLR registration page says registering under the MLRs does not of itself subject the firm to SM&CR. This row is a preparation item for the FSMA regime. It is not scored as a current MLR expectation. The pinned pages put regime commencement on 25 October 2027, and the landing page says expected.",
+      "handbook_names": [
+        "SM&CR, as named on the 30 June 2026 overview",
+        "PS26/13"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        },
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "sm&cr"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "board owns money laundering compliance. SM&CR statements of responsibilities will be prepared for the FSMA regime. Suspicious",
+      "scored_as_current_expectation": false,
+      "preparation_item": true
+    },
+    {
+      "requirement_id": "R-GOV-04",
+      "control_area": "governance_smcr",
+      "title": "Suspicious activity reporting, including tipping off, is described",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page expects a suspicious activity reporting policy for the whole business, staff obligations, tipping off, and when a defence against money laundering or terrorist financing report may need to be considered, with escalation to the MLRO or nominated officer and externally to the National Crime Agency.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "suspicious activity",
+        "tipping off"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "nce is a passport or a driving licence. Suspicious activity is escalated. Tipping off is prohibited. Reports go to the NCA. SYNTHETIC. Tran",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CD-01",
+      "control_area": "consumer_duty",
+      "title": "Consumer Duty text for the cryptoasset regime is present",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The 30 June 2026 overview says the Consumer Duty is applied across regulated cryptoasset activities and names FG26/5 as non-handbook guidance. FG26/5 was not opened. This is a preparation item. A missing phrase is not a finding that the Duty has been breached.",
+      "handbook_names": [
+        "FG26/5",
+        "PS26/13"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "consumer duty",
+        "consumer support"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Consumer Duty. Price and value, and consumer support, are reviewed for the cryptoasset servic",
+      "scored_as_current_expectation": false,
+      "preparation_item": true
+    },
+    {
+      "requirement_id": "R-OR-01",
+      "control_area": "operational_resilience",
+      "title": "Operational resilience text names an important business service or an impact tolerance",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The 30 June 2026 overview names FG26/6 Cryptoasset Operational Resilience alongside PS26/13. FG26/6 was not opened. This is a preparation item, not a current MLR expectation and not a finding under SYSC.",
+      "handbook_names": [
+        "FG26/6"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "operational resilience",
+        "important business service"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Operational resilience. The important business service has an impact tolerance. Business continuity is",
+      "scored_as_current_expectation": false,
+      "preparation_item": true
+    },
+    {
+      "requirement_id": "R-OR-02",
+      "control_area": "operational_resilience",
+      "title": "Business continuity is described",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page lists a description of the business continuity plan among the contents it expects in the business plan for an MLR registration application.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "business continuity"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "siness service has an impact tolerance. Business continuity is tested twice a year.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-FP-01",
+      "control_area": "financial_promotions",
+      "title": "Financial promotions policy says promotions are fair, clear and not misleading",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The registration page says the firm must provide its financial promotions policy so that promotions are fair, clear and not misleading. The marketing page, last updated 6 February 2026, says the regime applies from 8 October 2023 and points to PS23/6. PS23/6 and FG23/3 were not opened.",
+      "handbook_names": [
+        "PS23/6, named and not opened",
+        "FG23/3, named and not opened"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-marketing",
+          "title": "Cryptoasset firms marketing to UK consumers",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/marketing-uk-consumers",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        },
+        {
+          "source_id": "fca-mlr-application",
+          "title": "Cryptoassets: what we expect to see in an application for registration",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "financial promotion",
+        "fair, clear and not misleading"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "SYNTHETIC. Financial promotions must be fair, clear and not misleading. The route is an MLR-registered firm un",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-FP-02",
+      "control_area": "financial_promotions",
+      "title": "Financial promotions policy names a communication route from the marketing page",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The marketing page lists four routes: communication by an FCA authorised person; approval by an authorised person; communication by an MLR-registered cryptoasset business; or an exemption in the Financial Promotion Order. As last updated on 6 February 2026 the page still says legislation on a regulatory gateway for approvers was before Parliament. This checker does not update that sentence. The s.21 approvers page named on the gateway was not opened.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-marketing",
+          "title": "Cryptoasset firms marketing to UK consumers",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/marketing-uk-consumers",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "financial promotion order"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "ute is an MLR-registered firm under the Financial Promotion Order.",
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-FP-03",
+      "control_area": "financial_promotions",
+      "title": "Financial promotions policy mentions a risk warning or a cooling-off period",
+      "rule_stage": "in_force_expectation",
+      "rule_stage_label": "Described on an FCA page opened on 24 October 2026 as material the FCA looks for now, or as a regime already in force on that page. Not a finding that a duty applies to this firm, and not a finding of breach.",
+      "page_says": "The marketing page says firms must use specific risk warnings and positive frictions such as a 24-hour cooling-off period, as well as the fair, clear and not misleading requirement.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-marketing",
+          "title": "Cryptoasset firms marketing to UK consumers",
+          "url": "https://www.fca.org.uk/firms/cryptoassets/marketing-uk-consumers",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_not_found",
+      "matched_phrases": [],
+      "missing_phrase_groups": [
+        "risk warning"
+      ],
+      "scored_as_current_expectation": true,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-SG-01",
+      "control_area": "safeguarding_custody",
+      "title": "Safeguarding text covers client cryptoasset records, reconciliation or private keys",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The 30 June 2026 overview says PS26/11 proceeds with CASS 17 for client cryptoassets, including ownership rights, record-keeping, reconciliation and private key management. It also says CASS 17 is not being applied to relevant specified investment cryptoasset (RSIC) custody at this stage, and names CASS 6 for RSICs for the time being. The policy statement PDF was not opened. Preparation item only.",
+      "handbook_names": [
+        "CASS 17",
+        "PS26/11"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "signal_present",
+      "matched_phrases": [
+        "private key"
+      ],
+      "missing_phrase_groups": [],
+      "evidence_excerpt": "ent cryptoasset records are reconciled. Private key management is described. This firm does not issue stablecoins.",
+      "scored_as_current_expectation": false,
+      "preparation_item": true
+    },
+    {
+      "requirement_id": "R-SG-02",
+      "control_area": "safeguarding_custody",
+      "title": "Stablecoin issuance text covers backing assets",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The overview says PS26/10 and CASS 16 cover safeguarding of stablecoin backing assets, including statutory trust arrangements. The PDF was not opened. This row is only considered when the pack says the firm issues qualifying stablecoins. A custodian that does not say that is not given a missing-phrase row for backing assets.",
+      "handbook_names": [
+        "CASS 16",
+        "CRYPTO 2",
+        "PS26/10"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_indicated_in_the_text",
+      "scored_as_current_expectation": false,
+      "preparation_item": false,
+      "matched_phrases": [],
+      "missing_phrase_groups": []
+    },
+    {
+      "requirement_id": "R-MARC-01",
+      "control_area": "transaction_monitoring",
+      "title": "Trading-platform pack mentions market-abuse controls",
+      "rule_stage": "final_not_yet_in_force",
+      "rule_stage_label": "Named as final rules or finalised guidance in the June 2026 policy statements, or in PS26/18. The pinned pages put commencement on 25 October 2027. The landing page says the regime is expected to come into force on that date. Not scored as a current MLR expectation. PDFs and Handbook sections named here were not opened unless the source row says otherwise.",
+      "page_says": "The overview says MARC sits in CRYPTO 4 under PS26/9, and that the on-chain monitoring requirement for large UK qualifying cryptoasset trading platforms was narrowed. This row does not decide whether a firm is large. It is only considered when the pack says the firm operates a qualifying cryptoasset trading platform. The PDF was not opened.",
+      "handbook_names": [
+        "CRYPTO 4",
+        "PS26/9"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_indicated_in_the_text",
+      "scored_as_current_expectation": false,
+      "preparation_item": false,
+      "matched_phrases": [],
+      "missing_phrase_groups": []
+    },
+    {
+      "requirement_id": "R-CON-01",
+      "control_area": "prudential",
+      "title": "GC26/4 COREPRU guidance consultation",
+      "rule_stage": "consultation",
+      "rule_stage_label": "The pinned FCA page calls this a consultation or a guidance consultation. It is not scored. Policy text cannot change this stage.",
+      "page_says": "The 30 June 2026 overview says the FCA is consulting on non-handbook guidance for the overall risk assessment under COREPRU and names GC26/4. That is a guidance consultation. It is not scored as a rule.",
+      "handbook_names": [
+        "GC26/4",
+        "COREPRU"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CON-02",
+      "control_area": "prudential",
+      "title": "GC26/5 CRYPTOPRU guidance consultation",
+      "rule_stage": "consultation",
+      "rule_stage_label": "The pinned FCA page calls this a consultation or a guidance consultation. It is not scored. Policy text cannot change this stage.",
+      "page_says": "The overview names GC26/5 as a consultation on CRYPTOPRU guidance. It is not scored as a rule. PS26/12 is the prudential policy statement named on the same page. This row is only the guidance consultation.",
+      "handbook_names": [
+        "GC26/5",
+        "CRYPTOPRU"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CON-03",
+      "control_area": "financial_crime_guide",
+      "title": "Financial Crime Guide update for cryptoasset firms",
+      "rule_stage": "planned_consultation",
+      "rule_stage_label": "The pinned FCA page says the FCA plans to consult. This starter did not verify that the consultation has since opened. It is not scored. Policy text cannot change this stage.",
+      "page_says": "The 30 June 2026 overview says the FCA plans to consult on Financial Crime Guide updates, including AML and KYC for cryptoasset firms, later that year. This starter did not verify that a consultation paper has since been published. The row stays a planned consultation.",
+      "handbook_names": [
+        "Financial Crime Guide, update not verified as published"
+      ],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CON-04",
+      "control_area": "defi",
+      "title": "Tailored DeFi guidance",
+      "rule_stage": "planned_consultation",
+      "rule_stage_label": "The pinned FCA page says the FCA plans to consult. This starter did not verify that the consultation has since opened. It is not scored. Policy text cannot change this stage.",
+      "page_says": "The overview says the FCA will consult on tailored DeFi guidance, including indicators of decentralisation. A mention of DeFi in a policy does not make that guidance final. Not scored.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CON-05",
+      "control_area": "resolution",
+      "title": "Resolution and distribution rules for a failed stablecoin issuer or custodian",
+      "rule_stage": "planned_consultation",
+      "rule_stage_label": "The pinned FCA page says the FCA plans to consult. This starter did not verify that the consultation has since opened. It is not scored. Policy text cannot change this stage.",
+      "page_says": "The overview says the FCA will consult later in the year of that page on managing cryptoasset firm failure, including distribution rules where a stablecoin issuer or a cryptoasset custodian has failed. Not scored. This starter did not verify that the consultation has opened.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-regime-overview",
+          "title": "Overview of our cryptoassets regime policy statements",
+          "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    },
+    {
+      "requirement_id": "R-CON-06",
+      "control_area": "perimeter",
+      "title": "Further perimeter guidance after PS26/18",
+      "rule_stage": "planned_consultation",
+      "rule_stage_label": "The pinned FCA page says the FCA plans to consult. This starter did not verify that the consultation has since opened. It is not scored. Policy text cannot change this stage.",
+      "page_says": "PS26/18, 16 September 2026, says the FCA plans to consult on further changes to perimeter guidance in late 2026, following a Government statutory instrument, and aims to publish that guidance in early 2027. PS26/18 itself is final guidance. This row is only the further consultation. Not scored.",
+      "handbook_names": [],
+      "sources": [
+        {
+          "source_id": "fca-ps26-18",
+          "title": "PS26/18: Cryptoasset perimeter guidance",
+          "url": "https://www.fca.org.uk/publications/policy-statements/ps26-18-cryptoasset-perimeter-guidance",
+          "last_verified": "2026-10-24",
+          "currency": "within_threshold"
+        }
+      ],
+      "do_not_rely_until_sources_reverified": false,
+      "accepted_as_gap": false,
+      "for_human_review": true,
+      "pack_cannot_change_rule_stage": true,
+      "text_observation": "not_scored_consultation_or_planned",
+      "mentioned_in_pack": false,
+      "scored_as_current_expectation": false,
+      "preparation_item": false
+    }
+  ],
+  "counts": {
+    "rows": 35,
+    "signal_present": 26,
+    "signal_not_found": 1,
+    "document_not_supplied": 0,
+    "document_quarantined_prompt_injection": 0,
+    "not_indicated_in_the_text": 2,
+    "not_scored_consultation_or_planned": 6,
+    "current_expectation_phrase_missing": 1,
+    "preparation_phrase_missing": 0
+  },
+  "summary_for_humans": "Draft observations only. 1 current-expectation rows and 0 preparation rows did not find the expected wording or had no document of that type. 6 rows are consultation or planned and are not scored. These numbers are not a readiness result.",
+  "human_review": {
+    "required_before_anyone_relies_on_a_row": true,
+    "approver": "Compliance Officer or MLRO",
+    "agent_accepted_any_gap": false
+  }
+}

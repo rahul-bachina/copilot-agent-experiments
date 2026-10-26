@@ -21,6 +21,21 @@ DIAGRAMS = {
     "experiments/02-consumer-duty-complaint-intake/docs/architecture_diagram.png": (
         "experiments/img/02-consumer-duty-architecture.png"
     ),
+    "experiments/03-agent-inventory-atrs-assurance/docs/architecture_diagram.png": (
+        "experiments/img/03-agent-inventory-architecture.png"
+    ),
+    "experiments/04-fca-cryptoasset-readiness/docs/architecture_diagram.png": (
+        "experiments/img/04-fca-cryptoasset-architecture.png"
+    ),
+    "experiments/05-awaabs-law-hazard-triage/docs/architecture_diagram.png": (
+        "experiments/img/05-awaabs-architecture.png"
+    ),
+    "experiments/06-nhs-policy-qa/docs/architecture_diagram.png": (
+        "experiments/img/06-nhs-policy-architecture.png"
+    ),
+    "experiments/07-consultation-themes/docs/architecture_diagram.png": (
+        "experiments/img/07-consultation-architecture.png"
+    ),
 }
 
 

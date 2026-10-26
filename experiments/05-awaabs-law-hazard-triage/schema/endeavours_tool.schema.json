@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Reasonable-endeavours record tool input",
+  "description": "Steps an officer has typed. The tool returns a draft. It does not file the record, send it, or decide that a defence is made out.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "barrier": {
+      "type": "string"
+    },
+    "officer_approved": {
+      "type": "boolean",
+      "description": "Records that an officer approved the draft. Does not file it."
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["on", "kind", "what"],
+        "properties": {
+          "on": {"type": "string"},
+          "kind": {
+            "type": "string",
+            "enum": [
+              "access_attempt",
+              "tenant_contact",
+              "consent_request",
+              "regulator_application",
+              "contractor_search",
+              "decant_search",
+              "other"
+            ]
+          },
+          "what": {"type": "string"},
+          "outcome": {"type": "string"}
+        }
+      }
+    }
+  }
+}

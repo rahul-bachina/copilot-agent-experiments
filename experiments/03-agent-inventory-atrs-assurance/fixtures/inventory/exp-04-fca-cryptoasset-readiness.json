@@ -1,0 +1,122 @@
+{
+  "governance_owner_role": "Governance owner",
+  "lifecycle_status": "proposed",
+  "explicit_consent": "unknown",
+  "article_9_2_g": "unknown",
+  "contract_or_authorised_by_law": "unknown",
+  "safeguard_information": "unknown",
+  "safeguard_representations": "unknown",
+  "safeguard_human_intervention": "unknown",
+  "safeguard_contest": "unknown",
+  "third_party_involvement": "No",
+  "third_party_name": "N/A",
+  "companies_house_number": "N/A",
+  "third_party_role": "N/A",
+  "procurement_procedure_type": "N/A",
+  "third_party_data_access_terms": "N/A",
+  "data_reads": [
+    {
+      "resource": "Policy pack supplied for this run",
+      "justification": "The observation register cannot be drafted without the documents the caller supplied",
+      "may_contain_personal_data": true
+    }
+  ],
+  "never_access": [
+    {
+      "resource": "FCA Connect and the FCA website at run time",
+      "reason": "Citations are pinned. The checker does not submit and does not browse."
+    }
+  ],
+  "tools": [
+    {
+      "tool": "Gap register",
+      "action": "Draft observations from a pack against the pinned catalogue",
+      "access_level": "read"
+    }
+  ],
+  "risk_rows": [
+    {
+      "id": "R1",
+      "risk": "A reviewer treats a missing phrase as a breach, or a complete-looking pack as readiness",
+      "likelihood": "Medium",
+      "impact": "High",
+      "residual_risk": "Medium"
+    }
+  ],
+  "recorded_events": [
+    {
+      "from_status": "proposed",
+      "to_status": "assurance_drafted",
+      "requested_by": "Inventory drafter",
+      "reason": "Example proposal only. No governance owner decision is attached.",
+      "applied": false,
+      "approved_by_this_tool": false,
+      "external_approval_id": "",
+      "approver_role": "",
+      "external_decision": ""
+    }
+  ],
+  "inventory_id": "exp-04-fca-cryptoasset-readiness",
+  "catalogue_id": "UK02",
+  "name": "FCA cryptoasset authorisation readiness gap checker",
+  "version": "0.1.0",
+  "sector": "fca_firm",
+  "organisation_name": "Harbourline Markets Ltd (fictional firm used in Experiment 04)",
+  "team": "Compliance / financial crime",
+  "senior_responsible_owner_role": "Compliance Officer or MLRO",
+  "contact_email": "compliance-draft@example.com",
+  "website_url": "https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/04-fca-cryptoasset-readiness",
+  "atrs_phase": "Pre-deployment",
+  "region": "UK",
+  "autonomy_level": "A0",
+  "source_reviewed_on": "2026-10-24",
+  "experiment_path": "experiments/04-fca-cryptoasset-readiness",
+  "processing_regime": "uk_gdpr",
+  "processes_personal_data": "yes",
+  "special_category_data": "unknown",
+  "profiling": "no",
+  "meaningful_human_involvement": "yes",
+  "significant_effect": "none",
+  "significant_effect_note": "An authorisation decision can have a significant effect. That decision is outside this checker. This row screens the draft register only.",
+  "lawful_basis": "Not asserted in the Experiment 04 manifest",
+  "one_sentence_description": "A starter that reads a synthetic policy pack and drafts an observation register against pinned FCA cryptoasset pages.",
+  "public_description": "The checker cites the page each row came from and marks consultation-stage and planned items. It does not say that a firm is ready, and it does not say that a firm is not ready. The Compliance Officer or the MLRO owns every gap conclusion. Output is labelled draft for human review.",
+  "detailed_description": "src/gap_register.py reads a pack and writes one JSON document. accepted_as_gap is false on every row. Citations come from src/sources.py. The checker does not browse fca.org.uk at run time and does not call a model.",
+  "benefits": "Observations are tied to a pinned page and a stage. No reduction in application effort is claimed.",
+  "previous_process": "A compliance team read its own drafts against FCA pages. This repository does not replace a named firm process.",
+  "alternatives_considered": "The runnable part is the deterministic checker. A Microsoft Foundry narration is described and not built.",
+  "operational_process": "A person supplies a synthetic pack and an as-of date. The Compliance Officer or MLRO decides what is actually a gap. The checker does not accept the gap.",
+  "human_review": "The Compliance Officer or the MLRO owns every gap conclusion. The checker does not submit an application, use Connect, email the FCA, or file a suspicious activity report.",
+  "frequency_and_scale": "Not deployed. The Harbourline pack is a synthetic fixture. That is not an operational volume.",
+  "required_training": "Not recorded. The adopting firm would use its own compliance procedure, which is not in this repository.",
+  "appeals_and_review": "N/A for the checker's output. Submitting an application is disabled.",
+  "system_architecture": "Python in the standard library for the checker. Copilot Studio on both harnesses, Microsoft Foundry, and Azure are described. Nothing in the folder calls a model or the network.",
+  "system_input": "A pack of synthetic policy documents and an as-of date.",
+  "system_output": "A draft observation register. Readiness fields are not a conclusion that the firm is ready.",
+  "maintenance": "FCA pages were read on 24 October 2026. The manifest next review is 24 April 2027, sooner if those pages change.",
+  "models_summary": "No model is called.",
+  "model_name": "No deployed model.",
+  "model_version": "N/A",
+  "model_task": "Not a model task. The checker compares text with a pinned catalogue.",
+  "model_input": "Policy text in the pack.",
+  "model_output": "Observation rows with a source citation and a stage.",
+  "model_architecture": "Deterministic text checks. Not a trained model.",
+  "model_performance": "eval/smoke_report.json is a deterministic smoke test. It is not a model score.",
+  "datasets_and_purposes": "Synthetic policy documents for Harbourline Markets Ltd. Not used to train a model.",
+  "development_data_description": "Invented policy text. Harbourline Markets Ltd is not an applicant and not a registered cryptoasset business.",
+  "data_modality": "Text",
+  "data_quantities": "One synthetic pack in the worked example.",
+  "development_sensitive_attributes": "The fixtures are invented. A real policy can name staff.",
+  "data_completeness": "The pack is written to exercise the checker. It is not a firm's application.",
+  "data_cleaning": "Injection lines are dropped from the evidence. A document with a split instruction is quarantined.",
+  "data_collection": "Written for the repository.",
+  "development_data_access": "Repository readers.",
+  "development_data_sharing": "N/A.",
+  "operational_data_sources": "Documents the caller supplies for one run.",
+  "operational_sensitive_attributes": "A real policy can name staff. The Experiment 04 manifest does not assert an Article 9 condition.",
+  "operational_data_processing": "The checker looks for expected phrases. It does not build a data set.",
+  "operational_data_access": "The starter does not persist the pack.",
+  "operational_data_sharing": "N/A. The checker does not send.",
+  "impact_assessments": "No DPIA is linked. The Experiment 04 manifest does not decide a lawful basis. A candidate it names for the firm to confirm is Article 6(1)(f). It is not claimed here.",
+  "risks_and_mitigations": "The manifest records a missing phrase being treated as a breach, or a complete-looking pack being treated as readiness. Residual risk is Medium for that row. accepted_as_gap stays false."
+}

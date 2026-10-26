@@ -32,6 +32,11 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 |---|------|-------------|--------|
 | 01 | [FOI Complaint Triage](experiments/01-foi-complaint-triage/) | Triage long FOI requests and complaints into structured data for public sector staff | ✅ Complete |
 | 02 | [Complaint Intake — Consumer Duty / DISP](experiments/02-consumer-duty-complaint-intake/) | Draft a DISP complaint intake for a handler. Dates are computed in code. The agent does not send, decide, or write a case. | ✅ Starter |
+| 03 | [Agent inventory and ATRS assurance pack](experiments/03-agent-inventory-atrs-assurance/) | Draft an ATRS record, a playbook mapping, a DPIA skeleton, a DUAA screen, and an FCA-style inventory row. The governance owner approves every lifecycle status change. | ✅ Starter |
+| 04 | [FCA cryptoasset authorisation readiness](experiments/04-fca-cryptoasset-readiness/) | Draft a gap register against pinned FCA cryptoasset pages. The Compliance Officer or MLRO owns every gap conclusion. Autonomy A0. | ✅ Starter |
+| 05 | [Awaab's Law hazard triage](experiments/05-awaabs-law-hazard-triage/) | Draft a hazard triage and statutory clock for a social landlord in England. The officer approves the category, the clock, and every summary. Dates are computed in code. The agent does not send or write a housing system. | ✅ Starter |
+| 06 | [Policy questions for NHS corporate services](experiments/06-nhs-policy-qa/) | Quote an approved corporate policy, with its version and review date, or say "I don't know". Clinical questions are refused. The policy owner approves sources. Autonomy A0. | ✅ Starter |
+| 07 | [Consultation themes](experiments/07-consultation-themes/) | Code one consultation question for a public body or charity. The analyst approves the framework and every sampled assignment. Counts keep minority views and link every theme to response IDs. The agent does not publish. | ✅ Starter |
 
 ## Getting Started
 
@@ -60,6 +65,36 @@ cd ../02-consumer-duty-complaint-intake
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/disp_clock.py --received 2026-01-02 --route general
+
+# Experiment 03 drafts an assurance pack. It does not approve it.
+cd ../03-agent-inventory-atrs-assurance
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/pack.py --inventory fixtures/inventory/exp-01-foi-triage.json --as-of 2026-10-24
+
+# Experiment 04 needs no credentials either. The gap register is deterministic.
+cd ../04-fca-cryptoasset-readiness
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/gap_register.py --pack examples/harbourline --as-of 2026-10-24
+
+# Experiment 05 needs no credentials either. The statutory clock is deterministic.
+cd ../05-awaabs-law-hazard-triage
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/statutory_clock.py --aware-at 2026-01-08T09:00:00+00:00 --category significant --hazard-family damp_mould_fungal_growth --social-home-in-england --approve-category --approve-clock
+
+# Experiment 06 needs no credentials either. The policy register is deterministic.
+cd ../06-nhs-policy-qa
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/answer.py --question "How much notice do I need to book annual leave?" --as-of 2026-10-24
+
+# Experiment 07 needs no credentials either. The codebook is deterministic.
+cd ../07-consultation-themes
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python -m src.cli analyse --input eval/synthetic_dataset.json --as-of 2026-10-24
 ```
 
 ## Repository Structure
@@ -76,15 +111,20 @@ copilot-agent-experiments/
 │   └── test_agent_manifest_schema.py  # Schema validation tests
 └── experiments/
     ├── 01-foi-complaint-triage/
-    └── 02-consumer-duty-complaint-intake/
-        ├── README.md              # Experiment documentation
-        ├── agent-manifest.yaml    # Permissions and governance manifest
-        ├── requirements.txt
-        ├── src/                   # Python implementation
-        ├── copilot-studio/        # Copilot Studio guides
-        ├── eval/                  # Evaluation data and scripts
-        ├── docs/                  # Architecture and security docs
-        └── examples/              # Sample inputs/outputs
+    ├── 02-consumer-duty-complaint-intake/
+    ├── 03-agent-inventory-atrs-assurance/
+    ├── 04-fca-cryptoasset-readiness/
+    │   ├── README.md              # Experiment documentation
+    │   ├── agent-manifest.yaml    # Permissions and governance manifest
+    │   ├── requirements.txt
+    │   ├── src/                   # Python implementation
+    │   ├── copilot-studio/        # Copilot Studio guides
+    │   ├── eval/                  # Evaluation data and scripts
+    │   ├── docs/                  # Architecture and security docs
+    │   └── examples/              # Sample inputs/outputs
+    ├── 05-awaabs-law-hazard-triage/
+    ├── 06-nhs-policy-qa/
+    └── 07-consultation-themes/
 ```
 
 ## Agent Governance
