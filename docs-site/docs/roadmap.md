@@ -104,6 +104,16 @@ A draft reply from a fixed catalogue, or a handover to a person. The adviser acc
 
 </article>
 
+<article class="plan-card" id="b004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · B004 · Autonomy A1</p>
+
+## KYC evidence intake
+
+A draft checklist for one synthetic customer file against the Money Laundering Regulations 2017. The KYC reviewer confirms the documents and the purpose. The agent does not approve, reject, or onboard the customer, and it does not assign a risk rating or file a report. Customer-facing wording must not hint at suspicion. It calls [Experiment 12](experiments/12-document-intake.md). [Read the briefing](experiments/16-kyc-evidence-intake.md).
+
+</article>
+
 <article class="plan-card" id="o001" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · O001 · Autonomy A1</p>
