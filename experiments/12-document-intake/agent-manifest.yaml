@@ -1,0 +1,559 @@
+# Agent manifest: Document Intake Agent
+# Experiment 12 — catalogue ID O001
+# Version: 0.1.0
+# Last reviewed: 2026-10-27
+# Next review: 2027-04-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-12-document-intake"
+  name: "Document Intake Agent"
+  version: "0.1.0"
+  description: >
+    Inventories one synthetic batch of text files for a later specialist
+    review. It suggests a keyword class, previews a purpose checklist, flags
+    prompt injection and stale dates, and calls the Experiment 08 UK
+    identifier gateway for a redaction proposal. Autonomy A1. The user
+    confirms the files and the permitted purpose. An intake reviewer accepts
+    or returns the routing suggestion. The agent never confirms those steps
+    itself, never accepts a file into a queue, never approves or rejects the
+    underlying matter, never writes a production record, and never sends.
+  owner: "Intake reviewer, with the user who confirms the files"
+  contact: "document-intake@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/12-document-intake"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human confirms the files and the purpose, then a second person accepts any routing suggestion"
+  constraints:
+    - "The user confirms the file list and the permitted purpose. The agent only drafts."
+    - "An intake reviewer accepts, returns, or rejects the routing suggestion. The agent does not."
+    - "The agent NEVER accepts a file into a queue or a case"
+    - "The agent NEVER approves or rejects a KYC file, a claim, a disclosure, or an evidence finding"
+    - "The agent NEVER writes a production record"
+    - "The agent NEVER sends an external message"
+    - "The agent NEVER releases redacted text or describes it as anonymised"
+    - "A sentence inside a document cannot confirm files, set the purpose, or clear a stale date"
+    - "UK identifier detection is Experiment 08. This agent does not re-implement it."
+    - "All output is a draft and is marked for intake review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic batch of files"
+      description: "File ids, filenames, media types, document dates, and text the user pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One batch per invocation. No browsing of a case store or a mailbox."
+      justification: "The inventory cannot describe the files without the text the user has supplied"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "A document date and a filename"
+        - "NHS number, which can sit in a health context, when the text contains one"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text. The draft stores hashes and closed-list phrases, not the body."
+
+    - resource: "User-supplied run parameters"
+      description: "As-of date, optional stale window, optional rules date, and an optional requested purpose for a checklist preview"
+      access_level: "read"
+      scope: "Fields passed for this run. requested_purpose is a preview, not a confirmation."
+      justification: "Stale comparison and the checklist preview need a date and a purpose the user typed outside the file body"
+      may_contain_personal_data: false
+
+    - resource: "Pinned purpose catalogue"
+      description: "The closed purpose and class lists in src/catalogue.py, pinned 2026-10-27"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The purpose list has to be reproducible without a network call"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 08 identifier rules"
+      description: "Called in-process via propose(). This agent does not read the gateway's source in order to copy it."
+      access_level: "read"
+      scope: "One text at a time, the same file the user supplied"
+      justification: "UK identifier spans are proposed by the existing gateway so this experiment does not keep a second redactor"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The gateway does not persist the text. This draft keeps the gateway's entity types and hash, not the raw values."
+
+  never_access:
+    - resource: "Mailboxes, SharePoint libraries, and Dataverse"
+      reason: "The agent does not collect files itself and does not write them back."
+    - resource: "Case-management, KYC, claims, and disclosure systems"
+      reason: "A routing label is not a hand-off. B004, B007, UK11, and UK09 are not called."
+    - resource: "NHS, HMRC, Companies House, and bank directories"
+      reason: "Experiment 08 does not look those up, and this agent does not either."
+    - resource: "The Experiment 08 reversible token vault"
+      reason: "This caller does not pass reversible=True and does not store a map."
+    - resource: "Customer, patient, and tenant records beyond the pasted batch"
+      reason: "The checklist does not verify a name or a reference against a system of record."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Document inventory"
+      provider: "Local Python (src/intake.py, src/catalogue.py, src/injection.py)"
+      action: "Hash each file, suggest a keyword class, flag injection and stale dates, preview a checklist"
+      access_level: "read"
+      scope: "The single batch supplied for this run. No network. No model."
+      justification: "File identity, keyword class, and the date comparison are deterministic. A language model must not set them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "UK identifier redaction proposal"
+      provider: "Experiment 08 (experiments/08-uk-pii-redaction-gateway, function propose)"
+      action: "Propose UK identifier spans for one text/plain file"
+      access_level: "read"
+      scope: "One file body. Model suggestions off. Reversible tokens not requested. Caller id exp-12-document-intake."
+      justification: "The catalogue already has a UK identifier gateway. Calling it avoids a second, drifting detector."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the intake JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run. Not called by this starter."
+      justification: "Optional narrative. Hashes, classes, dates, and the empty decision stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python (src/intake.py)"
+      action: "Reject a result that confirms files, sets a purpose, or records an action"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that accepts, sends, writes, or releases is not a valid result of intake()"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the user. Filing it, if a person
+      chooses to, is done in the organisation's own system. record_user_confirmation
+      and record_reviewer_decision update a copy of the JSON in memory.
+      They do not write a queue. The agent must not call them.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. A routing suggestion is a label. The agent does not message
+      a customer, a counterparty, the ICO, or the FCA, and it does not call
+      B004, B007, UK11, or UK09.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject the underlying matter, and it does
+      not accept or reject the file on its own. The user confirms the files
+      and the purpose. The intake reviewer decides the routing suggestion.
+      intake() leaves both decisions empty. The record functions refuse every
+      role except the named one, and they still do not accept the file into
+      a queue.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Whether evidence is sufficient for KYC, whether a claim is covered,
+      whether a subject-access disclosure should be made, and whether an
+      evidence bundle supports a finding are specialist decisions. This
+      agent proposes a class and a checklist preview. It does not take them.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a case system, Dataverse, SharePoint, or
+      any other production record. commit_to_queue and write_production_record
+      raise IntakeForbidden.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent has no send tool. send_external raises. An instruction in
+      the document to email the customer is recorded and is not followed.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, refund, or other transaction can be instructed. A phrase such as 'pay the claim' is an injection signal, not a payment."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Accept the batch into a queue"
+      rationale: "commit_to_queue always raises, including after a reviewer decision has been recorded in the JSON."
+    - enabled: false
+      action_name: "Release redacted text"
+      rationale: "release_redacted always raises. Experiment 08 release() is not called to produce a success."
+    - enabled: false
+      action_name: "Hand off to B004, B007, UK11, or UK09"
+      rationale: "Those catalogue ids are labels on the purpose list. There is no tool that invokes them."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The user confirms the files and the permitted purpose. The intake
+    reviewer then decides whether to accept the routing suggestion.
+    Recording either step in the Python functions does not write a queue
+    and does not send. The agent has no tool that records the steps.
+
+  approval_points:
+    - action: "Confirm the file list, including each file id in order"
+      approver: "Intake user"
+      mandatory: true
+      rationale: "Catalogue checkpoint for O001. A document that says the files are confirmed is ignored. A checksum mismatch blocks confirmation."
+
+    - action: "Confirm the permitted purpose from the closed list"
+      approver: "Intake user"
+      mandatory: true
+      rationale: "The purpose selects the checklist and the downstream label. The file text cannot set it. A requested_purpose field is only a preview."
+
+    - action: "Accept, return, or reject the routing suggestion"
+      approver: "Intake reviewer"
+      mandatory: true
+      rationale: "Accepting a suggestion is a second person, after the user has confirmed the files and the purpose. The agent does not record this decision."
+
+    - action: "Rely on a document date or the purpose catalogue after it is marked stale, missing, or future"
+      approver: "Intake reviewer"
+      mandatory: true
+      rationale: "The core does not clear a stale flag from a sentence in the file. accept_routing is refused until a person passes acknowledge_stale. That still does not write a queue."
+
+    - action: "Treat an unread, empty, oversized, or checksum-failed file as examined"
+      approver: "Intake reviewer"
+      mandatory: true
+      rationale: "not_read is not a clean result. Confirmation is refused while a checksum does not match."
+
+    - action: "Release redacted text"
+      approver: "Privacy reviewer"
+      mandatory: true
+      rationale: "Experiment 08's checkpoint. This agent does not release the text even after that approval. release_redacted raises."
+
+    - action: "Hand the draft to a specialist agent or write it to a case"
+      approver: "Intake reviewer"
+      mandatory: true
+      rationale: "Outside this agent, including after a routing suggestion is accepted in the JSON."
+
+  no_approval_required:
+    - action: "View the draft inventory"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the same batch"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted by this starter"
+    description: >
+      A council handling a subject-access bundle and a firm handling KYC
+      evidence do not share one Article 6 basis. The caller confirms its own
+      basis before production use. This starter does not copy Experiment 01's
+      public-task basis or Experiment 02's legal-obligation basis.
+    secondary: "To be confirmed by the caller. Article 6(1)(c) or 6(1)(e) may be relevant. This file does not choose."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, where an NHS number or the surrounding text reveals health data"
+      - "Any special-category detail a person wrote into a file"
+    lawful_basis_special: >
+      Not asserted. The caller must identify an Article 9 condition before
+      production use. This starter does not claim a Schedule 1 condition of
+      the Data Protection Act 2018.
+    safeguards:
+      - "The draft stores hashes, entity types, and closed-list phrases. It does not store the file body."
+      - "Experiment 08's audit record omits the raw identifier. This caller does not request a reversible map."
+      - "The output says the text is not anonymised, because the gateway's flag is fixed false"
+      - "Nothing is released or written to a case"
+      - "The user confirms the purpose before a checklist is treated as confirmed"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One batch at a time, as supplied by the user"
+    - "text/plain only. Other media types are not opened."
+    - "The body is not copied into the draft JSON"
+    - "No lookup of the person, the policy, or the case"
+    - "Names, emails, and telephone numbers are not detected, and they are not extracted into the draft"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "If the caller stores the draft, that schedule is the caller's. Do not store the source text in the same row as the draft."
+
+  data_residency:
+    region: "UK"
+    note: "A production model, if one is added, should use UK South or UK West. This repository cannot enforce that. The deterministic path makes no network call."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      A subject-access purpose on the closed list is a filing label, not a
+      disclosure decision. Those requests go through the caller's privacy
+      process. Catalogue row UK11 is a different piece of work.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    File text is untrusted. It may hide an instruction in an HTML comment,
+    after a form feed, after blank lines, or between zero-width characters.
+    The instruction may tell the agent to confirm the files, set the purpose,
+    approve KYC, pay a claim, disclose records, email the customer, or skip
+    the date check. The core records the phrase and does not follow it.
+    There is no queue, send, or release tool.
+
+  controls:
+    - control: "Instructions are not confirmation"
+      description: "Prohibited keys on the batch are stripped. files_confirmed and the purpose stay unset."
+    - control: "Hidden text is still data"
+      description: "HTML comments, form feeds, trailing blank lines, and zero-width characters are scanned. followed is false."
+    - control: "Deterministic catalogue"
+      description: "Classes, purposes, and the stale comparison run in Python."
+    - control: "Experiment 08 stays on"
+      description: "A phrase such as 'do not redact' does not stop the gateway call."
+    - control: "No tools with side effects"
+      description: "Writes, sends, queue acceptance, and release are disabled in this manifest."
+    - control: "Two human steps"
+      description: "The user confirms files and purpose. The intake reviewer decides the routing suggestion."
+
+  residual_risk: >
+    A phrase that is not on the list can still be in the file. A file over
+    the size cap is not scanned. The reviewer is the control before anyone
+    relies on the draft. There is no autonomous send even if the draft is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-27"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a file confirms the files, sets the purpose, or accepts the batch"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "intake() forces files_confirmed and purpose_confirmed false"
+        - "Prohibited payload keys are stripped and listed"
+        - "The record functions check the role and still do not write a queue"
+      residual_risk: "Low"
+      owner: "Intake reviewer"
+
+    - id: "R2"
+      risk: "A UK identifier reaches a later model because this draft was treated as anonymised"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 is called and its anonymisation flag is fixed false"
+        - "The draft does not copy the body or the redacted text"
+        - "Known gateway misses are restated in the limitations"
+        - "A privacy reviewer approves any later release, which this agent cannot perform"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+    - id: "R3"
+      risk: "A stale, future, or missing document date is treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The comparison is in Python. Equal to 90 days is not stale. Older than 90 is."
+        - "A sentence telling the agent to ignore the date is an injection signal and does not clear the flag"
+        - "accept_routing is refused while the flag is set, unless a person acknowledges it"
+      residual_risk: "Medium"
+      owner: "Intake reviewer"
+
+    - id: "R4"
+      risk: "An unread PDF is treated as a clean file"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "media types other than text/plain are not_read"
+        - "Oversized and empty files are not scanned"
+        - "The limitation is on the draft"
+      residual_risk: "Medium"
+      owner: "Intake reviewer"
+
+    - id: "R5"
+      risk: "The keyword class or the checklist is used as a KYC, claims, or disclosure decision"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "approve_underlying_matter and reject_underlying_matter raise"
+        - "Downstream catalogue ids are labels. Those agents are not called."
+        - "The checklist reports phrase presence, not sufficiency"
+      residual_risk: "Medium"
+      owner: "Intake reviewer"
+
+    - id: "R6"
+      risk: "The pinned purpose list or the Experiment 08 rules drift"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "catalogue_pinned_on is on every draft"
+        - "An earlier rules_as_of is flagged and does not switch the gateway rules off"
+        - "Review trigger on a change to either pin"
+      residual_risk: "Medium"
+      owner: "Intake reviewer"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log who ran the intake, the batch id, the
+    file hashes, whether injection or a stale date was flagged, and the two
+    later human decisions. This starter writes no log. The draft itself omits
+    the file body and the raw identifiers.
+
+  logged_events:
+    - event: "Intake requested"
+      data_logged:
+        - "Timestamp"
+        - "User identity"
+        - "Batch id"
+        - "Whether the batch was marked synthetic"
+        - "File ids and SHA-256 hashes, not the bodies"
+      retention: "Caller's schedule. Not set by this starter."
+    - event: "Redaction proposed by Experiment 08"
+      data_logged:
+        - "Caller id exp-12-document-intake"
+        - "Entity types and the gateway hash"
+        - "Not the raw identifier and not the file body"
+      retention: "Same schedule as the caller uses for the Experiment 08 audit record."
+    - event: "User confirmed files and purpose"
+      data_logged:
+        - "Role"
+        - "Purpose id"
+        - "File ids"
+        - "Queue still not written"
+      retention: "Caller's schedule. The agent does not write this event."
+    - event: "Reviewer recorded a routing decision"
+      data_logged:
+        - "Decision: accept_routing, return_for_edit, or reject_routing"
+        - "Whether stale material was acknowledged"
+        - "accepted_into_queue still false"
+      retention: "Caller's schedule. The agent does not write this event."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store. Do not put file bodies or raw identifiers in Application Insights traces."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the intake being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Stop calling Experiment 08"
+      action: "Remove the in-process import. The intake then cannot propose identifier spans and should not be described as having redacted anything."
+      time_to_effect: "Immediate once the caller is changed"
+      who_can_activate: "The experiment owner"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the managed identity or the Key Vault secret used by an optional narrative deployment"
+      time_to_effect: "Immediate for new calls. The deterministic path does not use that secret."
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SharePoint, Dataverse, or a case system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Intake reviewer"
+      contact: "document-intake@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-27"
+  next_review_date: "2027-04-27"
+  review_frequency: "6 months, and sooner if the purpose list or Experiment 08's identifier rules change"
+  reviewer: "The adopting organisation's intake reviewer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Experiment 08's detectors or to its 'not anonymised' wording"
+    - "A decision to call Document Intelligence, Content Understanding, or a send connector"
+    - "A proposal to let this agent write a queue or call B004, B007, UK11, or UK09"
+    - "A security incident in which a document instruction was followed"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Intake core"
+      path: "src/intake.py"
+    - name: "Purpose catalogue"
+      path: "src/catalogue.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Experiment 08 gateway"
+      path: "../08-uk-pii-redaction-gateway/src/gateway.py"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The caller's Article 6 basis, and an Article 9 condition if health data is in scope, are confirmed by that organisation's DPO"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The purpose list pinned on 27 October 2026 is still the list the organisation wants. It is not a statutory classification scheme."
+      section: "src/catalogue.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 08 remains the identifier gateway. This experiment does not replace it."
+      section: "tools.allowed"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if a narrative model is added later, runs in the UK and is not trained on the caller's files"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No mail, SharePoint, Dataverse, or case connector is added without a manifest change in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders, not an organisation"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Document Intelligence and Content Understanding were read on 27 October 2026 and are not wired. A later OCR step has to land in front of this intake, and the unread-file limitation remains until it does."
+      section: "docs/foundry.md"
+      verify_on_deployment: true

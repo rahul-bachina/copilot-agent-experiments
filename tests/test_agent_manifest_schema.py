@@ -438,6 +438,168 @@ class TestExperiment10Manifest:
         assert decision["mandatory"] is True
 
 
+class TestExperiment11Manifest:
+    """Test the Experiment 11 Employment Rights Act 2025 HR assistant manifest."""
+
+    @pytest.fixture
+    def experiment_11_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "11-era-2025-hr-assistant"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_11_manifest):
+        """Experiment 11 manifest should be valid."""
+        validate(instance=experiment_11_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_11_manifest):
+        """Experiment 11 should be autonomy level A1, not above."""
+        level = experiment_11_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1"}
+        assert experiment_11_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_11_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_11_manifest):
+        """Experiment 11 should have all high-risk actions disabled."""
+        high_risk = experiment_11_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_11_manifest):
+        """Nothing is sent or written to a personnel or policy record."""
+        assert experiment_11_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_11_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_hr_lead_treats_the_draft(self, experiment_11_manifest):
+        """The human checkpoint is the HR lead, and it is mandatory."""
+        points = experiment_11_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Treat the draft"))
+        assert decision["approver"] == "HR lead"
+        assert decision["mandatory"] is True
+
+
+class TestExperiment12Manifest:
+    """Test the Experiment 12 document-intake manifest."""
+
+    @pytest.fixture
+    def experiment_12_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "12-document-intake" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_12_manifest):
+        """Experiment 12 manifest should be valid."""
+        validate(instance=experiment_12_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_12_manifest):
+        """Experiment 12 should be autonomy level A1, not above."""
+        level = experiment_12_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_12_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_12_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_12_manifest):
+        """Experiment 12 should have all high-risk actions disabled."""
+        high_risk = experiment_12_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_12_manifest):
+        """Nothing is sent or written to a case system."""
+        assert experiment_12_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_12_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_user_confirms_files_and_purpose(self, experiment_12_manifest):
+        """The catalogue checkpoint is the user, and it is mandatory."""
+        points = experiment_12_manifest["human_approval"]["approval_points"]
+        files = next(point for point in points if point["action"].startswith("Confirm the file list"))
+        purpose = next(point for point in points if point["action"].startswith("Confirm the permitted purpose"))
+        assert files["approver"] == "Intake user"
+        assert files["mandatory"] is True
+        assert purpose["approver"] == "Intake user"
+        assert purpose["mandatory"] is True
+        assert experiment_12_manifest["agent"]["id"] == "exp-12-document-intake"
+
+
+class TestExperiment13Manifest:
+    """Test the Experiment 13 council front-door manifest."""
+
+    @pytest.fixture
+    def experiment_13_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "13-council-contact-front-door"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_13_manifest):
+        """Experiment 13 manifest should be valid."""
+        validate(instance=experiment_13_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_13_manifest):
+        """Experiment 13 should be autonomy level A1, not above."""
+        level = experiment_13_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_13_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_13_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_13_manifest):
+        """Experiment 13 should have all high-risk actions disabled."""
+        high_risk = experiment_13_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_13_manifest):
+        """Nothing is sent or written to a case system."""
+        assert experiment_13_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_13_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_adviser_accepts_a_published_page(self, experiment_13_manifest):
+        """The human checkpoint is the adviser, and it is mandatory."""
+        points = experiment_13_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Accept a published"))
+        assert decision["approver"] == "Contact centre adviser"
+        assert decision["mandatory"] is True
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

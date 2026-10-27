@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Ten starters you can read today
+## Thirteen starters you can read today
 
 </div>
 
@@ -328,6 +328,81 @@ The checklist runs locally. Nothing is held, returned, released, filed, or sent 
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 11 · UK03 · Employers · Autonomy A1</p>
+
+### Employment Rights Act 2025 HR assistant
+
+Read one synthetic employer pack and draft which pinned duties are in force. The HR lead decides. It does not find that the employer complied, and it does not discipline or send.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The checklist runs locally. Nothing is decided, published, written to a personnel record, or sent.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/11-era-2025-hr-assistant.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/11-era-2025-hr-assistant)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 12 · O001 · Autonomy A1</p>
+
+### Document intake
+
+Inventory one synthetic batch of text files. The user confirms the files and the purpose. An intake reviewer decides the routing suggestion. UK identifiers are proposed by Experiment 08.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The inventory runs locally. Nothing is confirmed, queued, released, or sent.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/12-document-intake.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/12-document-intake)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 13 · V006 · Local authorities · Autonomy A1</p>
+
+### Council contact-centre front door
+
+Quote one published page for an adviser, or hand the conversation to a person. Emergencies and eligibility questions stop at a handover.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The catalogue runs locally. Nothing is decided, sent, or written to a case.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/13-council-contact-front-door.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/13-council-contact-front-door)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -346,7 +421,7 @@ The checklist runs locally. Nothing is held, returned, released, filed, or sent 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, UK05, M003, V010, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, UK03, UK05, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -406,12 +481,12 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 
 ## Before you rely on a page
 
-- These pages describe the repository as it stood on 24 October 2026, except the Experiment 08, Experiment 09, and Experiment 10 briefings, which were checked on 26 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
+- These pages describe the repository as it stood on 24 October 2026, except the Experiment 08, Experiment 09, and Experiment 10 briefings, which were checked on 26 October 2026, and the Experiment 11, Experiment 12, and Experiment 13 briefings, which were checked on 27 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
 - There are no client names or testimonials. Experiment 06 records a design for measuring time with a stopwatch. The figures in its smoke report are synthetic fixture arithmetic, not a study of staff.
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 08 proposes redactions of UK identifiers for another experiment to call. A privacy reviewer approves the proposal before any release. The gateway does not release the text and does not describe it as anonymised. Experiment 09 drafts one correspondence reply for a department, an agency, or a council. It does not send, and it does not invent a line to take. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 08 proposes redactions of UK identifiers for another experiment to call. A privacy reviewer approves the proposal before any release. The gateway does not release the text and does not describe it as anonymised. Experiment 09 drafts one correspondence reply for a department, an agency, or a council. It does not send, and it does not invent a line to take. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. Experiment 11 drafts a commencement and evidence note for an HR lead at a UK employer. It does not decide that the employer took all reasonable steps, and it does not discipline, dismiss, publish, or send. Experiment 12 inventories one synthetic batch of text files. The user confirms the files and the purpose, and an intake reviewer decides the routing suggestion. It does not queue, release, or send, and it does not decide the underlying matter. Experiment 13 drafts a contact-centre reply for a local authority from a fixed catalogue, or a handover. It does not decide eligibility, send a message, or write a case. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 

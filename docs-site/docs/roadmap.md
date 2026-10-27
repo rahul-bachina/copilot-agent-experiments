@@ -84,6 +84,36 @@ A draft reply for ministerial, MP, or resident casework. The author approves the
 
 </article>
 
+<article class="plan-card" id="uk03" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK03 · Autonomy A1</p>
+
+## Employment Rights Act 2025 HR assistant
+
+A draft reading of one synthetic employer pack against pinned commencement dates. The HR lead decides. It does not find that the employer complied, and it does not discipline or send. [Read the briefing](experiments/11-era-2025-hr-assistant.md).
+
+</article>
+
+<article class="plan-card" id="v006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · V006 · Autonomy A1</p>
+
+## Council contact-centre front door
+
+A draft reply from a fixed catalogue, or a handover to a person. The adviser accepts a published sentence. Emergencies and eligibility questions are not answered by the agent. [Read the briefing](experiments/13-council-contact-front-door.md).
+
+</article>
+
+<article class="plan-card" id="o001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · O001 · Autonomy A1</p>
+
+## Document intake
+
+A draft inventory of one synthetic batch of text files. The user confirms the files and the permitted purpose. An intake reviewer accepts, returns, or rejects the routing suggestion. UK identifier spans come from [Experiment 08](experiments/08-uk-pii-redaction-gateway.md). The agent does not queue, release, or send. [Read the briefing](experiments/12-document-intake.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
