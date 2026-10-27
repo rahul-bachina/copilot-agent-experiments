@@ -1,0 +1,254 @@
+# Agent manifest: Agent Architecture Advisor
+# Experiment 14 — catalogue ID G002
+# Version: 0.1.0
+# Last reviewed: 2026-10-27
+# Next review: 2027-04-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-14-agent-architecture-advisor"
+  name: "Agent Architecture Advisor"
+  version: "0.1.0"
+  description: >
+    Reads one proposed agent use case, supplied by an architect, and returns
+    a draft list of options. The options are the Copilot Studio standard
+    harness, the Copilot Studio GitHub Copilot harness, Microsoft Foundry
+    Agent Service, Power Automate, or no agent. It also drafts a catalogue
+    autonomy level from A0 to A2, the human approval points, and a permissions
+    manifest skeleton. Autonomy of this advisor is A0. The architect confirms
+    every platform option. The advisor does not select a platform, does not
+    approve the manifest, and does not deploy anything.
+  owner: "Architecture / governance (the adopting organisation)"
+  contact: "architecture-draft@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/14-agent-architecture-advisor"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The advisor returns a draft of options and stops. It has no action to take on that draft."
+    - "The advisor NEVER selects a platform. selected is false on every option. platform_selected stays null."
+    - "The advisor NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The advisor NEVER approves, rejects, or marks a permissions manifest as approved."
+    - "The advisor NEVER deploys an agent, publishes a Copilot Studio agent, creates a Foundry agent, or turns on a cloud flow."
+    - "The advisor NEVER sends, spends, or writes a production record."
+    - "The advisor NEVER quotes a price, a credit quantity, or a pack size."
+    - "Capability claims cite Microsoft Learn pages pinned in src/sources.py. The advisor does not browse those pages at run time."
+    - "Use-case text is untrusted data. Instructions inside it cannot change the rules, the autonomy level, or the disclaimer."
+    - "All output is labelled DRAFT FOR ARCHITECT REVIEW."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Use case supplied for this run"
+      description: "Structured fields for data, users, actions, risk, and the licences the organisation says it holds, plus a narrative. Synthetic in this repository."
+      access_level: "read"
+      scope: "One use case per invocation. No browsing of a tenant."
+      justification: "The draft options cannot be built without the description the architect asked the advisor to read."
+      data_categories:
+        - "A proposed use case"
+        - "Licence statements recorded by the architect"
+        - "Free text, which may contain personal data if the architect pasted it"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the use case."
+    - resource: "Pinned Microsoft Learn catalogue"
+      description: "src/sources.py. URLs and notes recorded on 27 October 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Citations come from the pin, not from the model and not from the use-case text."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the architect."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of the pinned pages is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A tenant's admin centre, licence inventory, or billing account"
+      reason: "The licence flags are the architect's statement. This starter does not look them up."
+    - resource: "Copilot Studio, Microsoft Foundry, or Power Automate as a control plane"
+      reason: "The advisor does not create or publish an agent or a flow."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The draft is returned to the caller. Nothing is sent."
+    - resource: "A pricing page or a credit estimator"
+      reason: "This starter does not quote prices. Those pages were not opened."
+
+tools:
+  allowed:
+    - tool: "Read the use case supplied for this run"
+      provider: "Local Python (src/advise.py)"
+      action: "Score the structured fields against the pinned decision table"
+      access_level: "read"
+      scope: "The single use case passed to the advisor"
+      justification: "The draft cannot be built without the case the architect supplied"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft a permissions manifest skeleton"
+      provider: "Experiment 03 generator (src/manifest_generator.py)"
+      action: "Return a draft agent-manifest.yaml at autonomy A0, A1, or A2"
+      access_level: "read"
+      scope: "One inventory-shaped record built from the use case"
+      justification: "The skeleton is a draft for the architect. The generator cannot mark it approved."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The advisor does not write Dataverse, Foundry, Copilot Studio, or any other production record."
+  sends:
+    enabled: false
+    note: "The advisor does not send email, Teams messages, or a deployment request."
+
+human_approval:
+  description: >
+    The architect confirms every platform option. The advisor records none of
+    them as selected. A governance owner approves any permissions manifest
+    before anyone relies on it. This starter cannot record that approval.
+  approval_points:
+    - action: "Confirm each platform option, including no agent"
+      approver: "Architect"
+      mandatory: true
+      rationale: "Catalogue control for G002. The advisor makes no selection."
+    - action: "Confirm the catalogue autonomy level"
+      approver: "Architect"
+      mandatory: true
+      rationale: "A3 is not available. A0, A1, or A2 is a recommendation, not a decision."
+    - action: "Rely on the permissions manifest skeleton"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off."
+  no_approval_required:
+    - action: "Produce this draft from a use case"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A use case may describe personal data. The advisor does not choose an
+      Article 6 basis for that future agent, and it does not choose one for
+      itself. The organisation's DPO confirms a basis before any processing
+      of live data. The samples in this repository are synthetic.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "The use-case narrative is not written to a production record"
+      - "Instructions in the narrative are not followed"
+  data_minimisation:
+    - "One use case per draft"
+    - "The manifest skeleton copies structured fields, not a raw narrative that matched an instruction pattern"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-27"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a suitable option as a decision to build"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "platform_selected is null and every option has selected false"
+        - "The label is DRAFT FOR ARCHITECT REVIEW"
+      residual_risk: "Medium"
+      owner: "Architect"
+    - id: "R2"
+      risk: "Use-case text instructs the advisor to recommend autonomy A3 or to deploy"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Free text is not an input to the rules"
+        - "A3 is refused in code"
+        - "Tests cover an injected narrative"
+      residual_risk: "Low"
+      owner: "Architect"
+    - id: "R3"
+      risk: "A pinned Microsoft Learn page has changed since 27 October 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin is marked do not rely"
+      residual_risk: "Medium"
+      owner: "Architect"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a draft, the case id, the as-of date, and the validation result. Do not log a narrative that contains personal data into an unreviewed store."
+  logged_events:
+    - event: "Architecture draft generated"
+      data_logged:
+        - "case id"
+        - "as-of date"
+        - "recommended autonomy"
+        - "whether a prompt-injection pattern was detected"
+        - "manifest validation result"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/advise.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft options"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-10-27"
+  next_review_date: "2027-04-27"
+  review_frequency: "Six months, and sooner if a pinned Microsoft Learn page changes."
+  reviewer: "The adopting organisation's architect. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The advisor does not approve or reject a platform, a manifest, or a use case."
+  regulated_decision:
+    enabled: false
+    rationale: "A platform option is not a regulated decision. The architect confirms it."
+  production_record_change:
+    enabled: false
+    rationale: "Nothing is deployed and no tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The draft is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase, no credit estimate, and no price."
+  additional_high_risk:
+    - action_name: "Select a platform"
+      enabled: false
+      rationale: "platform_selected stays null."
+    - action_name: "Mark a manifest approved"
+      enabled: false
+      rationale: "The skeleton generator refuses an approve flag."
+    - action_name: "Deploy an agent or a flow"
+      enabled: false
+      rationale: "There is no deployment tool."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a draft."
+  items:
+    - id: "A1"
+      assumption: "Licence flags are the architect's statement, not a lookup in the admin centre."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Microsoft Learn pages pinned on 27 October 2026 are re-opened before a draft is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. A3 is not a permitted recommendation."
+      section: "high_risk_actions"
+      verify_on_deployment: true
