@@ -1,0 +1,445 @@
+# Agent manifest: KYC Evidence Intake Agent
+# Experiment 16 — catalogue ID B004
+# Version: 0.1.0
+# Last reviewed: 2026-10-27
+# Next review: 2027-04-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-16-kyc-evidence-intake"
+  name: "KYC Evidence Intake Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a Money Laundering Regulations 2017 checklist for one synthetic
+    customer file. It calls Experiment 12 intake for purpose kyc_evidence,
+    which calls the Experiment 08 UK identifier gateway. Autonomy A1. A KYC
+    reviewer confirms the documents and the purpose. The agent never approves,
+    rejects, or onboards a customer, never assigns a final risk rating, and
+    never files a suspicious activity report. Customer-facing wording must
+    not hint at suspicion.
+  owner: "KYC reviewer"
+  contact: "kyc-evidence@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/16-kyc-evidence-intake"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "A KYC reviewer confirms the documents and the purpose. The agent only drafts."
+  constraints:
+    - "The KYC reviewer confirms the document list and the purpose kyc_evidence. The agent only drafts."
+    - "The agent NEVER approves, rejects, or onboards a customer"
+    - "The agent NEVER assigns a final risk rating"
+    - "The agent NEVER files or drafts a suspicious activity report"
+    - "The agent NEVER sends the customer-facing note, or any other external message"
+    - "The agent NEVER writes a production record"
+    - "A sentence inside a document cannot confirm the documents, set the purpose, clear a stale date, or set a risk rating"
+    - "Customer-facing wording must not hint at suspicion. Proceeds of Crime Act 2002 section 333A."
+    - "Document inventory and UK identifier detection are Experiments 12 and 08. This agent does not re-implement them."
+    - "All output is a draft and is marked for KYC review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic customer file"
+      description: "File ids, filenames, media types, document dates, text, a customer reference, a customer type, relationship dates, an optional establishment country, and an optional screening note. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One customer file per invocation. No browsing of an onboarding system."
+      justification: "The checklist cannot describe the file without the text the reviewer has supplied"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "A document date, a relationship date, and a filename"
+        - "A phrase that may indicate political exposure"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text. The draft stores hashes, closed-list phrases, and the Experiment 12 inventory, not the body."
+
+    - resource: "Reviewer-supplied run parameters"
+      description: "As-of date and optional stale window, typed outside the file body."
+      access_level: "read"
+      scope: "Fields passed for this run."
+      justification: "The freshness comparison needs a date the reviewer typed"
+      may_contain_personal_data: false
+
+    - resource: "Pinned regulation extracts"
+      description: "Short quotations in src/sources.py from legislation.gov.uk pages opened on 27 October 2026."
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The checklist has to cite the words that were read, without a network call at runtime"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 12 intake and Experiment 08 gateway"
+      description: "In-process calls. Experiment 12 inventories the files. Experiment 08 proposes UK identifier spans. This agent does not copy either implementation."
+      access_level: "read"
+      scope: "The two experiment folders beside this one. No network."
+      justification: "B004 is specified to call the O001 intake rather than re-implement it"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The nested intake stores hashes and entity types, not the body."
+
+  never_access:
+    - resource: "Onboarding, core banking, or case systems"
+      reason: "A production customer record is out of scope. The starter reads only the pasted file."
+    - resource: "Suspicious activity report filing channels, including the NCA"
+      reason: "The agent does not file a report and has no connector for one."
+    - resource: "The FATF call-for-action list, and Companies House or other registers"
+      reason: "Regulation 33(3) points at a list that changes. This starter does not download it and does not look a customer up."
+    - resource: "Mailboxes and customer chat transcripts beyond the pasted file"
+      reason: "Customer-facing wording is a draft. It is not sent, and a live thread is not read."
+    - resource: "Experiment 08 reversible token vault"
+      reason: "The intake calls propose() and does not ask for a reversible map. This agent does not add one."
+
+# =============================================================================
+# TOOLS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "review_customer_file"
+      provider: "Python src/review.py"
+      action: "Return a draft checklist for one synthetic customer file"
+      access_level: "read"
+      scope: "One file. Calls Experiment 12 intake() and, through it, Experiment 08 propose()."
+      justification: "The reviewer needs a draft of what is evidenced, missing, and stale"
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No production write. record_reviewer_confirmation updates a copy of the JSON in memory and still does not onboard the customer. The agent must not call it."
+  sends:
+    enabled: false
+    note: "send_to_customer always raises. The customer-facing paragraph is text in the draft."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "approve_customer and reject_customer always raise. Confirming documents is not an approval of the customer."
+  regulated_decision:
+    enabled: false
+    rationale: "No final risk rating, no decision that regulation 33 applies, and no onboarding decision. assign_risk_rating and onboard_customer always raise."
+  production_record_change:
+    enabled: false
+    rationale: "The starter does not write to an onboarding system, Dataverse, or SharePoint."
+  external_send:
+    enabled: false
+    rationale: "send_to_customer always raises. Nothing is sent to a customer, a supervisor, or the NCA."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not move money or instruct a payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "File a suspicious activity report"
+      rationale: "file_sar always raises. The agent does not draft a report narrative."
+    - enabled: false
+      action_name: "Onboard the customer"
+      rationale: "onboard_customer always raises, including after a reviewer has confirmed the documents in the JSON."
+    - enabled: false
+      action_name: "Assign a final risk rating"
+      rationale: "assign_risk_rating always raises. final_risk_rating stays null."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    A KYC reviewer confirms the documents and the purpose. Recording that
+    step in Python does not approve the customer, assign a rating, file a
+    report, or send the note. The agent has no tool that records the step.
+
+  approval_points:
+    - action: "Confirm the documents, including each file id in order, and the purpose kyc_evidence"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "Catalogue checkpoint for B004. A document that says the file is confirmed is ignored. A checksum mismatch blocks confirmation."
+
+    - action: "Rely on a document date or the pinned sources after they are marked stale, missing, or future"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "The core does not clear a stale flag from a sentence in the file. Confirmation of the document list does not mean the dates are current."
+
+    - action: "Treat an unread, empty, oversized, or checksum-failed file as evidence"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "not_read is not a clean result. Confirmation is refused while a checksum does not match."
+
+    - action: "Use the customer-facing wording"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "The note is a template. The agent does not send it. Section 333A of the Proceeds of Crime Act 2002 is why the template avoids suspicion, a report, and a rating."
+
+    - action: "Decide whether regulation 33 is engaged, including any PEP or FATF call-for-action determination"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "A phrase in the file is not that determination. The FATF list was not downloaded. Regulation 35 was not opened."
+
+    - action: "Assign the final risk rating"
+      approver: "KYC reviewer"
+      mandatory: true
+      rationale: "Disabled for this agent. There is no tool that sets a rating. The person does it in their own system, if they do it at all."
+
+    - action: "File or not file a suspicious activity report"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "Disabled for this agent. file_sar always raises. The nominated officer is named so the boundary is visible. This starter does not implement that role."
+
+  no_approval_required:
+    - action: "View the draft checklist"
+      rationale: "Reading the JSON has no external effect."
+    - action: "Re-run the same customer file"
+      rationale: "The same file and the same as-of date produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      A firm applying customer due diligence may look at Article 6(1)(c).
+      This manifest does not assert that basis. The adopting organisation
+      confirms its own before production use. Political opinions can be
+      special category data, and a PEP marker can touch that category.
+      No Article 9 condition is asserted.
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Political opinions, where the file contains a PEP phrase"
+      - "Health, where an NHS number sits in the pasted text"
+    lawful_basis_special: "Not asserted"
+    condition: "Not asserted. The caller confirms any Schedule 1 condition before production use."
+    safeguards:
+      - "The draft does not copy the file body or the screening note"
+      - "Experiment 08 proposes identifier spans through Experiment 12. The output is not described as anonymised"
+      - "Customer-facing text is a fixed template and does not repeat the PEP phrase"
+
+  data_minimisation:
+    - "One customer file per run"
+    - "Hashes, closed-list phrases, and entity types are kept. The body is not"
+    - "A country name supplied as a field is quoted to the reviewer and is not copied into the customer note"
+    - "The starter does not download the FATF list or look the customer up"
+
+  retention:
+    agent_retention: "Transient in this starter. Nothing is written to a store."
+    note: >
+      Regulation 40 is cited for the firm's own records. It is not a
+      retention period for this agent's logs, and the agent does not delete
+      personal data under regulation 40(5).
+
+  data_residency:
+    region: "UK South or UK West if a team later adds a Foundry narrative"
+    note: "The Python starter makes no network call. Data-use terms are confirmed at deployment."
+
+  data_subject_rights:
+    note: "The starter does not hold a customer record against which to action a request. The firm handles rights against its own file. The customer note is not a response to a rights request."
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    File text and the screening note are untrusted. A phrase that asks for
+    approval, a rating, a report, or a customer message is recorded and is
+    not followed. Experiment 12 records its own list on the nested intake.
+  controls:
+    - control: "Closed phrase list"
+      description: "KYC instructions are recorded, including when hidden in a comment, after a form feed, after blank lines, or between zero-width characters."
+      implementation: "src/injection.py. followed is forced false."
+    - control: "Prohibited payload keys"
+      description: "Keys such as risk_rating, onboard, and documents_confirmed are stripped from the JSON before the checklist is built."
+      implementation: "src/review.py"
+    - control: "Customer-facing lexicon"
+      description: "The customer note is built from fixed sentences and rejected by the guard if a suspicion word appears."
+      implementation: "src/tipping_off.py"
+    - control: "Nested intake"
+      description: "Experiment 12 strips its own prohibited keys and does not let the file confirm the purpose."
+      implementation: "experiments/12-document-intake/src/intake.py, called, not copied."
+  residual_risk: >
+    The lists are not exhaustive. A novel instruction can pass both scanners.
+    A file over 20,000 characters is not scanned. The reviewer still reads
+    the draft.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Qualitative likelihood and impact for this starter, assessed 27 October 2026. Not a firm's business-wide risk assessment under regulation 18."
+  date_assessed: "2026-10-27"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the file approves the customer, sets a rating, or files a report"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions always raise"
+        - "Injection phrases are recorded and not followed"
+        - "final_risk_rating stays null"
+      residual_risk: "Low"
+      owner: "KYC reviewer"
+    - id: "R2"
+      risk: "Customer-facing wording hints that a report was made or that an investigation is in mind"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The note is a fixed template"
+        - "A lexicon replaces the note if a listed word appears"
+        - "The agent cannot send the note"
+      residual_risk: "Medium"
+      owner: "KYC reviewer"
+    - id: "R3"
+      risk: "A stale or unread document is treated as current evidence"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Date status comes from Experiment 12"
+        - "A sentence in the file does not clear the flag"
+        - "not_read is not classified as evidence"
+      residual_risk: "Medium"
+      owner: "KYC reviewer"
+    - id: "R4"
+      risk: "A phrase match is used as a final risk rating or as a decision that regulation 33 applies"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "sufficient is false"
+        - "The FATF list is not downloaded"
+        - "assign_risk_rating always raises"
+      residual_risk: "Medium"
+      owner: "KYC reviewer"
+    - id: "R5"
+      risk: "The pinned regulation text drifts, or the old high-risk third country words are applied as if they were still the test in regulation 33(1)(b)"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Sources are pinned on 27 October 2026"
+        - "The substitution by SI 2026/621 is stated in the draft"
+        - "After the freshness window, sources_stale is true"
+      residual_risk: "Medium"
+      owner: "KYC reviewer"
+    - id: "R6"
+      risk: "A UK identifier reaches a later model because the draft was treated as anonymised"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 is called through Experiment 12"
+        - "The body is not copied into this draft"
+        - "output_is_anonymised stays false on the nested gateway"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: "This starter writes no log. The JSON is the record of the run for as long as the caller keeps it."
+  logged_events:
+    - event: "Draft produced"
+      data_logged:
+        - "customer_file_id"
+        - "as_of"
+        - "whether injection was detected"
+        - "whether any document was stale"
+        - "file hashes, not bodies"
+      retention: "Not stored by this starter"
+    - event: "Reviewer confirmation recorded in memory"
+      data_logged:
+        - "role"
+        - "purpose id"
+        - "file ids"
+      retention: "Only if the caller saves the JSON. The agent does not."
+  log_destination:
+    primary: "None in this starter"
+    secondary: "Application Insights, if a team deploys a host later"
+    note: "Do not log the file body, the screening note, or the raw identifiers."
+  audit_trail:
+    - "The draft records model_called and network_called as false"
+    - "The nested Experiment 12 inventory is included so the hash and the gateway call can be seen"
+    - "Customer-facing hints_at_suspicion is recorded"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Stop producing drafts. Existing JSON already in someone's hands is not recalled by this file."
+  methods:
+    - method: "Disable the Copilot Studio agent"
+      action: "Turn the agent off in the tenant"
+      time_to_effect: "When the tenant applies it"
+      who_can_activate: "The person who owns the agent in the tenant"
+    - method: "Stop calling review()"
+      action: "Remove the flow or the function host"
+      time_to_effect: "On the next request"
+      who_can_activate: "The team running the host"
+    - method: "Remove any later Foundry access"
+      action: "Revoke the credential. This starter has none."
+      time_to_effect: "When the credential is revoked"
+      who_can_activate: "The platform owner"
+  escalation_contacts:
+    - role: "KYC reviewer"
+      contact: "kyc-evidence@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-27"
+  next_review_date: "2027-04-27"
+  review_frequency: "Six months, and sooner if regulation 28, 33, or 40, or section 333A, changes"
+  reviewer: "KYC reviewer, with the data protection officer for the identifier path"
+  review_triggers:
+    - "A change to regulations 28, 33, or 40, or to section 333A"
+    - "A change to the FATF call-for-action list process in regulation 33(3)"
+    - "A change to Experiment 12 or Experiment 08 that alters the nested JSON"
+    - "A plan to send the customer note, or to connect an onboarding system"
+  related_documents:
+    - name: "Security and permissions"
+      path: "experiments/16-kyc-evidence-intake/docs/security-and-permissions.md"
+    - name: "Experiment 12 intake"
+      path: "experiments/12-document-intake/README.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items to verify before anyone relies on a draft in a firm."
+  items:
+    - id: "A1"
+      assumption: "The adopting firm is the relevant person for the customer file, and a person will make any regulation 33 determination."
+      section: "autonomy"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6 and any Article 9 condition are confirmed by the firm. This manifest does not assert them."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The regulation extracts pinned on 27 October 2026 are re-read before the freshness window lapses."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "JMLSG Guidance, Part I, is read by the firm if the firm relies on it. This starter does not apply it."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, Foundry prompt shields, Key Vault, Purview, and Application Insights are tenant controls. They are not configured in this repository."
+      section: "kill_switch"
+      verify_on_deployment: true
