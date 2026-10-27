@@ -655,6 +655,58 @@ class TestExperiment15Manifest:
         assert experiment_15_manifest["agent"]["id"] == "exp-15-vulnerability-urgency-scanner"
 
 
+class TestExperiment16Manifest:
+    """Test the Experiment 16 KYC evidence-intake manifest."""
+
+    @pytest.fixture
+    def experiment_16_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "16-kyc-evidence-intake" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_16_manifest):
+        """Experiment 16 manifest should be valid."""
+        validate(instance=experiment_16_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_16_manifest):
+        """Experiment 16 should be autonomy level A1, not above."""
+        level = experiment_16_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_16_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_16_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_16_manifest):
+        """Experiment 16 should have all high-risk actions disabled."""
+        high_risk = experiment_16_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_16_manifest):
+        """Nothing is sent or written to an onboarding system."""
+        assert experiment_16_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_16_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_reviewer_confirms_documents_and_purpose(self, experiment_16_manifest):
+        """The catalogue checkpoint is the KYC reviewer, and it is mandatory."""
+        points = experiment_16_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Confirm the documents"))
+        assert decision["approver"] == "KYC reviewer"
+        assert decision["mandatory"] is True
+        assert experiment_16_manifest["agent"]["id"] == "exp-16-kyc-evidence-intake"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

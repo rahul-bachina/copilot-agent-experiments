@@ -58,6 +58,9 @@ DIAGRAMS = {
     "experiments/15-vulnerability-urgency-scanner/docs/architecture_diagram.png": (
         "experiments/img/15-vulnerability-urgency-architecture.png"
     ),
+    "experiments/16-kyc-evidence-intake/docs/architecture_diagram.png": (
+        "experiments/img/16-kyc-evidence-intake-architecture.png"
+    ),
 }
 
 
