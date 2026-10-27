@@ -1,0 +1,63 @@
+{
+  "tools": [
+    {
+      "name": "review_kyc_file",
+      "implementation": "review",
+      "reads": ["one synthetic customer file", "as-of date", "pinned regulation extracts", "Experiment 12 intake()"],
+      "writes": false,
+      "sends": false,
+      "approves_customer": false,
+      "assigns_risk_rating": false,
+      "files_sar": false,
+      "persists_file_body": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_reviewer_confirmation",
+      "implementation": "record_reviewer_confirmation",
+      "reads": ["draft checklist"],
+      "writes": false,
+      "sends": false,
+      "approves_customer": false,
+      "assigns_risk_rating": false,
+      "files_sar": false,
+      "persists_file_body": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "KYC reviewer"
+    },
+    {
+      "name": "approve_customer",
+      "implementation": "approve_customer",
+      "writes": false,
+      "sends": false,
+      "approves_customer": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "assign_risk_rating",
+      "implementation": "assign_risk_rating",
+      "assigns_risk_rating": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "file_sar",
+      "implementation": "file_sar",
+      "files_sar": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_to_customer",
+      "implementation": "send_to_customer",
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
