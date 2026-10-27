@@ -1,0 +1,494 @@
+{
+  "label": "DRAFT FOR ARCHITECT REVIEW",
+  "catalogue_id": "G002",
+  "experiment": "14-agent-architecture-advisor",
+  "as_of": "2026-10-27",
+  "model_called": false,
+  "network_called": false,
+  "deployed": false,
+  "decision": null,
+  "platform_selected": null,
+  "architect_confirmed": false,
+  "manifest_approved": false,
+  "actions_taken": [],
+  "a3_recommended": false,
+  "catalogue_autonomy_levels": [
+    "A0",
+    "A1",
+    "A2"
+  ],
+  "case_id": "uc-01-bounded-policy-qa",
+  "errors": [],
+  "input_notes": [],
+  "recommended_autonomy": "A0",
+  "autonomy_rationale": "Recommended autonomy is A0. Either no consequential action is in scope, no approver was named, or the architect asked for A0 so those actions stay out of scope. The advisor takes no action.",
+  "a3_requested": false,
+  "a3_refused": false,
+  "consequential_action_recorded": false,
+  "work_shape": "bounded",
+  "rules_fired": [
+    "R5",
+    "R10"
+  ],
+  "options": [
+    {
+      "id": "copilot_studio_standard",
+      "name": "Copilot Studio standard harness",
+      "suitability": "suitable_to_consider",
+      "selected": false,
+      "reasons": [
+        {
+          "rule_id": "R5",
+          "text": "The harness overview describes the standard harness for rule-based agents and structured, repeatable conversations, with topics and paths the maker defines. The comparison page says to choose it when the work is relatively short and bounded and explicit control matters.",
+          "source_ids": [
+            "cs-harnesses-overview",
+            "cs-choose-harness"
+          ]
+        }
+      ],
+      "preview_notes": []
+    },
+    {
+      "id": "copilot_studio_github_harness",
+      "name": "Copilot Studio GitHub Copilot harness",
+      "suitability": "not_indicated",
+      "selected": false,
+      "reasons": [
+        {
+          "rule_id": "R5",
+          "text": "The comparison page says the GitHub Copilot harness may add reasoning, latency, and Copilot Credit consumption when the scenario is simple, without a better result. No rate is copied. It is not indicated for this bounded use case. The harness overview also says it is not the GitHub Copilot service.",
+          "source_ids": [
+            "cs-choose-harness",
+            "cs-harnesses-overview"
+          ]
+        }
+      ],
+      "preview_notes": [
+        {
+          "text": "The harness overview opened on 27 October 2026 does not mark the GitHub Copilot harness as preview. The comparison page says customers should validate required features and channels as the experience matures. That is a maturity caveat, not a preview label.",
+          "source_ids": [
+            "cs-harnesses-overview",
+            "cs-choose-harness"
+          ]
+        },
+        {
+          "text": "The cost-management page says developer environments and trial environments move to usage-based billing on 1 September 2026. That date is before this retrieval. Confirm the tenant. No price is copied.",
+          "source_ids": [
+            "cs-gh-cost-management"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundry_agent_service",
+      "name": "Microsoft Foundry Agent Service",
+      "suitability": "not_indicated",
+      "selected": false,
+      "reasons": [
+        {
+          "rule_id": "R5",
+          "text": "No custom code, chosen model, private network, or Foundry evaluation was recorded. Foundry Agent Service is not indicated for this bounded use case.",
+          "source_ids": [
+            "foundry-agent-service"
+          ]
+        }
+      ],
+      "preview_notes": [
+        {
+          "text": "Agent optimizer is marked preview on the Foundry Agent Service overview. It is not a reason to choose the service.",
+          "source_ids": [
+            "foundry-agent-service"
+          ]
+        },
+        {
+          "text": "Prompt Shields are described on a separate page. User prompt attack detection is on by default. Document attack detection is off by default. Tool-response scanning for agents, and Spotlighting, are marked preview. This advisor does not call Prompt Shields.",
+          "source_ids": [
+            "foundry-prompt-shields"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power_automate",
+      "name": "Power Automate",
+      "suitability": "not_indicated",
+      "selected": false,
+      "reasons": [
+        {
+          "rule_id": "R5",
+          "text": "The use case is not only a fixed sequence of connector steps. The cloud-flows overview is not the fit for a conversational or drafting agent. Power Automate is not indicated as the agent.",
+          "source_ids": [
+            "pa-cloud-flows"
+          ]
+        }
+      ],
+      "preview_notes": []
+    },
+    {
+      "id": "no_agent",
+      "name": "No agent",
+      "suitability": "possible_with_conditions",
+      "selected": false,
+      "reasons": [
+        {
+          "rule_id": "R5",
+          "text": "The architect may decide not to build. That option is conditional, not a selection.",
+          "source_ids": [
+            "catalogue-boundary"
+          ]
+        }
+      ],
+      "preview_notes": []
+    }
+  ],
+  "decision_table": [
+    {
+      "id": "R1",
+      "when": "Classification is secret_or_above.",
+      "effect": "Only no agent is suitable. The other four are not indicated. Catalogue rule, not a Microsoft Learn sentence."
+    },
+    {
+      "id": "R2",
+      "when": "Channel is voice and the audience is customers, the public, or mixed.",
+      "effect": "No agent is suitable. Foundry voice is preview, so Foundry is conditional. The Customer Conversation harness is not scored."
+    },
+    {
+      "id": "R3",
+      "when": "The steps are a fixed, bounded workflow with no open-ended reasoning, long run, file creation, or custom code.",
+      "effect": "Power Automate is suitable, subject to licence. The agent harnesses are not indicated."
+    },
+    {
+      "id": "R4",
+      "when": "The work is long-running, multi-step, large or multi-source, creates files, or needs custom code.",
+      "effect": "The GitHub Copilot harness is suitable, subject to licence. The standard harness is conditional. Foundry is suitable only when a Foundry capability was asked for."
+    },
+    {
+      "id": "R5",
+      "when": "The work is a short, bounded, rule-based agent.",
+      "effect": "The standard harness is suitable, subject to licence. The GitHub Copilot harness is not indicated."
+    },
+    {
+      "id": "R6",
+      "when": "Autonomy A3 was requested, or a consequential action has no named approver.",
+      "effect": "No agent is suitable for the unsupervised design. A platform that was suitable becomes conditional, for a reduced scope that leaves the action off."
+    },
+    {
+      "id": "R7",
+      "when": "The organisation recorded no for the licence that option needs, and the option was still open.",
+      "effect": "That option is not indicated. No purchase is recommended."
+    },
+    {
+      "id": "R8",
+      "when": "The licence was recorded as unknown, and the option was still open.",
+      "effect": "A suitable option becomes conditional. The architect confirms the licence."
+    },
+    {
+      "id": "R9",
+      "when": "The record says the GitHub Copilot service is held and Copilot Studio was not recorded as held.",
+      "effect": "Both Copilot Studio harnesses are not indicated. The harness is not the GitHub Copilot service."
+    },
+    {
+      "id": "R10",
+      "when": "No consequential action remains in scope, there is no named approver, or the architect asked for A0.",
+      "effect": "Recommended autonomy is A0."
+    },
+    {
+      "id": "R11",
+      "when": "A consequential action remains, a named approver was recorded, and A2 was not requested.",
+      "effect": "Recommended autonomy is A1. A request for A3 is lowered to A1."
+    },
+    {
+      "id": "R12",
+      "when": "A2 was requested, a named approver was recorded, and a consequential action remains.",
+      "effect": "Recommended autonomy is A2. The skeleton still leaves the action disabled."
+    },
+    {
+      "id": "R13",
+      "when": "A3 was requested.",
+      "effect": "A3 is refused. a3_recommended is false."
+    },
+    {
+      "id": "R14",
+      "when": "All four product options are not indicated.",
+      "effect": "No agent is suitable."
+    }
+  ],
+  "approval_points": [
+    {
+      "action": "Confirm each platform option, including no agent",
+      "approver": "Architect",
+      "mandatory": true,
+      "rationale": "The advisor has selected none. platform_selected stays null."
+    },
+    {
+      "action": "Confirm the catalogue autonomy level",
+      "approver": "Architect",
+      "mandatory": true,
+      "rationale": "A3 is not available. A0, A1, and A2 are recommendations, not a decision."
+    },
+    {
+      "action": "Approve the permissions manifest before anyone relies on it",
+      "approver": "Governance owner",
+      "mandatory": true,
+      "rationale": "The skeleton is a draft. approved is false."
+    },
+    {
+      "action": "Confirm a UK region before any deployment",
+      "approver": "Architect",
+      "mandatory": true,
+      "rationale": "A UK region list was not on the Foundry overview opened on 27 October 2026. Unverified."
+    }
+  ],
+  "licensing_notes": [
+    {
+      "text": "Licence flags are the architect's statement. This advisor does not open an admin centre. The assign-licences page says creating and managing standard-harness agents needs a user licence and a tenant licence, and that a trial can test in the chat panel but cannot publish. The standard-harness licensing page uses a different list, including a Microsoft 365 Copilot licence, and says that licence lets you use Copilot Studio to build agents for the GitHub Copilot harness. The cost-management page says GitHub Copilot harness consumption is not included with a Microsoft 365 Copilot licence, and that standard-harness agents are covered by that licence in Microsoft 365 channels and billed outside that case. The sentences are not merged. No quantity or price is copied.",
+      "source_ids": [
+        "cs-assign-licences",
+        "cs-standard-licensing",
+        "cs-gh-cost-management"
+      ]
+    },
+    {
+      "text": "The usage-based billing overview says the GitHub Copilot harness charges Copilot Credits from the moment you start building, including testing, and that the standard harness starts billing after publish. No diagram and no rate from that page is copied.",
+      "source_ids": [
+        "cs-usage-billing"
+      ]
+    },
+    {
+      "text": "The Power Automate licence-types page describes user licences and capacity licences and points to a pricing page. That pricing page was not opened. A recorded yes does not say which licence is held, and it does not say that premium connectors are included.",
+      "source_ids": [
+        "pa-licence-types"
+      ]
+    },
+    {
+      "text": "The Foundry Agent Service overview describes cost as per-call inference plus tool usage for prompt agents, and that plus container compute for hosted agents. It points to a pricing page for voice. That page was not opened. No figure is copied.",
+      "source_ids": [
+        "foundry-agent-service"
+      ]
+    },
+    {
+      "text": "The organisation recorded a Microsoft 365 Copilot licence. That record is not treated as a Copilot Studio tenant licence, and it is not treated as covering GitHub Copilot harness consumption. See the two sentences above. The architect confirms both in the tenant.",
+      "source_ids": [
+        "cs-standard-licensing",
+        "cs-gh-cost-management"
+      ]
+    }
+  ],
+  "unscored_context": [
+    {
+      "text": "The harness overview also describes a Customer Conversation harness for customer voice and chat, using Copilot Credits. It is not one of the five options. This advisor does not select it.",
+      "source_ids": [
+        "cs-harnesses-overview"
+      ]
+    },
+    {
+      "text": "A procurement route is not scored. G-Cloud, DOS, and RM6200 were not opened for this run.",
+      "source_ids": []
+    },
+    {
+      "text": "Microsoft Entra Conditional Access, Microsoft Purview, a Data Loss Prevention policy, and Key Vault were not opened for this revision. Treat any claim about those controls as unverified. The Foundry overview does describe Microsoft Entra identity, role-based access control, and virtual network isolation for Agent Service. Application Insights is named there for traces.",
+      "source_ids": [
+        "foundry-agent-service"
+      ]
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": [],
+    "prohibited_payload_keys_ignored": [],
+    "narrative_used_as_instruction": false
+  },
+  "scored_fields": {
+    "organisation": {
+      "sector": "local_authority",
+      "licences": {
+        "copilot_studio": "yes",
+        "microsoft_365_copilot": "yes",
+        "power_automate": "yes",
+        "foundry": "yes",
+        "github_copilot_service_only": false
+      }
+    },
+    "users": {
+      "audience": "internal_staff",
+      "channel": "teams"
+    },
+    "data": {
+      "personal_data": false,
+      "special_category": false,
+      "classification": "official",
+      "volume": "bounded",
+      "residency": "uk"
+    },
+    "actions": {
+      "read": true,
+      "draft": true,
+      "classify": true,
+      "create_files": false,
+      "fixed_workflow": false,
+      "multi_step_reasoning": false,
+      "long_running": false,
+      "needs_custom_code": false,
+      "needs_model_choice": false,
+      "needs_private_network": false,
+      "needs_evaluations": false,
+      "production_write": false,
+      "external_send": false,
+      "spend": false,
+      "approve_or_reject": false,
+      "regulated_decision": false
+    },
+    "risk": {
+      "level": "low",
+      "significant_automated_decision": false,
+      "requested_autonomy": "A0",
+      "named_approver": true,
+      "approver_role": "Policy owner"
+    }
+  },
+  "sources_stale": false,
+  "do_not_rely": false,
+  "sources": [
+    {
+      "id": "cs-harnesses-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. Three harnesses are described: GitHub Copilot for reasoning-heavy multi-step work, Customer Conversation for customer voice and chat, and standard for rule-based agents and agent flows. The GitHub Copilot harness can take a goal, break it into steps, call tools across connectors, knowledge, MCP, and connected agents, create and edit Word, Excel, PowerPoint, and PDF files, and it supports skills and memory. Each task runs in a sandbox governed by Copilot Studio. Agents on that harness use Copilot Credits. An important note says the GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service, and that customer data is not sent to the GitHub Copilot service. The page does not mark the GitHub Copilot harness itself as preview. The Customer Conversation harness is not one of the five options this advisor scores."
+    },
+    {
+      "id": "cs-choose-harness",
+      "title": "Compare Copilot Studio agent harnesses",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/choose-harness",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [
+        "The page says customers should validate required features and channels as the experience matures. That is a maturity caveat, not a preview label on the harness."
+      ],
+      "notes": "Opened 27 October 2026. Choose the standard harness when the work is relatively short and bounded and explicit control matters. Choose the GitHub Copilot harness when the task is long-running, coordination-heavy, or reasoning-intensive. The GitHub Copilot harness supports longer-running tasks, larger files and datasets, agentic loops, iterative reasoning, persistent memory, and a Bash container. The page says a more capable harness can overwork a simple problem, and that simple scenarios can add reasoning, latency, and Copilot Credit consumption. No rate is stored here. Both harnesses can keep a deterministic step: topics on the standard harness, workflows on the GitHub Copilot harness. Reasoning models and some emerging agentic capabilities are described as available only through the GitHub Copilot harness. Standard-harness agents are said to retain the pre-existing Copilot Studio licensing model. GitHub Copilot harness solutions are said to use usage-based billing."
+    },
+    {
+      "id": "cs-assign-licences",
+      "title": "Assign user licenses and manage access",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-licensing",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. The page says it describes the standard harness. It says creating and managing agents needs a user licence and a tenant licence, that users of a published agent do not need a special licence, and that a trial can be used in the test chat panel but cannot publish. It points to the Microsoft Copilot Studio Licensing Guide. That guide was not opened. No quantity is stored here."
+    },
+    {
+      "id": "cs-standard-licensing",
+      "title": "Standard harness licensing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. The page says it covers licensing for agents on the standard harness, and it distinguishes Azure Bot Service skills on that harness from agentic skills on the GitHub Copilot harness. It says Copilot Credits are the common currency, and that on 1 September 2025 the common currency changed from messages to Copilot Credits. It says a Microsoft 365 Copilot licence lets you use Copilot Studio to build agents for the GitHub Copilot harness. It points to a licensing guide and a billing-rates page. Those were not used for figures. No quantity is stored here. Price words on the page are not stored."
+    },
+    {
+      "id": "cs-usage-billing",
+      "title": "Overview of usage-based billing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/billing-credit-overview",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. The page says agents, workflows, and apps on the GitHub Copilot harness use usage-based billing measured in Copilot Credits. Credits cover model tokens, tools including knowledge and MCP, and the harness. Billing starts when you start building, including previewing, testing, and generating evaluations. The page says the standard harness starts billing after publish. A diagram of ranges was on the page and is not copied."
+    },
+    {
+      "id": "cs-gh-cost-management",
+      "title": "Manage costs for agents powered by the GitHub Copilot harness",
+      "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-usage-github-copilot-harness",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [
+        "Developer environments and trial environments move to usage-based billing on 1 September 2026. That date is before this retrieval. Confirm the tenant."
+      ],
+      "notes": "Opened 27 October 2026. The page says GitHub Copilot harness agents use consumption-based billing and that this usage is not included with a Microsoft 365 Copilot licence. Creation and runtime consume Copilot Credits regardless of the user's licence. It says standard-harness agents are covered by a Microsoft 365 Copilot licence in Microsoft 365 channels, and billed when the user has no such licence or the channel is outside Microsoft 365. The Harness column in the admin centre shows GitHub Copilot, Standard, or Copilot Chat. Developer environments and trial environments move to usage-based billing on 1 September 2026. No credit amount is stored here. This page and the standard-harness licensing page do not use the same sentence about a Microsoft 365 Copilot licence and the GitHub Copilot harness. Both are kept."
+    },
+    {
+      "id": "foundry-agent-service",
+      "title": "What is Microsoft Foundry Agent Service?",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/agents/overview",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [
+        "Agent optimizer is marked preview.",
+        "Voice-based agents and some related monitoring, evaluation, avatar, WebRTC, and telephony capabilities are marked preview.",
+        "A2A protocol v1.0 is described as generally available. v0.3 remains in preview."
+      ],
+      "notes": "Opened 27 October 2026. The page describes prompt agents, voice-based prompt agents, and hosted agents. Prompt agents are instructions, a model, and tools, run by Foundry with no application code. Hosted agents are your code, run as a container or from a zip file, with a managed endpoint, scaling, and a dedicated Microsoft Entra identity. Observability on the page includes tracing, evaluations, and Application Insights. Private networking is described for prompt agents. Hosted agents are described with bring-your-own virtual network. Content filters are described as mitigating prompt injection, including cross-prompt injection. The comparison table describes prompt-agent cost as per-call inference plus tool usage, and hosted agents as that plus container compute. It points to a pricing page for voice. That pricing page was not opened. No figure is stored. A list of UK regions was not on the page. Region availability is unverified. Agent optimizer is marked preview and is not a reason to choose the service."
+    },
+    {
+      "id": "foundry-prompt-shields",
+      "title": "Prompt Shields in Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/content-filter-prompt-shields",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [
+        "For Foundry Agent Service agents, document-attack scanning at the tool-response point is marked preview.",
+        "Spotlighting is marked preview and is off by default. A cost note in that section is not copied."
+      ],
+      "notes": "Opened 27 October 2026. Prompt Shields detect user prompt attacks and document attacks. The page says they are part of Foundry guardrails. User prompt attack detection is on by default. Document attack detection is off by default. The page says Prompt Shields do not decide that content is harmful, accurate, grounded, or compliant. The local advisor does not call Prompt Shields. Its tests are the control on use-case text. The page says the service behind Prompt Shields is Azure AI Content Safety."
+    },
+    {
+      "id": "pa-cloud-flows",
+      "title": "Overview of cloud flows",
+      "url": "https://learn.microsoft.com/en-us/power-automate/overview-cloud",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. Cloud flows connect apps and services. Without Copilot in the designer, the page lists three types: automated (an event, such as an email), instant (a button, with an approval in Teams or SharePoint given as an example), and scheduled. Copilot in the designer can suggest actions from a prompt and can be turned off by an admin. That authoring aid is not one of the five options. A cloud flow is not scored as an agent."
+    },
+    {
+      "id": "pa-licence-types",
+      "title": "Types of Power Automate licenses",
+      "url": "https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/types",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "age_days": 0,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Opened 27 October 2026. The page describes user licences and capacity licences. It names Premium, Process, and Hosted Process, a 90-day trial, and a further user licence limited to standard connectors. It says other Microsoft 365, Dynamics 365, and Power Platform licences include a limited set of Power Automate capabilities, and it points to a licensing guide and a pricing page. Those were not opened. Quantities, storage sizes, and price words on the page are not stored. A recorded yes does not say which of these licences the organisation holds."
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue autonomy boundary for this repository",
+      "url": null,
+      "last_verified": "2026-10-27",
+      "body_opened": false,
+      "age_days": null,
+      "stale": false,
+      "preview_labels": [],
+      "notes": "Not a Microsoft page. This repository permits autonomy A0, A1, and A2. A3 is never recommended. Secret material is not put into a generative agent by this catalogue. The architect confirms every platform option."
+    }
+  ],
+  "manifest_skeleton": {
+    "validation_passed": true,
+    "approved": false,
+    "may_be_relied_on": false,
+    "autonomy_level": "A0",
+    "errors": [],
+    "yaml": "draft_control:\n  document_status: draft\n  approved: false\n  approved_by: null\n  may_be_relied_on: false\n  note: Generated from an inventory record. This file is not an approval of the agent,\n    the lifecycle status, or the manifest.\nagent:\n  id: uc-01-bounded-policy-qa\n  name: Pebbleford corporate policy questions\n  version: 0.0.1\n  description: Draft manifest for the inventoried agent. Draft manifest for a proposed\n    agent. The architect has not confirmed a platform. The advisor has not deployed\n    anything. Approved corporate policies already marked for staff use\n  owner: Pebbleford Borough Council\n  contact: architecture-draft@example.com\n  repository: https://github.com/rahul-bachina/copilot-agent-experiments\n  experiment_path: experiments/14-agent-architecture-advisor\nautonomy:\n  level: A0\n  level_description: Read-only analysis. Drafted from the inventory, not approved.\n  constraints:\n  - This manifest is a draft from the inventory generator\n  - The generator does not approve lifecycle status, publishing, or sending\n  - High-risk actions are left disabled even if the inventory asked for them\n  human_in_the_loop: true\n  auto_actions_enabled: false\ndata_access:\n  reads:\n  - resource: Approved corporate policies already marked for staff use\n    access_level: read\n    justification: Copied from the structured use case. Not re-justified here.\n    may_contain_personal_data: false\n  never_access:\n  - resource: A channel that can send or publish\n    reason: This skeleton does not enable a send.\n  - resource: A production system of record\n    reason: This skeleton does not enable a production write.\n  - resource: A channel that can send or publish\n    reason: The generator has no send and no ATRS submission step\ntools:\n  allowed:\n  - tool: Read the inventory record supplied for this draft\n    provider: Local Python\n    action: Copy recorded fields into a draft manifest\n    access_level: read\n    scope: The single inventory record passed to the generator\n    justification: The draft cannot be built without the record the caller supplied\n    human_approval_required: false\n    output_requires_human_review: true\n  writes:\n    enabled: false\n    note: The generator does not write Dataverse or any other production record.\n  sends:\n    enabled: false\n    note: The generator does not send email or publish an ATRS record.\nhuman_approval:\n  description: A governance owner approves every lifecycle status change outside this\n    generator. The generator cannot record that approval.\n  approval_points:\n  - action: Change the lifecycle status of the inventoried agent\n    approver: Governance owner\n    mandatory: true\n    rationale: Catalogue control for G010. The generator only drafts.\n  - action: Rely on this manifest in a tenant\n    approver: Governance owner\n    mandatory: true\n    rationale: A generated file is not a sign-off.\n  no_approval_required:\n  - action: Generate this draft from an inventory record\n    rationale: The draft has no external effect.\nuk_gdpr:\n  lawful_basis:\n    primary: No personal data was recorded. The architect confirms that is true.\n    description: Copied from the inventory where a basis was recorded. The generator\n      does not choose a basis. A DPO confirms it before any processing.\n  special_category_data:\n    may_process: false\n    lawful_basis_special: Not asserted by this generator.\n    safeguards:\n    - No Article 9 condition is claimed here\n    - The draft is not written to a production record\n  data_minimisation:\n  - One inventory record per draft\n  - Narrative text is copied, not enriched\n  retention:\n    agent_retention: None in this generator. The draft is returned to the caller.\n  data_residency:\n    region: UK\n    note: A deployment choice. This generator does not call a model.\nrisk_assessment:\n  methodology: Rows copied from the inventory where they were valid. Otherwise a single\n    gap row.\n  date_assessed: '2026-10-27'\n  risks:\n  - id: U1\n    risk: The draft is treated as a decision to build or as an approved manifest\n    likelihood: Low\n    impact: High\n    controls:\n    - Copied from the inventory. This generator has not accepted the risk.\n    residual_risk: Medium\n    owner: Not assigned by this generator\nlogging_and_audit:\n  description: This generator does not write a log. A deployment would need one before\n    live use.\n  logged_events:\n  - event: Manifest draft generated\n    data_logged:\n    - inventory id\n    - as-of date\n    - validation result\n    retention: Not set by this generator.\nkill_switch:\n  description: Ways a deployment can stop use of the inventoried agent. Not tested\n    here.\n  methods:\n  - method: Stop the Copilot Studio agent\n    action: Set the published agent to off\n    who_can_activate: Copilot Studio administrators\n  - method: Remove the Dataverse security role\n    action: Take the read role off the agent identity\n    who_can_activate: Power Platform administrators\nreview:\n  last_review_date: '2026-10-27'\n  next_review_date: '2027-10-27'\n  review_frequency: Draft only. Next review is 365 days after the inventory review\n    date. That interval is not a legal period.\n  reviewer: Not assigned by this generator\nhigh_risk_actions:\n  approve_reject:\n    enabled: false\n    rationale: The generator does not approve or reject an agent, a record, or a request.\n  regulated_decision:\n    enabled: false\n    rationale: ATRS scope, DUAA engagement, and FCA inventory status are screens,\n      not decisions.\n  production_record_change:\n    enabled: false\n    rationale: Lifecycle status in a system of record is changed by a person, not\n      by this draft.\n  external_send:\n    enabled: false\n    rationale: The draft is not emailed to the ATRS team or to anyone else.\n  spend_transact:\n    enabled: false\n    rationale: No spend and no contract.\n  additional_high_risk:\n  - enabled: false\n    rationale: Publish an ATRS record\n    action_name: Publish an ATRS record\n  - enabled: false\n    rationale: Mark a manifest approved\n    action_name: Mark a manifest approved\nassumptions:\n  description: The organisation confirms these before anyone relies on the draft.\n  items:\n  - id: G1\n    assumption: Next review is 365 days after the inventory review date. That interval\n      is not a legal period.\n    section: review\n    verify_on_deployment: true\n  - id: G2\n    assumption: High-risk actions stay disabled until a person edits the manifest\n      and the schema still passes\n    section: high_risk_actions\n    verify_on_deployment: true\n  - id: G3\n    assumption: No personal data was recorded. The architect confirms that is true.\n    section: uk_gdpr.lawful_basis\n    verify_on_deployment: true\n"
+  }
+}

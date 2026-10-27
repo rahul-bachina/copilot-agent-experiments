@@ -1,0 +1,7 @@
+# Experiment 14 has no model and no network calls at runtime.
+# The manifest skeleton reuses Experiment 03's generator, which needs
+# PyYAML and jsonschema. Tests use pytest.
+
+pytest>=7.0.0
+jsonschema>=4.17.0
+pyyaml>=6.0

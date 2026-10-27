@@ -1,0 +1,2180 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_path": "fixtures/use_cases.json",
+  "dataset_label": "Synthetic use cases. Invented organisations. Not clients.",
+  "as_of": "2026-10-27",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "uc-01-bounded-policy-qa",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R7",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R9",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R11",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-02-invoice-exceptions",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "reasoning_heavy"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R4",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_R8",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_absent_R7",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R4,R8,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"suitable_to_consider\", \"copilot_studio_standard\": \"possible_with_conditions\", \"foundry_agent_service\": \"possible_with_conditions\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"possible_with_conditions\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-03-file-the-post",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "fixed_flow"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R3",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R4",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R5",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R7",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"suitable_to_consider\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-04-unsupervised-benefit",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "rule_R6",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "rule_R13",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "rule_absent_R11",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R5,R6,R13,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"possible_with_conditions\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"suitable_to_consider\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-05-injected-narrative",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal_ignore_instructions",
+          "passed": true,
+          "detail": "ignore_instructions,force_a3,persona_override,deploy,select_platform,approve_manifest,hide_from_architect,override"
+        },
+        {
+          "field": "signal_force_a3",
+          "passed": true,
+          "detail": "ignore_instructions,force_a3,persona_override,deploy,select_platform,approve_manifest,hide_from_architect,override"
+        },
+        {
+          "field": "signal_deploy",
+          "passed": true,
+          "detail": "ignore_instructions,force_a3,persona_override,deploy,select_platform,approve_manifest,hide_from_architect,override"
+        },
+        {
+          "field": "signal_select_platform",
+          "passed": true,
+          "detail": "ignore_instructions,force_a3,persona_override,deploy,select_platform,approve_manifest,hide_from_architect,override"
+        },
+        {
+          "field": "signal_approve_manifest",
+          "passed": true,
+          "detail": "ignore_instructions,force_a3,persona_override,deploy,select_platform,approve_manifest,hide_from_architect,override"
+        },
+        {
+          "field": "same_scored_fields",
+          "passed": true,
+          "detail": "uc-01-bounded-policy-qa"
+        },
+        {
+          "field": "same_suitability",
+          "passed": true,
+          "detail": "uc-01-bounded-policy-qa"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-06-foundry-code",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "reasoning_heavy"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R4",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_R7",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R8",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"suitable_to_consider\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-07-secret",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "blocked_data"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R1",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "rule_R14",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "rule_absent_R4",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "rule_absent_R5",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R1,R14,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"suitable_to_consider\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-08-licence-unknown",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_R8",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_absent_R7",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_absent_R11",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R5,R8,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"possible_with_conditions\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-09-no-licences",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_R7",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_R14",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_absent_R8",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R7,R14,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"suitable_to_consider\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-10-github-service-only",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "reasoning_heavy"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R4",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_R8",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_R9",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_absent_R7",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R4,R9,R8,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"possible_with_conditions\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"possible_with_conditions\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-11-a2-with-approver",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A2"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A2"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A2"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "rule_R12",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "rule_absent_R10",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "rule_absent_R11",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R12"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-12-customer-voice",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "customer_voice"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R2",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_absent_R4",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_absent_R5",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R2,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"possible_with_conditions\", \"no_agent\": \"suitable_to_consider\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-13-special-category",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-14-injected-name",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "fixed_flow"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R3",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R3,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"not_indicated\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"suitable_to_consider\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "ignored_recommended_autonomy",
+          "passed": true,
+          "detail": "recommended_autonomy platform_selected deploy"
+        },
+        {
+          "field": "ignored_platform_selected",
+          "passed": true,
+          "detail": "recommended_autonomy platform_selected deploy"
+        },
+        {
+          "field": "ignored_deploy",
+          "passed": true,
+          "detail": "recommended_autonomy platform_selected deploy"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-15-multi-source-review",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "reasoning_heavy"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R4",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_R7",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R8",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "rule_absent_R14",
+          "passed": true,
+          "detail": "R4,R7,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"suitable_to_consider\", \"copilot_studio_standard\": \"possible_with_conditions\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"possible_with_conditions\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-16-a2-without-a-gate",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_R10",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R10"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-17-send-with-approver",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "rule_R11",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "rule_absent_R6",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "rule_absent_R10",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "rule_absent_R13",
+          "passed": true,
+          "detail": "R5,R11"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"suitable_to_consider\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"possible_with_conditions\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "uc-18-a3-with-approver",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "autonomy_band",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "architect_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_level",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "manifest_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "manifest_valid",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "options_unselected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_shape",
+          "passed": true,
+          "detail": "bounded"
+        },
+        {
+          "field": "recommended_autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "rule_R5",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "rule_R6",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "rule_R11",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "rule_R13",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "rule_absent_R10",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "rule_absent_R12",
+          "passed": true,
+          "detail": "R5,R6,R13,R11"
+        },
+        {
+          "field": "suitability",
+          "passed": true,
+          "detail": "{\"copilot_studio_github_harness\": \"not_indicated\", \"copilot_studio_standard\": \"possible_with_conditions\", \"foundry_agent_service\": \"not_indicated\", \"no_agent\": \"suitable_to_consider\", \"power_automate\": \"not_indicated\"}"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    }
+  ]
+}

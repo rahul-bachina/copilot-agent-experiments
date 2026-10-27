@@ -134,6 +134,16 @@ Possible indicators in one synthetic letter: safeguarding, self-harm, financial 
 
 </article>
 
+<article class="plan-card" id="g002" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G002 · Autonomy A0</p>
+
+## Agent Architecture Advisor
+
+A draft of platform options for one proposed agent, including no agent. The architect confirms every option. The advisor does not select a platform, approve a manifest, or deploy. [Read the briefing](experiments/14-agent-architecture-advisor.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
