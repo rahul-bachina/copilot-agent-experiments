@@ -655,6 +655,61 @@ class TestExperiment15Manifest:
         assert experiment_15_manifest["agent"]["id"] == "exp-15-vulnerability-urgency-scanner"
 
 
+class TestExperiment14Manifest:
+    """Test the Experiment 14 architecture advisor manifest."""
+
+    @pytest.fixture
+    def experiment_14_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "14-agent-architecture-advisor"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_14_manifest):
+        """Experiment 14 manifest should be valid."""
+        validate(instance=experiment_14_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_14_manifest):
+        """Experiment 14 should be autonomy level A0, not above."""
+        level = experiment_14_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_14_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_14_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_14_manifest):
+        """Experiment 14 should have all high-risk actions disabled."""
+        high_risk = experiment_14_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_14_manifest):
+        """Nothing is sent or written to a tenant."""
+        assert experiment_14_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_14_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_architect_confirms_the_platform(self, experiment_14_manifest):
+        """The human checkpoint is the architect, and it is mandatory."""
+        points = experiment_14_manifest["human_approval"]["approval_points"]
+        confirm = next(point for point in points if point["action"].startswith("Confirm each platform"))
+        assert confirm["approver"] == "Architect"
+        assert confirm["mandatory"] is True
+        assert experiment_14_manifest["agent"]["id"] == "exp-14-agent-architecture-advisor"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

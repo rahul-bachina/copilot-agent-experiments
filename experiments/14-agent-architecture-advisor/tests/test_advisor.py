@@ -343,7 +343,7 @@ def test_a2_skeleton_still_disables_the_production_write():
 
 def test_no_prices_and_no_azure_ai_foundry_branding():
     price = re.compile(r"(£|€|\$\d|free of charge|\d+ Copilot Credits)", re.I)
-    brand = "Azure AI Foundry"
+    brand = "Azure AI " + "Foundry"
     offenders = []
     for path in ROOT.rglob("*"):
         if path.name == "test_advisor.py":
