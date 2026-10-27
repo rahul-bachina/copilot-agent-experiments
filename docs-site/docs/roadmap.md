@@ -84,6 +84,16 @@ A draft reply for ministerial, MP, or resident casework. The author approves the
 
 </article>
 
+<article class="plan-card" id="uk03" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK03 · Autonomy A1</p>
+
+## Employment Rights Act 2025 HR assistant
+
+A draft reading of one synthetic employer pack against pinned commencement dates. The HR lead decides. It does not find that the employer complied, and it does not discipline or send. [Read the briefing](experiments/11-era-2025-hr-assistant.md).
+
+</article>
+
 <article class="plan-card" id="v006" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · V006 · Autonomy A1</p>
