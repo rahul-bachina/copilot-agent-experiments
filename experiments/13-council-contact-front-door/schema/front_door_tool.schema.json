@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Council front-door tool input",
+  "description": "Least-privilege input for one enquiry. The tool quotes a synthetic catalogue page or returns a handover. It does not decide eligibility, write a case, send a message, take a payment, or book an appointment. Those fields are not accepted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["enquiry", "as_of"],
+  "properties": {
+    "enquiry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enquiry_id", "synthetic", "text"],
+      "properties": {
+        "enquiry_id": {
+          "type": "string",
+          "pattern": "^SYN-[A-Z0-9-]{1,40}$",
+          "description": "Synthetic id. A live identifier is not an input this schema accepts."
+        },
+        "synthetic": {
+          "type": "boolean",
+          "description": "Must be true for this starter. The core refuses anything else and does not echo the text."
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "channel": {
+          "type": "string",
+          "enum": ["web_chat", "phone_note", "email_paste", "adviser_desk"]
+        }
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "description": "The day the adviser is reading the enquiry, YYYY-MM-DD."
+    },
+    "stale_after_days": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 365
+    }
+  }
+}
