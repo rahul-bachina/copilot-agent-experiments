@@ -46,6 +46,9 @@ DIAGRAMS = {
     "experiments/10-travel-rule-exception-triage/docs/architecture_diagram.png": (
         "experiments/img/10-travel-rule-architecture.png"
     ),
+    "experiments/11-era-2025-hr-assistant/docs/architecture_diagram.png": (
+        "experiments/img/11-era-hr-architecture.png"
+    ),
     "experiments/13-council-contact-front-door/docs/architecture_diagram.png": (
         "experiments/img/13-council-contact-architecture.png"
     ),
