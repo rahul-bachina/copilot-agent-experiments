@@ -1,0 +1,3801 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 08 for UK identifier spans. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "dataset_label": "SYNTHETIC SMOKE SET. Not a model evaluation. No real person, firm, or case.",
+  "summary": {
+    "total_cases": 30,
+    "passed": 30,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "clean-note",
+      "name": "A short note with no class keyword",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "unclassified"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "read"
+        },
+        {
+          "field": "pii_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "None"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-preview-complete",
+      "name": "Identity and address markers preview KYC without confirming it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "B004"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-preview-gap",
+      "name": "A passport alone leaves the address marker unmet",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "identity_document"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "B004"
+        }
+      ]
+    },
+    {
+      "case_id": "claims-markers",
+      "name": "Claims phrases preview B007",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "B007"
+        }
+      ]
+    },
+    {
+      "case_id": "claims-gap",
+      "name": "A policy phrase without an incident phrase is a gap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "B007"
+        }
+      ]
+    },
+    {
+      "case_id": "sar-markers",
+      "name": "Subject-access phrases preview UK11 and do not disclose",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "UK11"
+        }
+      ]
+    },
+    {
+      "case_id": "bundle-index",
+      "name": "A bundle index previews UK09 and does not summarise",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "bundle_index"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "UK09"
+        }
+      ]
+    },
+    {
+      "case_id": "html-comment",
+      "name": "An HTML comment tries to set the purpose and send mail",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "html_comment"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "None"
+        }
+      ]
+    },
+    {
+      "case_id": "zero-width",
+      "name": "A zero-width character splits an instruction",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "zero_width"
+        }
+      ]
+    },
+    {
+      "case_id": "body-send",
+      "name": "A visible instruction to email the customer is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "body"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-91",
+      "name": "A document 91 days old is stale",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "any_document_not_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "stale"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "window-90",
+      "name": "A document exactly 90 days old is inside the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_not_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "within_window"
+        }
+      ]
+    },
+    {
+      "case_id": "future-date",
+      "name": "A future document date is not current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_not_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "future"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-date",
+      "name": "A missing document date is not treated as current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_not_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "missing"
+        }
+      ]
+    },
+    {
+      "case_id": "checksum-mismatch",
+      "name": "A supplied hash that does not match is a failure",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pii_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checksum_matches",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "pdf-not-read",
+      "name": "A PDF is not read, and a pasted instruction is still recorded",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "not_read"
+        },
+        {
+          "field": "pii_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection_scanned",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "duplicate-hash",
+      "name": "The same text twice is marked as a duplicate",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "correspondence"
+        },
+        {
+          "field": "duplicate_of",
+          "passed": true,
+          "detail": "F-001"
+        }
+      ]
+    },
+    {
+      "case_id": "prohibited-keys",
+      "name": "The batch cannot confirm itself",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "prohibited_keys",
+          "passed": true,
+          "detail": "files_confirmed,permitted_purpose,reviewer_decision,file:F-001:files_confirmed,file:F-001:requested_purpose"
+        }
+      ]
+    },
+    {
+      "case_id": "empty-file",
+      "name": "An empty file is not a reading and is not sent to the gateway",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "empty"
+        },
+        {
+          "field": "pii_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection_scanned",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "catalogue-stale",
+      "name": "The purpose catalogue is stale after the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "within_window"
+        },
+        {
+          "field": "catalogue_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "class-tie",
+      "name": "One keyword from each of two classes is unresolved",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "unresolved"
+        }
+      ]
+    },
+    {
+      "case_id": "identifiers-not-copied",
+      "name": "Planted UK identifiers are proposed and not copied into the draft",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "proof_of_address"
+        },
+        {
+          "field": "entity_types",
+          "passed": true,
+          "detail": "nino,nhs_number,postcode,sort_code"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent planted value 2",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent planted value 3",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent planted value 4",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A batch that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "too-large",
+      "name": "A file over the cap is not truncated and then scanned",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "too_large"
+        },
+        {
+          "field": "pii_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection_scanned",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "rules-as-of-stale",
+      "name": "An earlier rules date warns and does not stop detection",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "gateway_rules_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "entity_types",
+          "passed": true,
+          "detail": "nino"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "do-not-redact",
+      "name": "An instruction not to redact does not stop the gateway",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "body"
+        },
+        {
+          "field": "entity_types",
+          "passed": true,
+          "detail": "nino"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "form-feed",
+      "name": "An instruction after a form feed is recorded",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "form_feed"
+        }
+      ]
+    },
+    {
+      "case_id": "trailing-blanks",
+      "name": "An instruction after blank lines is recorded",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "trailing_blank_lines"
+        }
+      ]
+    },
+    {
+      "case_id": "ignore-date",
+      "name": "A sentence that the document is current does not clear a stale date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "body"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "proof_of_address"
+        }
+      ]
+    },
+    {
+      "case_id": "general-preview",
+      "name": "General records has an empty checklist and no downstream row",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR INTAKE REVIEW"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reviewer_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag accepted_into_queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag underlying_matter_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag redacted_text_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag files_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag handed_off",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "suggested_class",
+          "passed": true,
+          "detail": "correspondence"
+        },
+        {
+          "field": "checklist_complete",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "checklist_sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "checklist_preview_only",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "downstream",
+          "passed": true,
+          "detail": "None"
+        }
+      ]
+    }
+  ]
+}
