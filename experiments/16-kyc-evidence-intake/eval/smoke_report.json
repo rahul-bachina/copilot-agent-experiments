@@ -1,0 +1,3759 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 12 intake and, through it, Experiment 08. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "dataset_label": "Synthetic KYC files for Marrowgate Payments Limited, a fictional firm. Not a model evaluation.",
+  "summary": {
+    "total_cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "kyc-01-complete",
+      "name": "Identity, address, and purpose on current text files",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "address_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "verify_status",
+          "passed": true,
+          "detail": "not_determined"
+        },
+        {
+          "field": "purpose_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "beneficial_status",
+          "passed": true,
+          "detail": "not_applicable_on_the_file"
+        },
+        {
+          "field": "pep_status",
+          "passed": true,
+          "detail": "not_in_file"
+        },
+        {
+          "field": "fatf_status",
+          "passed": true,
+          "detail": "not_in_file"
+        },
+        {
+          "field": "unusual_status",
+          "passed": true,
+          "detail": "not_in_file"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "period_begun",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent planted value 2",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-02-missing",
+      "name": "No identity or address marker",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "missing"
+        },
+        {
+          "field": "address_status",
+          "passed": true,
+          "detail": "missing"
+        },
+        {
+          "field": "purpose_status",
+          "passed": true,
+          "detail": "missing"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-03-stale",
+      "name": "Passport older than 90 days",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced_but_stale"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "stale"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-04-boundary",
+      "name": "A document dated exactly 90 days earlier is not stale",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "within_window"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-05-pep",
+      "name": "PEP phrase is not a rating",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pep_status",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-06-old-country-words",
+      "name": "The pre-2026 high-risk third country words are a phrase, not a decision",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_status",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-07-fatf-words",
+      "name": "Current FATF call for action words",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_status",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-08-unusual",
+      "name": "Unusual pattern phrase",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unusual_status",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-09-injection",
+      "name": "HTML comment telling the agent to approve and to tip off",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "html_comment"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-10-not-synthetic",
+      "name": "A file that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-11-body-missing-owner",
+      "name": "Body corporate with no beneficial-owner phrase",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "beneficial_status",
+          "passed": true,
+          "detail": "missing"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-12-body-owner-phrase",
+      "name": "Beneficial-owner phrase is not sufficiency",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "beneficial_status",
+          "passed": true,
+          "detail": "evidenced"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-13-ended",
+      "name": "Five-year arithmetic from a stated end date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "period_begun",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "arithmetic_end",
+          "passed": true,
+          "detail": "2029-02-28"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-14-occasional",
+      "name": "Occasional transaction completion date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "period_begun",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "arithmetic_end",
+          "passed": true,
+          "detail": "2031-03-01"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-15-ongoing",
+      "name": "An ongoing relationship has not started the five-year period",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "period_begun",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "arithmetic_end",
+          "passed": true,
+          "detail": "None"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-16-prohibited-key",
+      "name": "A risk rating in the JSON is stripped",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "prohibited_keys",
+          "passed": true,
+          "detail": "risk_rating,onboard"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-17-purpose-conflict",
+      "name": "Another purpose on the wrapper does not switch the checklist",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "purpose_conflict",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-18-pdf",
+      "name": "A PDF is not read and is not evidence",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "missing"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "not_read"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-19-pepper",
+      "name": "The word pepper is not a PEP marker",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pep_status",
+          "passed": true,
+          "detail": "not_in_file"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-20-sources-stale",
+      "name": "Pinned sources are stale after the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "any_document_stale",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-21-note-only",
+      "name": "A PEP phrase only in the screening note",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pep_status",
+          "passed": true,
+          "detail": "phrase_in_note"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-22-future",
+      "name": "A future document date is not current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced_but_not_current"
+        },
+        {
+          "field": "date_status",
+          "passed": true,
+          "detail": "future"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-23-zero-width",
+      "name": "An approval split by a zero-width character",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "identity_status",
+          "passed": true,
+          "detail": "evidenced"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "zero_width"
+        }
+      ]
+    },
+    {
+      "case_id": "kyc-24-country-only",
+      "name": "A stated country is not classified against the FATF list",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KYC REVIEW"
+        },
+        {
+          "field": "documents_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "final_risk_rating",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_list_downloaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "jmlsg_not_opened",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "intake_not_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edd_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hints",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_deletion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_rejected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_onboarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag final_risk_rating_assigned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag sar_filed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag production_record_written",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag customer_text_hints_at_suspicion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag purpose_taken_from_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "flag documents_confirmed_by_document",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "fatf_status",
+          "passed": true,
+          "detail": "country_stated_in_the_file"
+        },
+        {
+          "field": "customer_text_excludes",
+          "passed": true,
+          "detail": "clear"
+        }
+      ]
+    }
+  ]
+}

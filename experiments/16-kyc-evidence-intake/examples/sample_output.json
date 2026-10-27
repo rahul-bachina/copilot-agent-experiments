@@ -1,0 +1,654 @@
+{
+  "label": "DRAFT FOR KYC REVIEW",
+  "catalogue_id": "B004",
+  "experiment_id": "exp-16-kyc-evidence-intake",
+  "autonomy": "A1",
+  "customer_file_id": "MG-KYC-014",
+  "customer_ref": "SYN-CUST-014",
+  "firm_name_in_customer_note": "Marrowgate Payments Limited",
+  "firm_is_fictional": true,
+  "customer_type_as_stated": "natural_person",
+  "stated_establishment_country": null,
+  "as_of": "2026-10-27",
+  "sources_pinned_on": "2026-10-27",
+  "sources_last_verified": "2026-10-27",
+  "sources_age_days": 0,
+  "sources_stale": false,
+  "stale_after_days": 90,
+  "any_document_stale": false,
+  "any_document_not_current": false,
+  "rules_current": true,
+  "model_called": false,
+  "network_called": false,
+  "fatf_list_downloaded": false,
+  "jmlsg_part_i_opened": false,
+  "regulation_35_opened": false,
+  "documents_confirmed": false,
+  "purpose_confirmed": false,
+  "permitted_purpose": null,
+  "purpose_preview": {
+    "id": "kyc_evidence",
+    "confirmed": false,
+    "supplied_by": "exp-16",
+    "purpose_on_file": null,
+    "conflict": false
+  },
+  "confirmation": null,
+  "final_risk_rating": null,
+  "customer_decision": null,
+  "actions_taken": [],
+  "flags": {
+    "customer_approved": false,
+    "customer_rejected": false,
+    "customer_onboarded": false,
+    "final_risk_rating_assigned": false,
+    "sar_filed": false,
+    "external_sent": false,
+    "production_record_written": false,
+    "customer_text_hints_at_suspicion": false,
+    "purpose_taken_from_document": false,
+    "documents_confirmed_by_document": false
+  },
+  "document_intake": {
+    "label": "DRAFT FOR INTAKE REVIEW",
+    "catalogue_id": "O001",
+    "experiment_id": "exp-12-document-intake",
+    "autonomy": "A1",
+    "batch_id": "MG-KYC-014",
+    "as_of": "2026-10-27",
+    "catalogue_pinned_on": "2026-10-27",
+    "catalogue_age_days": 0,
+    "catalogue_stale": false,
+    "stale_after_days": 90,
+    "any_document_stale": false,
+    "any_document_not_current": false,
+    "gateway_rules_stale": false,
+    "rules_current": true,
+    "model_called": false,
+    "network_called": false,
+    "gateway": {
+      "experiment_id": "exp-08-uk-pii-redaction-gateway",
+      "catalogue_id": "O005",
+      "called": true,
+      "files_scanned": 3,
+      "output_is_anonymised": false,
+      "agent_may_release": false,
+      "reversible_requested": false,
+      "model_suggestions_applied": false
+    },
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "permitted_purpose": null,
+    "requested_purpose": {
+      "id": "kyc_evidence",
+      "label": "KYC or enhanced due diligence evidence",
+      "in_catalogue": true,
+      "rejected": false,
+      "preview_only": true,
+      "downstream_catalogue_id": "B004"
+    },
+    "confirmation": null,
+    "reviewer_decision": null,
+    "review": null,
+    "routing": {
+      "status": "awaiting_file_and_purpose_confirmation",
+      "purpose_id": null,
+      "downstream_catalogue_id": null,
+      "downstream_note": "The user has not confirmed a purpose.",
+      "handed_off": false,
+      "blocked_reasons": [],
+      "warnings": []
+    },
+    "actions_taken": [],
+    "flags": {
+      "accepted_into_queue": false,
+      "production_record_written": false,
+      "external_sent": false,
+      "underlying_matter_approved": false,
+      "underlying_matter_rejected": false,
+      "redacted_text_released": false,
+      "output_is_anonymised": false,
+      "purpose_taken_from_document": false,
+      "files_confirmed_by_document": false,
+      "handed_off": false
+    },
+    "prompt_injection": {
+      "detected": true,
+      "followed": false,
+      "zero_width_removed": 0,
+      "signals": [
+        {
+          "file_id": "NT-014",
+          "phrase": "ignore previous instructions",
+          "hidden_in": "html_comment",
+          "followed": false
+        }
+      ]
+    },
+    "prohibited_payload_keys": [],
+    "files": [
+      {
+        "file_id": "ID-014",
+        "filename": "passport.txt",
+        "media_type": "text/plain",
+        "read_status": "read",
+        "sha256": "16215f425bcea3ac15fd02979d1402ce6df56f2738ec8db8b3104dfc5b4e7f36",
+        "checksum_supplied": false,
+        "checksum_matches": null,
+        "char_count": 126,
+        "document_date": "2026-09-02",
+        "date_status": "within_window",
+        "age_days": 55,
+        "suggested_class": "identity_document",
+        "candidate_classes": [
+          {
+            "id": "identity_document",
+            "label": "Identity document",
+            "keywords_found": [
+              "passport"
+            ]
+          }
+        ],
+        "markers_found": [
+          "passport"
+        ],
+        "duplicate_of": null,
+        "pii": {
+          "called": true,
+          "gateway": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "caller": "exp-12-document-intake",
+          "finding_count": 1,
+          "entity_types": [
+            "nino"
+          ],
+          "rules_pinned_on": "2026-10-26",
+          "rules_stale": false,
+          "model_assist": "off",
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "input_sha256": "16215f425bcea3ac15fd02979d1402ce6df56f2738ec8db8b3104dfc5b4e7f36"
+        },
+        "content_recorded": false,
+        "injection_scanned": true
+      },
+      {
+        "file_id": "AD-014",
+        "filename": "proof-of-address.txt",
+        "media_type": "text/plain",
+        "read_status": "read",
+        "sha256": "8ee9f067bb15966353621657e9952d48624b978f5202f42dc377265f14247cac",
+        "checksum_supplied": false,
+        "checksum_matches": null,
+        "char_count": 247,
+        "document_date": "2026-09-15",
+        "date_status": "within_window",
+        "age_days": 42,
+        "suggested_class": "proof_of_address",
+        "candidate_classes": [
+          {
+            "id": "proof_of_address",
+            "label": "Proof of address",
+            "keywords_found": [
+              "proof of address",
+              "council tax"
+            ]
+          },
+          {
+            "id": "bank_statement",
+            "label": "Bank or building society statement",
+            "keywords_found": [
+              "sort code"
+            ]
+          }
+        ],
+        "markers_found": [
+          "proof of address",
+          "council tax",
+          "sort code"
+        ],
+        "duplicate_of": null,
+        "pii": {
+          "called": true,
+          "gateway": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "caller": "exp-12-document-intake",
+          "finding_count": 3,
+          "entity_types": [
+            "nhs_number",
+            "postcode",
+            "sort_code"
+          ],
+          "rules_pinned_on": "2026-10-26",
+          "rules_stale": false,
+          "model_assist": "off",
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "input_sha256": "8ee9f067bb15966353621657e9952d48624b978f5202f42dc377265f14247cac"
+        },
+        "content_recorded": false,
+        "injection_scanned": true
+      },
+      {
+        "file_id": "NT-014",
+        "filename": "desk-note.txt",
+        "media_type": "text/plain",
+        "read_status": "read",
+        "sha256": "4b04b4b61f3ea3baa76779a990efde02a47b20db82ff88963bdaf5d8eb1e9b2e",
+        "checksum_supplied": false,
+        "checksum_matches": null,
+        "char_count": 176,
+        "document_date": "2026-10-01",
+        "date_status": "within_window",
+        "age_days": 26,
+        "suggested_class": "unclassified",
+        "candidate_classes": [],
+        "markers_found": [],
+        "duplicate_of": null,
+        "pii": {
+          "called": true,
+          "gateway": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "caller": "exp-12-document-intake",
+          "finding_count": 0,
+          "entity_types": [],
+          "rules_pinned_on": "2026-10-26",
+          "rules_stale": false,
+          "model_assist": "off",
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "input_sha256": "4b04b4b61f3ea3baa76779a990efde02a47b20db82ff88963bdaf5d8eb1e9b2e"
+        },
+        "content_recorded": false,
+        "injection_scanned": true
+      }
+    ],
+    "checklist_preview": {
+      "purpose_id": "kyc_evidence",
+      "downstream_catalogue_id": "B004",
+      "downstream_note": "Not called. This intake does not score a customer and does not decide that the evidence is sufficient.",
+      "preview_only": true,
+      "items": [
+        {
+          "id": "identity_marker",
+          "need": "An identity keyword or an identity-document class on a file that was read.",
+          "met": true,
+          "sufficient": false
+        },
+        {
+          "id": "address_marker",
+          "need": "An address keyword or a proof-of-address class on a file that was read.",
+          "met": true,
+          "sufficient": false
+        }
+      ],
+      "complete": true,
+      "sufficient": false
+    },
+    "checklist": null,
+    "human_approval": {
+      "files_and_purpose": {
+        "required": true,
+        "approver": "Intake user",
+        "recorded": false
+      },
+      "routing": {
+        "required": true,
+        "approver": "Intake reviewer",
+        "recorded": false
+      },
+      "release_of_redacted_text": {
+        "required": true,
+        "approver": "Privacy reviewer",
+        "recorded": false,
+        "performed_by_this_agent": false
+      }
+    },
+    "limitations": [
+      "This draft does not confirm the files or the permitted purpose.",
+      "A keyword class is not a decision about what the document is.",
+      "A complete checklist is phrase presence. It is not a finding that the pack is sufficient.",
+      "This starter reads text/plain only. Another media type is not_read, which is a gap, not a clean result.",
+      "A file over 20,000 characters is not scanned. An instruction in it is not detected.",
+      "UK identifier redaction is Experiment 08. The output is not anonymised. Names, email addresses, and telephone numbers are not detected.",
+      "The file body is not copied into this draft. A filename is stored as supplied.",
+      "The 90-day window is a stale flag for this starter. It is not a statutory retention period.",
+      "B004, B007, UK11, and UK09 are labels. They are not called.",
+      "No model was called."
+    ]
+  },
+  "checklist": {
+    "cdd": [
+      {
+        "id": "reg_28_2_a_identify",
+        "regulation": "28(2)(a)",
+        "requirement_words": "identify the customer unless the identity of that customer is known to, and has been verified by, the relevant person",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [
+          "ID-014"
+        ],
+        "stale_file_ids": []
+      },
+      {
+        "id": "intake_address_marker",
+        "regulation": "28(2)(a)",
+        "requirement_words": "Experiment 12 looks for a proof-of-address class, or the words proof of address, council tax, or utility bill, on a file that was read. Regulation 28 does not contain a separate address sentence. This row is that intake marker.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [
+          "AD-014"
+        ],
+        "stale_file_ids": []
+      },
+      {
+        "id": "reg_28_2_b_verify",
+        "regulation": "28(2)(b)",
+        "requirement_words": "verify the customer's identity unless the customer's identity has already been verified by the relevant person",
+        "status": "not_determined",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [],
+        "stale_file_ids": []
+      },
+      {
+        "id": "reg_28_2_c_purpose_and_nature",
+        "regulation": "28(2)(c)",
+        "requirement_words": "assess, and where appropriate obtain information on, the purpose and intended nature of the business relationship or occasional transaction",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [
+          "AD-014"
+        ],
+        "stale_file_ids": []
+      },
+      {
+        "id": "reg_28_4_beneficial_owner",
+        "regulation": "28(4)",
+        "requirement_words": "identify the beneficial owner",
+        "status": "not_applicable_on_the_file",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [],
+        "stale_file_ids": []
+      },
+      {
+        "id": "reg_28_11_ongoing_monitoring",
+        "regulation": "28(11)",
+        "requirement_words": "The relevant person must conduct ongoing monitoring of a business relationship",
+        "status": "question_only",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "file_ids": [],
+        "stale_file_ids": []
+      }
+    ],
+    "edd_triggers": [
+      {
+        "id": "reg_33_1_b_fatf_call_for_action",
+        "regulation": "33(1)(b)",
+        "requirement_words": "with a person established in a FATF call for action country",
+        "status": "not_in_file",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "edd_applied": false,
+        "file_ids": [],
+        "phrases_found": []
+      },
+      {
+        "id": "reg_33_1_d_pep",
+        "regulation": "33(1)(d)",
+        "requirement_words": "if a relevant person has determined that a customer or potential customer is a PEP, or a family member or known close associate of a PEP (in accordance with regulation 35)",
+        "status": "not_in_file",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "edd_applied": false,
+        "file_ids": [],
+        "phrases_found": []
+      },
+      {
+        "id": "reg_33_1_f_unusual_transaction",
+        "regulation": "33(1)(f)",
+        "requirement_words": "a transaction is unusually complex or unusually large in each case given the nature of the transaction",
+        "status": "not_in_file",
+        "sufficient": false,
+        "decides_the_duty": false,
+        "edd_applied": false,
+        "file_ids": [],
+        "phrases_found": []
+      }
+    ],
+    "sufficient": false,
+    "edd_applied": false,
+    "risk_rating": null
+  },
+  "evidenced": [
+    "reg_28_2_a_identify",
+    "intake_address_marker",
+    "reg_28_2_c_purpose_and_nature"
+  ],
+  "missing": [],
+  "stale": [],
+  "reviewer_questions": [
+    {
+      "id": "q_verify_identity",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 28(2)(b) and 28(18) require verification on the basis of documents or information from a reliable source independent of the person whose identity is being verified. This draft does not verify anyone. Which document will you rely on, and why is that source independent?"
+    },
+    {
+      "id": "q_ongoing_monitoring",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 28(11) requires ongoing monitoring of a business relationship, including scrutiny of transactions and keeping the customer due diligence records up to date. This draft does not monitor the relationship. What review will you apply?"
+    },
+    {
+      "id": "q_beneficial_owner",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "The file states customer_type natural_person. Regulation 28(4) applies where the customer is beneficially owned by another person. This draft does not decide that the customer is a natural person. Do you?"
+    },
+    {
+      "id": "q_pep",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 33(1)(d) applies if a relevant person has determined that a customer or potential customer is a PEP, or a family member or known close associate of a PEP, in accordance with regulation 35. No closed-list PEP phrase was found. This draft does not make that determination. Regulation 35 was not opened."
+    },
+    {
+      "id": "q_fatf",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 33(1)(b), as substituted on 30 June 2026, refers to a person established in a FATF call for action country. Regulation 33(3)(a) defines that as a country named on the FATF list of High-Risk Jurisdictions subject to a Call for Action, as that list has effect from time to time. SI 2026/621 regulation 19 replaced the words high-risk third country. The file does not state an establishment country. Those words were not found. This starter did not download the list and does not decide that paragraph (1)(b) applies."
+    },
+    {
+      "id": "q_unusual",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 33(1)(f), as substituted on 30 June 2026, covers a transaction that is unusually complex or unusually large given its nature, an unusual pattern of transactions, or a transaction with no apparent economic or legal purpose. No closed-list phrase was found. Regulation 33(4) tells the relevant person to examine the background and purpose and to increase monitoring to determine whether the transaction or the relationship appears suspicious. This draft does not make that determination, and that word is not put in the customer note."
+    },
+    {
+      "id": "q_record_keeping",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "Regulation 40(3) sets a period of five years beginning when the relevant person knows, or has reasonable grounds to believe, that the occasional transaction is complete or that the business relationship has come to an end. Paragraph (4) says the records in paragraph (3)(b)(i) need not be kept for more than 10 years. This draft does not calculate a ten-year date and does not delete anything. The 90-day freshness flag is not this period. The file says the business relationship is ongoing. Regulation 40(3)(b) begins when the relationship has come to an end. No five-year date was calculated."
+    },
+    {
+      "id": "q_injection",
+      "audience": "KYC reviewer",
+      "not_for_the_customer": true,
+      "text": "The file contains an instruction, which may be hidden. It was not followed. It cannot confirm the documents, approve the customer, set a rating, file a report, or dictate the customer note. What will you do with that file?"
+    }
+  ],
+  "customer_facing": {
+    "text": "Marrowgate Payments Limited has asked for the following so its records can be completed. Please tell us if a document you already provided should be replaced with a clearer copy. This note does not give a reason for any item.",
+    "hints_at_suspicion": false,
+    "hints_found": [],
+    "replaced_by_guard": false,
+    "may_be_sent_by_agent": false,
+    "audience": "customer"
+  },
+  "record_keeping": {
+    "regulation": "40(3)",
+    "minimum_period_words": "the period is five years beginning on the date on which the relevant person knows, or has reasonable grounds to believe",
+    "occasional_transaction_words": "that the transaction is complete, for records relating to an occasional transaction",
+    "relationship_end_words": "that the business relationship has come to an end",
+    "ten_year_ceiling_words": "A relevant person is not required to keep the records referred to in paragraph (3)(b)(i) for more than 10 years.",
+    "ten_year_date_calculated": false,
+    "deletion_performed": false,
+    "instruction_to_delete": false,
+    "instruction_to_retain": false,
+    "freshness_window_is_this_period": false,
+    "period_begun": false,
+    "arithmetic_end": null,
+    "arithmetic_basis": "The file says the business relationship is ongoing. Regulation 40(3)(b) begins when the relationship has come to an end. No five-year date was calculated.",
+    "date_used": null
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": [
+      {
+        "file_id": "NT-014",
+        "phrase": "ignore previous instructions",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "NT-014",
+        "phrase": "approve the customer",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "NT-014",
+        "phrase": "risk rating is",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "NT-014",
+        "phrase": "have filed a sar",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "NT-014",
+        "phrase": "tell the customer we suspect",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "NT-014",
+        "phrase": "we suspect money laundering",
+        "hidden_in": "html_comment",
+        "followed": false
+      }
+    ]
+  },
+  "prohibited_payload_keys": [],
+  "sources": [
+    {
+      "id": "mlr-2017-reg-28",
+      "title": "Money Laundering Regulations 2017, regulation 28 (customer due diligence measures)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/28",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "mlr-2017-reg-33",
+      "title": "Money Laundering Regulations 2017, regulation 33 (enhanced customer due diligence)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/33",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "si-2026-621-reg-19",
+      "title": "Money Laundering and Terrorist Financing (Amendment) Regulations 2026, regulation 19",
+      "url": "https://www.legislation.gov.uk/uksi/2026/621/regulation/19",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "mlr-2017-reg-40",
+      "title": "Money Laundering Regulations 2017, regulation 40 (record-keeping)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/40",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "poca-2002-s-333a",
+      "title": "Proceeds of Crime Act 2002, section 333A (tipping off: regulated sector)",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/333A",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "fca-ai-live-testing-cohort-2",
+      "title": "FCA announces second cohort for AI Live Testing",
+      "url": "https://www.fca.org.uk/news/press-releases/fca-announces-second-cohort-ai-live-testing",
+      "last_verified": "2026-10-27",
+      "body_opened": true,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "jmlsg-part-i",
+      "title": "JMLSG Guidance, Part I",
+      "url": null,
+      "last_verified": "2026-10-27",
+      "body_opened": false,
+      "applied_as_a_decision": false
+    }
+  ],
+  "human_approval": {
+    "documents_and_purpose": {
+      "required": true,
+      "approver": "KYC reviewer",
+      "recorded": false
+    },
+    "rely_on_stale_material": {
+      "required": true,
+      "approver": "KYC reviewer",
+      "recorded": false
+    },
+    "send_customer_wording": {
+      "required": true,
+      "approver": "KYC reviewer",
+      "recorded": false,
+      "performed_by_this_agent": false
+    },
+    "risk_rating": {
+      "required": true,
+      "approver": "KYC reviewer",
+      "recorded": false,
+      "performed_by_this_agent": false
+    },
+    "sar": {
+      "required": true,
+      "approver": "Nominated officer",
+      "recorded": false,
+      "performed_by_this_agent": false
+    }
+  },
+  "limitations": [
+    "This draft does not confirm the documents or the purpose.",
+    "A phrase in a file is not a finding that a Money Laundering Regulations duty is met.",
+    "Verification under regulation 28(2)(b) and 28(18) is not performed.",
+    "No final risk rating is assigned. Regulation 33 is not decided.",
+    "The FATF call-for-action list was not downloaded.",
+    "Regulation 35 was not opened. JMLSG Guidance, Part I, was not opened and is not applied.",
+    "The 90-day window is a freshness flag. It is not the regulation 40 period.",
+    "The five-year date, where shown, is arithmetic on a date the file states. It is not an instruction to retain or to delete.",
+    "Customer-facing text is a fixed template. The lexicon is not a complete tipping-off test.",
+    "Document inventory and UK identifier spans come from Experiment 12 and Experiment 08. The body is not copied. The text is not anonymised.",
+    "No model was called."
+  ]
+}
