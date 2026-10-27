@@ -1,0 +1,33 @@
+{
+  "description": "Least-privilege tools for the ERA 2025 HR assistant. The agent may draft. It may not decide, publish, write, or send. record_hr_decision is declared so a tenant can see the approval, and the agent cannot call it.",
+  "tools": [
+    {
+      "name": "review_employer_pack",
+      "callable_by_agent": true,
+      "writes": false,
+      "sends": false,
+      "publishes_policy": false,
+      "changes_records": false,
+      "decides_discipline": false,
+      "concludes_compliance": false,
+      "contacts_acas": false,
+      "human_approval_to_rely_on_output": true,
+      "approver": "HR lead",
+      "implementation": "review() in src/review.py"
+    },
+    {
+      "name": "record_hr_decision",
+      "callable_by_agent": false,
+      "writes": false,
+      "sends": false,
+      "publishes_policy": false,
+      "changes_records": false,
+      "decides_discipline": false,
+      "concludes_compliance": false,
+      "contacts_acas": false,
+      "human_approval_to_rely_on_output": true,
+      "approver": "HR lead",
+      "implementation": "Not implemented. A person records any decision outside this agent."
+    }
+  ]
+}

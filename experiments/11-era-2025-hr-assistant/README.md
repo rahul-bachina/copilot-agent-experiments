@@ -143,7 +143,7 @@ experiments/11-era-2025-hr-assistant/
 ## References opened on 27 October 2026
 
 - [Equality Act 2010, section 40A](https://www.legislation.gov.uk/ukpga/2010/15/section/40A)
-- [Employment Rights Act 2025, sections 20, 21, 22, 23, 25, and 152](https://www.legislation.gov.uk/ukpga/2025/36/contents)
+- [Employment Rights Act 2025, section 20](https://www.legislation.gov.uk/ukpga/2025/36/section/20), [section 21](https://www.legislation.gov.uk/ukpga/2025/36/section/21), [section 22](https://www.legislation.gov.uk/ukpga/2025/36/section/22), [section 23](https://www.legislation.gov.uk/ukpga/2025/36/section/23), [section 25](https://www.legislation.gov.uk/ukpga/2025/36/section/25), and [section 152](https://www.legislation.gov.uk/ukpga/2025/36/section/152)
 - [SI 2026/1065, regulation 3](https://www.legislation.gov.uk/uksi/2026/1065/regulation/3/made)
 - [SI 2026/559, regulation 3](https://www.legislation.gov.uk/uksi/2026/559/regulation/3/made)
 - [SI 2026/954](https://www.legislation.gov.uk/uksi/2026/954/body/made)
