@@ -55,6 +55,9 @@ DIAGRAMS = {
     "experiments/13-council-contact-front-door/docs/architecture_diagram.png": (
         "experiments/img/13-council-contact-architecture.png"
     ),
+    "experiments/16-kyc-evidence-intake/docs/architecture_diagram.png": (
+        "experiments/img/16-kyc-evidence-intake-architecture.png"
+    ),
 }
 
 

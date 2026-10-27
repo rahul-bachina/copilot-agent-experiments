@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Thirteen starters you can read today
+## Fourteen starters you can read today
 
 </div>
 
@@ -403,6 +403,31 @@ The catalogue runs locally. Nothing is decided, sent, or written to a case.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 16 · B004 · FCA firms · Autonomy A1</p>
+
+### KYC evidence intake
+
+Draft a checklist for one synthetic customer file against the Money Laundering Regulations 2017. The KYC reviewer confirms the documents and the purpose. Experiment 12 inventories the files.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The checklist runs locally. Nothing is confirmed, approved, rated, filed, or sent.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/16-kyc-evidence-intake.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/16-kyc-evidence-intake)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -421,7 +446,7 @@ The catalogue runs locally. Nothing is decided, sent, or written to a case.
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. G010, UK01, UK02, UK03, UK05, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, G010, UK01, UK02, UK03, UK05, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
