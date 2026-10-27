@@ -124,6 +124,16 @@ A draft inventory of one synthetic batch of text files. The user confirms the fi
 
 </article>
 
+<article class="plan-card" id="uk06" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK06 · Autonomy A1</p>
+
+## Vulnerability and urgency scanner
+
+Possible indicators in one synthetic letter: safeguarding, self-harm, financial hardship, and deadlines. The duty officer reviews every flag. The scanner does not close, deprioritise, send, or label a person as vulnerable. UK identifiers go through [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) before any model call. [Read the briefing](experiments/15-vulnerability-urgency-scanner.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

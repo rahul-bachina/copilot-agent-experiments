@@ -1,0 +1,162 @@
+name: Experiment 15 - Vulnerability and urgency scanner tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/15-vulnerability-urgency-scanner/**'
+      - '.github/workflows/experiment-15-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/15-vulnerability-urgency-scanner/**'
+      - '.github/workflows/experiment-15-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/15-vulnerability-urgency-scanner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: experiments/15-vulnerability-urgency-scanner/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v --tb=short
+
+      - name: Run scanner smoke test
+        run: |
+          python src/scan.py --input examples/sample_letter.txt --synthetic > /tmp/scan.json
+          python -c "
+          import json
+          draft = json.load(open('/tmp/scan.json'))
+          assert draft['person_label']['labelled_vulnerable'] is False
+          assert draft['person_label']['decision_about_the_person'] is None
+          assert draft['queue']['auto_closed'] is False
+          assert draft['queue']['deprioritised'] is False
+          assert draft['queue']['sent'] is False
+          assert draft['queue']['certified_safe'] is False
+          assert draft['queue']['effect'] == 'no_change'
+          assert draft['duty_officer']['decision'] is None
+          assert draft['duty_officer']['must_review_every_flag'] is True
+          assert draft['security']['injection_followed'] is False
+          assert draft['security']['actions_taken'] == []
+          assert draft['pii_gateway']['called_before_model'] is True
+          assert draft['pii_gateway']['gateway'] == 'exp-08-uk-pii-redaction-gateway'
+          assert draft['pii_gateway']['output_is_anonymised'] is False
+          assert draft['pii_gateway']['agent_may_release'] is False
+          assert draft['model']['raw_text_passed'] is False
+          assert draft['network_called'] is False
+          assert draft['dpia']['recommended'] is True
+          assert draft['dpia']['this_output_is_a_dpia'] is False
+          assert draft['special_category']['article_9_condition_asserted'] is False
+          text = json.dumps(draft)
+          assert 'REDACTION PROPOSAL' in draft['redacted_text']
+          assert 'Not anonymised' in draft['redacted_text']
+          assert 'AB123456C' not in text
+          assert 'ZZ99 9ZZ' not in text
+          categories = {flag['category'] for flag in draft['flags']}
+          assert 'possible_safeguarding_risk' in categories
+          print('Scanner smoke test passed')
+          "
+
+      - name: Run evaluation (deterministic smoke test)
+        run: |
+          python eval/evaluate.py --output /tmp/eval_report.json
+          python -c "
+          import json
+          report = json.load(open('/tmp/eval_report.json'))
+          assert report['mode'] == 'deterministic_rules'
+          assert report['not_a_model_evaluation'] is True
+          assert 'SMOKE TEST' in report['evaluation_label']
+          summary = report['summary']
+          print(f\"Smoke test recall: {summary['recall_percent']}%\")
+          print(f\"Smoke test precision: {summary['precision_percent']}%\")
+          if summary['errors'] or summary['failed']:
+              print(f\"ERROR: {summary['failed']} failed, {summary['errors']} errors\")
+              raise SystemExit(1)
+          if summary['recall_percent'] != 100.0:
+              print('ERROR: recall is the gate and it is not 100')
+              raise SystemExit(1)
+          if summary['recall_is_the_gate'] is not True:
+              raise SystemExit(1)
+          if summary['precision_percent'] >= 100.0:
+              print('ERROR: accepted false positives should keep precision under 100')
+              raise SystemExit(1)
+          if summary['precision_is_the_gate'] is not False:
+              raise SystemExit(1)
+          if summary['must_flag_cases'] < 30:
+              print('ERROR: fewer than 30 must-flag cases')
+              raise SystemExit(1)
+          print('Smoke test passed')
+          "
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment-15-smoke-report
+          path: /tmp/eval_report.json
+          retention-days: 30
+
+  governance-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Brand name is Microsoft Foundry
+        run: |
+          if grep -RIn --exclude-dir=__pycache__ "Azure AI Foundry" experiments/15-vulnerability-urgency-scanner docs-site/docs/experiments/15-vulnerability-urgency-scanner.md; then
+            echo "Use 'Microsoft Foundry', not 'Azure AI Foundry'."
+            exit 1
+          fi
+          echo "Brand check passed"
+
+      - name: No obvious secrets in Experiment 15
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          root = Path("experiments/15-vulnerability-urgency-scanner")
+          patterns = [
+              re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+              re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+              re.compile(r"(?i)(api[_-]?key|secret|password)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+          ]
+          failed = False
+          for path in root.rglob("*"):
+              if not path.is_file() or path.suffix not in {".py", ".md", ".json", ".yaml", ".yml", ".txt"}:
+                  continue
+              text = path.read_text(errors="ignore")
+              for pattern in patterns:
+                  if pattern.search(text):
+                      print(f"Possible secret in {path}")
+                      failed = True
+          if failed:
+              sys.exit(1)
+          print("Secret check passed")
+          PY
+
+      - name: MIT licence is present and referenced
+        run: |
+          test -f LICENSE
+          grep -q "MIT" LICENSE
+          grep -q "MIT" experiments/15-vulnerability-urgency-scanner/README.md
+          echo "Licence check passed"

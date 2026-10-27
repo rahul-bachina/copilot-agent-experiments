@@ -43,6 +43,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 11 | [Employment Rights Act 2025 HR assistant](experiments/11-era-2025-hr-assistant/) | Draft a reading of one synthetic employer pack against pinned commencement dates. The HR lead decides. Autonomy A1. The agent does not decide compliance, discipline, publish, or send. | ✅ Starter |
 | 12 | [Document Intake Agent](experiments/12-document-intake/) | Inventory one synthetic batch of text files. The user confirms the files and the permitted purpose. An intake reviewer decides the routing suggestion. UK identifiers are proposed by Experiment 08. Autonomy A1. The agent does not queue, release, write, or send. | ✅ Starter |
 | 13 | [Council contact-centre front door](experiments/13-council-contact-front-door/) | Draft a reply from a fixed catalogue for a local-authority contact centre, or a handover to a person. The adviser accepts a published sentence. Autonomy A1. The agent does not decide eligibility, send a message, or write a case. | ✅ Starter |
+| 15 | [Vulnerability and urgency scanner](experiments/15-vulnerability-urgency-scanner/) | Flag possible safeguarding, self-harm, financial hardship, and deadline indicators in inbound post and email. The duty officer reviews every flag. Autonomy A1. UK identifiers go through Experiment 08 before any model call. The agent does not close, deprioritise, send, or label a person as vulnerable. | ✅ Starter |
 | 16 | [KYC Evidence Intake Agent](experiments/16-kyc-evidence-intake/) | Draft a Money Laundering Regulations 2017 checklist for one synthetic customer file. The KYC reviewer confirms the documents and the purpose. Experiment 12 inventories the files. Autonomy A1. The agent does not approve, reject, onboard, rate, file a report, or send. | ✅ Starter |
 
 ## Getting Started
@@ -139,6 +140,13 @@ pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/front_door.py --input examples/sample_enquiry.json --as-of 2026-10-27
 
+# Experiment 15 needs no credentials either. The phrase scan is deterministic.
+# Experiment 08 has to be present beside it. The scanner calls that gateway.
+cd ../15-vulnerability-urgency-scanner
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/scan.py --input examples/sample_letter.txt --synthetic
+
 # Experiment 16 needs no credentials either. The checklist is deterministic.
 cd ../16-kyc-evidence-intake
 pip install -r requirements.txt
@@ -180,6 +188,7 @@ copilot-agent-experiments/
     ├── 11-era-2025-hr-assistant/
     ├── 12-document-intake/
     ├── 13-council-contact-front-door/
+    ├── 15-vulnerability-urgency-scanner/
     └── 16-kyc-evidence-intake/
 ```
 
