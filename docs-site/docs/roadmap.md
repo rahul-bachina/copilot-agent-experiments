@@ -104,6 +104,16 @@ A draft reply from a fixed catalogue, or a handover to a person. The adviser acc
 
 </article>
 
+<article class="plan-card" id="o001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · O001 · Autonomy A1</p>
+
+## Document intake
+
+A draft inventory of one synthetic batch of text files. The user confirms the files and the permitted purpose. An intake reviewer accepts, returns, or rejects the routing suggestion. UK identifier spans come from [Experiment 08](experiments/08-uk-pii-redaction-gateway.md). The agent does not queue, release, or send. [Read the briefing](experiments/12-document-intake.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
