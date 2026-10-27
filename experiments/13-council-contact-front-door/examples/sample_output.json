@@ -1,0 +1,98 @@
+{
+  "label": "DRAFT FOR ADVISER REVIEW",
+  "catalogue_id": "V006",
+  "council": {
+    "id": "northmarsh-borough-council",
+    "name": "Northmarsh Borough Council",
+    "fictional": true
+  },
+  "enquiry_id": "SYN-ENQ-1001",
+  "as_of": "2026-10-27",
+  "channel": "web_chat",
+  "ai_disclosure": "This response has been written by an automated AI chatbot. It is not a council officer. You can ask for a person, and you can use the council's phone or face-to-face route.",
+  "stale_after_days": 180,
+  "sources_and_currency": [
+    {
+      "id": "ai-playbook",
+      "title": "AI Playbook for the UK Government",
+      "url": "https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html",
+      "last_verified": "2026-10-27",
+      "stale": false
+    },
+    {
+      "id": "atrs-scope",
+      "title": "ATRS mandatory scope and exemptions policy",
+      "url": "https://www.gov.uk/government/publications/algorithmic-transparency-recording-standard-mandatory-scope-and-exemptions-policy/algorithmic-transparency-recording-standard-atrs-mandatory-scope-and-exemptions-policy",
+      "last_verified": "2026-10-27",
+      "stale": false
+    },
+    {
+      "id": "copilot-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-10-27",
+      "stale": false
+    },
+    {
+      "id": "accessibility-regs",
+      "title": "Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018",
+      "url": "https://www.legislation.gov.uk/uksi/2018/952",
+      "last_verified": "2026-10-27",
+      "stale": false
+    }
+  ],
+  "any_source_stale": false,
+  "rules_current": true,
+  "prohibited_keys_ignored": [],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": []
+  },
+  "outcome": "published_answer",
+  "answer": {
+    "text": "Example Ward household bins are collected on Wednesday. Put the bin out by 7:00. This page does not say whether a particular collection was missed, and it does not list any other ward.",
+    "verbatim_article_id": "waste-example-ward",
+    "sufficient": true
+  },
+  "citations": [
+    {
+      "article_id": "waste-example-ward",
+      "title": "Example Ward bin day",
+      "url": "https://www.northmarsh.example.gov.uk/bins/example-ward",
+      "last_reviewed": "2026-09-02",
+      "stale": false,
+      "quoted_in_answer": true,
+      "body": "Example Ward household bins are collected on Wednesday. Put the bin out by 7:00. This page does not say whether a particular collection was missed, and it does not list any other ward."
+    }
+  ],
+  "handover": {
+    "required": false,
+    "urgency": "none",
+    "queue": null,
+    "reason": "published_page_matched",
+    "summary": "Routine published page waste-example-ward matched. No eligibility decision."
+  },
+  "flags": {
+    "emergency": false,
+    "vulnerability": false,
+    "eligibility_asked": false,
+    "eligibility_decided": false,
+    "case_created": false,
+    "message_sent": false,
+    "appointment_booked": false,
+    "payment_taken": false,
+    "enforcement_action": false,
+    "released_to_resident": false,
+    "any_article_stale": false,
+    "stale_article_quoted": false,
+    "live_record_refused": false,
+    "text_too_long": false
+  },
+  "human_approval": null,
+  "actions_taken": [],
+  "adviser_accepted_published_text": false,
+  "model_called": false,
+  "network_called": false,
+  "enquiry_text_echoed": false
+}
