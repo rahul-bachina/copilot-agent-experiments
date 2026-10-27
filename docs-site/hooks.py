@@ -49,6 +49,9 @@ DIAGRAMS = {
     "experiments/11-era-2025-hr-assistant/docs/architecture_diagram.png": (
         "experiments/img/11-era-hr-architecture.png"
     ),
+    "experiments/13-council-contact-front-door/docs/architecture_diagram.png": (
+        "experiments/img/13-council-contact-architecture.png"
+    ),
 }
 
 

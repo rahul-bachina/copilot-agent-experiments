@@ -94,6 +94,16 @@ A draft reading of one synthetic employer pack against pinned commencement dates
 
 </article>
 
+<article class="plan-card" id="v006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · V006 · Autonomy A1</p>
+
+## Council contact-centre front door
+
+A draft reply from a fixed catalogue, or a handover to a person. The adviser accepts a published sentence. Emergencies and eligibility questions are not answered by the agent. [Read the briefing](experiments/13-council-contact-front-door.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

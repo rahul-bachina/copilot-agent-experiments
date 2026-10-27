@@ -1,0 +1,2440 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic Northmarsh Borough Council enquiries. Not a resident dataset. Not a model benchmark.",
+  "council_in_fixtures": "Northmarsh Borough Council (invented)",
+  "summary": {
+    "total_cases": 22,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "SYN-FD-01",
+      "name": "Example Ward bin day",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "waste-example-ward"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "answer_contains",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-02",
+      "name": "River Ward is not listed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "waste-day-depends-on-ward"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        },
+        {
+          "field": "absent River Ward",
+          "passed": true,
+          "detail": "River Ward"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-03",
+      "name": "Bin day with no ward",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "waste-day-depends-on-ward"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-04",
+      "name": "Missed collection",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "waste-missed-collection"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-05",
+      "name": "Library hours",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "library-hours"
+        },
+        {
+          "field": "answer_contains",
+          "passed": true,
+          "detail": "Saturday from 10:00 to 13:00"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-06",
+      "name": "How to pay council tax",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "council-tax-how-to-pay"
+        },
+        {
+          "field": "answer_contains",
+          "passed": true,
+          "detail": "does not show a balance"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-07",
+      "name": "Council tax balance",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "account_lookup"
+        },
+        {
+          "field": "absent direct debit",
+          "passed": true,
+          "detail": "direct debit"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-08",
+      "name": "Council tax reduction eligibility",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "eligibility_not_decided"
+        },
+        {
+          "field": "citation_ids",
+          "passed": true,
+          "detail": "['council-tax-reduction-contact']"
+        },
+        {
+          "field": "eligibility_asked",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-09",
+      "name": "Housing register",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "statutory_contact"
+        },
+        {
+          "field": "citation_ids",
+          "passed": true,
+          "detail": "['housing-register-contact']"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-10",
+      "name": "Blue Badge",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "sufficient",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "statutory_contact"
+        },
+        {
+          "field": "citation_ids",
+          "passed": true,
+          "detail": "['blue-badge-contact']"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-11",
+      "name": "Homeless tonight",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "safe_handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "vulnerability_phrase"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "housing_options"
+        },
+        {
+          "field": "vulnerability",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-12",
+      "name": "Smell of gas",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "safe_handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "emergency_phrase"
+        },
+        {
+          "field": "answer_contains",
+          "passed": true,
+          "detail": "call 999"
+        },
+        {
+          "field": "emergency",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-13",
+      "name": "Domestic abuse",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "safe_handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "vulnerability_phrase"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "safeguarding"
+        },
+        {
+          "field": "vulnerability",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-14",
+      "name": "Stale pothole page",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_article"
+        },
+        {
+          "field": "citation_ids",
+          "passed": true,
+          "detail": "['pothole-report']"
+        },
+        {
+          "field": "any_article_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent does not cover motorways",
+          "passed": true,
+          "detail": "does not cover motorways"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-15",
+      "name": "Instruction with no service question",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "not_in_catalogue"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "instruction_only"
+        },
+        {
+          "field": "eligibility_asked",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-16",
+      "name": "Bin day plus an instruction",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "waste-example-ward"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-17",
+      "name": "Library and bins together",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "ambiguous"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "ambiguous_pages"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        },
+        {
+          "field": "absent 10:00 to 13:00",
+          "passed": true,
+          "detail": "10:00 to 13:00"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-18",
+      "name": "Cancel a penalty charge",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "enforcement"
+        },
+        {
+          "field": "absent \u00a31.40",
+          "passed": true,
+          "detail": "\u00a31.40"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-19",
+      "name": "Take a card payment",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "handover"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "payment"
+        },
+        {
+          "field": "absent direct debit",
+          "passed": true,
+          "detail": "direct debit"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-20",
+      "name": "Market Square tariff",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "published_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "parking-market-square"
+        },
+        {
+          "field": "answer_contains",
+          "passed": true,
+          "detail": "\u00a31.40 an hour"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-21",
+      "name": "Not marked synthetic",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused_not_synthetic"
+        },
+        {
+          "field": "live_record_refused",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent SECRET-MARKER-should-not-echo",
+          "passed": true,
+          "detail": "SECRET-MARKER-should-not-echo"
+        }
+      ]
+    },
+    {
+      "case_id": "SYN-FD-22",
+      "name": "Governance pins stale on a later as-of date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR ADVISER REVIEW"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accepted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "eligibility_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "case_created",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "enforcement_action",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "released_to_resident",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_article"
+        },
+        {
+          "field": "any_article_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent collected on Wednesday",
+          "passed": true,
+          "detail": "collected on Wednesday"
+        }
+      ]
+    }
+  ]
+}

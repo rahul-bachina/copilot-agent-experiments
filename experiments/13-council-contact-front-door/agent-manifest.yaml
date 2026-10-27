@@ -1,0 +1,556 @@
+# Agent manifest: Council contact-centre front door
+# Experiment 13 — catalogue ID V006
+# Version: 0.1.0
+# Last reviewed: 2026-10-27
+# Next review: 2027-04-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-13-council-contact-front-door"
+  name: "Council Contact-Centre Front Door"
+  version: "0.1.0"
+  description: >
+    Helps a contact-centre adviser at a UK local authority draft a reply
+    to one resident enquiry from a fixed catalogue of published pages, or
+    prepare a warm handover. Autonomy A1. The adviser accepts a published
+    sentence before it is treated as fit to read out. The agent never
+    decides eligibility, never changes a case, and never sends a message.
+    Emergencies and vulnerability phrases stop at a fixed handover script.
+  owner: "Contact centre operations"
+  contact: "contact-centre@northmarsh.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/13-council-contact-front-door"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "An adviser accepts or rejects a published draft. The agent only prepares it."
+    - "The agent NEVER decides eligibility, entitlement, or the outcome of an application"
+    - "The agent NEVER creates, updates, or closes a case or service request"
+    - "The agent NEVER sends email, SMS, letter, or chat, including after a draft is accepted"
+    - "The agent NEVER takes a payment, books an appointment, or takes enforcement action"
+    - "Emergency and vulnerability phrases return a fixed handover. No service page is quoted."
+    - "Page text and the empty approval come from src/front_door.py, not from model output"
+    - "All output is advisory and is marked draft for adviser review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic or council-supplied enquiry"
+      description: "A single enquiry the adviser pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One enquiry per invocation. The output does not echo the text."
+      justification: "The front door cannot match a page without the enquiry the adviser has supplied."
+      data_categories:
+        - "Free text of one enquiry"
+        - "A channel label, if the adviser supplied one"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the enquiry."
+
+    - resource: "Adviser-confirmed inputs"
+      description: "As-of date, optional stale threshold, and a separate review object if the adviser records one"
+      access_level: "read"
+      scope: "Fields the adviser types for this run. The review object is not read from the enquiry text."
+      justification: "Currency of a page is compared with the day the adviser is working. Approval cannot be taken from the resident's words."
+      may_contain_personal_data: false
+
+    - resource: "Synthetic published catalogue"
+      description: "Pages in src/catalogue.py for the invented council Northmarsh Borough Council."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Answers are quotations from these pages. The core does not browse a live website."
+      may_contain_personal_data: false
+
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Council tax, benefits, housing, rents, and social-care case systems"
+      reason: "The agent does not look up an account and does not decide eligibility."
+    - resource: "Resident contact details held by the council"
+      reason: "The agent does not send a message and does not enrich the enquiry."
+    - resource: "Payment systems and card data"
+      reason: "The agent does not take or refund a payment."
+    - resource: "Penalty charge and other enforcement systems"
+      reason: "The agent does not issue, cancel, or waive a charge."
+    - resource: "Safeguarding case records and 999 dispatch"
+      reason: "The handover script tells a person to take the conversation. The agent does not open a safeguarding record and does not call 999."
+    - resource: "Live council websites and knowledge bases"
+      reason: "A live page would bypass last_reviewed. The catalogue is the file in this experiment."
+    - resource: "Other residents' enquiries"
+      reason: "One enquiry at a time. The agent does not search a contact history."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Front door draft"
+      provider: "Local Python (src/front_door.py)"
+      action: "Match one enquiry to the synthetic catalogue or return a handover"
+      access_level: "read"
+      scope: "One enquiry. No network. No model."
+      justification: "Which page applies, and whether it is stale, is a comparison. A language model must not invent it."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Adviser review"
+      provider: "Local Python (record_adviser_review)"
+      action: "Record accept_draft, reject_draft, or take_handover on a draft already produced"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No send and no write."
+      justification: "The approval has to be deterministic and has to refuse prohibited decisions. It still does not execute them."
+      human_approval_required: true
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The page text, the flags, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a decision, a send, or a case write"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that decides eligibility, sends, or writes a case is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the adviser. Logging a service
+      request, if the adviser chooses to, is done in the council's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Accepting a draft does not email, text, or chat the resident.
+      The adviser reads it out, or not, in the council's own channel.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or refuse an application, a reduction, a
+      badge, or a service request. The output leaves that decision unset.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Eligibility, entitlement, enforcement, and safeguarding outcomes are
+      for a person. The agent can quote a published contact page and cannot
+      decide it. It does not decide that the council has complied with a duty.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a case system, a CRM, a housing system,
+      or any other production record. Accepting a draft does not write one.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent does not contact the resident, a contractor, or an emergency
+      service. The 999 line is text in a script, not a call placed by the agent.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment is taken or refunded. No fee is spent."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Decide eligibility or entitlement"
+      rationale: "A person decides. The flag eligibility_decided stays false, including after accept_draft."
+    - enabled: false
+      action_name: "Book an appointment"
+      rationale: "The agent has no diary tool. The adviser books in the council's own system, if anyone books."
+    - enabled: false
+      action_name: "Take enforcement action"
+      rationale: "Issuing, cancelling, or waiving a penalty charge is outside the agent."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The adviser accepts a published sentence, rejects it, or takes the
+    handover. The agent has no path that acts on that choice. Approving
+    a sentence in the chat does not send it, write a case, or decide
+    eligibility. Emergency and vulnerability drafts cannot be accepted
+    as a service answer. The only recorded decision on those is
+    take_handover.
+
+  approval_points:
+    - action: "Accept a published page as fit to read out"
+      approver: "Contact centre adviser"
+      mandatory: true
+      rationale: "Catalogue checkpoint for V006. triage() leaves human_approval null. Only record_adviser_review can set it, and only for a current published answer."
+
+    - action: "Take the handover for a vulnerable resident or an emergency"
+      approver: "Contact centre adviser"
+      mandatory: true
+      rationale: "The core returns a fixed script and will not quote a service page. accept_draft is refused. A person continues the conversation."
+
+    - action: "Rely on a page after it is marked stale"
+      approver: "Contact centre adviser"
+      mandatory: true
+      rationale: "The body is not copied. The adviser re-opens the council's own page before anyone uses it. This starter cannot fetch that page."
+
+    - action: "Decide eligibility, entitlement, or an application"
+      approver: "The council officer who owns that decision"
+      mandatory: true
+      rationale: "Outside the agent, including after a draft is accepted."
+
+    - action: "Create or update a case or service request"
+      approver: "Contact centre adviser"
+      mandatory: true
+      rationale: "Outside the agent. Writes are disabled. The review function refuses a create-case decision."
+
+    - action: "Send a message to the resident"
+      approver: "Contact centre adviser"
+      mandatory: true
+      rationale: "Outside the agent. Sends are disabled. released_to_resident stays false."
+
+    - action: "Take a payment, book an appointment, or take enforcement action"
+      approver: "The officer authorised for that action"
+      mandatory: true
+      rationale: "Outside the agent. Those flags stay false."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same enquiry"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the council's lawful basis. A candidate
+      for the data protection officer to confirm, before any production use,
+      is Article 6(1)(e), public task, because answering enquiries is part
+      of a council's functions. Do not copy the legal-obligation basis from
+      Experiment 02.
+    secondary: "None asserted. A council that later logs the enquiry in its own case system chooses the basis for that system."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or disability information a resident volunteers"
+      - "Information about a child's circumstances, volunteered in the enquiry"
+    lawful_basis_special: "Not asserted. The council confirms an Article 9 condition, and completes a DPIA, before production use. This starter does not ask for this data and does not store the enquiry."
+    safeguards:
+      - "One enquiry at a time, as supplied by the adviser"
+      - "The output does not echo the enquiry text"
+      - "Nothing is written to a case record"
+      - "Samples in this repository are synthetic"
+      - "Emergency and vulnerability phrases stop at a fixed script"
+      - "No solely automated significant decision. Eligibility and case outcomes stay with a person."
+
+  data_minimisation:
+    - "The core reads one enquiry. It does not retrieve an account."
+    - "The draft summary is a template. It names page ids, not the resident's words."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The council's own retention applies to whatever the adviser then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the council's privacy process.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Enquiry text is untrusted. It may tell the model to ignore the catalogue,
+    mark the resident eligible, create a case, or send an email. The core
+    does not read the network. The model is not given a tool that can decide,
+    write, or send.
+
+  controls:
+    - control: "Instructions separated from the enquiry"
+      description: "A sentence that is itself an instruction is not used to choose a page. The signal is recorded and followed is false."
+    - control: "Deterministic catalogue"
+      description: "The quoted body, the stale flag, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set eligibility, a send, a case write, or the adviser's decision is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled in this manifest. record_adviser_review refuses those decisions."
+    - control: "Human decision"
+      description: "human_approval stays null until a separate review object is supplied. Text inside the enquiry cannot supply it."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The adviser
+    is the control. There is no autonomous action to take even if the brief is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named council"
+  date_assessed: "2026-10-27"
+  risks:
+    - id: "R1"
+      risk: "A published page is treated as an eligibility decision, or a missing page is filled in with a guessed fact"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "eligibility_decided stays false"
+        - "answer.text is either a catalogue body or a fixed script"
+        - "No match and a stale page do not invent a day, a balance, or a tariff"
+      residual_risk: "Medium"
+      owner: "Contact centre operations"
+
+    - id: "R2"
+      risk: "An emergency or a safeguarding worry is answered with a service page"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those phrases are checked before page matching"
+        - "No service page is quoted on that path"
+        - "accept_draft is refused. The recorded route is take_handover"
+      residual_risk: "Medium"
+      owner: "Contact centre operations"
+
+    - id: "R3"
+      risk: "A stale page is read out as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than the threshold is not quoted"
+        - "Equal to the threshold is still quoted, and that boundary is tested"
+        - "The core does not refresh the page from the web"
+      residual_risk: "Low"
+      owner: "Contact centre operations"
+
+    - id: "R4"
+      risk: "Prompt injection marks someone eligible, opens a case, or sends a message"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No such tool exists"
+        - "The review function refuses those decisions"
+        - "Tests cover eligibility, send, and case-write instructions"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R5"
+      risk: "A live enquiry, including special-category detail, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Samples use an invented council"
+        - "The starter does not persist the enquiry"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R6"
+      risk: "The agent becomes the only route, so people who cannot or will not use chat get a worse service"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The disclosure names the phone and face-to-face route"
+        - "This starter is not a published website and does not meet SI 2018/952 by itself"
+        - "A council deploying a chat still has to meet the accessibility requirement for that site"
+      residual_risk: "Medium"
+      owner: "Contact centre operations"
+
+    - id: "R7"
+      risk: "A pinned governance page changes and the notes are still treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Each source has last_verified"
+        - "Older than the threshold is stale and is not silently refreshed"
+      residual_risk: "Medium"
+      owner: "Contact centre operations"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the enquiry id, the outcome, and the adviser's later review. This
+    starter logs nothing because it keeps no store. Do not put the enquiry
+    text in an application trace.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Adviser identity"
+        - "Enquiry id"
+        - "Whether the record was marked synthetic"
+      retention: "Council's contact-centre schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Article ids cited"
+        - "Whether any article or source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the contact if the adviser relies on the draft. The enquiry text is not in this event."
+    - event: "Adviser recorded accept, reject, or handover"
+      data_logged:
+        - "Decision"
+        - "Adviser identity"
+        - "Timestamp"
+      retention: "Council's schedule. The agent does not write this event to a case system."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the council already operates. Do not log the enquiry narrative in an application trace."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SMS, a case system, or payments"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Contact centre operations lead"
+      contact: "contact-centre@northmarsh.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@northmarsh.example.gov.uk"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-27"
+  next_review_date: "2027-04-27"
+  review_frequency: "6 months, and sooner if the catalogue pages, the playbook, or the ATRS scope policy change"
+  reviewer: "The adopting council's contact-centre lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to a page in the council's real catalogue, if one is later substituted for the synthetic file"
+    - "A change to AI Playbook Principle 4 or Principle 7"
+    - "A change to the ATRS scope policy that brings local authorities into the mandatory duty"
+    - "A proposal to add a connector that can message a resident, write a case, or take a payment"
+    - "A proposal to publish a resident-facing chat on the Customer Conversation harness"
+    - "A security incident involving a draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Front door core"
+      path: "src/front_door.py"
+    - name: "Synthetic catalogue"
+      path: "src/catalogue.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+# =============================================================================
+# ATRS
+# =============================================================================
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The policy opened on
+    27 October 2026 recommends the standard for the broader public sector
+    and reserves the mandatory duty for central government. A council that
+    wants a draft pack uses Experiment 03. The pointers below say which
+    manifest sections a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a council must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "Article 6(1)(e) is a candidate basis only. The council confirms it, and completes a DPIA, before live use. No Article 9 condition is asserted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a review duty the council already has."
+      section: "src/catalogue.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on residents' enquiries."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "No messaging, case, payment, or enforcement connector is added without updating this manifest."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Contact addresses on northmarsh.example.gov.uk are placeholders. Northmarsh Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "A resident-facing website chat would have to meet SI 2018/952 for that site. This command-line starter does not."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Section 80 of the Data (Use and Access) Act 2025 was not re-opened on 27 October 2026. This agent does not run Experiment 03's screen."
+      section: "atrs_mapping"
+      verify_on_deployment: true

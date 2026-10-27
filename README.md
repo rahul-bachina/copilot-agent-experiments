@@ -41,6 +41,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 09 | [Correspondence Draft Agent](experiments/09-casework-correspondence-draft/) | Draft one ministerial, MP, or resident reply. The author approves the recipient and the final text. Dates and line citations come from code. The agent does not send or invent a policy position. | ✅ Starter |
 | 10 | [Travel Rule exception triage](experiments/10-travel-rule-exception-triage/) | Draft a reading of one synthetic cryptoasset transfer: missing or mismatched originator and beneficiary information, including a sunrise jurisdiction. The analyst decides hold, return, or escalate. Autonomy A1. The agent does not hold, return, release, file, or contact a counterparty. | ✅ Starter |
 | 11 | [Employment Rights Act 2025 HR assistant](experiments/11-era-2025-hr-assistant/) | Draft a reading of one synthetic employer pack against pinned commencement dates. The HR lead decides. Autonomy A1. The agent does not decide compliance, discipline, publish, or send. | ✅ Starter |
+| 13 | [Council contact-centre front door](experiments/13-council-contact-front-door/) | Draft a reply from a fixed catalogue for a local-authority contact centre, or a handover to a person. The adviser accepts a published sentence. Autonomy A1. The agent does not decide eligibility, send a message, or write a case. | ✅ Starter |
 
 ## Getting Started
 
@@ -123,6 +124,12 @@ cd ../11-era-2025-hr-assistant
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/review.py --input examples/sample_pack.json --as-of 2026-10-27
+
+# Experiment 13 needs no credentials either. The catalogue is deterministic.
+cd ../13-council-contact-front-door
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/front_door.py --input examples/sample_enquiry.json --as-of 2026-10-27
 ```
 
 ## Repository Structure
@@ -156,7 +163,8 @@ copilot-agent-experiments/
     ├── 08-uk-pii-redaction-gateway/
     ├── 09-casework-correspondence-draft/
     ├── 10-travel-rule-exception-triage/
-    └── 11-era-2025-hr-assistant/
+    ├── 11-era-2025-hr-assistant/
+    └── 13-council-contact-front-door/
 ```
 
 ## Agent Governance
