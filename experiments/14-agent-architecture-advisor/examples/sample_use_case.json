@@ -1,0 +1,39 @@
+{
+  "case_id": "uc-01-bounded-policy-qa",
+  "title": "Pebbleford corporate policy questions",
+  "organisation": {
+    "name": "Pebbleford Borough Council",
+    "sector": "local_authority",
+    "licences": {
+      "copilot_studio": "yes",
+      "microsoft_365_copilot": "yes",
+      "power_automate": "yes",
+      "foundry": "yes",
+      "github_copilot_service_only": false
+    }
+  },
+  "users": {
+    "audience": "internal_staff",
+    "channel": "teams"
+  },
+  "data": {
+    "description": "Approved corporate policies already marked for staff use",
+    "personal_data": false,
+    "special_category": false,
+    "classification": "official",
+    "volume": "bounded",
+    "residency": "uk"
+  },
+  "actions": {
+    "read": true,
+    "draft": true,
+    "classify": true
+  },
+  "risk": {
+    "level": "low",
+    "requested_autonomy": "A0",
+    "named_approver": true,
+    "approver_role": "Policy owner"
+  },
+  "narrative": "Staff ask questions about the published policy set. A person still owns the answer."
+}
