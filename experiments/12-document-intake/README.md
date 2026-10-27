@@ -44,7 +44,7 @@ This starter is only that front door. The specialist decision stays in the later
 
 `src/intake.py` reads one JSON batch and writes one JSON document. The same batch and the same as-of date produce the same JSON. `files_confirmed` and `purpose_confirmed` are false. `reviewer_decision` is null. `actions_taken` is empty.
 
-**Files.** Each file needs an id, a filename, a media type, and text. This starter reads `text/plain` only. Anything else is listed as `not_read` and is not classified and not sent to the gateway. An empty file and a file over 20,000 characters are not scanned. A supplied SHA-256 that does not match the text is a checksum failure. A repeated hash is marked as a duplicate of the earlier file id.
+**Files.** Each file needs an id, a filename, a media type, and text. This starter reads `text/plain` only. Anything else is listed as `not_read` and is not classified and not sent to the gateway. If that file's JSON still contains a text body under the size cap, the body is scanned for instructions. It is still not treated as a reading of the file. An empty file and a file over 20,000 characters are not scanned. A supplied SHA-256 that does not match the text is a checksum failure. A repeated hash is marked as a duplicate of the earlier file id.
 
 **Class.** A closed keyword list suggests a class, or `unclassified`, or `unresolved` when two classes tie. The suggestion is not a document-type decision.
 

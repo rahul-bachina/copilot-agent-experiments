@@ -1,0 +1,214 @@
+{
+  "label": "DRAFT FOR INTAKE REVIEW",
+  "catalogue_id": "O001",
+  "experiment_id": "exp-12-document-intake",
+  "autonomy": "A1",
+  "batch_id": "INTAKE-SYN-001",
+  "as_of": "2026-10-27",
+  "catalogue_pinned_on": "2026-10-27",
+  "catalogue_age_days": 0,
+  "catalogue_stale": false,
+  "stale_after_days": 90,
+  "any_document_stale": false,
+  "any_document_not_current": false,
+  "gateway_rules_stale": false,
+  "rules_current": true,
+  "model_called": false,
+  "network_called": false,
+  "gateway": {
+    "experiment_id": "exp-08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "called": true,
+    "files_scanned": 2,
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "reversible_requested": false,
+    "model_suggestions_applied": false
+  },
+  "files_confirmed": false,
+  "purpose_confirmed": false,
+  "permitted_purpose": null,
+  "requested_purpose": null,
+  "confirmation": null,
+  "reviewer_decision": null,
+  "review": null,
+  "routing": {
+    "status": "awaiting_file_and_purpose_confirmation",
+    "purpose_id": null,
+    "downstream_catalogue_id": null,
+    "downstream_note": "The user has not confirmed a purpose.",
+    "handed_off": false,
+    "blocked_reasons": [],
+    "warnings": []
+  },
+  "actions_taken": [],
+  "flags": {
+    "accepted_into_queue": false,
+    "production_record_written": false,
+    "external_sent": false,
+    "underlying_matter_approved": false,
+    "underlying_matter_rejected": false,
+    "redacted_text_released": false,
+    "output_is_anonymised": false,
+    "purpose_taken_from_document": false,
+    "files_confirmed_by_document": false,
+    "handed_off": false
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": [
+      {
+        "file_id": "F-002",
+        "phrase": "ignore previous instructions",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "F-002",
+        "phrase": "approve this file",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "F-002",
+        "phrase": "set the purpose",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "F-002",
+        "phrase": "email the customer",
+        "hidden_in": "html_comment",
+        "followed": false
+      }
+    ]
+  },
+  "prohibited_payload_keys": [],
+  "files": [
+    {
+      "file_id": "F-001",
+      "filename": "proof-of-address.txt",
+      "media_type": "text/plain",
+      "read_status": "read",
+      "sha256": "48356f500c93c8710f125393381c9d7178df9d18020189b9bebd2544f9c9e304",
+      "checksum_supplied": false,
+      "checksum_matches": null,
+      "char_count": 254,
+      "document_date": "2026-09-01",
+      "date_status": "within_window",
+      "age_days": 56,
+      "suggested_class": "proof_of_address",
+      "candidate_classes": [
+        {
+          "id": "proof_of_address",
+          "label": "Proof of address",
+          "keywords_found": [
+            "proof of address",
+            "council tax"
+          ]
+        },
+        {
+          "id": "bank_statement",
+          "label": "Bank or building society statement",
+          "keywords_found": [
+            "sort code"
+          ]
+        }
+      ],
+      "markers_found": [
+        "proof of address",
+        "council tax",
+        "sort code"
+      ],
+      "duplicate_of": null,
+      "pii": {
+        "called": true,
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "caller": "exp-12-document-intake",
+        "finding_count": 4,
+        "entity_types": [
+          "nino",
+          "nhs_number",
+          "postcode",
+          "sort_code"
+        ],
+        "rules_pinned_on": "2026-10-26",
+        "rules_stale": false,
+        "model_assist": "off",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "input_sha256": "48356f500c93c8710f125393381c9d7178df9d18020189b9bebd2544f9c9e304"
+      },
+      "content_recorded": false,
+      "injection_scanned": true
+    },
+    {
+      "file_id": "F-002",
+      "filename": "desk-note.txt",
+      "media_type": "text/plain",
+      "read_status": "read",
+      "sha256": "660686648b24b480de13f7d55e4c72d55ec9a32eae8faa2f613425be4e45493a",
+      "checksum_supplied": false,
+      "checksum_matches": null,
+      "char_count": 181,
+      "document_date": "2026-10-01",
+      "date_status": "within_window",
+      "age_days": 26,
+      "suggested_class": "unclassified",
+      "candidate_classes": [],
+      "markers_found": [],
+      "duplicate_of": null,
+      "pii": {
+        "called": true,
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "caller": "exp-12-document-intake",
+        "finding_count": 0,
+        "entity_types": [],
+        "rules_pinned_on": "2026-10-26",
+        "rules_stale": false,
+        "model_assist": "off",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "input_sha256": "660686648b24b480de13f7d55e4c72d55ec9a32eae8faa2f613425be4e45493a"
+      },
+      "content_recorded": false,
+      "injection_scanned": true
+    }
+  ],
+  "checklist_preview": null,
+  "checklist": null,
+  "human_approval": {
+    "files_and_purpose": {
+      "required": true,
+      "approver": "Intake user",
+      "recorded": false
+    },
+    "routing": {
+      "required": true,
+      "approver": "Intake reviewer",
+      "recorded": false
+    },
+    "release_of_redacted_text": {
+      "required": true,
+      "approver": "Privacy reviewer",
+      "recorded": false,
+      "performed_by_this_agent": false
+    }
+  },
+  "limitations": [
+    "This draft does not confirm the files or the permitted purpose.",
+    "A keyword class is not a decision about what the document is.",
+    "A complete checklist is phrase presence. It is not a finding that the pack is sufficient.",
+    "This starter reads text/plain only. Another media type is not_read, which is a gap, not a clean result.",
+    "A file over 20,000 characters is not scanned. An instruction in it is not detected.",
+    "UK identifier redaction is Experiment 08. The output is not anonymised. Names, email addresses, and telephone numbers are not detected.",
+    "The file body is not copied into this draft. A filename is stored as supplied.",
+    "The 90-day window is a stale flag for this starter. It is not a statutory retention period.",
+    "B004, B007, UK11, and UK09 are labels. They are not called.",
+    "No model was called."
+  ]
+}
