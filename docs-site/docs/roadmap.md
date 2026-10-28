@@ -144,6 +144,16 @@ A draft of platform options for one proposed agent, including no agent. The arch
 
 </article>
 
+<article class="plan-card" id="f004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · F004 · Autonomy A1</p>
+
+## Invoice exception triage
+
+A draft resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change goes to a separate verifier and does not change the supplier bank record. It calls [Experiment 12](experiments/12-document-intake.md). [Read the briefing](experiments/17-invoice-exception-triage.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
