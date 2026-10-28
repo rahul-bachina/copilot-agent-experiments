@@ -20,7 +20,9 @@ def test_pinned_sources_match_the_pages_opened_on_27_october_2026():
     assert "FATF call for action country" in QUOTES["reg33_3_a"]
     assert "high-risk third country" in QUOTES["si_2026_621_reg19_b"]
     assert "five years" in QUOTES["reg40_3"]
+    assert "paragraph (3)(b)(i)" in QUOTES["reg40_4"]
     assert "10 years" in QUOTES["reg40_4"]
+    assert "ceiling" not in QUOTES["reg40_4"].lower()
     assert "likely to prejudice" in QUOTES["poca_333a_1_b"]
     for source in SOURCES:
         assert source["applied_as_a_decision"] is False
