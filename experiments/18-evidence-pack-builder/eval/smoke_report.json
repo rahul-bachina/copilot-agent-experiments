@@ -1,0 +1,1732 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 12 and Experiment 08. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "dataset_label": "SYNTHETIC SMOKE SET. Not a model evaluation. No real person, firm, or case. Reedbank Borough Council is fictional.",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "clean-letter",
+      "name": "One in-scope letter is proposed and nothing is approved",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-reply"
+        },
+        {
+          "field": "held_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "intake_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "intake_purpose",
+          "passed": true,
+          "detail": "sar_bundle"
+        },
+        {
+          "field": "export_before_approval",
+          "passed": true,
+          "detail": "refused"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A request that is not marked synthetic is refused without the body",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "out-of-scope",
+      "name": "A repairs item is excluded when that scope was not authorised",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-in"
+        },
+        {
+          "field": "intake_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "excluded item-out",
+          "passed": true,
+          "detail": "out_of_scope"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent planted value 2",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "empty-scopes",
+      "name": "An empty scope list excludes every item and does not call intake",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "intake_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "authorised_scopes",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "period-unset",
+      "name": "No pages are proposed when the search period is omitted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "search_period_set",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "date item-in",
+          "passed": true,
+          "detail": "period_unset"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "duplicate",
+      "name": "A repeated hash is not given its own page",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-a"
+        },
+        {
+          "field": "eligible item-b",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "duplicate item-b",
+          "passed": true,
+          "detail": "item-a"
+        }
+      ]
+    },
+    {
+      "case_id": "checksum",
+      "name": "A supplied hash that does not match is not eligible",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "eligible item-bad",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "checksum",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "privilege",
+      "name": "A privilege phrase is held and the exemption is not applied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "held_ids",
+          "passed": true,
+          "detail": "item-advice"
+        },
+        {
+          "field": "intake_purpose",
+          "passed": true,
+          "detail": "evidence_bundle"
+        },
+        {
+          "field": "pack_type",
+          "passed": true,
+          "detail": "internal_investigation"
+        },
+        {
+          "field": "privilege item-advice",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "exemption item-advice",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "eligible item-advice",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "third-party-identifier",
+      "name": "An NHS number and a third-party phrase are flagged without copying the value",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held_ids",
+          "passed": true,
+          "detail": "item-nhs"
+        },
+        {
+          "field": "entity_types item-nhs",
+          "passed": true,
+          "detail": "nhs_number"
+        },
+        {
+          "field": "eligible item-nhs",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "outside-and-future",
+      "name": "Dates outside the period, and future dates, are not proposed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "intake_purpose",
+          "passed": true,
+          "detail": "evidence_bundle"
+        },
+        {
+          "field": "pack_type",
+          "passed": true,
+          "detail": "housing_ombudsman_referral"
+        },
+        {
+          "field": "date item-old",
+          "passed": true,
+          "detail": "outside_period"
+        },
+        {
+          "field": "date item-future",
+          "passed": true,
+          "detail": "future"
+        }
+      ]
+    },
+    {
+      "case_id": "html-comment",
+      "name": "An approval instruction in an HTML comment is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "html_comment"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "eligible item-hidden",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "zero-width",
+      "name": "A zero-width character does not hide an instruction",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "zero_width"
+        },
+        {
+          "field": "intake_purpose",
+          "passed": true,
+          "detail": "evidence_bundle"
+        },
+        {
+          "field": "pack_type",
+          "passed": true,
+          "detail": "fos_referral"
+        },
+        {
+          "field": "eligible item-zw",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "scope-not-from-text",
+      "name": "Item text cannot widen the authorised scopes",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "pack_type",
+          "passed": true,
+          "detail": "regulator_information_request"
+        },
+        {
+          "field": "authorised_scopes",
+          "passed": true,
+          "detail": "audit_workpapers"
+        },
+        {
+          "field": "excluded item-mail",
+          "passed": true,
+          "detail": "out_of_scope,prompt_injection"
+        }
+      ]
+    },
+    {
+      "case_id": "unread-pdf",
+      "name": "A PDF is not_read and is not proposed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "none"
+        },
+        {
+          "field": "intake_purpose",
+          "passed": true,
+          "detail": "evidence_bundle"
+        },
+        {
+          "field": "eligible item-pdf",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "read item-pdf",
+          "passed": true,
+          "detail": "not_read"
+        }
+      ]
+    },
+    {
+      "case_id": "wrong-role",
+      "name": "A role other than Evidence pack approver cannot record the list",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-clean"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "refused"
+        }
+      ]
+    },
+    {
+      "case_id": "exact-list-refuses-out-of-scope",
+      "name": "The exact list cannot include an out-of-scope id",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-in"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "refused"
+        }
+      ]
+    },
+    {
+      "case_id": "include-after-review",
+      "name": "A flagged item is exported only in the approver's order, and still not sent",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-clean"
+        },
+        {
+          "field": "held_ids",
+          "passed": true,
+          "detail": "item-advice"
+        },
+        {
+          "field": "privilege item-advice",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "exemption item-advice",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "approved"
+        },
+        {
+          "field": "still_not_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "still_not_exempt",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "export_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bodies_included",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "export_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "export_order",
+          "passed": true,
+          "detail": "item-advice,item-clean"
+        },
+        {
+          "field": "send_blocked",
+          "passed": true,
+          "detail": "PackForbidden"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-acknowledgement",
+      "name": "A stale source pin blocks approval until a person acknowledges it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR EVIDENCE PACK REVIEW"
+        },
+        {
+          "field": "export_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "redactions_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approver_name",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "exemption_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "search_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "may_release",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "external_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "proposed_ids",
+          "passed": true,
+          "detail": "item-paper"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "refused"
+        }
+      ]
+    }
+  ]
+}

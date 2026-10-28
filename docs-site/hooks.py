@@ -67,6 +67,9 @@ DIAGRAMS = {
     "experiments/17-invoice-exception-triage/docs/architecture_diagram.png": (
         "experiments/img/17-invoice-exception-architecture.png"
     ),
+    "experiments/18-evidence-pack-builder/docs/architecture_diagram.png": (
+        "experiments/img/18-evidence-pack-architecture.png"
+    ),
 }
 
 

@@ -154,6 +154,16 @@ A draft resolution for one synthetic invoice that failed a 2-way or 3-way match.
 
 </article>
 
+<article class="plan-card" id="l004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · L004 · Autonomy A1</p>
+
+## Evidence pack builder
+
+A draft index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. The agent does not apply an exemption, disclose, write, or send. It calls [Experiment 12](experiments/12-document-intake.md). [Read the briefing](experiments/18-evidence-pack-builder.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

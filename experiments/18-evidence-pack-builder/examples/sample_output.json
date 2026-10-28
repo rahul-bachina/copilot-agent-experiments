@@ -1,0 +1,488 @@
+{
+  "label": "DRAFT FOR EVIDENCE PACK REVIEW",
+  "catalogue_id": "L004",
+  "experiment_id": "exp-18-evidence-pack-builder",
+  "autonomy": "A1",
+  "request_id": "SYN-EP-SAMPLE",
+  "as_of": "2026-10-28",
+  "pack_type": "sar_bundle",
+  "pack_type_label": "Subject access request bundle",
+  "pack_type_note": "Experiment 12 labels this purpose UK11 and does not call that row. This pack does not disclose anything to a data subject.",
+  "authorised_scopes": [
+    "case_file",
+    "correspondence"
+  ],
+  "search_period": {
+    "set": true,
+    "from": "2026-01-01",
+    "to": "2026-10-28"
+  },
+  "sources_pinned_on": "2026-10-28",
+  "sources_stale": false,
+  "rules_as_of": null,
+  "model_called": false,
+  "network_called": false,
+  "export_approved": false,
+  "redactions_approved": false,
+  "approver_name": null,
+  "approved_item_ids": null,
+  "actions_taken": [],
+  "flags": {
+    "export_produced": false,
+    "external_sent": false,
+    "disclosed_to_requester": false,
+    "production_record_written": false,
+    "exemption_applied": false,
+    "redacted_text_released": false,
+    "output_is_anonymised": false,
+    "scopes_widened_by_item": false,
+    "search_period_taken_from_item": false
+  },
+  "law": {
+    "pinned_on": "2026-10-28",
+    "exemption_applied": false,
+    "reasonable_and_proportionate_search_decided": false,
+    "paragraph_17_applied": false,
+    "citations": [
+      {
+        "id": "uk_gdpr_art_15",
+        "instrument": "UK GDPR Article 15",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/15",
+        "retrieved": "2026-10-28",
+        "read": "Article 15(1) is the right to obtain confirmation whether personal data are being processed and, where that is the case, access to the personal data and the information listed in that paragraph. Article 15(1A) limits that to what the controller is able to provide based on a reasonable and proportionate search. Article 15(3) requires a copy of the personal data the data subject is entitled to under paragraph 1. Article 15(4) says the right to obtain that copy shall not adversely affect the rights and freedoms of others."
+      },
+      {
+        "id": "dpa_sch2_para_16",
+        "instrument": "Data Protection Act 2018, Schedule 2, paragraph 16",
+        "url": "https://www.legislation.gov.uk/ukpga/2018/12/schedule/2/paragraph/16",
+        "retrieved": "2026-10-28",
+        "read": "Paragraph 16(1) says Article 15(1) to (3) do not oblige a controller to disclose information to the data subject to the extent that doing so would involve disclosing information relating to another individual who can be identified from the information. Paragraph 16(2) does not remove that obligation where the other individual has consented, or where it is reasonable to disclose without consent. Paragraph 16(3) lists circumstances the controller must have regard to. Paragraph 16(4) covers information identifying another individual as the source, and identification from other information the controller reasonably believes the data subject is likely to possess or obtain."
+      },
+      {
+        "id": "dpa_sch2_para_18",
+        "instrument": "Data Protection Act 2018, Schedule 2, paragraph 18",
+        "url": "https://www.legislation.gov.uk/ukpga/2018/12/schedule/2",
+        "retrieved": "2026-10-28",
+        "read": "For Part 4 of Schedule 2, the listed UK GDPR provisions include Article 15(1) to (3). Paragraph 19 uses that definition."
+      },
+      {
+        "id": "dpa_sch2_para_19",
+        "instrument": "Data Protection Act 2018, Schedule 2, paragraph 19",
+        "url": "https://www.legislation.gov.uk/ukpga/2018/12/schedule/2/paragraph/19",
+        "retrieved": "2026-10-28",
+        "read": "The listed UK GDPR provisions do not apply to personal data that consists of information in respect of which a claim to legal professional privilege or, in Scotland, confidentiality of communications, could be maintained in legal proceedings, or information in respect of which a duty of confidentiality is owed by a professional legal adviser to a client."
+      },
+      {
+        "id": "ico_sar_exemptions",
+        "instrument": "ICO, What exemptions are relevant for SARs?",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/what-exemptions-are-relevant-for-sars/",
+        "retrieved": "2026-10-28",
+        "read": "The page's latest-update line says 8 December 2025. It says an exemption should be considered case by case, and that exemptions cannot be relied on routinely or applied in a blanket fashion. It also says reasons for relying on an exemption should be documented."
+      },
+      {
+        "id": "ico_other_people",
+        "instrument": "ICO, When can an exemption apply to information about other people in a SAR?",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/when-can-an-exemption-apply-to-information-about-other-people-in-a-sar/",
+        "retrieved": "2026-10-28",
+        "read": "The page says information need not be provided in response to a SAR to the extent that this would reveal information about another person, unless that person has consented or it is reasonable to disclose without consent. It calls this the rights of others exemption, and sometimes the third-party data exemption."
+      }
+    ],
+    "note": "The citations were read on 28 October 2026. This draft does not decide that a search was reasonable and proportionate, and it does not apply Schedule 2."
+  },
+  "intake": {
+    "called": true,
+    "reason": null,
+    "experiment_id": "exp-12-document-intake",
+    "catalogue_id": "O001",
+    "purpose_preview": "sar_bundle",
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "reviewer_decision": null,
+    "catalogue_pinned_on": "2026-10-27",
+    "catalogue_stale": false,
+    "gateway_rules_stale": false,
+    "gateway_output_is_anonymised": false,
+    "gateway_agent_may_release": false,
+    "routing_handed_off": false,
+    "checklist_sufficient": false,
+    "actions_taken": []
+  },
+  "gateway": {
+    "experiment_id": "exp-08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "called_via": "exp-12-document-intake",
+    "output_is_anonymised": false,
+    "agent_may_release": false
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "signals": [
+      {
+        "item_id": "item-hidden",
+        "phrase": "approve the export",
+        "hidden_in": "html_comment",
+        "followed": false,
+        "source": "experiment_18"
+      }
+    ]
+  },
+  "prohibited_payload_keys": [
+    "pack_type",
+    "authorised_scopes",
+    "search_from",
+    "export_approved"
+  ],
+  "items": [
+    {
+      "item_id": "item-reply",
+      "title": "reply.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "correspondence",
+      "in_authorised_scope": true,
+      "document_date": "2026-10-01",
+      "date_position": "within_period",
+      "sha256": "3ba952f47baecfae65de0b7f57bda93ea53fbb1cc1abca40dc6cb8ef88259648",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": "correspondence",
+      "intake_date_status": "within_window",
+      "pii_called": true,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": true,
+      "proposed_for_export": true,
+      "held_for_review": false,
+      "reasons": [],
+      "proposed_page": 1
+    },
+    {
+      "item_id": "item-advice",
+      "title": "advice.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "case_file",
+      "in_authorised_scope": true,
+      "document_date": "2026-10-02",
+      "date_position": "within_period",
+      "sha256": "ee8bf771669d0f05fbfb091b13557e29b8acc0fee4095aea2053d4ab30d4bd6a",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": "unclassified",
+      "intake_date_status": "within_window",
+      "pii_called": true,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [
+        "legally privileged",
+        "solicitor's advice"
+      ],
+      "possible_privilege": true,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": true,
+      "proposed_for_export": false,
+      "held_for_review": true,
+      "reasons": [
+        "possible_privilege"
+      ],
+      "proposed_page": null
+    },
+    {
+      "item_id": "item-neighbour",
+      "title": "repairs.txt",
+      "source": "repairs export",
+      "source_scope": "repairs_log",
+      "in_authorised_scope": false,
+      "document_date": "2026-10-03",
+      "date_position": "within_period",
+      "sha256": null,
+      "read_status": null,
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": null,
+      "intake_date_status": null,
+      "pii_called": false,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": false,
+      "proposed_for_export": false,
+      "held_for_review": false,
+      "reasons": [
+        "out_of_scope"
+      ],
+      "proposed_page": null
+    },
+    {
+      "item_id": "item-copy",
+      "title": "reply-copy.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "correspondence",
+      "in_authorised_scope": true,
+      "document_date": "2026-10-01",
+      "date_position": "within_period",
+      "sha256": "3ba952f47baecfae65de0b7f57bda93ea53fbb1cc1abca40dc6cb8ef88259648",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": "item-reply",
+      "suggested_class": "correspondence",
+      "intake_date_status": "within_window",
+      "pii_called": true,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": false,
+      "proposed_for_export": false,
+      "held_for_review": false,
+      "reasons": [
+        "duplicate"
+      ],
+      "proposed_page": null
+    },
+    {
+      "item_id": "item-hidden",
+      "title": "cover.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "correspondence",
+      "in_authorised_scope": true,
+      "document_date": "2026-10-04",
+      "date_position": "within_period",
+      "sha256": "d4f236646cfab60019c264abc3e78632043064f176a64cab0f9949dade9a89f7",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": "unclassified",
+      "intake_date_status": "within_window",
+      "pii_called": true,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": true,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": false,
+      "proposed_for_export": false,
+      "held_for_review": true,
+      "reasons": [
+        "prompt_injection"
+      ],
+      "proposed_page": null
+    },
+    {
+      "item_id": "item-old",
+      "title": "old.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "correspondence",
+      "in_authorised_scope": true,
+      "document_date": "2024-01-15",
+      "date_position": "outside_period",
+      "sha256": "a047ccbbdd74aae70011dd9143fc205974824228509d645d2e60362825294ea5",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": "correspondence",
+      "intake_date_status": "stale",
+      "pii_called": true,
+      "entity_types": [],
+      "finding_count": 0,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [],
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": false,
+      "proposed_for_export": false,
+      "held_for_review": false,
+      "reasons": [
+        "outside_period"
+      ],
+      "proposed_page": null
+    },
+    {
+      "item_id": "item-nhs",
+      "title": "health-note.txt",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "source_scope": "correspondence",
+      "in_authorised_scope": true,
+      "document_date": "2026-10-05",
+      "date_position": "within_period",
+      "sha256": "95d714a5591d73cd12c7cca480f45e8f13c9e96ee76875f63a9c6c61d8224c2c",
+      "read_status": "read",
+      "checksum_matches": null,
+      "duplicate_of": null,
+      "suggested_class": "unclassified",
+      "intake_date_status": "within_window",
+      "pii_called": true,
+      "entity_types": [
+        "nhs_number"
+      ],
+      "finding_count": 1,
+      "privilege_phrases": [],
+      "possible_privilege": false,
+      "third_party_phrases": [
+        "another resident"
+      ],
+      "possible_third_party_personal_data": true,
+      "prompt_injection": false,
+      "exemption_applied": false,
+      "content_recorded": false,
+      "eligible_for_approval": true,
+      "proposed_for_export": false,
+      "held_for_review": true,
+      "reasons": [
+        "possible_third_party_personal_data"
+      ],
+      "proposed_page": null
+    }
+  ],
+  "proposed_index": [
+    {
+      "page": 1,
+      "item_id": "item-reply",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "document_date": "2026-10-01",
+      "sha256": "3ba952f47baecfae65de0b7f57bda93ea53fbb1cc1abca40dc6cb8ef88259648",
+      "source_scope": "correspondence",
+      "status": "proposed"
+    }
+  ],
+  "held_for_review": [
+    {
+      "item_id": "item-advice",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "document_date": "2026-10-02",
+      "sha256": "ee8bf771669d0f05fbfb091b13557e29b8acc0fee4095aea2053d4ab30d4bd6a",
+      "possible_privilege": true,
+      "possible_third_party_personal_data": false,
+      "prompt_injection": false,
+      "eligible_for_approval": true,
+      "exemption_applied": false
+    },
+    {
+      "item_id": "item-hidden",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "document_date": "2026-10-04",
+      "sha256": "d4f236646cfab60019c264abc3e78632043064f176a64cab0f9949dade9a89f7",
+      "possible_privilege": false,
+      "possible_third_party_personal_data": false,
+      "prompt_injection": true,
+      "eligible_for_approval": false,
+      "exemption_applied": false
+    },
+    {
+      "item_id": "item-nhs",
+      "source": "Reedbank Borough Council case SYN-RB-100",
+      "document_date": "2026-10-05",
+      "sha256": "95d714a5591d73cd12c7cca480f45e8f13c9e96ee76875f63a9c6c61d8224c2c",
+      "possible_privilege": false,
+      "possible_third_party_personal_data": true,
+      "prompt_injection": false,
+      "eligible_for_approval": true,
+      "exemption_applied": false
+    }
+  ],
+  "excluded": [
+    {
+      "item_id": "item-neighbour",
+      "source_scope": "repairs_log",
+      "reasons": [
+        "out_of_scope"
+      ],
+      "sha256": null,
+      "content_recorded": false
+    },
+    {
+      "item_id": "item-copy",
+      "source_scope": "correspondence",
+      "reasons": [
+        "duplicate"
+      ],
+      "sha256": "3ba952f47baecfae65de0b7f57bda93ea53fbb1cc1abca40dc6cb8ef88259648",
+      "content_recorded": false
+    },
+    {
+      "item_id": "item-old",
+      "source_scope": "correspondence",
+      "reasons": [
+        "outside_period"
+      ],
+      "sha256": "a047ccbbdd74aae70011dd9143fc205974824228509d645d2e60362825294ea5",
+      "content_recorded": false
+    }
+  ],
+  "pagination": {
+    "proposed_page_count": 1,
+    "order": "document_date then item_id",
+    "note": "A proposal. It is not the approved export order."
+  },
+  "human_approval": {
+    "exact_export_list": {
+      "required": true,
+      "approver": "Evidence pack approver",
+      "recorded": false
+    },
+    "redactions": {
+      "required": true,
+      "approver": "Evidence pack approver",
+      "recorded": false
+    },
+    "stale_material": {
+      "required": true,
+      "approver": "Evidence pack approver",
+      "recorded": false
+    },
+    "release_or_send": {
+      "required": true,
+      "approver": "Evidence pack approver",
+      "recorded": false,
+      "performed_by_this_agent": false
+    }
+  },
+  "limitations": [
+    "This draft does not approve the export list or the redaction decisions.",
+    "Authorised scopes and the search period come from the caller. Item text cannot set them.",
+    "Out-of-scope text is not passed to Experiment 12 and is not hashed into the candidate manifest.",
+    "This starter does not search Microsoft 365. Items that were not pasted are invisible.",
+    "UK GDPR Article 15(1A) is cited and is not decided. The search period is not a reasonable-and-proportionate finding.",
+    "Schedule 2 paragraphs 16 and 19 are cited and are not applied. exemption_applied is false.",
+    "A privilege phrase is not a finding that a claim to legal professional privilege could be maintained.",
+    "A UK identifier is not proof that it relates to another individual. The data subject's own identifier is flagged.",
+    "Document inventory and UK identifier spans come from Experiment 12 and Experiment 08. The body is not copied. The text is not anonymised.",
+    "Names, email addresses, and telephone numbers are not detected. The US spelling neighbor is not on the third-party list.",
+    "This starter reads text/plain only, through Experiment 12. Another media type is not_read, which is a gap.",
+    "A file over 20,000 characters is not scanned. An instruction in it is not detected.",
+    "The 90-day window is a stale flag. It is not a statutory response period. Article 12 was not opened.",
+    "Financial Ombudsman Service and Housing Ombudsman evidence rules were not opened. Nothing is sent.",
+    "Titles and source labels are stored as supplied. Do not put an identifier in them.",
+    "No model was called."
+  ]
+}

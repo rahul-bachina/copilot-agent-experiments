@@ -814,6 +814,58 @@ class TestExperiment17Manifest:
         assert experiment_17_manifest["agent"]["id"] == "exp-17-invoice-exception-triage"
 
 
+class TestExperiment18Manifest:
+    """Test the Experiment 18 evidence pack builder manifest."""
+
+    @pytest.fixture
+    def experiment_18_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "18-evidence-pack-builder" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_18_manifest):
+        """Experiment 18 manifest should be valid."""
+        validate(instance=experiment_18_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_18_manifest):
+        """Experiment 18 should be autonomy level A1, not above."""
+        level = experiment_18_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_18_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_18_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_18_manifest):
+        """Experiment 18 should have all high-risk actions disabled."""
+        high_risk = experiment_18_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_18_manifest):
+        """Nothing is sent or written to a case system."""
+        assert experiment_18_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_18_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_approver_confirms_the_exact_list(self, experiment_18_manifest):
+        """The catalogue checkpoint is the evidence pack approver, and it is mandatory."""
+        points = experiment_18_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Approve the exact list"))
+        assert decision["approver"] == "Evidence pack approver"
+        assert decision["mandatory"] is True
+        assert experiment_18_manifest["agent"]["id"] == "exp-18-evidence-pack-builder"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 
