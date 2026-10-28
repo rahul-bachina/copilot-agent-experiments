@@ -46,6 +46,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 14 | [Agent Architecture Advisor](experiments/14-agent-architecture-advisor/) | Draft platform options for one proposed agent: Copilot Studio standard harness, Copilot Studio GitHub Copilot harness, Microsoft Foundry Agent Service, Power Automate, or no agent. The architect confirms every option. Autonomy A0. The advisor does not select, approve a manifest, or deploy. | ✅ Starter |
 | 15 | [Vulnerability and urgency scanner](experiments/15-vulnerability-urgency-scanner/) | Flag possible safeguarding, self-harm, financial hardship, and deadline indicators in inbound post and email. The duty officer reviews every flag. Autonomy A1. UK identifiers go through Experiment 08 before any model call. The agent does not close, deprioritise, send, or label a person as vulnerable. | ✅ Starter |
 | 16 | [KYC Evidence Intake Agent](experiments/16-kyc-evidence-intake/) | Draft a Money Laundering Regulations 2017 checklist for one synthetic customer file. The KYC reviewer confirms the documents and the purpose. Experiment 12 inventories the files. Autonomy A1. The agent does not approve, reject, onboard, rate, file a report, or send. | ✅ Starter |
+| 18 | [Evidence Pack Builder](experiments/18-evidence-pack-builder/) | Draft an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. Experiment 12 inventories in-scope items. Autonomy A1. The agent does not apply an exemption, disclose, write, or send. | ✅ Starter |
 
 ## Getting Started
 
@@ -153,6 +154,15 @@ cd ../16-kyc-evidence-intake
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/review.py --input examples/sample_customer_file.json --as-of 2026-10-27
+
+# Experiment 18 needs no credentials either. The index is deterministic.
+# Experiments 08 and 12 have to be present beside it. The builder calls that intake.
+cd ../18-evidence-pack-builder
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/pack.py --input examples/sample_request.json --as-of 2026-10-28 \
+  --pack-type sar_bundle --scopes case_file,correspondence \
+  --search-from 2026-01-01 --search-to 2026-10-28
 ```
 
 ## Repository Structure
@@ -191,7 +201,8 @@ copilot-agent-experiments/
     ├── 13-council-contact-front-door/
     ├── 14-agent-architecture-advisor/
     ├── 15-vulnerability-urgency-scanner/
-    └── 16-kyc-evidence-intake/
+    ├── 16-kyc-evidence-intake/
+    └── 18-evidence-pack-builder/
 ```
 
 ## Agent Governance
