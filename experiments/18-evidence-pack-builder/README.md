@@ -118,8 +118,8 @@ experiments/18-evidence-pack-builder/
 ├── agent-manifest.yaml
 ├── requirements.txt
 ├── src/
-│   ├── catalogue.py
-│   ├── injection.py
+│   ├── sources.py
+│   ├── pack_injection.py
 │   └── pack.py
 ├── copilot-studio/
 ├── skills/

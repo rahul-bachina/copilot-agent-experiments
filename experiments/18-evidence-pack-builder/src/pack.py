@@ -23,7 +23,7 @@ from pathlib import Path
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from catalogue import (
+    from sources import (
         APPROVER_ROLE,
         CATALOGUE_ID,
         CITATIONS,
@@ -40,9 +40,9 @@ if __package__ in {None, ""}:
         THIRD_PARTY_PHRASES,
         phrases_in,
     )
-    from injection import merge_scans, scan_text
+    from pack_injection import merge_scans, scan_text
 else:
-    from .catalogue import (
+    from .sources import (
         APPROVER_ROLE,
         CATALOGUE_ID,
         CITATIONS,
@@ -59,7 +59,7 @@ else:
         THIRD_PARTY_PHRASES,
         phrases_in,
     )
-    from .injection import merge_scans, scan_text
+    from .pack_injection import merge_scans, scan_text
 
 LABEL = "DRAFT FOR EVIDENCE PACK REVIEW"
 EXPORT_LABEL = "EVIDENCE PACK EXPORT INDEX"

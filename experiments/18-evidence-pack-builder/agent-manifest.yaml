@@ -73,7 +73,7 @@ data_access:
       may_contain_personal_data: false
 
     - resource: "Pinned source catalogue"
-      description: "The closed pack types, scopes, and phrase lists in src/catalogue.py, pinned 2026-10-28, and the legislation and ICO pages named there"
+      description: "The closed pack types, scopes, and phrase lists in src/sources.py, pinned 2026-10-28, and the legislation and ICO pages named there"
       access_level: "read"
       scope: "Static files in this experiment"
       justification: "The scope list and the citations have to be reproducible without a network call"
@@ -106,7 +106,7 @@ data_access:
 tools:
   allowed:
     - tool: "Evidence pack draft"
-      provider: "Local Python (src/pack.py, src/catalogue.py, src/injection.py)"
+      provider: "Local Python (src/pack.py, src/sources.py, src/pack_injection.py)"
       action: "Build a candidate manifest, flag privilege and third-party phrases, propose an index"
       access_level: "read"
       scope: "The single request supplied for this run, limited to the scopes passed as arguments. No network. No model."
@@ -517,7 +517,7 @@ review:
     - name: "Pack core"
       path: "src/pack.py"
     - name: "Source catalogue"
-      path: "src/catalogue.py"
+      path: "src/sources.py"
     - name: "Architecture"
       path: "docs/architecture.md"
     - name: "Security and permissions"
@@ -541,7 +541,7 @@ assumptions:
       verify_on_deployment: true
     - id: "A2"
       assumption: "The scope list and the phrase lists pinned on 28 October 2026 are still the lists the organisation wants. They are not a statutory classification."
-      section: "src/catalogue.py"
+      section: "src/sources.py"
       verify_on_deployment: true
     - id: "A3"
       assumption: "Experiment 12 remains the inventory and Experiment 08 remains the identifier gateway. This experiment does not replace either."
@@ -561,5 +561,5 @@ assumptions:
       verify_on_deployment: true
     - id: "A7"
       assumption: "Article 15 and Schedule 2 paragraphs 16 and 19 were read on 28 October 2026. A later amendment has to be re-read before the citations are reused. Article 12 was not opened, so no response deadline is encoded."
-      section: "src/catalogue.py"
+      section: "src/sources.py"
       verify_on_deployment: true

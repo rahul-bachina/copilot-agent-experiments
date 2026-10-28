@@ -3,7 +3,7 @@
 import json
 from datetime import date
 
-from src.injection import scan_text
+from src.pack_injection import scan_text
 from src.pack import build_pack
 from tests.support import AS_OF, PERIOD_FROM, PERIOD_TO, item, request
 
