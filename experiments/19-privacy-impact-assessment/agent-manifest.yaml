@@ -1,0 +1,392 @@
+# Agent manifest: Privacy Impact Assessment Assistant
+# Experiment 19 — catalogue ID L006
+# Version: 0.1.0
+# Last reviewed: 2026-10-28
+# Next review: 2027-04-28
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-19-privacy-impact-assessment"
+  name: "Privacy Impact Assessment Assistant"
+  version: "0.1.0"
+  description: >
+    Drafts a data protection impact assessment for one synthetic project brief.
+    It screens recorded answers against UK GDPR Article 35(1) and (3) and the
+    ICO list of processing likely to result in high risk, screens solely
+    automated significant decisions against Articles 22A to 22D, and drafts the
+    description, necessity, risk, and mitigation sections. Autonomy A1. The
+    privacy officer approves the assessment. The project owner accepts residual
+    risk. The agent never approves, rejects, or signs off a DPIA, and it never
+    sends a prior consultation.
+  owner: "Privacy officer"
+  contact: "privacy-officer@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/19-privacy-impact-assessment"
+
+autonomy:
+  level: "A1"
+  level_description: "The privacy officer approves the assessment. The project owner accepts residual risk. The agent only drafts."
+  constraints:
+    - "The privacy officer, or the data protection officer where one is designated, approves the assessment. The agent only drafts."
+    - "The project owner accepts residual risk. The agent does not accept it."
+    - "The agent NEVER approves, rejects, or signs off a DPIA"
+    - "The agent NEVER decides that Article 35 requires a DPIA, or that it does not"
+    - "The agent NEVER decides that Article 36(1) requires prior consultation, and NEVER sends that consultation"
+    - "The agent NEVER decides that processing is lawful, and NEVER decides that an Article 22B condition is met"
+    - "The agent NEVER writes a production record"
+    - "A sentence in the project brief cannot approve the assessment, clear a stale source pin, or cancel a consultation flag"
+    - "Free text is passed through Experiment 08. The output is not anonymised and is not released by this agent."
+    - "An Experiment 03 inventory or a permissions manifest may pre-fill empty fields. It does not answer the screening questions."
+    - "All output is a draft and is marked for privacy-officer review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic project brief"
+      description: "Screening answers, a description of processing, necessity notes, consultation notes, and risk rows. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One brief per invocation. No browsing of a case system or a live DPIA register."
+      justification: "The draft cannot describe the processing without the text the project team has supplied"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "Recorded yes, no, or unknown answers"
+        - "A risk description"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the brief. The draft stores redacted text and the Experiment 08 audit, which does not store raw identifier values."
+
+    - resource: "Optional Experiment 03 inventory JSON"
+      description: "An inventory record from Experiment 03, used only to fill empty fields. Screening answers are not inferred from it."
+      access_level: "read"
+      scope: "One record, if the caller passes a path."
+      justification: "Catalogue L006 can pre-fill agent-specific sections from an ATRS inventory"
+      may_contain_personal_data: true
+      retention: "Not stored beyond the draft. Copied strings are redacted before they are written into the draft."
+
+    - resource: "Optional permissions manifest"
+      description: "An agent-manifest.yaml. Identity, a recorded basis that is not 'Not asserted', and the autonomy level may be copied. Article 22A is not inferred from a disabled tool."
+      access_level: "read"
+      scope: "One manifest, if the caller passes a path."
+      justification: "The same pre-fill path as the inventory, for a project that already has a manifest"
+      may_contain_personal_data: false
+
+    - resource: "Reviewer-supplied as-of date"
+      description: "Typed outside the brief."
+      access_level: "read"
+      scope: "One date for this run."
+      justification: "The freshness comparison needs a date the person typed"
+      may_contain_personal_data: false
+
+    - resource: "Pinned legislation and ICO extracts"
+      description: "Short quotations in src/sources.py from pages opened on 28 October 2026."
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The draft has to cite the words that were read, without a network call at runtime"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 08 UK identifier gateway"
+      description: "In-process call to propose(). Model suggestions are off. The reversible vault is not requested."
+      access_level: "read"
+      scope: "The Experiment 08 folder beside this one. No network."
+      justification: "Free text in a DPIA draft is a place identifiers would otherwise be copied"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The audit omits raw values. This draft does not ask for a reversible map."
+
+  never_access:
+    - resource: "A live DPIA register, case system, or data-protection records store"
+      reason: "The starter reads only the brief, and an optional inventory or manifest, that the caller supplies."
+    - resource: "The Information Commission consultation inbox, or any mailbox"
+      reason: "Prior consultation is not sent. The address on the ICO page is not a tool."
+    - resource: "Mailboxes and customer systems beyond the pasted brief"
+      reason: "There is no connector."
+    - resource: "Experiment 08 reversible token vault"
+      reason: "propose() is called with reversible false."
+
+tools:
+  allowed:
+    - tool: "draft_dpia"
+      provider: "Python src/assess.py"
+      action: "Return a draft DPIA for one synthetic project brief"
+      access_level: "read"
+      scope: "One brief. Calls Experiment 08 propose()."
+      justification: "The project team needs a draft screening and the Article 35(7) sections"
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No production write. record_external_attestation updates a copy of the JSON in memory, effect none, and still does not approve the DPIA. The agent must not call it."
+  sends:
+    enabled: false
+    note: "send_prior_consultation always raises. Nothing is emailed to the Commission or the ICO."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "approve_assessment and reject_assessment always raise. An attestation recorded by a person outside the agent has effect none."
+  regulated_decision:
+    enabled: false
+    rationale: "dpia_required and article_36_consultation_required stay null. lawful stays null. The tool does not decide Article 35, Article 36, or Article 22B."
+  production_record_change:
+    enabled: false
+    rationale: "The starter does not write to a DPIA register, Dataverse, or SharePoint."
+  external_send:
+    enabled: false
+    rationale: "send_prior_consultation always raises. The ICO consultation address is quoted so the boundary is visible. It is not a tool."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not move money or instruct a payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Sign off a DPIA"
+      rationale: "sign_off_assessment always raises. signed_off stays false. Every sign-off name in the draft is null."
+    - enabled: false
+      action_name: "Accept residual risk"
+      rationale: "accept_residual_risk always raises. residual_risk_accepted stays false. The project owner accepts it outside this agent."
+    - enabled: false
+      action_name: "Send an Article 36 prior consultation"
+      rationale: "send_prior_consultation always raises. A high residual flag is not a decision that Article 36(1) is met."
+
+human_approval:
+  description: >
+    The privacy officer approves the assessment. The project owner accepts
+    residual risk. Neither step is a tool of the agent. Recording an
+    attestation in Python does not approve the DPIA.
+
+  approval_points:
+    - action: "Approve the assessment"
+      approver: "Privacy officer"
+      mandatory: true
+      rationale: "Catalogue checkpoint for L006. UK GDPR Article 35(2) requires the controller to seek the advice of the data protection officer, where designated. The agent does not record that advice as given, and it does not approve the DPIA."
+
+    - action: "Accept residual risk"
+      approver: "Project owner"
+      mandatory: true
+      rationale: "The ICO step 7 asks who accepted residual risk. accept_residual_risk always raises. The project owner does this outside the agent."
+
+    - action: "Decide whether to consult under Article 36(1), and send that consultation if they decide to"
+      approver: "Privacy officer"
+      mandatory: true
+      rationale: "The draft flags a high recorded residual. It does not decide that consultation is required, and it does not send it. The statutory addressee in the revised Article 36(1) is the Commission."
+
+    - action: "Rely on the screening after the pinned sources are marked stale"
+      approver: "Privacy officer"
+      mandatory: true
+      rationale: "A sentence in the brief does not clear sources_stale. The 90-day window is a freshness flag for this starter, not a statutory review period."
+
+    - action: "Treat text copied from an inventory or a manifest as the project team's own answer"
+      approver: "Project owner"
+      mandatory: true
+      rationale: "Pre-filled fields are marked copied. Screening answers are not inferred. A disabled regulated decision in a manifest is not meaningful human involvement under Article 22A."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading the JSON has no external effect."
+    - action: "Re-run the same brief"
+      rationale: "The same brief and the same as-of date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This manifest does not assert an Article 6 basis for the assistant or
+      for the project being assessed. A basis string copied from a brief, an
+      inventory, or another manifest is a quotation. It is not a chosen basis.
+      The adopting organisation confirms its own before production use.
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, where the brief describes health data or an NHS number is pasted"
+      - "Any other Article 9 category the brief happens to contain"
+    lawful_basis_special: "Not asserted"
+    condition: "Not asserted. The caller confirms any Article 9 condition and any Data Protection Act 2018 Schedule 1 condition before production use."
+    safeguards:
+      - "Experiment 08 proposes UK identifier spans. The output is not described as anonymised"
+      - "The draft does not request a reversible token map"
+      - "A brief that is not marked synthetic is refused, and the refusal does not echo the body"
+
+  data_minimisation:
+    - "One project brief per run"
+    - "Identifier values are not stored in the draft. The Experiment 08 audit records types and positions"
+    - "Screening is yes, no, or unknown. Missing is unknown, not no"
+    - "The starter does not open a live DPIA register"
+
+  retention:
+    agent_retention: "Transient in this starter. Nothing is written to a store."
+    note: "Article 35(11) is the controller's duty to review the DPIA when the risk changes. It is not a retention period for this agent's logs, and the agent does not delete personal data."
+
+  data_residency:
+    region: "UK South or UK West if a team later adds a Foundry narrative"
+    note: "The Python starter makes no network call. Data-use terms are confirmed at deployment."
+
+  data_subject_rights:
+    note: "The starter does not hold a record against which to action a request. The organisation handles rights against its own project file."
+
+prompt_injection:
+  description: >
+    Brief text is untrusted. A phrase that asks for approval, a sign-off, a
+    rejected DPIA, an accepted residual risk, or no consultation is recorded
+    and is not followed. The phrase is removed from the copied section text.
+  controls:
+    - control: "Closed phrase list"
+      description: "Instructions are recorded, including when hidden in a comment, after a form feed, after blank lines, or between zero-width characters."
+      implementation: "src/injection.py. followed is forced false. The copied section does not repeat the phrase."
+    - control: "Prohibited payload keys"
+      description: "Keys such as approved, signed_off, and residual_risk_accepted are stripped before the draft is built."
+      implementation: "src/assess.py"
+    - control: "No approval function"
+      description: "approve_assessment, reject_assessment, sign_off_assessment, accept_residual_risk, and send_prior_consultation always raise."
+      implementation: "src/assess.py"
+  residual_risk: >
+    The list is not exhaustive. A novel instruction can pass the scanner.
+    The privacy officer still reads the draft.
+
+risk_assessment:
+  methodology: "Qualitative likelihood and impact for this starter, assessed 28 October 2026. Not the DPIA of a named project, and not a score on the ICO likelihood and severity matrix."
+  date_assessed: "2026-10-28"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the brief approves the DPIA, accepts residual risk, or says consultation is unnecessary"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions always raise"
+        - "Injection phrases are recorded, removed from the copied section, and not followed"
+        - "approved, signed_off, and residual_risk_accepted stay false"
+      residual_risk: "Low"
+      owner: "Privacy officer"
+    - id: "R2"
+      risk: "A screening result is treated as a decision that Article 35 does or does not require a DPIA"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "dpia_required stays null"
+        - "A recorded no on every list is described as not a decision"
+        - "An ICO exception is not applied"
+      residual_risk: "Medium"
+      owner: "Privacy officer"
+    - id: "R3"
+      risk: "A high residual flag is treated as a sent Article 36 consultation, or a low residual is treated as a decision not to consult"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "article_36_consultation_required stays null"
+        - "send_prior_consultation always raises"
+        - "The draft quotes both Article 36(1) and the ICO page and does not reconcile them"
+      residual_risk: "Medium"
+      owner: "Privacy officer"
+    - id: "R4"
+      risk: "Pre-filled inventory text is treated as the project team's screening answer, or a disabled manifest tool is treated as meaningful human involvement"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Screening answers are not inferred"
+        - "Copied fields are marked"
+        - "meaningful_human_involvement_inferred stays false"
+      residual_risk: "Medium"
+      owner: "Project owner"
+    - id: "R5"
+      risk: "The pinned Article 35, Article 36, or Articles 22A to 22D text drifts, or the ICO pages are updated while the DUAA review banner is still up"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Sources are pinned on 28 October 2026"
+        - "Commencement is stated, including S.I. 2026/82 regulation 2(j) and regulation 5"
+        - "After the freshness window, sources_stale is true"
+      residual_risk: "Medium"
+      owner: "Privacy officer"
+    - id: "R6"
+      risk: "A UK identifier reaches a later model because the draft was treated as anonymised"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 propose() is called"
+        - "Raw identifier values are not stored"
+        - "output_is_anonymised stays false"
+      residual_risk: "High"
+      owner: "Privacy officer"
+
+logging_and_audit:
+  description: "This starter writes no log. The draft JSON is the record of the run."
+  logged_events:
+    - event: "Draft produced"
+      data_logged:
+        - "Project name after redaction"
+        - "Screening result code"
+        - "Article 22 screen result code"
+        - "Whether injection was detected"
+        - "Whether sources were stale"
+        - "Experiment 08 finding counts, not the raw values"
+      retention: "Not persisted by this starter. A deployment chooses its own retention."
+  log_destination:
+    primary: "Stdout or the path passed to --output"
+    secondary: "None"
+    note: "Do not log the unredacted brief."
+  audit_trail:
+    - "The checksum covers the draft before any external attestation"
+    - "actions_taken is an empty list"
+    - "An external attestation, if a person outside the agent records one, has effect none"
+
+kill_switch:
+  description: "Stop calling assess(). Turn off the Copilot Studio agent. Remove any later connector."
+  methods:
+    - method: "Do not invoke the topic or the skill"
+      action: "The draft is not produced"
+      time_to_effect: "Immediate"
+      who_can_activate: "Privacy officer or the person who published the agent"
+    - method: "Unpublish the Copilot Studio agent"
+      action: "The channel stops answering"
+      time_to_effect: "As soon as the tenant applies it"
+      who_can_activate: "The environment administrator"
+    - method: "Power Platform DLP, if a connector is added later"
+      action: "Block the connector. This starter has none"
+      time_to_effect: "As soon as the policy applies"
+      who_can_activate: "The environment administrator"
+  escalation_contacts:
+    - role: "Privacy officer"
+      contact: "privacy-officer@example.com"
+
+review:
+  last_review_date: "2026-10-28"
+  next_review_date: "2027-04-28"
+  review_frequency: "Six months, and sooner if Article 35, Article 36, Articles 22A to 22D, or the ICO DPIA pages change"
+  reviewer: "Privacy officer"
+  review_triggers:
+    - "A change to UK GDPR Article 35 or Article 36"
+    - "A regulation made under Article 22D"
+    - "The ICO replacing the DPIA pages that are currently marked under review"
+    - "A change to Experiment 08 that this draft calls"
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+
+assumptions:
+  description: "These are unverified for a deployment. The starter does not rely on them to produce a draft."
+  items:
+    - id: "A1"
+      assumption: "A deployment that adds a model will run it in the UK and will not send the unredacted brief."
+      section: "data_residency"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The organisation has decided who may approve a DPIA. This manifest names the privacy officer. It does not know the organisation's scheme of delegation."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "No Article 22D regulations have been made that change the four Article 22C(2) measures. None were read on 28 October 2026."
+      section: "automated_decision"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The ICO pages opened on 28 October 2026 are still the pages a controller would use. Each page says the guidance is under review because of the Data (Use and Access) Act."
+      section: "sources"
+      verify_on_deployment: true
