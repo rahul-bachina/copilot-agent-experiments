@@ -256,7 +256,7 @@ prompt_injection:
   controls:
     - control: "Closed phrase list"
       description: "KYC instructions are recorded, including when hidden in a comment, after a form feed, after blank lines, or between zero-width characters."
-      implementation: "src/injection.py. followed is forced false."
+      implementation: "src/kyc_injection.py. followed is forced false."
     - control: "Prohibited payload keys"
       description: "Keys such as risk_rating, onboard, and documents_confirmed are stripped from the JSON before the checklist is built."
       implementation: "src/review.py"
