@@ -1,0 +1,55 @@
+{
+  "tools": [
+    {
+      "name": "build_evidence_pack",
+      "implementation": "build_pack",
+      "reads": [
+        "one synthetic request",
+        "pack type",
+        "authorised scopes",
+        "search period",
+        "as-of date",
+        "Experiment 12 intake()"
+      ],
+      "writes": false,
+      "sends": false,
+      "releases": false,
+      "accepts_into_queue": false,
+      "persists_file_body": false,
+      "applies_exemption": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_export_approval",
+      "implementation": "record_export_approval",
+      "reads": ["draft evidence pack"],
+      "writes": false,
+      "sends": false,
+      "releases": false,
+      "accepts_into_queue": false,
+      "persists_file_body": false,
+      "applies_exemption": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Evidence pack approver"
+    },
+    {
+      "name": "produce_export_index",
+      "implementation": "produce_export",
+      "reads": ["approved draft"],
+      "writes": false,
+      "sends": false,
+      "releases": false,
+      "accepts_into_queue": false,
+      "persists_file_body": false,
+      "applies_exemption": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Evidence pack approver"
+    }
+  ]
+}
