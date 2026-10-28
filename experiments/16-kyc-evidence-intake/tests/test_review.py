@@ -196,7 +196,13 @@ def test_relationship_end_arithmetic_is_not_a_deletion_instruction():
     assert record["deletion_performed"] is False
     assert record["instruction_to_delete"] is False
     assert record["instruction_to_retain"] is False
+    assert "ten_year_ceiling_words" not in record
+    assert "paragraph (3)(b)(i)" in record["reg40_4_words"]
     assert record["ten_year_date_calculated"] is False
+    question = next(item["text"] for item in draft["reviewer_questions"] if item["id"] == "q_record_keeping")
+    assert "paragraph (3)(b)(i)" in question
+    assert "does not limit every record under regulation 40" in question
+    assert "ceiling" not in question.lower()
     assert record["freshness_window_is_this_period"] is False
     ongoing = _draft()
     assert ongoing["record_keeping"]["period_begun"] is False
