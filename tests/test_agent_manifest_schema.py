@@ -762,6 +762,58 @@ class TestExperiment16Manifest:
         assert experiment_16_manifest["agent"]["id"] == "exp-16-kyc-evidence-intake"
 
 
+class TestExperiment17Manifest:
+    """Test the Experiment 17 invoice exception-triage manifest."""
+
+    @pytest.fixture
+    def experiment_17_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "17-invoice-exception-triage" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_17_manifest):
+        """Experiment 17 manifest should be valid."""
+        validate(instance=experiment_17_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_17_manifest):
+        """Experiment 17 should be autonomy level A1, not above."""
+        level = experiment_17_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_17_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_17_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_17_manifest):
+        """Experiment 17 should have all high-risk actions disabled."""
+        high_risk = experiment_17_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_17_manifest):
+        """Nothing is posted, paid, or written to a finance system."""
+        assert experiment_17_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_17_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_ap_reviewer_approves_the_resolution(self, experiment_17_manifest):
+        """The catalogue checkpoint is the AP reviewer, and it is mandatory."""
+        points = experiment_17_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"].startswith("Approve, return"))
+        assert decision["approver"] == "AP reviewer"
+        assert decision["mandatory"] is True
+        assert experiment_17_manifest["agent"]["id"] == "exp-17-invoice-exception-triage"
+
+
 class TestExperiment18Manifest:
     """Test the Experiment 18 evidence pack builder manifest."""
 

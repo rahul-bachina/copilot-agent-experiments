@@ -1,0 +1,486 @@
+{
+  "label": "DRAFT FOR AP REVIEW",
+  "catalogue_id": "F004",
+  "experiment_id": "exp-17-invoice-exception-triage",
+  "autonomy": "A1",
+  "case_id": "syn-harbour-test-council-001",
+  "synthetic": true,
+  "as_of": "2026-10-28",
+  "sources_pinned_on": "2026-10-28",
+  "sources_stale": false,
+  "any_document_stale": false,
+  "gateway_rules_stale": false,
+  "rules_current": true,
+  "stale_after_days": 90,
+  "match": {
+    "type": "three_way",
+    "failed": true,
+    "stated_codes_adopted": false
+  },
+  "exceptions": [
+    "bank_detail_change",
+    "price_variance"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "class": "bank_detail_change",
+      "detail": "The invoice text contains a bank-detail change phrase. The account value is not recorded."
+    },
+    {
+      "id": "E2",
+      "class": "price_variance",
+      "detail": "Unit price 600 pence against purchase order 500 pence. Difference 100 pence. Tolerance 0 pence."
+    },
+    {
+      "id": "E3",
+      "class": "price_variance",
+      "detail": "Net 6000 pence against purchase order 5000 pence. Difference 1000 pence. Tolerance 0 pence."
+    }
+  ],
+  "duplicate_confirmed": false,
+  "resolution": {
+    "code": "route_to_separate_bank_verification",
+    "primary_class": "bank_detail_change",
+    "also_present": [
+      "price_variance"
+    ],
+    "draft_only": true,
+    "approved_by_reviewer": false,
+    "executed": false,
+    "must_not": [
+      "post",
+      "approve",
+      "hold",
+      "pay",
+      "change_supplier_bank_details",
+      "send"
+    ],
+    "asks_are_not_sent": true,
+    "text": "Route the bank-detail flag to the bank-detail verifier. Do not pay, and do not change the supplier bank record, on the strength of this draft.",
+    "reasons": [
+      "E1",
+      "E2",
+      "E3"
+    ]
+  },
+  "prompt_payment": {
+    "duty_decided": false,
+    "invoice_valid_decided": false,
+    "invoice_undisputed_decided": false,
+    "payment_instructed": false,
+    "notification_sent": false,
+    "pcr_2015_reg_113_in_force": false,
+    "pcr_2015_reg_113_revoked_on": "2025-02-24",
+    "revocation": "The Public Contracts Regulations 2015 are recorded on legislation.gov.uk as revoked on 24 February 2025 by the Procurement Act 2023, Schedule 11, paragraph 5.",
+    "savings_not_encoded": "SI 2024/716 regulations 5 and 6",
+    "act_sections_in_force_on": "2025-02-24",
+    "section_67_not_encoded": true,
+    "section_73_text_not_encoded": true,
+    "buyer_kind": "contracting_authority",
+    "exceptions_stated": [],
+    "unrecognised_exceptions": 0,
+    "last_day_of_period": "2026-10-30",
+    "period_start": "2026-10-01",
+    "start_reason": "day_invoice_received",
+    "status": "arithmetic_only",
+    "rely_on_clock": false,
+    "receipt_date_in_invoice_ignored": false,
+    "section": "68",
+    "quote": "Any sum due to be paid under the public contract by the contracting authority must be paid before the end of the period of 30 days beginning with the day the invoice is received, or if later the day the payment falls due in accordance with the invoice.",
+    "invalid_or_disputed_quote": "Subsection (2) does not apply if the contracting authority considers the invoice invalid, or disputes the invoice.",
+    "notify_quote": "On receiving an invoice, the contracting authority must notify the payee without undue delay if it considers the invoice invalid or disputes it.",
+    "period_length_days": 30,
+    "counting": "30 days beginning with the start date. The last day of that period is start plus 29 days.",
+    "note": "Arithmetic on the dates supplied. Not a finding that a sum is due, that the invoice is valid, or that the invoice is undisputed. Nothing is paid."
+  },
+  "vat_invoice": {
+    "notice": "VAT Notice 700/21",
+    "sections": [
+      "2.4",
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.4",
+      "4.5"
+    ],
+    "decides_input_tax": false,
+    "simplified_invoice_may_apply": true,
+    "simplified_ceiling_pence": 25000,
+    "ceiling_applied": true,
+    "currency_converted": false,
+    "full_invoice_list_applied": false,
+    "missing_fields": [],
+    "supplier_name_matches_master": true,
+    "supplier_vat_matches_master": true,
+    "vat_arithmetic": "within_one_penny",
+    "issue_against_section_3_1": "not_checked",
+    "cash_discount_stated": true,
+    "cash_discount_absence_is_not_a_gap": true,
+    "retention_quote": "Generally, you must keep all your business records for VAT purposes for at least 6 years.",
+    "destruction_date_calculated": false,
+    "reasons": [],
+    "quotes": {
+      "section_4_1": "You must show the following details on any VAT invoices you issue.",
+      "section_4_5": "If you're not a retailer and the total value of your supply does not exceed \u00a3250 you may issue your customer with a simplified invoice.",
+      "section_3_1": "Normally you must issue a VAT invoice within 30 days of the date you make the supply.",
+      "section_3_2": "The VAT invoices you receive are the primary evidence for you to recover VAT you have incurred as input tax."
+    }
+  },
+  "minimum_information": {
+    "section": "68(9) and 88(7)",
+    "quote": "The minimum required information is the name of the invoicing party, a description of the goods, services or works supplied, the sum requested, and a unique identification number.",
+    "fields": [
+      {
+        "field": "supplier_name",
+        "present": true,
+        "decides_validity": false
+      },
+      {
+        "field": "description",
+        "present": true,
+        "decides_validity": false
+      },
+      {
+        "field": "sum_requested",
+        "present": true,
+        "decides_validity": false
+      },
+      {
+        "field": "invoice_number",
+        "present": true,
+        "decides_validity": false
+      }
+    ],
+    "valid_decided": false,
+    "electronic_form_checked": false
+  },
+  "extracted": {
+    "invoice_number": "SYN-INV-1001",
+    "invoice_date": "2026-10-01",
+    "time_of_supply": "2026-10-01",
+    "date_of_issue": null,
+    "supplier_name": "North Quay Supplies Ltd",
+    "supplier_name_present": true,
+    "supplier_address_present": true,
+    "supplier_vat": "GB999999999",
+    "supplier_vat_present": true,
+    "supplier_vat_status": "stored_shape_only",
+    "customer_name": "Harbour Test Council",
+    "customer_name_present": true,
+    "customer_address_present": true,
+    "po_number": "SYN-PO-44",
+    "po_number_present": true,
+    "description_present": true,
+    "description": "Synthetic stationery",
+    "quantity": 10,
+    "unit_price_pence": 600,
+    "net_pence": 6000,
+    "vat_rate_percent": 20,
+    "vat_amount_pence": 1200,
+    "gross_pence": 7200,
+    "currency": "GBP",
+    "currency_labelled": true,
+    "cash_discount_stated": true,
+    "field_file_ids": {
+      "invoice_number": "inv-1",
+      "invoice_date": "inv-1",
+      "time_of_supply": "inv-1",
+      "supplier_name": "inv-1",
+      "supplier_address": "inv-1",
+      "supplier_vat": "inv-1",
+      "customer_name": "inv-1",
+      "customer_address": "inv-1",
+      "po_number": "inv-1",
+      "description": "inv-1",
+      "quantity": "inv-1",
+      "unit_price": "inv-1",
+      "net": "inv-1",
+      "vat_rate": "inv-1",
+      "vat_amount": "inv-1",
+      "gross": "inv-1",
+      "currency": "inv-1",
+      "cash_discount": "inv-1",
+      "bank_fingerprint": "inv-1"
+    },
+    "bank_fingerprints": [
+      "master-account-1"
+    ],
+    "bank_fingerprint_unsafe": false,
+    "bank_phrases": [
+      "update the bank details"
+    ],
+    "receipt_date_in_invoice_ignored": false,
+    "values_of_bank_accounts_recorded": false
+  },
+  "document_intake": {
+    "label": "DRAFT FOR INTAKE REVIEW",
+    "catalogue_id": "O001",
+    "experiment_id": "exp-12-document-intake",
+    "autonomy": "A1",
+    "batch_id": "syn-harbour-test-council-001",
+    "as_of": "2026-10-28",
+    "catalogue_pinned_on": "2026-10-27",
+    "catalogue_age_days": 1,
+    "catalogue_stale": false,
+    "stale_after_days": 90,
+    "any_document_stale": false,
+    "any_document_not_current": false,
+    "gateway_rules_stale": false,
+    "rules_current": true,
+    "model_called": false,
+    "network_called": false,
+    "gateway": {
+      "experiment_id": "exp-08-uk-pii-redaction-gateway",
+      "catalogue_id": "O005",
+      "called": true,
+      "files_scanned": 1,
+      "output_is_anonymised": false,
+      "agent_may_release": false,
+      "reversible_requested": false,
+      "model_suggestions_applied": false
+    },
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "permitted_purpose": null,
+    "requested_purpose": {
+      "id": "general_records",
+      "label": "General records filing",
+      "in_catalogue": true,
+      "rejected": false,
+      "preview_only": true,
+      "downstream_catalogue_id": null
+    },
+    "confirmation": null,
+    "reviewer_decision": null,
+    "review": null,
+    "routing": {
+      "status": "awaiting_file_and_purpose_confirmation",
+      "purpose_id": null,
+      "downstream_catalogue_id": null,
+      "downstream_note": "The user has not confirmed a purpose.",
+      "handed_off": false,
+      "blocked_reasons": [],
+      "warnings": []
+    },
+    "actions_taken": [],
+    "flags": {
+      "accepted_into_queue": false,
+      "production_record_written": false,
+      "external_sent": false,
+      "underlying_matter_approved": false,
+      "underlying_matter_rejected": false,
+      "redacted_text_released": false,
+      "output_is_anonymised": false,
+      "purpose_taken_from_document": false,
+      "files_confirmed_by_document": false,
+      "handed_off": false
+    },
+    "prompt_injection": {
+      "detected": false,
+      "followed": false,
+      "zero_width_removed": 0,
+      "signals": []
+    },
+    "prohibited_payload_keys": [],
+    "files": [
+      {
+        "file_id": "inv-1",
+        "filename": "invoice.txt",
+        "media_type": "text/plain",
+        "read_status": "read",
+        "sha256": "34b3452ddd8d63ae9eed06681978ed7cafa710e5f9f35f02046c02a148877204",
+        "checksum_supplied": false,
+        "checksum_matches": null,
+        "char_count": 534,
+        "document_date": "2026-10-01",
+        "date_status": "within_window",
+        "age_days": 27,
+        "suggested_class": "invoice",
+        "candidate_classes": [
+          {
+            "id": "invoice",
+            "label": "Invoice or receipt",
+            "keywords_found": [
+              "invoice number"
+            ]
+          }
+        ],
+        "markers_found": [
+          "invoice number"
+        ],
+        "duplicate_of": null,
+        "pii": {
+          "called": true,
+          "gateway": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "caller": "exp-12-document-intake",
+          "finding_count": 0,
+          "entity_types": [],
+          "rules_pinned_on": "2026-10-26",
+          "rules_stale": false,
+          "model_assist": "off",
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "input_sha256": "34b3452ddd8d63ae9eed06681978ed7cafa710e5f9f35f02046c02a148877204"
+        },
+        "content_recorded": false,
+        "injection_scanned": true
+      }
+    ],
+    "checklist_preview": {
+      "purpose_id": "general_records",
+      "downstream_catalogue_id": null,
+      "downstream_note": "No specialist catalogue row. Filing is still a person's step.",
+      "preview_only": true,
+      "items": [],
+      "complete": true,
+      "sufficient": false
+    },
+    "checklist": null,
+    "human_approval": {
+      "files_and_purpose": {
+        "required": true,
+        "approver": "Intake user",
+        "recorded": false
+      },
+      "routing": {
+        "required": true,
+        "approver": "Intake reviewer",
+        "recorded": false
+      },
+      "release_of_redacted_text": {
+        "required": true,
+        "approver": "Privacy reviewer",
+        "recorded": false,
+        "performed_by_this_agent": false
+      }
+    },
+    "limitations": [
+      "This draft does not confirm the files or the permitted purpose.",
+      "A keyword class is not a decision about what the document is.",
+      "A complete checklist is phrase presence. It is not a finding that the pack is sufficient.",
+      "This starter reads text/plain only. Another media type is not_read, which is a gap, not a clean result.",
+      "A file over 20,000 characters is not scanned. An instruction in it is not detected.",
+      "UK identifier redaction is Experiment 08. The output is not anonymised. Names, email addresses, and telephone numbers are not detected.",
+      "The file body is not copied into this draft. A filename is stored as supplied.",
+      "The 90-day window is a stale flag for this starter. It is not a statutory retention period.",
+      "B004, B007, UK11, and UK09 are labels. They are not called.",
+      "No model was called."
+    ]
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": [
+      {
+        "file_id": "inv-1",
+        "phrase": "pay this invoice",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "file_id": "inv-1",
+        "phrase": "update the bank details",
+        "hidden_in": "html_comment",
+        "followed": false
+      }
+    ]
+  },
+  "prohibited_keys_removed": [],
+  "bank_detail_change": true,
+  "bank_route_acknowledged": false,
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "flags": {
+    "invoice_posted": false,
+    "invoice_approved": false,
+    "invoice_held": false,
+    "invoice_paid": false,
+    "supplier_bank_details_changed": false,
+    "bank_details_verified": false,
+    "external_sent": false,
+    "production_record_written": false,
+    "resolution_executed": false,
+    "duplicate_confirmed": false,
+    "invoice_valid_decided": false,
+    "invoice_undisputed_decided": false,
+    "purpose_taken_from_document": false
+  },
+  "human_approval": {
+    "resolution": {
+      "required": true,
+      "approver": "AP reviewer",
+      "recorded": false,
+      "decision": null
+    },
+    "bank_route": {
+      "required": true,
+      "approver": "Bank-detail verifier",
+      "recorded": false,
+      "changes_bank_details": false,
+      "verifies_bank_details": false
+    },
+    "stale_material": {
+      "required": false,
+      "approver": "AP reviewer",
+      "recorded": false
+    }
+  },
+  "sources": [
+    {
+      "id": "vat-notice-700-21",
+      "title": "Record keeping (VAT Notice 700/21)",
+      "url": "https://www.gov.uk/guidance/record-keeping-for-vat-notice-70021",
+      "retrieved": "2026-10-28",
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "pa2023-s68",
+      "title": "Procurement Act 2023, section 68",
+      "url": "https://www.legislation.gov.uk/ukpga/2023/54/section/68",
+      "retrieved": "2026-10-28",
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "pa2023-s88",
+      "title": "Procurement Act 2023, section 88",
+      "url": "https://www.legislation.gov.uk/ukpga/2023/54/section/88",
+      "retrieved": "2026-10-28",
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "pcr2015-reg113",
+      "title": "Public Contracts Regulations 2015, regulation 113 (revoked)",
+      "url": "https://www.legislation.gov.uk/uksi/2015/102/regulation/113",
+      "retrieved": "2026-10-28",
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "pa2023-sch11",
+      "title": "Procurement Act 2023, Schedule 11, paragraph 5",
+      "url": "https://www.legislation.gov.uk/ukpga/2023/54/schedule/11",
+      "retrieved": "2026-10-28",
+      "applied_as_a_decision": false
+    }
+  ],
+  "limitations": [
+    "This draft does not post, approve, hold, or pay an invoice.",
+    "A recommended resolution is a draft. Approving it, outside this agent, still does not post or pay.",
+    "Supplier bank details are never changed here. A bank-detail flag is only a route to a separate verifier.",
+    "A fingerprint is a caller-supplied token. This starter does not read a sort code or an account number into the draft.",
+    "Experiment 12 inventories the file. Its purpose list has no accounts-payable purpose. The call uses general_records as a preview.",
+    "UK identifier spans come from Experiment 08, through Experiment 12. The text is not anonymised.",
+    "Labelled lines only. A price written in a sentence, or after a form feed, is not extracted.",
+    "One invoice line. A second line is not matched.",
+    "The \u00a3250 figure is the simplified-invoice ceiling in VAT Notice 700/21 sections 4.4 and 4.5. It is not applied to a currency other than GBP, and no exchange rate is used.",
+    "The VAT number shape stored here is GB and nine digits. It is not an HMRC lookup and not a checksum.",
+    "Public Contracts Regulations 2015 regulation 113 is revoked. It is not applied. Saving provisions in SI 2024/716 regulations 5 and 6 were not encoded.",
+    "The 30-day figure is arithmetic on dates the caller typed. It is not a finding that a sum is due, or that an invoice is valid or undisputed.",
+    "The 90-day window is a freshness flag. It is not the six-year VAT record period in Notice 700/21 section 2.4.",
+    "No model was called."
+  ],
+  "blockers": []
+}

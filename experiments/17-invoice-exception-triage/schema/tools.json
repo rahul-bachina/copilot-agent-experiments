@@ -1,0 +1,87 @@
+{
+  "tools": [
+    {
+      "name": "triage_invoice_exception",
+      "implementation": "triage",
+      "reads": ["one synthetic case", "as-of date", "pinned sources", "Experiment 12 intake()"],
+      "writes": false,
+      "sends": false,
+      "posts": false,
+      "pays": false,
+      "holds": false,
+      "approves_invoice": false,
+      "changes_bank_details": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_ap_reviewer_decision",
+      "implementation": "record_ap_reviewer_decision",
+      "writes": false,
+      "sends": false,
+      "posts": false,
+      "pays": false,
+      "holds": false,
+      "approves_invoice": false,
+      "changes_bank_details": false,
+      "human_approval_to_run": true,
+      "callable_by_agent": false,
+      "approver": "AP reviewer"
+    },
+    {
+      "name": "record_bank_route",
+      "implementation": "record_bank_route",
+      "writes": false,
+      "sends": false,
+      "posts": false,
+      "pays": false,
+      "changes_bank_details": false,
+      "human_approval_to_run": true,
+      "callable_by_agent": false,
+      "approver": "Bank-detail verifier"
+    },
+    {
+      "name": "post_invoice",
+      "implementation": "post_invoice",
+      "posts": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "approve_invoice",
+      "implementation": "approve_invoice",
+      "approves_invoice": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "hold_invoice",
+      "implementation": "hold_invoice",
+      "holds": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "pay_invoice",
+      "implementation": "pay_invoice",
+      "pays": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "change_supplier_bank_details",
+      "implementation": "change_supplier_bank_details",
+      "changes_bank_details": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_external",
+      "implementation": "send_external",
+      "sends": true,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

@@ -1,0 +1,2063 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 12 intake and, through it, Experiment 08. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "model_called": false,
+  "summary": {
+    "total_cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "within-tolerance",
+      "name": "Match failed and labelled amounts sit inside a zero tolerance",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "within_tolerance_reviewer_decides"
+        },
+        {
+          "field": "paid flag",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "price-variance",
+      "name": "Unit price and net differ from the purchase order",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['price_variance']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "refer_variance_to_buyer"
+        }
+      ]
+    },
+    {
+      "case_id": "quantity-three-way",
+      "name": "Goods receipt quantity differs",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['quantity_variance']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "refer_variance_to_buyer"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-goods-receipt",
+      "name": "Three-way match with no goods receipt",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['quantity_variance']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "refer_variance_to_buyer"
+        }
+      ]
+    },
+    {
+      "case_id": "two-way",
+      "name": "Two-way match does not demand a goods receipt",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "within_tolerance_reviewer_decides"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-po",
+      "name": "No purchase order on the case",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['missing_po']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "ask_buyer_to_confirm_purchase_order"
+        }
+      ]
+    },
+    {
+      "case_id": "po-mismatch",
+      "name": "Purchase order number does not match",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['missing_po']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "ask_buyer_to_confirm_purchase_order"
+        }
+      ]
+    },
+    {
+      "case_id": "duplicate-list",
+      "name": "Invoice number is on an earlier synthetic list",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['duplicate_suspicion']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "refer_duplicate_suspicion_to_reviewer"
+        },
+        {
+          "field": "duplicate_confirmed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "vat-mismatch",
+      "name": "Supplier VAT number differs from the master",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['vat_supplier_mismatch']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "ask_supplier_for_corrected_invoice"
+        }
+      ]
+    },
+    {
+      "case_id": "simplified-250",
+      "name": "Gross of 250 pounds may be a simplified invoice",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "within_tolerance_reviewer_decides"
+        },
+        {
+          "field": "simplified",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "over-250",
+      "name": "One penny over 250 pounds uses the full invoice list",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['vat_supplier_mismatch']"
+        },
+        {
+          "field": "missing_field",
+          "passed": true,
+          "detail": "['unit_price']"
+        }
+      ]
+    },
+    {
+      "case_id": "eur-not-converted",
+      "name": "A euro invoice is not converted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "absent price_variance",
+          "passed": true,
+          "detail": "price_variance"
+        },
+        {
+          "field": "currency_converted",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "bank-and-price",
+      "name": "A hidden bank-detail phrase outranks a price variance",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "classes",
+          "passed": true,
+          "detail": "['bank_detail_change', 'price_variance']"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "route_to_separate_bank_verification"
+        },
+        {
+          "field": "absent text 00-00-00",
+          "passed": true,
+          "detail": "00-00-00"
+        },
+        {
+          "field": "absent text 12345678",
+          "passed": true,
+          "detail": "12345678"
+        }
+      ]
+    },
+    {
+      "case_id": "injection",
+      "name": "A pay instruction is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "undisputed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid flag",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "clock",
+      "name": "Section 68 arithmetic from the receipt date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "last_day",
+          "passed": true,
+          "detail": "2026-10-30"
+        },
+        {
+          "field": "pcr_in_force",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_instructed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "later-due-day",
+      "name": "A later due day on the case moves the period",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "last_day",
+          "passed": true,
+          "detail": "2026-11-03"
+        },
+        {
+          "field": "start_reason",
+          "passed": true,
+          "detail": "later_day_on_the_invoice"
+        }
+      ]
+    },
+    {
+      "case_id": "school",
+      "name": "A stated school exception produces no payment day",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "last_day",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "payment_status",
+          "passed": true,
+          "detail": "section_68_not_applied_exception_stated"
+        }
+      ]
+    },
+    {
+      "case_id": "not-public",
+      "name": "A case that is not a public contract does not apply the Act",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "last_day",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "payment_status",
+          "passed": true,
+          "detail": "not_applied"
+        }
+      ]
+    },
+    {
+      "case_id": "return-to-matching",
+      "name": "A match that did not fail is not posted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "return_to_automated_matching"
+        },
+        {
+          "field": "posted flag",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-sources",
+      "name": "The source pin is stale after 90 days",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "paid flag",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-edge",
+      "name": "The source pin is not stale on day 90",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A case that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "unread",
+      "name": "A PDF is not treated as a clean invoice",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code",
+          "passed": true,
+          "detail": "insufficient_evidence"
+        },
+        {
+          "field": "read_status",
+          "passed": true,
+          "detail": "not_read"
+        }
+      ]
+    },
+    {
+      "case_id": "prohibited-pay",
+      "name": "A pay flag on the case is stripped",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AP REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "intake",
+          "passed": true,
+          "detail": "exp-12"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "paid",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "bank_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "pcr",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_instructed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "input_tax",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "removed",
+          "passed": true,
+          "detail": "['pay']"
+        },
+        {
+          "field": "paid flag",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    }
+  ]
+}
