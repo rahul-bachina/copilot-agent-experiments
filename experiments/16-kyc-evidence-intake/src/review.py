@@ -293,7 +293,7 @@ def _record_keeping(customer: dict) -> dict:
         "minimum_period_words": QUOTES["reg40_3"],
         "occasional_transaction_words": QUOTES["reg40_3_a"],
         "relationship_end_words": QUOTES["reg40_3_b"],
-        "ten_year_ceiling_words": QUOTES["reg40_4"],
+        "reg40_4_words": QUOTES["reg40_4"],
         "ten_year_date_calculated": False,
         "deletion_performed": False,
         "instruction_to_delete": False,
@@ -855,8 +855,10 @@ def review(
             "q_record_keeping",
             "Regulation 40(3) sets a period of five years beginning when the relevant person "
             "knows, or has reasonable grounds to believe, that the occasional transaction is "
-            "complete or that the business relationship has come to an end. Paragraph (4) says "
-            "the records in paragraph (3)(b)(i) need not be kept for more than 10 years. "
+            "complete or that the business relationship has come to an end. Regulation 40(4) "
+            "says the relevant person is not required to keep the records referred to in "
+            "paragraph (3)(b)(i) for more than 10 years. That sentence applies only to those "
+            "records. It does not limit every record under regulation 40. "
             "This draft does not calculate a ten-year date and does not delete anything. "
             "The 90-day freshness flag is not this period. "
             + draft_basis_placeholder(working),
