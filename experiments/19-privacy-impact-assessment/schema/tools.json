@@ -1,0 +1,82 @@
+{
+  "tools": [
+    {
+      "name": "draft_dpia",
+      "implementation": "assess",
+      "reads": ["one synthetic project brief", "as-of date", "optional Experiment 03 inventory", "optional permissions manifest", "pinned extracts", "Experiment 08 propose()"],
+      "writes": false,
+      "sends": false,
+      "approves_assessment": false,
+      "accepts_residual_risk": false,
+      "sends_consultation": false,
+      "persists_brief": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_external_attestation",
+      "implementation": "record_external_attestation",
+      "reads": ["draft DPIA"],
+      "writes": false,
+      "sends": false,
+      "approves_assessment": false,
+      "accepts_residual_risk": false,
+      "sends_consultation": false,
+      "persists_brief": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Privacy officer, Data protection officer, or Project owner"
+    },
+    {
+      "name": "approve_assessment",
+      "implementation": "approve_assessment",
+      "writes": false,
+      "sends": false,
+      "approves_assessment": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "reject_assessment",
+      "implementation": "reject_assessment",
+      "writes": false,
+      "sends": false,
+      "approves_assessment": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "sign_off_assessment",
+      "implementation": "sign_off_assessment",
+      "writes": false,
+      "sends": false,
+      "approves_assessment": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "accept_residual_risk",
+      "implementation": "accept_residual_risk",
+      "accepts_residual_risk": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_prior_consultation",
+      "implementation": "send_prior_consultation",
+      "sends": false,
+      "sends_consultation": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_production_record",
+      "implementation": "write_production_record",
+      "writes": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

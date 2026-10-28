@@ -48,6 +48,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 16 | [KYC Evidence Intake Agent](experiments/16-kyc-evidence-intake/) | Draft a Money Laundering Regulations 2017 checklist for one synthetic customer file. The KYC reviewer confirms the documents and the purpose. Experiment 12 inventories the files. Autonomy A1. The agent does not approve, reject, onboard, rate, file a report, or send. | ✅ Starter |
 | 17 | [Invoice Exception Triage Agent](experiments/17-invoice-exception-triage/) | Draft a resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change is routed to a separate verifier first. Experiment 12 inventories the file. Autonomy A1. The agent does not post, approve, hold, pay, or change supplier bank details. | ✅ Starter |
 | 18 | [Evidence Pack Builder](experiments/18-evidence-pack-builder/) | Draft an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. Experiment 12 inventories in-scope items. Autonomy A1. The agent does not apply an exemption, disclose, write, or send. | ✅ Starter |
+| 19 | [Privacy Impact Assessment Assistant](experiments/19-privacy-impact-assessment/) | Draft a DPIA for one synthetic project brief against UK GDPR Article 35 and Articles 22A to 22D. The privacy officer approves the assessment. The project owner accepts residual risk. Experiment 08 proposes identifier redactions. Autonomy A1. The agent does not approve, reject, sign off, accept residual risk, or send a consultation. | ✅ Starter |
 
 ## Getting Started
 
@@ -171,6 +172,13 @@ python -m pytest tests/ -q
 python src/pack.py --input examples/sample_request.json --as-of 2026-10-28 \
   --pack-type sar_bundle --scopes case_file,correspondence \
   --search-from 2026-01-01 --search-to 2026-10-28
+
+# Experiment 19 needs no credentials either. The draft is deterministic.
+# Experiment 08 has to be present beside it. The assistant calls that gateway.
+cd ../19-privacy-impact-assessment
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/assess.py --input examples/sample_project.json --as-of 2026-10-28
 ```
 
 ## Repository Structure
@@ -211,7 +219,8 @@ copilot-agent-experiments/
     ├── 15-vulnerability-urgency-scanner/
     ├── 16-kyc-evidence-intake/
     ├── 17-invoice-exception-triage/
-    └── 18-evidence-pack-builder/
+    ├── 18-evidence-pack-builder/
+    └── 19-privacy-impact-assessment/
 ```
 
 ## Agent Governance

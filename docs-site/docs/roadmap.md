@@ -164,6 +164,16 @@ A draft index for one synthetic evidence pack. The evidence pack approver record
 
 </article>
 
+<article class="plan-card" id="l006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · L006 · Autonomy A1</p>
+
+## Privacy impact assessment assistant
+
+A draft DPIA for one synthetic project brief. It screens recorded answers against UK GDPR Article 35(1) and (3), the ICO list opened on 28 October 2026, and Articles 22A to 22D. The privacy officer approves the assessment. The project owner accepts residual risk. The agent does not decide that a DPIA is required, and it does not send a prior consultation. It can copy empty fields from [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) and calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md). [Read the briefing](experiments/19-privacy-impact-assessment.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

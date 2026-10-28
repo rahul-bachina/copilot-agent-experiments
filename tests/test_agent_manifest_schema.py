@@ -866,6 +866,60 @@ class TestExperiment18Manifest:
         assert experiment_18_manifest["agent"]["id"] == "exp-18-evidence-pack-builder"
 
 
+class TestExperiment19Manifest:
+    """Test the Experiment 19 privacy impact assessment manifest."""
+
+    @pytest.fixture
+    def experiment_19_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "19-privacy-impact-assessment" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_19_manifest):
+        """Experiment 19 manifest should be valid."""
+        validate(instance=experiment_19_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_19_manifest):
+        """Experiment 19 should be autonomy level A1, not above."""
+        level = experiment_19_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_19_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_19_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_19_manifest):
+        """Experiment 19 should have all high-risk actions disabled."""
+        high_risk = experiment_19_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_19_manifest):
+        """Nothing is sent or written to a DPIA register."""
+        assert experiment_19_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_19_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_privacy_officer_approves_the_assessment(self, experiment_19_manifest):
+        """The catalogue checkpoint is the privacy officer, and it is mandatory."""
+        points = experiment_19_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"] == "Approve the assessment")
+        assert decision["approver"] == "Privacy officer"
+        assert decision["mandatory"] is True
+        residual = next(point for point in points if point["action"] == "Accept residual risk")
+        assert residual["approver"] == "Project owner"
+        assert experiment_19_manifest["agent"]["id"] == "exp-19-privacy-impact-assessment"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

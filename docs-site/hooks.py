@@ -70,6 +70,9 @@ DIAGRAMS = {
     "experiments/18-evidence-pack-builder/docs/architecture_diagram.png": (
         "experiments/img/18-evidence-pack-architecture.png"
     ),
+    "experiments/19-privacy-impact-assessment/docs/architecture_diagram.png": (
+        "experiments/img/19-privacy-impact-assessment-architecture.png"
+    ),
 }
 
 
