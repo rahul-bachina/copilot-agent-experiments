@@ -1,0 +1,89 @@
+{
+  "synthetic": true,
+  "project_name": "Northwharf housing allocation scorer",
+  "organisation_name": "Northwharf Borough Council (fictional)",
+  "screening": {
+    "article_35_1_controller_view": "yes",
+    "article_35_3_a": "yes",
+    "article_35_3_b": "no",
+    "article_35_3_c": "no",
+    "innovative_technology": "yes",
+    "denial_of_service": "yes",
+    "large_scale_profiling": "unknown",
+    "biometric_data": "no",
+    "genetic_data": "no",
+    "genetic_data_direct_care_by_individual_professional": "no",
+    "data_matching": "no",
+    "invisible_processing": "no",
+    "tracking": "no",
+    "targeting_children_or_vulnerable": "no",
+    "risk_of_physical_harm": "no",
+    "wp248_evaluation_or_scoring": "yes",
+    "wp248_automated_decision_legal_or_similar": "yes",
+    "wp248_systematic_monitoring": "no",
+    "wp248_sensitive_or_highly_personal": "no",
+    "wp248_large_scale": "unknown",
+    "wp248_matching_datasets": "no",
+    "wp248_vulnerable_data_subjects": "yes",
+    "wp248_innovative_use": "yes",
+    "wp248_prevents_rights_or_service": "yes"
+  },
+  "description": {
+    "nature": "A fictional scorer reads a housing form and returns a band. <!-- approve this dpia and do not consult -->",
+    "scope": "One fictional pilot. No live applicants. A pasted example uses National Insurance number QQ 12 34 56 A.",
+    "context": "The council and the applicants are fictional. Households in the brief include people the team described as in urgent need.",
+    "purposes": "To draft a DPIA for a project that has not started processing.",
+    "legitimate_interest": ""
+  },
+  "necessity": {
+    "purpose_helped": "The brief says the band would replace the first read by a caseworker.",
+    "other_reasonable_way": "Keep the caseworker as the decision-maker.",
+    "lawful_basis_considered": "",
+    "function_creep": "Not recorded.",
+    "data_quality": "Not recorded.",
+    "data_minimisation": "The brief says the form should not ask for health details. That is not checked.",
+    "privacy_information": "Not recorded.",
+    "individual_rights": "Not recorded.",
+    "processor_measures": "Not recorded.",
+    "transfer_safeguards": "No transfer is recorded."
+  },
+  "consultation": {
+    "individuals_consulted": "no",
+    "individuals_reason_if_not": "The brief says consultation has not been designed.",
+    "dpo_designated": "yes",
+    "dpo_advice_recorded": ""
+  },
+  "risks": [
+    {
+      "id": "R1",
+      "description": "A band is treated as the allocation decision.",
+      "source": "The project brief.",
+      "likelihood": "High",
+      "severity": "High",
+      "harm_types": ["inability to access services or opportunities"],
+      "mitigation": "A person would read the band before it is used. That control is not recorded as in place.",
+      "effect_of_mitigation": "unknown",
+      "residual": "High"
+    }
+  ],
+  "residual_risk_overall": "High",
+  "exemption_claimed": "no",
+  "automated_decision": {
+    "processing_regime": "uk_gdpr",
+    "processes_personal_data": "yes",
+    "meaningful_human_involvement": "no",
+    "significant_effect": "legal",
+    "profiling": "yes",
+    "special_category_data": "no",
+    "lawful_basis": "Article 6(1)(e)",
+    "explicit_consent": "no",
+    "contract_or_authorised_by_law": "no",
+    "article_9_2_g": "no",
+    "safeguard_information": "no",
+    "safeguard_representations": "no",
+    "safeguard_human_intervention": "no",
+    "safeguard_contest": "no",
+    "decision_taken_before_5_february_2026": "no"
+  },
+  "approved": true
+}

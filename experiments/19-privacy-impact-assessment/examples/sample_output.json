@@ -1,0 +1,799 @@
+{
+  "label": "DRAFT FOR PRIVACY OFFICER REVIEW",
+  "catalogue_id": "L006",
+  "experiment": "19-privacy-impact-assessment",
+  "autonomy": "A1",
+  "document_status": "draft",
+  "approved": false,
+  "rejected": false,
+  "signed_off": false,
+  "residual_risk_accepted": false,
+  "prior_consultation_sent": false,
+  "dpia_required": null,
+  "article_36_consultation_required": null,
+  "lawful": null,
+  "determination": "not_a_legal_determination",
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "output_is_anonymised": false,
+  "agent_may_release": false,
+  "project_name": "Northwharf housing allocation scorer",
+  "organisation_name": "Northwharf Borough Council (fictional)",
+  "as_of": "2026-10-28",
+  "sources_pinned_on": "2026-10-28",
+  "sources_stale": false,
+  "stale_after_days": 90,
+  "screening": {
+    "screen_result": "article_35_3_recorded",
+    "reading": "At least one recorded answer matches a type Article 35(3) says shall in particular be required. That is the project's answer. It is not a decision that Article 35 applies, and a 'no' on the Article 35(1) view does not clear it.",
+    "indicated_on_recorded_answers": true,
+    "dpia_required": null,
+    "dpia_required_decided_by_this_tool": false,
+    "article_35_1": {
+      "recorded_view": "yes",
+      "quote": "Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data.",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/35"
+    },
+    "article_35_3": [
+      {
+        "id": "article_35_3_a",
+        "provision": "UK GDPR Article 35(3)",
+        "recorded_answer": "yes",
+        "statutory_text": "a systematic and extensive evaluation of personal aspects relating to natural persons which is based on automated processing, including profiling, and on which decisions are based that produce legal effects concerning the natural person or similarly significantly affect the natural person",
+        "triggers_list": true
+      },
+      {
+        "id": "article_35_3_b",
+        "provision": "UK GDPR Article 35(3)",
+        "recorded_answer": "no",
+        "statutory_text": "processing on a large scale of special categories of data referred to in Article 9(1), or of personal data relating to criminal convictions and offences referred to in Article 10",
+        "triggers_list": false
+      },
+      {
+        "id": "article_35_3_c",
+        "provision": "UK GDPR Article 35(3)",
+        "recorded_answer": "no",
+        "statutory_text": "a systematic monitoring of a publicly accessible area on a large scale",
+        "triggers_list": false
+      }
+    ],
+    "ico_list": [
+      {
+        "id": "innovative_technology",
+        "title": "Innovative technology",
+        "recorded_answer": "yes",
+        "combination_required": true,
+        "exception_recorded": null,
+        "status": "combination_recorded",
+        "question": "Processing involving the use of new technologies, or the novel application of existing technologies (including AI). The ICO says a DPIA is required where this is combined with any other criterion from the European guidelines."
+      },
+      {
+        "id": "denial_of_service",
+        "title": "Denial of service",
+        "recorded_answer": "yes",
+        "combination_required": false,
+        "exception_recorded": null,
+        "status": "recorded_yes",
+        "question": "Decisions about an individual's access to a product, service, opportunity or benefit which are based to any extent on automated decision-making (including profiling) or involve the processing of special-category data."
+      },
+      {
+        "id": "large_scale_profiling",
+        "title": "Large-scale profiling",
+        "recorded_answer": "unknown",
+        "combination_required": false,
+        "exception_recorded": null,
+        "status": "unknown",
+        "question": "Any profiling of individuals on a large scale."
+      },
+      {
+        "id": "biometric_data",
+        "title": "Biometric data",
+        "recorded_answer": "no",
+        "combination_required": true,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "Any processing of biometric data for the purpose of uniquely identifying an individual. The examples page and the when-page both say a DPIA is required where this is combined with another criterion from the European guidelines. The when-page's short heading does not repeat the unique-identification words. This question uses the examples-page wording."
+      },
+      {
+        "id": "genetic_data",
+        "title": "Genetic data",
+        "recorded_answer": "no",
+        "combination_required": true,
+        "exception_recorded": "no",
+        "status": "recorded_no",
+        "question": "Any processing of genetic data, other than that processed by an individual GP or health professional for the provision of health care direct to the data subject. The ICO says a DPIA is required where this is combined with another criterion from the European guidelines. This tool does not decide that the exception applies."
+      },
+      {
+        "id": "data_matching",
+        "title": "Data matching",
+        "recorded_answer": "no",
+        "combination_required": false,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "Combining, comparing or matching personal data obtained from multiple sources."
+      },
+      {
+        "id": "invisible_processing",
+        "title": "Invisible processing",
+        "recorded_answer": "no",
+        "combination_required": true,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "Processing of personal data that has not been obtained direct from the data subject, where the controller considers that compliance with Article 14 would prove impossible or involve disproportionate effort. The examples page cites Article 14.5(b). Article 14 was not opened. The ICO says a DPIA is required where this is combined with another criterion from the European guidelines."
+      },
+      {
+        "id": "tracking",
+        "title": "Tracking",
+        "recorded_answer": "no",
+        "combination_required": true,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "Processing which involves tracking an individual's geolocation or behaviour, including but not limited to the online environment. The when-page says a DPIA is required where this processing is combined with any of the criteria from the European guidelines. The examples page says that for geolocation data in particular."
+      },
+      {
+        "id": "targeting_children_or_vulnerable",
+        "title": "Targeting of children or other vulnerable individuals",
+        "recorded_answer": "no",
+        "combination_required": false,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "The use of the personal data of children or other vulnerable individuals for marketing purposes, profiling or other automated decision-making, or offering online services directly to children."
+      },
+      {
+        "id": "risk_of_physical_harm",
+        "title": "Risk of physical harm",
+        "recorded_answer": "no",
+        "combination_required": false,
+        "exception_recorded": null,
+        "status": "recorded_no",
+        "question": "Where the processing is of such a nature that a personal data breach could jeopardise the physical health or safety of individuals. The ICO page places square brackets around the word physical."
+      }
+    ],
+    "wp248_as_listed_on_the_ico_when_page": [
+      {
+        "id": "wp248_evaluation_or_scoring",
+        "criterion": "Evaluation or scoring.",
+        "recorded_answer": "yes"
+      },
+      {
+        "id": "wp248_automated_decision_legal_or_similar",
+        "criterion": "Automated decision-making with legal or similar significant effect.",
+        "recorded_answer": "yes"
+      },
+      {
+        "id": "wp248_systematic_monitoring",
+        "criterion": "Systematic monitoring.",
+        "recorded_answer": "no"
+      },
+      {
+        "id": "wp248_sensitive_or_highly_personal",
+        "criterion": "Sensitive data or data of a highly personal nature.",
+        "recorded_answer": "no"
+      },
+      {
+        "id": "wp248_large_scale",
+        "criterion": "Data processed on a large scale.",
+        "recorded_answer": "unknown"
+      },
+      {
+        "id": "wp248_matching_datasets",
+        "criterion": "Matching or combining datasets.",
+        "recorded_answer": "no"
+      },
+      {
+        "id": "wp248_vulnerable_data_subjects",
+        "criterion": "Data concerning vulnerable data subjects.",
+        "recorded_answer": "yes"
+      },
+      {
+        "id": "wp248_innovative_use",
+        "criterion": "Innovative use or applying new technological or organisational solutions.",
+        "recorded_answer": "yes"
+      },
+      {
+        "id": "wp248_prevents_rights_or_service",
+        "criterion": "Preventing data subjects from exercising a right or using a service or contract.",
+        "recorded_answer": "yes"
+      }
+    ],
+    "wp248_yes_count": 5,
+    "two_factors_usually_indicate": false,
+    "flags": [],
+    "rejected_keys": [],
+    "ico_pages_under_review": true,
+    "ico_banner": "Due to changes made by the Data (Use and Access) Act, this guidance is under review and may be subject to change.",
+    "sources": [
+      {
+        "name": "UK GDPR Article 35",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/35"
+      },
+      {
+        "name": "ICO, When do we need to do a DPIA?",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/when-do-we-need-to-do-a-dpia/"
+      },
+      {
+        "name": "ICO, Examples of processing likely to result in high risk",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/examples-of-processing-likely-to-result-in-high-risk/"
+      }
+    ],
+    "wp248_opened": false
+  },
+  "automated_decision_screen": {
+    "document_status": "draft",
+    "approved": false,
+    "determination": "not_a_legal_determination",
+    "lawful": null,
+    "screen_result": "safeguards_incomplete",
+    "flags": [
+      "article_22D_regulations_not_read",
+      "profiling_recorded_article_22A_2",
+      "article_22C_safeguards_incomplete"
+    ],
+    "missing_fields": [],
+    "recorded_facts": {
+      "processing_regime": "uk_gdpr",
+      "processes_personal_data": "yes",
+      "meaningful_human_involvement": "no",
+      "significant_effect": "legal",
+      "profiling": "yes",
+      "special_category_data": "no",
+      "lawful_basis": "Article 6(1)(e)",
+      "explicit_consent": "no",
+      "contract_or_authorised_by_law": "no",
+      "article_9_2_g": "no",
+      "safeguard_information": "no",
+      "safeguard_representations": "no",
+      "safeguard_human_intervention": "no",
+      "safeguard_contest": "no",
+      "decision_taken_before_5_february_2026": "no"
+    },
+    "commencement_note": "UK GDPR Article 22A, as published on legislation.gov.uk, is annotated as substituted for Article 22 on 19 June 2025 for specified purposes and on 5 February 2026 in so far as not already in force, by Data (Use and Access) Act 2025 sections 80(1) and 142(1) and (2)(h), and by S.I. 2026/82 regulation 2(j), with regulation 5. Section 80 of the Act carries the same commencement footnotes. Regulation 5 says the amendments made by section 80 and Schedule 6 do not apply to a decision taken before 5 February 2026 to which Article 22(3) of the UK GDPR, or section 14(1) or 50(2) of the Data Protection Act 2018, applied. This tool has not interpreted regulation 5, and it has not read any regulations made under Article 22D.",
+    "sources": [
+      {
+        "name": "DUAA 2025 section 80",
+        "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80"
+      },
+      {
+        "name": "UK GDPR Article 22A",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A"
+      },
+      {
+        "name": "UK GDPR Article 22B",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22B"
+      },
+      {
+        "name": "UK GDPR Article 22C",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22C"
+      },
+      {
+        "name": "UK GDPR Article 22D",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22D"
+      },
+      {
+        "name": "S.I. 2026/82 regulation 5",
+        "url": "https://www.legislation.gov.uk/uksi/2026/82/regulation/5/made"
+      }
+    ],
+    "actions_taken": [],
+    "reading": "Article 22C(1) applies where a significant decision is based entirely or partly on personal data and solely on automated processing. Article 22C(2) describes information, representations, human intervention, and contesting the decision. At least one is not recorded as in place. This is not a finding that the safeguard is absent in the real process."
+  },
+  "sections": [
+    {
+      "step": 1,
+      "title": "Identify whether a DPIA is being considered",
+      "article": "UK GDPR Article 35(1) and (3). The minimum contents are Article 35(7).",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "screening",
+          "text": "At least one recorded answer matches a type Article 35(3) says shall in particular be required. That is the project's answer. It is not a decision that Article 35 applies, and a 'no' on the Article 35(1) view does not clear it.",
+          "state": "screened_from_recorded_answers",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 2,
+      "title": "Describe the processing",
+      "article": "UK GDPR Article 35(7)(a): a systematic description of the envisaged processing operations and the purposes of the processing, including, where applicable, the legitimate interest pursued by the controller",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "nature",
+          "text": "A fictional scorer reads a housing form and returns a band.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "scope",
+          "text": "One fictional pilot. No live applicants. A pasted example uses National Insurance number [NINO-1].",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "context",
+          "text": "The council and the applicants are fictional. Households in the brief include people the team described as in urgent need.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "purposes",
+          "text": "To draft a DPIA for a project that has not started processing.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "legitimate_interest",
+          "text": "Not recorded in the project brief. This draft does not fill the gap.",
+          "state": "gap",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 3,
+      "title": "Consultation",
+      "article": "UK GDPR Article 35(2) and (9). The controller shall seek the advice of the data protection officer, where designated, when carrying out a data protection impact assessment.",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "individuals",
+          "text": "no",
+          "state": "recorded_answer",
+          "prefilled_from": null
+        },
+        {
+          "name": "individuals_reason_if_not",
+          "text": "The brief says consultation has not been designed.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "dpo_designated",
+          "text": "yes",
+          "state": "recorded_answer",
+          "prefilled_from": null
+        },
+        {
+          "name": "dpo_advice_recorded",
+          "text": "Not recorded in the project brief. This draft does not fill the gap.",
+          "state": "gap",
+          "prefilled_from": null
+        },
+        {
+          "name": "dpo_advice",
+          "text": null,
+          "state": "left_blank",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 4,
+      "title": "Necessity and proportionality",
+      "article": "UK GDPR Article 35(7)(b): an assessment of the necessity and proportionality of the processing operations in relation to the purposes",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "purpose_helped",
+          "text": "The brief says the band would replace the first read by a caseworker.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "other_reasonable_way",
+          "text": "Keep the caseworker as the decision-maker.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "lawful_basis_considered",
+          "text": "Not recorded in the project brief. This draft does not fill the gap.",
+          "state": "gap",
+          "prefilled_from": null
+        },
+        {
+          "name": "function_creep",
+          "text": "Not recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "data_quality",
+          "text": "Not recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "data_minimisation",
+          "text": "The brief says the form should not ask for health details. That is not checked.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "privacy_information",
+          "text": "Not recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "individual_rights",
+          "text": "Not recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "processor_measures",
+          "text": "Not recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        },
+        {
+          "name": "transfer_safeguards",
+          "text": "No transfer is recorded.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 5,
+      "title": "Risks to individuals",
+      "article": "UK GDPR Article 35(7)(c): an assessment of the risks to the rights and freedoms of data subjects referred to in paragraph 1",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "risks",
+          "text": "1 risk row or rows copied. This tool does not score the ICO matrix.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 6,
+      "title": "Measures",
+      "article": "UK GDPR Article 35(7)(d): the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "mitigations",
+          "text": "A mitigation string is a note of what the brief says. mitigation_in_place is false on every row.",
+          "state": "copied_from_brief",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    },
+    {
+      "step": 7,
+      "title": "Outcomes left for the privacy officer and the project owner",
+      "article": "ICO step 7 asks who approved the measures and the residual risk. Those names are left blank.",
+      "ico_step_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/how-do-we-do-a-dpia/",
+      "fields": [
+        {
+          "name": "sign_off",
+          "text": null,
+          "state": "left_blank",
+          "prefilled_from": null
+        }
+      ],
+      "approved": false
+    }
+  ],
+  "risks": [
+    {
+      "id": "R1",
+      "description": "A band is treated as the allocation decision.",
+      "source": "The project brief.",
+      "likelihood": "High",
+      "severity": "High",
+      "harm_types": [
+        {
+          "text": "inability to access services or opportunities",
+          "on_ico_step_5_list": true
+        }
+      ],
+      "mitigation": "A person would read the band before it is used. That control is not recorded as in place.",
+      "mitigation_in_place": false,
+      "effect_of_mitigation": "unknown",
+      "residual": "High",
+      "scored_by_this_tool": false,
+      "prefilled_from": null
+    }
+  ],
+  "prior_consultation": {
+    "code": "high_residual_recorded",
+    "article_36_1_quote": "The controller shall consult the Commission prior to processing where a data protection impact assessment under Article 35 indicates that the processing would result in a high risk in the absence of measures taken by the controller to mitigate the risk.",
+    "article_36_consultation_required": null,
+    "consultation_required_decided_by_this_tool": false,
+    "sent_by_agent": false,
+    "statutory_addressee": "the Commission",
+    "commission_note": "Article 35(4) and Article 36(1), as revised on legislation.gov.uk, say the Commission. The footnotes say the word was substituted on 30 September 2026 by S.I. 2026/386, Schedule 3, paragraph 41, brought into force by S.I. 2026/1015 regulation 2(c). Data (Use and Access) Act 2025 section 119, in force on the same day by that regulation, transfers the functions of the Information Commissioner to the Information Commission. An ICO news item dated 15 September 2026, updated 17 September 2026, says the organisation will continue to be known as the ICO. The ICO DPIA pages still say ICO, and each of them carries a banner that the guidance is under review because of the Data (Use and Access) Act.",
+    "ico_page_note": "The ICO page 'Do we need to consult the ICO?' says prior consultation is required where a DPIA identifies a high risk and you cannot reduce it, and that the focus is the residual risk after mitigating measures. It says that if the risk is no longer high, you need not consult. Article 36(1) uses different words: a high risk in the absence of measures taken to mitigate the risk. This tool does not reconcile those readings and does not decide that consultation is or is not required.",
+    "ico_consult_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/do-we-need-to-consult-the-ico/",
+    "email_on_the_ico_page_is_not_a_tool": "dpiaconsultation@ico.org.uk"
+  },
+  "sign_off": {
+    "measures_approved_by": null,
+    "residual_risks_accepted_by": null,
+    "dpo_advice": null,
+    "dpo_advice_accepted_or_overruled_by": null,
+    "individuals_views_reviewed_by": null,
+    "kept_under_review_by": null,
+    "prior_consultation_sent_by": null
+  },
+  "agent_sections": {
+    "present": true,
+    "autonomy_level_recorded": null,
+    "regulated_decision_enabled": null,
+    "meaningful_human_involvement_inferred": false,
+    "note": "A manifest that disables a regulated decision is not a finding of meaningful human involvement under Article 22A(1)(a). Screening answers are not copied from a manifest.",
+    "inventory_id": null,
+    "copied_fields": [],
+    "inventory_note": null
+  },
+  "prefill": {
+    "inventory": [],
+    "manifest": [],
+    "screening_inferred": false
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": [
+      {
+        "field": "description.nature",
+        "phrase": "approve this dpia",
+        "hidden_in": "html_comment",
+        "followed": false
+      },
+      {
+        "field": "description.nature",
+        "phrase": "do not consult",
+        "hidden_in": "html_comment",
+        "followed": false
+      }
+    ]
+  },
+  "stripped_keys": [
+    "approved"
+  ],
+  "redaction": {
+    "called": true,
+    "experiment": "08-uk-pii-redaction-gateway",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "reversible": false,
+    "model_suggestions_applied": false,
+    "fields": [
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "87cc5e5a1ac3c6b0987b2afc76f35196c4975b1730375d5f0f2b84313a4c3fa9",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "description.nature"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 1,
+        "entity_types": [
+          "nino"
+        ],
+        "input_sha256": "53c19f7620962beb90c6159e1cf8093d6fd7d084de55131be750a8d7b367ba37",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "description.scope"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "14ef6a0401b25437e5e7c3f63136f377f9b3299dabeeb1238b2da18e5278e838",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "description.context"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "3a932ffc2013e6cee29018759bd32e39b75a28f3e28a885f2385a31d96d30f09",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "description.purposes"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "a7dfd8f2ceb5ba0f58f8637d2d8720a83653c201af3410bf91f4956f018f9e94",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.purpose_helped"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "f2781210865acbfed0d1b5f058a39611e323df8f4ea8cb2f549c87a92c4fcfa4",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.other_reasonable_way"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "57a5c6d1c2072ccf944a4c14cee5663d49af430df5a67279d0c8ae2d5c7d85bc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.function_creep"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "57a5c6d1c2072ccf944a4c14cee5663d49af430df5a67279d0c8ae2d5c7d85bc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.data_quality"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "4de2e003cf429447ed97f04668ec5e2b66ddfb94ec3697306888aa7f171b46fc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.data_minimisation"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "57a5c6d1c2072ccf944a4c14cee5663d49af430df5a67279d0c8ae2d5c7d85bc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.privacy_information"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "57a5c6d1c2072ccf944a4c14cee5663d49af430df5a67279d0c8ae2d5c7d85bc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.individual_rights"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "57a5c6d1c2072ccf944a4c14cee5663d49af430df5a67279d0c8ae2d5c7d85bc",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.processor_measures"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "2a37d83edd0f646fda65f96299adce927ea574eecf710682db5af1bd0883439b",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "necessity.transfer_safeguards"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "be57c5f8a3caf94c77bef184a859c8e95c4d43b2389986ab26fc3169f2f046e8",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "consultation.individuals_reason_if_not"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "1e02906946f6aaeb1fa8aa2228af2eaffffb2b62aec62b8d6b67d8578b307985",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "risks[0].description"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "59a39d36ef93904e7833b85c960e92827458e82be7978dc73b6e6e2bc383fdd3",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "risks[0].source"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "c2cc092531f34af769fa66071fb6711f63a0e3667a101b0a1fa73d34dc179398",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "risks[0].mitigation"
+      },
+      {
+        "gateway": "exp-08-uk-pii-redaction-gateway",
+        "catalogue_id": "O005",
+        "output_is_anonymised": false,
+        "agent_may_release": false,
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "f3b3b20fa0a7ef167890e33c65b00940b6e80f0f108eeff3b60213a38a902ac2",
+        "rules_pinned_on": "2026-10-26",
+        "raw_values_logged": false,
+        "field": "project_name"
+      }
+    ]
+  },
+  "not_legal_advice": true,
+  "checksum": "7687270cf60a57c7990ec80f82d39e6924e09043486606088ad94fc90d5c3311"
+}
