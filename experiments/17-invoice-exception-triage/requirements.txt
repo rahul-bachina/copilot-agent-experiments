@@ -1,0 +1,5 @@
+# Experiment 17 has no runtime dependencies. Triage calls Experiment 12,
+# which calls Experiment 08, both in-process. Tests use pytest.
+# A clean environment can install just this file.
+
+pytest>=7.0.0

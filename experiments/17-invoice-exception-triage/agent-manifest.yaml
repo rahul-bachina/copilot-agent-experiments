@@ -1,0 +1,510 @@
+# Agent manifest: Invoice Exception Triage Agent
+# Experiment 17 — catalogue ID F004
+# Version: 0.1.0
+# Last reviewed: 2026-10-28
+# Next review: 2027-04-28
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-17-invoice-exception-triage"
+  name: "Invoice Exception Triage Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a resolution for one synthetic invoice that failed a 2-way or
+    3-way match. It classifies price variance, quantity variance, a missing
+    purchase order, duplicate suspicion, a VAT or supplier-detail mismatch,
+    and a bank-detail change. Autonomy A1. The AP reviewer approves the
+    resolution. A bank-detail change is routed to a bank-detail verifier
+    first. The agent never posts, approves, holds, or pays an invoice, and
+    never changes supplier bank details. Invoice inventory is Experiment 12.
+    UK identifiers are Experiment 08, called by that intake.
+  owner: "AP reviewer, with the bank-detail verifier for a bank-detail flag"
+  contact: "invoice-triage@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/17-invoice-exception-triage"
+
+autonomy:
+  level: "A1"
+  level_description: "The AP reviewer approves the recommended resolution. A bank-detail flag is a separate verifier's step."
+  constraints:
+    - "The agent only drafts. The AP reviewer approves, returns, or rejects the resolution."
+    - "The agent NEVER posts an invoice"
+    - "The agent NEVER approves an invoice for payment"
+    - "The agent NEVER holds an invoice"
+    - "The agent NEVER pays a supplier"
+    - "The agent NEVER changes supplier bank details"
+    - "A bank-detail change is always routed to a bank-detail verifier. The AP reviewer cannot approve the resolution until that route is recorded."
+    - "A sentence inside an invoice cannot pay, post, clear a stale date, or verify a bank account"
+    - "UK identifier detection is Experiment 08, through Experiment 12. This agent does not re-implement it."
+    - "All output is a draft and is marked for AP review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic invoice case"
+      description: "Invoice text, a purchase order, a goods receipt, and a supplier master the reviewer pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One case per invocation. No browsing of a ledger or a bank master."
+      justification: "The draft cannot classify the exception without the case the reviewer supplied"
+      data_categories:
+        - "Invoice text that may contain a supplier name and a VAT number"
+        - "A bank fingerprint token, not the account number"
+        - "UK identifiers, if a person pasted them into the invoice"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the text. The draft stores shaped fields and hashes, not the body."
+
+    - resource: "User-supplied run parameters"
+      description: "As-of date, optional stale window, optional rules date, receipt date, and tolerances"
+      access_level: "read"
+      scope: "Fields passed for this run. A date inside the invoice is not the receipt date."
+      justification: "The stale comparison and the 30-day arithmetic need dates the reviewer typed outside the invoice body"
+      may_contain_personal_data: false
+
+    - resource: "Pinned source notes"
+      description: "The VAT Notice 700/21 and Procurement Act extracts in src/rules.py, pinned 2026-10-28"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The checklist has to be reproducible without a network call"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 12 document intake"
+      description: "Called in-process via intake(), which calls Experiment 08 propose(). This agent does not copy either implementation."
+      access_level: "read"
+      scope: "The same files the reviewer supplied. Purpose preview general_records. Caller remains Experiment 12's caller id."
+      justification: "The catalogue already has an inventory and a UK identifier gateway. Calling them avoids a second, drifting extractor."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Neither called module persists the text. This draft keeps entity types and hashes, not the raw values."
+
+  never_access:
+    - resource: "Accounts-payable ledgers, payment systems, and supplier bank masters"
+      reason: "A fingerprint token is not a lookup. The agent does not read or write a bank account."
+    - resource: "Mailboxes, SharePoint libraries, and Dataverse"
+      reason: "The agent does not collect invoices itself and does not write them back."
+    - resource: "HMRC, Companies House, and bank directories"
+      reason: "The VAT shape is not a lookup. Experiment 08 does not call those services, and this agent does not either."
+    - resource: "The Experiment 08 reversible token vault"
+      reason: "The intake caller does not pass reversible=True and this experiment does not store a map."
+
+tools:
+  allowed:
+    - tool: "Invoice exception triage"
+      provider: "Local Python (src/triage.py, src/rules.py, src/ap_injection.py)"
+      action: "Classify the exception, compare labelled amounts, draft a resolution code"
+      access_level: "read"
+      scope: "The single case supplied for this run. No network. No model."
+      justification: "Classes, pence differences, and the 30-day arithmetic are deterministic. A language model must not set them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Document inventory"
+      provider: "Experiment 12 (experiments/12-document-intake, function intake)"
+      action: "Hash the file, suggest a keyword class, flag injection and stale dates, call Experiment 08"
+      access_level: "read"
+      scope: "One batch built from this case. Purpose preview general_records. Not a confirmation."
+      justification: "The catalogue already has a document intake. This experiment does not ship a second one."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the triage JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run. Not called by this starter."
+      justification: "Optional narrative. Classes, amounts, and the empty payment flags stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python (src/triage.py)"
+      action: "Reject a result that posts, pays, holds, or changes a bank record"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that pays or changes a bank record is not a valid result of triage()"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the reviewer. Filing it, if a person
+      chooses to, is done in the organisation's own system. record_ap_reviewer_decision
+      and record_bank_route update a copy of the JSON in memory. They do not
+      post an invoice or change a bank record. The agent must not call them.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. A question for the supplier or the buyer is text in the draft.
+      The agent does not message a supplier, a payee, HMRC, or a bank.
+      Section 68(4) requires a contracting authority to notify a payee without
+      undue delay where it considers an invoice invalid or disputed. This
+      agent does not send that notice.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject the invoice. The AP reviewer
+      approves the recommended resolution. triage() leaves that decision
+      empty. Approving the resolution still does not approve the invoice
+      for payment. approve_invoice raises TriageForbidden.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Whether an invoice is valid or undisputed, whether input tax can be
+      recovered, whether a duplicate is made out, and whether a Procurement
+      Act payment duty applies are reviewer decisions. This agent shows
+      arithmetic and a field checklist. It does not take them. Regulation
+      113 of the Public Contracts Regulations 2015 is revoked and is not applied.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a finance system, Dataverse, SharePoint,
+      or any other production record. post_invoice and write_production_record
+      raise TriageForbidden. change_supplier_bank_details raises.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent has no send tool. send_external raises. An instruction in
+      the invoice to pay the supplier is recorded and is not followed.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment can be instructed. pay_invoice raises. A phrase such as 'pay this invoice' is an injection signal, not a payment."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Post the invoice"
+      rationale: "post_invoice always raises, including after a reviewer decision has been recorded in the JSON."
+    - enabled: false
+      action_name: "Hold the invoice"
+      rationale: "hold_invoice always raises. Duplicate suspicion is not a hold."
+    - enabled: false
+      action_name: "Change supplier bank details"
+      rationale: "change_supplier_bank_details always raises. A bank-detail flag is a route to a verifier, not a write."
+
+human_approval:
+  description: >
+    The AP reviewer approves the recommended resolution. A bank-detail
+    change must be acknowledged by a bank-detail verifier first. Recording
+    either step in the Python functions does not post, pay, or change a
+    bank record. The agent has no tool that records the steps.
+
+  approval_points:
+    - action: "Approve, return, or reject the recommended resolution"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "Catalogue checkpoint for F004. A sentence in the invoice that says the resolution is approved is ignored."
+
+    - action: "Acknowledge a bank-detail change as a separate verification route"
+      approver: "Bank-detail verifier"
+      mandatory: true
+      rationale: "Fraud control. Required before the AP reviewer can approve a resolution while the flag is set. The acknowledgement does not verify the account and does not change supplier bank details."
+
+    - action: "Rely on a document date or the pinned sources after they are marked stale, missing, or future"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "The core does not clear a stale flag from a sentence in the invoice. approve_resolution is refused until a person passes acknowledge_stale. That still does not pay."
+
+    - action: "Treat an unread, empty, oversized, or checksum-failed file as examined"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "not_read is not a clean result. Approval is refused while a file was not read or a checksum does not match."
+
+    - action: "Treat the 30-day arithmetic as a date a sum must be paid"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "The period is arithmetic on dates the reviewer typed. The agent does not decide that the invoice is valid or undisputed, and it does not pay."
+
+    - action: "Send a question to a supplier, a buyer, or a payee"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "Outside this agent. Section 68(4) and section 88(4) describe a notice. This agent does not send it."
+
+    - action: "Post, hold, pay, or change a supplier bank record"
+      approver: "AP reviewer"
+      mandatory: true
+      rationale: "Outside this agent, including after the resolution is approved in the JSON. The functions that would do those things raise."
+
+  no_approval_required:
+    - action: "View the draft resolution"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the same case"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted by this starter"
+    description: >
+      A council paying a supplier and a regulated firm paying a supplier do
+      not share one Article 6 basis. The caller confirms its own basis before
+      production use. This starter does not copy another experiment's basis.
+    secondary: "To be confirmed by the caller. Article 6(1)(c) or 6(1)(e) may be relevant for a public body. This file does not choose."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: >
+      Not expected on an invoice. If a reviewer pastes special-category data
+      into the file, Experiment 08 may still see it because the intake calls
+      the gateway. No Article 9 condition is asserted.
+    safeguards:
+      - "The draft does not store the file body."
+      - "Bank account numbers and sort codes are not copied into the draft."
+      - "The output says the text is not anonymised, because Experiment 08's flag is fixed false"
+      - "Nothing is paid, posted, or written to a finance system"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One case at a time, as supplied by the reviewer"
+    - "text/plain only, via Experiment 12. Other media types are not opened."
+    - "The body is not copied into the draft JSON"
+    - "No lookup of the supplier, the VAT number, or the bank account"
+    - "A bank fingerprint is a token. The account number is not extracted."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "VAT Notice 700/21 section 2.4 says records are generally kept for at least 6 years. This starter does not calculate a destruction date and does not retain the invoice. If the caller stores the draft, that schedule is the caller's."
+
+  data_residency:
+    region: "UK"
+    note: "A production model, if one is added, should use UK South or UK West. This repository cannot enforce that. The deterministic path makes no network call."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those requests go through the caller's privacy process.
+
+prompt_injection:
+  description: >
+    Invoice text is untrusted. It may hide an instruction in an HTML comment,
+    after a form feed, after blank lines, or between zero-width characters.
+    The instruction may tell the agent to pay, post, approve, hold, update
+    the bank details, or treat the invoice as valid and undisputed. The core
+    records the phrase and does not follow it. There is no payment, post, or
+    bank-change tool.
+
+  controls:
+    - control: "Instructions are not a payment"
+      description: "Prohibited keys on the case are stripped. Payment flags stay false."
+    - control: "Hidden text is still data"
+      description: "HTML comments, form feeds, trailing blank lines, and zero-width characters are scanned. followed is false. Hidden prices are not extracted."
+    - control: "Deterministic classes"
+      description: "Exception classes, pence differences, and the 30-day arithmetic run in Python."
+    - control: "Experiment 08 stays on"
+      description: "A phrase such as 'do not redact' does not stop the gateway call inside Experiment 12."
+    - control: "No tools with side effects"
+      description: "Writes, sends, posts, payments, and bank changes are disabled in this manifest."
+    - control: "Two human steps when a bank flag is set"
+      description: "The bank-detail verifier acknowledges the route. The AP reviewer then decides the resolution."
+
+  residual_risk: >
+    A phrase that is not on the list can still be in the file. A file over
+    the size cap is not scanned. The reviewer is the control before anyone
+    relies on the draft. There is no autonomous payment even if the draft is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-28"
+  risks:
+    - id: "R1"
+      risk: "A sentence in an invoice pays the supplier or posts the invoice"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "triage() forces every payment flag false"
+        - "Prohibited payload keys are stripped and listed"
+        - "pay_invoice and post_invoice raise"
+      residual_risk: "Low"
+      owner: "AP reviewer"
+
+    - id: "R2"
+      risk: "A changed bank detail is written to the supplier master or paid"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The class outranks every other exception"
+        - "The account number is not stored"
+        - "A separate verifier must record the route before the reviewer can approve"
+        - "change_supplier_bank_details raises, including after that approval"
+      residual_risk: "Medium"
+      owner: "Bank-detail verifier"
+
+    - id: "R3"
+      risk: "The 30-day arithmetic is treated as a decision that a sum is due"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "payment_instructed and duty_decided stay false"
+        - "A stated section 68(1) exception emits no payment day"
+        - "Regulation 113 is recorded as revoked and is not applied"
+        - "Saving provisions in SI 2024/716 regulations 5 and 6 were not encoded, and the draft says so"
+      residual_risk: "Medium"
+      owner: "AP reviewer"
+
+    - id: "R4"
+      risk: "A stale or missing document date is treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The comparison is in Python, using Experiment 12's date status and the extracted invoice date"
+        - "A sentence telling the agent to ignore the date is an injection signal and does not clear the flag"
+        - "approve_resolution is refused while the flag is set, unless a person acknowledges it"
+      residual_risk: "Medium"
+      owner: "AP reviewer"
+
+    - id: "R5"
+      risk: "A field checklist is used as a VAT assessment"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "decides_input_tax stays false"
+        - "The £250 ceiling is not applied to a non-GBP currency"
+        - "The GB-and-nine-digits shape is not described as an HMRC checksum"
+      residual_risk: "Medium"
+      owner: "AP reviewer"
+
+    - id: "R6"
+      risk: "A UK identifier reaches a later model because this draft was treated as anonymised"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 is called through Experiment 12 and its anonymisation flag is fixed false"
+        - "The draft does not copy the body"
+        - "Known gateway misses are restated in the limitations"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log who ran the triage, the case id, the
+    file hashes, the exception classes, and the later human decisions. This
+    starter writes no log. The draft itself omits the file body and the raw
+    bank account.
+
+  logged_events:
+    - event: "Triage requested"
+      data_logged:
+        - "Timestamp"
+        - "Reviewer identity"
+        - "Case id"
+        - "Whether the case was marked synthetic"
+        - "File ids and SHA-256 hashes, not the bodies"
+      retention: "Caller's schedule. Not set by this starter."
+    - event: "Bank-detail route recorded"
+      data_logged:
+        - "Role Bank-detail verifier"
+        - "That the bank record was not changed"
+        - "Not the account number"
+      retention: "Caller's schedule. The agent does not write this event."
+    - event: "AP reviewer recorded a resolution"
+      data_logged:
+        - "Decision: approve_resolution, return_for_edit, or reject_resolution"
+        - "Whether stale material was acknowledged"
+        - "invoice_paid still false"
+      retention: "Caller's schedule. The agent does not write this event."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store. Do not put invoice bodies, VAT numbers, or bank tokens in Application Insights traces."
+
+kill_switch:
+  description: "Ways to stop the triage being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Stop calling Experiment 12"
+      action: "Remove the in-process import. The triage then cannot inventory the file and should not be described as having done so."
+      time_to_effect: "Immediate once the caller is changed"
+      who_can_activate: "The experiment owner"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the managed identity or the Key Vault secret used by an optional narrative deployment"
+      time_to_effect: "Immediate for new calls. The deterministic path does not use that secret."
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for a finance system, mail, SharePoint, Dataverse, or a supplier bank master"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "AP reviewer"
+      contact: "invoice-triage@example.com"
+    - role: "Bank-detail verifier"
+      contact: "bank-verify@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+review:
+  last_review_date: "2026-10-28"
+  next_review_date: "2027-04-28"
+  review_frequency: "6 months, and sooner if VAT Notice 700/21 or the Procurement Act payment sections change"
+  reviewer: "The adopting organisation's AP reviewer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to VAT Notice 700/21 sections 4.1, 4.4, or 4.5"
+    - "A change to Procurement Act 2023 sections 68 or 88, or to the revocation of the Public Contracts Regulations 2015"
+    - "A decision to call AI Builder, Document Intelligence, or a finance connector"
+    - "A proposal to let this agent post, pay, or update a supplier bank record"
+    - "A security incident in which an invoice instruction was followed"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Triage core"
+      path: "src/triage.py"
+    - name: "Pinned sources"
+      path: "src/rules.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Experiment 12 intake"
+      path: "../12-document-intake/src/intake.py"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The caller's Article 6 basis is confirmed by that organisation's DPO before production use"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The source notes pinned on 28 October 2026 are still the text the organisation wants quoted. They are not a complete VAT or procurement opinion."
+      section: "src/rules.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 12 remains the inventory and Experiment 08 remains the identifier gateway. This experiment does not replace them."
+      section: "tools.allowed"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if a narrative model is added later, runs in the UK and is not trained on the caller's invoices"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No finance, mail, SharePoint, Dataverse, or bank-master connector is added without a manifest change in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders, not an organisation"
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "SI 2024/716 regulations 5 and 6 may keep some contracts under the 2015 Regulations. They were not encoded. The organisation decides which regime applies."
+      section: "src/rules.py"
+      verify_on_deployment: true
