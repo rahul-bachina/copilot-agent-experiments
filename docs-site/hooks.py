@@ -64,6 +64,9 @@ DIAGRAMS = {
     "experiments/16-kyc-evidence-intake/docs/architecture_diagram.png": (
         "experiments/img/16-kyc-evidence-intake-architecture.png"
     ),
+    "experiments/19-privacy-impact-assessment/docs/architecture_diagram.png": (
+        "experiments/img/19-privacy-impact-assessment-architecture.png"
+    ),
 }
 
 
