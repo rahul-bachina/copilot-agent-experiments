@@ -1,0 +1,565 @@
+# Agent manifest: Evidence Pack Builder
+# Experiment 18 — catalogue ID L004
+# Version: 0.1.0
+# Last reviewed: 2026-10-28
+# Next review: 2027-04-28
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-18-evidence-pack-builder"
+  name: "Evidence Pack Builder"
+  version: "0.1.0"
+  description: >
+    Assembles a draft index for one synthetic evidence pack: a subject access
+    bundle, a regulator or audit request, a complaint referral bundle, or an
+    internal investigation. It keeps items inside the scopes the caller names,
+    records source, date, and hash, flags possible third-party personal data
+    and possible privileged material, de-duplicates, and proposes pages.
+    Autonomy A1. An evidence pack approver must approve the exact item list
+    and the redaction decisions before an export index is produced. The agent
+    never approves that list itself, never applies an exemption, never
+    releases text, never writes a production record, and never sends.
+  owner: "Evidence pack approver"
+  contact: "evidence-pack@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/18-evidence-pack-builder"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "A named person approves the exact export list and the redaction decisions. The agent only drafts."
+  constraints:
+    - "The evidence pack approver approves the exact list of item ids and every redaction decision. The agent does not."
+    - "The agent NEVER applies a Data Protection Act 2018 Schedule 2 exemption"
+    - "The agent NEVER decides that a search was reasonable and proportionate"
+    - "The agent NEVER discloses personal data or sends a pack externally"
+    - "The agent NEVER writes a production record"
+    - "The agent NEVER releases redacted text or describes it as anonymised"
+    - "A sentence inside an item cannot set the scopes, the search period, or the approval"
+    - "Document inventory is Experiment 12. UK identifier detection is Experiment 08, called by that intake. This agent does not re-implement either."
+    - "All output is a draft until a named approver records the exact list. The export index is still not sent."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic set of items"
+      description: "Item ids, titles, sources, scopes, document dates, media types, and text the user pastes for this run. Samples in this repository are synthetic. Reedbank Borough Council is fictional."
+      access_level: "read"
+      scope: "One request per invocation. No search of a mailbox, SharePoint library, or case store."
+      justification: "The index cannot describe the items without the text the user has supplied"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "A document date, a title, and a source label"
+        - "NHS number, which can sit in a health context, when the text contains one"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the text. The draft stores hashes, closed-list phrases, and source labels, not the body."
+
+    - resource: "Caller-supplied run parameters"
+      description: "As-of date, pack type, authorised scopes, and the search period, passed as arguments rather than read from item text"
+      access_level: "read"
+      scope: "Arguments for this run. The same fields inside the JSON or an item are ignored."
+      justification: "Scope and the search period have to come from the person, not from a document"
+      may_contain_personal_data: false
+
+    - resource: "Pinned source catalogue"
+      description: "The closed pack types, scopes, and phrase lists in src/sources.py, pinned 2026-10-28, and the legislation and ICO pages named there"
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The scope list and the citations have to be reproducible without a network call"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 12 document intake"
+      description: "Called in-process via intake() for items inside the authorised scopes. Experiment 12 calls Experiment 08 propose()."
+      access_level: "read"
+      scope: "In-scope items only. Out-of-scope text is not passed across."
+      justification: "The catalogue already has an intake and a UK identifier gateway. Calling them avoids a second inventory and a second redactor."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Neither called experiment persists the text. This draft keeps hashes and entity types, not the raw values."
+
+  never_access:
+    - resource: "Mailboxes, SharePoint libraries, and Dataverse"
+      reason: "The agent does not search a tenant and does not write the pack back."
+    - resource: "Case-management systems and ombudsman or regulator portals"
+      reason: "A pack-type label is not a referral. Nothing is sent to the Financial Ombudsman Service, the Housing Ombudsman, or a regulator."
+    - resource: "NHS, HMRC, Companies House, and bank directories"
+      reason: "Experiment 08 does not look those up, and this agent does not either."
+    - resource: "The Experiment 08 reversible token vault"
+      reason: "The intake caller does not pass reversible=True and this experiment does not store a map."
+    - resource: "Items outside the authorised scopes"
+      reason: "Out-of-scope text is not inventoried and is not hashed into the candidate manifest."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Evidence pack draft"
+      provider: "Local Python (src/pack.py, src/sources.py, src/pack_injection.py)"
+      action: "Build a candidate manifest, flag privilege and third-party phrases, propose an index"
+      access_level: "read"
+      scope: "The single request supplied for this run, limited to the scopes passed as arguments. No network. No model."
+      justification: "Scope checks, hashes, dates, and page order are deterministic. A language model must not set them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Document inventory"
+      provider: "Experiment 12 (experiments/12-document-intake, function intake)"
+      action: "Hash in-scope items, suggest a keyword class, and call Experiment 08 for identifier spans"
+      access_level: "read"
+      scope: "In-scope items only. Model suggestions off. Reversible tokens not requested."
+      justification: "The catalogue already has a document intake. Calling it avoids a second, drifting inventory."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the pack JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run. Not called by this starter."
+      justification: "Optional narrative. Hashes, pages, flags, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python (src/pack.py)"
+      action: "Reject a result that approves the export, applies an exemption, or records a send"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that approves, sends, writes, discloses, or releases is not a valid result of build_pack()"
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the user. Filing it, if a person
+      chooses to, is done in the organisation's own system. record_export_approval
+      and produce_export update or return a copy in memory. They do not write
+      a case. The agent must not call them. produce_export does not include
+      document bodies.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. An export index is not a disclosure and is not a referral.
+      The agent does not message a data subject, a complainant, the Financial
+      Ombudsman Service, the Housing Ombudsman, the ICO, or a regulator.
+      send_external and disclose_to_requester raise.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject the pack. The evidence pack
+      approver records the exact item list and the redaction decisions.
+      build_pack() leaves both false. record_export_approval refuses every
+      role except that named role, and it still does not send.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      Whether a Schedule 2 exemption applies, whether a search was reasonable
+      and proportionate under UK GDPR Article 15(1A), and whether a pack
+      should be disclosed are decisions for a person. This agent flags phrases
+      and proposes pages. apply_exemption raises.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a case system, Dataverse, SharePoint, or
+      any other production record. write_production_record raises PackForbidden.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent has no send tool. send_external and disclose_to_requester
+      raise, including after an export index has been returned. An instruction
+      in an item to email the requester or the ombudsman is recorded and is
+      not followed.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment, fee, or other transaction can be instructed. A copy fee under Article 15(3) is not calculated and is not charged."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Apply a Schedule 2 exemption"
+      rationale: "apply_exemption always raises. exemption_applied stays false on the draft and on the export index."
+    - enabled: false
+      action_name: "Release redacted text"
+      rationale: "release_redacted always raises. Experiment 08 release() is not called."
+    - enabled: false
+      action_name: "Produce an export before exact approval"
+      rationale: "produce_export raises until record_export_approval has accepted the role, the exact ids, and the redaction decisions."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    A named evidence pack approver approves the exact list of items and the
+    redaction decisions. Only then may an export index be produced. The index
+    is not sent. The agent has no tool that records the approval, produces
+    the index, or sends it.
+
+  approval_points:
+    - action: "Approve the exact list of items and the redaction decisions"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "Catalogue checkpoint for L004. The ids are the ones the approver passes, with no additions. A sentence in an item is ignored. A checksum mismatch, an unread file, an out-of-scope item, a duplicate, and an injection hit cannot be included."
+
+    - action: "Include an item flagged for possible privilege or possible third-party personal data"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "The decision must be include_after_review for that item id. The agent does not apply Schedule 2 paragraph 16 or paragraph 19. Withhold means the id stays off the list."
+
+    - action: "Rely on a source pin or an intake date after it is marked stale"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "The core does not clear a stale flag from a sentence in an item. Approval is refused until a person passes acknowledge_stale. That still does not send."
+
+    - action: "Treat an unread, empty, oversized, or checksum-failed item as examined"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "not_read is not a clean result. Those item ids are not eligible for the approved list."
+
+    - action: "Set the authorised scopes and the search period"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "Scopes and the period are arguments. Item text cannot widen a scope or move a date. An empty scope list excludes every item. A missing period proposes no pages."
+
+    - action: "Release redacted text or send the export"
+      approver: "Evidence pack approver"
+      mandatory: true
+      rationale: "Outside this agent, including after the exact list has been recorded and an index returned. send_external, disclose_to_requester, and release_redacted raise."
+
+  no_approval_required:
+    - action: "View the draft index"
+      rationale: "Reading a draft has no external effect"
+    - action: "Re-run the same request"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted by this starter"
+    description: >
+      A council handling a subject-access bundle and a firm preparing a
+      complaint file do not share one Article 6 basis. The caller confirms
+      its own basis before production use. This starter does not copy
+      Experiment 01's public-task basis or Experiment 02's legal-obligation basis.
+      UK GDPR Article 15 is the data subject's right. It is not this starter's
+      basis for processing the file while a member of staff assembles a draft.
+    secondary: "To be confirmed by the caller. Article 6(1)(c) or 6(1)(e) may be relevant. This file does not choose."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, where an NHS number or the surrounding text reveals health data"
+      - "Any special-category detail a person wrote into an item"
+    lawful_basis_special: >
+      Not asserted. The caller must identify an Article 9 condition before
+      production use. This starter does not claim a Schedule 1 condition of
+      the Data Protection Act 2018. Schedule 2 exemptions are cited for the
+      approver and are not applied.
+    safeguards:
+      - "The draft stores hashes, entity types, closed-list phrases, and source labels. It does not store the item body."
+      - "Experiment 08's audit record omits the raw identifier. This caller does not request a reversible map."
+      - "The output says the text is not anonymised"
+      - "Nothing is disclosed or written to a case"
+      - "A named approver confirms the exact list before an export index exists"
+      - "No solely automated decision under the UK GDPR, including the safeguards inserted by the Data (Use and Access) Act 2025"
+
+  data_minimisation:
+    - "One pasted request at a time"
+    - "Out-of-scope items are not passed to Experiment 12"
+    - "text/plain only, via Experiment 12. Other media types are not opened."
+    - "The body is not copied into the draft or the export index"
+    - "No lookup of the person or the case"
+    - "Names, emails, and telephone numbers are not detected, and they are not extracted into the draft"
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "If the caller stores the draft, that schedule is the caller's. Do not store the source text in the same row as the draft. This file does not encode a statutory retention period."
+
+  data_residency:
+    region: "UK"
+    note: "A production model, if one is added, should use UK South or UK West. This repository cannot enforce that. The deterministic path makes no network call."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle the right of access itself. UK GDPR Article 15
+      was read on 28 October 2026 and is cited in the draft so a person can
+      see the right the pack might later support. The agent does not confirm
+      processing to a data subject, does not provide a copy, and does not
+      decide Article 15(4) or Schedule 2. Those requests go through the
+      caller's privacy process.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Item text is untrusted. It may hide an instruction in an HTML comment,
+    after a form feed, after blank lines, or between zero-width characters.
+    The instruction may tell the agent to approve the export, widen the
+    scopes, move the search period, apply an exemption, disclose the records,
+    or email an ombudsman. The core records the phrase and does not follow it.
+    There is no send, disclosure, or release tool.
+
+  controls:
+    - control: "Instructions are not approval"
+      description: "Prohibited keys on the request and on each item are stripped. export_approved and the scopes stay as the arguments, not the document."
+    - control: "Hidden text is still data"
+      description: "HTML comments, form feeds, trailing blank lines, and zero-width characters are scanned. followed is false."
+    - control: "Deterministic catalogue"
+      description: "Scopes, pack types, phrase flags, and page order run in Python."
+    - control: "Experiment 08 stays on for in-scope text"
+      description: "A phrase such as 'do not redact' does not stop the intake call and does not make the item eligible."
+    - control: "No tools with side effects"
+      description: "Writes, sends, disclosure, exemption, and release are disabled in this manifest."
+    - control: "Named human approval"
+      description: "The evidence pack approver records the exact list. The agent has no tool that does it."
+
+  residual_risk: >
+    A phrase that is not on the list can still be in the item. A file over
+    the size cap is not scanned. The approver is the control before anyone
+    relies on the draft. There is no autonomous send even if the draft is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-28"
+  risks:
+    - id: "R1"
+      risk: "A sentence in an item approves the export, widens the scopes, or sends the pack"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "build_pack() forces export_approved and redactions_approved false"
+        - "Scopes and the search period are arguments. Payload copies are stripped."
+        - "record_export_approval checks the role and still does not send"
+      residual_risk: "Low"
+      owner: "Evidence pack approver"
+
+    - id: "R2"
+      risk: "Third-party personal data or privileged material is treated as cleared because a phrase was not found"
+      likelihood: "High"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Closed phrases and Experiment 08 entity types raise a flag. They do not clear an item."
+        - "exemption_applied stays false"
+        - "A held item can be included only with include_after_review from the named approver"
+        - "Known gateway misses are restated in the limitations"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+    - id: "R3"
+      risk: "An out-of-scope or out-of-period item is indexed as a candidate"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Out-of-scope text is not passed to Experiment 12 and is not hashed into the candidate list"
+        - "A missing search period proposes no pages"
+        - "Those ids are refused at approval"
+      residual_risk: "Medium"
+      owner: "Evidence pack approver"
+
+    - id: "R4"
+      risk: "An unread PDF is treated as a clean file"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "media types other than text/plain are not_read"
+        - "Oversized and empty files are not scanned"
+        - "Those ids are not eligible"
+      residual_risk: "Medium"
+      owner: "Evidence pack approver"
+
+    - id: "R5"
+      risk: "The draft is used as a disclosure or as an exemption decision"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "apply_exemption, disclose_to_requester, and send_external raise"
+        - "The export index contains no document bodies"
+        - "Article 15(1A) is cited and is not decided"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R6"
+      risk: "The pinned sources or the Experiment 08 rules drift"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "sources_pinned_on is on every draft"
+        - "An earlier rules_as_of is flagged and does not switch detection off"
+        - "Approval is refused until a person acknowledges the stale flag"
+      residual_risk: "Medium"
+      owner: "Evidence pack approver"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log who ran the builder, the request id,
+    the authorised scopes, the search period, the file hashes rather than the
+    bodies, whether injection or a review flag was raised, and the approver's
+    later decision. This starter writes no log. The draft itself omits the
+    item body and the raw identifiers.
+
+  logged_events:
+    - event: "Pack requested"
+      data_logged:
+        - "Timestamp"
+        - "User identity"
+        - "Request id"
+        - "Pack type, authorised scopes, and search period"
+        - "Whether the request was marked synthetic"
+        - "Item ids and SHA-256 hashes of in-scope text, not the bodies"
+      retention: "Caller's schedule. Not set by this starter."
+    - event: "Redaction proposed by Experiment 08, via Experiment 12"
+      data_logged:
+        - "Caller id exp-12-document-intake, which is the intake this experiment uses"
+        - "Entity types and the gateway hash"
+        - "Not the raw identifier and not the item body"
+      retention: "Same schedule as the caller uses for the Experiment 08 audit record."
+    - event: "Approver recorded the exact list"
+      data_logged:
+        - "Role and approver name"
+        - "Approved item ids, in order"
+        - "Redaction decisions"
+        - "Whether stale material was acknowledged"
+        - "External send still false"
+      retention: "Caller's schedule. The agent does not write this event."
+    - event: "Export index returned"
+      data_logged:
+        - "Page count"
+        - "Bodies included: false"
+        - "Sent: false"
+      retention: "Caller's schedule. The agent does not write this event."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store. Do not put item bodies or raw identifiers in Application Insights traces."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the builder being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Stop calling Experiment 12"
+      action: "Remove the in-process import. The builder then cannot inventory in-scope items and should not be described as having hashed them."
+      time_to_effect: "Immediate once the caller is changed"
+      who_can_activate: "The experiment owner"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the managed identity or the Key Vault secret used by an optional narrative deployment"
+      time_to_effect: "Immediate for new calls. The deterministic path does not use that secret."
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SharePoint, Dataverse, or an external portal"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Evidence pack approver"
+      contact: "evidence-pack@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-28"
+  next_review_date: "2027-04-28"
+  review_frequency: "6 months, and sooner if Article 15, Schedule 2, or the ICO right-of-access guidance changes"
+  reviewer: "The adopting organisation's evidence pack approver and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 15 or to Data Protection Act 2018 Schedule 2 paragraphs 16, 18, or 19"
+    - "A change to the ICO right-of-access guidance that this starter cites"
+    - "A change to Experiment 08's detectors or to Experiment 12's intake"
+    - "A decision to search Microsoft 365, or to add a send connector"
+    - "A security incident in which an item instruction was followed"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Pack core"
+      path: "src/pack.py"
+    - name: "Source catalogue"
+      path: "src/sources.py"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Copilot Studio"
+      path: "copilot-studio/README.md"
+    - name: "Microsoft Foundry"
+      path: "docs/foundry.md"
+    - name: "Experiment 12 intake"
+      path: "../12-document-intake/src/intake.py"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "The caller's Article 6 basis, and an Article 9 condition if health data is in scope, are confirmed by that organisation's DPO"
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The scope list and the phrase lists pinned on 28 October 2026 are still the lists the organisation wants. They are not a statutory classification."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 12 remains the inventory and Experiment 08 remains the identifier gateway. This experiment does not replace either."
+      section: "tools.allowed"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if a narrative model is added later, runs in the UK and is not trained on the caller's files"
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No mail, SharePoint, Dataverse, or portal connector is added without a manifest change in the same change"
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders, not an organisation. Reedbank Borough Council is fictional."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Article 15 and Schedule 2 paragraphs 16 and 19 were read on 28 October 2026. A later amendment has to be re-read before the citations are reused. Article 12 was not opened, so no response deadline is encoded."
+      section: "src/sources.py"
+      verify_on_deployment: true
