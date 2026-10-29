@@ -1,0 +1,392 @@
+# Agent manifest: Complaints root-cause and regulatory MI report generator
+# Experiment 20 — catalogue ID UK04
+# Version: 0.1.0
+# Last reviewed: 2026-10-29
+# Next review: 2027-04-29
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-20-complaints-root-cause-mi"
+  name: "Complaints root-cause and regulatory MI report generator"
+  version: "0.1.0"
+  description: >
+    Clusters one synthetic batch of complaint records into root-cause themes
+    and drafts management information for a Consumer Duty governing-body
+    report, a Housing Ombudsman Complaint Handling Code pack, or Ofgem
+    domestic complaints reporting. Every count lists the source record ids.
+    Autonomy A0. The complaints owner validates the clusters and the narrative
+    before either is used. The agent never submits, publishes, or sends a
+    regulatory return, and it never decides that the organisation is complying.
+  owner: "Complaints owner"
+  contact: "complaints-owner@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/20-complaints-root-cause-mi"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. The complaints owner validates clusters and the narrative. The agent only drafts."
+  constraints:
+    - "The complaints owner validates the clusters. The agent only groups records."
+    - "The complaints owner validates the narrative before it is used. The agent only drafts it."
+    - "The agent NEVER presents a draft as a final regulatory return"
+    - "The agent NEVER confirms compliance with the Consumer Duty, the Complaint Handling Code, or an Ofgem return"
+    - "The agent NEVER submits, publishes, or sends a report"
+    - "The agent NEVER writes a production complaints record"
+    - "A sentence in a complaint cannot validate a cluster, clear a stale source pin, or mark a return as sent"
+    - "Free text is passed through Experiment 08. The output is not anonymised and is not released by this agent."
+    - "A financial-services narrative may be passed to Experiment 02 analyse(). The suggested cause is not the firm's cause until the complaints owner validates it."
+    - "All output is a draft and is marked for complaints-owner review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic complaint batch"
+      description: "Complaint narratives, receipt dates, recorded outcomes, and optional fields such as redress, a refusal type, or a meter context. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One batch per invocation. No browsing of a complaints system."
+      justification: "The draft cannot count records it has not been given"
+      data_categories:
+        - "Free text that may contain UK identifiers"
+        - "A receipt date and an optional closure date"
+        - "A recorded outcome, redress figure, or refusal type"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the batch. The draft stores redacted strings and the Experiment 08 audit counts, which do not store raw identifier values."
+
+    - resource: "Optional Experiment 02 intake object on a financial-services record"
+      description: "A prior intake JSON. Used only to compare the suggested root cause with a fresh analyse() call. It is ignored for housing and energy batches."
+      access_level: "read"
+      scope: "One object per record, if the caller includes it."
+      justification: "Catalogue UK04 reuses the Consumer Duty complaint intake where the batch is a financial-services extract"
+      may_contain_personal_data: true
+      retention: "Not stored beyond the disagreement flag and the suggested cause code. The acknowledgement letter is not copied."
+
+    - resource: "Reviewer-supplied as-of date"
+      description: "Typed outside the batch."
+      access_level: "read"
+      scope: "One date for this run."
+      justification: "The freshness comparison needs a date the person typed"
+      may_contain_personal_data: false
+
+    - resource: "Pinned Handbook, Code, Regulations, and Ofgem extracts"
+      description: "Short quotations in src/sources.py from pages opened on 29 October 2026."
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The draft has to cite the words that were read, without a network call at runtime"
+      may_contain_personal_data: false
+
+    - resource: "Experiment 08 UK identifier gateway"
+      description: "In-process call to propose(). Model suggestions are off. The reversible vault is not requested."
+      access_level: "read"
+      scope: "The Experiment 08 folder beside this one. No network."
+      justification: "Complaint narratives are a place identifiers would otherwise be copied into a board pack"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The audit omits raw values. This draft does not ask for a reversible map."
+
+    - resource: "Experiment 02 analyse()"
+      description: "In-process call for a financial-services narrative, after redaction. No clock is applied and no acknowledgement is drafted by this experiment."
+      access_level: "read"
+      scope: "The Experiment 02 folder beside this one. No network."
+      justification: "The suggested root cause should be the same starter lexicon as the intake experiment, not a second list"
+      may_contain_personal_data: true
+      retention: "The draft stores the cause code and the driver names. It does not store the evidence quote."
+
+  never_access:
+    - resource: "A live complaints system, board-pack store, or landlord website"
+      reason: "The starter reads only the batch the caller supplies."
+    - resource: "The FCA, the Housing Ombudsman, or Ofgem submission channels"
+      reason: "No return is submitted. The address in the Ofgem guidance is not a tool."
+    - resource: "Mailboxes and customer systems beyond the pasted batch"
+      reason: "There is no connector."
+    - resource: "Experiment 08 reversible token vault"
+      reason: "propose() is called with reversible false."
+
+tools:
+  allowed:
+    - tool: "draft_complaints_mi"
+      provider: "Python src/report.py"
+      action: "Return a draft MI pack for one synthetic complaint batch"
+      access_level: "read"
+      scope: "One batch. Calls Experiment 08 propose() and, for financial services, Experiment 02 analyse()."
+      justification: "The complaints owner needs clusters and a narrative that can be checked against the records"
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No production write. record_external_attestation updates a copy of the JSON in memory, effect none, and still does not validate the clusters or the narrative. The agent must not call it."
+  sends:
+    enabled: false
+    note: "submit_regulatory_return, publish_report, and send_report always raise. Nothing is sent to the FCA, the Housing Ombudsman, or Ofgem."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "approve_clusters and approve_narrative always raise. An attestation recorded by a person outside the agent has effect none."
+  regulated_decision:
+    enabled: false
+    rationale: "complying_with_consumer_duty, code_compliant, and ofgem_return_complete stay null. The tool does not decide a regulatory outcome."
+  production_record_change:
+    enabled: false
+    rationale: "The starter does not write to a complaints system, a board pack, or a website."
+  external_send:
+    enabled: false
+    rationale: "send_report and submit_regulatory_return always raise. The Ofgem submission address is quoted so the boundary is visible. It is not a tool."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not move money, offer redress, or instruct a payment. A redress figure is repeated only when the source record already has one."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Present the draft as a final regulatory return"
+      rationale: "is_final_regulatory_return stays false. submitted and published stay false."
+    - enabled: false
+      action_name: "Validate clusters or the narrative"
+      rationale: "approve_clusters and approve_narrative always raise. clusters_validated and narrative_validated stay false."
+    - enabled: false
+      action_name: "Publish a board report, self-assessment, or complaints report"
+      rationale: "publish_report always raises. The Code's publication duty is the landlord's. This agent does not publish."
+
+human_approval:
+  description: >
+    The complaints owner validates the clusters and the narrative before
+    either is used. Neither step is a tool of the agent. Recording an
+    attestation in Python does not validate the draft and does not make it a return.
+
+  approval_points:
+    - action: "Validate the clusters"
+      approver: "Complaints owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for UK04. A suggested theme, including an Experiment 02 cause, is not the organisation's root cause until this person validates it."
+
+    - action: "Validate the narrative before it is used"
+      approver: "Complaints owner"
+      mandatory: true
+      rationale: "Every count is traceable, and the words are still a draft. The complaints owner checks them against the records before they are used in a pack."
+
+    - action: "Decide whether the firm is complying with the Consumer Duty, whether the landlord complies with the Code, or whether an Ofgem return is complete, and submit or publish if they decide to"
+      approver: "Complaints owner"
+      mandatory: true
+      rationale: "PRIN 2A.8.4R places the annual confirmation on the governing body. The Code's annual submission is the landlord's. The Ofgem templates are the supplier's. Those decisions stay null here, and nothing is sent."
+
+    - action: "Rely on the draft after the pinned sources are marked stale"
+      approver: "Complaints owner"
+      mandatory: true
+      rationale: "A sentence in a record does not clear sources_stale. The 90-day window is a freshness flag for this starter, not a statutory review period."
+
+    - action: "Treat an Experiment 02 suggestion, or a lexicon label, as the organisation's confirmed root cause"
+      approver: "Complaints owner"
+      mandatory: true
+      rationale: "Themes are suggestions. needs_owner and unassigned records stay in those groups until a person moves them."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading the JSON has no external effect."
+    - action: "Re-run the same batch"
+      rationale: "The same batch and the same as-of date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This manifest does not assert an Article 6 basis. A complaints file can
+      support different bases for a firm, a landlord, and a supplier. The
+      adopting organisation confirms its own before production use.
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, where a narrative mentions health or an NHS number is pasted"
+      - "Any other Article 9 category the narrative happens to contain"
+    lawful_basis_special: "Not asserted"
+    condition: "Not asserted. The caller confirms any Article 9 condition and any Data Protection Act 2018 Schedule 1 condition before production use."
+    safeguards:
+      - "Experiment 08 proposes UK identifier spans. The output is not described as anonymised"
+      - "The draft does not request a reversible token map"
+      - "A batch that is not marked synthetic is refused, and the refusal does not echo the narratives"
+      - "No customer is labelled vulnerable"
+
+  data_minimisation:
+    - "One batch per run"
+    - "Identifier values are not stored in the draft. The Experiment 08 audit records types and counts"
+    - "An Experiment 02 acknowledgement letter is not copied"
+    - "The starter does not open a live complaints system"
+
+  retention:
+    agent_retention: "Transient in this starter. Nothing is written to a store."
+    note: "How long the organisation keeps the underlying complaint is the organisation's decision. This agent does not delete personal data."
+
+  data_residency:
+    region: "UK South or UK West if a team later adds a Foundry narrative"
+    note: "The Python starter makes no network call. Data-use terms are confirmed at deployment."
+
+  data_subject_rights:
+    note: "The starter does not hold a record against which to action a request. The organisation handles rights against its own complaints file."
+
+prompt_injection:
+  description: >
+    Complaint text is untrusted. A phrase that asks for a final return, a
+    submission, a published report, a validated cluster, or a compliance
+    confirmation is recorded and is not followed. The phrase is removed
+    before classification and before text is copied.
+  controls:
+    - control: "Closed phrase list"
+      description: "Instructions are recorded, including when hidden in a comment, after a form feed, after blank lines, or between zero-width characters."
+      implementation: "src/injection.py. followed is forced false. Copied text does not repeat the phrase."
+    - control: "Prohibited payload keys"
+      description: "Keys such as submitted, published, and is_final_regulatory_return are stripped before the draft is built."
+      implementation: "src/report.py"
+    - control: "No submission function"
+      description: "approve_clusters, approve_narrative, submit_regulatory_return, publish_report, send_report, and write_production_record always raise."
+      implementation: "src/report.py"
+  residual_risk: >
+    The list is not exhaustive. A novel instruction can pass the scanner.
+    The complaints owner still reads the draft.
+
+risk_assessment:
+  methodology: "Qualitative likelihood and impact for this starter, assessed 29 October 2026. Not a Consumer Duty assessment, a Code self-assessment, or an Ofgem return."
+  date_assessed: "2026-10-29"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a complaint marks the draft as a final return, or as submitted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions always raise"
+        - "Injection phrases are recorded, removed from copied text, and not followed"
+        - "is_final_regulatory_return, submitted, and published stay false"
+      residual_risk: "Low"
+      owner: "Complaints owner"
+    - id: "R2"
+      risk: "A count in the narrative cannot be walked back to the records, or a missing redress figure is treated as zero"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Each count equals the length of its record-id list"
+        - "Clusters partition the in-period records"
+        - "Redress is summed only from recorded pence, and the missing count is separate"
+      residual_risk: "Low"
+      owner: "Complaints owner"
+    - id: "R3"
+      risk: "A suggested theme is treated as the organisation's confirmed root cause, or as a finding of breach or Code compliance"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "clusters_validated stays false"
+        - "complying_with_consumer_duty and code_compliant stay null"
+        - "A disagreement with an Experiment 02 intake is left as needs_owner"
+      residual_risk: "Medium"
+      owner: "Complaints owner"
+    - id: "R4"
+      risk: "An energy category that depends on the meter is guessed, or unassigned records are dumped into B22 and the return looks complete"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Unassigned is a separate group"
+        - "ofgem_return_complete stays null"
+        - "Working-day resolution is not calculated from dates"
+      residual_risk: "Medium"
+      owner: "Complaints owner"
+    - id: "R5"
+      risk: "The pinned PRIN, Code, Regulations, or Ofgem guidance drifts"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Sources are pinned on 29 October 2026"
+        - "Pages that were not opened are named"
+        - "After the freshness window, sources_stale is true"
+      residual_risk: "Medium"
+      owner: "Complaints owner"
+    - id: "R6"
+      risk: "A UK identifier reaches a later model or a board pack because the draft was treated as anonymised"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 propose() is called"
+        - "Raw identifier values are not stored"
+        - "output_is_anonymised stays false"
+      residual_risk: "High"
+      owner: "Complaints owner"
+
+logging_and_audit:
+  description: "This starter writes no log. The draft JSON is the record of the run."
+  logged_events:
+    - event: "Draft produced"
+      data_logged:
+        - "Batch id"
+        - "Sector and report type"
+        - "In-period count and cluster ids, not the narratives"
+        - "Whether injection was detected"
+        - "Whether sources were stale"
+        - "Experiment 08 finding counts, not the raw values"
+      retention: "Not persisted by this starter. A deployment chooses its own retention."
+  log_destination:
+    primary: "Stdout or the path passed to --output"
+    secondary: "None"
+    note: "Do not log the unredacted narratives."
+  audit_trail:
+    - "The checksum covers the draft before any external attestation"
+    - "actions_taken is an empty list"
+    - "An external attestation, if a person outside the agent records one, has effect none"
+
+kill_switch:
+  description: "Stop calling draft_report(). Turn off the Copilot Studio agent. Remove any later connector."
+  methods:
+    - method: "Do not invoke the topic or the skill"
+      action: "The draft is not produced"
+      time_to_effect: "Immediate"
+      who_can_activate: "Complaints owner or the person who published the agent"
+    - method: "Unpublish the Copilot Studio agent"
+      action: "The channel stops answering"
+      time_to_effect: "As soon as the tenant applies it"
+      who_can_activate: "The environment administrator"
+    - method: "Power Platform DLP, if a connector is added later"
+      action: "Block the connector. This starter has none"
+      time_to_effect: "As soon as the policy applies"
+      who_can_activate: "The environment administrator"
+  escalation_contacts:
+    - role: "Complaints owner"
+      contact: "complaints-owner@example.com"
+
+review:
+  last_review_date: "2026-10-29"
+  next_review_date: "2027-04-29"
+  review_frequency: "Six months, and sooner if PRIN 2A.8, PRIN 2A.9, the Complaint Handling Code, the 2008 Regulations, or the Ofgem complaints guidance change"
+  reviewer: "Complaints owner"
+  review_triggers:
+    - "A change to PRIN 2A.8 or PRIN 2A.9"
+    - "A revision of the Housing Ombudsman Complaint Handling Code or the annual-submission guidance"
+    - "A new Ofgem complaints-data guidance or template"
+    - "A change to Experiment 02 or Experiment 08 that this draft calls"
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+
+assumptions:
+  description: "These are unverified for a deployment. The starter does not rely on them to produce a draft."
+  items:
+    - id: "A1"
+      assumption: "A deployment that adds a model will run it in the UK and will not send the unredacted batch."
+      section: "data_residency"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The organisation has decided who may validate complaints MI. This manifest names the complaints owner. It does not know the organisation's scheme of delegation, and it does not sit in the place of the governing body under PRIN 2A.8.4R."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The Ofgem guidance PDF opened on 29 October 2026 is still the guidance a domestic supplier would use. The Excel templates were not opened."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Complaint Handling Code PDF last revised 17 April 2024 is still the Code a member landlord would self-assess against. The annual-submissions page was also opened, and it carried a service notice."
+      section: "sources"
+      verify_on_deployment: true
