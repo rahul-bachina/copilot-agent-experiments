@@ -1,11 +1,12 @@
-"""Tool schemas do not offer an execution field."""
+"""Tool schemas do not offer an execution field.
+
+The check uses the standard library. CI installs only pytest.
+"""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-
-from jsonschema import Draft7Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,7 +17,9 @@ def _schema(name: str) -> dict:
 
 def test_desk_schema_has_no_side_effect_field():
     schema = _schema("desk_tool.schema.json")
-    Draft7Validator.check_schema(schema)
+    assert schema["$schema"] == "http://json-schema.org/draft-07/schema#"
+    assert schema["additionalProperties"] is False
+    assert "synthetic" in schema["required"]
     properties = schema["properties"]
     for banned in (
         "password_reset",
@@ -26,12 +29,12 @@ def test_desk_schema_has_no_side_effect_field():
         "human_approval",
     ):
         assert banned not in properties
-    assert schema["additionalProperties"] is False
+    assert properties["identity_check"]["additionalProperties"] is False
 
 
 def test_review_schema_allows_only_the_four_decisions():
     schema = _schema("review_tool.schema.json")
-    Draft7Validator.check_schema(schema)
+    assert schema["additionalProperties"] is False
     decisions = set(schema["properties"]["decision"]["enum"])
     assert decisions == {
         "user_confirm_standard_fix",
