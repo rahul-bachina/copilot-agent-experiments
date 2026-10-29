@@ -1,0 +1,96 @@
+{
+  "tools": [
+    {
+      "name": "draft_complaints_mi",
+      "implementation": "draft_report",
+      "reads": [
+        "one synthetic complaint batch",
+        "as-of date",
+        "pinned extracts",
+        "Experiment 02 analyse()",
+        "Experiment 08 propose()"
+      ],
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "validates_clusters": false,
+      "validates_narrative": false,
+      "submits_return": false,
+      "persists_batch": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_external_attestation",
+      "implementation": "record_external_attestation",
+      "reads": ["draft MI pack"],
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "validates_clusters": false,
+      "validates_narrative": false,
+      "submits_return": false,
+      "persists_batch": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Complaints owner"
+    },
+    {
+      "name": "approve_clusters",
+      "implementation": "approve_clusters",
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "validates_clusters": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "approve_narrative",
+      "implementation": "approve_narrative",
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "validates_narrative": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "submit_regulatory_return",
+      "implementation": "submit_regulatory_return",
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "submits_return": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "publish_report",
+      "implementation": "publish_report",
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_report",
+      "implementation": "send_report",
+      "writes": false,
+      "sends": false,
+      "approves": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_production_record",
+      "implementation": "write_production_record",
+      "writes": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
