@@ -549,7 +549,7 @@ def triage(ticket: dict, as_of: str, stale_after_days: int = STALE_AFTER_DAYS) -
         "followed": False,
     }
     draft["prompt_injection"] = {
-        "detected": bool(signals),
+        "detected": bool(signals) or bool(stripped),
         "signals": signals,
         "followed": False,
         "stripped_keys": stripped,
