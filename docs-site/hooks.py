@@ -73,6 +73,9 @@ DIAGRAMS = {
     "experiments/19-privacy-impact-assessment/docs/architecture_diagram.png": (
         "experiments/img/19-privacy-impact-assessment-architecture.png"
     ),
+    "experiments/20-complaints-root-cause-mi/docs/architecture_diagram.png": (
+        "experiments/img/20-complaints-root-cause-mi-architecture.png"
+    ),
 }
 
 

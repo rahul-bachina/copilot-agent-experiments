@@ -920,6 +920,63 @@ class TestExperiment19Manifest:
         assert experiment_19_manifest["agent"]["id"] == "exp-19-privacy-impact-assessment"
 
 
+class TestExperiment20Manifest:
+    """Test the Experiment 20 complaints root-cause MI manifest."""
+
+    @pytest.fixture
+    def experiment_20_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "20-complaints-root-cause-mi" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_20_manifest):
+        """Experiment 20 manifest should be valid."""
+        validate(instance=experiment_20_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_20_manifest):
+        """Experiment 20 should be autonomy level A0, not above."""
+        level = experiment_20_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_20_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_20_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_20_manifest):
+        """Experiment 20 should have all high-risk actions disabled."""
+        high_risk = experiment_20_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_20_manifest):
+        """Nothing is sent or written to a complaints system or a regulator."""
+        assert experiment_20_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_20_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_complaints_owner_validates_the_clusters(self, experiment_20_manifest):
+        """The catalogue checkpoint is the complaints owner, and it is mandatory."""
+        points = experiment_20_manifest["human_approval"]["approval_points"]
+        clusters = next(point for point in points if point["action"] == "Validate the clusters")
+        assert clusters["approver"] == "Complaints owner"
+        assert clusters["mandatory"] is True
+        narrative = next(
+            point for point in points if point["action"] == "Validate the narrative before it is used"
+        )
+        assert narrative["approver"] == "Complaints owner"
+        assert narrative["mandatory"] is True
+        assert experiment_20_manifest["agent"]["id"] == "exp-20-complaints-root-cause-mi"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

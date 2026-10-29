@@ -174,6 +174,16 @@ A draft DPIA for one synthetic project brief. It screens recorded answers agains
 
 </article>
 
+<article class="plan-card" id="uk04" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK04 · Autonomy A0</p>
+
+## Complaints root-cause and regulatory MI
+
+A draft management-information pack for one synthetic complaint batch. The complaints owner validates the clusters and the narrative before either is used. Counts list the source record ids. It calls [Experiment 02](experiments/02-consumer-duty-complaint-intake.md) `analyse()` for a financial-services cause and [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier redactions. It does not present the draft as a regulatory return. [Read the briefing](experiments/20-complaints-root-cause-mi.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20.
