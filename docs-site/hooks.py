@@ -76,6 +76,9 @@ DIAGRAMS = {
     "experiments/20-complaints-root-cause-mi/docs/architecture_diagram.png": (
         "experiments/img/20-complaints-root-cause-mi-architecture.png"
     ),
+    "experiments/21-it-service-desk/docs/architecture_diagram.png": (
+        "experiments/img/21-it-service-desk-architecture.png"
+    ),
 }
 
 

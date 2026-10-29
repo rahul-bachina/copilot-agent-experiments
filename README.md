@@ -50,6 +50,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 18 | [Evidence Pack Builder](experiments/18-evidence-pack-builder/) | Draft an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. Experiment 12 inventories in-scope items. Autonomy A1. The agent does not apply an exemption, disclose, write, or send. | ✅ Starter |
 | 19 | [Privacy Impact Assessment Assistant](experiments/19-privacy-impact-assessment/) | Draft a DPIA for one synthetic project brief against UK GDPR Article 35 and Articles 22A to 22D. The privacy officer approves the assessment. The project owner accepts residual risk. Experiment 08 proposes identifier redactions. Autonomy A1. The agent does not approve, reject, sign off, accept residual risk, or send a consultation. | ✅ Starter |
 | 20 | [Complaints root-cause and regulatory MI](experiments/20-complaints-root-cause-mi/) | Draft management information from one synthetic complaint batch for a Consumer Duty board report, a Housing Ombudsman Code self-assessment, or Ofgem complaints reporting. The complaints owner validates the clusters and the narrative. Every count lists source record ids. Experiments 02 and 08 are called in-process. Autonomy A0. The agent does not validate, submit, publish, or send. | ✅ Starter |
+| 21 | [IT Service Desk Agent](experiments/21-it-service-desk/) | Draft a reading of one synthetic IT ticket from a fixed knowledge base. The member of staff confirms a device change. Password resets, MFA changes, and access grants go to an analyst. Experiment 08 counts UK identifiers. Autonomy A1. The agent does not reset, grant, execute, write a ticket, or send. | ✅ Starter |
 
 ## Getting Started
 
@@ -187,6 +188,13 @@ cd ../20-complaints-root-cause-mi
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/report.py --input examples/sample_batch.json --as-of 2026-10-29
+
+# Experiment 21 needs no credentials either. The draft is deterministic.
+# Experiment 08 has to be present beside it. The desk calls that gateway.
+cd ../21-it-service-desk
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/desk.py --input examples/sample_ticket.json --as-of 2026-10-29
 ```
 
 ## Repository Structure
@@ -229,7 +237,8 @@ copilot-agent-experiments/
     ├── 17-invoice-exception-triage/
     ├── 18-evidence-pack-builder/
     ├── 19-privacy-impact-assessment/
-    └── 20-complaints-root-cause-mi/
+    ├── 20-complaints-root-cause-mi/
+    └── 21-it-service-desk/
 ```
 
 ## Agent Governance

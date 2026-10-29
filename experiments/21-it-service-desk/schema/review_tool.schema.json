@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Service desk review tool",
+  "description": "Input for record_review(). Confirmation does not execute a fix. Reset, MFA change, access grant, write, send, purchase, and wipe are not decisions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "user_confirm_standard_fix",
+        "user_confirm_device_change",
+        "analyst_take_handover",
+        "reject_draft"
+      ]
+    },
+    "actor": {
+      "enum": ["user", "analyst"]
+    },
+    "actor_id": {
+      "type": "string"
+    }
+  }
+}
