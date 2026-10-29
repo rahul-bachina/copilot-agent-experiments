@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Nineteen starters you can read today
+## Twenty starters you can read today
 
 </div>
 
@@ -553,6 +553,31 @@ The draft runs locally. Nothing is approved, signed off, accepted, or sent.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 21 · Q009 · IT service desk · Autonomy A1</p>
+
+### IT service desk
+
+Draft a reading of one synthetic IT ticket from a fixed knowledge base. The member of staff confirms a device change. Password resets, MFA changes, and access grants go to an analyst. Experiment 08 counts UK identifiers.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is reset, granted, executed, written, or sent.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/21-it-service-desk.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/21-it-service-desk)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -575,7 +600,7 @@ The draft runs locally. Nothing is approved, signed off, accepted, or sent.
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G010, L004, L006, UK01, UK02, UK03, UK05, UK06, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G010, L004, L006, Q009, UK01, UK02, UK03, UK05, UK06, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
@@ -635,12 +660,12 @@ The manifest is a prompt for the organisation's own assessment. It is not a fini
 
 ## Before you rely on a page
 
-- These pages describe the repository as it stood on 24 October 2026, except the Experiment 08, Experiment 09, and Experiment 10 briefings, which were checked on 26 October 2026, and the Experiment 11, Experiment 12, Experiment 13, Experiment 14, Experiment 15, and Experiment 16 briefings, which were checked on 27 October 2026, and the Experiment 17, Experiment 18, and Experiment 19 briefings, which were checked on 28 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
+- These pages describe the repository as it stood on 24 October 2026, except the Experiment 08, Experiment 09, and Experiment 10 briefings, which were checked on 26 October 2026, and the Experiment 11, Experiment 12, Experiment 13, Experiment 14, Experiment 15, and Experiment 16 briefings, which were checked on 27 October 2026, and the Experiment 17, Experiment 18, and Experiment 19 briefings, which were checked on 28 October 2026, and the Experiment 21 briefing, which was checked on 29 October 2026. If a page and an `agent-manifest.yaml` disagree, the manifest is the control.
 - There are no client names or testimonials. Experiment 06 records a design for measuring time with a stopwatch. The figures in its smoke report are synthetic fixture arithmetic, not a study of staff.
 - A smoke test checks that code runs on synthetic text. It is not a model score.
 - This site is not legal advice, a data protection impact assessment, or an ATRS submission.
 - Contact addresses on `example.gov.uk` and `example.com` are placeholders.
-- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 08 proposes redactions of UK identifiers for another experiment to call. A privacy reviewer approves the proposal before any release. The gateway does not release the text and does not describe it as anonymised. Experiment 09 drafts one correspondence reply for a department, an agency, or a council. It does not send, and it does not invent a line to take. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. Experiment 11 drafts a commencement and evidence note for an HR lead at a UK employer. It does not decide that the employer took all reasonable steps, and it does not discipline, dismiss, publish, or send. Experiment 12 inventories one synthetic batch of text files. The user confirms the files and the purpose, and an intake reviewer decides the routing suggestion. It does not queue, release, or send, and it does not decide the underlying matter. Experiment 13 drafts a contact-centre reply for a local authority from a fixed catalogue, or a handover. It does not decide eligibility, send a message, or write a case. Experiment 14 drafts platform options for one proposed agent. The architect confirms every option. It does not select a platform, approve a manifest, or deploy. Experiment 15 flags possible safeguarding, self-harm, financial hardship, and deadline indicators in one synthetic letter. The duty officer reviews every flag. It does not close, deprioritise, send, or label a person as vulnerable. Text goes through Experiment 08 before any model call. Experiment 16 drafts a Money Laundering Regulations 2017 checklist for one synthetic customer file. The KYC reviewer confirms the documents and the purpose. It does not approve, reject, onboard, assign a risk rating, file a report, or send. Experiment 17 drafts a resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change is routed to a separate verifier. It does not post, approve, hold, or pay the invoice, and it does not change supplier bank details. Experiment 18 drafts an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. It does not apply an exemption, disclose, write a production record, or send. Experiment 19 drafts a data protection impact assessment for one synthetic project brief. The privacy officer approves the assessment and the project owner accepts residual risk. It does not approve, reject, sign off, accept residual risk, or send a consultation. They are not interchangeable.
+- Experiment 01 is for public bodies. Experiments 02 and 04 are for FCA-regulated firms. Experiment 03 drafts assurance records and does not decide that a body is in the ATRS mandatory scope. Experiment 04 does not decide that a firm is ready for authorisation. Experiment 05 is for social landlords in England. Experiment 06 quotes approved corporate policies, refuses clinical questions, and does not decide entitlement. Experiment 07 drafts consultation themes for a public body or a charity. It does not decide the policy and it does not publish the analysis. Experiment 08 proposes redactions of UK identifiers for another experiment to call. A privacy reviewer approves the proposal before any release. The gateway does not release the text and does not describe it as anonymised. Experiment 09 drafts one correspondence reply for a department, an agency, or a council. It does not send, and it does not invent a line to take. Experiment 10 triages one synthetic cryptoasset transfer for an analyst at an FCA-regulated firm. It does not hold, return, release, file, or contact a counterparty. Experiment 11 drafts a commencement and evidence note for an HR lead at a UK employer. It does not decide that the employer took all reasonable steps, and it does not discipline, dismiss, publish, or send. Experiment 12 inventories one synthetic batch of text files. The user confirms the files and the purpose, and an intake reviewer decides the routing suggestion. It does not queue, release, or send, and it does not decide the underlying matter. Experiment 13 drafts a contact-centre reply for a local authority from a fixed catalogue, or a handover. It does not decide eligibility, send a message, or write a case. Experiment 14 drafts platform options for one proposed agent. The architect confirms every option. It does not select a platform, approve a manifest, or deploy. Experiment 15 flags possible safeguarding, self-harm, financial hardship, and deadline indicators in one synthetic letter. The duty officer reviews every flag. It does not close, deprioritise, send, or label a person as vulnerable. Text goes through Experiment 08 before any model call. Experiment 16 drafts a Money Laundering Regulations 2017 checklist for one synthetic customer file. The KYC reviewer confirms the documents and the purpose. It does not approve, reject, onboard, assign a risk rating, file a report, or send. Experiment 17 drafts a resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change is routed to a separate verifier. It does not post, approve, hold, or pay the invoice, and it does not change supplier bank details. Experiment 18 drafts an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. It does not apply an exemption, disclose, write a production record, or send. Experiment 19 drafts a data protection impact assessment for one synthetic project brief. The privacy officer approves the assessment and the project owner accepts residual risk. It does not approve, reject, sign off, accept residual risk, or send a consultation. Experiment 21 drafts a reading of one synthetic IT ticket. The member of staff confirms a device change. An analyst takes a password reset, an MFA change, or an access grant. It does not reset, grant, execute, write a ticket, or send. They are not interchangeable.
 
 Nothing in the repository is marked Blueprint or Archived.
 
