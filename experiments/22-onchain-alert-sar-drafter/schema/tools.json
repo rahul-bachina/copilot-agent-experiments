@@ -1,0 +1,99 @@
+{
+  "tools": [
+    {
+      "name": "investigate_alert",
+      "implementation": "investigate",
+      "reads": [
+        "one synthetic alert case",
+        "as-of date",
+        "pinned extracts",
+        "optional Experiment 10 triage()",
+        "optional Experiment 16 review()",
+        "Experiment 08 propose()"
+      ],
+      "writes": false,
+      "sends": false,
+      "files_sar": false,
+      "requests_daml": false,
+      "contacts_customer": false,
+      "freezes_account": false,
+      "moves_crypto": false,
+      "records_decision": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "file_with_nca",
+      "implementation": "file_with_nca",
+      "writes": false,
+      "sends": false,
+      "files_sar": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "request_daml",
+      "implementation": "request_daml",
+      "writes": false,
+      "sends": false,
+      "requests_daml": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_customer",
+      "implementation": "contact_customer",
+      "writes": false,
+      "sends": false,
+      "contacts_customer": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "freeze_account",
+      "implementation": "freeze_account",
+      "writes": false,
+      "sends": false,
+      "freezes_account": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "move_crypto",
+      "implementation": "move_crypto",
+      "writes": false,
+      "sends": false,
+      "moves_crypto": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_mlro_decision",
+      "implementation": "record_mlro_decision",
+      "writes": false,
+      "sends": false,
+      "records_decision": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_suspicion",
+      "implementation": "record_suspicion",
+      "writes": false,
+      "sends": false,
+      "records_decision": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "assign_glossary_code",
+      "implementation": "assign_glossary_code",
+      "writes": false,
+      "sends": false,
+      "assigns_glossary_code": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

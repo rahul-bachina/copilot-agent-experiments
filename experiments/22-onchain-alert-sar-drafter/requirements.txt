@@ -1,0 +1,6 @@
+# Experiment 22 has no runtime dependencies. The investigation calls
+# Experiments 10, 16, and 08 in-process when those folders are beside it.
+# Experiment 16 calls Experiment 12, which calls Experiment 08.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0

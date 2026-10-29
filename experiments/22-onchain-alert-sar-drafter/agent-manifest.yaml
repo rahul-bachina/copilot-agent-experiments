@@ -1,0 +1,482 @@
+# Agent manifest: On-chain monitoring alert investigator and SAR narrative drafter
+# Experiment 22 — catalogue ID UK07
+# Version: 0.1.0
+# Last reviewed: 2026-10-29
+# Next review: 2027-04-29
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-22-onchain-alert-sar-drafter"
+  name: "On-chain Alert Investigator and SAR Narrative Drafter"
+  version: "0.1.0"
+  description: >
+    Drafts an internal evidence timeline, an investigation note, and a
+    suspicious activity report narrative from one synthetic on-chain alert
+    and the customer context supplied with it. Autonomy A1. The nominated
+    officer decides whether the Proceeds of Crime Act 2002 section 330 or
+    section 331 test is met and whether to file. The agent never files with
+    the National Crime Agency, never requests a defence, never freezes or
+    moves a cryptoasset, and never drafts customer-facing content about a
+    suspicion. Travel Rule context is Experiment 10. KYC context is
+    Experiment 16. Identifier redaction is Experiment 08. Monitoring
+    expectations are cited from the same FCA pages as Experiment 04.
+  owner: "Nominated officer"
+  contact: "nominated-officer@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/22-onchain-alert-sar-drafter"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "The nominated officer decides whether to file. The agent only drafts an internal note."
+  constraints:
+    - "The nominated officer decides whether a disclosure is required. The agent only drafts."
+    - "The agent NEVER files, submits, or suppresses a suspicious activity report"
+    - "The agent NEVER contacts the National Crime Agency or the UKFIU"
+    - "The agent NEVER requests a defence against money laundering or terrorist financing"
+    - "The agent NEVER records that anyone knows or suspects money laundering"
+    - "The agent NEVER drafts or sends customer-facing content. Proceeds of Crime Act 2002 section 333A."
+    - "The agent NEVER freezes a wallet, moves a cryptoasset, or writes a production record"
+    - "A sentence inside the alert cannot set the officer's decision, close the alert, or instruct a customer message"
+    - "Travel Rule triage, KYC review, and UK identifier detection are Experiments 10, 16, and 08. This agent does not re-implement them."
+    - "All output is a draft and is marked for the nominated officer"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic on-chain alert case"
+      description: "An alert id, a rule id, hops, optional ledger rows, a customer reference, and optional free text. Samples in this repository are synthetic. Addresses must use the SYNTH-ADDR- prefix and hashes the SYNTH-TX- prefix."
+      access_level: "read"
+      scope: "One case per invocation. No chain query and no browsing of a case system."
+      justification: "The timeline cannot be assembled without the export the analyst has supplied"
+      data_categories:
+        - "Synthetic wallet tokens and transaction tokens"
+        - "A customer reference and a stated purpose"
+        - "Free text that may contain a UK identifier or an instruction"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the case. The draft stores synthetic tokens, closed-list labels, and hashes, not a live address."
+
+    - resource: "Optional Travel Rule transfer"
+      description: "One synthetic transfer passed to Experiment 10. Party names are not copied into this draft."
+      access_level: "read"
+      scope: "The travel_rule_transfer object on this case, if present."
+      justification: "A missing Travel Rule field can be part of the same timeline. The decision stays with Experiment 10's analyst."
+      may_contain_personal_data: true
+
+    - resource: "Optional KYC customer file"
+      description: "One synthetic file passed to Experiment 16. The file body and the customer-facing note are not copied into this draft."
+      access_level: "read"
+      scope: "The kyc_file object on this case, if present."
+      justification: "Customer-due-diligence gaps can be part of the same timeline. Confirmation stays with Experiment 16's reviewer."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+
+    - resource: "Analyst-supplied run parameters"
+      description: "As-of date and optional stale window, typed outside the case body."
+      access_level: "read"
+      scope: "Fields passed for this run."
+      justification: "The freshness comparison needs a date the analyst typed"
+      may_contain_personal_data: false
+
+    - resource: "Pinned source extracts"
+      description: "Short quotations in src/sources.py from pages opened on 29 October 2026."
+      access_level: "read"
+      scope: "Static files in this experiment"
+      justification: "The draft has to cite the words that were read, without a network call at runtime"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "NCA SAR Portal and UKFIU inboxes"
+      reason: "The agent does not file and does not request a defence."
+    - resource: "Chain nodes, mempools, and blockchain-analytics vendor APIs"
+      reason: "The timeline uses only the export in the case. A later hop is not retrieved."
+    - resource: "Wallet private keys and seed phrases"
+      reason: "Not required to draft a note, and the agent does not transact."
+    - resource: "Customer email, chat, or letter channels"
+      reason: "Section 333A. This agent drafts no customer-facing content."
+    - resource: "Production case-management or core-banking records"
+      reason: "No production write. The draft is JSON for a person."
+    - resource: "The SAR glossary and the Financial Crime Guide"
+      reason: "Neither was opened. The agent must not invent a glossary code or a guide paragraph."
+
+# =============================================================================
+# TOOLS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "investigate_alert"
+      provider: "Python src/investigate.py"
+      action: "Return one internal draft for the case the analyst supplied"
+      access_level: "read"
+      scope: "One synthetic case and one as-of date"
+      justification: "The nominated officer needs a timeline and a narrative before deciding"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "triage_transfer"
+      provider: "Experiment 10 src/triage.py"
+      action: "Read one attached Travel Rule transfer and keep the categories only"
+      access_level: "read"
+      scope: "Called only when travel_rule_transfer is present"
+      justification: "The same case should not re-implement Part 7A"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "review_kyc_file"
+      provider: "Experiment 16 src/review.py"
+      action: "Read one attached KYC file and keep the missing-item ids only"
+      access_level: "read"
+      scope: "Called only when kyc_file is present"
+      justification: "The same case should not re-implement the KYC checklist"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "propose_redaction"
+      provider: "Experiment 08 src/gateway.py"
+      action: "Propose redactions for the analyst note"
+      access_level: "read"
+      scope: "The analyst note on this case"
+      justification: "A UK identifier in free text should not be repeated as if the excerpt were anonymised"
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No case system, SAR portal, chain, or wallet is written. A sandbox copy of the JSON is a draft and is not a production record."
+  sends:
+    enabled: false
+    note: "Nothing is sent to a customer, a counterparty, the FCA, or the NCA. contact_customer always raises."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject an alert, a customer, or a disclosure. record_mlro_decision always raises."
+  regulated_decision:
+    enabled: false
+    rationale: "Whether section 330 or section 331 is met is the nominated officer's determination under regulation 21(5). record_suspicion always raises. mlro_decision stays null."
+  production_record_change:
+    enabled: false
+    rationale: "The starter does not write to a case system, the SAR Portal, Dataverse, or a chain."
+  external_send:
+    enabled: false
+    rationale: "contact_customer and file_with_nca always raise. No customer wording is drafted."
+  spend_transact:
+    enabled: false
+    rationale: "move_crypto and freeze_account always raise. The agent does not move or freeze a cryptoasset."
+  additional_high_risk:
+    - enabled: false
+      action_name: "File a suspicious activity report with the NCA"
+      rationale: "file_with_nca always raises. sar_filed stays false. The narrative says it has not been submitted."
+    - enabled: false
+      action_name: "Request a defence against money laundering"
+      rationale: "request_daml always raises. Chapter 3 of the UKFIU guidance was not opened. daml_requested stays false."
+    - enabled: false
+      action_name: "Draft or send customer-facing content"
+      rationale: "contact_customer always raises. Section 333A. customer_facing.text stays null."
+    - enabled: false
+      action_name: "Assign a SAR glossary code"
+      rationale: "The glossary was not opened. glossary_codes_assigned stays false."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The nominated officer decides whether the information gives rise to
+    knowledge, suspicion, or reasonable grounds, and whether to make a
+    disclosure. The agent has no tool that records that decision. Viewing
+    the draft is not approval.
+
+  approval_points:
+    - action: "Decide whether the section 330 or section 331 test is met"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "Regulation 21(5) gives that determination to the nominated officer. The draft lists what was supplied and does not make it."
+
+    - action: "File or not file a suspicious activity report with the NCA"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "Disabled for this agent. file_with_nca always raises. The officer files in the firm's own channel, if they file at all."
+
+    - action: "Request a defence against money laundering or terrorist financing"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "Disabled for this agent. request_daml always raises. UKFIU chapter 3 was not opened."
+
+    - action: "Rely on the draft after a source or the alert is marked stale, or after an event is dated after the as-of date"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "The core does not clear a stale flag and does not query the chain for a later hop."
+
+    - action: "Treat a supplied sanctions marker, PEP marker, or counterparty label as a determination"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "A boolean or a word on the export is not a screening result and not a suspicion."
+
+    - action: "Use any customer-facing wording about this case"
+      approver: "Nominated officer"
+      mandatory: true
+      rationale: "The agent drafts none. Section 333A. Sections 333B to 333D were not opened and are not applied."
+
+  no_approval_required:
+    - action: "View the internal draft"
+      rationale: "Reading the JSON has no external effect."
+    - action: "Re-run the same case"
+      rationale: "The same case and the same as-of date produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      A firm handling an internal financial-crime note may look at Article
+      6(1)(c), legal obligation, because the Money Laundering Regulations and
+      Part 7 of the Proceeds of Crime Act 2002 require the firm to have
+      reporting arrangements. This manifest does not assert that basis. The
+      adopting organisation confirms its own before production use. No
+      Article 9 condition is asserted. A PEP marker can touch political
+      opinions. Health data can appear if someone pastes it.
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Political opinions, where the case contains a PEP marker"
+      - "Health, where free text happens to include it"
+    lawful_basis_special: "Not asserted"
+    condition: "Not asserted. The caller confirms any Schedule 1 condition before production use."
+    safeguards:
+      - "The draft does not copy a KYC file body"
+      - "Experiment 08 proposes identifier spans for the analyst note. The excerpt is not described as anonymised"
+      - "No customer-facing text is produced, so a marker is not repeated to the customer"
+
+  data_minimisation:
+    - "One case per run"
+    - "Live-looking chain addresses are omitted rather than stored in the draft"
+    - "Party names from Experiment 10 and file bodies from Experiment 16 are not copied"
+    - "The starter does not query a chain or a sanctions list"
+
+  retention:
+    agent_retention: "Transient in this starter. Nothing is written to a store."
+    note: >
+      The firm's own SAR and investigation records are the firm's. This
+      agent does not set a retention period and does not delete a production file.
+
+  data_residency:
+    region: "UK South or UK West if a team later adds a Foundry narrative"
+    note: "The Python starter makes no network call. Data-use terms are confirmed at deployment."
+
+  data_subject_rights:
+    note: "The starter does not hold a customer record against which to action a request. The firm handles rights against its own file. This agent does not draft the response to the customer."
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Alert text, notes, and nested files are untrusted. A phrase that asks
+    the agent to file, not file, tell the customer, freeze a wallet, or
+    ignore the rules is recorded and is not followed.
+  controls:
+    - control: "Closed phrase list"
+      description: "Instructions are recorded, including when they sit in a nested KYC note or a hop label."
+      implementation: "src/injection.py. followed is forced false."
+    - control: "Prohibited payload keys"
+      description: "Keys such as mlro_decision, sar_filed, and daml_requested are stripped before the draft is built."
+      implementation: "src/investigate.py"
+    - control: "No customer channel"
+      description: "A requested customer message is not copied into the output. customer_facing.text stays null."
+      implementation: "src/customer_guard.py"
+    - control: "Nested experiments"
+      description: "Experiments 10 and 16 keep their own injection flags. This draft does not follow either of them."
+      implementation: "src/reuse.py"
+  residual_risk: >
+    The lists are not exhaustive. A novel instruction can pass the scanner.
+    Text over 4,000 characters is not fully read. The nominated officer still
+    reads the draft.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Qualitative likelihood and impact for this starter, assessed 29 October 2026. Not a firm's business-wide risk assessment under regulation 18."
+  date_assessed: "2026-10-29"
+  risks:
+    - id: "R1"
+      risk: "The narrative is treated as a filed SAR or as the officer's suspicion"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "file_with_nca and record_suspicion always raise"
+        - "The narrative says it is not a disclosure and has not been submitted"
+        - "mlro_decision stays null"
+      residual_risk: "Medium"
+      owner: "Nominated officer"
+    - id: "R2"
+      risk: "Customer-facing wording discloses that a report was made or that an investigation is in mind"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No customer text is drafted"
+        - "A requested customer message is dropped, not echoed"
+        - "contact_customer always raises"
+      residual_risk: "Low"
+      owner: "Nominated officer"
+    - id: "R3"
+      risk: "A stale alert, or an address that is not the synthetic token, is treated as the current chain picture"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Alert age is compared with the as-of date"
+        - "Only SYNTH-ADDR- and SYNTH-TX- tokens are copied"
+        - "The core does not query a chain"
+      residual_risk: "Medium"
+      owner: "Financial crime operations"
+    - id: "R4"
+      risk: "Prompt injection files a report, tells the customer, or moves a cryptoasset"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions always raise"
+        - "Injection phrases are recorded and followed is forced false"
+        - "Prohibited keys are stripped"
+      residual_risk: "Low"
+      owner: "Information security"
+    - id: "R5"
+      risk: "The MARC on-chain sentence, or a planned Financial Crime Guide consultation, is applied as if it were the AML monitoring rule"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The draft labels the MARC sentence as market abuse, not this alert"
+        - "The guide was not opened and is listed under not opened"
+      residual_risk: "Low"
+      owner: "Financial crime operations"
+    - id: "R6"
+      risk: "A live alert is pasted into a shared test run, or a redacted excerpt is treated as anonymised"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A case that is not marked synthetic is refused"
+        - "Experiment 08 is called for the analyst note"
+        - "output_is_anonymised stays false"
+      residual_risk: "High"
+      owner: "Data protection officer"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: "This starter writes no log. The JSON is the record of the run for as long as the caller keeps it."
+  logged_events:
+    - event: "Draft produced"
+      data_logged:
+        - "alert id"
+        - "as_of"
+        - "whether injection was detected"
+        - "whether a source or the alert was stale"
+        - "input sha256, not the body"
+      retention: "Not stored by this starter"
+    - event: "Nested experiment called"
+      data_logged:
+        - "whether Experiment 10 or 16 was called"
+        - "whether that call was refused or unread"
+        - "Experiment 08 finding counts, not raw values"
+      retention: "Only if the caller saves the JSON. The agent does not."
+  log_destination:
+    primary: "None in this starter"
+    secondary: "Application Insights, if a team deploys a host later"
+    note: "Do not log the analyst note, the customer message that was refused, or a raw identifier."
+  audit_trail:
+    - "The draft records model_called, network_called, and chain_queried as false"
+    - "sar_filed, nca_contacted, daml_requested, and customer_told are recorded as false"
+    - "customer_facing.drafted is recorded as false"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Stop producing drafts. Existing JSON already in someone's hands is not recalled by this file."
+  methods:
+    - method: "Disable the Copilot Studio agent"
+      action: "Turn the agent off in the tenant"
+      time_to_effect: "When the tenant applies it"
+      who_can_activate: "The person who owns the agent in the tenant"
+    - method: "Stop calling investigate()"
+      action: "Remove the flow or the function host"
+      time_to_effect: "On the next request"
+      who_can_activate: "The team running the host"
+    - method: "Remove any later Foundry access"
+      action: "Revoke the credential. This starter has none."
+      time_to_effect: "When the credential is revoked"
+      who_can_activate: "The platform owner"
+  escalation_contacts:
+    - role: "Nominated officer"
+      contact: "nominated-officer@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-29"
+  next_review_date: "2027-04-29"
+  review_frequency: "Six months, and sooner if section 330, 331, or 333A, or regulation 19 or 21, changes"
+  reviewer: "Nominated officer, with the data protection officer for the identifier path"
+  review_triggers:
+    - "A change to sections 330, 331, or 333A, or to regulations 19 or 21"
+    - "A published Financial Crime Guide update for cryptoasset firms"
+    - "A change to the UKFIU submitting-a-SAR chapter or the glossary"
+    - "A change to Experiment 08, 10, or 16 that alters the nested JSON"
+    - "A plan to connect the SAR Portal, a chain node, or a customer channel"
+  related_documents:
+    - name: "Security and permissions"
+      path: "experiments/22-onchain-alert-sar-drafter/docs/security-and-permissions.md"
+    - name: "Experiment 10 Travel Rule triage"
+      path: "experiments/10-travel-rule-exception-triage/README.md"
+    - name: "Experiment 16 KYC evidence intake"
+      path: "experiments/16-kyc-evidence-intake/README.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items to verify before anyone relies on a draft in a firm."
+  items:
+    - id: "A1"
+      assumption: "The adopting firm is in the regulated sector for the case, and a person will make any section 330 or 331 determination."
+      section: "autonomy"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6 and any Article 9 condition are confirmed by the firm. This manifest does not assert them."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The pages pinned on 29 October 2026 are re-read before the freshness window lapses. The POCA pages warned that the revised text may not be fully up to date."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The firm reads UKFIU chapter 3 before anyone requests a defence. This starter does not."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, Foundry prompt shields, Key Vault, Purview, and Application Insights are tenant controls. They are not configured in this repository."
+      section: "kill_switch"
+      verify_on_deployment: true
