@@ -355,19 +355,19 @@ def test_report_type_must_match_the_sector():
 
 
 def test_duplicate_record_ids_raise_without_the_narrative():
-    secret = "SECRET-NARRATIVE-TOKEN"
+    marker = "NARRATIVE-TOKEN-NOT-IN-THE-ERROR"
     with pytest.raises(ValueError) as caught:
         draft_report(
             _batch(
                 "energy",
                 [
-                    _record("E1", f"The bill is wrong. {secret}"),
+                    _record("E1", f"The bill is wrong. {marker}"),
                     _record("E1", "Another bill."),
                 ],
             ),
             as_of=AS_OF,
         )
-    assert secret not in str(caught.value)
+    assert marker not in str(caught.value)
     assert "duplicate record_id" in str(caught.value)
 
 
