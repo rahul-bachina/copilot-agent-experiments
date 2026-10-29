@@ -174,6 +174,16 @@ A draft DPIA for one synthetic project brief. It screens recorded answers agains
 
 </article>
 
+<article class="plan-card" id="q009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Q009 · Autonomy A1</p>
+
+## IT service desk
+
+A draft reading of one synthetic IT ticket from a fixed knowledge base. The member of staff confirms a device change. Password resets, MFA changes, and access grants go to an analyst. The agent does not execute a fix, write the ticket, or send a message. It calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) and follows the catalogue pattern of [Experiment 13](experiments/13-council-contact-front-door.md). [Read the briefing](experiments/21-it-service-desk.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.
