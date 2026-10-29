@@ -76,6 +76,9 @@ DIAGRAMS = {
     "experiments/21-it-service-desk/docs/architecture_diagram.png": (
         "experiments/img/21-it-service-desk-architecture.png"
     ),
+    "experiments/22-onchain-alert-sar-drafter/docs/architecture_diagram.png": (
+        "experiments/img/22-onchain-alert-sar-architecture.png"
+    ),
 }
 
 

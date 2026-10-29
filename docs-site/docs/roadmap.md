@@ -184,6 +184,16 @@ A draft reading of one synthetic IT ticket from a fixed knowledge base. The memb
 
 </article>
 
+<article class="plan-card" id="uk07" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK07 · Autonomy A1</p>
+
+## On-chain alert investigator and SAR narrative drafter
+
+A draft timeline and SAR narrative for one synthetic on-chain alert. The nominated officer decides whether to file. The agent does not file with the National Crime Agency, request a defence, or draft customer-facing content. It can call [Experiment 10](experiments/10-travel-rule-exception-triage.md), [Experiment 16](experiments/16-kyc-evidence-intake.md), and [Experiment 08](experiments/08-uk-pii-redaction-gateway.md). [Read the briefing](experiments/22-onchain-alert-sar-drafter.md).
+
+</article>
+
 </div>
 
 Every card on this page now has a briefing. Nothing here is still only a name.

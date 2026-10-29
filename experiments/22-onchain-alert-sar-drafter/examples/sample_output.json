@@ -1,0 +1,315 @@
+{
+  "label": "DRAFT FOR THE NOMINATED OFFICER",
+  "catalogue_id": "UK07",
+  "experiment": "22-onchain-alert-sar-drafter",
+  "experiment_id": "exp-22-onchain-alert-sar-drafter",
+  "autonomy": "A1",
+  "synthetic": true,
+  "refused": false,
+  "firm_name": "Harbourline Markets Ltd",
+  "alert_id": "SYN-ALERT-014",
+  "as_of": "2026-10-29",
+  "sources_pinned_on": "2026-10-29",
+  "sources_stale": false,
+  "rules_current": true,
+  "alert_context_stale": false,
+  "input_sha256": "5b9a1f1409b4db4cd346a04d07bd8078c171cbdc3c582c1a2e4d19db7932c82a",
+  "model_called": false,
+  "network_called": false,
+  "chain_queried": false,
+  "mlro_decision": null,
+  "sar_filed": false,
+  "nca_contacted": false,
+  "daml_requested": false,
+  "customer_told": false,
+  "suspicion_recorded_by_agent": false,
+  "glossary_codes_assigned": false,
+  "actions_taken": [],
+  "decisions_not_taken": [
+    "file_sar",
+    "contact_nca",
+    "request_daml",
+    "record_suspicion",
+    "record_mlro_decision",
+    "draft_customer_content",
+    "freeze_account",
+    "move_crypto",
+    "assign_glossary_code",
+    "query_chain"
+  ],
+  "evidence_timeline": [
+    {
+      "at": "2026-10-19T14:02:00+00:00",
+      "placed": true,
+      "future": false,
+      "kind": "on_chain_hop",
+      "summary": "out 1.25 SYN from SYNTH-ADDR-CUSTOMER-014 to SYNTH-ADDR-LABEL-001 tx SYNTH-TX-0A11B2. Supplied label words: mixer.",
+      "source": "alert.hops[0]",
+      "is_a_suspicion": false
+    },
+    {
+      "at": "2026-10-19T14:11:00+00:00",
+      "placed": true,
+      "future": false,
+      "kind": "on_chain_hop",
+      "summary": "in 1.10 SYN from SYNTH-ADDR-LABEL-001 to SYNTH-ADDR-CUSTOMER-014 tx SYNTH-TX-0A11B3. Supplied label words: mixer.",
+      "source": "alert.hops[1]",
+      "is_a_suspicion": false
+    },
+    {
+      "at": "2026-10-20T09:15:00+00:00",
+      "placed": true,
+      "future": false,
+      "kind": "alert_raised",
+      "summary": "The export records the alert as raised at this time.",
+      "source": "alert.raised_at",
+      "is_a_suspicion": false
+    }
+  ],
+  "omitted_identifiers": [],
+  "text_not_fully_read": [],
+  "indicators_for_a_person": [
+    {
+      "id": "alert_rule_on_the_export",
+      "fact": "The export names rule id SYN-RULE-MIXER-01.",
+      "is_a_suspicion": false,
+      "decided_by_agent": false
+    },
+    {
+      "id": "supplied_counterparty_label",
+      "fact": "The export already carried these label words: mixer; mixer.",
+      "is_a_suspicion": false,
+      "decided_by_agent": false
+    },
+    {
+      "id": "stated_purpose_on_the_file",
+      "fact": "A stated purpose is on the customer block. This draft does not decide that activity is inconsistent with it.",
+      "is_a_suspicion": false,
+      "decided_by_agent": false
+    }
+  ],
+  "investigation_note": {
+    "audience": "internal_nominated_officer",
+    "not_for_the_customer": true,
+    "paragraphs": [
+      "Internal draft for the nominated officer. Subject reference on the file: SYN-CUST-014. Firm label on the case: Harbourline Markets Ltd.",
+      "Who is involved is taken from the customer reference supplied with the case. How they are involved is the relationship described below, and only where the case itself states it.",
+      "The case says the relationship is business_relationship.",
+      "The case says the firm is established in the United Kingdom. That is the UK link recorded here.",
+      "Placed events, in time order: out 1.25 SYN from SYNTH-ADDR-CUSTOMER-014 to SYNTH-ADDR-LABEL-001 tx SYNTH-TX-0A11B2. Supplied label words: mixer. in 1.10 SYN from SYNTH-ADDR-LABEL-001 to SYNTH-ADDR-CUSTOMER-014 tx SYNTH-TX-0A11B3. Supplied label words: mixer. The export records the alert as raised at this time.",
+      "Arithmetic on the placed hop amounts gives 2.35 SYN. This is not a valuation and not a sterling figure.",
+      "The case supplies a sterling figure of 940.00 GBP. This draft did not convert a price.",
+      "Facts a person may look at, none of which is a suspicion recorded by this agent: The export names rule id SYN-RULE-MIXER-01. The export already carried these label words: mixer; mixer. A stated purpose is on the customer block. This draft does not decide that activity is inconsistent with it.",
+      "No Travel Rule transfer was attached. Experiment 10 was not called.",
+      "No KYC file was attached. Experiment 16 was not called.",
+      "Experiment 08 detected UK identifiers in the analyst note. The excerpt is a redaction proposal and is not anonymised. The raw values are not repeated here.",
+      "Section 330(2), as opened, uses these words for the first condition: knows or suspects, or has reasonable grounds for knowing or suspecting, that another person is engaged in money laundering. This draft does not decide that the condition is met.",
+      "Regulation 21(5) requires the nominated officer to determine whether a disclosure made to them gives rise to knowledge or suspicion or reasonable grounds for knowledge or suspicion. This text is not that determination, and it is not itself a disclosure under section 330 or section 331.",
+      "It has not been submitted to the National Crime Agency. No glossary code has been selected. No defence has been requested. UKFIU chapter 3 was not opened. Nothing in this draft is for the customer."
+    ]
+  },
+  "sar_narrative": {
+    "audience": "nominated_officer",
+    "not_a_disclosure": true,
+    "not_submitted": true,
+    "glossary_codes_assigned": false,
+    "daml_requested": false,
+    "statutory_test_applied": false,
+    "ukfiu_chapter": "2",
+    "ukfiu_version": "1.1 December 2025",
+    "reason_for_suspicion_draft": "Internal draft for the nominated officer. Subject reference on the file: SYN-CUST-014. Firm label on the case: Harbourline Markets Ltd.\n\nWho is involved is taken from the customer reference supplied with the case. How they are involved is the relationship described below, and only where the case itself states it.\n\nThe case says the relationship is business_relationship.\n\nThe case says the firm is established in the United Kingdom. That is the UK link recorded here.\n\nPlaced events, in time order: out 1.25 SYN from SYNTH-ADDR-CUSTOMER-014 to SYNTH-ADDR-LABEL-001 tx SYNTH-TX-0A11B2. Supplied label words: mixer. in 1.10 SYN from SYNTH-ADDR-LABEL-001 to SYNTH-ADDR-CUSTOMER-014 tx SYNTH-TX-0A11B3. Supplied label words: mixer. The export records the alert as raised at this time.\n\nArithmetic on the placed hop amounts gives 2.35 SYN. This is not a valuation and not a sterling figure.\n\nThe case supplies a sterling figure of 940.00 GBP. This draft did not convert a price.\n\nFacts a person may look at, none of which is a suspicion recorded by this agent: The export names rule id SYN-RULE-MIXER-01. The export already carried these label words: mixer; mixer. A stated purpose is on the customer block. This draft does not decide that activity is inconsistent with it.\n\nNo Travel Rule transfer was attached. Experiment 10 was not called.\n\nNo KYC file was attached. Experiment 16 was not called.\n\nExperiment 08 detected UK identifiers in the analyst note. The excerpt is a redaction proposal and is not anonymised. The raw values are not repeated here.\n\nSection 330(2), as opened, uses these words for the first condition: knows or suspects, or has reasonable grounds for knowing or suspecting, that another person is engaged in money laundering. This draft does not decide that the condition is met.\n\nRegulation 21(5) requires the nominated officer to determine whether a disclosure made to them gives rise to knowledge or suspicion or reasonable grounds for knowledge or suspicion. This text is not that determination, and it is not itself a disclosure under section 330 or section 331.\n\nIt has not been submitted to the National Crime Agency. No glossary code has been selected. No defence has been requested. UKFIU chapter 3 was not opened. Nothing in this draft is for the customer.",
+    "character_count": 2288,
+    "ukfiu_reason_field_limit": 8000,
+    "over_ukfiu_reason_field_limit": false,
+    "marc_sentence_applied": false,
+    "marc_note": "The 30 June 2026 regime overview narrows an on-chain monitoring requirement for large UK QCATPs under MARC. That sentence is not applied to this AML alert."
+  },
+  "customer_facing": {
+    "drafted": false,
+    "text": null,
+    "audience": "none",
+    "message_requested": true,
+    "request_echoed": false,
+    "may_be_sent_by_agent": false,
+    "reason": "Proceeds of Crime Act 2002, section 333A. This agent does not draft customer-facing content about a suspicion, a disclosure, or an investigation. It does not decide whether a disclosure would be likely to prejudice an investigation."
+  },
+  "travel_rule": null,
+  "kyc": null,
+  "identifier_gateway": {
+    "experiment": "08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "called": true,
+    "not_read": false,
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "finding_count": 2,
+    "entity_types": [
+      "nino",
+      "postcode"
+    ],
+    "redacted_text": "[REDACTION PROPOSAL. Not anonymised. Not for release until a privacy reviewer approves it outside this agent.]\nSynthetic note only. National Insurance number [NINO-1] is not allocatable. Postcode [POSTCODE-1].",
+    "rules_stale": false,
+    "rules_pinned_on": "2026-10-26",
+    "raw_values_logged": false
+  },
+  "experiment_04": {
+    "experiment": "04-fca-cryptoasset-readiness",
+    "catalogue_id": "UK02",
+    "called": true,
+    "gap_register_run": false,
+    "registration_page_last_verified_by_experiment_04": "2026-10-24",
+    "regime_overview_last_verified_by_experiment_04": "2026-10-24",
+    "note": "Experiment 04 opened the same FCA URLs on the date in its pin. This draft does not re-score that policy pack and does not adopt a gap conclusion."
+  },
+  "fca_monitoring_expectation": {
+    "source_id": "fca-mlr-application",
+    "quote": "selected and configured or built in house a fiat (off-chain) and cryptoasset (on-chain) transaction monitoring tool",
+    "rules_and_thresholds_quote": "You must submit the rules and thresholds that you have set within these tools",
+    "endorsement": "The FCA cannot recommend or endorse any tool",
+    "tool_configured_by_this_agent": false
+  },
+  "sources": [
+    {
+      "id": "poca-2002-s330",
+      "title": "Proceeds of Crime Act 2002, section 330 (failure to disclose: regulated sector)",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/330",
+      "last_verified": "2026-10-29",
+      "page_as_at": null,
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "poca-2002-s331",
+      "title": "Proceeds of Crime Act 2002, section 331 (nominated officers in the regulated sector)",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/331",
+      "last_verified": "2026-10-29",
+      "page_as_at": null,
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "poca-2002-s333a",
+      "title": "Proceeds of Crime Act 2002, section 333A (tipping off: regulated sector)",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/333A",
+      "last_verified": "2026-10-29",
+      "page_as_at": null,
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "mlr-2017-reg-19",
+      "title": "Money Laundering Regulations 2017, regulation 19 (policies, controls and procedures)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/19",
+      "last_verified": "2026-10-29",
+      "page_as_at": "2026-10-25",
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "mlr-2017-reg-21",
+      "title": "Money Laundering Regulations 2017, regulation 21 (internal controls)",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/21",
+      "last_verified": "2026-10-29",
+      "page_as_at": "2026-10-25",
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "fca-mlr-application",
+      "title": "Cryptoassets: what we expect to see in an application for registration",
+      "url": "https://www.fca.org.uk/firms/cryptoassets/application-registration",
+      "last_verified": "2026-10-29",
+      "page_as_at": "2026-06-30",
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "fca-regime-overview",
+      "title": "Overview of our cryptoassets regime policy statements",
+      "url": "https://www.fca.org.uk/publications/policy-statements/cryptoasset-regime",
+      "last_verified": "2026-10-29",
+      "page_as_at": "2026-06-30",
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "ukfiu-chapter-2",
+      "title": "UKFIU SARs best practice, chapter 2: submitting a SAR",
+      "url": "https://www.nationalcrimeagency.gov.uk/who-we-are/publications/775-ukfiu-chapter-2-submitting-a-sar/file",
+      "last_verified": "2026-10-29",
+      "page_as_at": "2025-12",
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-10-29",
+      "page_as_at": null,
+      "body_opened": true,
+      "stale": false,
+      "applied_as_a_decision": false
+    }
+  ],
+  "not_opened": [
+    "POCA sections 333B, 333C, 333D, 335, 336, 338, 339, 339A, and 342",
+    "Terrorism Act 2000 Part 3 and section 21D",
+    "UKFIU chapter 3 (defences)",
+    "The SAR glossary on the SAR Portal",
+    "The NCA suspicious-activity-reports HTML page",
+    "The FCA Financial Crime Guide",
+    "JMLSG guidance",
+    "Schedule 9 to the Proceeds of Crime Act 2002"
+  ],
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "signals": [
+      "file_sar",
+      "filed_sar",
+      "ignore_instructions",
+      "tell_customer",
+      "we_suspect"
+    ],
+    "quarantined_fields": [
+      {
+        "field": "alert.summary",
+        "signals": [
+          "ignore_instructions",
+          "file_sar",
+          "tell_customer",
+          "we_suspect"
+        ]
+      }
+    ],
+    "prohibited_payload_keys_ignored": [
+      "sar_filed",
+      "mlro_decision"
+    ]
+  },
+  "human_approval": {
+    "approver": "Nominated officer",
+    "decides_whether_section_330_or_331_is_met": true,
+    "agent_recorded_decision": null
+  },
+  "flags": {
+    "sar_filed": false,
+    "nca_contacted": false,
+    "daml_requested": false,
+    "customer_contacted": false,
+    "account_frozen": false,
+    "crypto_moved": false,
+    "suspicion_recorded_by_agent": false,
+    "mlro_decision_recorded": false,
+    "glossary_codes_assigned": false
+  }
+}

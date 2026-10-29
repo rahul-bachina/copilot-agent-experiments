@@ -920,6 +920,65 @@ class TestExperiment19Manifest:
         assert experiment_19_manifest["agent"]["id"] == "exp-19-privacy-impact-assessment"
 
 
+class TestExperiment22Manifest:
+    """Test the Experiment 22 on-chain alert SAR drafter manifest."""
+
+    @pytest.fixture
+    def experiment_22_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "22-onchain-alert-sar-drafter" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_22_manifest):
+        """Experiment 22 manifest should be valid."""
+        validate(instance=experiment_22_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_22_manifest):
+        """Experiment 22 should be autonomy level A1, not above."""
+        level = experiment_22_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_22_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_22_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_22_manifest):
+        """Experiment 22 should have all high-risk actions disabled."""
+        high_risk = experiment_22_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_22_manifest):
+        """Nothing is filed or sent."""
+        assert experiment_22_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_22_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_nominated_officer_decides_whether_to_file(self, experiment_22_manifest):
+        """The catalogue checkpoint is the nominated officer, and it is mandatory."""
+        points = experiment_22_manifest["human_approval"]["approval_points"]
+        decision = next(
+            point for point in points if point["action"] == "Decide whether the section 330 or section 331 test is met"
+        )
+        assert decision["approver"] == "Nominated officer"
+        assert decision["mandatory"] is True
+        filing = next(
+            point for point in points if point["action"] == "File or not file a suspicious activity report with the NCA"
+        )
+        assert filing["approver"] == "Nominated officer"
+        assert filing["mandatory"] is True
+        assert experiment_22_manifest["agent"]["id"] == "exp-22-onchain-alert-sar-drafter"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 
