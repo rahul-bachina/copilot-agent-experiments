@@ -51,6 +51,7 @@ Twenty-one starters are in `experiments/`. The count is the number of folders.
 | 17 | [Invoice Exception Triage Agent](experiments/17-invoice-exception-triage/) | Draft a resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change is routed to a separate verifier first. Experiment 12 inventories the file. Autonomy A1. The agent does not post, approve, hold, pay, or change supplier bank details. | ✅ Starter |
 | 18 | [Evidence Pack Builder](experiments/18-evidence-pack-builder/) | Draft an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. Experiment 12 inventories in-scope items. Autonomy A1. The agent does not apply an exemption, disclose, write, or send. | ✅ Starter |
 | 19 | [Privacy Impact Assessment Assistant](experiments/19-privacy-impact-assessment/) | Draft a DPIA for one synthetic project brief against UK GDPR Article 35 and Articles 22A to 22D. The privacy officer approves the assessment. The project owner accepts residual risk. Experiment 08 proposes identifier redactions. Autonomy A1. The agent does not approve, reject, sign off, accept residual risk, or send a consultation. | ✅ Starter |
+| 20 | [Complaints root-cause and regulatory MI](experiments/20-complaints-root-cause-mi/) | Draft management information from one synthetic complaint batch for a Consumer Duty board report, a Housing Ombudsman Code self-assessment, or Ofgem complaints reporting. The complaints owner validates the clusters and the narrative. Every count lists source record ids. Experiments 02 and 08 are called in-process. Autonomy A0. The agent does not validate, submit, publish, or send. | ✅ Starter |
 | 21 | [IT Service Desk Agent](experiments/21-it-service-desk/) | Draft a reading of one synthetic IT ticket from a fixed knowledge base. The member of staff confirms a device change. Password resets, MFA changes, and access grants go to an analyst. Experiment 08 counts UK identifiers. Autonomy A1. The agent does not reset, grant, execute, write a ticket, or send. | ✅ Starter |
 | 22 | [On-chain alert investigator and SAR narrative drafter](experiments/22-onchain-alert-sar-drafter/) | Draft an internal timeline and a SAR narrative from one synthetic on-chain alert. The nominated officer decides whether to file. Experiments 10, 16, and 08 can be called. Autonomy A1. The agent does not file, request a defence, freeze or move a cryptoasset, or draft customer-facing content. | ✅ Starter |
 
@@ -184,6 +185,13 @@ pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/assess.py --input examples/sample_project.json --as-of 2026-10-28
 
+# Experiment 20 needs no credentials either. The draft is deterministic.
+# Experiments 02 and 08 have to be present beside it. The draft calls both.
+cd ../20-complaints-root-cause-mi
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/report.py --input examples/sample_batch.json --as-of 2026-10-29
+
 # Experiment 21 needs no credentials either. The draft is deterministic.
 # Experiment 08 has to be present beside it. The desk calls that gateway.
 cd ../21-it-service-desk
@@ -239,6 +247,7 @@ copilot-agent-experiments/
     ├── 17-invoice-exception-triage/
     ├── 18-evidence-pack-builder/
     ├── 19-privacy-impact-assessment/
+    ├── 20-complaints-root-cause-mi/
     ├── 21-it-service-desk/
     └── 22-onchain-alert-sar-drafter/
 ```
