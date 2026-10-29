@@ -1,0 +1,601 @@
+# Agent manifest: IT Service Desk Agent
+# Experiment 21 — catalogue ID Q009
+# Version: 0.1.0
+# Last reviewed: 2026-10-29
+# Next review: 2027-04-29
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-21-it-service-desk"
+  name: "IT Service Desk Agent"
+  version: "0.1.0"
+  description: >
+    Helps a signed-in member of staff or a service desk analyst draft a
+    reading of one synthetic IT ticket from a fixed knowledge base. Autonomy
+    A1. The member of staff confirms a proposed device change. Password
+    resets, MFA changes, and access grants go to an analyst. The agent never
+    executes a fix, never writes the ticket, and never sends a message.
+    Helpdesk-impersonation and secret-request phrases stop at a fixed script.
+  owner: "IT service desk operations"
+  contact: "servicedesk@aldermere.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/21-it-service-desk"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "A member of staff confirms a device-change proposal. The agent only prepares it."
+    - "The agent NEVER resets a password, changes MFA, or grants access"
+    - "The agent NEVER executes a fix, wipes a device, or buys a licence"
+    - "The agent NEVER writes a production ticket or sends a message, including after confirmation"
+    - "A passed session does not replace the analyst's own check on a privileged action"
+    - "Phone and email channels cannot carry a trusted identity check"
+    - "Article text, identity, and the empty approval come from src/desk.py, not from model output"
+    - "All output is advisory and is marked draft for service desk review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied ticket"
+      description: "A single ticket the member of staff or the analyst pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One ticket per invocation. The output does not echo the text."
+      justification: "The desk cannot match an article without the ticket that was supplied."
+      data_categories:
+        - "Free text of one ticket"
+        - "A channel label, if supplied"
+        - "Synthetic staff ids and an asset tag, if they match the starter pattern"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the ticket."
+
+    - resource: "Channel identity check"
+      description: "A separate object. method, result, checked_by, and as_of. Not read from the ticket text."
+      access_level: "read"
+      scope: "One check for this run. A passed result is honoured only for an entra_session recorded by the channel, on portal or Teams chat, for the same day and the same synthetic staff id."
+      justification: "Identity cannot be taken from a sentence that says the caller is verified."
+      may_contain_personal_data: false
+
+    - resource: "Separate review object"
+      description: "user_confirm_standard_fix, user_confirm_device_change, analyst_take_handover, or reject_draft."
+      access_level: "read"
+      scope: "One review for a draft already produced. Not read from the ticket text."
+      justification: "Approval has to be deterministic and has to refuse a reset, a grant, and an execution."
+      may_contain_personal_data: false
+
+    - resource: "Synthetic knowledge base"
+      description: "Articles in src/catalogue.py for the invented desk Aldermere Shared ICT."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Answers are quotations from these articles. The core does not browse a live knowledge base."
+      may_contain_personal_data: false
+
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+    - resource: "Experiment 08 redaction proposal"
+      description: "propose() from experiments/08-uk-pii-redaction-gateway. The redacted text is not copied into the draft."
+      access_level: "read"
+      scope: "One call per free-text field. Reversible maps are not requested. release() is not called."
+      justification: "UK identifiers in a ticket should be counted before a draft is shown. This experiment does not ship a second redactor."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "Microsoft Entra, on-premises directories, and other identity systems"
+      reason: "The agent does not reset a password, change MFA, or grant access. The identity check is a field the channel already recorded."
+    - resource: "Device management and remote-wipe consoles"
+      reason: "The agent does not change or wipe a device."
+    - resource: "IT service management production tickets"
+      reason: "The draft note is not written back."
+    - resource: "Mailboxes, Teams chats, and SMS gateways"
+      reason: "The agent does not send the draft."
+    - resource: "Licence purchasing and finance systems"
+      reason: "The agent does not spend."
+    - resource: "Live knowledge bases and intranet search"
+      reason: "A live page would bypass last_reviewed. The catalogue is the file in this experiment."
+    - resource: "Other people's tickets and directory listings"
+      reason: "One ticket at a time. The agent does not search a contact history."
+    - resource: "Password stores, MFA seeds, and recovery codes"
+      reason: "The agent does not ask for them and does not store them."
+
+# =============================================================================
+# TOOLS AND ACTIONS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "Service desk draft"
+      provider: "Local Python (src/desk.py)"
+      action: "Match one ticket to the synthetic catalogue or return a handover"
+      access_level: "read"
+      scope: "One ticket. No network. No model. Calls Experiment 08 propose() in process."
+      justification: "Which article applies, whether it is stale, and whether identity is trusted, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record a user confirmation, an analyst handover, or a rejection on a draft already produced"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No execution and no write."
+      justification: "The approval has to be deterministic and has to refuse a reset, a grant, and an execution."
+      human_approval_required: true
+      output_requires_human_review: true
+
+    - tool: "UK identifier proposal"
+      provider: "Experiment 08 (propose)"
+      action: "Count UK identifier spans in free text. The redacted string is not copied out."
+      access_level: "read"
+      scope: "The ticket summary and diagnostic free text for this run. reversible is false."
+      justification: "The desk does not ship a second redactor. Experiment 08 is the gateway."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The article text, the identity flag, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records an execution, a reset, a grant, a send, or a ticket write"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that performs a privileged action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the person. Updating the ticket,
+      if an analyst chooses to, is done in the organisation's own ITSM tool.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming a proposal does not email, text, or chat anyone.
+      The person reads the draft in the channel they already have open.
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or refuse an access request, a reset, or
+      a device change. record_review can record a confirmation or a handover.
+      It cannot perform the action.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that the organisation complies with NCSC
+      guidance or with UK GDPR. It does not decide that a caller is genuine
+      beyond the channel fields it was given.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against an identity system, a device console, or
+      an ITSM ticket. Confirmation does not write one.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent does not contact the member of staff, a manager, or a vendor.
+      The fixed script is text in the draft, not a message the agent sends.
+
+  spend_transact:
+    enabled: false
+    rationale: "No licence is bought. No fee is spent."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Reset a password or change MFA"
+      rationale: "An analyst does this outside the agent. The flags password_reset and mfa_changed stay false, including after analyst_take_handover."
+    - enabled: false
+      action_name: "Grant access"
+      rationale: "An analyst does this outside the agent, after the resource owner has agreed. access_granted stays false."
+    - enabled: false
+      action_name: "Change or wipe a device"
+      rationale: "A member of staff may confirm a device-change proposal. device_changed and remote_wipe stay false. The agent has no console."
+    - enabled: false
+      action_name: "Collect a password or an MFA code"
+      rationale: "The NCSC end-user page says a password is not disclosed to IT support. secrets_collected stays false."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The member of staff confirms a standard fix they will try themselves, or
+    confirms a device-change proposal. An analyst takes a privileged handover,
+    an unverified caller, a third-party request, a stale article, or a
+    social-engineering stop. The agent has no path that acts on that choice.
+    Confirming a sentence in the chat does not reset a password, change MFA,
+    grant access, change a device, write the ticket, or send a message.
+    A user cannot confirm a privileged action. A passed session does not
+    either.
+
+  approval_points:
+    - action: "Confirm a standard fix the member of staff will try"
+      approver: "Signed-in member of staff who raised the ticket"
+      mandatory: true
+      rationale: "triage() leaves human_approval null. Only record_review can set it, and only for a current standard fix where identity is trusted."
+
+    - action: "Confirm a device change"
+      approver: "Signed-in member of staff who is the subject of the ticket"
+      mandatory: true
+      rationale: "Catalogue checkpoint for Q009. Required diagnostics must be present. Confirmation does not perform the change."
+
+    - action: "Reset a password, change MFA, or grant access"
+      approver: "Service desk analyst"
+      mandatory: true
+      rationale: "Outside the agent. The user confirmation is refused. analyst_take_handover records the handover and does not perform the action. The analyst verifies the person by the organisation's own method."
+
+    - action: "Take a social-engineering stop, an unverified caller, or a third-party request"
+      approver: "Service desk analyst"
+      mandatory: true
+      rationale: "The core returns a fixed script or withholds the steps. A user confirmation is refused."
+
+    - action: "Rely on an article after it is marked stale"
+      approver: "Service desk analyst"
+      mandatory: true
+      rationale: "The body is not copied. The analyst re-opens the organisation's own article before anyone uses it. This starter cannot fetch that article."
+
+    - action: "Write the ticket or send a message"
+      approver: "Service desk analyst"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled."
+
+    - action: "Wipe a device or buy a licence"
+      approver: "The person authorised for that action"
+      mandatory: true
+      rationale: "Outside the agent. Those flags stay false."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same ticket"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was read on 29 October 2026. Points (ea) and (f) of Article 6(1) do not
+      apply to processing carried out by public authorities in the performance
+      of their tasks. Article 6(11)(c) lists security of network and
+      information systems as an example of a legitimate interest, and that
+      example does not remove the public-authority limit. A private-sector
+      employer confirms its own basis. Do not copy the legal-obligation basis
+      from Experiment 02.
+    secondary: "None asserted. An organisation that later logs the ticket in its own ITSM tool chooses the basis for that system."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a member of staff volunteers in a ticket"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 29 October 2026. The controller confirms a condition, and completes a DPIA, before production use. This starter does not ask for this data and does not store the ticket."
+    safeguards:
+      - "One ticket at a time, as supplied by the person running the draft"
+      - "The output does not echo the ticket text, and it does not copy Experiment 08's redacted text"
+      - "Nothing is written to an ITSM record"
+      - "Samples in this repository are synthetic"
+      - "Secret-request and helpdesk-impersonation phrases stop at a fixed script"
+      - "No solely automated significant decision. Resets, grants, and device changes stay with a person, and this agent does not perform them."
+
+  data_minimisation:
+    - "The core reads one ticket. It does not retrieve a directory entry."
+    - "The draft note names article ids and synthetic ids that match the starter pattern. It does not name the person."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the analyst then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process.
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Ticket text is untrusted. It may tell the model to ignore the catalogue,
+    skip verification, reset a password, or send a code. The core does not
+    read the network. The model is not given a tool that can reset, grant,
+    write, or send.
+
+  controls:
+    - control: "Instructions separated from the ticket"
+      description: "A sentence that is itself an instruction is not used to choose an article. The signal is recorded and followed is false."
+    - control: "Helpdesk impersonation stops first"
+      description: "A claim to be the helpdesk, or a request for a password or an MFA code, returns a fixed script. No article body is quoted."
+    - control: "Identity is a separate object"
+      description: "A sentence that says the caller is verified is not the identity check. Phone and email cannot carry a passed session."
+    - control: "Deterministic catalogue"
+      description: "The quoted body, the stale flag, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set a reset, a grant, an execution, or the review decision is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses those decisions. Direct functions raise DeskForbidden."
+    - control: "Experiment 08"
+      description: "Free text goes through propose(). The redacted text is not copied out. release() is not called."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The analyst
+    is the control. There is no autonomous action to take even if the brief is wrong.
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-29"
+  risks:
+    - id: "R1"
+      risk: "A ticket text is treated as authority to reset a password, change MFA, or grant access"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no steps and no user confirmation"
+        - "analyst_take_handover does not perform the action"
+        - "reset_password, change_mfa, and grant_access raise DeskForbidden"
+      residual_risk: "Low"
+      owner: "IT service desk operations"
+
+    - id: "R2"
+      risk: "A caller impersonates the helpdesk, or a helpdesk process asks a person for a password or an MFA code"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those phrases are checked before article matching"
+        - "The fixed script says not to share a password or a code"
+        - "secrets_collected stays false"
+      residual_risk: "Medium"
+      owner: "Information security"
+
+    - id: "R3"
+      risk: "Steps are read out to a caller whose identity was not checked, including on the phone"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A passed check is honoured only for a same-day entra_session on portal or Teams chat"
+        - "Phone and email withhold standard-fix and device-change steps"
+        - "A stale check is not trusted"
+      residual_risk: "Medium"
+      owner: "IT service desk operations"
+
+    - id: "R4"
+      risk: "A stale article is followed as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than the threshold is not quoted"
+        - "Equal to the threshold is still quoted, and that boundary is tested"
+        - "The core does not refresh the article from the web"
+      residual_risk: "Low"
+      owner: "IT service desk operations"
+
+    - id: "R5"
+      risk: "Prompt injection marks a fix as executed, writes the ticket, or sends a message"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "No such tool exists"
+        - "The review function refuses those decisions"
+        - "Tests cover reset, grant, execute, and send instructions"
+      residual_risk: "Low"
+      owner: "Information security"
+
+    - id: "R6"
+      risk: "A live ticket, including a National Insurance number or health detail, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Experiment 08 counts UK identifiers. The redacted text is not copied out"
+        - "Samples use an invented organisation"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+    - id: "R7"
+      risk: "A pinned NCSC or legislation page changes and the notes are still treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Each source has last_verified"
+        - "Older than the threshold is stale and is not silently refreshed"
+      residual_risk: "Medium"
+      owner: "IT service desk operations"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the ticket id, the outcome, and the later review. This starter logs
+    nothing because it keeps no store. Do not put the ticket text in an
+    application trace. Experiment 08's audit record omits raw identifier values.
+    Do not add them back.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Ticket id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's service-desk schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Article ids cited"
+        - "Whether any article or source was stale"
+        - "Whether identity was trusted"
+        - "Whether human_approval was left null"
+        - "Experiment 08 finding count and input hash, not the raw values"
+      retention: "Keep with the ticket if the analyst relies on the draft. The ticket text is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Timestamp"
+        - "executed false"
+      retention: "Organisation's schedule. The agent does not write this event to an ITSM tool."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the ticket narrative in an application trace."
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, the identity system, device management, or purchasing"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "IT service desk operations lead"
+      contact: "servicedesk@aldermere.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@aldermere.example.gov.uk"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-29"
+  next_review_date: "2027-04-29"
+  review_frequency: "6 months, and sooner if the catalogue articles, the NCSC pages, or Article 6 or 32 change"
+  reviewer: "The adopting organisation's service-desk lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to an article in the organisation's real knowledge base, if one is later substituted for the synthetic file"
+    - "A change to the NCSC phishing guidance, the end-user device page, or the 4 May 2025 retailers post"
+    - "A change to UK GDPR Article 6 or Article 32"
+    - "A proposal to add a connector that can reset a password, change MFA, grant access, message a person, write a ticket, or spend"
+    - "A proposal to publish an unattended password-reset chat"
+    - "A security incident involving a draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Desk core"
+      path: "src/desk.py"
+    - name: "Synthetic catalogue"
+      path: "src/catalogue.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+# =============================================================================
+# ATRS
+# =============================================================================
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03. The pointers below
+    say which manifest sections a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 was read on 29 October 2026. The controller confirms the basis, and completes a DPIA, before live use. No Article 9 condition is asserted. Article 9 was not opened that day."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a review duty the organisation already has."
+      section: "src/catalogue.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "A passed entra_session is a channel field in the JSON. This starter does not call Microsoft Entra and does not describe that product's sign-in behaviour. The session does not authorise a password reset."
+      section: "src/identity.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on staff tickets."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No identity, device, messaging, ITSM, or purchasing connector is added without updating this manifest."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on aldermere.example.gov.uk are placeholders. Aldermere District Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Section 80 of the Data (Use and Access) Act 2025 was not opened on 29 October 2026. This agent does not run Experiment 03's screen."
+      section: "atrs_mapping"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Experiment 08 does not anonymise the text. This desk does not copy the redacted string into the draft and does not call release()."
+      section: "tools.allowed"
+      verify_on_deployment: true
