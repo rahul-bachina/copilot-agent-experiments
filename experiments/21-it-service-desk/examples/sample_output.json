@@ -1,0 +1,166 @@
+{
+  "label": "DRAFT FOR SERVICE DESK REVIEW",
+  "experiment": "21-it-service-desk",
+  "catalogue_id": "Q009",
+  "autonomy": "A1",
+  "organisation": {
+    "id": "aldermere-district-council",
+    "name": "Aldermere District Council",
+    "desk": "Aldermere Shared ICT",
+    "fictional": true
+  },
+  "model_called": false,
+  "network_called": false,
+  "executed": false,
+  "actions_taken": [],
+  "human_approval": null,
+  "ticket_id": "SYN-1042",
+  "ticket_text_echoed": false,
+  "as_of": "2026-10-29",
+  "stale_after_days": 180,
+  "rules_current": true,
+  "any_source_stale": false,
+  "any_article_stale": false,
+  "sources": [
+    {
+      "id": "ncsc-phishing",
+      "title": "Phishing attacks: defending your organisation",
+      "url": "https://www.ncsc.gov.uk/guidance/phishing",
+      "last_verified": "2026-10-29",
+      "stale": false
+    },
+    {
+      "id": "ncsc-end-user-devices",
+      "title": "Advice for End Users",
+      "url": "https://www.ncsc.gov.uk/guidance/end-user-devices-advice-end-users",
+      "last_verified": "2026-10-29",
+      "stale": false
+    },
+    {
+      "id": "ncsc-retailers",
+      "title": "Incidents impacting retailers \u2013 recommendations from the NCSC",
+      "url": "https://www.ncsc.gov.uk/blog-post/incidents-impacting-retailers",
+      "last_verified": "2026-10-29",
+      "stale": false
+    },
+    {
+      "id": "uk-gdpr-article-6",
+      "title": "UK GDPR Article 6",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/6",
+      "last_verified": "2026-10-29",
+      "stale": false
+    },
+    {
+      "id": "uk-gdpr-article-32",
+      "title": "UK GDPR Article 32",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/32",
+      "last_verified": "2026-10-29",
+      "stale": false
+    },
+    {
+      "id": "copilot-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-10-29",
+      "stale": false
+    }
+  ],
+  "ai_disclosure": "This draft was written by an automated AI chatbot for a service-desk analyst or a signed-in member of staff. It does not reset a password, change MFA, grant access, or change a device.",
+  "flags": {
+    "password_reset": false,
+    "mfa_changed": false,
+    "access_granted": false,
+    "device_changed": false,
+    "ticket_written": false,
+    "message_sent": false,
+    "licence_purchased": false,
+    "remote_wipe": false,
+    "fix_executed": false,
+    "secrets_collected": false,
+    "stale_article_quoted": false,
+    "user_confirmed": false,
+    "analyst_accepted_handover": false
+  },
+  "identity": {
+    "trusted": true,
+    "reason": "entra_session",
+    "third_party": false,
+    "check_stale": false,
+    "channel": "portal",
+    "requester_is_subject": true,
+    "requester_staff_id": "SYN-STAFF-014"
+  },
+  "social_engineering": {
+    "detected": false,
+    "signals": [],
+    "followed": false
+  },
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "followed": false,
+    "stripped_keys": []
+  },
+  "pii_gateway": {
+    "called": true,
+    "experiment": "08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "reversible": false,
+    "model_suggestions_applied": false,
+    "finding_count": 0,
+    "entity_types": [],
+    "input_sha256": "81135cc7d705f7b60927944699d2fdde29afc20a5115f127ab087891394d8420",
+    "rules_pinned_on": "2026-10-26",
+    "raw_values_logged": false,
+    "redacted_text_copied": false
+  },
+  "diagnostics": {
+    "supplied": [
+      "error_code",
+      "network_connected"
+    ],
+    "missing": [],
+    "complete": true,
+    "values_invented": false,
+    "closed_values": {
+      "error_code": "809",
+      "network_connected": true
+    }
+  },
+  "outcome": "standard_fix_proposed",
+  "article": {
+    "id": "kb-vpn-809",
+    "title": "VPN client error 809",
+    "class": "standard_fix",
+    "last_reviewed": "2026-08-01",
+    "stale": false,
+    "body_quoted": true,
+    "body": "Check the laptop is on the corporate network or a known home connection. Quit the VPN client and open it again. If error 809 is still shown, stop. A service desk analyst looks at the concentrator. This article does not change the device and does not change the account. Aldermere Shared ICT is fictional.",
+    "citation": "kb-vpn-809, last reviewed 2026-08-01"
+  },
+  "citations": [
+    {
+      "article_id": "kb-vpn-809",
+      "title": "VPN client error 809",
+      "last_reviewed": "2026-08-01",
+      "stale": false,
+      "body_quoted": true
+    }
+  ],
+  "proposed_fix": {
+    "would_change_device": false,
+    "would_change_account": false,
+    "privileged": false,
+    "executed": false,
+    "user_may_confirm": true,
+    "analyst_required": false
+  },
+  "answer": {
+    "text": "Check the laptop is on the corporate network or a known home connection. Quit the VPN client and open it again. If error 809 is still shown, stop. A service desk analyst looks at the concentrator. This article does not change the device and does not change the account. Aldermere Shared ICT is fictional.",
+    "body_quoted": true,
+    "sufficient": true
+  },
+  "ticket_update_draft": "Draft ticket note. Not written to the ticket system. Ticket SYN-1042. Outcome standard_fix_proposed. Articles: kb-vpn-809. Nothing was executed. human_approval is empty until a separate review object is supplied."
+}

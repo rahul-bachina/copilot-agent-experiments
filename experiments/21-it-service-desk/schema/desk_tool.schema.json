@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "desk_tool.schema.json",
+  "title": "Service desk draft tool",
+  "description": "Input for triage(). There is no field that resets a password, changes MFA, grants access, executes a fix, writes a ticket, or sends a message.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "channel", "summary", "requester", "subject_account"],
+  "properties": {
+    "synthetic": {
+      "const": true,
+      "description": "This repository only accepts a record marked synthetic."
+    },
+    "ticket_id": {
+      "type": "string",
+      "pattern": "^SYN-\\d{4}$"
+    },
+    "channel": {
+      "enum": ["portal", "teams_chat", "phone", "email"]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "requester": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["staff_id", "signed_in"],
+      "properties": {
+        "staff_id": {"type": "string", "pattern": "^SYN-STAFF-\\d{3}$"},
+        "signed_in": {"type": "boolean"}
+      }
+    },
+    "subject_account": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["staff_id"],
+      "properties": {
+        "staff_id": {"type": "string", "pattern": "^SYN-STAFF-\\d{3}$"}
+      }
+    },
+    "identity_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {"enum": ["entra_session"]},
+        "result": {"enum": ["passed", "failed", "absent"]},
+        "checked_by": {"const": "channel"},
+        "as_of": {"type": "string"}
+      }
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "asset_tag": {"type": "string"},
+        "change_requested": {"type": "boolean"}
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "os": {"type": "string"},
+        "error_code": {"type": "string"},
+        "network_connected": {"type": "boolean"},
+        "free_text": {"type": "string"}
+      }
+    }
+  }
+}
