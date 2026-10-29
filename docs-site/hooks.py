@@ -73,6 +73,9 @@ DIAGRAMS = {
     "experiments/19-privacy-impact-assessment/docs/architecture_diagram.png": (
         "experiments/img/19-privacy-impact-assessment-architecture.png"
     ),
+    "experiments/22-onchain-alert-sar-drafter/docs/architecture_diagram.png": (
+        "experiments/img/22-onchain-alert-sar-architecture.png"
+    ),
 }
 
 

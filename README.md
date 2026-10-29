@@ -28,6 +28,8 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
+Twenty starters are in `experiments/`. The count is the number of folders.
+
 | # | Name | Description | Status |
 |---|------|-------------|--------|
 | 01 | [FOI Complaint Triage](experiments/01-foi-complaint-triage/) | Triage long FOI requests and complaints into structured data for public sector staff | ✅ Complete |
@@ -49,6 +51,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 | 17 | [Invoice Exception Triage Agent](experiments/17-invoice-exception-triage/) | Draft a resolution for one synthetic invoice that failed a 2-way or 3-way match. The AP reviewer approves the resolution. A bank-detail change is routed to a separate verifier first. Experiment 12 inventories the file. Autonomy A1. The agent does not post, approve, hold, pay, or change supplier bank details. | ✅ Starter |
 | 18 | [Evidence Pack Builder](experiments/18-evidence-pack-builder/) | Draft an index for one synthetic evidence pack. The evidence pack approver records the exact item list and the redaction decisions. Experiment 12 inventories in-scope items. Autonomy A1. The agent does not apply an exemption, disclose, write, or send. | ✅ Starter |
 | 19 | [Privacy Impact Assessment Assistant](experiments/19-privacy-impact-assessment/) | Draft a DPIA for one synthetic project brief against UK GDPR Article 35 and Articles 22A to 22D. The privacy officer approves the assessment. The project owner accepts residual risk. Experiment 08 proposes identifier redactions. Autonomy A1. The agent does not approve, reject, sign off, accept residual risk, or send a consultation. | ✅ Starter |
+| 22 | [On-chain alert investigator and SAR narrative drafter](experiments/22-onchain-alert-sar-drafter/) | Draft an internal timeline and a SAR narrative from one synthetic on-chain alert. The nominated officer decides whether to file. Experiments 10, 16, and 08 can be called. Autonomy A1. The agent does not file, request a defence, freeze or move a cryptoasset, or draft customer-facing content. | ✅ Starter |
 
 ## Getting Started
 
@@ -179,6 +182,13 @@ cd ../19-privacy-impact-assessment
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/assess.py --input examples/sample_project.json --as-of 2026-10-28
+
+# Experiment 22 needs no credentials either. The draft is deterministic.
+# Experiments 04, 08, 10, 12, and 16 have to be present beside it.
+cd ../22-onchain-alert-sar-drafter
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/investigate.py --input examples/sample_alert.json --as-of 2026-10-29
 ```
 
 ## Repository Structure
@@ -220,7 +230,8 @@ copilot-agent-experiments/
     ├── 16-kyc-evidence-intake/
     ├── 17-invoice-exception-triage/
     ├── 18-evidence-pack-builder/
-    └── 19-privacy-impact-assessment/
+    ├── 19-privacy-impact-assessment/
+    └── 22-onchain-alert-sar-drafter/
 ```
 
 ## Agent Governance
