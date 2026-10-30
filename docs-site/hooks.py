@@ -88,6 +88,9 @@ DIAGRAMS = {
     "experiments/24-agent-use-case-intake/docs/architecture_diagram.png": (
         "experiments/img/24-agent-use-case-intake-architecture.png"
     ),
+    "experiments/25-instruction-quality-reviewer/docs/architecture_diagram.png": (
+        "experiments/img/25-instruction-quality-reviewer-architecture.png"
+    ),
 }
 
 

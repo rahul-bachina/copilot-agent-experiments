@@ -1,0 +1,62 @@
+{
+  "tools": [
+    {
+      "name": "review_instructions",
+      "implementation": "review",
+      "reads": [
+        "instruction text supplied for this run",
+        "optional permissions manifest supplied for this run",
+        "optional structured use case supplied for this run",
+        "as-of date and stale threshold"
+      ],
+      "writes": false,
+      "sends": false,
+      "edits_instructions": false,
+      "applies_diff": false,
+      "approves_rewrite": false,
+      "deploys": false,
+      "persists_instruction_text": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_owner_approval",
+      "implementation": "record_owner_approval",
+      "reads": ["draft findings report"],
+      "writes": false,
+      "sends": false,
+      "edits_instructions": false,
+      "applies_diff": false,
+      "approves_rewrite": false,
+      "deploys": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Agent owner"
+    },
+    {
+      "name": "apply_instruction_diff",
+      "implementation": "apply_instruction_diff",
+      "writes": false,
+      "sends": false,
+      "edits_instructions": false,
+      "applies_diff": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "deploy_agent",
+      "implementation": "deploy_agent",
+      "deploys": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_findings",
+      "implementation": "send_findings",
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "bundle_id": "halebridge-policy",
+  "title": "Halebridge policy explainer",
+  "synthetic": true,
+  "documents": [
+    {
+      "path": "halebridge.md",
+      "kind": "system_prompt",
+      "reviewed_on": "2026-10-30",
+      "text_path": "../fixtures/instructions/halebridge.md"
+    }
+  ],
+  "manifest": {
+    "tools": {
+      "allowed": [{"tool": "read_policy_file"}],
+      "writes": {"enabled": false},
+      "sends": {"enabled": false}
+    },
+    "autonomy": {"level": "A0"},
+    "human_approval": {
+      "approval_points": [
+        {"action": "Approve prompt changes", "approver": "Agent owner", "mandatory": true}
+      ]
+    }
+  },
+  "use_case": {
+    "case_id": "halebridge-policy",
+    "title": "Halebridge policy questions",
+    "organisation": {
+      "name": "Halebridge Borough Council",
+      "sector": "local_authority",
+      "licences": {
+        "copilot_studio": "yes",
+        "microsoft_365_copilot": "unknown",
+        "power_automate": "unknown",
+        "foundry": "unknown"
+      }
+    },
+    "users": {"audience": "internal_staff", "channel": "teams"},
+    "data": {
+      "description": "Published staff policies",
+      "personal_data": false,
+      "classification": "official",
+      "volume": "bounded",
+      "residency": "uk"
+    },
+    "actions": {"read": true, "draft": true},
+    "risk": {
+      "level": "low",
+      "requested_autonomy": "A0",
+      "named_approver": true,
+      "approver_role": "Agent owner"
+    },
+    "narrative": "Staff ask about published policies. A person still owns the answer."
+  }
+}

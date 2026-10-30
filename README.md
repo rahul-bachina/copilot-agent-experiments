@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Twenty-four starters are in `experiments/`. The count is the number of folders.
+Twenty-five starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -56,6 +56,7 @@ Twenty-four starters are in `experiments/`. The count is the number of folders.
 | 22 | [On-chain alert investigator and SAR narrative drafter](experiments/22-onchain-alert-sar-drafter/) | Draft an internal timeline and a SAR narrative from one synthetic on-chain alert. The nominated officer decides whether to file. Experiments 10, 16, and 08 can be called. Autonomy A1. The agent does not file, request a defence, freeze or move a cryptoasset, or draft customer-facing content. | ✅ Starter |
 | 23 | [Cryptoasset financial promotions pre-checker](experiments/23-crypto-financial-promotions-prechecker/) | Draft a checklist for one synthetic cryptoasset promotion. The section 21 approver signs off. Experiments 08, 04, and 03 can be called. Autonomy A0. The agent does not approve, publish, rewrite, or give a compliance opinion. | ✅ Starter |
 | 24 | [Agent use-case intake](experiments/24-agent-use-case-intake/) | Draft a classification of one proposed agent for the governance team. Suggested autonomy is A0, A1, or A2. Experiments 14, 19, and 03 are called. Autonomy A1. The governance team approves or changes the classification. The agent does not approve the use case or provision anything. | ✅ Starter |
+| 25 | [Instruction Quality Reviewer](experiments/25-instruction-quality-reviewer/) | Score one system prompt, SKILL.md, or topic prompt against a fixed checklist and propose a diff. The agent owner approves prompt changes. Experiments 03 and 14 can be called. Autonomy A0. The reviewer does not edit, apply, approve, or deploy. | ✅ Starter |
 
 ## Getting Started
 
@@ -221,6 +222,13 @@ cd ../24-agent-use-case-intake
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/classify.py --input examples/sample_proposal.json --as-of 2026-10-30
+
+# Experiment 25 needs no credentials either. The checklist is deterministic.
+# Experiments 03 and 14 sit beside it. The reviewer calls them only when the bundle asks.
+cd ../25-instruction-quality-reviewer
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/review.py --bundle examples/sample_bundle.json --as-of 2026-10-30
 ```
 
 ## Repository Structure
@@ -267,7 +275,8 @@ copilot-agent-experiments/
     ├── 21-it-service-desk/
     ├── 22-onchain-alert-sar-drafter/
     ├── 23-crypto-financial-promotions-prechecker/
-    └── 24-agent-use-case-intake/
+    ├── 24-agent-use-case-intake/
+    └── 25-instruction-quality-reviewer/
 ```
 
 ## Agent Governance

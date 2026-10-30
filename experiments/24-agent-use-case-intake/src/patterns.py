@@ -177,6 +177,13 @@ PATTERNS: tuple[dict, ...] = (
         "name": "Agent use-case intake",
         "keywords": ("use-case intake", "agent idea intake", "intake classification"),
     },
+    {
+        "id": "instruction_quality",
+        "catalogue_id": "G003",
+        "experiment": "25-instruction-quality-reviewer",
+        "name": "Instruction quality reviewer",
+        "keywords": ("instruction quality", "topic prompt", "approve prompt changes"),
+    },
 )
 
 _BY_ID = {row["id"]: row for row in PATTERNS}
