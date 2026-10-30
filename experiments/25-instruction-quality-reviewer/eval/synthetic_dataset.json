@@ -1,0 +1,30 @@
+{
+  "label": "Synthetic instruction bundles, plus instruction files already in this repository. Not live prompts.",
+  "as_of": "2026-10-30",
+  "cases": [
+    {"id": "halebridge-clean", "file": "halebridge.md", "use_case": true, "expect": {"band": "no_gaps", "percent": 100.0, "injection": false, "do_not_rely": false}},
+    {"id": "missing-nongoals", "file": "missing-nongoals.md", "expect": {"results": {"C1": "partial"}, "band": "gaps"}},
+    {"id": "no-approval", "file": "no-approval.md", "expect": {"results": {"C2": "fail"}}},
+    {"id": "no-refusal", "file": "no-refusal.md", "expect": {"results": {"C3": "fail"}}},
+    {"id": "prohibited-send", "file": "prohibited-send.md", "expect": {"results": {"C4": "fail"}, "injection": true}},
+    {"id": "no-injection", "file": "no-injection.md", "expect": {"results": {"C5": "fail"}}},
+    {"id": "partial-injection", "file": "partial-injection.md", "expect": {"results": {"C5": "partial"}, "band": "gaps"}},
+    {"id": "obey-document", "file": "obey-document.md", "expect": {"results": {"C5": "fail"}}},
+    {"id": "fill-gaps", "file": "fill-gaps.md", "expect": {"results": {"C6": "fail"}}},
+    {"id": "no-gdpr", "file": "no-gdpr.md", "expect": {"results": {"C7": "fail"}}},
+    {"id": "collect-health", "file": "collect-health.md", "expect": {"results": {"C7": "fail"}}},
+    {"id": "tool-mismatch", "file": "tool-mismatch.md", "expect": {"results": {"C8": "fail"}}},
+    {"id": "manifest-missing", "file": "halebridge.md", "manifest": false, "expect": {"results": {"C8": "fail"}, "skeleton": true}},
+    {"id": "sends-enabled", "file": "halebridge.md", "sends": true, "expect": {"results": {"C8": "fail"}}},
+    {"id": "vague-conflict", "file": "vague-conflict.md", "expect": {"results": {"C9": "fail", "C4": "fail"}}},
+    {"id": "unbounded", "file": "unbounded.md", "expect": {"results": {"C1": "fail", "C9": "fail"}}},
+    {"id": "injection", "file": "injection.md", "payload": true, "expect": {"injection": true, "signals": ["ignore_instructions", "apply_diff", "force_pass"]}},
+    {"id": "stale-review-date", "file": "halebridge.md", "reviewed_on": "2026-01-01", "expect": {"band": "no_gaps", "do_not_rely": true, "percent": 100.0}},
+    {"id": "autonomy-a3", "file": "autonomy-a3.md", "manifest": false, "expect": {"results": {"C4": "fail"}, "skeleton_refused": true}},
+    {"id": "repo-14-system-prompt", "repo_path": "experiments/14-agent-architecture-advisor/copilot-studio/system-prompt.md", "manifest_repo_path": "experiments/14-agent-architecture-advisor/agent-manifest.yaml", "reviewed_on": "2026-10-27", "expect": {"realistic": true}},
+    {"id": "repo-14-skill", "repo_path": "experiments/14-agent-architecture-advisor/skills/read-use-case/SKILL.md", "manifest_repo_path": "experiments/14-agent-architecture-advisor/agent-manifest.yaml", "reviewed_on": "2026-10-27", "expect": {"realistic": true}},
+    {"id": "repo-06-system-prompt", "repo_path": "experiments/06-nhs-policy-qa/copilot-studio/system-prompt.md", "manifest_repo_path": "experiments/06-nhs-policy-qa/agent-manifest.yaml", "reviewed_on": "2026-10-27", "expect": {"realistic": true}},
+    {"id": "repo-01-system-prompt", "repo_path": "experiments/01-foi-complaint-triage/copilot-studio/system-prompt.md", "manifest_repo_path": "experiments/01-foi-complaint-triage/agent-manifest.yaml", "reviewed_on": "2026-10-27", "expect": {"realistic": true}},
+    {"id": "repo-03-skill", "repo_path": "experiments/03-agent-inventory-atrs-assurance/skills/draft-permissions-manifest/SKILL.md", "manifest_repo_path": "experiments/03-agent-inventory-atrs-assurance/agent-manifest.yaml", "reviewed_on": "2026-10-24", "expect": {"realistic": true}}
+  ]
+}
