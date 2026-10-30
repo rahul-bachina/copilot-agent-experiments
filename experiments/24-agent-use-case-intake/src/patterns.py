@@ -164,6 +164,13 @@ PATTERNS: tuple[dict, ...] = (
         "keywords": ("suspicious activity report", "on-chain alert", "nominated officer"),
     },
     {
+        "id": "financial_promotion",
+        "catalogue_id": "UK08",
+        "experiment": "23-crypto-financial-promotions-prechecker",
+        "name": "Cryptoasset financial promotions pre-checker",
+        "keywords": ("cryptoasset promotion", "financial promotion", "section 21 approver"),
+    },
+    {
         "id": "use_case_intake",
         "catalogue_id": "G001",
         "experiment": "24-agent-use-case-intake",
