@@ -1,0 +1,53 @@
+{
+  "synthetic": true,
+  "proposal_id": "SYN-G001-NORTHMERE-HAZARD",
+  "organisation": {
+    "name": "Northmere Borough Council",
+    "fictional": true,
+    "kind": "local_authority",
+    "licences": {
+      "copilot_studio": "yes",
+      "microsoft_365_copilot": "unknown",
+      "power_automate": "yes",
+      "foundry": "unknown"
+    }
+  },
+  "problem": "Housing officers want a first draft of the hazard category when a tenant reports damp and mould. An officer still decides.",
+  "users": {
+    "who": "Housing officers",
+    "audience": "internal_staff",
+    "channel": "teams"
+  },
+  "data": {
+    "involved": "Tenant repair reports the council already holds. The sample contains no real tenant.",
+    "personal_data": "yes",
+    "special_category": "no",
+    "criminal_offence_data": "no",
+    "classification": "official",
+    "volume": "bounded",
+    "residency": "uk"
+  },
+  "decisions_affected": {
+    "description": "A draft hazard category. The officer approves the category.",
+    "significant_effect": "none",
+    "regulated_decision": false,
+    "significant_automated_decision": false,
+    "production_write": false,
+    "external_send": false,
+    "spend": false,
+    "approve_or_reject": false
+  },
+  "autonomy_wanted": "A1",
+  "named_human_approver": true,
+  "approver_role": "Housing officer",
+  "systems_touched": ["dataverse", "sharepoint"],
+  "public_interaction": "no",
+  "significant_influence_on_a_decision_with_public_effect": "no",
+  "work": {
+    "fixed_workflow": false,
+    "multi_step_reasoning": false
+  },
+  "article_35_1_view": "unknown",
+  "pattern_hint": "housing_hazard",
+  "narrative": "Northmere Borough Council is fictional. This proposal is synthetic."
+}

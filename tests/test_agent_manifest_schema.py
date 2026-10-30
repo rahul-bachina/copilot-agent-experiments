@@ -1036,6 +1036,60 @@ class TestExperiment22Manifest:
         assert experiment_22_manifest["agent"]["id"] == "exp-22-onchain-alert-sar-drafter"
 
 
+class TestExperiment24Manifest:
+    """Test the Experiment 24 agent use-case intake manifest."""
+
+    @pytest.fixture
+    def experiment_24_manifest(self):
+        manifest_path = (
+            REPO_ROOT / "experiments" / "24-agent-use-case-intake" / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_24_manifest):
+        """Experiment 24 manifest should be valid."""
+        validate(instance=experiment_24_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_24_manifest):
+        """Experiment 24 should be autonomy level A1, not above."""
+        level = experiment_24_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_24_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_24_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_24_manifest):
+        """Experiment 24 should have all high-risk actions disabled."""
+        high_risk = experiment_24_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_24_manifest):
+        """Nothing is sent or provisioned."""
+        assert experiment_24_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_24_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_governance_team_approves_the_classification(self, experiment_24_manifest):
+        """The catalogue checkpoint is the governance team, and it is mandatory."""
+        points = experiment_24_manifest["human_approval"]["approval_points"]
+        decision = next(
+            point for point in points if point["action"] == "Approve or change the intake classification"
+        )
+        assert decision["approver"] == "Governance team"
+        assert decision["mandatory"] is True
+        assert experiment_24_manifest["agent"]["id"] == "exp-24-agent-use-case-intake"
+
+
 class TestExperiment25Manifest:
     """Test the Experiment 25 instruction quality reviewer manifest."""
 
