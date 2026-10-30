@@ -1,0 +1,53 @@
+{
+  "tools": [
+    {
+      "name": "precheck_promotion",
+      "implementation": "precheck",
+      "reads": [
+        "one synthetic promotion draft",
+        "as-of date",
+        "pinned extracts",
+        "Experiment 08 propose()",
+        "optional Experiment 03 lifecycle proposal",
+        "Experiment 04 marketing-page pin"
+      ],
+      "writes": false,
+      "sends": false,
+      "approves_promotion": false,
+      "publishes": false,
+      "gives_compliance_opinion": false,
+      "drafts_rewrite": false,
+      "records_decision": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "approve_promotion",
+      "implementation": "approve_promotion",
+      "writes": false,
+      "sends": false,
+      "approves_promotion": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "publish_promotion",
+      "implementation": "publish_promotion",
+      "writes": false,
+      "sends": false,
+      "publishes": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "give_compliance_opinion",
+      "implementation": "give_compliance_opinion",
+      "writes": false,
+      "sends": false,
+      "gives_compliance_opinion": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
