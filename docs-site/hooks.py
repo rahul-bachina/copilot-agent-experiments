@@ -82,6 +82,9 @@ DIAGRAMS = {
     "experiments/22-onchain-alert-sar-drafter/docs/architecture_diagram.png": (
         "experiments/img/22-onchain-alert-sar-architecture.png"
     ),
+    "experiments/24-agent-use-case-intake/docs/architecture_diagram.png": (
+        "experiments/img/24-agent-use-case-intake-architecture.png"
+    ),
 }
 
 

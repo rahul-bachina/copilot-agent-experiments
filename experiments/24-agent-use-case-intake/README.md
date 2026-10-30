@@ -103,3 +103,5 @@ Experiments 03, 14, and 19 must sit beside this folder. This starter does not ca
 | `copilot-studio/` | Standard harness: one topic, no skill. |
 | `skills/` | GitHub Copilot harness skills. They call `classify` and stop. |
 | `eval/` | A deterministic smoke test. Not a model score. |
+
+MIT Licence. See [LICENSE](../../LICENSE).

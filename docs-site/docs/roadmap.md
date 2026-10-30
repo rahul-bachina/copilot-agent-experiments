@@ -204,6 +204,16 @@ A draft timeline and SAR narrative for one synthetic on-chain alert. The nominat
 
 </article>
 
+<article class="plan-card" id="g001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G001 · Autonomy A1</p>
+
+## Agent use-case intake
+
+A draft classification for one proposed agent. The governance team approves or changes the classification. Suggested autonomy is A0, A1, or A2. A request for A3 is out of scope. It calls [Experiment 14](experiments/14-agent-architecture-advisor.md), [Experiment 19](experiments/19-privacy-impact-assessment.md), and [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md). It does not approve a use case or provision anything. [Read the briefing](experiments/24-agent-use-case-intake.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. G001 is Experiment 24.
