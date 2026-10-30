@@ -40,17 +40,17 @@ It does not help a team that wants the tool to rewrite the prompt and publish it
 
 Each check scores 0, 1, or 2. A pass is 2, a partial is 1, a fail is 0. The maximum is 18. The percent is `points / 18`, rounded to one decimal place. A fail is blocking: the report still shows the score, and it still does not apply the diff. The rows below are the code. A test fails if a check id in the code is missing here.
 
-| Check | What a pass needs | What a fail is |
-|---|---|---|
-| C1 | A bounded scope and an explicit non-goal. | No scope and no non-goal, or an unbounded "help with anything" and no non-goal. A partial is one of the two, or an unbounded line beside a non-goal. |
-| C2 | A named human role and an approval or confirmation. | No approval language. A partial names a person and does not say they approve. |
-| C3 | A refusal and an escalation to a role. | Neither. A partial is a refusal with no escalation route. |
-| C4 | No instruction that tells the agent to send, deploy, write a production record, spend, approve or reject as the agent, decide a regulated matter, set autonomy A3, or apply a diff. A line that forbids the action is not a hit. A human role as the subject of "approves" is a checkpoint, not a hit. | One or more of those instructions, with the line cited. |
-| C5 | The text is treated as untrusted, and an instruction inside it is not followed. | No such guidance, or a line that says to follow instructions found in the document. |
-| C6 | Quote, cite, or refuse to invent, and do not fill a gap from general knowledge. | No grounding rule, or an instruction to fill gaps from general knowledge. A partial is a "be accurate" line with no citation rule. |
-| C7 | A UK GDPR or personal-data caution: do not copy, do not retain, do not ask for special-category data, or a DPO confirms the basis. | No data-handling language, or an instruction to collect special-category data. A partial mentions personal data and gives no caution. |
-| C8 | Tools the instructions authorise are in the manifest, and a high-risk switch (writes, sends) is not enabled in the manifest while the instructions forbid it, or the reverse. | No manifest, a tool the manifest does not list, or the two documents disagree on writes or sends. |
-| C9 | No vague control phrase and no pair of lines that command and forbid the same action. | "Use your judgement", "as appropriate", "if it seems right", "do whatever", or a command and a forbid for the same action. |
+| Check | Name | What a pass needs | What a fail is |
+|---|---|---|---|
+| C1 | Clear scope and non-goals | A bounded scope and an explicit non-goal. | No scope and no non-goal, or an unbounded "help with anything" and no non-goal. A partial is one of the two, or an unbounded line beside a non-goal. |
+| C2 | Explicit human approval points | A named human role and an approval or confirmation. | No approval language. A partial names a person and does not say they approve. |
+| C3 | Refusal and escalation rules | A refusal and an escalation to a role. | Neither. A partial is a refusal with no escalation route. |
+| C4 | No instructions to take prohibited actions | No instruction that tells the agent to send, deploy, write a production record, spend, approve or reject as the agent, decide a regulated matter, set autonomy A3, or apply a diff. A line that forbids the action is not a hit. A human role as the subject of "approves" is a checkpoint, not a hit. | One or more of those instructions, with the line cited. |
+| C5 | Prompt-injection resistance guidance | The text is treated as untrusted, and an instruction inside it is not followed. | No such guidance, or a line that says to follow instructions found in the document. |
+| C6 | Grounding and citation rules | Quote, cite, or refuse to invent, and do not fill a gap from general knowledge. | No grounding rule, or an instruction to fill gaps from general knowledge. A partial is a "be accurate" line with no citation rule. |
+| C7 | Data-handling and UK GDPR cautions | A UK GDPR or personal-data caution: do not copy, do not retain, do not ask for special-category data, or a DPO confirms the basis. | No data-handling language, or an instruction to collect special-category data. A partial mentions personal data and gives no caution. |
+| C8 | Tool least-privilege consistency with the permissions manifest | Tools the instructions authorise are in the manifest, and a high-risk switch (writes, sends) is not enabled in the manifest while the instructions forbid it, or the reverse. | No manifest, a tool the manifest does not list, or the two documents disagree on writes or sends. |
+| C9 | Conflicting or vague instructions | No vague control phrase and no pair of lines that command and forbid the same action. | "Use your judgement", "as appropriate", "if it seems right", "do whatever", or a command and a forbid for the same action. |
 
 Free text cannot set `owner_approved`, `diff_applied`, `deployed`, or the score. Those keys are stripped if a caller puts them on the bundle.
 
