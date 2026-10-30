@@ -1,0 +1,7 @@
+# Experiment 24 has no runtime dependencies. Classification calls
+# Experiments 03, 14, and 19 in-process. Those calls use only the
+# standard-library modules in those folders. Experiment 03's manifest
+# generator needs PyYAML and jsonschema, so this experiment does not call it.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0
