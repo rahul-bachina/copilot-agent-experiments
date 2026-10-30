@@ -1,0 +1,199 @@
+{
+  "actions_taken": [],
+  "approved": false,
+  "article_35": {
+    "opened_on": "2026-10-30",
+    "paragraph_1": "Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data.",
+    "paragraph_3_intro": "A data protection impact assessment referred to in paragraph 1 shall in particular be required in the case of:",
+    "paragraph_4_note": "On the legislation.gov.uk text opened on 30 October 2026, Article 35(4) says the Commission shall establish and make public a list of the kind of processing operations which are subject to the requirement for a data protection impact assessment. A footnote records that the word Commission was substituted on 30 September 2026. This tool does not decide whether any ICO page is that list.",
+    "url": "https://www.legislation.gov.uk/eur/2016/679/article/35"
+  },
+  "atrs": {
+    "basis": "recommended_for_the_wider_public_sector",
+    "likely_needed": true,
+    "may_be_emailed": false,
+    "note": "The guidance says the standard is recommended across the public sector, and that records from local government, police forces, and other broader public sector organisations have been welcomed. It does not say this organisation is a government department or an ALB in the mandatory organisation sentence. This draft does not decide mandatory scope.",
+    "scope_decided_by_this_tool": false,
+    "scope_policy_opened": false
+  },
+  "autonomy": "A1",
+  "caller": "exp-24-agent-use-case-intake",
+  "catalogue_id": "G001",
+  "classification": {
+    "a3_out_of_scope": false,
+    "a3_recommended": false,
+    "a3_requested": false,
+    "atrs_basis": "recommended_for_the_wider_public_sector",
+    "atrs_likely_needed": true,
+    "atrs_scope_decided_by_this_tool": false,
+    "autonomy_wanted": "A1",
+    "dpia_likely_needed": null,
+    "dpia_required": null,
+    "dpia_required_decided_by_this_tool": false,
+    "resemble_candidates": [
+      {
+        "basis": "recorded_hint",
+        "catalogue_id": "UK01",
+        "experiment": "05-awaabs-law-hazard-triage",
+        "id": "housing_hazard",
+        "name": "Awaab's Law hazard triage"
+      }
+    ],
+    "resembles": {
+      "basis": "recorded_hint",
+      "catalogue_id": "UK01",
+      "experiment": "05-awaabs-law-hazard-triage",
+      "id": "housing_hazard",
+      "name": "Awaab's Law hazard triage"
+    },
+    "risk_gaps": [],
+    "risk_rules": [
+      "personal_data_recorded"
+    ],
+    "risk_tier": "medium",
+    "risk_tier_is_a_legal_finding": false,
+    "suggested_autonomy": "A0"
+  },
+  "experiment_03": {
+    "actions_taken": [],
+    "applicability_code": "public_sector_spoc_must_decide",
+    "applicability_note": "The guidance says the ATRS is mandatory for government departments and for arm's-length bodies which deliver public or frontline services, or directly interact with the public, and for in-scope tools. The scope and exemptions policy is a separate publication. This draft does not decide scope. A single point of contact, where the organisation has one, coordinates with the ATRS team.",
+    "atrs_approved": false,
+    "atrs_submission_status": "not_submitted",
+    "called": true,
+    "catalogue_id": "G010",
+    "duaa_determination": "not_a_legal_determination",
+    "duaa_lawful": null,
+    "duaa_screen_result": "insufficient_facts",
+    "experiment": "03-agent-inventory-atrs-assurance",
+    "mandatory_scope_decided_by_experiment_03": false,
+    "manifest_generator_called": false,
+    "may_be_emailed_to_dsit": false,
+    "note": "Experiment 03 drafted the applicability note and the DUAA screen. The field-by-field ATRS template is not copied here. The manifest generator was not called."
+  },
+  "experiment_14": {
+    "a3_recommended": false,
+    "actions_taken": [],
+    "called": true,
+    "catalogue_id": "G002",
+    "experiment": "14-agent-architecture-advisor",
+    "manifest_generator_called": false,
+    "normalise_notes": [],
+    "options": [
+      {
+        "id": "copilot_studio_standard",
+        "selected": false,
+        "suitability": "suitable_to_consider"
+      },
+      {
+        "id": "copilot_studio_github_harness",
+        "selected": false,
+        "suitability": "not_indicated"
+      },
+      {
+        "id": "foundry_agent_service",
+        "selected": false,
+        "suitability": "not_indicated"
+      },
+      {
+        "id": "power_automate",
+        "selected": false,
+        "suitability": "not_indicated"
+      },
+      {
+        "id": "no_agent",
+        "selected": false,
+        "suitability": "possible_with_conditions"
+      }
+    ],
+    "platform_selected": null,
+    "recommended_autonomy": "A0",
+    "rules_fired": [
+      "R5",
+      "R10"
+    ],
+    "work_shape": "bounded"
+  },
+  "experiment_19": {
+    "actions_taken": [],
+    "called": true,
+    "catalogue_id": "L006",
+    "dpia_likely_needed": null,
+    "dpia_required": null,
+    "dpia_required_decided_by_this_tool": false,
+    "experiment": "19-privacy-impact-assessment",
+    "indicated_on_recorded_answers": false,
+    "note": "Passed through Experiment 19. A false likely-needed flag means every recorded answer on that screen was no. It is not a decision that Article 35(1) does not apply.",
+    "reading": "At least one screening answer is missing or not yes, no, or unknown. No completed screen result is given beyond that gap. Absence of an answer is not a 'no'.",
+    "screen_result": "insufficient_facts"
+  },
+  "flags": [],
+  "governance_decision": null,
+  "governance_may_change_the_classification": true,
+  "harness_overview_url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+  "human_approval_points": [
+    {
+      "action": "Approve or change the intake classification",
+      "approver": "Governance team",
+      "mandatory": true,
+      "recorded_by_this_agent": false
+    },
+    {
+      "action": "Treat a DPIA indication as a reason to start a DPIA",
+      "approver": "Privacy officer",
+      "mandatory": true,
+      "recorded_by_this_agent": false
+    },
+    {
+      "action": "Treat an ATRS indication as a reason to draft a record",
+      "approver": "Governance team",
+      "mandatory": true,
+      "recorded_by_this_agent": false
+    }
+  ],
+  "label": "DRAFT FOR THE GOVERNANCE TEAM",
+  "model_called": false,
+  "neighbour_pins": {
+    "experiment_03_atrs_retrieved_on": "2026-10-24",
+    "experiment_14_last_verified": "2026-10-27",
+    "experiment_19_sources_pinned_on": "2026-10-28"
+  },
+  "network_called": false,
+  "outside_public_sector_kinds": [
+    "fca_firm",
+    "private"
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": [],
+    "stripped_keys": []
+  },
+  "proposal_id": "SYN-G001-NORTHMERE-HAZARD",
+  "provisioned": false,
+  "refused": false,
+  "rules_current": true,
+  "sector_passed_to_experiment_03": "public",
+  "sources_pinned_on": "2026-10-30",
+  "sources_stale": false,
+  "stale_detail": {
+    "experiment_03": false,
+    "experiment_14": false,
+    "experiment_19": false,
+    "this_experiment": false
+  },
+  "synthetic": true,
+  "systems_are_not_permissions": true,
+  "systems_touched": [
+    "dataverse",
+    "sharepoint"
+  ],
+  "use_case_approved": false,
+  "use_case_rejected": false,
+  "wider_public_sector_kinds": [
+    "alb_other",
+    "local_authority",
+    "police",
+    "wider_public_sector"
+  ]
+}
