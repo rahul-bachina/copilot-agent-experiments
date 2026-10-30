@@ -3,6 +3,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+_RETIRED_BRAND = "Azure AI" + " Foundry"
 
 
 def _text(relative: str) -> str:
@@ -26,7 +27,7 @@ def test_each_skill_names_the_harness_and_the_governance_gate():
         lowered = text.lower()
         assert "memory" in lowered
         assert "do not use it" in lowered or "do not write" in lowered
-        assert "Azure AI Foundry" not in text
+        assert _RETIRED_BRAND not in text
 
 
 def test_harness_docs_stay_inside_what_was_opened():
@@ -36,12 +37,12 @@ def test_harness_docs_stay_inside_what_was_opened():
     for text in (comparison, harness, studio):
         assert "not the GitHub Copilot service" in text
         assert "30 October 2026" in text
-        assert "Azure AI Foundry" not in text
+        assert _RETIRED_BRAND not in text
         assert "£" not in text
     foundry = _text("docs/foundry.md")
     assert "Microsoft Foundry" in foundry
     assert "No Foundry resource is created" in foundry
-    assert "Azure AI Foundry" not in foundry
+    assert _RETIRED_BRAND not in foundry
     security = _text("docs/security-and-permissions.md")
     for label in (
         "Conditional Access",
@@ -53,7 +54,7 @@ def test_harness_docs_stay_inside_what_was_opened():
         "prompt shields",
     ):
         assert label.lower() in security.lower()
-    assert "Azure AI Foundry" not in security
+    assert _RETIRED_BRAND not in security
     flow = _text("copilot-studio/power-automate-flow.md")
     assert "provision" in flow.lower()
     assert "does not contain" in flow.lower()

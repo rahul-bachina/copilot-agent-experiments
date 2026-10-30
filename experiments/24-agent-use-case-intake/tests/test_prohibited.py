@@ -16,9 +16,10 @@ def test_manifest_text_keeps_the_boundary():
     assert "Governance team" in text
     assert "Approve or change the intake classification" in text
     assert "enabled: false" in text
-    assert "Azure AI Foundry" not in text
+    retired = "Azure AI" + " Foundry"
+    assert retired not in text
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Azure AI Foundry" not in readme
+    assert retired not in readme
     assert "Microsoft Foundry" in readme
 
 
