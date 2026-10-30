@@ -1,0 +1,7 @@
+# Experiment 23 has no runtime dependencies. The pre-check calls
+# Experiments 08, 04, and 03 in-process when those folders are beside it.
+# Experiment 03's manifest generator needs PyYAML and jsonschema, which
+# this workflow does not install. The lifecycle module does not.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0

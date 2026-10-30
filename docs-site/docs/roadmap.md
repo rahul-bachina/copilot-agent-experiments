@@ -204,6 +204,16 @@ A draft timeline and SAR narrative for one synthetic on-chain alert. The nominat
 
 </article>
 
+<article class="plan-card" id="uk08" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK08 · Autonomy A0</p>
+
+## Cryptoasset financial promotions pre-checker
+
+A draft checklist for one synthetic cryptoasset promotion. The section 21 approver signs off. The agent does not approve, publish, or give a compliance opinion. It calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier redactions and can hand a lifecycle request to [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) without applying it. The marketing-page pin follows [Experiment 04](experiments/04-fca-cryptoasset-readiness.md). [Read the briefing](experiments/23-crypto-financial-promotions-prechecker.md).
+
+</article>
+
 <article class="plan-card" id="g003" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · G003 · Autonomy A0</p>
@@ -216,4 +226,4 @@ A scored reading of one system prompt, SKILL.md, or topic prompt. The agent owne
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. G003 is Experiment 25.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G003 is Experiment 25.
