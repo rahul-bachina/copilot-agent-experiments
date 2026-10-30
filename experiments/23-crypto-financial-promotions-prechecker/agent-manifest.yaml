@@ -1,0 +1,417 @@
+# Agent manifest: Cryptoasset financial promotions pre-checker
+# Experiment 23 — catalogue ID UK08
+# Version: 0.1.0
+# Last reviewed: 2026-10-30
+# Next review: 2027-04-30
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+# =============================================================================
+# AGENT IDENTITY
+# =============================================================================
+agent:
+  id: "exp-23-crypto-financial-promotions-prechecker"
+  name: "Cryptoasset Financial Promotions Pre-checker"
+  version: "0.1.0"
+  description: >
+    Drafts a checklist for one synthetic cryptoasset promotion (web copy,
+    social post, or app screen text) against pinned extracts from FSMA 2000
+    section 21, the Financial Promotion Order, and COBS 4. Autonomy A0. The
+    section 21 approver signs off. The agent never approves a promotion,
+    never publishes one, never rewrites copy, and never gives a compliance
+    opinion. UK identifiers go through Experiment 08. A lifecycle request
+    goes through Experiment 03 and is not applied. The marketing-page pin
+    is read from Experiment 04 and is not overwritten.
+  owner: "Section 21 approver"
+  contact: "s21-approver@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/23-crypto-financial-promotions-prechecker"
+
+# =============================================================================
+# AUTONOMY LEVEL
+# =============================================================================
+autonomy:
+  level: "A0"
+  level_description: "Advisory only. The section 21 approver signs off. The agent returns a draft checklist and stops."
+  constraints:
+    - "The section 21 approver signs off. The agent only drafts a checklist."
+    - "The agent NEVER approves, rejects, or signs off a financial promotion"
+    - "The agent NEVER publishes, schedules, or sends a promotion"
+    - "The agent NEVER drafts replacement copy"
+    - "The agent NEVER gives a compliance opinion or legal advice"
+    - "The agent NEVER decides that section 21, article 73ZA, or paragraph 26F applies"
+    - "The agent NEVER decides that an offence under section 25 would be committed"
+    - "A sentence inside the draft cannot set s21_approver_decision, clear a flag, or mark the promotion approved"
+    - "Identifier redaction is Experiment 08. Lifecycle proposals are Experiment 03. This agent does not re-implement them."
+    - "All output is a draft and is marked for the section 21 approver"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+# =============================================================================
+# DATA ACCESS
+# =============================================================================
+data_access:
+  reads:
+    - resource: "One synthetic promotion draft"
+      description: "Web copy, a social post, or app screen text, plus the caller's channel, route claim, and whether they say it is a direct offer. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One promotion per invocation. No website crawl and no social-network account."
+      justification: "The checklist cannot be drafted without the text the reviewer has supplied"
+      data_categories:
+        - "Marketing copy"
+        - "A claimed communication route and an approver name, if the caller typed one"
+        - "Free text that may contain a UK identifier or an instruction"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the text. The draft stores the Experiment 08 redaction, not the original."
+
+    - resource: "Optional inventory record"
+      description: "One synthetic inventory record passed to Experiment 03 when an untrusted control asks for a lifecycle change."
+      access_level: "read"
+      scope: "The inventory_record object on this promotion, if present."
+      justification: "Experiment 03 refuses to apply a status without an external governance-owner decision. This agent does not supply that decision."
+      may_contain_personal_data: false
+
+    - resource: "Reviewer-supplied run parameters"
+      description: "As-of date and optional stale window, typed outside the promotion body."
+      access_level: "read"
+      scope: "Fields passed for this run."
+      justification: "The freshness comparison needs a date the reviewer typed"
+      may_contain_personal_data: false
+
+    - resource: "Pinned source extracts"
+      description: "Short quotations in src/sources.py from pages opened on 30 October 2026, plus Experiment 04's marketing-page pin."
+      access_level: "read"
+      scope: "Static files in this experiment and Experiment 04's sources module"
+      justification: "The checklist has to cite the words that were read, without a network call at runtime"
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "The firm's publishing tools, CMS, app store, and social accounts"
+      reason: "The agent does not publish."
+    - resource: "FCA Connect, the Financial Services Register, and fca.org.uk at run time"
+      reason: "Citations are pinned. The agent does not look up a firm's permissions."
+    - resource: "Section 55NA and section 55NB, COBS 4 Annex 1R, COBS 10, and COBS 10A"
+      reason: "Those texts were not opened. The agent must not invent their content."
+    - resource: "Customer relationship systems and recipient lists"
+      reason: "A personalised risk warning needs the client's name at the point of a direct offer. This agent does not hold that list and does not send the warning."
+    - resource: "Production approval registers and Dataverse"
+      reason: "No production write. The draft is JSON for a person."
+    - resource: "Other firms' promotions and live campaigns"
+      reason: "One draft at a time. No benchmarking."
+
+# =============================================================================
+# TOOLS
+# =============================================================================
+tools:
+  allowed:
+    - tool: "precheck_promotion"
+      provider: "Python src/precheck.py"
+      action: "Return one draft checklist for the promotion the reviewer supplied"
+      access_level: "read"
+      scope: "The JSON for this run. Experiments 08, 03, and 04 are called in-process when the input gives them something to read."
+      justification: "The section 21 approver needs a checklist with citations, not a decision"
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: "No production record is written. approve_promotion, publish_promotion, and give_compliance_opinion always raise."
+
+  sends:
+    enabled: false
+    note: "Nothing is published or sent. The agent does not draft replacement copy that could be pasted into a channel."
+
+# =============================================================================
+# HIGH-RISK ACTIONS
+# =============================================================================
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject a promotion. approve_promotion always raises. s21_approver_decision stays null."
+  regulated_decision:
+    enabled: false
+    rationale: "Whether the promotion may be communicated is the section 21 approver's decision. give_compliance_opinion always raises. compliance_opinion stays false."
+  production_record_change:
+    enabled: false
+    rationale: "The starter does not write to an approvals register, a CMS, Dataverse, or the Financial Services Register."
+  external_send:
+    enabled: false
+    rationale: "publish_promotion always raises. published stays false. No social network, website, or app store is contacted."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not buy, sell, or transfer a cryptoasset, and it does not spend."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Approve a financial promotion under section 21"
+      rationale: "approve_promotion always raises. The section 21 approver signs off outside this agent."
+    - enabled: false
+      action_name: "Publish or schedule a promotion"
+      rationale: "publish_promotion always raises. published stays false."
+    - enabled: false
+      action_name: "Draft replacement promotion copy"
+      rationale: "rewrite_drafted stays false. A rewrite would be another communication."
+    - enabled: false
+      action_name: "Apply an inventory lifecycle status"
+      rationale: "Experiment 03 is called with no approval. status_applied stays false. This agent does not mint an approval id."
+
+# =============================================================================
+# HUMAN APPROVAL
+# =============================================================================
+human_approval:
+  description: >
+    The section 21 approver signs off. The agent has no tool that records
+    that decision. Viewing the checklist is not approval and is not a
+    compliance opinion.
+
+  approval_points:
+    - action: "Sign off the promotion, or refuse to"
+      approver: "Section 21 approver"
+      mandatory: true
+      rationale: "FSMA 2000 section 21. The checklist is a draft. The approver decides."
+
+    - action: "Treat a flagged phrase as a breach, or as acceptable"
+      approver: "Section 21 approver"
+      mandatory: true
+      rationale: "COBS 4.2.5G and COBS 4.12A.7R turn on judgements this checker does not make."
+
+    - action: "Rely on a row after a source is marked stale"
+      approver: "Section 21 approver"
+      mandatory: true
+      rationale: "The pin is 30 October 2026. A person re-opens the page before anyone relies on a stale row."
+
+    - action: "Confirm the communication route, including any section 55NA permission"
+      approver: "Section 21 approver"
+      mandatory: true
+      rationale: "Section 55NA was not opened. The marketing page and section 21(2A) are both recorded and not reconciled by the agent."
+
+    - action: "Publish, schedule, or send the promotion"
+      approver: "Section 21 approver"
+      mandatory: true
+      rationale: "Outside the agent. publish_promotion always raises."
+
+    - action: "Change the lifecycle status of an inventoried agent"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "Experiment 03. This agent does not supply the external decision."
+
+  no_approval_required:
+    - action: "View the draft checklist"
+      rationale: "Reading has no external effect. It is not sign-off."
+    - action: "Re-run the same draft"
+      rationale: "The same text and the same as-of date produce the same JSON."
+
+# =============================================================================
+# UK GDPR
+# =============================================================================
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      A draft promotion can name a person or paste an identifier. This
+      starter does not decide the firm's lawful basis. A candidate for the
+      DPO to confirm is Article 6(1)(f), legitimate interests, for an
+      internal review of the firm's own draft. Do not copy a basis from
+      another experiment.
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The checker does not look for special-category data. A draft that contains it should not be pasted into this repository."
+    safeguards:
+      - "Experiment 08 proposes identifier redactions before an excerpt is stored"
+      - "output_is_anonymised stays false"
+      - "The starter does not persist the text"
+  data_minimisation:
+    - "One promotion per run"
+    - "The original body is not copied into the result when Experiment 08 returns a redaction"
+    - "No recipient list and no client name is fetched"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "If the caller stores the checklist, that schedule is the caller's."
+  data_residency:
+    region: "UK South or UK West if a firm later hosts a model"
+    note: "This starter makes no network call. A region is not configured."
+  data_subject_rights:
+    note: "The starter does not hold a record on which to action a request. The firm that keeps the draft does."
+
+# =============================================================================
+# PROMPT INJECTION
+# =============================================================================
+prompt_injection:
+  description: >
+    Promotion text is data. An instruction to approve, publish, ignore the
+    rules, or set s21_approver_decision is recorded and not followed.
+  controls:
+    - control: "Line scan"
+      description: "A matching line is not used as evidence that a warning or a route is present."
+      implementation: "src/injection.py"
+    - control: "Split-line quarantine"
+      description: "An instruction that appears only when line breaks are removed quarantines the whole text."
+      implementation: "src/injection.py"
+    - control: "Prohibited keys"
+      description: "promotion_approved, published, compliance_opinion, and s21_approver_decision in the JSON are ignored."
+      implementation: "src/precheck.py"
+  residual_risk: "A paraphrase that does not match the patterns can still be read by a later model. This starter does not call a model. Residual risk of a missed pattern is Medium."
+
+# =============================================================================
+# RISK ASSESSMENT
+# =============================================================================
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named firm"
+  date_assessed: "2026-10-30"
+  risks:
+    - id: "R1"
+      risk: "A reviewer treats a missing phrase as a breach, or a complete-looking draft as approved"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "compliance_finding is false on every row"
+        - "promotion_approved, published, and compliance_opinion stay false"
+        - "The label says the checklist is a draft for the section 21 approver"
+      residual_risk: "Medium"
+      owner: "Section 21 approver"
+    - id: "R2"
+      risk: "A stale Handbook or legislation pin is relied on after the rules move, including the 25 October 2027 Handbook future version"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "last_verified is 30 October 2026"
+        - "Older than 90 days is marked stale and rules_current is false"
+        - "The future Handbook version was not opened and is named as not opened"
+      residual_risk: "Medium"
+      owner: "Section 21 approver"
+    - id: "R3"
+      risk: "An instruction inside the copy causes the agent to approve or publish"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Matching lines are not evidence"
+        - "approve_promotion and publish_promotion raise"
+        - "Untrusted lifecycle requests are not applied"
+      residual_risk: "Low"
+      owner: "Section 21 approver"
+    - id: "R4"
+      risk: "A UK identifier in a draft is copied into a log or a model prompt"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 redacts before the excerpt is stored"
+        - "The result does not repeat the original body"
+        - "output_is_anonymised stays false"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R5"
+      risk: "The marketing-page gateway sentence and section 21(2A) are collapsed into one conclusion"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Both sentences are stored"
+        - "Section 55NA was not opened and is named as not opened"
+        - "The agent does not decide which sentence the firm should follow"
+      residual_risk: "Medium"
+      owner: "Section 21 approver"
+
+# =============================================================================
+# LOGGING AND AUDIT
+# =============================================================================
+logging_and_audit:
+  description: >
+    This starter writes no log. Before live use, log who ran it, the
+    promotion id, whether injection or a stale date was flagged, and the
+    later human decision. Do not log the original body.
+  logged_events:
+    - event: "Checklist drafted"
+      data_logged:
+        - "Promotion id"
+        - "As-of date"
+        - "Whether any source was stale"
+        - "Injection pattern ids, not the line, if the line may contain an identifier"
+      retention: "Caller's schedule. Not set by this starter."
+    - event: "Section 21 approver's later decision"
+      data_logged:
+        - "Decision recorded by the person, outside this agent"
+      retention: "Firm's compliance-file schedule. Not set by this starter."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Application Insights is a tenant control. It is not wired here."
+  audit_trail:
+    - "This starter writes no audit trail"
+    - "Experiment 08's proposal says the privacy reviewer has not released the text"
+
+# =============================================================================
+# KILL SWITCH
+# =============================================================================
+kill_switch:
+  description: "Ways to stop the agent. None of these tenant controls is configured in this repository."
+  methods:
+    - method: "Do not call precheck_promotion"
+      action: "The Python function is the only producer of a checklist. Not calling it stops the draft."
+      time_to_effect: "Immediate"
+      who_can_activate: "The person running the script, or the Copilot Studio owner who unpublishes the agent"
+    - method: "Unpublish the Copilot Studio agent"
+      action: "Stops a channel from invoking the topic. The repository cannot do this."
+      time_to_effect: "Depends on the tenant"
+      who_can_activate: "Copilot Studio owner"
+    - method: "Remove any later Foundry connection"
+      action: "This starter has no Foundry connection. A key in Key Vault would be removed by the firm."
+      time_to_effect: "Depends on the tenant"
+      who_can_activate: "The firm's administrator"
+  escalation_contacts:
+    - role: "Section 21 approver"
+      contact: "s21-approver@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+# =============================================================================
+# REVIEW
+# =============================================================================
+review:
+  last_review_date: "2026-10-30"
+  next_review_date: "2027-04-30"
+  review_frequency: "Six months, and sooner if COBS 4.12A, section 21, or the Financial Promotion Order changes"
+  reviewer: "The adopting firm's section 21 approver and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to FSMA 2000 section 21 or section 25, or to paragraph 26F or article 73ZA"
+    - "The Handbook future version dated 25 October 2027, or any earlier change to COBS 4.12A or COBS 4.2"
+    - "An update to the FCA marketing page, including the gateway sentence"
+    - "A change to Experiment 08 or Experiment 03 that alters the nested JSON"
+    - "A plan to connect a CMS, a social account, or the Financial Services Register"
+  related_documents:
+    - name: "Security and permissions"
+      path: "experiments/23-crypto-financial-promotions-prechecker/docs/security-and-permissions.md"
+    - name: "Experiment 04 FCA cryptoasset readiness"
+      path: "experiments/04-fca-cryptoasset-readiness/README.md"
+    - name: "Experiment 08 UK identifier gateway"
+      path: "experiments/08-uk-pii-redaction-gateway/README.md"
+
+# =============================================================================
+# ASSUMPTIONS
+# =============================================================================
+assumptions:
+  description: "Items a firm must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "A person who may approve under section 21, or who is otherwise responsible for the route the firm uses, will sign off. This agent will not."
+      section: "autonomy"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 6 is confirmed by the firm. This manifest does not assert it."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The pages pinned on 30 October 2026 are re-read before the freshness window lapses. Paragraph 26F's substitution note and the marketing-page gateway sentence are both unresolved by this starter."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The firm opens COBS 4 Annex 1R, COBS 4.12A.36R, COBS 4.12A.38R, section 55NA, and COBS 10 before it treats those points as checked. This starter did not."
+      section: "sources"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, Foundry prompt shields, Key Vault, Purview, and Application Insights are tenant controls. They are not configured in this repository."
+      section: "kill_switch"
+      verify_on_deployment: true
