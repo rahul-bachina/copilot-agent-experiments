@@ -1036,6 +1036,61 @@ class TestExperiment22Manifest:
         assert experiment_22_manifest["agent"]["id"] == "exp-22-onchain-alert-sar-drafter"
 
 
+class TestExperiment25Manifest:
+    """Test the Experiment 25 instruction quality reviewer manifest."""
+
+    @pytest.fixture
+    def experiment_25_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "25-instruction-quality-reviewer"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_25_manifest):
+        """Experiment 25 manifest should be valid."""
+        validate(instance=experiment_25_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_25_manifest):
+        """Experiment 25 should be autonomy level A0, not above."""
+        level = experiment_25_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_25_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_25_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_25_manifest):
+        """Experiment 25 should have all high-risk actions disabled."""
+        high_risk = experiment_25_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_25_manifest):
+        """Nothing is sent or written, including a prompt file."""
+        assert experiment_25_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_25_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_agent_owner_approves_prompt_changes(self, experiment_25_manifest):
+        """The catalogue checkpoint is the agent owner, and it is mandatory."""
+        points = experiment_25_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"] == "Approve prompt changes")
+        assert decision["approver"] == "Agent owner"
+        assert decision["mandatory"] is True
+        assert experiment_25_manifest["agent"]["id"] == "exp-25-instruction-quality-reviewer"
+
+
 class TestInvalidA3Autonomy:
     """Test that A3 autonomy level is rejected."""
 

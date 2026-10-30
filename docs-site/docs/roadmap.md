@@ -214,6 +214,16 @@ A draft checklist for one synthetic cryptoasset promotion. The section 21 approv
 
 </article>
 
+<article class="plan-card" id="g003" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G003 · Autonomy A0</p>
+
+## Instruction quality reviewer
+
+A scored reading of one system prompt, SKILL.md, or topic prompt. The agent owner approves prompt changes. The proposed diff is not applied. It can call [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) for an unapproved manifest skeleton and [Experiment 14](experiments/14-agent-architecture-advisor.md) when a structured use case is supplied. [Read the briefing](experiments/25-instruction-quality-reviewer.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G003 is Experiment 25.

@@ -85,6 +85,9 @@ DIAGRAMS = {
     "experiments/23-crypto-financial-promotions-prechecker/docs/architecture_diagram.png": (
         "experiments/img/23-crypto-financial-promotions-architecture.png"
     ),
+    "experiments/25-instruction-quality-reviewer/docs/architecture_diagram.png": (
+        "experiments/img/25-instruction-quality-reviewer-architecture.png"
+    ),
 }
 
 

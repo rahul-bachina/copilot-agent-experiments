@@ -1,0 +1,7 @@
+# Experiment 25 has no runtime dependencies beyond the standard library.
+# The checklist, the diff, and the tests do not import third-party packages.
+# Experiment 03's manifest generator is called only when PyYAML and jsonschema
+# are already installed. This file does not install them. A clean environment
+# can install just pytest.
+
+pytest>=7.0.0

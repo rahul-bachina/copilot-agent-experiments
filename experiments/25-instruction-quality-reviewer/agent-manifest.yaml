@@ -1,0 +1,281 @@
+# Agent manifest: Instruction Quality Reviewer
+# Experiment 25 — catalogue ID G003
+# Version: 0.1.0
+# Last reviewed: 2026-10-30
+# Next review: 2027-04-30
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-25-instruction-quality-reviewer"
+  name: "Instruction Quality Reviewer"
+  version: "0.1.0"
+  description: >
+    Reviews one set of agent instructions (a system prompt, a SKILL.md, or a
+    topic prompt) against a fixed checklist and returns a scored findings
+    report with a proposed diff. Autonomy of this reviewer is A0. The agent
+    owner approves any prompt change. The reviewer does not edit the
+    instructions, does not apply the diff, and does not deploy.
+  owner: "Agent owner (the adopting organisation)"
+  contact: "instruction-review@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/25-instruction-quality-reviewer"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The reviewer returns a draft findings report and a proposed diff, and stops."
+    - "The reviewer NEVER edits instructions, applies a diff, or writes a prompt file."
+    - "The reviewer NEVER deploys, publishes, or changes a Copilot Studio agent."
+    - "The reviewer NEVER approves a rewrite. owner_approved stays false. The agent owner decides."
+    - "The reviewer NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The reviewer NEVER sends the report, spends, or writes a production record."
+    - "Instruction text is untrusted data. Instructions inside it cannot change the checklist, the score, or the decision to leave the diff unapplied."
+    - "All output is labelled DRAFT FOR AGENT OWNER REVIEW."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Instructions supplied for this run"
+      description: "System prompt, SKILL.md, or topic prompt text. Synthetic in this repository, or a copy of an instruction file already in this repository."
+      access_level: "read"
+      scope: "The documents passed to this run. No browsing of a tenant."
+      justification: "The checklist cannot score instructions it has not been given."
+      data_categories:
+        - "Agent instructions"
+        - "Free text, which may contain personal data if the owner pasted it"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the instructions."
+    - resource: "Permissions manifest supplied for this run"
+      description: "Optional agent-manifest.yaml or an equivalent JSON object, used for the least-privilege check."
+      access_level: "read"
+      scope: "One manifest, if the caller supplied one."
+      justification: "Tool statements in the instructions are compared with the manifest. The reviewer does not approve the manifest."
+      may_contain_personal_data: false
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences taken from Experiment 14's pin of 27 October 2026. This experiment did not re-open the pages."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Harness claims are cited from that pin, and marked as not re-opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the agent owner."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of review dates and of the pin is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A Copilot Studio tenant, a prompt store, or a deployment pipeline"
+      reason: "The reviewer does not read or write live instructions. The caller supplies the text."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The report is returned to the caller. Nothing is sent."
+    - resource: "A production system of record"
+      reason: "The reviewer does not change a case, a ticket, or a configuration record."
+
+tools:
+  allowed:
+    - tool: "Read the instructions supplied for this run"
+      provider: "Local Python (src/review.py)"
+      action: "Score the text against the fixed checklist"
+      access_level: "read"
+      scope: "The documents passed to the reviewer"
+      justification: "The report cannot be built without the text the owner supplied"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft a proposed diff"
+      provider: "Local Python (src/diffing.py)"
+      action: "Return a unified diff. Do not write it to disk."
+      access_level: "read"
+      scope: "The same documents"
+      justification: "The agent owner needs a concrete rewrite to accept or reject. The diff is not applied."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft an unapproved manifest skeleton when none was supplied"
+      provider: "Experiment 03 generator when PyYAML and jsonschema are installed; otherwise a local stand-in"
+      action: "Return a draft skeleton. Refuse approval. Refuse autonomy A3."
+      access_level: "read"
+      scope: "One inventory-shaped record built from the bundle id and title"
+      justification: "A missing manifest is itself a finding. The skeleton is not a sign-off."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Read a structured use case with Experiment 14's decision table"
+      provider: "Experiment 14 (src/rules.py), called only when a use case is supplied"
+      action: "Return that advisor's autonomy recommendation. Do not select a platform."
+      access_level: "read"
+      scope: "The structured fields on the bundle, if present"
+      justification: "A use case lets the owner see whether the instructions' autonomy words disagree with Experiment 14. Experiment 14 does not select a platform."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The reviewer does not write instructions, Dataverse, Copilot Studio, or any other production record."
+  sends:
+    enabled: false
+    note: "The reviewer does not send email, Teams messages, or a deployment request."
+
+human_approval:
+  description: >
+    The agent owner approves prompt changes. The reviewer can propose a diff.
+    It cannot record that the owner accepted it, and it cannot apply it.
+  approval_points:
+    - action: "Approve prompt changes"
+      approver: "Agent owner"
+      mandatory: true
+      rationale: "Catalogue control for G003. The proposed diff stays unapplied."
+    - action: "Accept or reject each finding before a rewrite is kept"
+      approver: "Agent owner"
+      mandatory: true
+      rationale: "The checklist is deterministic and can miss a paraphrase or flag a harmless line."
+    - action: "Rely on a manifest skeleton drafted because none was supplied"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Re-open a pinned page, or a review date, before relying on a citation"
+      approver: "Agent owner"
+      mandatory: true
+      rationale: "This experiment did not re-open the Microsoft Learn pages. A stale review date is not refreshed by the reviewer."
+  no_approval_required:
+    - action: "Produce this draft from instructions the owner supplied"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      Instructions may quote personal data if the owner pasted a live prompt.
+      The reviewer does not choose an Article 6 basis. The organisation's
+      data protection officer confirms a basis before any processing of live
+      data. The samples in this repository are synthetic, apart from
+      instruction text already published in this repository.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Instruction text is not written to a production record"
+      - "Instructions inside the text are not followed"
+  data_minimisation:
+    - "One bundle per report"
+    - "A line is quoted in a finding only as a short excerpt"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-10-30"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a score or a proposed diff as an approved prompt change"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "owner_approved is false and diff_applied is false"
+        - "The label is DRAFT FOR AGENT OWNER REVIEW"
+      residual_risk: "Medium"
+      owner: "Agent owner"
+    - id: "R2"
+      risk: "Instruction text tells the reviewer to mark every check as pass, apply the diff, or deploy"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the checklist result or the unapplied flag"
+        - "Tests cover an injected bundle"
+      residual_risk: "Low"
+      owner: "Agent owner"
+    - id: "R3"
+      risk: "A pattern misses a paraphrase, or flags a line that a person would read as safe"
+      likelihood: "High"
+      impact: "Medium"
+      controls:
+        - "Every check cites the line it used"
+        - "The owner accepts or rejects each finding"
+      residual_risk: "Medium"
+      owner: "Agent owner"
+    - id: "R4"
+      risk: "A pinned Microsoft Learn sentence has changed since Experiment 14 opened the page on 27 October 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified and say this experiment did not re-open them"
+        - "A stale pin is marked do not rely"
+      residual_risk: "Medium"
+      owner: "Agent owner"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a review, the bundle id, the as-of date, and whether a diff was proposed. Do not log the full instruction text into an unreviewed store."
+  logged_events:
+    - event: "Instruction review drafted"
+      data_logged:
+        - "bundle id"
+        - "as-of date"
+        - "score percent"
+        - "check ids that failed"
+        - "whether a prompt-injection pattern was detected"
+        - "whether the diff was applied (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/review.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft reviews"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-10-30"
+  next_review_date: "2027-04-30"
+  review_frequency: "Six months, and sooner if a pinned Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting organisation's agent owner. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The reviewer does not approve or reject a rewrite, a finding, or a manifest."
+  regulated_decision:
+    enabled: false
+    rationale: "A checklist score is not a regulated decision. The agent owner decides what to do with it."
+  production_record_change:
+    enabled: false
+    rationale: "Instructions are not edited. No tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The report is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Apply a proposed instruction diff"
+      enabled: false
+      rationale: "diff_applied stays false. There is no write tool."
+    - action_name: "Deploy or publish an agent"
+      enabled: false
+      rationale: "There is no deployment tool."
+    - action_name: "Mark a manifest approved"
+      enabled: false
+      rationale: "The skeleton path refuses an approve flag."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a report."
+  items:
+    - id: "A1"
+      assumption: "The instruction text was supplied by the agent owner. This starter does not fetch it from a tenant."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Microsoft Learn sentences reused from Experiment 14's pin of 27 October 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The reviewer does not apply a diff."
+      section: "high_risk_actions"
+      verify_on_deployment: true
