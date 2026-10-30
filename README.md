@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Twenty-one starters are in `experiments/`. The count is the number of folders.
+Twenty-three starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -54,6 +54,7 @@ Twenty-one starters are in `experiments/`. The count is the number of folders.
 | 20 | [Complaints root-cause and regulatory MI](experiments/20-complaints-root-cause-mi/) | Draft management information from one synthetic complaint batch for a Consumer Duty board report, a Housing Ombudsman Code self-assessment, or Ofgem complaints reporting. The complaints owner validates the clusters and the narrative. Every count lists source record ids. Experiments 02 and 08 are called in-process. Autonomy A0. The agent does not validate, submit, publish, or send. | ✅ Starter |
 | 21 | [IT Service Desk Agent](experiments/21-it-service-desk/) | Draft a reading of one synthetic IT ticket from a fixed knowledge base. The member of staff confirms a device change. Password resets, MFA changes, and access grants go to an analyst. Experiment 08 counts UK identifiers. Autonomy A1. The agent does not reset, grant, execute, write a ticket, or send. | ✅ Starter |
 | 22 | [On-chain alert investigator and SAR narrative drafter](experiments/22-onchain-alert-sar-drafter/) | Draft an internal timeline and a SAR narrative from one synthetic on-chain alert. The nominated officer decides whether to file. Experiments 10, 16, and 08 can be called. Autonomy A1. The agent does not file, request a defence, freeze or move a cryptoasset, or draft customer-facing content. | ✅ Starter |
+| 23 | [Cryptoasset financial promotions pre-checker](experiments/23-crypto-financial-promotions-prechecker/) | Draft a checklist for one synthetic cryptoasset promotion. The section 21 approver signs off. Experiments 08, 04, and 03 can be called. Autonomy A0. The agent does not approve, publish, rewrite, or give a compliance opinion. | ✅ Starter |
 
 ## Getting Started
 
@@ -205,6 +206,13 @@ cd ../22-onchain-alert-sar-drafter
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/investigate.py --input examples/sample_alert.json --as-of 2026-10-29
+
+# Experiment 23 needs no credentials either. The checklist is deterministic.
+# Experiments 03, 04, and 08 have to be present beside it.
+cd ../23-crypto-financial-promotions-prechecker
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/precheck.py --input examples/sample_web.json --as-of 2026-10-30
 ```
 
 ## Repository Structure
@@ -249,7 +257,8 @@ copilot-agent-experiments/
     ├── 19-privacy-impact-assessment/
     ├── 20-complaints-root-cause-mi/
     ├── 21-it-service-desk/
-    └── 22-onchain-alert-sar-drafter/
+    ├── 22-onchain-alert-sar-drafter/
+    └── 23-crypto-financial-promotions-prechecker/
 ```
 
 ## Agent Governance
