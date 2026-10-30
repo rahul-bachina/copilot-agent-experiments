@@ -82,6 +82,9 @@ DIAGRAMS = {
     "experiments/22-onchain-alert-sar-drafter/docs/architecture_diagram.png": (
         "experiments/img/22-onchain-alert-sar-architecture.png"
     ),
+    "experiments/23-crypto-financial-promotions-prechecker/docs/architecture_diagram.png": (
+        "experiments/img/23-crypto-financial-promotions-architecture.png"
+    ),
 }
 
 

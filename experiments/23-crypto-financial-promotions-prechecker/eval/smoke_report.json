@@ -1,0 +1,3514 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which can call Experiments 08, 04, and 03. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_compliance_score": true,
+  "dataset_label": "Synthetic fixtures for Experiment 23. Not a model evaluation.",
+  "firm_in_fixtures": "Harbourline Markets Ltd (synthetic, invented)",
+  "summary": {
+    "total_cases": 26,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "web-missing-warning",
+      "name": "Web draft with no warning, a bonus, and an instruction",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signals_include",
+          "passed": true,
+          "detail": "ignore_instructions,approve_promotion"
+        },
+        {
+          "field": "prohibited_keys",
+          "passed": true,
+          "detail": "promotion_approved,published"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_not_found"
+        },
+        {
+          "field": "FP-INCENTIVE",
+          "passed": true,
+          "detail": "flagged_for_review"
+        },
+        {
+          "field": "FP-FAIR",
+          "passed": true,
+          "detail": "flagged_for_review"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "question_for_approver"
+        },
+        {
+          "field": "FP-ROUTE",
+          "passed": true,
+          "detail": "phrase_not_found"
+        }
+      ]
+    },
+    {
+      "case_id": "web-full-warning",
+      "name": "Web draft with the crypto warning, a route, and the journey words",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-RISK-LINK",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-FAIR",
+          "passed": true,
+          "detail": "phrase_not_found"
+        },
+        {
+          "field": "FP-INCENTIVE",
+          "passed": true,
+          "detail": "phrase_not_found"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-ROUTE",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-S21-NAME",
+          "passed": true,
+          "detail": "not_applied"
+        }
+      ]
+    },
+    {
+      "case_id": "social-short-limited",
+      "name": "Social post using the short warning where the caller says a character limit applies",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "question_for_approver"
+        }
+      ]
+    },
+    {
+      "case_id": "social-short-open",
+      "name": "Social post using the short warning with no stated character limit",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "flagged_for_review"
+        }
+      ]
+    },
+    {
+      "case_id": "nrr-wording",
+      "name": "App screen using the securities warning",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "flagged_for_review"
+        }
+      ]
+    },
+    {
+      "case_id": "refer-a-friend",
+      "name": "Referral bonus on a web page",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE",
+          "passed": true,
+          "detail": "flagged_for_review"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "cashback",
+      "name": "Cashback offer",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE",
+          "passed": true,
+          "detail": "flagged_for_review"
+        }
+      ]
+    },
+    {
+      "case_id": "free-bitcoin",
+      "name": "Free bitcoin offer",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE",
+          "passed": true,
+          "detail": "flagged_for_review"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "question_for_approver"
+        }
+      ]
+    },
+    {
+      "case_id": "guaranteed",
+      "name": "Guaranteed returns",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR",
+          "passed": true,
+          "detail": "flagged_for_review"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "fscs-claim",
+      "name": "FSCS wording",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR",
+          "passed": true,
+          "detail": "flagged_for_review"
+        }
+      ]
+    },
+    {
+      "case_id": "injection-only",
+      "name": "Instruction to mark the promotion compliant",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signals_include",
+          "passed": true,
+          "detail": "mark_compliant,new_instructions,you_are_approver"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-pin",
+      "name": "Same draft read after the pin is stale",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "pin-still-fresh",
+      "name": "Same draft on the last day inside the 90-day window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "dofp-missing",
+      "name": "Caller marks a direct offer and omits the journey",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "phrase_not_found"
+        }
+      ]
+    },
+    {
+      "case_id": "dofp-words-present",
+      "name": "Caller marks a direct offer and the four condition words are present",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-RISK-LINK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "buy-now-unmarked",
+      "name": "Buy now, not marked as a direct offer",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP",
+          "passed": true,
+          "detail": "question_for_approver"
+        }
+      ]
+    },
+    {
+      "case_id": "s21-named",
+      "name": "Section 21 route with an approver name on the draft",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-ROUTE",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "s21-unnamed",
+      "name": "Section 21 route with no approver name",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME",
+          "passed": true,
+          "detail": "phrase_not_found"
+        }
+      ]
+    },
+    {
+      "case_id": "nino-redacted",
+      "name": "A National Insurance number pasted into the draft",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "prohibited-keys",
+      "name": "Payload asks the agent to approve and to change lifecycle status",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_keys",
+          "passed": true,
+          "detail": "promotion_approved,s21_approver_decision,requested_lifecycle_status"
+        },
+        {
+          "field": "lifecycle_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "status_applied",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "split-injection",
+      "name": "An instruction split across lines quarantines the warning",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "quarantine",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_not_found"
+        }
+      ]
+    },
+    {
+      "case_id": "not-qualifying-claimed",
+      "name": "Caller does not say the asset is a qualifying cryptoasset",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "not_applied"
+        },
+        {
+          "field": "FP-26F",
+          "passed": true,
+          "detail": "recorded_not_applied"
+        }
+      ]
+    },
+    {
+      "case_id": "fpo-exemption",
+      "name": "Caller claims an Financial Promotion Order exemption",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-S21-NAME",
+          "passed": true,
+          "detail": "not_applied"
+        }
+      ]
+    },
+    {
+      "case_id": "authorised-person",
+      "name": "Caller claims the communicator is an authorised person",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-RISK-LINK",
+          "passed": true,
+          "detail": "phrase_present"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A record that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent planted value 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "app-no-link",
+      "name": "App screen with the full warning and no link text",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CHECKLIST FOR THE S21 APPROVER"
+        },
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "UK08"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "promotion_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "compliance_opinion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "s21_approver_decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "rewrite_drafted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "prohibited_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-ROUTE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-S21-NAME.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-GATEWAY.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-26F.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK-LINK.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-PROMINENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-INCENTIVE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-FAIR.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-DOFP.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-OFFENCE.compliance_finding",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "FP-RISK",
+          "passed": true,
+          "detail": "phrase_present"
+        },
+        {
+          "field": "FP-RISK-LINK",
+          "passed": true,
+          "detail": "question_for_approver"
+        }
+      ]
+    }
+  ]
+}
