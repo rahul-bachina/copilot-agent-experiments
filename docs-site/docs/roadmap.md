@@ -234,6 +234,16 @@ A scored reading of one system prompt, SKILL.md, or topic prompt. The agent owne
 
 </article>
 
+<article class="plan-card" id="g006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G006 · Autonomy A0</p>
+
+## Prompt injection test agent
+
+A draft findings report from one versioned suite of synthetic prompt-injection fixtures. The security reviewer assesses the findings and decides remediation. It can call [Experiment 08](experiments/08-uk-pii-redaction-gateway.md), [Experiment 25](experiments/25-instruction-quality-reviewer.md), and [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) inside the sandbox. It does not target production, publish a payload, or call Microsoft Foundry. [Read the briefing](experiments/28-prompt-injection-test.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G006 is Experiment 28.

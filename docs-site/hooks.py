@@ -91,6 +91,9 @@ DIAGRAMS = {
     "experiments/25-instruction-quality-reviewer/docs/architecture_diagram.png": (
         "experiments/img/25-instruction-quality-reviewer-architecture.png"
     ),
+    "experiments/28-prompt-injection-test/docs/architecture_diagram.png": (
+        "experiments/img/28-prompt-injection-test-architecture.png"
+    ),
 }
 
 

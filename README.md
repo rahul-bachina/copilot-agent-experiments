@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Twenty-five starters are in `experiments/`. The count is the number of folders.
+Twenty-six starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -57,6 +57,7 @@ Twenty-five starters are in `experiments/`. The count is the number of folders.
 | 23 | [Cryptoasset financial promotions pre-checker](experiments/23-crypto-financial-promotions-prechecker/) | Draft a checklist for one synthetic cryptoasset promotion. The section 21 approver signs off. Experiments 08, 04, and 03 can be called. Autonomy A0. The agent does not approve, publish, rewrite, or give a compliance opinion. | ✅ Starter |
 | 24 | [Agent use-case intake](experiments/24-agent-use-case-intake/) | Draft a classification of one proposed agent for the governance team. Suggested autonomy is A0, A1, or A2. Experiments 14, 19, and 03 are called. Autonomy A1. The governance team approves or changes the classification. The agent does not approve the use case or provision anything. | ✅ Starter |
 | 25 | [Instruction Quality Reviewer](experiments/25-instruction-quality-reviewer/) | Score one system prompt, SKILL.md, or topic prompt against a fixed checklist and propose a diff. The agent owner approves prompt changes. Experiments 03 and 14 can be called. Autonomy A0. The reviewer does not edit, apply, approve, or deploy. | ✅ Starter |
+| 28 | [Prompt Injection Test Agent](experiments/28-prompt-injection-test/) | Run a versioned suite of synthetic prompt-injection fixtures against a sandbox target and draft findings mapped to pinned OWASP titles. A security reviewer assesses the findings. Experiments 08, 25, and 03 can be called. Autonomy A0. The runner does not target production, assess, remediate, or publish. | ✅ Starter |
 
 ## Getting Started
 
@@ -229,6 +230,13 @@ cd ../25-instruction-quality-reviewer
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/review.py --bundle examples/sample_bundle.json --as-of 2026-10-30
+
+# Experiment 28 needs no credentials either. The suite is deterministic.
+# Experiments 03, 08, and 25 sit beside it. The runner calls them only when the bundle asks.
+cd ../28-prompt-injection-test
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/run.py --bundle examples/sample_bundle.json --as-of 2026-11-02
 ```
 
 ## Repository Structure
@@ -276,7 +284,8 @@ copilot-agent-experiments/
     ├── 22-onchain-alert-sar-drafter/
     ├── 23-crypto-financial-promotions-prechecker/
     ├── 24-agent-use-case-intake/
-    └── 25-instruction-quality-reviewer/
+    ├── 25-instruction-quality-reviewer/
+    └── 28-prompt-injection-test/
 ```
 
 ## Agent Governance
