@@ -234,6 +234,16 @@ A scored reading of one system prompt, SKILL.md, or topic prompt. The agent owne
 
 </article>
 
+<article class="plan-card" id="g004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G004 · Autonomy A0</p>
+
+## Skill selection evaluator
+
+A routing test suite for one set of skills or topics and a labelled set of utterances. The maintainer validates routing tests. The proposed description diff is not applied. It calls [Experiment 25](experiments/25-instruction-quality-reviewer.md) on each skill file, and can call [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) and [Experiment 14](experiments/14-agent-architecture-advisor.md). It does not edit a skill or deploy. [Read the briefing](experiments/26-skill-selection-evaluator.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26.

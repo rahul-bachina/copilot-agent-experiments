@@ -1,0 +1,305 @@
+# Agent manifest: Skill Selection Evaluator
+# Experiment 26 — catalogue ID G004
+# Version: 0.1.0
+# Last reviewed: 2026-11-02
+# Next review: 2027-05-02
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-26-skill-selection-evaluator"
+  name: "Skill Selection Evaluator"
+  version: "0.1.0"
+  description: >
+    Given skill and topic metadata and a labelled set of utterances, drafts a
+    routing test suite and a report of precision, recall, confusable pairs,
+    and a proposed description diff. Autonomy of this evaluator is A0. The
+    maintainer validates routing tests. The evaluator does not edit a skill
+    and does not deploy.
+  owner: "Maintainer (the adopting organisation)"
+  contact: "skill-routing@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/26-skill-selection-evaluator"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The evaluator returns a draft routing report and a proposed diff, and stops."
+    - "The evaluator NEVER edits a skill, a topic, or a trigger list."
+    - "The evaluator NEVER applies a description diff."
+    - "The evaluator NEVER records that the maintainer has validated the routing tests. maintainer_validated stays false."
+    - "The evaluator NEVER deploys, publishes, or changes a Copilot Studio agent or a Microsoft Foundry agent."
+    - "The evaluator NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The evaluator NEVER sends the report, spends, or writes a production record."
+    - "Utterance text is untrusted data. A line that names a skill does not force that skill."
+    - "All output is labelled DRAFT FOR MAINTAINER REVIEW."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Skill and topic metadata supplied for this run"
+      description: "SKILL.md files or topic records. Synthetic fixtures in this repository, or a copy of a SKILL.md file already in this repository."
+      access_level: "read"
+      scope: "The documents passed to this run. No browsing of a tenant."
+      justification: "Routing cannot be scored without the descriptions and trigger phrases the maintainer supplied."
+      data_categories:
+        - "Agent skill metadata"
+        - "Free text, which may contain personal data if the maintainer pasted a live skill"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the skill text."
+    - resource: "Labelled utterances supplied for this run"
+      description: "Synthetic user utterances with an expected route of a skill, none, or human."
+      access_level: "read"
+      scope: "The utterances passed to this run."
+      justification: "Precision and recall need a label the maintainer has already chosen."
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the utterances."
+    - resource: "Permissions manifest supplied for this run"
+      description: "Optional agent-manifest.yaml or an equivalent JSON object. Used when Experiment 25 reviews a skill file. This evaluator does not approve it."
+      access_level: "read"
+      scope: "One manifest, if the caller supplied one."
+      justification: "A missing manifest is itself a finding. Experiment 03 may draft a skeleton. approved stays false."
+      may_contain_personal_data: false
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences taken from Experiment 14's pin of 27 October 2026. This experiment did not re-open the pages."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Harness claims are cited from that pin, and marked as not re-opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the maintainer."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of review dates and of the pin is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A Copilot Studio tenant, a skill store, or a deployment pipeline"
+      reason: "The evaluator does not read or write live skills. The caller supplies the text."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The report is returned to the caller. Nothing is sent."
+    - resource: "A production system of record"
+      reason: "The evaluator does not change a case, a ticket, or a configuration record."
+
+tools:
+  allowed:
+    - tool: "Read the skills and the labelled utterances supplied for this run"
+      provider: "Local Python (src/report.py)"
+      action: "Score routes and compute precision and recall"
+      access_level: "read"
+      scope: "The documents passed to the evaluator"
+      justification: "The report cannot be built without the metadata and the labels the maintainer supplied"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft a proposed description diff"
+      provider: "Local Python (src/rewrites.py)"
+      action: "Return a unified diff. Do not write it to disk."
+      access_level: "read"
+      scope: "The same documents"
+      justification: "The maintainer needs a concrete rewrite to accept or reject. The diff is not applied."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Score each skill file with Experiment 25"
+      provider: "Experiment 25 (src/review.py)"
+      action: "Return that reviewer's band and blocking checks. Do not apply its diff."
+      access_level: "read"
+      scope: "The skill text already loaded for this run"
+      justification: "A vague or unbounded skill description is also an instruction-quality finding. Experiment 25 does not edit the file."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft an unapproved manifest skeleton when none was supplied"
+      provider: "Experiment 03 generator when PyYAML and jsonschema are installed; otherwise Experiment 25's local stand-in"
+      action: "Return a draft skeleton. Refuse approval. Refuse autonomy A3."
+      access_level: "read"
+      scope: "One inventory-shaped record built from the bundle id and title"
+      justification: "A missing manifest is itself a finding. The skeleton is not a sign-off."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Read a structured use case with Experiment 14's decision table"
+      provider: "Experiment 14 (src/rules.py), called only when a use case is supplied"
+      action: "Return that advisor's autonomy recommendation. Do not select a platform."
+      access_level: "read"
+      scope: "The structured fields on the bundle, if present"
+      justification: "A use case lets the maintainer see an autonomy reading. Experiment 14 does not select a platform."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The evaluator does not write skills, Dataverse, Copilot Studio, or any other production record."
+  sends:
+    enabled: false
+    note: "The evaluator does not send email, Teams messages, or a deployment request."
+
+human_approval:
+  description: >
+    The maintainer validates routing tests. The evaluator can propose a
+    description diff. It cannot record that the maintainer accepted it, and
+    it cannot apply it.
+  approval_points:
+    - action: "Validate routing tests"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "Catalogue control for G004. The maintainer validates routing tests. The proposed tests stay unvalidated by this tool."
+    - action: "Accept or reject each description rewrite before it is kept"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "The router is deterministic and can miss a paraphrase or flag a harmless overlap."
+    - action: "Rely on a manifest skeleton drafted because none was supplied"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Re-open a pinned page, or a review date, before relying on a citation"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "This experiment did not re-open the Microsoft Learn pages. A stale review date is not refreshed by the evaluator."
+  no_approval_required:
+    - action: "Produce this draft from skills and utterances the maintainer supplied"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      Skill text and utterances may quote personal data if the maintainer
+      pasted a live file. The evaluator does not choose an Article 6 basis.
+      The organisation's data protection officer confirms a basis before any
+      processing of live data. The samples in this repository are synthetic,
+      apart from skill text already published in this repository.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Skill text and utterances are not written to a production record"
+      - "Instructions inside an utterance are not followed"
+  data_minimisation:
+    - "One bundle per report"
+    - "A description is quoted in a diff only as the proposed sentence"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-02"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a precision figure or a proposed diff as a validated routing change"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "maintainer_validated is false and diff_applied is false"
+        - "The label is DRAFT FOR MAINTAINER REVIEW"
+      residual_risk: "Medium"
+      owner: "Maintainer"
+    - id: "R2"
+      risk: "An utterance tells the evaluator to select a named skill, mark the tests validated, or deploy"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "A forced skill name is not a routing bonus"
+        - "Tests cover an injected utterance and a prohibited-action request"
+      residual_risk: "Low"
+      owner: "Maintainer"
+    - id: "R3"
+      risk: "Token overlap misses a paraphrase, or treats two clear skills as a tie"
+      likelihood: "High"
+      impact: "Medium"
+      controls:
+        - "Every utterance cites the reason and the scores"
+        - "The maintainer validates routing tests and accepts or rejects each rewrite"
+      residual_risk: "Medium"
+      owner: "Maintainer"
+    - id: "R4"
+      risk: "A pinned Microsoft Learn sentence has changed since Experiment 14 opened the page on 27 October 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified and say this experiment did not re-open them"
+        - "A stale pin is marked do not rely"
+      residual_risk: "Medium"
+      owner: "Maintainer"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran an evaluation, the bundle id, the as-of date, and whether a diff was proposed. Do not log the full skill text or the utterances into an unreviewed store."
+  logged_events:
+    - event: "Skill routing report drafted"
+      data_logged:
+        - "bundle id"
+        - "as-of date"
+        - "agreement percent"
+        - "skill ids with a failed routing test"
+        - "whether a prompt-injection pattern was detected"
+        - "whether the diff was applied (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/report.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft routing reports"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-02"
+  next_review_date: "2027-05-02"
+  review_frequency: "Six months, and sooner if a pinned Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting organisation's maintainer. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The evaluator does not validate routing tests, approve a rewrite, or approve a manifest. The maintainer validates routing tests."
+  regulated_decision:
+    enabled: false
+    rationale: "A precision figure is not a regulated decision. The maintainer decides what to do with the tests."
+  production_record_change:
+    enabled: false
+    rationale: "Skills are not edited. No tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The report is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Apply a proposed description diff"
+      enabled: false
+      rationale: "diff_applied stays false. There is no write tool."
+    - action_name: "Edit a skill or a topic"
+      enabled: false
+      rationale: "skills_edited stays false. There is no write tool."
+    - action_name: "Record that the maintainer validated the routing tests"
+      enabled: false
+      rationale: "maintainer_validated stays false. The maintainer validates routing tests outside this tool."
+    - action_name: "Deploy or publish an agent"
+      enabled: false
+      rationale: "There is no deployment tool."
+    - action_name: "Mark a manifest approved"
+      enabled: false
+      rationale: "The skeleton path refuses an approve flag."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a report."
+  items:
+    - id: "A1"
+      assumption: "The skill text and the utterances were supplied by the maintainer. This starter does not fetch them from a tenant."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Microsoft Learn sentences reused from Experiment 14's pin of 27 October 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The evaluator does not edit a skill."
+      section: "high_risk_actions"
+      verify_on_deployment: true

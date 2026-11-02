@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Twenty-five starters you can read today
+## Twenty-six starters you can read today
 
 </div>
 
@@ -703,6 +703,31 @@ The draft runs locally. Nothing is edited, applied, approved, or deployed.
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 26 · G004 · Governance · Autonomy A0</p>
+
+### Skill selection evaluator
+
+Score whether a labelled utterance would select the right skill or topic. The maintainer validates routing tests. Experiment 25 reads each skill file. Experiments 03 and 14 can be called.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is edited, applied, validated, or deployed.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/26-skill-selection-evaluator.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/26-skill-selection-evaluator)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -725,7 +750,7 @@ The draft runs locally. Nothing is edited, applied, approved, or deployed.
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G001, G003, G010, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G001, G003, G004, G010, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, and O008 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

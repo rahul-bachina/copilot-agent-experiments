@@ -91,6 +91,9 @@ DIAGRAMS = {
     "experiments/25-instruction-quality-reviewer/docs/architecture_diagram.png": (
         "experiments/img/25-instruction-quality-reviewer-architecture.png"
     ),
+    "experiments/26-skill-selection-evaluator/docs/architecture_diagram.png": (
+        "experiments/img/26-skill-selection-evaluator-architecture.png"
+    ),
 }
 
 
