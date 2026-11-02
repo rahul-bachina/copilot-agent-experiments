@@ -175,7 +175,8 @@ def control_present(class_name: str, text: str, posture: dict[str, Any]) -> bool
         return _any(scopes, r"\b(approv\w*|reject|spend|decid\w*|send|deploy|releas\w*)\b")
     if class_name == "system_prompt_disclosure":
         for scope in scopes:
-            verb = re.search(r"\b(reveal|repeat|print|disclose|show)\b", scope, re.I)
+            # "show" is not a disclosure verb. Ordinary instructions say "show the report".
+            verb = re.search(r"\b(reveal|repeat|print|disclose)\b", scope, re.I)
             target = re.search(r"(system prompt|these instructions|this prompt)", scope, re.I)
             if verb and target:
                 return True
