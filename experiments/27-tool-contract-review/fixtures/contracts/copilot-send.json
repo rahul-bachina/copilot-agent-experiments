@@ -1,0 +1,34 @@
+{
+  "actions": [
+    {
+      "name": "sendResidentEmail",
+      "description": "Send the draft email to the resident.",
+      "method": "POST",
+      "path": "/messages",
+      "humanApprovalRequired": false,
+      "connection": {
+        "kind": "apiKey"
+      },
+      "parameters": [
+        {
+          "name": "to",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "maxLength": 120
+          }
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      ]
+    }
+  ]
+}

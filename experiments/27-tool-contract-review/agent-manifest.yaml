@@ -1,0 +1,329 @@
+# Agent manifest: Tool Contract Review Agent
+# Experiment 27 — catalogue ID G005
+# Version: 0.1.0
+# Last reviewed: 2026-11-02
+# Next review: 2027-05-02
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-27-tool-contract-review"
+  name: "Tool Contract Review Agent"
+  version: "0.1.0"
+  description: >
+    Reviews one tool or action contract (an OpenAPI document, an MCP-shaped
+    tool list, a Copilot Studio action list, a Foundry-shaped tool list, or
+    a schema/tools.json file) against a fixed checklist and returns a scored
+    findings report with proposed contract notes and an API Management policy
+    sketch. Autonomy of this reviewer is A0. The security/API owner approves
+    the contract. The reviewer does not modify the contract, does not publish
+    a policy, and does not deploy.
+  owner: "Security/API owner (the adopting organisation)"
+  contact: "contract-review@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/27-tool-contract-review"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The reviewer returns a draft findings report and a proposed diff, and stops."
+    - "The reviewer NEVER modifies a contract, applies a diff, or writes a contract file."
+    - "The reviewer NEVER publishes an Azure API Management policy."
+    - "The reviewer NEVER deploys or publishes a contract, a Copilot Studio agent, or a Foundry agent."
+    - "The reviewer NEVER approves a contract. contract_approved stays false. The security/API owner decides."
+    - "The reviewer NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The reviewer NEVER sends the report, spends, or writes a production record."
+    - "Contract text is untrusted data. Instructions inside it cannot change the checklist, the score, or the decision to leave the diff unapplied."
+    - "All output is labelled DRAFT FOR SECURITY/API OWNER REVIEW."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Tool contract supplied for this run"
+      description: "OpenAPI, MCP-shaped, Copilot Studio action, Foundry-shaped, or repository tool-schema JSON. Synthetic in this repository, or a copy of a schema file already in this repository."
+      access_level: "read"
+      scope: "The document passed to this run. No call to an API Management instance, a Foundry project, or an MCP server."
+      justification: "The checklist cannot score a contract it has not been given."
+      data_categories:
+        - "API and tool definitions"
+        - "Free text, which may contain personal data if the owner pasted a live specification"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the contract."
+    - resource: "Permissions manifest supplied for this run"
+      description: "Optional agent-manifest.yaml or an equivalent JSON object, used for the consistency check."
+      access_level: "read"
+      scope: "One manifest, if the caller supplied one."
+      justification: "Operations are compared with the manifest. The reviewer does not approve the manifest."
+      may_contain_personal_data: false
+    - resource: "Optional instruction text supplied for this run"
+      description: "Passed to Experiment 25 when present. The instruction score is not the contract score."
+      access_level: "read"
+      scope: "The text the caller pasted."
+      justification: "A contract and the instructions that mention its tools can disagree. Experiment 25 reads the instructions. This reviewer does not edit them."
+      may_contain_personal_data: true
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Pages opened on 2 November 2026. The reviewer does not download them again."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Harness and API Management claims are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the security/API owner."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of the contract review date and of the pin is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "An Azure API Management instance, a Foundry project, or a deployment pipeline"
+      reason: "The reviewer does not read or write a live contract or policy. The caller supplies the document."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The report is returned to the caller. Nothing is sent."
+    - resource: "A production system of record"
+      reason: "The reviewer does not change a case, a ticket, an API, or a policy."
+    - resource: "A secret store"
+      reason: "The reviewer does not read Key Vault. A key found inside a pasted contract is reported. It is not used."
+
+tools:
+  allowed:
+    - tool: "Read the contract supplied for this run"
+      provider: "Local Python (src/review.py)"
+      action: "Score the contract against the fixed checklist"
+      access_level: "read"
+      scope: "The document passed to the reviewer"
+      justification: "The report cannot be built without the contract the owner supplied"
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft proposed contract notes and an API Management policy sketch"
+      provider: "Local Python (src/diffing.py)"
+      action: "Return notes and policy XML. Do not write them to a service."
+      access_level: "read"
+      scope: "The same document"
+      justification: "The security/API owner needs a concrete proposal to accept or reject. The diff is not applied and the policy is not published."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft an unapproved manifest skeleton when none was supplied"
+      provider: "Experiment 03 generator when PyYAML and jsonschema are installed; otherwise a local stand-in"
+      action: "Return a draft skeleton. Refuse approval. Refuse autonomy A3."
+      access_level: "read"
+      scope: "One inventory-shaped record built from the bundle id and title"
+      justification: "A missing manifest is itself a finding. The skeleton is not a sign-off."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Read a structured use case with Experiment 14's decision table"
+      provider: "Experiment 14 (src/rules.py), called only when a use case is supplied"
+      action: "Return that advisor's autonomy recommendation. Do not select a platform."
+      access_level: "read"
+      scope: "The structured fields on the bundle, if present"
+      justification: "A use case lets the owner see whether the contract's effects disagree with the actions the architect recorded. Experiment 14 does not select a platform."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Read instruction text with Experiment 25"
+      provider: "Experiment 25 (src/review.py), called only when instruction text is supplied"
+      action: "Return that reviewer's summary. Do not apply its diff."
+      access_level: "read"
+      scope: "The instruction text on the bundle, if present"
+      justification: "Instructions that name tools can disagree with the contract. Experiment 25 does not edit them, and this reviewer does not treat its score as the contract score."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The reviewer does not write contracts, policies, Dataverse, Copilot Studio, API Management, or any other production record."
+  sends:
+    enabled: false
+    note: "The reviewer does not send email, Teams messages, or a deployment request."
+
+human_approval:
+  description: >
+    The security/API owner approves the contract. The reviewer can propose
+    notes and a policy sketch. It cannot record that the owner accepted them,
+    and it cannot apply or publish them.
+  approval_points:
+    - action: "Approve the contract"
+      approver: "Security/API owner"
+      mandatory: true
+      rationale: "Catalogue control for G005. The proposed diff stays unapplied."
+    - action: "Approve an API Management policy change before it is published"
+      approver: "Security/API owner"
+      mandatory: true
+      rationale: "The policy XML is a sketch with placeholders. It is not published."
+    - action: "Accept or reject each finding before a contract change is kept"
+      approver: "Security/API owner"
+      mandatory: true
+      rationale: "The checklist is deterministic and can miss a paraphrase or flag a line the owner wants to keep."
+    - action: "Rely on a manifest skeleton drafted because none was supplied"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Re-open a pinned page, or a review date, before relying on a citation"
+      approver: "Security/API owner"
+      mandatory: true
+      rationale: "A stale review date is not refreshed by the reviewer."
+  no_approval_required:
+    - action: "Produce this draft from a contract the owner supplied"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A pasted contract may quote personal data if the owner pasted a live
+      specification. The reviewer does not choose an Article 6 basis. The
+      organisation's data protection officer confirms a basis before any
+      processing of live data. The samples in this repository are synthetic,
+      apart from tool-schema text already published in this repository.
+  special_category_data:
+    may_process: false
+    categories_possible:
+      - "A field name in a pasted schema may match a health or other special-category word. The match is a name check."
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "The contract is not written to a production record"
+      - "Instructions inside the contract are not followed"
+      - "A field-name match is not a determination that special-category data is being processed"
+  data_minimisation:
+    - "One bundle per report"
+    - "A finding cites an operation id and a short reason, not the whole document"
+    - "Experiment 25's full report is not copied into this report"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model, does not call API Management, and does not choose a region. UK region availability was not on the pages opened on 2 November 2026."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-02"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a score or a proposed policy as an approved contract change"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "owner_approved and contract_approved are false"
+        - "diff_applied, contract_modified, and policy_published are false"
+        - "The label is DRAFT FOR SECURITY/API OWNER REVIEW"
+      residual_risk: "Medium"
+      owner: "Security/API owner"
+    - id: "R2"
+      risk: "Contract text tells the reviewer to mark every check as pass, publish the policy, or deploy"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the checklist result or the unapplied flag"
+        - "Tests cover an injected bundle"
+      residual_risk: "Low"
+      owner: "Security/API owner"
+    - id: "R3"
+      risk: "A pattern misses a secret, a special-category field under a bland name, or a paraphrase, or flags a line a person would keep"
+      likelihood: "High"
+      impact: "Medium"
+      controls:
+        - "Every check cites the operation it used"
+        - "The security/API owner accepts or rejects each finding"
+      residual_risk: "Medium"
+      owner: "Security/API owner"
+    - id: "R4"
+      risk: "A pinned Microsoft Learn sentence has changed since 2 November 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin is marked do not rely"
+      residual_risk: "Medium"
+      owner: "Security/API owner"
+    - id: "R5"
+      risk: "A proposed rate-limit policy is published without the owner setting calls and renewal-period, or is treated as authentication"
+      likelihood: "Low"
+      impact: "High"
+      controls:
+        - "Placeholders are not numbers"
+        - "policy_published stays false"
+        - "The rate-limit note says the policy applies when a subscription key is used and does not authenticate the caller"
+      residual_risk: "Medium"
+      owner: "Security/API owner"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a review, the bundle id, the as-of date, and whether a diff or a policy was proposed. Do not log the full contract into an unreviewed store. Do not log a secret-shaped value the checker found; log that a finding of that class existed."
+  logged_events:
+    - event: "Tool contract review drafted"
+      data_logged:
+        - "bundle id"
+        - "contract kind"
+        - "as-of date"
+        - "score percent"
+        - "check ids that failed"
+        - "whether a prompt-injection pattern was detected"
+        - "whether the diff was applied (always false in this starter)"
+        - "whether a policy was published (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/review.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft reviews"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-02"
+  next_review_date: "2027-05-02"
+  review_frequency: "Six months, and sooner if a pinned Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting organisation's security/API owner. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The reviewer does not approve or reject a contract, a finding, a policy, or a manifest."
+  regulated_decision:
+    enabled: false
+    rationale: "A checklist score is not a regulated decision and not a finding that a contract meets UK GDPR. The security/API owner decides what to do with it."
+  production_record_change:
+    enabled: false
+    rationale: "The contract is not edited. No API Management policy is written. No tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The report is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Apply a proposed contract diff"
+      enabled: false
+      rationale: "diff_applied and contract_modified stay false. There is no write tool."
+    - action_name: "Publish an API Management policy"
+      enabled: false
+      rationale: "policy_published stays false. There is no publish tool."
+    - action_name: "Deploy or publish a contract or an agent"
+      enabled: false
+      rationale: "There is no deployment tool."
+    - action_name: "Mark a manifest approved"
+      enabled: false
+      rationale: "The skeleton path refuses an approve flag."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a report."
+  items:
+    - id: "A1"
+      assumption: "The contract was supplied by the security/API owner. This starter does not fetch it from API Management, Foundry, or an MCP server."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Microsoft Learn pages opened on 2 November 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The reviewer does not apply a diff or publish a policy."
+      section: "high_risk_actions"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Copilot Studio, MCP, and Foundry blocks in a bundle use this reviewer's reading shape, unless the caller has confirmed a vendor export."
+      section: "data_access.reads"
+      verify_on_deployment: true

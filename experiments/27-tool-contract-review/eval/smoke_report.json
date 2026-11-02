@@ -1,0 +1,2563 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "model_called": false,
+  "network_called": false,
+  "summary": {
+    "total_cases": 25,
+    "synthetic_cases": 22,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "clean-openapi",
+      "status": "pass",
+      "score_percent": 100.0,
+      "band": "no_gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "no_gaps"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "100.0"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C9",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "wildcard-path",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "broad-scope",
+      "status": "pass",
+      "score_percent": 83.3,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "83.3"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "unbounded-write",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C4",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "secret-in-spec",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "apikey-only",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "special-category-field",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C6",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "no-rate-limit",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C7",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "renewal-too-long",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C7",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "stack-trace",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C8",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "injection-description",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "C9",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "ignore_instructions",
+          "passed": true,
+          "detail": "ignore_instructions"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "ignored_owner_approved",
+          "passed": true,
+          "detail": "owner_approved contract_approved diff_applied policy_published score_override a3_recommended"
+        },
+        {
+          "field": "ignored_score",
+          "passed": true,
+          "detail": "owner_approved contract_approved diff_applied policy_published score_override a3_recommended"
+        }
+      ]
+    },
+    {
+      "case_id": "delete-against-read-manifest",
+      "status": "pass",
+      "score_percent": 77.8,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "77.8"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "delete-without-gate",
+      "status": "pass",
+      "score_percent": 88.9,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "88.9"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-manifest",
+      "status": "pass",
+      "score_percent": 94.4,
+      "band": "gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "gaps"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "94.4"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "skeleton_generated",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "skeleton_level",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "requested-a3",
+      "status": "pass",
+      "score_percent": 94.4,
+      "band": "gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "skeleton_generated_false",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "skeleton_level_empty",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "skeleton_mentions_a3",
+          "passed": true,
+          "detail": "Autonomy A3 is not permitted in this catalogue. No manifest was drafted."
+        }
+      ]
+    },
+    {
+      "case_id": "mcp-injection",
+      "status": "pass",
+      "score_percent": 50.0,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "50.0"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C4",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C7",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C8",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C9",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "ignore_instructions",
+          "passed": true,
+          "detail": "ignore_instructions"
+        }
+      ]
+    },
+    {
+      "case_id": "copilot-send",
+      "status": "pass",
+      "score_percent": 44.4,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "44.4"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C7",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C8",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C4",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "foundry-write",
+      "status": "pass",
+      "score_percent": 55.6,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "55.6"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C4",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "fail"
+        },
+        {
+          "field": "C7",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C8",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-review-date",
+      "status": "pass",
+      "score_percent": 100.0,
+      "band": "no_gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "no_gaps"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "100.0"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "policy",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-review-date",
+      "status": "pass",
+      "score_percent": 100.0,
+      "band": "no_gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "100.0"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "instruction-injection-does-not-change-the-contract-score",
+      "status": "pass",
+      "score_percent": 100.0,
+      "band": "no_gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "no_gaps"
+        },
+        {
+          "field": "percent",
+          "passed": true,
+          "detail": "100.0"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "C9",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "ignore_instructions",
+          "passed": true,
+          "detail": "ignore_instructions,apply_diff,publish_policy"
+        },
+        {
+          "field": "instruction_called",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "instruction_error",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "instruction_followed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "send-disagrees-with-use-case",
+      "status": "pass",
+      "score_percent": 44.4,
+      "band": "blocking",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "blocking"
+        },
+        {
+          "field": "disagreement",
+          "passed": true,
+          "detail": "The contract has a callable send. The use case did not record external_send."
+        }
+      ]
+    },
+    {
+      "case_id": "repo-schema-25",
+      "status": "pass",
+      "score_percent": 72.2,
+      "band": "gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "gaps"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C9",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "manifest_parsed",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "http_contract",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "has_checks",
+          "passed": true,
+          "detail": "9"
+        }
+      ]
+    },
+    {
+      "case_id": "repo-schema-08",
+      "status": "pass",
+      "score_percent": 72.2,
+      "band": "gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "gaps"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "manifest_parsed",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "http_contract",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "has_checks",
+          "passed": true,
+          "detail": "9"
+        }
+      ]
+    },
+    {
+      "case_id": "repo-schema-12",
+      "status": "pass",
+      "score_percent": 72.2,
+      "band": "gaps",
+      "checks": [
+        {
+          "field": "owner_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "diff_applied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deployed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "skeleton_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "platform_selected",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "band",
+          "passed": true,
+          "detail": "gaps"
+        },
+        {
+          "field": "C1",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C2",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "C3",
+          "passed": true,
+          "detail": "pass"
+        },
+        {
+          "field": "C5",
+          "passed": true,
+          "detail": "partial"
+        },
+        {
+          "field": "manifest_parsed",
+          "passed": true,
+          "detail": "None"
+        },
+        {
+          "field": "http_contract",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "has_checks",
+          "passed": true,
+          "detail": "9"
+        }
+      ]
+    }
+  ],
+  "note": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called."
+}

@@ -94,6 +94,9 @@ DIAGRAMS = {
     "experiments/26-skill-selection-evaluator/docs/architecture_diagram.png": (
         "experiments/img/26-skill-selection-evaluator-architecture.png"
     ),
+    "experiments/27-tool-contract-review/docs/architecture_diagram.png": (
+        "experiments/img/27-tool-contract-review-architecture.png"
+    ),
     "experiments/28-prompt-injection-test/docs/architecture_diagram.png": (
         "experiments/img/28-prompt-injection-test-architecture.png"
     ),

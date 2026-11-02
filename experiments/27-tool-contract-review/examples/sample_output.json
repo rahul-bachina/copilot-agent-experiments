@@ -1,0 +1,337 @@
+{
+  "label": "DRAFT FOR SECURITY/API OWNER REVIEW",
+  "catalogue_id": "G005",
+  "experiment": "27",
+  "autonomy": "A0",
+  "bundle_id": "halebridge-case-read",
+  "title": "Halebridge case read",
+  "contract_kind": "openapi",
+  "http_contract": true,
+  "reading_shape_note": null,
+  "operation_ids": [
+    "getCase"
+  ],
+  "as_of": "2026-11-02",
+  "stale_after_days": 90,
+  "decision": null,
+  "owner_approved": false,
+  "contract_approved": false,
+  "diff_applied": false,
+  "contract_modified": false,
+  "policy_published": false,
+  "deployed": false,
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "a3_recommended": false,
+  "score": {
+    "points": 18,
+    "max_points": 18,
+    "percent": 100.0,
+    "band": "no_gaps"
+  },
+  "blocking": [],
+  "do_not_rely": false,
+  "checks": [
+    {
+      "id": "C1",
+      "name": "Least privilege",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C2",
+      "name": "Consistency with the permissions manifest",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C3",
+      "name": "Destructive or external-send operations have a human approval gate",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C4",
+      "name": "Input validation and bounded parameters",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C5",
+      "name": "Authentication model",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C6",
+      "name": "Data minimisation and UK GDPR special-category exposure",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C7",
+      "name": "Rate limiting and API Management policy recommendation",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C8",
+      "name": "Error handling",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    },
+    {
+      "id": "C9",
+      "name": "Tool descriptions that could be abused by prompt injection",
+      "result": "pass",
+      "points": 2,
+      "max_points": 2,
+      "evidence": [
+        "No operation raised this check."
+      ],
+      "rewrite": ""
+    }
+  ],
+  "check_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+  ],
+  "findings": [],
+  "proposed_diff": {
+    "applied": false,
+    "published": false,
+    "contract_modified": false,
+    "format": "proposed notes and policy XML",
+    "contract_notes": [],
+    "policy_xml": null,
+    "policy_notes": []
+  },
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "followed": false,
+    "prohibited_payload_keys_ignored": []
+  },
+  "stale": {
+    "contract": {
+      "reviewed_on": "2026-11-02",
+      "age_days": 0,
+      "stale": false,
+      "reason": "Inside the threshold."
+    },
+    "sources_stale": false,
+    "do_not_rely": false
+  },
+  "sources": [
+    {
+      "id": "cs-harnesses-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. The GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. The page says it can take a goal, break it into steps, call tools across connectors, knowledge, MCP, and connected agents, create and edit Word, Excel, PowerPoint, and PDF files, and support skills and memory. Agents and workflows on it use Copilot Credits. No quantity is copied. The page does not mark that harness as preview. It says customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. That is Microsoft's statement. This repository cannot see a tenant's traffic.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "cs-choose-harness",
+      "title": "Compare Copilot Studio agent harnesses",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/choose-harness",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. Choose the standard harness when the work is relatively short and bounded. Choose the GitHub Copilot harness when the task is long-running or reasoning-intensive. Customers should validate required features and channels as the experience matures. GitHub Copilot harness solutions use usage-based billing for AI-based creation and use. Standard harness agents retain the pre-existing Copilot Studio licensing model. No rate is copied. The billing overview was not opened for this experiment.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "apim-policies",
+      "title": "Azure API Management policy reference",
+      "url": "https://learn.microsoft.com/en-us/azure/api-management/api-management-policies",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. Limit call rate by subscription and set usage quota by subscription depend on the subscription key. Limit call rate by key is listed as not supported on the Consumption gateway. Authenticate with managed identity is listed as not supported on the workspace gateway. Validate Microsoft Entra token, Validate JWT, and Validate parameters are listed. The element name for limit-by-key was not on this page, so proposed XML uses rate-limit only.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "apim-rate-limit",
+      "title": "API Management rate-limit policy",
+      "url": "https://learn.microsoft.com/en-us/azure/api-management/rate-limit-policy",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. The rate-limit policy limits call rate per subscription. Above the limit the caller receives HTTP 429. calls and renewal-period are required. renewal-period is seconds and the maximum allowed value is 300. Policy expressions are not allowed for those attributes. The policy is only applied when an API is accessed using a subscription key. The page says rate limiting is never completely accurate. The example of 20 calls per 90 seconds is not a limit this reviewer sets.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "apim-authentication-managed-identity",
+      "title": "API Management authentication-managed-identity policy",
+      "url": "https://learn.microsoft.com/en-us/azure/api-management/authentication-managed-identity-policy",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. The policy obtains a token for the managed identity and sets Authorization: Bearer. Omitting client-id on a managed gateway uses the system-assigned identity. The customer is responsible for forwarding the token only to an intended backend. The usage line lists classic, v2, consumption, and self-hosted. The policy index lists the workspace gateway as not supported. Both statements are what the pages said.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "apim-validate-parameters",
+      "title": "API Management validate-parameters policy",
+      "url": "https://learn.microsoft.com/en-us/azure/api-management/validate-parameters-policy",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 2 November 2026. The policy validates header, query, or path parameters against the API schema. Actions are ignore, prevent, and detect. A prevent action on an inbound policy returns HTTP 400. The maximum schema size stated for the validation policy is 4 MB. The page says validation can reduce throughput and recommends load tests. This reviewer does not run one.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue boundary for this reviewer",
+      "url": "",
+      "last_verified": "2026-11-02",
+      "body_opened_by": "experiment-27",
+      "reopened_for_this_experiment": false,
+      "stale_applicable": false,
+      "notes": "Not a Microsoft page. Autonomy of this reviewer is A0. The security/API owner approves the contract. The reviewer does not modify a contract, publish a policy, or deploy.",
+      "age_days": 0,
+      "stale": false
+    }
+  ],
+  "pins_reopened_for_this_experiment": true,
+  "manifest_check": {
+    "parsed": true,
+    "error": null,
+    "writes_enabled": false,
+    "sends_enabled": false,
+    "autonomy": "A0",
+    "allowed_names": [
+      "getCase"
+    ],
+    "names_are_prose": false,
+    "names_checked": true
+  },
+  "manifest_skeleton": {
+    "generated": false,
+    "approved": false,
+    "may_be_relied_on": false,
+    "reason": "A manifest was supplied. Experiment 03 was not asked to replace it.",
+    "experiment_03_called": false,
+    "validation_passed": false,
+    "autonomy_level": "A0",
+    "yaml": null,
+    "errors": []
+  },
+  "architecture_cross_check": {
+    "called": true,
+    "experiment": "14",
+    "reason": "Experiment 14 scored the structured use case. It did not select a platform.",
+    "recommended_autonomy": "A0",
+    "a3_recommended": false,
+    "platform_selected": null,
+    "any_option_selected": false,
+    "deployed": false,
+    "rules_fired": [
+      "R5",
+      "R10"
+    ],
+    "work_shape": "bounded",
+    "normalise_notes": [],
+    "disagreement": null
+  },
+  "instruction_review": {
+    "called": true,
+    "experiment": "25",
+    "reason": "Experiment 25 scored the instruction text. Its diff was not applied. Its score is not the contract score.",
+    "catalogue_id": "G003",
+    "owner_approved": false,
+    "diff_applied": false,
+    "a3_recommended": false,
+    "followed": false,
+    "deployed": false,
+    "score_percent": 83.3,
+    "band": "blocking",
+    "c8_result": "partial",
+    "injection_detected": false,
+    "do_not_rely": false,
+    "error": null
+  },
+  "human_approval": [
+    {
+      "action": "Approve the contract",
+      "approver": "Security/API owner",
+      "mandatory": true,
+      "rationale": "Catalogue control for G005. The proposed diff stays unapplied."
+    },
+    {
+      "action": "Approve an API Management policy change before it is published",
+      "approver": "Security/API owner",
+      "mandatory": true,
+      "rationale": "policy_published is false. Placeholders are not a call volume."
+    },
+    {
+      "action": "Accept or reject each finding before a contract change is kept",
+      "approver": "Security/API owner",
+      "mandatory": true,
+      "rationale": "The checklist can miss a paraphrase or flag a line the owner wants to keep."
+    }
+  ]
+}
