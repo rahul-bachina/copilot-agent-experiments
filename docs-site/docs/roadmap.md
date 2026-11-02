@@ -234,6 +234,16 @@ A scored reading of one system prompt, SKILL.md, or topic prompt. The agent owne
 
 </article>
 
+<article class="plan-card" id="g005" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G005 · Autonomy A0</p>
+
+## Tool contract review
+
+A scored reading of one tool or action contract. The security/API owner approves the contract. The proposed diff is not applied and the API Management policy sketch is not published. It can call [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) for an unapproved manifest skeleton, [Experiment 14](experiments/14-agent-architecture-advisor.md) when a structured use case is supplied, and [Experiment 25](experiments/25-instruction-quality-reviewer.md) when instruction text is supplied. [Read the briefing](experiments/27-tool-contract-review.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G005 is Experiment 27.
