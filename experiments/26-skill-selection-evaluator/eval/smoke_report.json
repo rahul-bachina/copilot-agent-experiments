@@ -1,0 +1,86 @@
+{
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_copilot_studio_routing_score": true,
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model score and not a Copilot Studio routing score.",
+  "summary": {
+    "total_cases": 3,
+    "total_utterances": 52,
+    "errors": 0,
+    "failed": 0,
+    "controlled_agreement": 100.0,
+    "injection_followed": 0,
+    "prohibited_misses": 0
+  },
+  "cases": [
+    {
+      "id": "northfen-controlled",
+      "passed": true,
+      "problems": [],
+      "agreement": {
+        "correct": 19,
+        "labelled": 19,
+        "percent": 100.0
+      },
+      "do_not_rely": false,
+      "maintainer_validated": false,
+      "skills_edited": false,
+      "diff_applied": false,
+      "deployed": false,
+      "a3_recommended": false,
+      "model_called": false,
+      "network_called": false,
+      "platform_selected": null,
+      "manifest_approved": false,
+      "confusable_pairs": 1,
+      "failed_routing_tests": []
+    },
+    {
+      "id": "northfen-stale",
+      "passed": true,
+      "problems": [],
+      "agreement": {
+        "correct": 19,
+        "labelled": 19,
+        "percent": 100.0
+      },
+      "do_not_rely": true,
+      "maintainer_validated": false,
+      "skills_edited": false,
+      "diff_applied": false,
+      "deployed": false,
+      "a3_recommended": false,
+      "model_called": false,
+      "network_called": false,
+      "platform_selected": null,
+      "manifest_approved": false,
+      "confusable_pairs": 1,
+      "failed_routing_tests": []
+    },
+    {
+      "id": "repo-skills",
+      "passed": true,
+      "problems": [],
+      "agreement": {
+        "correct": 12,
+        "labelled": 14,
+        "percent": 85.7
+      },
+      "do_not_rely": true,
+      "maintainer_validated": false,
+      "skills_edited": false,
+      "diff_applied": false,
+      "deployed": false,
+      "a3_recommended": false,
+      "model_called": false,
+      "network_called": false,
+      "platform_selected": null,
+      "manifest_approved": false,
+      "confusable_pairs": 0,
+      "failed_routing_tests": [
+        "statutory-deadline",
+        "damp-mould"
+      ]
+    }
+  ]
+}

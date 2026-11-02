@@ -1,0 +1,62 @@
+{
+  "tools": [
+    {
+      "name": "evaluate_skill_routing",
+      "implementation": "evaluate",
+      "reads": [
+        "skill and topic metadata supplied for this run",
+        "labelled utterances supplied for this run",
+        "optional permissions manifest supplied for this run",
+        "optional structured use case supplied for this run",
+        "as-of date and stale threshold"
+      ],
+      "writes": false,
+      "sends": false,
+      "edits_skills": false,
+      "applies_diff": false,
+      "validates_routing_tests": false,
+      "deploys": false,
+      "persists_skill_text": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_maintainer_validation",
+      "implementation": "record_maintainer_validation",
+      "reads": ["draft routing report"],
+      "writes": false,
+      "sends": false,
+      "edits_skills": false,
+      "validates_routing_tests": false,
+      "deploys": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    },
+    {
+      "name": "apply_description_diff",
+      "implementation": "apply_description_diff",
+      "writes": false,
+      "sends": false,
+      "edits_skills": false,
+      "applies_diff": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "deploy_agent",
+      "implementation": "deploy_agent",
+      "deploys": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_routing_report",
+      "implementation": "send_routing_report",
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
