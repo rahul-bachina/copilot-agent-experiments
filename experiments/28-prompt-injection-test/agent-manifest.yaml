@@ -1,0 +1,296 @@
+# Agent manifest: Prompt Injection Test Agent
+# Experiment 28 — catalogue ID G006
+# Version: 0.1.0
+# Last reviewed: 2026-11-02
+# Next review: 2027-05-02
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-28-prompt-injection-test"
+  name: "Prompt Injection Test Agent"
+  version: "0.1.0"
+  description: >
+    Runs one versioned suite of synthetic prompt-injection fixtures against a
+    sandbox target and returns a findings report mapped to pinned OWASP
+    titles. Autonomy is A0. A security reviewer assesses the findings and
+    decides remediation. The runner does not target production, does not take
+    an action, and does not publish a payload.
+  owner: "Security reviewer (the adopting organisation)"
+  contact: "prompt-injection-test@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/28-prompt-injection-test"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The runner returns a draft findings report and stops."
+    - "The runner NEVER targets a production system, a tenant, or a model endpoint."
+    - "The runner NEVER assesses findings. reviewer_assessed stays false. The security reviewer decides."
+    - "The runner NEVER applies remediation, edits a prompt, or deploys an agent."
+    - "The runner NEVER publishes the report or a fixture beyond the synthetic files in this folder."
+    - "The runner NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The runner NEVER sends, spends, or writes a production record."
+    - "Fixture text is untrusted data. Text inside a bundle cannot change the score or mark the report assessed."
+    - "All output is labelled DRAFT FOR SECURITY REVIEWER."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Sandbox bundle supplied for this run"
+      description: "Target id, adapter name, and optional paths to files already in this repository."
+      access_level: "read"
+      scope: "The one JSON bundle passed to this run. No browsing of a tenant."
+      justification: "The suite cannot be aimed without a named sandbox target."
+      data_categories:
+        - "Test configuration"
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the bundle."
+    - resource: "Allow-listed instruction and tool files"
+      description: "system-prompt.md, SKILL.md, tools.json, or agent-manifest.yaml under experiments/."
+      access_level: "read"
+      scope: "Paths that match the allow-list. Other paths are refused."
+      justification: "The instruction-surface adapter reads wording that is already in the repository."
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient."
+    - resource: "Pinned source notes"
+      description: "src/sources.py and src/owasp.py. Pages opened on 2 November 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "OWASP titles and harness claims are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the caller."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of the OWASP pin and the Microsoft pages is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A production agent, a model endpoint, or any network host"
+      reason: "The runner has no HTTP client for a target. A URL in the bundle is refused."
+    - resource: "Live customer, citizen, or staff data"
+      reason: "Fixtures are synthetic. The one identifier shape is the synthetic example from Experiment 08, and the report does not repeat it."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The report is returned to the caller. Nothing is sent."
+    - resource: "A production system of record"
+      reason: "The runner does not change a case, a prompt, or a configuration record."
+
+tools:
+  allowed:
+    - tool: "Load suite 2026.1"
+      provider: "Local Python (src/suite.py)"
+      action: "Return the versioned synthetic fixtures"
+      access_level: "read"
+      scope: "The suite baked into this folder"
+      justification: "The report has to name the cases it scored."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Score a sandbox target"
+      provider: "Local Python (src/run.py)"
+      action: "Compare observations with expected safe behaviour. Do not call a network."
+      access_level: "read"
+      scope: "The adapter named in the bundle"
+      justification: "The security reviewer needs a cited draft. The draft is not an assessment."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Call Experiment 08, 25, or 03 inside the sandbox"
+      provider: "Those experiments' local Python, or a stand-in when an import is missing"
+      action: "One synthetic call. Refuse release, refuse an applied diff, refuse an approved manifest."
+      access_level: "read"
+      scope: "The single fixture for that adapter"
+      justification: "Those cores are suitable sandbox targets. They are not production systems."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The runner does not write prompts, Dataverse, Copilot Studio, Foundry, or any other production record."
+  sends:
+    enabled: false
+    note: "The runner does not send email, Teams messages, or a report to anyone but the local caller."
+
+human_approval:
+  description: >
+    A security reviewer assesses the findings and decides remediation. The
+    runner cannot record that assessment and cannot apply a change.
+  approval_points:
+    - action: "Assess the findings"
+      approver: "Security reviewer"
+      mandatory: true
+      rationale: "Catalogue control for G006. reviewer_assessed stays false."
+    - action: "Decide remediation"
+      approver: "Security reviewer"
+      mandatory: true
+      rationale: "A failed case is a draft finding. The runner does not edit a prompt or a control."
+    - action: "Re-open a pinned page before relying on a citation"
+      approver: "Security reviewer"
+      mandatory: true
+      rationale: "OWASP titles and Microsoft pages were opened on 2 November 2026. A stale pin is not refreshed by the runner."
+    - action: "Rely on a manifest skeleton drafted because none was supplied"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Point a hosted red-team tool at an agent"
+      approver: "Security reviewer"
+      mandatory: true
+      rationale: "That step is outside this starter. The Foundry page says to review results before mitigation, and to use a non-production environment."
+  no_approval_required:
+    - action: "Produce this draft from a sandbox bundle"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      The samples are synthetic. The runner does not choose an Article 6 basis.
+      The organisation's data protection officer confirms a basis before any
+      processing of live data. Live data is outside this starter.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Fixtures do not contain special-category data"
+      - "The report does not repeat the synthetic identifier used in the Experiment 08 call"
+  data_minimisation:
+    - "One bundle per report"
+    - "The Experiment 08 call does not copy the identifier into the findings"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region."
+
+prompt_injection:
+  description: >
+    The runner is itself a reader of untrusted fixture text. Text in the bundle
+    cannot set reviewer_assessed, remediation_applied, or the case results.
+  controls:
+    - control: "Strip output-shaped keys"
+      description: "Keys that would mark the report assessed or change the score are removed before scoring."
+      implementation: "src/injection.py"
+    - control: "Refuse a production target"
+      description: "sandbox must be true, production must be false, and a URL is refused."
+      implementation: "src/run.py"
+  residual_risk: "Medium. A paraphrase can still be stored as a fixture the reviewer must read. It cannot flip the flags."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-02"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a draft pass as evidence a live agent is safe"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR SECURITY REVIEWER"
+        - "reviewer_assessed is false"
+        - "The report says a local policy pass is not a model result"
+      residual_risk: "Medium"
+      owner: "Security reviewer"
+    - id: "R2"
+      risk: "Fixture text tells the runner to mark every case as pass or to publish the report"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the case result or the unassessed flag"
+        - "Tests cover an injected bundle"
+      residual_risk: "Low"
+      owner: "Security reviewer"
+    - id: "R3"
+      risk: "The instruction-surface rules miss a paraphrase, or a live model ignores a control the file states"
+      likelihood: "High"
+      impact: "High"
+      controls:
+        - "Each finding names the rule id and the file"
+        - "The security reviewer assesses the finding before anyone remediates"
+      residual_risk: "High"
+      owner: "Security reviewer"
+    - id: "R4"
+      risk: "An OWASP title or a Microsoft page has changed since 2 November 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin is marked do not rely"
+      residual_risk: "Medium"
+      owner: "Security reviewer"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log the bundle id, the adapter, the suite version, and the pass count. Do not log fixture text that includes a canary into an unreviewed store."
+  logged_events:
+    - event: "Sandbox suite drafted"
+      data_logged:
+        - "bundle id"
+        - "adapter"
+        - "suite version"
+        - "pass count and fail count"
+        - "whether a prompt-injection pattern was detected in the bundle"
+        - "whether the reviewer assessed the findings (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/run.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft reports"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-02"
+  next_review_date: "2027-05-02"
+  review_frequency: "Six months, and sooner if a pinned OWASP or Microsoft page is re-opened and has changed."
+  reviewer: "The adopting organisation's security reviewer. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The runner does not assess, approve, or reject a finding."
+  regulated_decision:
+    enabled: false
+    rationale: "A case result is not a regulated decision and not a statement that an agent is safe."
+  production_record_change:
+    enabled: false
+    rationale: "No prompt, ticket, or tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The report is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Assess the findings"
+      enabled: false
+      rationale: "reviewer_assessed stays false. There is no assessment tool the agent can call."
+    - action_name: "Apply remediation"
+      enabled: false
+      rationale: "remediation_applied stays false. There is no write tool."
+    - action_name: "Publish fixtures or the report"
+      enabled: false
+      rationale: "published stays false. Payloads stay inside the labelled fixture files."
+    - action_name: "Target a production system"
+      enabled: false
+      rationale: "A URL or production true is refused before any case runs."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a report."
+  items:
+    - id: "A1"
+      assumption: "The target is a sandbox. This starter does not fetch a live agent."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "OWASP titles and Microsoft pages opened on 2 November 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The security reviewer assesses findings outside this tool."
+      section: "high_risk_actions"
+      verify_on_deployment: true

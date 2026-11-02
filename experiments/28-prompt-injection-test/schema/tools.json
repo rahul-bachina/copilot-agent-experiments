@@ -1,0 +1,68 @@
+{
+  "tools": [
+    {
+      "name": "load_suite",
+      "implementation": "build_suite",
+      "reads": ["the versioned suite baked into this folder"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "targets_production": false,
+      "publishes_payloads": false,
+      "assesses_findings": false,
+      "applies_remediation": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "run_sandbox",
+      "implementation": "run",
+      "reads": [
+        "one sandbox bundle supplied for this run",
+        "allow-listed files under experiments/ when the adapter is instruction_surface",
+        "Experiment 08, Experiment 25, or Experiment 03 when that adapter is named"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "targets_production": false,
+      "publishes_payloads": false,
+      "assesses_findings": false,
+      "applies_remediation": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_security_assessment",
+      "implementation": "record_security_assessment",
+      "reads": ["draft findings report"],
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Security reviewer"
+    },
+    {
+      "name": "apply_remediation",
+      "implementation": "apply_remediation",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Security reviewer"
+    },
+    {
+      "name": "publish_findings",
+      "implementation": "publish_findings",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Security reviewer"
+    }
+  ]
+}
