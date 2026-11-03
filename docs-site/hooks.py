@@ -100,6 +100,9 @@ DIAGRAMS = {
     "experiments/28-prompt-injection-test/docs/architecture_diagram.png": (
         "experiments/img/28-prompt-injection-test-architecture.png"
     ),
+    "experiments/29-groundedness-evaluation/docs/architecture_diagram.png": (
+        "experiments/img/29-groundedness-evaluation-architecture.png"
+    ),
 }
 
 
