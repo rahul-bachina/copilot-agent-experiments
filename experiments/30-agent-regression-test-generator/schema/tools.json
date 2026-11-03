@@ -1,0 +1,100 @@
+{
+  "tools": [
+    {
+      "name": "read_agent_pack",
+      "implementation": "read_agent_pack",
+      "reads": ["one synthetic bundle supplied for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "edits_agent_under_test": false,
+      "merges": false,
+      "pushes": false,
+      "opens_pull_request": false,
+      "approves_tests": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "draft_regression_cases",
+      "implementation": "generate",
+      "reads": [
+        "the manifest, skills, tool contract, observations, and existing tests in the bundle"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "edits_agent_under_test": false,
+      "merges": false,
+      "pushes": false,
+      "opens_pull_request": false,
+      "approves_tests": false,
+      "calls_foundry": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "show_draft_pr",
+      "implementation": "show_draft_pr",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "merges": false,
+      "pushes": false,
+      "opens_pull_request": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "approve_generated_tests",
+      "implementation": "approve_generated_tests",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    },
+    {
+      "name": "open_pull_request",
+      "implementation": "open_pull_request",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    },
+    {
+      "name": "merge_pull_request",
+      "implementation": "merge_pull_request",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    },
+    {
+      "name": "push_branch",
+      "implementation": "push_branch",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    },
+    {
+      "name": "edit_agent_under_test",
+      "implementation": "edit_agent_under_test",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Maintainer"
+    }
+  ]
+}
