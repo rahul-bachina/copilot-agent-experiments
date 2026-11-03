@@ -264,6 +264,16 @@ A draft findings report from one versioned suite of synthetic prompt-injection f
 
 </article>
 
+<article class="plan-card" id="g009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G009 · Autonomy A0</p>
+
+## Agent cost and capacity
+
+A draft of per-agent cost, unit cost, a flat forecast, and quota headroom from one synthetic usage file and a rate card with an effective date. The FinOps owner validates the rates and the forecast. It does not change a quota, a budget, or a subscription, and it does not store a Microsoft price. [Read the briefing](experiments/31-agent-cost-capacity.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G009 is Experiment 31.
