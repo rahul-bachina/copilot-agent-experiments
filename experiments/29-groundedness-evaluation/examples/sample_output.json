@@ -1,0 +1,247 @@
+{
+  "label": "DRAFT FOR EVALUATION OWNER",
+  "catalogue_id": "G007",
+  "experiment": "29",
+  "autonomy": "A0",
+  "bundle_id": "syn-northfen-repairs",
+  "organisation": "Northfen Borough Council",
+  "sector": "uk-public-sector",
+  "synthetic": true,
+  "agent_under_test": "synthetic-housing-repairs-qa",
+  "as_of": "2026-11-03",
+  "model_called": false,
+  "network_called": false,
+  "foundry_evaluator_called": false,
+  "a3_recommended": false,
+  "actions_taken": [],
+  "threshold_approved_by_evaluation_owner": false,
+  "release_decision": null,
+  "pass_fail_released": false,
+  "groundedness_clearance": false,
+  "draft_bar_met": true,
+  "draft_bar_is_not_a_release": true,
+  "draft_thresholds": {
+    "min_supported_rate": 1.0,
+    "max_non_supported_claims": 0,
+    "max_stale_claims": 0,
+    "stale_after_days": 180,
+    "approved_by_evaluation_owner": false,
+    "source": "draft_default"
+  },
+  "summary": {
+    "claim_count": 3,
+    "answer_count": 3,
+    "verdicts": {
+      "supported": 3,
+      "citation_missing": 0,
+      "source_not_shown": 0,
+      "quote_not_in_source": 0,
+      "number_mismatch": 0,
+      "date_mismatch": 0,
+      "unsupported": 0
+    },
+    "verdict_total": 3,
+    "stale_claim_count": 0,
+    "supported_count": 3,
+    "non_supported_count": 0,
+    "supported_rate": 1.0,
+    "each_claim_has_one_verdict": true,
+    "stale_claim_count_is_separate": true,
+    "answer_count_is_not_added_to_claim_count": true,
+    "other_failures_are_not_in_the_totals": true
+  },
+  "claims": [
+    {
+      "answer_id": "a-emergency",
+      "claim_id": "a-emergency-c1",
+      "question": "How quickly are emergency repairs attended?",
+      "text": "Emergency repairs are attended within 24 hours.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "Emergency repairs are attended within 24 hours.",
+          "quote_found": true,
+          "source_shown": true
+        }
+      ],
+      "verdict": "supported",
+      "other_failures": [],
+      "stale_source": false,
+      "stale_reason": null,
+      "cited_source_ids": [
+        "leaflet-repairs"
+      ],
+      "numbers": [
+        "24"
+      ],
+      "dates": []
+    },
+    {
+      "answer_id": "a-routine",
+      "claim_id": "a-routine-c1",
+      "question": "How quickly are routine repairs attended?",
+      "text": "Routine repairs are attended within 20 working days.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "Routine repairs are attended within 20 working days.",
+          "quote_found": true,
+          "source_shown": true
+        }
+      ],
+      "verdict": "supported",
+      "other_failures": [],
+      "stale_source": false,
+      "stale_reason": null,
+      "cited_source_ids": [
+        "leaflet-repairs"
+      ],
+      "numbers": [
+        "20"
+      ],
+      "dates": []
+    },
+    {
+      "answer_id": "a-issued",
+      "claim_id": "a-issued-c1",
+      "question": "When was the leaflet issued?",
+      "text": "The leaflet was issued on 1 September 2026.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "The leaflet was issued on 1 September 2026.",
+          "quote_found": true,
+          "source_shown": true
+        }
+      ],
+      "verdict": "supported",
+      "other_failures": [],
+      "stale_source": false,
+      "stale_reason": null,
+      "cited_source_ids": [
+        "leaflet-repairs"
+      ],
+      "numbers": [
+        "1",
+        "2026"
+      ],
+      "dates": [
+        "1 September 2026"
+      ]
+    }
+  ],
+  "passages": [
+    {
+      "source_id": "leaflet-repairs",
+      "title": "Northfen housing repairs leaflet (synthetic)",
+      "reviewed_on": "2026-09-01",
+      "stale": false,
+      "stale_reason": "within_draft_threshold",
+      "age_days": 63
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "ignored_keys": [],
+    "ignored_threshold_keys": [],
+    "followed": false
+  },
+  "sources": [
+    {
+      "id": "foundry-rag-evaluators",
+      "title": "Retrieval-Augmented Generation (RAG) Evaluators for Generative AI",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 3 November 2026. The comparison table calls Groundedness a system evaluation for a well-rounded groundedness definition that works with agent inputs, using the caller's own GPT models as the LLM-judge. It measures how well the generated response aligns with the given context without fabricating content, and it calls that the precision aspect. The output column says binary pass or fail based on a threshold on a 1-5 scale. The example-output section says these evaluators return scores from 1 to 5, where 1 is very poor and 5 is excellent, and that the default pass threshold is 3. Scores at or above the threshold are considered passing. The example object shows score 4, threshold 3, and passed true. Required inputs on the page are response and context, with context described as optional and recommended, and query optional for enhanced scoring. A second input shape is query and response for agent response mode, plus tool_definitions. The required parameter is deployment_name. A tip says that for best Groundedness results the caller should provide query, response, and context. Groundedness Pro is marked preview. The table says it is a strict definition powered by Azure AI Content Safety, and the output column says binary true or false. Required inputs are query, response, and context. Required parameters are none. The example for Groundedness Pro has a label and passed, and no numeric score. The page says Groundedness Pro uses the Azure AI Content Safety service. No UK region is named on the page. This starter does not call either evaluator and does not map its own rate onto the 1-5 scale.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "cs-harnesses-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened on 3 November 2026. The GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. Customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. The harness can take a goal, break it into steps, call tools across connectors, knowledge, MCP, and connected agents, create and edit Word, Excel, PowerPoint, and PDF files, and use skills and memory. Each task runs in a sandbox governed by Copilot Studio. Agents and workflows on it use Copilot Credits. No quantity is copied. The overview does not mark the harness as preview. The standard harness follows the topics and rules the maker defines. The Customer Conversation harness is described for customer voice and chat and is not built here. An administrator control to turn memory off was not on the page. Billing pages linked from the overview were not opened.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue row G007",
+      "url": "",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": false,
+      "stale_applicable": false,
+      "notes": "Not a Microsoft page. Stack FND, autonomy A0, human checkpoint: an evaluation owner approves thresholds. Experiment 03 keeps a narrower G007 check inside the assurance pack. Not stale-tested.",
+      "age_days": 0,
+      "stale": false
+    }
+  ],
+  "pins_stale": false,
+  "passages_stale": false,
+  "do_not_rely": false,
+  "foundry_option": {
+    "called": false,
+    "option": "builtin.groundedness",
+    "preview_option": "Groundedness Pro",
+    "preview_option_is_preview": true,
+    "page_id": "foundry-rag-evaluators",
+    "page": "https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators",
+    "opened_on": "2026-11-03",
+    "documented_default_pass_threshold_on_1_to_5_scale": 3,
+    "applied_to_this_report": false,
+    "local_score_is_not_a_foundry_score": true,
+    "foundry_score": null,
+    "foundry_passed": null,
+    "uk_region_on_the_page": false,
+    "uk_region_availability": "unverified",
+    "what_the_page_says": "Groundedness is an LLM-judge. It needs a deployment_name. The page says scores run from 1 to 5 and the default pass threshold is 3. Groundedness Pro is marked preview, uses Azure AI Content Safety, and returns a boolean rather than that numeric score. This report does not call either one."
+  },
+  "manifest_skeleton": {
+    "requested": false,
+    "experiment_03_called": false,
+    "generator": "not-requested",
+    "document_status": "draft",
+    "approved": false,
+    "may_be_relied_on": false,
+    "validation_passed": false,
+    "autonomy_level": null,
+    "high_risk_actions_enabled": false,
+    "yaml": null,
+    "errors": [],
+    "reason": "No skeleton was requested."
+  },
+  "experiment_03_note": "Experiment 03 keeps a narrower G007 check inside the assurance pack. This report does not clear that pack and does not approve its 180-day draft.",
+  "human_approval": [
+    {
+      "action": "Approve the draft thresholds",
+      "approver": "Evaluation owner",
+      "recorded_by_agent": false
+    },
+    {
+      "action": "Record a pass or fail release",
+      "approver": "Evaluation owner",
+      "recorded_by_agent": false
+    },
+    {
+      "action": "Re-open a pinned page before relying on a citation",
+      "approver": "Evaluation owner",
+      "recorded_by_agent": false
+    },
+    {
+      "action": "Rely on a manifest skeleton",
+      "approver": "Governance owner",
+      "recorded_by_agent": false
+    },
+    {
+      "action": "Call the Microsoft Foundry groundedness evaluator",
+      "approver": "Evaluation owner",
+      "recorded_by_agent": false
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "bundle_id": "syn-northfen-repairs",
+  "organisation": "Northfen Borough Council",
+  "sector": "uk-public-sector",
+  "synthetic": true,
+  "agent_under_test": "synthetic-housing-repairs-qa",
+  "passages": [
+    {
+      "source_id": "leaflet-repairs",
+      "title": "Northfen housing repairs leaflet (synthetic)",
+      "reviewed_on": "2026-09-01",
+      "text": "Emergency repairs are attended within 24 hours. Routine repairs are attended within 20 working days. The leaflet was issued on 1 September 2026."
+    }
+  ],
+  "answers": [
+    {
+      "answer_id": "a-emergency",
+      "question": "How quickly are emergency repairs attended?",
+      "text": "Emergency repairs are attended within 24 hours.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "Emergency repairs are attended within 24 hours."
+        }
+      ]
+    },
+    {
+      "answer_id": "a-routine",
+      "question": "How quickly are routine repairs attended?",
+      "text": "Routine repairs are attended within 20 working days.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "Routine repairs are attended within 20 working days."
+        }
+      ]
+    },
+    {
+      "answer_id": "a-issued",
+      "question": "When was the leaflet issued?",
+      "text": "The leaflet was issued on 1 September 2026.",
+      "citations": [
+        {
+          "source_id": "leaflet-repairs",
+          "quote": "The leaflet was issued on 1 September 2026."
+        }
+      ]
+    }
+  ]
+}
