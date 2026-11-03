@@ -1,0 +1,67 @@
+{
+  "tools": [
+    {
+      "name": "report_agent_cost",
+      "implementation": "evaluate",
+      "reads": [
+        "usage telemetry supplied for this run",
+        "rate card file supplied for this run",
+        "quota limits on the telemetry file",
+        "as-of date and stale threshold"
+      ],
+      "writes": false,
+      "sends": false,
+      "validates_rates": false,
+      "validates_forecast": false,
+      "changes_quota": false,
+      "changes_budget": false,
+      "changes_subscription": false,
+      "uses_builtin_rates": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_rate_validation",
+      "implementation": "validate_rates",
+      "reads": ["draft cost report"],
+      "writes": false,
+      "sends": false,
+      "validates_rates": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "FinOps owner"
+    },
+    {
+      "name": "record_forecast_validation",
+      "implementation": "validate_forecast",
+      "writes": false,
+      "sends": false,
+      "validates_forecast": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "FinOps owner"
+    },
+    {
+      "name": "change_quota",
+      "implementation": "change_quota",
+      "changes_quota": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "change_budget",
+      "implementation": "change_budget",
+      "changes_budget": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "change_subscription",
+      "implementation": "change_subscription",
+      "changes_subscription": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
