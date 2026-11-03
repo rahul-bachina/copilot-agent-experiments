@@ -264,6 +264,16 @@ A draft findings report from one versioned suite of synthetic prompt-injection f
 
 </article>
 
+<article class="plan-card" id="g007" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · G007 · Autonomy A0</p>
+
+## Groundedness evaluation agent
+
+A draft report of whether each claim in a synthetic Q&A bundle stays inside the passages the agent was shown. The evaluation owner approves thresholds and any pass or fail release. The Microsoft Foundry groundedness evaluator is described and not called. It can ask [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) for an unapproved manifest skeleton. [Read the briefing](experiments/29-groundedness-evaluation.md).
+
+</article>
+
 <article class="plan-card" id="g008" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · G008 · Autonomy A1</p>
@@ -286,4 +296,4 @@ A draft of per-agent cost, unit cost, a flat forecast, and quota headroom from o
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G008 is Experiment 30. G009 is Experiment 31.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31.

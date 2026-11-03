@@ -1,0 +1,226 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called. Not a Microsoft Foundry groundedness score.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_foundry_score": true,
+  "model_called": false,
+  "network_called": false,
+  "foundry_evaluator_called": false,
+  "claims_added_to_total_cases": false,
+  "as_of": "2026-11-03",
+  "summary": {
+    "total_cases": 23,
+    "passed": 23,
+    "failed": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "id": "northfen-supported",
+      "name": "Three supported claims on a fresh synthetic leaflet",
+      "passed": true,
+      "problems": [],
+      "claim_count": 3,
+      "verdict_total": 3,
+      "refused": false
+    },
+    {
+      "id": "number-mismatch",
+      "name": "The claim says 48 hours. The passage says 24.",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "date-mismatch",
+      "name": "The quote is in the passage. The claim names a different date.",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "citation-missing",
+      "name": "The sentence matches the passage and no citation is attached",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "quote-not-in-source",
+      "name": "The quoted sentence is not in the passage",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "source-not-shown",
+      "name": "The citation names a passage that was not shown",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "unsupported-extra",
+      "name": "The quote is in the passage and the claim adds a cost",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "stale-passage",
+      "name": "The words match and the passage review date is in 2024",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "injection-not-followed",
+      "name": "An answer tells the checker to approve the thresholds",
+      "passed": true,
+      "problems": [],
+      "claim_count": 2,
+      "verdict_total": 2,
+      "refused": false
+    },
+    {
+      "id": "refusal-sentence",
+      "name": "A sentence that forbids approval is not an instruction",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "stripped-release-keys",
+      "name": "Payload keys that would record a pass are removed",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "fenwick-supported",
+      "name": "A synthetic regulated-sector complaints note, words copied",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "fenwick-number",
+      "name": "The fictional note says 8 weeks. The claim says 4.",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "rivertrust-leave",
+      "name": "A synthetic non-clinical leave note at a fictional NHS trust",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "two-claims-one-answer",
+      "name": "One answer, two claims, one verdict each",
+      "passed": true,
+      "problems": [],
+      "claim_count": 2,
+      "verdict_total": 2,
+      "refused": false
+    },
+    {
+      "id": "draft-bar-against-unapproved-threshold",
+      "name": "A looser draft threshold is met and is still not a release",
+      "passed": true,
+      "problems": [],
+      "claim_count": 2,
+      "verdict_total": 2,
+      "refused": false
+    },
+    {
+      "id": "pins-stale",
+      "name": "The passages are inside 180 days and the Microsoft pin is older than 90",
+      "passed": true,
+      "problems": [],
+      "claim_count": 3,
+      "verdict_total": 3,
+      "refused": false
+    },
+    {
+      "id": "passages-and-pins-stale",
+      "name": "A later as-of date makes the leaflet stale as well as the pin",
+      "passed": true,
+      "problems": [],
+      "claim_count": 3,
+      "verdict_total": 3,
+      "refused": false
+    },
+    {
+      "id": "not-synthetic",
+      "name": "A bundle that is not marked synthetic is refused",
+      "passed": true,
+      "problems": [],
+      "claim_count": null,
+      "verdict_total": null,
+      "refused": true
+    },
+    {
+      "id": "wrong-sector",
+      "name": "A sector outside the two fixture sectors is refused",
+      "passed": true,
+      "problems": [],
+      "claim_count": null,
+      "verdict_total": null,
+      "refused": true
+    },
+    {
+      "id": "no-answers",
+      "name": "A bundle with no answers is refused",
+      "passed": true,
+      "problems": [],
+      "claim_count": null,
+      "verdict_total": null,
+      "refused": true
+    },
+    {
+      "id": "manifest-skeleton",
+      "name": "A requested skeleton stays unapproved",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    },
+    {
+      "id": "manifest-a3-refused",
+      "name": "A request for autonomy A3 does not produce a manifest",
+      "passed": true,
+      "problems": [],
+      "claim_count": 1,
+      "verdict_total": 1,
+      "refused": false
+    }
+  ]
+}
