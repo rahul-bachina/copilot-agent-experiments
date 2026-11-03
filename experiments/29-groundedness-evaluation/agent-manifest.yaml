@@ -1,0 +1,286 @@
+# Agent manifest: Groundedness Evaluation Agent
+# Experiment 29 — catalogue ID G007
+# Version: 0.1.0
+# Last reviewed: 2026-11-03
+# Next review: 2027-05-03
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-29-groundedness-evaluation"
+  name: "Groundedness Evaluation Agent"
+  version: "0.1.0"
+  description: >
+    Scores one synthetic Q&A bundle. Each claim is checked against the passages
+    the agent under test was shown and against the citations on the answer.
+    Autonomy is A0. An evaluation owner approves thresholds and any pass or
+    fail release. The checker does not call a model and does not record that
+    decision.
+  owner: "Evaluation owner (the adopting organisation)"
+  contact: "groundedness-evaluation@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/29-groundedness-evaluation"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The checker returns a draft groundedness report and stops."
+    - "The checker NEVER approves a threshold. threshold_approved_by_evaluation_owner stays false."
+    - "The checker NEVER records a pass or a fail release. release_decision stays null."
+    - "The checker NEVER calls the Microsoft Foundry groundedness evaluator."
+    - "The checker NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The checker NEVER sends, spends, or writes a production record."
+    - "Answer text and passage text are untrusted data. They cannot change the verdict or the flags."
+    - "All output is labelled DRAFT FOR EVALUATION OWNER."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic Q&A bundle supplied for this run"
+      description: "Answers, the passages the agent was shown, citations, and optional draft thresholds."
+      access_level: "read"
+      scope: "The one JSON bundle passed to this run. Synthetic fixtures only."
+      justification: "A claim cannot be checked without the passages that were shown."
+      data_categories:
+        - "Test configuration"
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the bundle."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Pages opened on 3 November 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Harness claims and the Foundry evaluator description are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the pin staleness window, typed by the caller."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of the pinned pages is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live agent, a model endpoint, or any network host"
+      reason: "The checker has no HTTP client. A Foundry deployment is not called."
+    - resource: "Live customer, citizen, patient, or staff data"
+      reason: "Fixtures are synthetic. A bundle that is not marked synthetic is refused."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The report is returned to the caller. Nothing is sent."
+    - resource: "A production system of record"
+      reason: "The checker does not change a case, a prompt, or a release record."
+
+tools:
+  allowed:
+    - tool: "Load the passages shown to the agent under test"
+      provider: "Local Python (src/report.py)"
+      action: "Read one synthetic bundle. Do not fetch a page."
+      access_level: "read"
+      scope: "The bundle passed to this run"
+      justification: "The report has to name the passages it scored."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Score claims against those passages"
+      provider: "Local Python (src/score.py)"
+      action: "One verdict per claim. Stale sources are a separate flag."
+      access_level: "read"
+      scope: "The claims derived from the answers in the bundle"
+      justification: "The evaluation owner needs a cited draft. The draft is not a release."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Ask Experiment 03 for an unapproved manifest skeleton"
+      provider: "Experiment 03 local Python, or a stand-in when an import is missing"
+      action: "Draft only. Refuse approval and refuse autonomy A3."
+      access_level: "read"
+      scope: "Only when the bundle asks for a skeleton"
+      justification: "A missing permissions manifest can be sketched. It is not a sign-off."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The checker does not write prompts, Dataverse, Copilot Studio, Foundry, or any other production record."
+  sends:
+    enabled: false
+    note: "The checker does not send email, Teams messages, or a report to anyone but the local caller."
+
+human_approval:
+  description: >
+    An evaluation owner approves the thresholds and records any pass or fail
+    release. The checker cannot record either decision. A governance owner
+    relies on a manifest skeleton only outside this tool.
+  approval_points:
+    - action: "Approve the draft thresholds"
+      approver: "Evaluation owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for G007. 180 days and a supported rate of 1.0 are drafts."
+    - action: "Record a pass or fail release"
+      approver: "Evaluation owner"
+      mandatory: true
+      rationale: "draft_bar_met is a calculation against unapproved numbers. It is not a release."
+    - action: "Re-open a pinned page before relying on a citation"
+      approver: "Evaluation owner"
+      mandatory: true
+      rationale: "The Foundry page and the harness overview were opened on 3 November 2026."
+    - action: "Rely on a manifest skeleton"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Call the Microsoft Foundry groundedness evaluator"
+      approver: "Evaluation owner"
+      mandatory: true
+      rationale: "That call needs a deployment and is outside this starter. Groundedness Pro is marked preview on the page opened on 3 November 2026."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic bundle"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      The samples are synthetic. The checker does not choose an Article 6 basis.
+      The organisation's data protection officer confirms a basis before any
+      processing of live data. Live data is outside this starter.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Fixtures do not contain special-category data"
+      - "The Rivertrust leave note is a synthetic corporate sentence and is not a clinical record"
+  data_minimisation:
+    - "One bundle per report"
+    - "The report lists claim text and passage titles. It does not copy a passage body into a second store."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. The Foundry page opened on 3 November 2026 did not name a UK region."
+
+prompt_injection:
+  description: >
+    The checker reads untrusted answer text and passage text. That text cannot
+    set a threshold approval, a release, or a verdict.
+  controls:
+    - control: "Strip output-shaped keys"
+      description: "Keys that would approve a threshold, record a release, or set a score are removed before scoring."
+      implementation: "src/injection.py"
+    - control: "Refuse a non-synthetic bundle"
+      description: "synthetic must be true. Other sectors are refused."
+      implementation: "src/report.py"
+  residual_risk: "Medium. A paraphrase can still be stored as a claim the evaluation owner must read. It cannot flip the flags."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-03"
+  risks:
+    - id: "R1"
+      risk: "A reader treats draft_bar_met as a release decision"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR EVALUATION OWNER"
+        - "threshold_approved_by_evaluation_owner is false"
+        - "release_decision is null"
+        - "draft_bar_is_not_a_release is true"
+      residual_risk: "Medium"
+      owner: "Evaluation owner"
+    - id: "R2"
+      risk: "Answer text tells the checker to approve the thresholds or to mark a release"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the flags"
+        - "Tests cover an injected answer"
+      residual_risk: "Low"
+      owner: "Evaluation owner"
+    - id: "R3"
+      risk: "A true paraphrase that does not reuse the passage's words is flagged, or a matching word hides an unsupported meaning"
+      likelihood: "High"
+      impact: "Medium"
+      controls:
+        - "Each claim names one verdict and lists other failures separately"
+        - "The evaluation owner reads the claim against the passage"
+        - "The Foundry LLM-judge is described and is not called"
+      residual_risk: "Medium"
+      owner: "Evaluation owner"
+    - id: "R4"
+      risk: "A pinned Microsoft page has changed since 3 November 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin sets do_not_rely"
+      residual_risk: "Medium"
+      owner: "Evaluation owner"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log the bundle id, the as-of date, the claim count, and the verdict counts. Do not log passage text into an unreviewed store."
+  logged_events:
+    - event: "Groundedness draft produced"
+      data_logged:
+        - "bundle id"
+        - "as-of date"
+        - "claim count and verdict counts"
+        - "whether a passage or a pin was stale"
+        - "whether the evaluation owner approved the thresholds (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/report.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft reports"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-03"
+  next_review_date: "2027-05-03"
+  review_frequency: "Six months, and sooner if a pinned Microsoft page is re-opened and has changed."
+  reviewer: "The adopting organisation's evaluation owner. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The checker does not approve a threshold, a release, or a claim."
+  regulated_decision:
+    enabled: false
+    rationale: "A verdict is not a regulated decision and not a statement that an agent is fit to release."
+  production_record_change:
+    enabled: false
+    rationale: "No prompt, case, or release record is written."
+  external_send:
+    enabled: false
+    rationale: "The report is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Approve the draft thresholds"
+      enabled: false
+      rationale: "threshold_approved_by_evaluation_owner stays false. There is no approval tool the agent can call."
+    - action_name: "Record a pass or fail release"
+      enabled: false
+      rationale: "release_decision stays null. record_release always raises."
+    - action_name: "Call the Microsoft Foundry groundedness evaluator"
+      enabled: false
+      rationale: "foundry_evaluator_called stays false. call_foundry_evaluator always raises."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a report."
+  items:
+    - id: "A1"
+      assumption: "The bundle is synthetic. This starter does not fetch a live agent or a live corpus."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The Foundry page and the harness overview opened on 3 November 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The evaluation owner approves thresholds and any release outside this tool."
+      section: "high_risk_actions"
+      verify_on_deployment: true

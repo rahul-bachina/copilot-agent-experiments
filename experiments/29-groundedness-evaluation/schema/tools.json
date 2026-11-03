@@ -1,0 +1,67 @@
+{
+  "tools": [
+    {
+      "name": "load_passages",
+      "implementation": "report",
+      "reads": ["one synthetic Q&A bundle supplied for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "approves_thresholds": false,
+      "records_release": false,
+      "calls_foundry": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "score_claims",
+      "implementation": "report",
+      "reads": [
+        "the answers, the passages shown to the agent under test, and the citations",
+        "the pinned source notes in src/sources.py",
+        "Experiment 03 only when a skeleton was requested and PyYAML and jsonschema import"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "approves_thresholds": false,
+      "records_release": false,
+      "calls_foundry": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "approve_thresholds",
+      "implementation": "approve_thresholds",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Evaluation owner"
+    },
+    {
+      "name": "record_release",
+      "implementation": "record_release",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Evaluation owner"
+    },
+    {
+      "name": "call_foundry_evaluator",
+      "implementation": "call_foundry_evaluator",
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "callable_by_agent": false,
+      "always_raises": true,
+      "approver": "Evaluation owner"
+    }
+  ]
+}
