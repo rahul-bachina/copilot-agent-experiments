@@ -1,0 +1,62 @@
+{
+  "bundle_id": "syn-northfen-2026-10",
+  "organisation": "Northfen Borough Council",
+  "synthetic": true,
+  "period": {"start": "2026-10-01", "end": "2026-10-31"},
+  "forecast": {"horizon_days": 31, "band": "0.20"},
+  "capacity": {"headroom_tight_below": "0.15", "spike_multiple": "3"},
+  "period_rollup": {"copilot_credits": "255", "cost": "4.3500"},
+  "quotas": [
+    {
+      "quota_id": "env-credits",
+      "meter": "copilot_credits",
+      "platform": "*",
+      "limit": "1000",
+      "unit": "credit"
+    },
+    {
+      "quota_id": "foundry-input",
+      "meter": "input_tokens",
+      "platform": "microsoft_foundry",
+      "limit": "2000000",
+      "unit": "token"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "agt-contact",
+      "name": "Contact front door",
+      "platform": "copilot_studio_standard",
+      "cases": 120,
+      "conversations": 140,
+      "tool_calls": 400,
+      "tokens": {"input": 800000, "output": 200000},
+      "copilot_credits": "45"
+    },
+    {
+      "agent_id": "agt-triage",
+      "name": "Triage reasoning",
+      "platform": "copilot_studio_github_copilot_harness",
+      "cases": 80,
+      "conversations": 90,
+      "tool_calls": 300,
+      "tokens": {"input": 1200000, "output": 400000},
+      "copilot_credits": "210"
+    },
+    {
+      "agent_id": "agt-summary",
+      "name": "Case summary",
+      "platform": "microsoft_foundry",
+      "cases": 50,
+      "conversations": 50,
+      "tool_calls": 20,
+      "tokens": {"input": 500000, "output": 100000},
+      "foundry_usage": {
+        "model_deployment": "syn-summary-deployment",
+        "input_tokens": 500000,
+        "output_tokens": 100000
+      },
+      "copilot_credits": "0"
+    }
+  ]
+}

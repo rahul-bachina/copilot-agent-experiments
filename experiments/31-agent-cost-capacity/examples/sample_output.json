@@ -1,0 +1,364 @@
+{
+  "label": "DRAFT FOR FINOPS REVIEW",
+  "catalogue_id": "G009",
+  "experiment": "31",
+  "autonomy": "A0",
+  "bundle_id": "syn-northfen-2026-10",
+  "organisation": "Northfen Borough Council",
+  "synthetic": true,
+  "as_of": "2026-11-03",
+  "currency": "GBP",
+  "currency_source": "rate_card",
+  "rates_validated": false,
+  "forecast_validated": false,
+  "quota_changed": false,
+  "budget_changed": false,
+  "subscription_changed": false,
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "a3_recommended": false,
+  "builtin_rates_used": false,
+  "microsoft_prices_used": false,
+  "added_rollup": false,
+  "priced_tokens_on_credit_agents": "0.0000",
+  "do_not_rely": false,
+  "refused": false,
+  "refusal_reasons": [],
+  "agents": [
+    {
+      "agent_id": "agt-contact",
+      "name": "Contact front door",
+      "platform": "copilot_studio_standard",
+      "cost": "0.4500",
+      "cost_complete": true,
+      "cases": "120",
+      "unit_cost_per_case": "0.003750",
+      "components": [
+        {
+          "meter": "copilot_credits",
+          "applied": true,
+          "reason": "billed_meter",
+          "quantity": "45",
+          "rate_id": "credits-studio",
+          "price_per_unit": "0.0100",
+          "amount": "0.4500"
+        },
+        {
+          "meter": "input_tokens",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "800000",
+          "rate_ids_not_applied": [
+            "decoy-standard-in"
+          ]
+        },
+        {
+          "meter": "output_tokens",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "200000",
+          "rate_ids_not_applied": []
+        },
+        {
+          "meter": "tool_calls",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "400",
+          "rate_ids_not_applied": []
+        },
+        {
+          "meter": "conversations",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "140",
+          "rate_ids_not_applied": []
+        }
+      ],
+      "model_deployment": null
+    },
+    {
+      "agent_id": "agt-triage",
+      "name": "Triage reasoning",
+      "platform": "copilot_studio_github_copilot_harness",
+      "cost": "2.1000",
+      "cost_complete": true,
+      "cases": "80",
+      "unit_cost_per_case": "0.026250",
+      "components": [
+        {
+          "meter": "copilot_credits",
+          "applied": true,
+          "reason": "billed_meter",
+          "quantity": "210",
+          "rate_id": "credits-studio",
+          "price_per_unit": "0.0100",
+          "amount": "2.1000"
+        },
+        {
+          "meter": "input_tokens",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "1200000",
+          "rate_ids_not_applied": [
+            "decoy-harness-in"
+          ]
+        },
+        {
+          "meter": "output_tokens",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "400000",
+          "rate_ids_not_applied": [
+            "decoy-harness-out"
+          ]
+        },
+        {
+          "meter": "tool_calls",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "300",
+          "rate_ids_not_applied": []
+        },
+        {
+          "meter": "conversations",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "90",
+          "rate_ids_not_applied": []
+        }
+      ],
+      "model_deployment": null
+    },
+    {
+      "agent_id": "agt-summary",
+      "name": "Case summary",
+      "platform": "microsoft_foundry",
+      "cost": "1.8000",
+      "cost_complete": true,
+      "cases": "50",
+      "unit_cost_per_case": "0.036000",
+      "components": [
+        {
+          "meter": "copilot_credits",
+          "applied": false,
+          "reason": "foundry_not_priced_in_copilot_credits",
+          "quantity": "0",
+          "rate_ids_not_applied": []
+        },
+        {
+          "meter": "input_tokens",
+          "applied": true,
+          "reason": "billed_meter",
+          "quantity": "500000",
+          "rate_id": "foundry-in",
+          "price_per_unit": "0.0020",
+          "amount": "1.0000"
+        },
+        {
+          "meter": "output_tokens",
+          "applied": true,
+          "reason": "billed_meter",
+          "quantity": "100000",
+          "rate_id": "foundry-out",
+          "price_per_unit": "0.0080",
+          "amount": "0.8000"
+        },
+        {
+          "meter": "tool_calls",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "20",
+          "rate_ids_not_applied": []
+        },
+        {
+          "meter": "conversations",
+          "applied": false,
+          "reason": "not_the_billed_meter",
+          "quantity": "50",
+          "rate_ids_not_applied": []
+        }
+      ],
+      "model_deployment": "syn-summary-deployment"
+    }
+  ],
+  "totals": {
+    "cost": "4.3500",
+    "cost_complete": true,
+    "partial_cost": "4.3500",
+    "partial_cost_is_not_the_total": false,
+    "cases": "250",
+    "unit_cost_per_case": "0.017400",
+    "copilot_credits": "255",
+    "agent_rows_used": 3,
+    "priced_tokens_on_credit_agents": "0.0000",
+    "added_rollup": false,
+    "agent_rows_dropped_as_duplicates": 0
+  },
+  "forecast": {
+    "point": "4.3500",
+    "low": "3.4800",
+    "high": "5.2200",
+    "band": "0.2000",
+    "band_source": "caller",
+    "observed_days": 31,
+    "horizon_days": 31,
+    "cases_point": "250",
+    "do_not_rely": false,
+    "statistical_interval": false,
+    "microsoft_estimate": false,
+    "coverage_end": "2027-01-29",
+    "horizon_end": "2026-12-01",
+    "flags": [],
+    "validated": false
+  },
+  "capacity": [
+    {
+      "quota_id": "env-credits",
+      "meter": "copilot_credits",
+      "platform": "*",
+      "limit": "1000",
+      "used": "255",
+      "headroom": "745",
+      "headroom_ratio": "0.745000",
+      "flags": [],
+      "changed": false,
+      "added_rollup": false
+    },
+    {
+      "quota_id": "foundry-input",
+      "meter": "input_tokens",
+      "platform": "microsoft_foundry",
+      "limit": "2000000",
+      "used": "500000",
+      "headroom": "1500000",
+      "headroom_ratio": "0.750000",
+      "flags": [],
+      "changed": false,
+      "added_rollup": false
+    }
+  ],
+  "anomalies": [],
+  "assumptions": [
+    {
+      "id": "B1",
+      "text": "A Copilot Studio agent is priced only from its copilot_credits quantity times one matching rate-card line. Input tokens, output tokens, tool calls, and conversations on that agent are usage. They are not added unless that rate line sets additive to true. The usage-based billing overview opened on 3 November 2026 says Copilot Credits for GitHub Copilot harness experiences are charged for large language model tokens, tools, and the harness. That sentence is about that harness. Using the same non-additive rule for the standard harness is this starter's double-count guard, not that sentence."
+    },
+    {
+      "id": "B2",
+      "text": "A Microsoft Foundry agent is priced only from input_tokens and output_tokens lines that match the platform and, when the line names one, the model deployment. Copilot Credits on a Foundry row are not priced. No Microsoft token price is stored. If tokens and foundry_usage disagree, the meter is not priced and the two quantities are not added together."
+    },
+    {
+      "id": "B3",
+      "text": "The period total is the sum of agent costs after duplicate agent ids are dropped. The first row is kept. A period_rollup figure is compared and is never added. A rate card embedded in the telemetry file is ignored."
+    },
+    {
+      "id": "B4",
+      "text": "A missing rate, two matching rates, a negative quantity, or a JSON float leaves that cost null. Null is not stored as zero. totals.cost is null when any used agent is incomplete. partial_cost adds only the complete agents and is not the total."
+    },
+    {
+      "id": "B5",
+      "text": "The currency code comes from the rate card. Nothing in the code fills one in. price_per_unit has to be a string."
+    },
+    {
+      "id": "B6",
+      "text": "The forecast multiplies the period cost by horizon_days divided by the inclusive day count of the observed period. It assumes the same daily run-rate and the same mix. Low and high are that point times one minus the band and one plus the band. The band is 0.20 only when the caller does not set one. It is not a statistical interval and it is not a Microsoft estimate."
+    },
+    {
+      "id": "B7",
+      "text": "A rate card is stale when as_of minus effective_date is more than stale_after_days. The default threshold is 90 days. A stale card is still applied so the arithmetic can be seen, and do_not_rely is true. A card dated after as_of is not applied."
+    },
+    {
+      "id": "B8",
+      "text": "rates_validated and forecast_validated stay false. quota_changed, budget_changed, and subscription_changed stay false. The FinOps owner validates rates and the forecast outside this tool. The tool does not change a quota, a budget, or a subscription."
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "patterns": [],
+    "note_withheld": false
+  },
+  "prohibited_actions": {
+    "requested": false,
+    "taken": false
+  },
+  "sources": [
+    {
+      "id": "cs-harnesses-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened 3 November 2026. The GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. Customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. The standard harness powers rule-based agents and agent flows and follows the topics and rules the maker defines. Agents on the GitHub Copilot harness use Copilot Credits. The page does not mark that harness as preview. No rate is copied.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "cs-usage-billing",
+      "title": "Overview of usage-based billing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/billing-credit-overview",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened 3 November 2026. Agents, workflows, and apps powered by the GitHub Copilot harness use usage-based billing measured in Copilot Credits. For those experiences, Copilot Credits are charged for large language model tokens, tools including knowledge and MCP, and the harness. The standard harness starts billing after publish. The GitHub Copilot harness charges credits from the moment you start building, including testing and evaluation. A diagram of ranges was on the page. No number from that diagram is copied. The article's scope statement covers the GitHub Copilot harness and customer conversations, not the standard harness.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "cs-gh-cost-management",
+      "title": "Manage costs for agents powered by the GitHub Copilot harness",
+      "url": "https://learn.microsoft.com/en-us/power-platform/admin/manage-usage-github-copilot-harness",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened 3 November 2026. GitHub Copilot harness consumption is not included with a Microsoft 365 Copilot licence. Creation and runtime are billed regardless of the user's licence. The same page says standard-harness agents are covered in Microsoft 365 channels, and billed when the user has no such licence or the channel is outside Microsoft 365. Azure budgets and alerts send notifications but do not stop Copilot Studio consumption. An agent monthly limit can stop usage when that control is turned on. That control is not called here. Developer environments and trial environments move to usage-based billing on 1 September 2026. The page says non-billed credit information is not a billing estimate. No quantity is copied.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "cs-standard-licensing",
+      "title": "Standard harness licensing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened 3 November 2026. Copilot Credits are the common currency across Copilot Studio capabilities. The page says the currency changed from messages to Copilot Credits on 1 September 2025. Pack sizes and pay-as-you-go rates are not copied. The page says a Microsoft 365 Copilot licence lets you use Copilot Studio to build agents for the GitHub Copilot harness. That sentence is not merged with the cost-management page, which says consumption for that harness is not included. The Licensing Guide and the billing-rates article named on the page were not opened. Those rates are unverified.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "foundry-manage-costs",
+      "title": "Plan and manage costs in Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/concepts/manage-costs",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": true,
+      "stale_applicable": true,
+      "notes": "Opened 3 November 2026. Foundry resources are charged for the Azure services used. Pay-as-you-go is described as billed according to usage. Token billing units and rates vary by model, deployment type, and meter. The page points at a pricing page for current rates. No rate is copied. The invoice and the meter records are the source of truth. Foundry has no dedicated page in the Azure pricing calculator because it is composed of optional services. Cost records can be delayed. Provisioned throughput hourly billing was not opened in full for this experiment and is unverified here.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue row G009",
+      "url": "",
+      "last_verified": "2026-11-03",
+      "reopened_for_this_experiment": false,
+      "stale_applicable": false,
+      "notes": "Not a Microsoft page. Catalogue ID G009. Autonomy A0. The FinOps owner validates rates and the forecast. The catalogue stack is Fabric and Power Platform. This starter does not connect to Fabric. The score in the catalogue is marked as an estimate and is not repeated here.",
+      "age_days": null,
+      "stale": false
+    }
+  ],
+  "rate_card": {
+    "id": "syn-rate-card-2026-10",
+    "effective_date": "2026-10-01",
+    "age_days": 33,
+    "stale": false,
+    "not_yet_effective": false,
+    "validity_days": 120,
+    "currency": "GBP",
+    "source": "user_supplied_file"
+  }
+}

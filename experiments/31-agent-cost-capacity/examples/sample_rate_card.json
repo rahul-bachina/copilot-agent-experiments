@@ -1,0 +1,61 @@
+{
+  "rate_card_id": "syn-rate-card-2026-10",
+  "synthetic": true,
+  "currency": "GBP",
+  "effective_date": "2026-10-01",
+  "validity_days": 120,
+  "source": "user_supplied",
+  "note": "Illustrative figures for this fixture. Not a Microsoft price list.",
+  "rates": [
+    {
+      "rate_id": "credits-studio",
+      "meter": "copilot_credits",
+      "platform": "*",
+      "unit": "credit",
+      "price_per_unit": "0.0100",
+      "additive": false
+    },
+    {
+      "rate_id": "decoy-standard-in",
+      "meter": "input_tokens",
+      "platform": "copilot_studio_standard",
+      "unit": "1000_tokens",
+      "price_per_unit": "9.9999",
+      "additive": false
+    },
+    {
+      "rate_id": "decoy-harness-in",
+      "meter": "input_tokens",
+      "platform": "copilot_studio_github_copilot_harness",
+      "unit": "1000_tokens",
+      "price_per_unit": "9.9999",
+      "additive": false
+    },
+    {
+      "rate_id": "decoy-harness-out",
+      "meter": "output_tokens",
+      "platform": "copilot_studio_github_copilot_harness",
+      "unit": "1000_tokens",
+      "price_per_unit": "9.9999",
+      "additive": false
+    },
+    {
+      "rate_id": "foundry-in",
+      "meter": "input_tokens",
+      "platform": "microsoft_foundry",
+      "model_deployment": "syn-summary-deployment",
+      "unit": "1000_tokens",
+      "price_per_unit": "0.0020",
+      "additive": false
+    },
+    {
+      "rate_id": "foundry-out",
+      "meter": "output_tokens",
+      "platform": "microsoft_foundry",
+      "model_deployment": "syn-summary-deployment",
+      "unit": "1000_tokens",
+      "price_per_unit": "0.0080",
+      "additive": false
+    }
+  ]
+}
