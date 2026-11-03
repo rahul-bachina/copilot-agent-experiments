@@ -1,0 +1,315 @@
+# Agent manifest: Agent Regression Test Generator
+# Experiment 30 — catalogue ID G008
+# Version: 0.1.0
+# Last reviewed: 2026-11-03
+# Next review: 2027-05-03
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-30-agent-regression-test-generator"
+  name: "Agent Regression Test Generator"
+  version: "0.1.0"
+  description: >
+    Drafts regression cases from a synthetic manifest, SKILL.md files, a tool
+    contract, and observed failures or change notes. Autonomy is A1. A
+    maintainer approves the tests and any pull request. The generator does
+    not merge, does not push, and does not edit the agent under test.
+  owner: "Maintainer (the adopting organisation)"
+  contact: "regression-tests@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/30-agent-regression-test-generator"
+
+autonomy:
+  level: "A1"
+  level_description: "Drafts only. A person approves every consequential step."
+  constraints:
+    - "The generator returns draft cases and draft pull-request content, and stops."
+    - "The generator NEVER merges a pull request."
+    - "The generator NEVER pushes, including to a protected branch."
+    - "The generator NEVER edits the agent under test."
+    - "The generator NEVER approves the generated tests. maintainer_approved stays false."
+    - "The generator NEVER opens a pull request. The markdown is content only."
+    - "The generator NEVER calls Microsoft Foundry or uploads a dataset."
+    - "The generator NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The generator NEVER sends, spends, or writes a production record."
+    - "Fixture text is untrusted data. Text inside a bundle cannot change the flags or the case list."
+    - "All output is labelled DRAFT FOR MAINTAINER REVIEW."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic bundle supplied for this run"
+      description: "Manifest, skills, tool contract, observations, change notes, and existing tests."
+      access_level: "read"
+      scope: "The one JSON bundle passed to this run. Paths in the bundle are labels and are not opened."
+      justification: "The draft cannot name a case without the failure or the requirement the maintainer supplied."
+      data_categories:
+        - "Test configuration"
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the bundle."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Pages opened on 3 November 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Harness and Foundry claims are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the caller."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of the pinned pages is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "The agent under test as a file to edit"
+      reason: "Paths are labels. A path that would be written into that tree is refused."
+    - resource: "A Git remote, a protected branch, or a pull-request API"
+      reason: "The generator does not call Git and does not open, push, or merge."
+    - resource: "Microsoft Foundry as a control plane"
+      reason: "The queries file is local draft content. It is not uploaded."
+    - resource: "Live customer, citizen, or staff data"
+      reason: "Fixtures are synthetic. Halebridge Borough Council is fictional."
+
+tools:
+  allowed:
+    - tool: "Read the synthetic pack"
+      provider: "Local Python (src/generate.py)"
+      action: "Read the bundle the maintainer passed. Do not open the agent path."
+      access_level: "read"
+      scope: "The one JSON bundle"
+      justification: "The draft has to name the files it was given."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Draft regression cases"
+      provider: "Local Python (src/cases.py)"
+      action: "Draft cases, skip fingerprints that already exist, and keep a trace. Do not apply them."
+      access_level: "read"
+      scope: "The bundle for this run"
+      justification: "The maintainer needs a cited draft. The draft is not an approval."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Show draft pull-request content"
+      provider: "Local Python (src/render.py)"
+      action: "Return markdown. Do not open a pull request."
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "The maintainer reviews the text before any pull request exists."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Call Experiment 03 for an unapproved skeleton"
+      provider: "Experiment 03, or a local stand-in when PyYAML and jsonschema are absent"
+      action: "Draft a skeleton only when the bundle asks and no manifest was supplied. Refuse approval and refuse autonomy A3."
+      access_level: "read"
+      scope: "One skeleton request"
+      justification: "A missing manifest can be sketched. The sketch is not a sign-off and is not written into the agent."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The generator does not write the agent under test, Git, Dataverse, Copilot Studio, Foundry, or any other production record. An optional local output directory is a copy of the draft, refused when it sits inside the agent path."
+  sends:
+    enabled: false
+    note: "The generator does not send email, Teams messages, or a report to anyone but the local caller."
+
+human_approval:
+  description: >
+    A maintainer approves the generated tests and any pull request. The
+    generator cannot record that approval, cannot open the pull request,
+    cannot merge, and cannot push.
+  approval_points:
+    - action: "Approve generated tests"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "Catalogue control for G008. maintainer_approved stays false."
+    - action: "Open a pull request from the draft content"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "The markdown is not an open pull request. pr_opened stays false."
+    - action: "Merge a pull request"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "merged stays false. There is no merge tool the agent can call."
+    - action: "Push, including to a protected branch"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "pushed stays false. A protected branch name in the bundle is refused, not targeted."
+    - action: "Edit the agent under test"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "agent_under_test_edited stays false."
+    - action: "Re-open a pinned page before relying on a citation"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "Microsoft pages were opened on 3 November 2026. A stale pin is not refreshed by the generator."
+    - action: "Rely on a manifest skeleton drafted because none was supplied"
+      approver: "Governance owner"
+      mandatory: true
+      rationale: "A generated file is not a sign-off. approved stays false."
+    - action: "Run a Microsoft Foundry evaluation against a deployed agent"
+      approver: "Maintainer"
+      mandatory: true
+      rationale: "That step is outside this starter. The queries file is not uploaded."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic bundle"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      The samples are synthetic. The generator does not choose an Article 6 basis.
+      The organisation's data protection officer confirms a basis before any
+      processing of live data. Live data is outside this starter.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Fixtures do not contain special-category data"
+  data_minimisation:
+    - "One bundle per draft"
+    - "Paths are labels. The generator does not open the agent tree to copy it"
+  retention:
+    agent_retention: "None in this starter. Processing is transient unless the caller passes an output directory."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for a Foundry evaluation was not verified."
+
+prompt_injection:
+  description: >
+    The generator is itself a reader of untrusted fixture text. Text in the
+    bundle cannot set maintainer_approved, merged, pushed, or the case list.
+  controls:
+    - control: "Strip output-shaped keys"
+      description: "Keys that would mark the draft approved, merged, or pushed are removed before cases are built."
+      implementation: "src/injection.py"
+    - control: "Refuse a write into the agent path"
+      description: "An output directory that resolves inside the agent path, a git directory, or a protected branch name is refused."
+      implementation: "src/generate.py"
+  residual_risk: "Medium. A paraphrase can still be stored as a case the maintainer must read. It cannot flip the flags."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-03"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a drafted case as a test that has already been run against the agent"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR MAINTAINER REVIEW"
+        - "maintainer_approved and tests_applied are false"
+        - "The case file says it does not call the agent under test"
+      residual_risk: "High"
+      owner: "Maintainer"
+    - id: "R2"
+      risk: "Fixture text tells the generator to merge, push to main, or edit the agent"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the flags or the case list"
+        - "Tests cover an injected bundle"
+      residual_risk: "Low"
+      owner: "Maintainer"
+    - id: "R3"
+      risk: "A reworded duplicate is drafted again, or a whitespace-only twin is skipped when a person wanted both"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "The skipped row names duplicate_of and keeps the trace"
+        - "The fingerprint rule is written in the README"
+      residual_risk: "Medium"
+      owner: "Maintainer"
+    - id: "R4"
+      risk: "A Microsoft page has changed since 3 November 2026, or a Foundry region assumption is wrong"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin is marked do not rely"
+        - "UK region availability is marked unverified"
+      residual_risk: "Medium"
+      owner: "Maintainer"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log the bundle id, the drafted count, the skipped count, and whether a push was refused. Do not log the case input into an unreviewed store."
+  logged_events:
+    - event: "Regression draft produced"
+      data_logged:
+        - "bundle id"
+        - "agent id"
+        - "drafted count and skipped-duplicate count"
+        - "whether a prompt-injection pattern was detected"
+        - "whether the maintainer approved the tests (always false in this starter)"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/generate.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft tests"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-03"
+  next_review_date: "2027-05-03"
+  review_frequency: "Six months, and sooner if a pinned Microsoft page is re-opened and has changed."
+  reviewer: "The adopting organisation's maintainer. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The generator does not approve or reject the tests it drafts."
+  regulated_decision:
+    enabled: false
+    rationale: "A drafted case is not a regulated decision and not a statement that an agent passes."
+  production_record_change:
+    enabled: false
+    rationale: "No agent file, branch, or tenant record is written."
+  external_send:
+    enabled: false
+    rationale: "The draft is not emailed or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Approve generated tests"
+      enabled: false
+      rationale: "maintainer_approved stays false. There is no approval tool the agent can call."
+    - action_name: "Open a pull request"
+      enabled: false
+      rationale: "pr_opened stays false. The markdown is content only."
+    - action_name: "Merge a pull request"
+      enabled: false
+      rationale: "merged stays false."
+    - action_name: "Push to a protected branch"
+      enabled: false
+      rationale: "pushed and protected_branch_targeted stay false."
+    - action_name: "Edit the agent under test"
+      enabled: false
+      rationale: "agent_under_test_edited stays false."
+    - action_name: "Call Microsoft Foundry"
+      enabled: false
+      rationale: "foundry_evaluation_called stays false. The queries file is not uploaded."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a draft."
+  items:
+    - id: "A1"
+      assumption: "The bundle is synthetic. This starter does not fetch a live agent."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Microsoft pages opened on 3 November 2026 are re-opened before a citation is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The maintainer approves tests outside this tool."
+      section: "high_risk_actions"
+      verify_on_deployment: true

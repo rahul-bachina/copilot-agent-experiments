@@ -103,6 +103,9 @@ DIAGRAMS = {
     "experiments/29-groundedness-evaluation/docs/architecture_diagram.png": (
         "experiments/img/29-groundedness-evaluation-architecture.png"
     ),
+    "experiments/30-agent-regression-test-generator/docs/architecture_diagram.png": (
+        "experiments/img/30-agent-regression-test-generator-architecture.png"
+    ),
 }
 
 

@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Twenty-nine starters you can read today
+## Thirty starters you can read today
 
 </div>
 
@@ -798,6 +798,31 @@ The draft runs locally. Thresholds are not approved, a release is not recorded, 
 
 [Read the briefing](experiments/29-groundedness-evaluation.md)
 [Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/29-groundedness-evaluation)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 30 · G008 · Governance · Autonomy A1</p>
+
+### Agent regression test generator
+
+Draft regression cases from one synthetic manifest, skill files, a tool contract, and failure or change notes. The maintainer approves the tests and any pull request. Duplicates are skipped. Each drafted case keeps a trace. A Foundry-shaped queries file is not uploaded.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is merged, pushed, approved, or written into the agent under test.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/30-agent-regression-test-generator.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/30-agent-regression-test-generator)
 
 </div>
 

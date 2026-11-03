@@ -1401,3 +1401,58 @@ class TestExperiment29Manifest:
         assert release["approver"] == "Evaluation owner"
         assert release["mandatory"] is True
         assert experiment_29_manifest["agent"]["id"] == "exp-29-groundedness-evaluation"
+
+
+class TestExperiment30Manifest:
+    """Test the Experiment 30 regression-test generator manifest."""
+
+    @pytest.fixture
+    def experiment_30_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "30-agent-regression-test-generator"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_30_manifest):
+        """Experiment 30 manifest should be valid."""
+        validate(instance=experiment_30_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_30_manifest):
+        """Experiment 30 should be autonomy level A1, not above."""
+        level = experiment_30_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_30_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_30_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_30_manifest):
+        """Experiment 30 should have all high-risk actions disabled."""
+        high_risk = experiment_30_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_30_manifest):
+        """Nothing is sent or written, including the agent under test."""
+        assert experiment_30_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_30_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_maintainer_approves_generated_tests(self, experiment_30_manifest):
+        """The catalogue checkpoint is the maintainer, and it is mandatory."""
+        points = experiment_30_manifest["human_approval"]["approval_points"]
+        decision = next(point for point in points if point["action"] == "Approve generated tests")
+        assert decision["approver"] == "Maintainer"
+        assert decision["mandatory"] is True
+        assert experiment_30_manifest["agent"]["id"] == "exp-30-agent-regression-test-generator"

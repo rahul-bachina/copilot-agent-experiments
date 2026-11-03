@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Twenty-nine starters are in `experiments/`. The count is the number of folders.
+Thirty starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -61,6 +61,7 @@ Twenty-nine starters are in `experiments/`. The count is the number of folders.
 | 27 | [Tool Contract Review Agent](experiments/27-tool-contract-review/) | Score one tool or action contract against a fixed checklist and propose contract notes and an API Management policy sketch. The security/API owner approves the contract. Experiments 03, 14, and 25 can be called. Autonomy A0. The reviewer does not modify, publish, approve, or deploy. | ✅ Starter |
 | 28 | [Prompt Injection Test Agent](experiments/28-prompt-injection-test/) | Run a versioned suite of synthetic prompt-injection fixtures against a sandbox target and draft findings mapped to pinned OWASP titles. A security reviewer assesses the findings. Experiments 08, 25, and 03 can be called. Autonomy A0. The runner does not target production, assess, remediate, or publish. | ✅ Starter |
 | 29 | [Groundedness Evaluation Agent](experiments/29-groundedness-evaluation/) | Score each claim in a synthetic Q&A bundle against the passages the agent was shown. The evaluation owner approves thresholds and any pass or fail release. Experiment 03 can draft an unapproved skeleton. Autonomy A0. The checker does not approve, release, or call Microsoft Foundry. | ✅ Starter |
+| 30 | [Agent Regression Test Generator](experiments/30-agent-regression-test-generator/) | Draft regression cases from a synthetic manifest, skill files, a tool contract, and failure or change notes. The maintainer approves the tests and any pull request. Autonomy A1. The generator does not merge, push, or edit the agent under test. | ✅ Starter |
 
 ## Getting Started
 
@@ -261,6 +262,13 @@ cd ../29-groundedness-evaluation
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/report.py --bundle examples/sample_bundle.json --as-of 2026-11-03
+
+# Experiment 30 needs no credentials either. The case list is deterministic.
+# Experiment 03 sits beside it. The generator calls it only when the bundle asks.
+cd ../30-agent-regression-test-generator
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/generate.py --bundle examples/sample_bundle.json --as-of 2026-11-03
 ```
 
 ## Repository Structure
@@ -312,7 +320,8 @@ copilot-agent-experiments/
     ├── 26-skill-selection-evaluator/
     ├── 27-tool-contract-review/
     ├── 28-prompt-injection-test/
-    └── 29-groundedness-evaluation/
+    ├── 29-groundedness-evaluation/
+    └── 30-agent-regression-test-generator/
 ```
 
 ## Agent Governance
