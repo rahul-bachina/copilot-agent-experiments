@@ -106,6 +106,9 @@ DIAGRAMS = {
     "experiments/30-agent-regression-test-generator/docs/architecture_diagram.png": (
         "experiments/img/30-agent-regression-test-generator-architecture.png"
     ),
+    "experiments/31-agent-cost-capacity/docs/architecture_diagram.png": (
+        "experiments/img/31-agent-cost-capacity-architecture.png"
+    ),
 }
 
 
