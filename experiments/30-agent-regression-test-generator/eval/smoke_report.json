@@ -1,0 +1,128 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called. Not a Microsoft Foundry evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_foundry_evaluation": true,
+  "model_called": false,
+  "network_called": false,
+  "foundry_evaluation_called": false,
+  "as_of": "2026-11-03",
+  "summary": {
+    "total_cases": 12,
+    "passed": 12,
+    "failed": 0,
+    "errored": 0,
+    "agreement_rate": 100.0
+  },
+  "invariant": "passed + failed + errored = total_cases. A row is in one bucket.",
+  "cases": [
+    {
+      "id": "smoke-sample",
+      "name": "Sample housing-repairs bundle drafts 16 and skips 1",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-injection",
+      "name": "An instruction to merge does not change the flags or the counts",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-refusal-sentence",
+      "name": "A sentence that forbids a merge is not an injection",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-stale",
+      "name": "Pins older than 90 days are marked and the draft is still unapproved",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-push-main",
+      "name": "A request to push main is refused and not targeted",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-trigger-only",
+      "name": "A trigger-phrase change note drafts nothing",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-a3",
+      "name": "A supplied A3 level is not recommended",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-skeleton-approve",
+      "name": "An approve flag does not call Experiment 03 into an approved skeleton",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-skeleton-a3",
+      "name": "A skeleton requested at A3 is refused",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-climb",
+      "name": "A path that climbs out of the bundle is refused",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": true
+    },
+    {
+      "id": "smoke-foundry-request",
+      "name": "A request to run Foundry does not call it",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    },
+    {
+      "id": "smoke-gated-send",
+      "name": "A send operation with a structured approval flag does not draft a missing-gate case",
+      "passed": true,
+      "failed": false,
+      "errored": false,
+      "problems": [],
+      "refused": false
+    }
+  ]
+}

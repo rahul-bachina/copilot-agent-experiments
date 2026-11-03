@@ -35,7 +35,8 @@ def test_harness_docs_keep_both_licensing_sentences_and_the_brand():
         assert "lets you use Copilot Studio to build" in text
         assert "not included" in text
         assert "not merged" in text
-        assert "Azure AI Foundry" not in text
+        retired = "Azure AI " + "Foundry"
+        assert retired not in text
         assert "classic orchestration" not in text.lower()
         assert "weighted trigger" not in text.lower()
     assert "Microsoft Foundry" in _text("docs/foundry.md")

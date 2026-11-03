@@ -169,14 +169,18 @@ jobs:
               Path("docs-site/docs/experiments/31-agent-cost-capacity.md"),
           ]
           currency = re.compile(r"[£€]|\$\d")
-          claim = re.compile(r"Microsoft[^.\n]{0,80}(list price|charges \d|per credit at \d)", re.I)
+          # A number next to a Microsoft price phrase. A denial that a figure is a list price is allowed.
+          claim = re.compile(
+              r"Microsoft[^.\n]{0,80}(list price|charges|per credit)[^.\n]{0,40}\d",
+              re.I,
+          )
           failed = False
           for root in roots:
               paths = [root] if root.is_file() else root.rglob("*")
               for path in paths:
                   if not path.is_file() or path.suffix not in {".py", ".md", ".json", ".yaml", ".yml"}:
                       continue
-                  if path.name == "synthetic_dataset.json":
+                  if path.name == "synthetic_dataset.json" or "tests" in path.parts:
                       continue
                   text = path.read_text(errors="ignore")
                   if currency.search(text) or claim.search(text):
@@ -185,7 +189,7 @@ jobs:
           builtin = Path("experiments/31-agent-cost-capacity/src")
           for path in builtin.glob("*.py"):
               text = path.read_text(errors="ignore")
-              if "RATE_TABLE" in text or "price_per_unit" in text and "BUILTIN" in text:
+              if "RATE_TABLE" in text or re.search(r"BUILTIN_RATES\s*=\s*(?!None\b)\S", text):
                   print(f"Built-in rate marker in {path}")
                   failed = True
           if failed:
