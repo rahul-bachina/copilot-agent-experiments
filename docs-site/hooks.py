@@ -112,6 +112,9 @@ DIAGRAMS = {
     "experiments/32-employee-case-intake/docs/architecture_diagram.png": (
         "experiments/img/32-employee-case-intake-architecture.png"
     ),
+    "experiments/33-case-bundle-summariser/docs/architecture_diagram.png": (
+        "experiments/img/33-case-bundle-summariser-architecture.png"
+    ),
 }
 
 

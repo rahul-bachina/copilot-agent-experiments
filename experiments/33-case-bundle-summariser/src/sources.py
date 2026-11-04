@@ -1,0 +1,193 @@
+"""Pages opened for Experiment 33. The checker does not fetch them again.
+
+`last_verified` is the day the page was opened. A later as-of date can mark a
+row stale. The catalogue-boundary row is not a web page and is not stale-tested.
+"""
+
+from __future__ import annotations
+
+SOURCES: tuple[dict, ...] = (
+    {
+        "id": "uk-gdpr-article-22",
+        "title": "UK GDPR Article 22",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. The article page showed Article 22 omitted. "
+            "The textual amendment says Chapter 3 Section 4A was substituted for Article 22 "
+            "by the Data (Use and Access) Act 2025 section 80(1), for specified purposes on "
+            "19 June 2025 and otherwise on 5 February 2026 by S.I. 2026/82. This starter does "
+            "not quote a pre-substitution Article 22."
+        ),
+    },
+    {
+        "id": "uk-gdpr-article-22a",
+        "title": "UK GDPR Article 22A",
+        "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. Article 22A(1) says a decision is based solely on "
+            "automated processing if there is no meaningful human involvement in the taking "
+            "of the decision, and a decision is significant if it produces a legal effect or "
+            "a similarly significant effect. Article 22A(2) says that, when considering "
+            "meaningful human involvement, a person must consider, among other things, the "
+            "extent to which the decision is reached by means of profiling."
+        ),
+    },
+    {
+        "id": "dpa-2018-section-14",
+        "title": "Data Protection Act 2018, section 14",
+        "url": "https://www.legislation.gov.uk/ukpga/2018/12/section/14",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. The page said section 14 is up to date with all "
+            "changes known to be in force on or before 1 November 2026. The operative text "
+            "was an omission: section 14 was omitted on 5 February 2026 by the Data (Use and "
+            "Access) Act 2025, Schedule 6, paragraph 11, and S.I. 2026/82. This starter does "
+            "not apply the omitted safeguards."
+        ),
+    },
+    {
+        "id": "duaa-2025-section-80",
+        "title": "Data (Use and Access) Act 2025, section 80",
+        "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. Section 80(1) substitutes UK GDPR Articles 22A to 22D "
+            "for Article 22. Section 80(3) substitutes Data Protection Act 2018 sections 50A "
+            "to 50D for the law-enforcement provisions on automated decision-making. Under "
+            "section 50A a significant decision produces an adverse legal effect or a similarly "
+            "significant adverse effect. This starter does not take that decision."
+        ),
+    },
+    {
+        "id": "cpia-1996-section-3",
+        "title": "Criminal Procedure and Investigations Act 1996, section 3",
+        "url": "https://www.legislation.gov.uk/ukpga/1996/25/section/3",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. Section 3(1) says the prosecutor must disclose to the "
+            "accused any prosecution material which has not previously been disclosed and which "
+            "might reasonably be considered capable of undermining the case for the prosecution "
+            "against the accused or of assisting the case for the accused, or give the accused "
+            "a written statement that there is no material of that description. This starter "
+            "does not apply that test and does not disclose anything."
+        ),
+    },
+    {
+        "id": "atrs-scope-policy",
+        "title": "ATRS mandatory scope and exemptions policy",
+        "url": "https://www.gov.uk/government/publications/algorithmic-transparency-recording-standard-mandatory-scope-and-exemptions-policy/algorithmic-transparency-recording-standard-atrs-mandatory-scope-and-exemptions-policy",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. The policy, published 17 December 2024, says the ATRS "
+            "was mandated across all government departments on 6 February 2024. Mandatory scope "
+            "is central government, as defined in section 3. Section 4.2 covers tools that have "
+            "a significant influence on a decision-making process with public effect, or that "
+            "directly interact with the general public. Section 4.3 applies the duty to Beta, "
+            "Pilot, and Production. The standard remains recommended for the broader public "
+            "sector. Annex 1 gives an in-scope example of a tool that summarises text submitted "
+            "by the public for humans who then take decisions. This starter does not decide "
+            "that a body is in mandatory scope and does not publish a record."
+        ),
+    },
+    {
+        "id": "ho-asylum-evaluation",
+        "title": "Evaluation of AI trials in the asylum decision making process",
+        "url": "https://www.gov.uk/government/publications/evaluation-of-ai-trials-in-the-asylum-decision-making-process/evaluation-of-ai-trials-in-the-asylum-decision-making-process",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. Published 29 April 2025. The note says the Asylum Case "
+            "Summarisation tool and the Asylum Policy Search tool do not, and cannot, replace "
+            "any part of the decision-making process. On average the test group reviewed "
+            "transcripts 23 minutes quicker than the comparison group, a 32 percent time saving. "
+            "Some interviewees highlighted minimal time-saving because the summary did not "
+            "provide source references. Section 5.1 says the summary did not reference where to "
+            "find the information in the transcript, which was a conscious design choice for the "
+            "pilot. Technical specialists removed 9 percent of summaries as inaccurate or "
+            "missing information. Of the summaries that remained, 23 percent of users were not "
+            "fully confident. Those figures are the Home Office's, not a result of this starter."
+        ),
+    },
+    {
+        "id": "disclosure-reforms-2026-07-14",
+        "title": "AI to speed up justice under major disclosure reforms",
+        "url": "https://www.gov.uk/government/news/ai-to-speed-up-justice-under-major-disclosure-reforms",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. Published 14 July 2026. The page says PoliceAI will "
+            "pilot AI tools capable of automatically generating summaries of digital material, "
+            "with a view to scaling across all police forces in 2027. It says some investigations "
+            "have over 500,000 e-books worth of data and an average fraud case contains over "
+            "4 million documents. It cites a Policing Productivity Review estimate of about "
+            "532,000 hours in 2022/23 on disclosure work and case files later assessed as "
+            "requiring no further action. The PoliceAI interim director is quoted as saying "
+            "technology can never replace professional judgement. This starter is not that pilot."
+        ),
+    },
+    {
+        "id": "dbs-barring-summary-atrs",
+        "title": "DBS Barring Referral AI Summary Tool",
+        "url": "https://www.gov.uk/algorithmic-transparency-records/disclosure-and-barring-service-barring-referral-ai-summary-tool",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "The record and the register index were opened on 4 November 2026. The index lists "
+            "the tool under the Home Office, phase Public Beta, ATRS version 4.0, date published "
+            "14 October 2026. The record says the original evidence remains the authoritative "
+            "source, caseworkers retain responsibility for decisions, and the output cannot be "
+            "the sole basis for any case assessment, recommendation, or barring-related decision. "
+            "It says the tool is not making any decisions. This starter is not that tool."
+        ),
+    },
+    {
+        "id": "cs-harnesses-overview",
+        "title": "Harnesses in Copilot Studio",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+        "last_verified": "2026-11-04",
+        "stale_applicable": True,
+        "reopened_for_this_experiment": True,
+        "note": (
+            "Opened on 4 November 2026. The page says the GitHub Copilot harness is a Copilot "
+            "Studio authoring and orchestration framework, not the GitHub Copilot service, and "
+            "that customer data is not sent to or processed by the GitHub Copilot service when "
+            "agents run in Copilot Studio. It can take a goal, break it into steps, use skills "
+            "and memory, create and edit Word, Excel, PowerPoint, and PDF files, and run in a "
+            "sandbox. The prose says agents and workflows on that harness use Copilot Credits. "
+            "The comparison table points the billing cell at a separate overview rather than "
+            "repeating that sentence. The standard harness follows the topics and rules the maker "
+            "defines. The page does not mark the GitHub Copilot harness as preview. Billing pages "
+            "linked from the overview were not opened. No quantity is copied."
+        ),
+    },
+    {
+        "id": "catalogue-boundary",
+        "title": "Catalogue row UK09",
+        "url": "",
+        "last_verified": "2026-11-04",
+        "stale_applicable": False,
+        "reopened_for_this_experiment": False,
+        "note": (
+            "Catalogue row UK09. Stack Microsoft Foundry, Azure, and Copilot Studio. "
+            "Autonomy A0. The decision-maker reviews every cited sentence. Not a web page. "
+            "Not stale-tested."
+        ),
+    },
+)

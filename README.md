@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-two starters are in `experiments/`. The count is the number of folders.
+Thirty-three starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -64,6 +64,7 @@ Thirty-two starters are in `experiments/`. The count is the number of folders.
 | 30 | [Agent Regression Test Generator](experiments/30-agent-regression-test-generator/) | Draft regression cases from a synthetic manifest, skill files, a tool contract, and failure or change notes. The maintainer approves the tests and any pull request. Autonomy A1. The generator does not merge, push, or edit the agent under test. | ✅ Starter |
 | 31 | [Agent Cost and Capacity Agent](experiments/31-agent-cost-capacity/) | Draft per-agent cost, unit cost per case, a flat forecast, and quota headroom from synthetic usage and a rate card with an effective date. The FinOps owner validates rates and the forecast. Autonomy A0. The agent does not change a quota, a budget, or a subscription, and it does not store a Microsoft price. | ✅ Starter |
 | 32 | [Employee Case Intake Agent](experiments/32-employee-case-intake/) | Propose a category, an urgency flag, a statutory or Acas time reference, and a route for one synthetic HR case. An HR officer confirms the classification and the routing. Experiments 15, 12, and 08 are called in-process. Autonomy A1. The agent does not decide an outcome, contact the employee or a manager, or write to an HR system. | ✅ Starter |
+| 33 | [Evidence and case-bundle summariser](experiments/33-case-bundle-summariser/) | Draft an extractive reading of one synthetic case bundle. Every sentence carries a pinpoint citation. The decision-maker reviews every cited sentence. Autonomy A0. The agent does not recommend an outcome, make a disclosure decision, or make a credibility finding. | ✅ Starter |
 
 ## Getting Started
 
@@ -285,6 +286,13 @@ cd ../32-employee-case-intake
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/draft.py --input examples/sample_case.json --as-of 2026-11-04
+
+# Experiment 33 needs no credentials either. The reading is deterministic.
+# Every sentence carries a pinpoint citation. The decision-maker reviews each one.
+cd ../33-case-bundle-summariser
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/summarise.py --bundle examples/sample_bundle.json --as-of 2026-11-04
 ```
 
 ## Repository Structure
@@ -339,7 +347,8 @@ copilot-agent-experiments/
     ├── 29-groundedness-evaluation/
     ├── 30-agent-regression-test-generator/
     ├── 31-agent-cost-capacity/
-    └── 32-employee-case-intake/
+    ├── 32-employee-case-intake/
+    └── 33-case-bundle-summariser/
 ```
 
 ## Agent Governance
