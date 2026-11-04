@@ -1,0 +1,87 @@
+{
+  "tools": [
+    {
+      "name": "assemble_ehcp_draft",
+      "implementation": "assemble",
+      "reads": [
+        "synthetic advice bundle supplied for this run",
+        "as-of date and stale threshold"
+      ],
+      "writes": false,
+      "sends": false,
+      "decides_needs": false,
+      "decides_provision": false,
+      "decides_placement": false,
+      "decides_outcomes": false,
+      "edits_final_plan": false,
+      "exports_without_signoff": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "export_local_copy",
+      "implementation": "assemble with a sign-off object",
+      "reads": ["draft", "caseworker sign-off object"],
+      "writes": false,
+      "sends": false,
+      "requires_caseworker_signoff": true,
+      "callable_by_agent": false,
+      "note": "The command includes a local copy only when the sign-off fields pass. It does not send."
+    },
+    {
+      "name": "decide_needs",
+      "implementation": "decide_needs",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_provision",
+      "implementation": "decide_provision",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_placement",
+      "implementation": "decide_placement",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_outcomes",
+      "implementation": "decide_outcomes",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "edit_final_plan",
+      "implementation": "edit_final_plan",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_to_parents",
+      "implementation": "send_to_parents",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_to_school",
+      "implementation": "send_to_school",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_to_la_system",
+      "implementation": "write_to_la_system",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "secure_provision",
+      "implementation": "secure_provision",
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-two starters are in `experiments/`. The count is the number of folders.
+Thirty-three starters are in `experiments/`. The folders are 01 to 31, 33, and 34. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -64,6 +64,7 @@ Thirty-two starters are in `experiments/`. The count is the number of folders.
 | 30 | [Agent Regression Test Generator](experiments/30-agent-regression-test-generator/) | Draft regression cases from a synthetic manifest, skill files, a tool contract, and failure or change notes. The maintainer approves the tests and any pull request. Autonomy A1. The generator does not merge, push, or edit the agent under test. | ✅ Starter |
 | 31 | [Agent Cost and Capacity Agent](experiments/31-agent-cost-capacity/) | Draft per-agent cost, unit cost per case, a flat forecast, and quota headroom from synthetic usage and a rate card with an effective date. The FinOps owner validates rates and the forecast. Autonomy A0. The agent does not change a quota, a budget, or a subscription, and it does not store a Microsoft price. | ✅ Starter |
 | 33 | [Evidence and case-bundle summariser](experiments/33-case-bundle-summariser/) | Draft an extractive reading of one synthetic case bundle. Every sentence carries a pinpoint citation. The decision-maker reviews every cited sentence. Autonomy A0. The agent does not recommend an outcome, make a disclosure decision, or make a credibility finding. | ✅ Starter |
+| 34 | [EHCP Draft Assembler](experiments/34-ehcp-draft-assembler/) | File synthetic SEND advice under the regulation 12 section headings, with citations, gaps, conflicts, and unsupported statements. The caseworker authors the final plan. Autonomy A1. The agent does not decide needs, provision, placement, or outcomes, and it does not send the draft. | ✅ Starter |
 
 ## Getting Started
 
@@ -331,7 +332,9 @@ copilot-agent-experiments/
     ├── 28-prompt-injection-test/
     ├── 29-groundedness-evaluation/
     ├── 30-agent-regression-test-generator/
-    └── 31-agent-cost-capacity/
+    ├── 31-agent-cost-capacity/
+    ├── 33-case-bundle-summariser/
+    └── 34-ehcp-draft-assembler/
 ```
 
 ## Agent Governance
