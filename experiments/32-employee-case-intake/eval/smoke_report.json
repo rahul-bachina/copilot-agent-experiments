@@ -1,0 +1,2461 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 15, Experiment 12, and Experiment 08. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "dataset_label": "Synthetic HR cases for a fictional employer. No real person.",
+  "summary": {
+    "total_cases": 22,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0,
+    "count_note": "total_cases is the number of synthetic cases. It is not the number of checks."
+  },
+  "cases": [
+    {
+      "case_id": "grievance",
+      "name": "Formal grievance",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_grievance_officer"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "routine_officer_review"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "confidential",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "gb_sources",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "acas_para_1,acas_para_4,acas_para_32,acas_para_33,acas_para_40"
+        },
+        {
+          "field": "deadline_encoded",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "absence",
+      "name": "Sickness absence",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "absence"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_absence_adviser"
+        },
+        {
+          "field": "health",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "absence_no_period"
+        },
+        {
+          "field": "deadline_encoded",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "flexible",
+      "name": "Flexible working with a supplied application date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "flexible_working"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_flexible_working_adviser"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "era_80g_1b"
+        },
+        {
+          "field": "deadline_encoded",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "last_day",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "application_made_on",
+          "passed": true,
+          "detail": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "case_id": "flexible-narrative-date",
+      "name": "A date in the narrative is not the application date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "flexible_working"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "era_80g_1b"
+        },
+        {
+          "field": "application_made_on",
+          "passed": true,
+          "detail": "None"
+        }
+      ]
+    },
+    {
+      "case_id": "whistleblowing",
+      "name": "Protected disclosure language",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "protected_disclosure"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "designated_whistleblowing_officer"
+        },
+        {
+          "field": "confidential",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "era_43a,era_43b_1,era_43c,era_43j,era_43l_sexual_harassment,acas_foreword_separate"
+        },
+        {
+          "field": "protected_decided",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "harassment",
+      "name": "Sexual harassment words",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "harassment"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_employee_relations_officer"
+        },
+        {
+          "field": "confidential",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "eqa_26_1,eqa_26_2,eqa_26_5,acas_foreword_separate,acas_para_33"
+        }
+      ]
+    },
+    {
+      "case_id": "tie",
+      "name": "Grievance and harassment tie",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "unresolved"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_officer_to_classify"
+        },
+        {
+          "field": "confidential",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "tie-whistleblowing",
+      "name": "Whistleblowing and harassment tie",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "unresolved"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "designated_whistleblowing_officer"
+        },
+        {
+          "field": "confidential",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "negation",
+      "name": "Not a grievance",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "absence"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_absence_adviser"
+        },
+        {
+          "field": "health",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "injection",
+      "name": "Instruction does not set the category",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "absence"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_absence_adviser"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "northern-ireland",
+      "name": "Northern Ireland is not given Great Britain sources",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "gb_sources",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "time_reference",
+          "passed": true,
+          "detail": "ni_not_applied"
+        }
+      ]
+    },
+    {
+      "case_id": "refused",
+      "name": "Not synthetic",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ]
+    },
+    {
+      "case_id": "self-harm",
+      "name": "Self-harm phrase",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "same_day_officer_review"
+        },
+        {
+          "field": "scanner_called",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "deadline",
+      "name": "Tribunal word from Experiment 15",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "time_sensitive_officer_review"
+        }
+      ]
+    },
+    {
+      "case_id": "nino",
+      "name": "Not-allocated National Insurance fixture",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "omitted"
+        },
+        {
+          "field": "absent 2",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "attachment",
+      "name": "Experiment 12 inventory",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "intake_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "intake_id",
+          "passed": true,
+          "detail": "exp-12-document-intake"
+        },
+        {
+          "field": "files_confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "omitted"
+        }
+      ]
+    },
+    {
+      "case_id": "payload",
+      "name": "A supplied category is stripped",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        }
+      ]
+    },
+    {
+      "case_id": "empty",
+      "name": "Empty narrative",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "unresolved"
+        },
+        {
+          "field": "route",
+          "passed": true,
+          "detail": "hr_officer_to_classify"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "routine_officer_review"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "scanner_called",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "hardship",
+      "name": "Experiment 15 hardship phrase",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "time_sensitive_officer_review"
+        }
+      ]
+    },
+    {
+      "case_id": "stale",
+      "name": "Sources older than the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "grievance"
+        },
+        {
+          "field": "sources_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "comment",
+      "name": "HTML comment does not set the category",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "absence"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "oversized",
+      "name": "Over the character cap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR HR CONFIRMATION"
+        },
+        {
+          "field": "narrative_stored",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "merits",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "actions",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "hr_write",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_employee",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_manager",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "confirmed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "article_9",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "policy_doc",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "automated",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "significant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "queue",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "unresolved"
+        },
+        {
+          "field": "urgency",
+          "passed": true,
+          "detail": "not_scanned"
+        },
+        {
+          "field": "gateway_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "scanner_called",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    }
+  ]
+}
