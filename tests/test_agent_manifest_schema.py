@@ -1629,3 +1629,78 @@ class TestExperiment33Manifest:
         assert review["approver"] == "Decision-maker"
         assert review["mandatory"] is True
         assert experiment_33_manifest["agent"]["id"] == "exp-33-case-bundle-summariser"
+
+
+class TestExperiment34Manifest:
+    """Test the Experiment 34 EHCP draft assembler manifest."""
+
+    @pytest.fixture
+    def experiment_34_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "34-ehcp-draft-assembler"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_34_manifest):
+        """Experiment 34 manifest should be valid."""
+        validate(instance=experiment_34_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_34_manifest):
+        """Experiment 34 should be autonomy level A1. The caseworker authors the plan."""
+        level = experiment_34_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_34_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_34_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_34_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_34_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        local_copy = next(
+            extra
+            for extra in high_risk["additional_high_risk"]
+            if extra["action_name"] == "Include a local export copy"
+        )
+        assert local_copy["enabled"] is True
+        assert local_copy["human_approval"]["required"] is True
+        assert local_copy["human_approval"]["approver"] == "Caseworker"
+        for extra in high_risk["additional_high_risk"]:
+            if extra["action_name"] != "Include a local export copy":
+                assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_34_manifest):
+        """Nothing is sent, and the local authority system is not written."""
+        assert experiment_34_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_34_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_caseworker_authors_the_final_plan(self, experiment_34_manifest):
+        """The catalogue checkpoint is the caseworker, and sign-off is mandatory."""
+        points = experiment_34_manifest["human_approval"]["approval_points"]
+        author = next(
+            point
+            for point in points
+            if point["action"].startswith("Author the final education, health and care plan")
+        )
+        signoff = next(
+            point
+            for point in points
+            if point["action"] == "Sign off before a local export copy is included"
+        )
+        assert author["approver"] == "Caseworker"
+        assert author["mandatory"] is True
+        assert signoff["approver"] == "Caseworker"
+        assert signoff["mandatory"] is True
+        assert experiment_34_manifest["agent"]["id"] == "exp-34-ehcp-draft-assembler"

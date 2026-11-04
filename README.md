@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-three starters are in `experiments/`. The count is the number of folders.
+Thirty-four starters are in `experiments/`. The folders are 01 to 34. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -65,6 +65,7 @@ Thirty-three starters are in `experiments/`. The count is the number of folders.
 | 31 | [Agent Cost and Capacity Agent](experiments/31-agent-cost-capacity/) | Draft per-agent cost, unit cost per case, a flat forecast, and quota headroom from synthetic usage and a rate card with an effective date. The FinOps owner validates rates and the forecast. Autonomy A0. The agent does not change a quota, a budget, or a subscription, and it does not store a Microsoft price. | ✅ Starter |
 | 32 | [Employee Case Intake Agent](experiments/32-employee-case-intake/) | Propose a category, an urgency flag, a statutory or Acas time reference, and a route for one synthetic HR case. An HR officer confirms the classification and the routing. Experiments 15, 12, and 08 are called in-process. Autonomy A1. The agent does not decide an outcome, contact the employee or a manager, or write to an HR system. | ✅ Starter |
 | 33 | [Evidence and case-bundle summariser](experiments/33-case-bundle-summariser/) | Draft an extractive reading of one synthetic case bundle. Every sentence carries a pinpoint citation. The decision-maker reviews every cited sentence. Autonomy A0. The agent does not recommend an outcome, make a disclosure decision, or make a credibility finding. | ✅ Starter |
+| 34 | [EHCP Draft Assembler](experiments/34-ehcp-draft-assembler/) | File synthetic SEND advice under the regulation 12 section headings, with citations, gaps, conflicts, and unsupported statements. The caseworker authors the final plan. Autonomy A1. The agent does not decide needs, provision, placement, or outcomes, and it does not send the draft. | ✅ Starter |
 
 ## Getting Started
 
@@ -348,7 +349,8 @@ copilot-agent-experiments/
     ├── 30-agent-regression-test-generator/
     ├── 31-agent-cost-capacity/
     ├── 32-employee-case-intake/
-    └── 33-case-bundle-summariser/
+    ├── 33-case-bundle-summariser/
+    └── 34-ehcp-draft-assembler/
 ```
 
 ## Agent Governance

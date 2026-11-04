@@ -314,6 +314,16 @@ A draft reading of one synthetic case bundle. Every sentence carries a pinpoint 
 
 </article>
 
+<article class="plan-card" id="uk10" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK10 · Autonomy A1</p>
+
+## EHCP draft assembler
+
+A draft filing of synthetic SEND advice under the regulation 12 section headings. Each placed line cites the report. Gaps, conflicts, and unsupported statements are flagged. Section I stays blank. The caseworker authors the final education, health and care plan and signs off before any local copy. It does not decide needs, provision, placement, or outcomes, and it does not send the draft. It is not the case-bundle summary in [Experiment 33](experiments/33-case-bundle-summariser.md). [Read the briefing](experiments/34-ehcp-draft-assembler.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34.

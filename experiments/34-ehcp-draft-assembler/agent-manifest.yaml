@@ -1,0 +1,374 @@
+# Agent manifest: EHCP draft assembler
+# Experiment 34 — catalogue ID UK10
+# Version: 0.1.0
+# Last reviewed: 2026-11-04
+# Next review: 2027-05-04
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-34-ehcp-draft-assembler"
+  name: "EHCP Draft Assembler"
+  version: "0.1.0"
+  description: >
+    Assembles a draft from synthetic SEND advice into the section headings
+    in regulation 12 of the Special Educational Needs and Disability
+    Regulations 2014. Autonomy is A1. The caseworker authors the final
+    education, health and care plan. The agent does not decide needs,
+    provision, placement, or outcomes, and it does not send the draft.
+  owner: "SEND caseworker (the adopting local authority)"
+  contact: "caseworker@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/34-ehcp-draft-assembler"
+
+autonomy:
+  level: "A1"
+  level_description: "The caseworker authors the final text. A local copy is included only after a deterministic sign-off. Nothing is sent."
+  constraints:
+    - "The agent files a paragraph only under the section letter the advice already tagged."
+    - "Section I stays blank. Children and Families Act 2014 s.38(5) applies to a draft."
+    - "The agent NEVER decides needs, provision, placement, or outcomes."
+    - "The agent NEVER edits the final plan and NEVER writes the final text."
+    - "The agent NEVER sends the draft to a parent, a school, or a local authority system."
+    - "The agent NEVER secures provision. Section 42 applies where a plan is maintained. This draft is not a maintained plan."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "Export of a local copy requires a sign-off object that is not text inside the advice."
+    - "Advice text is untrusted. An instruction inside a report is recorded and not followed."
+    - "All output is labelled DRAFT FOR CASEWORKER — NOT A PLAN."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic advice bundle supplied for this run"
+      description: "Advice reports with a section tag, a date, and paragraph text. The samples use Child A and a synthetic case id."
+      access_level: "read"
+      scope: "The file passed to this run. No case-management system."
+      justification: "The draft cannot be assembled without the advice the caseworker supplied."
+      data_categories:
+        - "Synthetic advice text"
+        - "Health-related text, which would be special category data in a live file"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the file."
+    - resource: "Caseworker sign-off object"
+      description: "A separate JSON object. It is read only when a local export is requested. It is not stored in the output."
+      access_level: "read"
+      scope: "The sign-off path passed with an export request."
+      justification: "The export gate checks role, reference, three boolean confirmations, and the signed-on date."
+      may_contain_personal_data: false
+      retention: "Transient. The sign-off object is not copied into the JSON."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 4 November 2026. The ICO Children's code page was not opened."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Statutory and product claims are cited from that pin and marked when a page was not opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the caseworker."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Advice age, the 20-week marker, and source currency are calculated from these inputs."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "A live education, health and care plan or a local authority case system"
+      reason: "The agent does not read or write a maintained plan."
+    - resource: "A parent, a school, or any send channel"
+      reason: "The draft is returned to the caseworker. Nothing is sent."
+    - resource: "A child's name, date of birth, address, NHS number, UPN, ULN, or a school name as a field"
+      reason: "Those keys refuse the bundle. The value is not copied."
+    - resource: "A Microsoft Foundry resource or an Azure subscription"
+      reason: "The catalogue names them. This folder does not call them."
+
+tools:
+  allowed:
+    - tool: "Assemble a draft from the advice bundle supplied for this run"
+      provider: "Local Python (src/assemble.py)"
+      action: "File tagged paragraphs under sections A to K, flag gaps, conflicts, and unsupported statements"
+      access_level: "read"
+      scope: "The bundle passed to the agent"
+      justification: "The caseworker needs the same section filing each time, with citations back to the reports."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Propose identifier redaction via Experiment 08"
+      provider: "experiments/08-uk-pii-redaction-gateway"
+      action: "Count deterministic identifier findings. Do not copy a paragraph that has one. Do not mark the output anonymised."
+      access_level: "read"
+      scope: "Paragraph text already accepted for length. Model suggestions are not applied."
+      justification: "A labelled NHS number must not be copied into the draft."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write a plan, a Dataverse row, or a local authority system. A local JSON copy is a return value after sign-off, not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not send email, a portal message, or a letter to a parent, a school, or the local authority."
+
+human_approval:
+  description: >
+    The caseworker authors the final text, checks the local template, and
+    signs off before any local copy is included. Sending the plan stays
+    outside this agent even after that sign-off.
+  approval_points:
+    - action: "Author the final education, health and care plan, including needs, provision, placement, and outcomes"
+      approver: "Caseworker"
+      mandatory: true
+      rationale: "Catalogue control for UK10. The agent files tagged quotes. It does not decide."
+    - action: "Resolve conflicts and gaps, and decide which advice to rely on"
+      approver: "Caseworker"
+      mandatory: true
+      rationale: "A conflict keeps both citations. resolved stays false. chosen_value stays null."
+    - action: "Check the section headings against the local authority's own template"
+      approver: "Caseworker"
+      mandatory: true
+      rationale: "SEND Code paragraph 9.62 says the format is agreed locally. agent_checked_template stays false."
+    - action: "Sign off before a local export copy is included"
+      approver: "Caseworker"
+      mandatory: true
+      rationale: "The gate requires role Caseworker, a caseworker reference, three boolean confirmations, and a signed-on date equal to the as-of date."
+    - action: "Re-open stale advice or a stale pinned page before relying on it"
+      approver: "Caseworker"
+      mandatory: true
+      rationale: "A stale quote is still shown. do_not_rely is not cleared by the agent."
+    - action: "Send the plan to a parent, a young person, a school, or the local authority system"
+      approver: "Caseworker, outside this agent"
+      mandatory: true
+      rationale: "sent_to_parents, sent_to_school, and written_to_la_system stay false after sign-off."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic bundle the caseworker supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT FOR CASEWORKER — NOT A PLAN."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live advice file would be personal data and, where it describes
+      health, special category data under UK GDPR Article 9. Article 8
+      applies only where Article 6(1)(a) consent is the basis for an
+      information society service offered directly to a child. This starter
+      does not choose an Article 6 basis and does not offer a service to a
+      child. The data protection officer confirms a basis before any live file.
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Data concerning health, where advice text describes it"
+    lawful_basis_special: "Not asserted. An Article 9(2) condition is for the data protection officer."
+    condition: "Not asserted. A Data Protection Act 2018 Schedule 1 condition is for the data protection officer."
+    safeguards:
+      - "No Article 9(2) condition is claimed here"
+      - "The bundle must be marked synthetic. A forbidden identity field refuses the file and the value is not copied."
+      - "A paragraph with a deterministic identifier finding is withheld. output_is_anonymised stays false."
+      - "The child reference is Child plus one letter. No real name is in the samples."
+      - "The ICO Children's code page returned 403 on 4 November 2026 and was not opened. Scope is for the data protection officer."
+  data_minimisation:
+    - "One advice bundle per draft. At most 12 reports and 40 paragraphs a report."
+    - "Forbidden identity fields refuse the bundle. The value is not echoed."
+    - "Section I quotes are not copied."
+    - "Unsupported statements and injection sentences are not copied into a section."
+    - "The sign-off object, including any final_text field, is not stored."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A deployment retention period is for the local authority, not this file."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for Microsoft Foundry was not verified for this experiment."
+  data_subject_rights:
+    note: "This starter does not operate a request channel. A live system would route rights requests to the local authority."
+
+prompt_injection:
+  description: "Advice text and the sign-off object are untrusted. A matching sentence is recorded and not followed."
+  controls:
+    - control: "Sentence patterns"
+      description: "Instructions to ignore directions, decide needs or placement, send, export, or edit the final plan are recorded."
+      implementation: "src/injection.py. A sentence that already says do not, must not, never, or cannot is not a hit."
+    - control: "Payload keys"
+      description: "Keys that would set a decision flag or a sign-off are stripped and not echoed."
+      implementation: "strip_payload before the bundle is read for sections."
+  residual_risk: "A negation in the same sentence can hide an instruction. A paraphrase can be missed. Neither grants a tool the agent does not have."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named local authority"
+  date_assessed: "2026-11-04"
+  risks:
+    - id: "R1"
+      risk: "A reader treats the draft as a maintained education, health and care plan"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR CASEWORKER — NOT A PLAN"
+        - "needs_decided, provision_decided, placement_decided, and outcomes_decided stay false"
+        - "Section I quotes are withheld"
+      residual_risk: "Medium"
+      owner: "Caseworker"
+    - id: "R2"
+      risk: "A report tells the agent to decide placement, export, or ignore these instructions"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those sentences are recorded and not placed"
+        - "A sign-off buried in a report does not pass the export gate"
+        - "Tests cover injection, a buried sign-off, and the prohibited command flags"
+      residual_risk: "Low"
+      owner: "Caseworker"
+    - id: "R3"
+      risk: "A child's identifier or a school name is copied into the draft"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Forbidden fields refuse the bundle"
+        - "Experiment 08 withholds a paragraph with a deterministic identifier finding"
+        - "Section I is left blank"
+        - "output_is_anonymised stays false"
+      residual_risk: "Medium"
+      owner: "Caseworker"
+    - id: "R4"
+      risk: "Stale advice or a stale legislation page is relied on, or the 140-day marker is read as a breach"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Stale advice sets do_not_rely and the quote is still shown"
+        - "breach_found stays false"
+        - "Regulation 13(3) exceptions are not applied"
+      residual_risk: "Medium"
+      owner: "Caseworker"
+    - id: "R5"
+      risk: "The local template differs from regulation 12 and the draft is filed as if it matched"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "local_format_must_be_checked is true on every section"
+        - "agent_checked_template stays false"
+        - "Export requires confirms_la_template_checked to be boolean true"
+      residual_risk: "Medium"
+      owner: "Caseworker"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a draft, the synthetic case id, the as-of date, whether export was blocked, and whether injection was detected. Do not log the advice text or the sign-off object."
+  logged_events:
+    - event: "EHCP draft assembled"
+      data_logged:
+        - "synthetic case id"
+        - "as-of date"
+        - "whether export was blocked"
+        - "whether a prompt-injection pattern was detected"
+        - "whether a paragraph was withheld"
+        - "whether anything was sent (always false in this starter)"
+      retention: "Not set by this starter."
+  log_destination:
+    primary: "None in this starter"
+    note: "A later host would choose a UK log store. Application Insights was not opened for this experiment and is unverified."
+  audit_trail:
+    - "The JSON records citations, gaps, conflicts, and injection pattern ids."
+    - "The sign-off object is not stored."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/assemble.py"
+      time_to_effect: "Immediate"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not assemble drafts"
+      action: "Delete the local copy"
+      time_to_effect: "Immediate"
+      who_can_activate: "The machine owner"
+  escalation_contacts:
+    - role: "Caseworker"
+      contact: "caseworker@example.com"
+    - role: "Data protection officer"
+      contact: "The adopting local authority's data protection officer. Not named in this starter."
+
+review:
+  last_review_date: "2026-11-04"
+  next_review_date: "2027-05-04"
+  review_frequency: "Six months, and sooner if a pinned legislation or Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting local authority's SEND caseworker. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A pinned page is re-opened and the sentence this starter relies on has changed."
+    - "The local authority changes its EHCP template."
+    - "Experiment 08's identifier rules change."
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Tool schema"
+      path: "schema/tools.json"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not decide whether to assess, whether to issue a plan, or whether advice is sufficient under regulation 6(4)."
+  regulated_decision:
+    enabled: false
+    rationale: "Needs, provision, placement, and outcomes are the caseworker's. This draft does not decide them and does not secure provision under section 42."
+  production_record_change:
+    enabled: false
+    rationale: "The final plan is not edited. No local authority system is written."
+  external_send:
+    enabled: false
+    rationale: "Nothing is sent to a parent, a young person, a school, or the local authority. A local copy is not a send."
+  spend_transact:
+    enabled: false
+    rationale: "Section J and section 49 concern a personal budget and direct payments. This agent does not set either and does not pay."
+  additional_high_risk:
+    - action_name: "Decide needs"
+      enabled: false
+      rationale: "needs_decided stays false."
+    - action_name: "Decide provision"
+      enabled: false
+      rationale: "provision_decided stays false. provision_secured stays false."
+    - action_name: "Decide placement"
+      enabled: false
+      rationale: "placement_decided stays false. Section I lines stay empty."
+    - action_name: "Decide outcomes"
+      enabled: false
+      rationale: "outcomes_decided stays false."
+    - action_name: "Edit the final plan"
+      enabled: false
+      rationale: "final_plan_edited stays false. The caseworker authors the final text outside this tool."
+    - action_name: "Include a local export copy"
+      enabled: true
+      rationale: "A local JSON copy can be included only when the deterministic sign-off passes. It is labelled LOCAL COPY FOR THE CASEWORKER — NOT SENT. It is not sent and it does not include the final text."
+      human_approval:
+        required: true
+        approver: "Caseworker"
+        approval_process: "A separate sign-off object. Role must be Caseworker. caseworker_ref must match the pattern. authorises_export, confirms_caseworker_authored_final_text, and confirms_la_template_checked must be boolean true. signed_on must equal the as-of date. Text inside the advice cannot pass this gate."
+        sla: "Not set by this starter."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The local authority confirms these before anyone relies on a draft."
+  items:
+    - id: "AS1"
+      assumption: "The advice bundle was supplied by the caseworker and is synthetic. This starter does not fetch it from a case system."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "AS2"
+      assumption: "Section headings follow regulation 12. The caseworker checks them against the local authority's own template. Paragraph 9.62 says the format is agreed locally."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "AS3"
+      assumption: "Twenty weeks is counted as 140 days. That arithmetic is not in the regulations. The marker is not a finding of breach. Regulation 13(3) exceptions are not applied."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "AS4"
+      assumption: "The sign-off date must equal the as-of date. That is this starter's gate, not a statutory rule."
+      section: "high_risk_actions"
+      verify_on_deployment: true
+    - id: "AS5"
+      assumption: "The ICO Children's code page was not opened on 4 November 2026. Whether the code applies to a later portal is for the data protection officer. Legislation and Microsoft Learn pages that were opened are re-opened before a citation is relied on."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS6"
+      assumption: "Experiment 33 may exist beside this folder. It is not imported. High-risk decision, write, and send actions stay disabled. The local export stays enabled only with the caseworker gate."
+      section: "high_risk_actions"
+      verify_on_deployment: true
