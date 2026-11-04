@@ -1514,3 +1514,58 @@ class TestExperiment31Manifest:
         assert forecast["approver"] == "FinOps owner"
         assert forecast["mandatory"] is True
         assert experiment_31_manifest["agent"]["id"] == "exp-31-agent-cost-capacity"
+
+
+class TestExperiment33Manifest:
+    """Test the Experiment 33 case-bundle summariser manifest."""
+
+    @pytest.fixture
+    def experiment_33_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "33-case-bundle-summariser"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_33_manifest):
+        """Experiment 33 manifest should be valid."""
+        validate(instance=experiment_33_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_33_manifest):
+        """Experiment 33 should be autonomy level A0, not above."""
+        level = experiment_33_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_33_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_33_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_all_high_risk_actions_disabled(self, experiment_33_manifest):
+        """Experiment 33 should have all high-risk actions disabled."""
+        high_risk = experiment_33_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_33_manifest):
+        """Nothing is sent or written, including a case record."""
+        assert experiment_33_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_33_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_decision_maker_reviews_every_cited_sentence(self, experiment_33_manifest):
+        """The catalogue checkpoint is the decision-maker, and it is mandatory."""
+        points = experiment_33_manifest["human_approval"]["approval_points"]
+        review = next(point for point in points if point["action"] == "Review every cited sentence")
+        assert review["approver"] == "Decision-maker"
+        assert review["mandatory"] is True
+        assert experiment_33_manifest["agent"]["id"] == "exp-33-case-bundle-summariser"
