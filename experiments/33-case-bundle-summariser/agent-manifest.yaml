@@ -1,0 +1,303 @@
+# Agent manifest: Evidence and case-bundle summariser
+# Experiment 33 — catalogue ID UK09
+# Version: 0.1.0
+# Last reviewed: 2026-11-04
+# Next review: 2027-05-04
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-33-case-bundle-summariser"
+  name: "Evidence and case-bundle summariser"
+  version: "0.1.0"
+  description: >
+    Drafts a reading of one synthetic case bundle. Every summary sentence carries
+    a pinpoint citation: document id, page, paragraph, and line. A deterministic
+    checker fails a sentence whose cited span does not contain it, or that has no
+    citation. Autonomy is A0. The decision-maker reviews every cited sentence.
+    The agent does not recommend an outcome, make a disclosure decision, or make
+    a credibility finding.
+  owner: "Decision-maker (the adopting organisation)"
+  contact: "case-bundle-summariser@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/33-case-bundle-summariser"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only analysis. No action, even with approval."
+  constraints:
+    - "The summariser returns a draft reading and stops."
+    - "The summariser NEVER recommends an outcome. case_outcome stays null."
+    - "The summariser NEVER makes a disclosure decision. disclosure_decision stays null."
+    - "The summariser NEVER makes a credibility finding. credibility_finding stays null."
+    - "The summariser NEVER accepts the summary. summary_accepted_as_reading_aid stays false on the agent path."
+    - "The summariser NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "The summariser NEVER sends, spends, or writes a production record."
+    - "Bundle text is untrusted data. It cannot set an outcome or a verdict."
+    - "All output is labelled DRAFT FOR THE DECISION-MAKER. NOT A DECISION."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic case bundle supplied for this run"
+      description: "Documents with page, paragraph, and line text, plus the fact keys the caller asked for."
+      access_level: "read"
+      scope: "The one JSON bundle passed to this run. Synthetic fixtures only."
+      justification: "A sentence cannot be cited without the span it came from."
+      data_categories:
+        - "Test configuration"
+      may_contain_personal_data: false
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the bundle."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Pages opened on 4 November 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Legal and harness notes are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the staleness window, typed by the caller."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Currency of documents and pinned pages is calculated from these inputs."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live case file, a model endpoint, or any network host"
+      reason: "The summariser has no HTTP client. Microsoft Foundry is not called."
+    - resource: "Live police, asylum, barring, or safeguarding records"
+      reason: "Fixtures are synthetic. A bundle that is not marked synthetic is refused."
+    - resource: "A mailbox, a Teams chat, or any send channel"
+      reason: "The draft is returned to the caller. Nothing is sent."
+    - resource: "A production case system"
+      reason: "The summariser does not write a decision, a disclosure schedule, or a barring record."
+
+tools:
+  allowed:
+    - tool: "Extract a cited summary"
+      provider: "Local Python (src/summarise.py)"
+      action: "Copy current lines that match the caller's fact keys. Do not paraphrase."
+      access_level: "read"
+      scope: "The bundle passed to this run"
+      justification: "The decision-maker needs a draft in which every sentence names its lines."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Check pinpoint citations"
+      provider: "Local Python (src/citations.py)"
+      action: "One verdict per sentence. A missing or unsupported citation fails."
+      access_level: "read"
+      scope: "The sentences in the draft, or proposed sentences passed beside the bundle"
+      justification: "A sentence that the cited lines do not contain must not pass."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "List gaps and contradictions"
+      provider: "Local Python (src/summarise.py)"
+      action: "Name missing fact keys and unreconciled fact keys. Do not pick a winner."
+      access_level: "read"
+      scope: "The shown sentences and the caller's fact-key list"
+      justification: "An omission or a clash is part of the reading. It is not a finding of fact."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The summariser does not write a case system, Dataverse, SharePoint, or any other production record."
+  sends:
+    enabled: false
+    note: "The summariser does not send email, Teams messages, or a draft to anyone but the local caller."
+
+human_approval:
+  description: >
+    The decision-maker reviews every cited sentence. The summariser cannot record
+    that review. Any case outcome, disclosure decision, or credibility finding is
+    made outside this tool, by a person, and is not stored here.
+  approval_points:
+    - action: "Review every cited sentence"
+      approver: "Decision-maker"
+      mandatory: true
+      rationale: "Catalogue checkpoint for UK09. Autonomy A0. The draft is not a decision."
+    - action: "Decide any case outcome"
+      approver: "Decision-maker"
+      mandatory: true
+      rationale: "case_outcome stays null. recommend_outcome always raises."
+    - action: "Make a disclosure decision"
+      approver: "Decision-maker"
+      mandatory: true
+      rationale: "CPIA 1996 section 3 is the prosecutor's duty. This starter does not apply it."
+    - action: "Make a credibility finding"
+      approver: "Decision-maker"
+      mandatory: true
+      rationale: "credibility_finding stays null. find_credibility always raises."
+    - action: "Re-open a pinned page before relying on a legal note"
+      approver: "Decision-maker"
+      mandatory: true
+      rationale: "The legislation and gov.uk pages were opened on 4 November 2026."
+    - action: "Confirm a lawful basis before any live processing"
+      approver: "Data protection officer"
+      mandatory: true
+      rationale: "This starter does not choose an Article 6 basis or a Part 3 purpose."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic bundle"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      The samples are synthetic. The summariser does not choose an Article 6 basis.
+      UK GDPR Article 22 was substituted by the Data (Use and Access) Act 2025
+      section 80. Articles 22A to 22D were read on 4 November 2026. Data Protection
+      Act 2018 section 14 was omitted on 5 February 2026. For law-enforcement
+      processing, section 80(3) substitutes sections 50A to 50D. The organisation's
+      data protection officer confirms the regime and the basis before any live
+      processing. Live data is outside this starter.
+  special_category_data:
+    may_process: false
+    lawful_basis_special: "Not asserted. An Article 9 condition is for the DPO."
+    safeguards:
+      - "No Article 9 condition is claimed here"
+      - "Fixtures do not contain special-category data or criminal-offence data"
+      - "A live asylum, barring, or criminal bundle would need its own assessment"
+  data_minimisation:
+    - "One bundle per draft"
+    - "Only fact keys the caller named are turned into sentences when a list is supplied"
+    - "Instruction text found in a document is not copied into the summary"
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for a Foundry deployment was not opened on 4 November 2026."
+
+prompt_injection:
+  description: >
+    The summariser reads untrusted bundle text. That text cannot set an outcome,
+    a disclosure decision, a credibility finding, or a verdict.
+  controls:
+    - control: "Strip output-shaped keys"
+      description: "Keys that would set an outcome, a decision, or an acceptance flag are removed before drafting. Their values are not echoed."
+      implementation: "src/injection.py"
+    - control: "Record instructions and do not follow them"
+      description: "A closed phrase list, including text hidden in comments, form feeds, trailing blank lines, or zero-width characters."
+      implementation: "src/injection.py"
+    - control: "Refuse a non-synthetic bundle"
+      description: "synthetic must be true. Other matter types are refused."
+      implementation: "src/summarise.py"
+  residual_risk: "Medium. A phrase that is not on the list is not detected. A verbatim quote can still omit the surrounding lines."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-04"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a cited draft as a case outcome, a disclosure decision, or a credibility finding"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR THE DECISION-MAKER. NOT A DECISION."
+        - "case_outcome, disclosure_decision, and credibility_finding stay null"
+        - "summary_accepted_as_reading_aid stays false on the agent path"
+      residual_risk: "Medium"
+      owner: "Decision-maker"
+    - id: "R2"
+      risk: "Bundle text tells the summariser to charge, disclose, or find a person credible"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those phrases do not change the flags"
+        - "A proposed sentence that states them fails the checker"
+        - "Tests cover an injected document"
+      residual_risk: "Low"
+      owner: "Decision-maker"
+    - id: "R3"
+      risk: "A verbatim sentence is true to its lines and still misleading because of what it leaves out"
+      likelihood: "High"
+      impact: "High"
+      controls:
+        - "Gaps and contradictions are listed and are not resolved"
+        - "The decision-maker reviews every cited sentence against the source"
+        - "checker_passed is not a finding that the reading is complete"
+      residual_risk: "High"
+      owner: "Decision-maker"
+    - id: "R4"
+      risk: "A pinned statute or gov.uk page has changed since 4 November 2026"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "Sources carry last_verified"
+        - "A stale pin sets do_not_rely"
+      residual_risk: "Medium"
+      owner: "Decision-maker"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log the bundle id, the as-of date, the sentence count, and the verdict counts. Do not log bundle text into an unreviewed store."
+  logged_events:
+    - event: "Case-bundle draft produced"
+      data_logged:
+        - "bundle id"
+        - "as-of date"
+        - "sentence count and verdict counts"
+        - "whether a document or a pin was stale"
+        - "whether an instruction was detected"
+      retention: "Not set by this starter."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/summarise.py"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft readings"
+      action: "Delete the local copy"
+      who_can_activate: "The machine owner"
+
+review:
+  last_review_date: "2026-11-04"
+  next_review_date: "2027-05-04"
+  review_frequency: "Six months, and sooner if a pinned page is re-opened and has changed."
+  reviewer: "The adopting organisation's decision-maker. Not assigned to a named person in this starter."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The summariser does not accept a summary, approve a charge, or refuse a case."
+  regulated_decision:
+    enabled: false
+    rationale: "A cited sentence is not a disclosure decision, an asylum decision, or a barring decision."
+  production_record_change:
+    enabled: false
+    rationale: "No case record is written."
+  external_send:
+    enabled: false
+    rationale: "The draft is not emailed, served, or posted."
+  spend_transact:
+    enabled: false
+    rationale: "No purchase and no credit estimate."
+  additional_high_risk:
+    - action_name: "Recommend an outcome"
+      enabled: false
+      rationale: "case_outcome stays null. recommend_outcome always raises."
+    - action_name: "Make a disclosure decision"
+      enabled: false
+      rationale: "disclosure_decision stays null. decide_disclosure always raises."
+    - action_name: "Make a credibility finding"
+      enabled: false
+      rationale: "credibility_finding stays null. find_credibility always raises."
+    - action_name: "Accept the summary as a case decision"
+      enabled: false
+      rationale: "accept_summary always raises. A sentence review, if a person records one outside the agent, is not a case decision."
+
+assumptions:
+  description: "The organisation confirms these before anyone relies on a draft."
+  items:
+    - id: "A1"
+      assumption: "The bundle is synthetic. This starter does not fetch a live case file."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The legislation and gov.uk pages opened on 4 November 2026 are re-opened before a legal note is relied on."
+      section: "review"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "High-risk actions stay disabled. The decision-maker reviews every cited sentence outside this tool."
+      section: "high_risk_actions"
+      verify_on_deployment: true
