@@ -1,0 +1,376 @@
+{
+  "label": "DRAFT FOR HR CONFIRMATION",
+  "catalogue_id": "H009",
+  "experiment_id": "exp-32-employee-case-intake",
+  "autonomy": "A1",
+  "case_id": "SYN-HR-001",
+  "as_of": "2026-11-04",
+  "sources_pinned_on": "2026-11-04",
+  "sources_age_days": 0,
+  "sources_stale": false,
+  "rules_current": true,
+  "stale_after_days": 90,
+  "narrative_stored": false,
+  "narrative_sha256": "be68ffe8d46eca2088b2e16d59ff555b0d799c0e55a6333aa93489801bbaa18a",
+  "narrative_char_count": 148,
+  "narrative_over_cap": false,
+  "classification": {
+    "proposed_category": "grievance",
+    "matched_categories": [
+      "grievance"
+    ],
+    "tie": false,
+    "keyword_hits": {
+      "grievance": [
+        "raise a grievance",
+        "formal grievance",
+        "grievance about"
+      ]
+    },
+    "decided": false,
+    "method": "closed_keyword_list"
+  },
+  "routing": {
+    "proposed_route": "hr_grievance_officer",
+    "proposed_route_label": "HR grievance officer",
+    "confirmed": false,
+    "queue_priority_changed": false,
+    "handed_off": false,
+    "channel_used_for_routing": false
+  },
+  "routing_summary": "Proposed category: grievance. Proposed route: hr_grievance_officer. Urgency proposal: routine_officer_review. The narrative is not in this summary. An HR officer confirms classification and routing. The agent does not contact the employee or a manager.",
+  "urgency": {
+    "proposed_flag": "routine_officer_review",
+    "source": "experiment_15",
+    "indicator_categories": [],
+    "indicator_count": 0,
+    "person_labelled_vulnerable": false,
+    "queue_priority_changed": false,
+    "certified_safe": false,
+    "statement": "Possible indicator from Experiment 15, or no indicator. Not a finding that a person is vulnerable, and not a change to a queue."
+  },
+  "time_references": [
+    {
+      "id": "acas_para_1",
+      "instrument": "Acas Code of Practice on disciplinary and grievance procedures",
+      "pin": "Paragraph 1",
+      "text": "This Code is designed to help employers, employees and their representatives deal with disciplinary and grievance situations in the workplace.",
+      "url": "https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures/html",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "acas_para_4",
+      "instrument": "Acas Code of Practice on disciplinary and grievance procedures",
+      "pin": "Paragraph 4, first bullet",
+      "text": "Employers and employees should raise and deal with issues promptly and should not unreasonably delay meetings, decisions or confirmation of those decisions.",
+      "url": "https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures/html",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "The Code does not state a number of days in this bullet.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "acas_para_32",
+      "instrument": "Acas Code of Practice on disciplinary and grievance procedures",
+      "pin": "Paragraph 32",
+      "text": "If it is not possible to resolve a grievance informally employees should raise the matter formally and without unreasonable delay with a manager who is not the subject of the grievance. This should be done in writing and should set out the nature of the grievance.",
+      "url": "https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures/html",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "acas_para_33",
+      "instrument": "Acas Code of Practice on disciplinary and grievance procedures",
+      "pin": "Paragraph 33",
+      "text": "Employers should arrange for a formal meeting to be held without unreasonable delay after a grievance is received.",
+      "url": "https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures/html",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "No number of days is stated. The non-statutory Acas guide's 'ideally within five working days' was seen in search and in the guide PDF index. It is not paragraph 33. This starter does not apply it. Paragraph 38's five working days is a postponement where a companion is unavailable, not a deadline for holding the meeting.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "acas_para_40",
+      "instrument": "Acas Code of Practice on disciplinary and grievance procedures",
+      "pin": "Paragraph 40",
+      "text": "Following the meeting decide on what action, if any, to take. Decisions should be communicated to the employee, in writing, without unreasonable delay and, where appropriate, should set out what action the employer intends to take to resolve the grievance.",
+      "url": "https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures/html",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "The decision in this paragraph is the employer's. This agent does not take it.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    }
+  ],
+  "data_protection_references": [
+    {
+      "id": "uk_gdpr_art_5",
+      "instrument": "UK GDPR",
+      "pin": "Article 5(1)(a), (c) and (f), and Article 5(2)",
+      "text": "Personal data shall be processed lawfully, fairly and in a transparent manner; adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed; and processed in a manner that ensures appropriate security. The controller shall be responsible for, and be able to demonstrate compliance with, paragraph 1.",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "The page shows Article 5(1)(b) and (e) and Article 5(3) as amended by the Data (Use and Access) Act 2025, in force on 5 February 2026 so far as not already in force. This starter does not choose an Article 6 basis. The routing summary does not contain the narrative.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "uk_gdpr_art_9",
+      "instrument": "UK GDPR",
+      "pin": "Article 9(1) and 9(2)(b)",
+      "text": "Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person's sex life or sexual orientation shall be prohibited. Paragraph 1 shall not apply if the processing is based on Article 6(1) and one of the listed conditions applies, including point (b): processing necessary for employment, social security and social protection law in so far as it is authorised by domestic law or a collective agreement providing for appropriate safeguards.",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/9",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "No Article 9 condition is asserted. The words 'the processing is based on Article 6(1) and' are the Data (Use and Access) Act 2025 insertion, in force from 20 August 2025.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "uk_gdpr_art_22a",
+      "instrument": "UK GDPR",
+      "pin": "Article 22A(1), substituted for Article 22",
+      "text": "A decision is based solely on automated processing if there is no meaningful human involvement in the taking of the decision, and a decision is a significant decision, in relation to a data subject, if it produces a legal effect for the data subject, or it has a similarly significant effect for the data subject.",
+      "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "The UK GDPR Article 22 page shows the article as substituted. Data (Use and Access) Act 2025 section 80(1) inserts Articles 22A to 22D. Section 80 is in force at 5 February 2026 in so far as not already in force, by SI 2026/82 regulation 2(j). Article 22B restricts a significant decision based entirely or partly on Article 9(1) data where it is taken based solely on automated processing. This draft is not that decision. The HR officer confirms classification and routing. No outcome is decided.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "dpa_s10",
+      "instrument": "Data Protection Act 2018",
+      "pin": "Section 10(2)",
+      "text": "The processing meets the requirement in point (b), (h), (i) or (j) of Article 9(2) of the UK GDPR for authorisation by, or a basis in, the law of the United Kingdom or a part of the United Kingdom only if it meets a condition in Part 1 of Schedule 1.",
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/section/10",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    },
+    {
+      "id": "dpa_sch1_para1",
+      "instrument": "Data Protection Act 2018",
+      "pin": "Schedule 1, paragraph 1(1)",
+      "text": "This condition is met if the processing is necessary for the purposes of performing or exercising obligations or rights which are imposed or conferred by law on the controller or the data subject in connection with employment, social security or social protection, and when the processing is carried out, the controller has an appropriate policy document in place.",
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/schedule/1/paragraph/1",
+      "applied_as_deadline": false,
+      "days_encoded": null,
+      "note": "Paragraph 1(2) points to the additional safeguards in Part 4 of Schedule 1, including the policy document in paragraph 39. That paragraph was not opened. This starter does not decide that paragraph 1 is met and does not check a policy document.",
+      "retrieved": "2026-11-04",
+      "conditional": false,
+      "decides_the_case": false
+    }
+  ],
+  "part_iva_headings_verified": [
+    {
+      "section": "43A",
+      "heading": "Meaning of \u201cprotected disclosure\u201d."
+    },
+    {
+      "section": "43B",
+      "heading": "Disclosures qualifying for protection."
+    },
+    {
+      "section": "43C",
+      "heading": "Disclosure to employer or other responsible person."
+    },
+    {
+      "section": "43D",
+      "heading": "Disclosure to legal adviser."
+    },
+    {
+      "section": "43E",
+      "heading": "Disclosure to Minister of the Crown."
+    },
+    {
+      "section": "43F",
+      "heading": "Disclosure to prescribed person."
+    },
+    {
+      "section": "43FA",
+      "heading": "Prescribed persons: duty to report on disclosures of information."
+    },
+    {
+      "section": "43G",
+      "heading": "Disclosure in other cases."
+    },
+    {
+      "section": "43H",
+      "heading": "Disclosure of exceptionally serious failure."
+    },
+    {
+      "section": "43J",
+      "heading": "Contractual duties of confidentiality."
+    },
+    {
+      "section": "43K",
+      "heading": "Extension of meaning of \u201cworker\u201d etc. for Part IVA."
+    },
+    {
+      "section": "43KA",
+      "heading": "Application of this Part and related provisions to police."
+    },
+    {
+      "section": "43L",
+      "heading": "Other interpretative provisions."
+    }
+  ],
+  "section_43i_on_contents_page": false,
+  "special_category": {
+    "article_9_1_quoted": true,
+    "indicators": [],
+    "may_be_present": false,
+    "sexual_harassment_may_engage_article_9": false,
+    "article_9_condition_asserted": false,
+    "schedule_1_paragraph_1_met": null,
+    "appropriate_policy_document_checked": false,
+    "routing_summary_omits_narrative": true,
+    "note": "UK GDPR Article 9(1) prohibits the listed processing unless a condition applies. Data Protection Act 2018 section 10(2) requires a condition in Part 1 of Schedule 1 before Article 9(2)(b) is met. Schedule 1 paragraph 1(1) also requires an appropriate policy document. This draft decides none of that. A sexual-harassment keyword is not a finding that data concerning sex life is present."
+  },
+  "whistleblowing_confidentiality": {
+    "applies": false,
+    "identity_in_routing_summary": false,
+    "narrative_in_routing_summary": false,
+    "do_not_notify": [
+      "the employee",
+      "a line manager",
+      "the subject of the disclosure"
+    ],
+    "proposed_route_when_language_present": null,
+    "section_43j_quoted": false,
+    "section_43j_applied_as_a_finding": false,
+    "protected_disclosure_decided": false,
+    "agent_contacted_anyone": false
+  },
+  "automated_decision": {
+    "uk_gdpr_article_22_status": "substituted",
+    "substituted_by": "Data (Use and Access) Act 2025 section 80",
+    "in_force_note": "Section 80 is in force at 5 February 2026 in so far as not already in force, by SI 2026/82 regulation 2(j).",
+    "solely_automated_decision": false,
+    "significant_decision": false,
+    "meaningful_human_involvement_on_confirmation": true,
+    "note": "Article 22A(1) defines a decision based solely on automated processing as one with no meaningful human involvement, and a significant decision as one with a legal effect or a similarly significant effect. This output is a proposal. The HR officer confirms classification and routing."
+  },
+  "jurisdiction": {
+    "supplied": true,
+    "value": "england",
+    "recognised": true,
+    "gb_sources_applied": true,
+    "note": "Sources marked E+W+S on the pages opened are quoted. This is not a finding about the contract."
+  },
+  "received_on": {
+    "status": "within_window",
+    "value": "2026-11-01",
+    "age_days": 3
+  },
+  "received_on_overrides_narrative": false,
+  "application_made_on": null,
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "zero_width_characters_removed": 0,
+    "signals": []
+  },
+  "pii_gateway": {
+    "called": true,
+    "reason": null,
+    "caller": "exp-32-employee-case-intake",
+    "experiment_id": "exp-08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "finding_count": 0,
+    "entity_types": [],
+    "input_sha256": "be68ffe8d46eca2088b2e16d59ff555b0d799c0e55a6333aa93489801bbaa18a",
+    "rules_pinned_on": "2026-10-26",
+    "rules_stale": false,
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "raw_values_logged": false,
+    "called_before_any_model": true,
+    "redacted_text_stored": false
+  },
+  "vulnerability_scanner": {
+    "called": true,
+    "experiment_id": "exp-15-vulnerability-urgency-scanner",
+    "catalogue_id": "UK06",
+    "flag_count": 0,
+    "categories": [],
+    "redacted_text_stored": false,
+    "injection_followed": false,
+    "person_labelled_vulnerable": false
+  },
+  "document_intake": null,
+  "hr_confirmation": {
+    "classification_confirmed": false,
+    "routing_confirmed": false,
+    "approver": "HR officer",
+    "decision": null,
+    "category_recorded": null,
+    "route_recorded": null
+  },
+  "outcome": null,
+  "merits_advice": null,
+  "contacted_employee": false,
+  "contacted_manager": false,
+  "hr_system_written": false,
+  "external_sent": false,
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "prohibited_payload_keys": [],
+  "flags": {
+    "outcome_decided": false,
+    "merits_advised": false,
+    "employee_contacted": false,
+    "manager_contacted": false,
+    "hr_system_written": false,
+    "external_sent": false,
+    "classification_confirmed_by_narrative": false,
+    "routing_confirmed_by_narrative": false,
+    "article_9_condition_asserted": false,
+    "protected_disclosure_decided": false,
+    "harassment_decided": false
+  },
+  "human_approval": [
+    {
+      "action": "Confirm the classification",
+      "approver": "HR officer",
+      "mandatory": true,
+      "done_by_agent": false
+    },
+    {
+      "action": "Confirm the routing",
+      "approver": "HR officer",
+      "mandatory": true,
+      "done_by_agent": false
+    }
+  ],
+  "limitations": [
+    "A keyword is not a decision that the statutory definition is met.",
+    "The Acas Code says 'without unreasonable delay'. This starter does not turn that into a number of days.",
+    "Section 80G(1B)(a) is quoted. The last day of the two-month period is not calculated.",
+    "No tribunal time limit is calculated.",
+    "Experiment 08 does not redact names, email addresses, or telephone numbers. This draft does not store the narrative. It is not anonymised.",
+    "A narrative over 20,000 characters is not scanned.",
+    "An instruction phrase that is not on the list is not detected.",
+    "Experiment 11 is the Employment Rights Act 2025 harassment-duty checklist. It is not called. This draft does not decide reasonable steps."
+  ]
+}
