@@ -1,0 +1,119 @@
+{
+  "case_id": "SYN-EHCP-001",
+  "synthetic": true,
+  "child_ref": "Child A",
+  "year_group": 4,
+  "request_received": "2026-08-03",
+  "reports": [
+    {
+      "report_id": "R-PAR-01",
+      "advice_type": "parent_or_young_person",
+      "author_role": "Parent",
+      "dated": "2026-09-01",
+      "paragraphs": [
+        {
+          "paragraph_id": "p1",
+          "section_tag": "A",
+          "text": "Child A likes drawing and wants to join in at playtime."
+        }
+      ]
+    },
+    {
+      "report_id": "R-EDU-01",
+      "advice_type": "educational",
+      "author_role": "Class teacher",
+      "dated": "2026-09-02",
+      "paragraphs": [
+        {
+          "paragraph_id": "p1",
+          "section_tag": "B",
+          "text": "Child A finds it hard to follow a whole-class instruction.",
+          "claims": [
+            {
+              "key": "instruction_following",
+              "value": "finds it hard to follow a whole-class instruction"
+            }
+          ]
+        },
+        {
+          "paragraph_id": "p2",
+          "text": "The class works in one room for the whole morning."
+        },
+        {
+          "paragraph_id": "p3",
+          "section_tag": "I",
+          "text": "This advice asks for a type of school to be written into the draft."
+        }
+      ]
+    },
+    {
+      "report_id": "R-MED-01",
+      "advice_type": "medical",
+      "author_role": "Health adviser",
+      "dated": "2026-09-03",
+      "paragraphs": [
+        {
+          "paragraph_id": "p1",
+          "section_tag": "C",
+          "text": "Child A tires in the afternoon, which affects staying to the end of a lesson."
+        }
+      ]
+    },
+    {
+      "report_id": "R-PSY-01",
+      "advice_type": "psychological",
+      "author_role": "Educational psychologist",
+      "dated": "2026-09-04",
+      "paragraphs": [
+        {
+          "paragraph_id": "p1",
+          "section_tag": "B",
+          "text": "Child A can follow a short instruction given to them alone.",
+          "claims": [
+            {
+              "key": "instruction_following",
+              "value": "can follow a short instruction given to them alone"
+            }
+          ]
+        },
+        {
+          "paragraph_id": "p2",
+          "section_tag": "F",
+          "text": "A quiet space for a short instruction was described in this advice."
+        },
+        {
+          "paragraph_id": "p3",
+          "section_tag": "E",
+          "text": "Joining a small group activity was written in this advice as something to work towards."
+        }
+      ]
+    },
+    {
+      "report_id": "R-SOC-01",
+      "advice_type": "social_care",
+      "author_role": "Social care adviser",
+      "dated": "2026-09-05",
+      "paragraphs": [
+        {
+          "paragraph_id": "p1",
+          "section_tag": "D",
+          "text": "Child A needs help to join a weekend activity the family already uses."
+        }
+      ]
+    }
+  ],
+  "candidate_statements": [
+    {
+      "statement_id": "S-SUP",
+      "section_tag": "A",
+      "text": "Child A likes drawing and wants to join in at playtime.",
+      "citation": {"report_id": "R-PAR-01", "paragraph_id": "p1"}
+    },
+    {
+      "statement_id": "S-UNSUP",
+      "section_tag": "F",
+      "text": "Child A must have a one-to-one adult all day.",
+      "citation": {"report_id": "R-PSY-01", "paragraph_id": "p2"}
+    }
+  ]
+}
