@@ -1,0 +1,320 @@
+# Agent manifest: Employee Case Intake Agent
+# Experiment 32 — catalogue ID H009
+# Version: 0.1.0
+# Last reviewed: 2026-11-04
+# Next review: 2027-05-04
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-32-employee-case-intake"
+  name: "Employee Case Intake Agent"
+  version: "0.1.0"
+  description: >
+    Proposes a category, an urgency flag, a statutory or Acas time reference,
+    and a route for one synthetic HR case. Autonomy A1. An HR officer confirms
+    classification and routing. The agent does not decide an outcome, advise
+    on merits, contact the employee or a manager, or write to an HR system.
+    UK identifiers go through Experiment 08. Urgency indicators come from
+    Experiment 15. Optional attachments go through Experiment 12.
+  owner: "HR officer, with the organisation's data protection officer"
+  contact: "employee-case-intake@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/32-employee-case-intake"
+
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "An HR officer confirms the classification and the routing. The agent only proposes them."
+    - "The agent NEVER decides a grievance, absence, flexible-working, harassment, or whistleblowing outcome"
+    - "The agent NEVER advises on the merits"
+    - "The agent NEVER contacts the employee or a manager"
+    - "The agent NEVER writes to an HR system, including after a confirmation is recorded in a test"
+    - "The agent NEVER decides that Equality Act 2010 section 26 is met"
+    - "The agent NEVER decides that a disclosure is a protected disclosure"
+    - "The agent NEVER asserts an Article 9 condition or that Schedule 1 paragraph 1 is met"
+    - "The agent NEVER calculates a tribunal time limit or the last day of a section 80G decision period"
+    - "Category keywords come from the deterministic core, not from model output"
+    - "Any model, if one is added later, sees only text already returned by Experiment 08"
+    - "Autonomy A3 is not used"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or officer-supplied HR case"
+      description: "A single narrative the HR officer pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One case per invocation. No mailbox browsing and no HR-system query."
+      justification: "The draft cannot propose a category without the text the officer has supplied."
+      data_categories:
+        - "Free text that may describe a grievance, absence, flexible working, harassment, or a disclosure"
+        - "UK identifiers, which are passed to Experiment 08 and are not repeated in this draft"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the narrative."
+
+    - resource: "Pinned statutory and Acas extracts"
+      description: "Quotations in src/case_sources.py, pinned 4 November 2026. The draft does not download them."
+      access_level: "read"
+      scope: "The extracts in this folder"
+      justification: "Time references are quotations, not a model's recollection."
+      may_contain_personal_data: false
+
+    - resource: "Experiment 08, Experiment 12, and Experiment 15"
+      description: "Called in-process. This experiment does not copy their detectors."
+      access_level: "read"
+      scope: "The three experiment folders beside this one"
+      justification: "Redaction, document intake, and urgency indicators are reused."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "The HR case system, personnel files, and payroll"
+      reason: "The agent does not read or write production HR records."
+    - resource: "The employee's mailbox and the manager's mailbox"
+      reason: "The agent does not contact either person and does not collect mail."
+    - resource: "Occupational health systems and the NHS Personal Demographics Service"
+      reason: "A health indicator is not a referral and not a lookup."
+    - resource: "Employment tribunals, Acas early conciliation, and prescribed persons"
+      reason: "The agent does not file, refer, or notify."
+
+tools:
+  allowed:
+    - tool: "draft_employee_case"
+      provider: "Local Python"
+      action: "Return one intake draft from the case the officer supplied"
+      access_level: "read"
+      scope: "One case. Calls Experiment 15, Experiment 08, and Experiment 12 when attachments are present."
+      justification: "The draft is the only output the agent is allowed to produce."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write to an HR system, Dataverse, SharePoint, or a mailbox. record_hr_confirmation is not a tool of the agent and still does not write."
+  sends:
+    enabled: false
+    note: "The agent does not email the employee, a manager, Acas, a tribunal, or a prescribed person."
+
+human_approval:
+  description: >
+    An HR officer confirms the classification and the routing outside this
+    agent. The agent cannot record that confirmation. A test helper can
+    record it for a role check. That record does not write an HR system.
+  approval_points:
+    - action: "Confirm the classification"
+      approver: "HR officer"
+      mandatory: true
+      rationale: "Catalogue control for H009. A keyword is not a decision that a statutory definition is met."
+    - action: "Confirm the routing"
+      approver: "HR officer"
+      mandatory: true
+      rationale: "The proposed route, including a designated whistleblowing officer, is a proposal. The officer confirms it."
+  no_approval_required:
+    - action: "Produce the draft from one supplied case"
+      rationale: "The draft has no external effect."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      The manifest does not choose an Article 6 basis. A public body might
+      later consider public task, and an employer might later consider
+      legitimate interests or a legal obligation. The DPO confirms the basis
+      before any live processing. This file is not that confirmation.
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Data concerning health, where the text mentions sickness, a fit note, disability, or mental health"
+      - "Data revealing racial or ethnic origin, religious or philosophical belief, or trade union membership, where those words appear"
+      - "Data concerning sex life or sexual orientation, where those words appear. A sexual-harassment keyword is not itself a finding that such data is present."
+    lawful_basis_special: >
+      Not asserted. UK GDPR Article 9(1) prohibits the listed processing
+      unless paragraph 1 does not apply because the processing is based on
+      Article 6(1) and a paragraph 2 condition applies. Article 9(2)(b) is
+      the employment condition. Data Protection Act 2018 section 10(2),
+      opened 4 November 2026, says that requirement is met only if a
+      condition in Part 1 of Schedule 1 is met. Schedule 1 paragraph 1(1),
+      opened the same day, requires necessity for an employment obligation
+      or right and an appropriate policy document. This starter decides
+      neither. Paragraph 39 of Schedule 1 was not opened.
+    safeguards:
+      - "One case at a time, supplied by the HR officer"
+      - "The narrative is not stored in the draft. The routing summary is a template."
+      - "Where whistleblowing language is present, the summary says not to notify the employee, a line manager, or the subject of the disclosure"
+      - "UK identifiers go through Experiment 08 before any model call. No model is called in this starter."
+      - "No Article 9 condition is asserted"
+  data_minimisation:
+    - "The draft stores a hash and a character count, not the narrative"
+    - "Experiment 15 phrases are not copied. Only indicator categories are kept."
+    - "Experiment 12 file bodies and filenames are not copied"
+  retention:
+    agent_retention: "None in this starter. The draft is returned to the caller."
+    note: "Article 5(1)(e) storage limitation is for the controller. This starter does not set a retention period."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice. This starter does not call a model or the network. Production inference, if added, should be in UK South or UK West. That choice is not made here."
+
+risk_assessment:
+  methodology: "Assessed for this starter on 4 November 2026, not for a named employer."
+  date_assessed: "2026-11-04"
+  risks:
+    - id: "R1"
+      risk: "A keyword proposes the wrong category, and someone treats the proposal as a decision."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "proposed_category is a closed-list label and decided is false"
+        - "An HR officer confirms classification and routing"
+        - "A tie is unresolved rather than a guessed winner, except that whistleblowing language keeps the designated route as a proposal"
+      residual_risk: "Medium"
+      owner: "HR officer"
+    - id: "R2"
+      risk: "Special-category detail in a narrative is copied into a route, a log, or a model prompt."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The narrative is not stored"
+        - "The routing summary is a template"
+        - "No Article 9 condition is asserted"
+        - "Experiment 08 runs before any model call, and this starter calls no model"
+      residual_risk: "High"
+      owner: "Data protection officer"
+    - id: "R3"
+      risk: "A whistleblowing narrative is notified to the subject or a line manager."
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Contact functions always raise"
+        - "The designated route is a proposal and the summary omits the narrative"
+        - "Sends are disabled"
+      residual_risk: "Medium"
+      owner: "HR officer"
+    - id: "R4"
+      risk: "An instruction inside the narrative sets the category, clears a stale pin, or causes a write."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Instruction sentences are blanked before keywords are counted"
+        - "followed is forced false"
+        - "Prohibited payload keys are stripped"
+        - "Write and contact functions always raise"
+      residual_risk: "Medium"
+      owner: "HR officer"
+    - id: "R5"
+      risk: "A reader treats 'without unreasonable delay' or the two-month flexible-working period as a date this agent calculated."
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "days_encoded is null on every time reference"
+        - "The section 80G last day is not calculated"
+        - "A date in the narrative is not used as the application date"
+      residual_risk: "Low"
+      owner: "HR officer"
+
+logging_and_audit:
+  description: "This starter writes no log. The JSON is the record of the run, and it does not contain the narrative."
+  logged_events:
+    - event: "Draft produced"
+      data_logged:
+        - "case id"
+        - "as-of date"
+        - "proposed category and route"
+        - "whether an instruction was detected"
+        - "whether sources were stale"
+      retention: "Not written by this starter. A later host should keep the narrative out of the trace."
+  log_destination:
+    primary: "None"
+    note: "Application Insights is not connected. Do not log the narrative."
+  audit_trail:
+    - "actions_taken is empty"
+    - "narrative_stored is false"
+
+kill_switch:
+  description: "Unpublish the Copilot Studio agent, or stop calling draft_case. There is no production write to undo."
+  methods:
+    - method: "Unpublish the agent"
+      action: "The topic and the skills stop being offered."
+      time_to_effect: "When the publisher confirms unpublish in the tenant."
+      who_can_activate: "The agent owner in the tenant"
+    - method: "Stop the host that imports draft_case"
+      action: "The Python function is no longer reachable."
+      time_to_effect: "When the process stops."
+      who_can_activate: "The operator of that host"
+  escalation_contacts:
+    - role: "HR officer"
+      contact: "employee-case-intake@example.com"
+
+review:
+  last_review_date: "2026-11-04"
+  next_review_date: "2027-05-04"
+  review_frequency: "Six months, and sooner if the Acas Code is replaced or a cited section changes"
+  reviewer: "HR officer, with the data protection officer"
+  review_triggers:
+    - "The published Acas Code of 11 March 2015 is replaced. A draft code was in consultation on the day this pin was made. It is not applied."
+    - "Employment Rights Act 1996 section 80G refusal grounds, appointed for specified purposes on 6 January 2026, are brought fully into force. SI 2026/3 was not opened."
+    - "A deployment connects a mailbox, an HR system, or a model"
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Architecture"
+      path: "docs/architecture.md"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject a case, a grievance, a flexible-working request, or a disclosure."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide that section 26 is met, that a disclosure is protected, or that an employer met a duty. Article 22A significant decisions are not taken."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not write to an HR system. A recorded HR confirmation in a test still does not write."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact the employee, a manager, Acas, a tribunal, or anyone else."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not spend or transact."
+  additional_high_risk:
+    - action_name: "Confirm the classification"
+      enabled: false
+      rationale: "Confirmation is the HR officer's act. The agent has no tool that records it."
+    - action_name: "Confirm the routing"
+      enabled: false
+      rationale: "Routing confirmation is the HR officer's act. The agent has no tool that records it."
+    - action_name: "Advise on merits"
+      enabled: false
+      rationale: "advise_on_merits always raises."
+    - action_name: "Assert an Article 9 condition"
+      enabled: false
+      rationale: "article_9_condition_asserted is forced false. Schedule 1 paragraph 1 is not decided."
+
+assumptions:
+  description: "Items to verify before anyone relies on a deployment. Unverified items stay unverified."
+  items:
+    - id: "A1"
+      assumption: "The harness overview retrieved on 4 November 2026 did not mark the GitHub Copilot harness as preview. Confirm the release state in the tenant."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Copilot Credit prices and the standard-harness licensing article were not opened. No price is stored."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, Foundry prompt shields, Key Vault, Purview, and Application Insights are named as deployment controls. This starter connects none of them. Portal labels were not re-opened on 4 November 2026."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "SI 2026/3, which appoints Employment Rights Act 2025 section 9 for specified purposes on 6 January 2026, was not opened. Refusal grounds in section 80G are not applied."
+      section: "src/case_sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Trade Union and Labour Relations (Consolidation) Act 1992 section 207A was not opened. The 25 per cent award adjustment is quoted from the Acas Code foreword only."
+      section: "src/case_sources.py"
+      verify_on_deployment: true

@@ -1,0 +1,85 @@
+{
+  "tools": [
+    {
+      "name": "draft_employee_case",
+      "implementation": "draft_case",
+      "reads": [
+        "one synthetic case",
+        "as-of date",
+        "pinned statutory and Acas extracts",
+        "Experiment 15 scan()",
+        "Experiment 12 intake() when attachments are supplied",
+        "Experiment 08 propose()"
+      ],
+      "writes": false,
+      "sends": false,
+      "decides_outcome": false,
+      "advises_on_merits": false,
+      "contacts_employee": false,
+      "contacts_manager": false,
+      "persists_narrative": false,
+      "asserts_article_9_condition": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_hr_confirmation",
+      "implementation": "record_hr_confirmation",
+      "reads": ["the draft"],
+      "writes": false,
+      "sends": false,
+      "decides_outcome": false,
+      "contacts_employee": false,
+      "contacts_manager": false,
+      "persists_narrative": false,
+      "human_approval_to_run": true,
+      "approver": "HR officer",
+      "callable_by_agent": false,
+      "note": "The agent must not call this. A recorded confirmation still does not write an HR system."
+    },
+    {
+      "name": "decide_outcome",
+      "implementation": "decide_outcome",
+      "writes": false,
+      "sends": false,
+      "decides_outcome": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "advise_on_merits",
+      "implementation": "advise_on_merits",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_employee",
+      "implementation": "contact_employee",
+      "writes": false,
+      "sends": false,
+      "contacts_employee": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_manager",
+      "implementation": "contact_manager",
+      "writes": false,
+      "sends": false,
+      "contacts_manager": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_hr_system",
+      "implementation": "write_hr_system",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
