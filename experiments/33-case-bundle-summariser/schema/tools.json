@@ -1,0 +1,105 @@
+{
+  "tools": [
+    {
+      "name": "extract_cited_summary",
+      "implementation": "summarise",
+      "reads": ["one synthetic case bundle supplied for this run", "the pinned source notes in src/sources.py"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "recommends_outcome": false,
+      "decides_disclosure": false,
+      "finds_credibility": false,
+      "accepts_summary": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "check_pinpoint_citations",
+      "implementation": "summarise",
+      "reads": ["one synthetic case bundle", "proposed sentences with a document id, page, paragraph, and line range"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "recommends_outcome": false,
+      "decides_disclosure": false,
+      "finds_credibility": false,
+      "accepts_summary": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "list_gaps_and_contradictions",
+      "implementation": "summarise",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "callable_by_agent": true,
+      "resolves_contradictions": false,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "recommend_outcome",
+      "implementation": "recommend_outcome",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_disclosure",
+      "implementation": "decide_disclosure",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "find_credibility",
+      "implementation": "find_credibility",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "accept_summary",
+      "implementation": "accept_summary",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_sentence_review",
+      "implementation": "record_sentence_review",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": false,
+      "note": "Not a tool of the agent. A test calls it to show the role check. The CLI does not expose it. A review is not a case decision."
+    },
+    {
+      "name": "send_external",
+      "implementation": "send_external",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_production_record",
+      "implementation": "write_production_record",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
