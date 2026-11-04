@@ -1,0 +1,280 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called. Not a Microsoft Foundry groundedness score. Not a case outcome.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_foundry_score": true,
+  "not_a_case_outcome": true,
+  "model_called": false,
+  "network_called": false,
+  "foundry_called": false,
+  "sentences_added_to_total_cases": false,
+  "as_of": "2026-11-04",
+  "summary": {
+    "total_cases": 26,
+    "passed": 26,
+    "failed": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "id": "extractive-disclosure",
+      "name": "Extractive disclosure reading quotes two current lines",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 2,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "clean-asylum",
+      "name": "Extractive asylum reading has no outcome",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 2,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "clean-barring",
+      "name": "Extractive barring reading has no recommendation",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "hallucinated-document",
+      "name": "A citation names a document that is not in the bundle",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "hallucinated-page",
+      "name": "A citation names a page the document does not have",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "unsupported-colour",
+      "name": "A red bicycle is not supported by the blue span",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "citation-missing",
+      "name": "A sentence with no citation fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "pinpoint-incomplete",
+      "name": "A citation without a line range fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "prohibited-outcome",
+      "name": "An outcome recommendation fails even with a real citation",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "prohibited-disclosure",
+      "name": "A disclosure decision fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "prohibited-credibility",
+      "name": "A credibility finding fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "refusal-not-prohibited",
+      "name": "A sentence that refuses a charge is not itself a recommendation",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "stale-quote",
+      "name": "An exact quote of a stale note still fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "superseded-quote",
+      "name": "An exact quote of a superseded note still fails",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "injection-not-followed",
+      "name": "An instruction in a bundle document is not copied and not followed",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 2,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "html-comment",
+      "name": "An instruction in an HTML comment is recorded and not followed",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "zero-width",
+      "name": "A zero-width character does not hide an instruction",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "contradiction",
+      "name": "Two current sightings are both quoted and neither is preferred",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 2,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "gap",
+      "name": "A fact key with no usable span is a gap, not a failed sentence",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 2,
+      "failure_count": 0,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "non-synthetic",
+      "name": "A bundle that is not marked synthetic is refused",
+      "passed": true,
+      "problems": [],
+      "sentence_count": null,
+      "failure_count": null,
+      "gap_count": null,
+      "refused": true
+    },
+    {
+      "id": "unknown-matter",
+      "name": "A charging label is not a reading type",
+      "passed": true,
+      "problems": [],
+      "sentence_count": null,
+      "failure_count": null,
+      "gap_count": null,
+      "refused": true
+    },
+    {
+      "id": "stripped-outcome",
+      "name": "An outcome key on the bundle is removed and not echoed",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "verbatim-proposed",
+      "name": "A verbatim proposal passes the checker and is still not accepted",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 1,
+      "refused": false
+    },
+    {
+      "id": "pins-stale",
+      "name": "Pinned pages go stale without failing a fresh quotation",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "autonomy-a3",
+      "name": "A request for autonomy A3 is not recommended",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 0,
+      "gap_count": 0,
+      "refused": false
+    },
+    {
+      "id": "empty-sentence",
+      "name": "An empty sentence is not supported by a real span",
+      "passed": true,
+      "problems": [],
+      "sentence_count": 1,
+      "failure_count": 1,
+      "gap_count": 1,
+      "refused": false
+    }
+  ]
+}

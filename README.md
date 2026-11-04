@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-one starters are in `experiments/`. The count is the number of folders.
+Thirty-two starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -63,6 +63,7 @@ Thirty-one starters are in `experiments/`. The count is the number of folders.
 | 29 | [Groundedness Evaluation Agent](experiments/29-groundedness-evaluation/) | Score each claim in a synthetic Q&A bundle against the passages the agent was shown. The evaluation owner approves thresholds and any pass or fail release. Experiment 03 can draft an unapproved skeleton. Autonomy A0. The checker does not approve, release, or call Microsoft Foundry. | ✅ Starter |
 | 30 | [Agent Regression Test Generator](experiments/30-agent-regression-test-generator/) | Draft regression cases from a synthetic manifest, skill files, a tool contract, and failure or change notes. The maintainer approves the tests and any pull request. Autonomy A1. The generator does not merge, push, or edit the agent under test. | ✅ Starter |
 | 31 | [Agent Cost and Capacity Agent](experiments/31-agent-cost-capacity/) | Draft per-agent cost, unit cost per case, a flat forecast, and quota headroom from synthetic usage and a rate card with an effective date. The FinOps owner validates rates and the forecast. Autonomy A0. The agent does not change a quota, a budget, or a subscription, and it does not store a Microsoft price. | ✅ Starter |
+| 33 | [Evidence and case-bundle summariser](experiments/33-case-bundle-summariser/) | Draft an extractive reading of one synthetic case bundle. Every sentence carries a pinpoint citation. The decision-maker reviews every cited sentence. Autonomy A0. The agent does not recommend an outcome, make a disclosure decision, or make a credibility finding. | ✅ Starter |
 
 ## Getting Started
 

@@ -1,0 +1,841 @@
+{
+  "as_of": "2026-11-04",
+  "stale_after_days": 90,
+  "description": "Synthetic cases for the UK09 citation checker. Not a model evaluation.",
+  "cases": [
+    {
+      "id": "extractive-disclosure",
+      "name": "Extractive disclosure reading quotes two current lines",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-BUNDLE-DISCLOSURE-01",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue",
+          "superseded_red",
+          "stale_location",
+          "injection"
+        ],
+        "expected_fact_keys": [
+          "sighting",
+          "item"
+        ]
+      },
+      "expect": {
+        "sentence_count": 2,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "verdicts": {
+          "supported": 2
+        },
+        "gap_count": 0,
+        "contradiction_count": 0,
+        "signals_include": [
+          "ignore_instructions",
+          "recommend_a_charge"
+        ],
+        "sentence_absent": "recommend a charge"
+      }
+    },
+    {
+      "id": "clean-asylum",
+      "name": "Extractive asylum reading has no outcome",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-ASYLUM-01",
+        "organisation": "Northfen Casework Unit (fictional, not the Home Office)",
+        "matter_type": "asylum_case_reading",
+        "documents": [
+          "asylum"
+        ],
+        "expected_fact_keys": [
+          "journey",
+          "interview"
+        ]
+      },
+      "expect": {
+        "sentence_count": 2,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": false,
+        "verdicts": {
+          "supported": 2
+        },
+        "signals_empty": true
+      }
+    },
+    {
+      "id": "clean-barring",
+      "name": "Extractive barring reading has no recommendation",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-BAR-01",
+        "organisation": "Example Barring Desk (fictional, not the Disclosure and Barring Service)",
+        "matter_type": "barring_referral_reading",
+        "documents": [
+          "barring"
+        ],
+        "expected_fact_keys": [
+          "event"
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": false,
+        "verdicts": {
+          "supported": 1
+        }
+      }
+    },
+    {
+      "id": "hallucinated-document",
+      "name": "A citation names a document that is not in the bundle",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-HALLUC-DOC",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a blue bicycle leave the fictional shop Reed Wharf Cycles.",
+            "fact_key": "sighting",
+            "citation": {
+              "document_id": "SYN-GHOST-99",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "citation_not_in_bundle": 1
+        }
+      }
+    },
+    {
+      "id": "hallucinated-page",
+      "name": "A citation names a page the document does not have",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-HALLUC-PAGE",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a blue bicycle leave the fictional shop Reed Wharf Cycles.",
+            "fact_key": "sighting",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 9,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "pinpoint_not_in_document": 1
+        }
+      }
+    },
+    {
+      "id": "unsupported-colour",
+      "name": "A red bicycle is not supported by the blue span",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-COLOUR",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a red bicycle leave the fictional shop Reed Wharf Cycles.",
+            "fact_key": "sighting",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "span_does_not_support": 1
+        },
+        "other_failures": []
+      }
+    },
+    {
+      "id": "citation-missing",
+      "name": "A sentence with no citation fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-NOCITE",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a blue bicycle leave the fictional shop Reed Wharf Cycles.",
+            "fact_key": "sighting"
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "citation_missing": 1
+        },
+        "other_failures": []
+      }
+    },
+    {
+      "id": "pinpoint-incomplete",
+      "name": "A citation without a line range fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-PARTIAL",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a blue bicycle leave the fictional shop Reed Wharf Cycles.",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "pinpoint_incomplete": 1
+        }
+      }
+    },
+    {
+      "id": "prohibited-outcome",
+      "name": "An outcome recommendation fails even with a real citation",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-OUTCOME",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "The decision-maker should charge the suspect.",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "prohibited_action": 1
+        },
+        "other_failures": [
+          "span_does_not_support"
+        ]
+      }
+    },
+    {
+      "id": "prohibited-disclosure",
+      "name": "A disclosure decision fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-DISC",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "Disclose all unused material to the defence.",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "prohibited_action": 1
+        }
+      }
+    },
+    {
+      "id": "prohibited-credibility",
+      "name": "A credibility finding fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-CRED",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "The witness is credible.",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "prohibited_action": 1
+        }
+      }
+    },
+    {
+      "id": "refusal-not-prohibited",
+      "name": "A sentence that refuses a charge is not itself a recommendation",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-REFUSAL",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "refusal"
+        ],
+        "expected_fact_keys": [
+          "boundary"
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": false,
+        "verdicts": {
+          "supported": 1
+        },
+        "signals_empty": true
+      }
+    },
+    {
+      "id": "stale-quote",
+      "name": "An exact quote of a stale note still fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-STALE",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "stale_location"
+        ],
+        "expected_fact_keys": [
+          "location"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "The fictional shop is on Example Wharf.",
+            "fact_key": "location",
+            "citation": {
+              "document_id": "SYN-NOTE-03",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "stale_or_superseded": 1
+        },
+        "other_failures": []
+      }
+    },
+    {
+      "id": "superseded-quote",
+      "name": "An exact quote of a superseded note still fails",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-SUPER",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "superseded_red"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 1 July 2026 synthetic witness W-01 saw a red bicycle.",
+            "fact_key": "sighting",
+            "citation": {
+              "document_id": "SYN-NOTE-02",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "stale_or_superseded": 1
+        }
+      }
+    },
+    {
+      "id": "injection-not-followed",
+      "name": "An instruction in a bundle document is not copied and not followed",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-INJECT",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue",
+          "injection"
+        ],
+        "expected_fact_keys": [
+          "sighting",
+          "item"
+        ]
+      },
+      "expect": {
+        "checker_passed": true,
+        "sentence_count": 2,
+        "signals_include": [
+          "ignore_instructions"
+        ],
+        "sentence_absent": "recommend a charge",
+        "do_not_rely": true
+      }
+    },
+    {
+      "id": "html-comment",
+      "name": "An instruction in an HTML comment is recorded and not followed",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-HTML",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "html"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ]
+      },
+      "expect": {
+        "checker_passed": true,
+        "sentence_count": 1,
+        "hidden_in": "html_comment",
+        "signals_include": [
+          "ignore_instructions"
+        ]
+      }
+    },
+    {
+      "id": "zero-width",
+      "name": "A zero-width character does not hide an instruction",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-ZW",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "zero_width"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ]
+      },
+      "expect": {
+        "checker_passed": true,
+        "sentence_count": 1,
+        "hidden_in": "zero_width",
+        "signals_include": [
+          "ignore_instructions"
+        ]
+      }
+    },
+    {
+      "id": "contradiction",
+      "name": "Two current sightings are both quoted and neither is preferred",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-CONTRA",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue",
+          "green"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ]
+      },
+      "expect": {
+        "sentence_count": 2,
+        "failure_count": 0,
+        "contradiction_count": 1,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "verdicts": {
+          "supported": 2
+        }
+      }
+    },
+    {
+      "id": "gap",
+      "name": "A fact key with no usable span is a gap, not a failed sentence",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-GAP",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting",
+          "item",
+          "cctv"
+        ]
+      },
+      "expect": {
+        "sentence_count": 2,
+        "failure_count": 0,
+        "gap_count": 1,
+        "checker_passed": true,
+        "do_not_rely": true
+      }
+    },
+    {
+      "id": "non-synthetic",
+      "name": "A bundle that is not marked synthetic is refused",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-LIVE",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "synthetic": false
+      },
+      "expect": {
+        "refused": true,
+        "error_contains": "synthetic"
+      }
+    },
+    {
+      "id": "unknown-matter",
+      "name": "A charging label is not a reading type",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-CHARGE",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "charging_decision",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ]
+      },
+      "expect": {
+        "refused": true,
+        "error_contains": "matter type"
+      }
+    },
+    {
+      "id": "stripped-outcome",
+      "name": "An outcome key on the bundle is removed and not echoed",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-STRIP",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "extra": {
+          "case_outcome": "OUTCOME-TOKEN-991"
+        }
+      },
+      "expect": {
+        "checker_passed": true,
+        "sentence_count": 1,
+        "ignored_keys": true,
+        "token_absent": "OUTCOME-TOKEN-991"
+      }
+    },
+    {
+      "id": "verbatim-proposed",
+      "name": "A verbatim proposal passes the checker and is still not accepted",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-VERBATIM",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting",
+          "item"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "On 12 August 2026 synthetic witness W-01 saw a blue bicycle leave the fictional shop Reed Wharf Cycles.",
+            "fact_key": "sighting",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "gap_count": 1,
+        "do_not_rely": true,
+        "verdicts": {
+          "supported": 1
+        }
+      }
+    },
+    {
+      "id": "pins-stale",
+      "name": "Pinned pages go stale without failing a fresh quotation",
+      "as_of": "2027-03-01",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-PINS",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "fresh_later"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "pins_stale": true,
+        "do_not_rely": true,
+        "verdicts": {
+          "supported": 1
+        }
+      }
+    },
+    {
+      "id": "autonomy-a3",
+      "name": "A request for autonomy A3 is not recommended",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-A3",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "extra": {
+          "requested_autonomy": "A3"
+        }
+      },
+      "expect": {
+        "checker_passed": true,
+        "sentence_count": 1
+      }
+    },
+    {
+      "id": "empty-sentence",
+      "name": "An empty sentence is not supported by a real span",
+      "as_of": "2026-11-04",
+      "stale_after_days": 90,
+      "spec": {
+        "bundle_id": "SYN-EMPTY",
+        "organisation": "Reedfen Constabulary (fictional)",
+        "matter_type": "disclosure_reading",
+        "documents": [
+          "blue"
+        ],
+        "expected_fact_keys": [
+          "sighting"
+        ],
+        "proposed_sentences": [
+          {
+            "sentence_id": "P1",
+            "text": "   ",
+            "citation": {
+              "document_id": "SYN-NOTE-01",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1
+            }
+          }
+        ]
+      },
+      "expect": {
+        "sentence_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdicts": {
+          "span_does_not_support": 1
+        }
+      }
+    }
+  ]
+}

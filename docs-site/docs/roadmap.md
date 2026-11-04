@@ -294,6 +294,16 @@ A draft of per-agent cost, unit cost, a flat forecast, and quota headroom from o
 
 </article>
 
+<article class="plan-card" id="uk09" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · UK09 · Autonomy A0</p>
+
+## Evidence and case-bundle summariser
+
+A draft reading of one synthetic case bundle. Every sentence carries a pinpoint citation, and a deterministic checker fails a sentence whose cited span does not contain it. The decision-maker reviews every cited sentence. It does not recommend an outcome, make a disclosure decision, or make a credibility finding. It is not the evidence-pack index in [Experiment 18](experiments/18-evidence-pack-builder.md) and it is not the groundedness scorer in [Experiment 29](experiments/29-groundedness-evaluation.md). [Read the briefing](experiments/33-case-bundle-summariser.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. UK09 is Experiment 33.
