@@ -109,6 +109,9 @@ DIAGRAMS = {
     "experiments/31-agent-cost-capacity/docs/architecture_diagram.png": (
         "experiments/img/31-agent-cost-capacity-architecture.png"
     ),
+    "experiments/32-employee-case-intake/docs/architecture_diagram.png": (
+        "experiments/img/32-employee-case-intake-architecture.png"
+    ),
 }
 
 
