@@ -562,8 +562,10 @@
     "experiment_08": "Experiment 08 proposes redaction of UK identifier patterns. This assembler calls propose and still sets output_is_anonymised to false. It does not copy the detectors and it does not release text.",
     "experiment_12": "Experiment 12 inventories a document batch and can suggest a purpose. It does not file SEND advice under sections A to K. This assembler does not call intake.",
     "experiment_33": {
-      "present": false,
-      "folders": [],
+      "present": true,
+      "folders": [
+        "33-case-bundle-summariser"
+      ],
       "called": false,
       "note": "Experiment 33 is the case-bundle summariser, catalogue UK09. A summary narrates a bundle for a reader. This draft does not narrate. It files advice the report already tagged, withholds section I, and blocks export. The summariser is not called."
     }

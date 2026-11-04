@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Thirty-two starters you can read today
+## Thirty-three starters you can read today
 
 </div>
 
@@ -878,6 +878,31 @@ The draft runs locally. Nothing is decided, disclosed, or accepted as a case out
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 34 · UK10 · SEND · Autonomy A1</p>
+
+### EHCP draft assembler
+
+File synthetic SEND advice under the regulation 12 section headings. Each placed line cites the report it came from. Gaps, conflicts, and unsupported statements are flagged. The caseworker authors the final education, health and care plan.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is decided, section I stays blank, and nothing is sent. A local copy needs caseworker sign-off.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/34-ehcp-draft-assembler.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/34-ehcp-draft-assembler)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -900,7 +925,7 @@ The draft runs locally. Nothing is decided, disclosed, or accepted as a case out
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, and UK09 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, and UK10 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

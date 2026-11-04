@@ -112,6 +112,9 @@ DIAGRAMS = {
     "experiments/33-case-bundle-summariser/docs/architecture_diagram.png": (
         "experiments/img/33-case-bundle-summariser-architecture.png"
     ),
+    "experiments/34-ehcp-draft-assembler/docs/architecture_diagram.png": (
+        "experiments/img/34-ehcp-draft-assembler-architecture.png"
+    ),
 }
 
 
