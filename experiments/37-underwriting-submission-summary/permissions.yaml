@@ -1,0 +1,366 @@
+# Agent manifest: Underwriting submission summary
+# Experiment 37 — catalogue ID B006
+# Version: 0.1.0
+# Last reviewed: 2026-11-05
+# Next review: 2027-05-05
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-37-underwriting-submission-summary"
+  name: "Underwriting Submission Summary Agent"
+  version: "0.1.0"
+  description: >
+    Produces a structured, source-cited summary of one synthetic broker
+    submission for an underwriter. Autonomy is A0. The underwriter owns the
+    coverage and pricing decision. The agent does not accept or decline, does
+    not suggest a price or terms, does not contact the broker, and does not
+    write to an underwriting system.
+  owner: "Underwriter (the adopting insurer, MGA, or broker)"
+  contact: "underwriter@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/37-underwriting-submission-summary"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only summary. The underwriter owns coverage and price. Nothing is sent and nothing is written."
+  constraints:
+    - "Every stated fact is a contiguous copy of cited lines. A missing field is the words not stated. Nothing is inferred."
+    - "The agent NEVER accepts or declines a risk and NEVER refers a risk."
+    - "The agent NEVER suggests a price, a premium, a rate, or terms."
+    - "The agent NEVER contacts the broker."
+    - "The agent NEVER writes to an underwriting system and NEVER binds cover."
+    - "The agent NEVER decides that a presentation met Insurance Act 2015 section 3, and NEVER applies a section 8 remedy."
+    - "The agent NEVER decides that a firm met the Consumer Duty or PRIN 2A."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "Submission text is untrusted. An instruction inside a document is recorded and not followed."
+    - "All output is labelled DRAFT FOR THE UNDERWRITER. NOT A COVERAGE OR PRICING DECISION."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic submission supplied for this run"
+      description: "Text files and documents already split into pages, paragraphs, and lines. The samples use Northfen Wharf Ltd, which is fictional."
+      access_level: "read"
+      scope: "The file passed to this run. No underwriting system and no broker mailbox."
+      justification: "The summary cannot be cited without the submission the underwriter supplied."
+      data_categories:
+        - "Synthetic submission text"
+        - "A company name, which would be personal data if it identified a sole trader"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the file."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 5 November 2026. Pages that were not opened are marked."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Statutory and product claims are cited from that pin and marked when a page was not opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the underwriter."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Document age and source currency are calculated from these inputs."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "An underwriting workbench, a bordereau, or a policy administration system"
+      reason: "The agent does not read or write a live underwriting record."
+    - resource: "A broker mailbox or any send channel"
+      reason: "The summary is returned to the underwriter. The broker is not contacted."
+    - resource: "A rating engine or a terms library"
+      reason: "The agent does not suggest a price or terms."
+    - resource: "A Microsoft Foundry resource or an Azure subscription"
+      reason: "The catalogue names them. This folder does not call them."
+
+tools:
+  allowed:
+    - tool: "Summarise the submission supplied for this run"
+      provider: "Local Python (src/summarise.py), which calls Experiment 12 intake and Experiment 29 number and date checks"
+      action: "Copy current lines under the closed field list, flag gaps, contradictions, and unsupported statements"
+      access_level: "read"
+      scope: "The submission passed to the agent"
+      justification: "The underwriter needs the same field summary each time, with a pinpoint citation on every stated fact."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Inventory files via Experiment 12"
+      provider: "experiments/12-document-intake"
+      action: "Inventory text files. Do not confirm a purpose, route, queue, or release."
+      access_level: "read"
+      scope: "The files array on the submission. No underwriting purpose is requested, because Experiment 12 has none."
+      justification: "A file that was not read, is stale, or contains a deterministic identifier is not quoted."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write an underwriting system, a Dataverse row, or a bordereau. The JSON is a return value, not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not email the broker, the insured, or a coverholder."
+
+human_approval:
+  description: >
+    The underwriter reviews every cited fact, decides whether anything is
+    missing, and owns coverage and price outside this agent. Asking the broker
+    and writing the underwriting system stay outside this agent.
+  approval_points:
+    - action: "Review every cited fact against the document, page, paragraph, and line"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "Catalogue control for B006. A passed checker is not a complete presentation."
+    - action: "Decide whether the presentation is fair, including any further enquiry"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "Insurance Act 2015 section 3 is the insured's duty. Section 3(4)(b) is an enquiry the underwriter may make. This agent does not enquire and does not decide."
+    - action: "Decide coverage, including accept, decline, or refer"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "coverage_decision stays null. The agent has no accept or decline tool that succeeds."
+    - action: "Set the price and the terms"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "price_suggested and terms_suggested stay null."
+    - action: "Decide whether to contact the broker, and send any message outside this agent"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "broker_contacted stays false. A missing field is not a message."
+    - action: "Write the decision to the underwriting system, or bind cover"
+      approver: "Underwriter, outside this agent"
+      mandatory: true
+      rationale: "underwriting_system_written and bound stay false."
+    - action: "Re-open a stale pinned page before relying on the legal note"
+      approver: "Underwriter"
+      mandatory: true
+      rationale: "A stale pin sets do_not_rely. The quote can still be shown. The note is not cleared by the agent."
+    - action: "Confirm a lawful basis before any live submission is processed"
+      approver: "Data protection officer"
+      mandatory: true
+      rationale: "The manifest does not assert an Article 6 basis."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic submission the underwriter supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT FOR THE UNDERWRITER. NOT A COVERAGE OR PRICING DECISION."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live submission may contain personal data, for example where the insured
+      is a sole trader or a location identifies a household. This starter does
+      not choose an Article 6 basis. The data protection officer confirms a basis
+      before any live file. Article 5 was read on 5 November 2026, including
+      data minimisation and accuracy. The starter copies cited lines and does
+      not fill a gap by inference.
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The samples are not special category data."
+    condition: "Not asserted."
+    safeguards:
+      - "No Article 9 condition is claimed here."
+      - "The submission must be marked synthetic."
+      - "A file with a deterministic identifier finding is not quoted. output_is_anonymised stays false."
+      - "Article 22 was shown as omitted on 5 November 2026. Article 22A defines a solely automated decision as one with no meaningful human involvement. This starter does not take the decision and does not certify meaningful human involvement."
+  data_minimisation:
+    - "One submission per draft. The field list is closed."
+    - "A field with no usable paragraph is not stated. The value is not guessed."
+    - "File content is not copied into the summary. Quoted lines are the cited facts."
+    - "A stripped decision key is not echoed."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A deployment retention period is for the insurer, not this file."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for Microsoft Foundry was not verified for this experiment."
+  data_subject_rights:
+    note: "This starter does not operate a request channel. A live system would route rights requests to the insurer."
+
+prompt_injection:
+  description: "Submission text is untrusted. A matching sentence is recorded and not followed."
+  controls:
+    - control: "Sentence patterns"
+      description: "Instructions to ignore directions, accept or decline, set a price, contact the broker, bind, or write the underwriting system are recorded."
+      implementation: "src/injection.py. A sentence that already says do not, must not, never, or cannot is not a hit, unless it also states an affirmative decision."
+    - control: "Payload keys"
+      description: "Keys that would set a coverage decision, a price, a send, or a write are stripped and not echoed."
+      implementation: "strip_prohibited before the submission is read."
+  residual_risk: "A negation in the same sentence can hide an instruction. A paraphrase can be missed. Neither grants a tool the agent does not have."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named insurer"
+  date_assessed: "2026-11-05"
+  risks:
+    - id: "R1"
+      risk: "A reader treats the draft as an acceptance, a declinature, or a price"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR THE UNDERWRITER. NOT A COVERAGE OR PRICING DECISION."
+        - "coverage_decision, price_suggested, and terms_suggested stay null"
+        - "Accept, decline, price, and bind wording is not copied into a fact"
+      residual_risk: "Medium"
+      owner: "Underwriter"
+    - id: "R2"
+      risk: "A document tells the agent to accept the risk, email the broker, or ignore these instructions"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those sentences are recorded and not copied"
+        - "A decision key buried in the submission does not set a flag"
+        - "Tests cover injection, a buried decision, and the prohibited command flags"
+      residual_risk: "Low"
+      owner: "Underwriter"
+    - id: "R3"
+      risk: "A cited line is accurate and the summary still omits the line that changes the risk"
+      likelihood: "High"
+      impact: "High"
+      controls:
+        - "A missing closed-list field is shown as not stated"
+        - "do_not_rely is true when a field is missing, even if every stated fact is supported"
+        - "The underwriter reviews every cited fact"
+      residual_risk: "High"
+      owner: "Underwriter"
+    - id: "R4"
+      risk: "A stale survey, a stale legislation page, or an identifier is relied on"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "A file outside the window is not quoted"
+        - "A stale pin sets do_not_rely and the legal note is not cleared"
+        - "A file with a deterministic identifier finding is not quoted"
+      residual_risk: "Medium"
+      owner: "Underwriter"
+    - id: "R5"
+      risk: "The draft is read as a decision that the duty of fair presentation was met, or that the Consumer Duty was met"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Regulatory notes are context. They are not findings."
+        - "A commercial label does not apply PRIN 2A. A retail label does not decide that the firm is in retail market business."
+        - "Section 8 remedies are not applied. Schedule 1 was not opened."
+      residual_risk: "Medium"
+      owner: "Underwriter"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a summary, the synthetic submission id, the as-of date, and whether injection was detected. Do not log the submission text."
+  logged_events:
+    - event: "Underwriting submission summarised"
+      data_logged:
+        - "synthetic submission id"
+        - "as-of date"
+        - "whether a prompt-injection pattern was detected"
+        - "whether a fact was withheld"
+        - "whether the broker was contacted (always false in this starter)"
+        - "whether the underwriting system was written (always false in this starter)"
+      retention: "Not set by this starter."
+  log_destination:
+    primary: "None in this starter"
+    note: "A later host would choose a UK log store. Application Insights was not opened for this experiment and is unverified."
+  audit_trail:
+    - "The JSON records citations, gaps, contradictions, and injection pattern ids."
+    - "Decision keys stripped from the submission are named, not valued."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/summarise.py"
+      time_to_effect: "Immediate"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not summarise submissions"
+      action: "Delete the local copy"
+      time_to_effect: "Immediate"
+      who_can_activate: "The machine owner"
+  escalation_contacts:
+    - role: "Underwriter"
+      contact: "underwriter@example.com"
+    - role: "Data protection officer"
+      contact: "The adopting firm's data protection officer. Not named in this starter."
+
+review:
+  last_review_date: "2026-11-05"
+  next_review_date: "2027-05-05"
+  review_frequency: "Six months, and sooner if a pinned legislation or Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting firm's underwriter. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A pinned page is re-opened and the sentence this starter relies on has changed."
+    - "Experiment 12's intake result shape changes."
+    - "Experiment 29's number check changes."
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Tool schema"
+      path: "schema/tools.json"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not accept, decline, or refer a risk. coverage_decision stays null."
+  regulated_decision:
+    enabled: false
+    rationale: "Coverage, price, and whether a presentation was fair are the underwriter's. This draft does not decide them. It is not a solely automated decision under Article 22A."
+  production_record_change:
+    enabled: false
+    rationale: "No underwriting system is written. The JSON is not a bordereau entry."
+  external_send:
+    enabled: false
+    rationale: "The broker is not contacted. Nothing is sent to the insured."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not bind cover and does not collect or pay a premium."
+  additional_high_risk:
+    - action_name: "Accept a risk"
+      enabled: false
+      rationale: "accept_risk always raises. The command flag exits without a draft."
+    - action_name: "Decline a risk"
+      enabled: false
+      rationale: "decline_risk always raises."
+    - action_name: "Suggest a price or terms"
+      enabled: false
+      rationale: "suggest_price and suggest_terms always raise. price_suggested and terms_suggested stay null."
+    - action_name: "Contact the broker"
+      enabled: false
+      rationale: "contact_broker always raises. broker_contacted stays false."
+    - action_name: "Write the underwriting system"
+      enabled: false
+      rationale: "write_underwriting_system always raises."
+    - action_name: "Bind cover"
+      enabled: false
+      rationale: "bind_cover always raises. bound stays false."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing. The scope policy was not re-opened for this experiment."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The firm confirms these before anyone relies on a summary."
+  items:
+    - id: "AS1"
+      assumption: "The submission was supplied by the underwriter and is synthetic. This starter does not fetch it from a broker portal or an underwriting system."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "AS2"
+      assumption: "Part 2 of the Insurance Act 2015 applies to non-consumer insurance contracts only, section 2(1). The caller label commercial_non_consumer is not a decision that the contract is non-consumer. The Consumer Insurance (Disclosure and Representations) Act 2012 was not opened."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "AS3"
+      assumption: "PRIN 2A applies to retail market business, on the page opened on 5 November 2026. PRIN 3 was not opened. This starter does not decide that a firm is in retail market business."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS4"
+      assumption: "The 90-day window is this starter's staleness rule, not a statutory period and not a Lloyd's reporting deadline. A Lloyd's byelaw was not opened."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "AS5"
+      assumption: "Article 22 was shown as omitted on 5 November 2026. Article 22A was read. This starter does not certify meaningful human involvement."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS6"
+      assumption: "Experiment 35 may appear beside this folder later. It is not imported. The evaluation harness in this folder is independent. A pass is not released as an underwriting decision."
+      section: "high_risk_actions"
+      verify_on_deployment: true

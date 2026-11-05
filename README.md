@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-five starters are in `experiments/`. The folders are 01 to 34 and 36. The count is the number of folders.
+Thirty-six starters are in `experiments/`. The folders are 01 to 34, 36, and 37. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -67,6 +67,7 @@ Thirty-five starters are in `experiments/`. The folders are 01 to 34 and 36. The
 | 33 | [Evidence and case-bundle summariser](experiments/33-case-bundle-summariser/) | Draft an extractive reading of one synthetic case bundle. Every sentence carries a pinpoint citation. The decision-maker reviews every cited sentence. Autonomy A0. The agent does not recommend an outcome, make a disclosure decision, or make a credibility finding. | ✅ Starter |
 | 34 | [EHCP Draft Assembler](experiments/34-ehcp-draft-assembler/) | File synthetic SEND advice under the regulation 12 section headings, with citations, gaps, conflicts, and unsupported statements. The caseworker authors the final plan. Autonomy A1. The agent does not decide needs, provision, placement, or outcomes, and it does not send the draft. | ✅ Starter |
 | 36 | [Cross-Source Validation Agent](experiments/36-cross-source-validation/) | Compare the same fact across synthetic source documents and classify each difference as a match, an immaterial difference, or a material discrepancy. The reviewer resolves every material discrepancy. Experiments 12, 08, and 33 are called in-process. Autonomy A0. The agent does not choose which source is right, edit a record, contact anyone, or query a live register. | ✅ Starter |
+| 37 | [Underwriting Submission Summary](experiments/37-underwriting-submission-summary/) | Draft a cited summary of one synthetic broker submission. A missing field is not stated. The underwriter owns coverage and price. Autonomy A0. The agent does not accept or decline, suggest a price or terms, contact the broker, or write to an underwriting system. | ✅ Starter |
 
 ## Getting Started
 

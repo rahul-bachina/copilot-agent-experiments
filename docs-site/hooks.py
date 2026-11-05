@@ -121,6 +121,9 @@ DIAGRAMS = {
     "experiments/36-cross-source-validation/docs/architecture_diagram.png": (
         "experiments/img/36-cross-source-validation-architecture.png"
     ),
+    "experiments/37-underwriting-submission-summary/docs/architecture_diagram.png": (
+        "experiments/img/37-underwriting-submission-summary-architecture.png"
+    ),
 }
 
 

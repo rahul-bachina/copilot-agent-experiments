@@ -1,0 +1,677 @@
+{
+  "label": "DRAFT FOR THE UNDERWRITER. NOT A COVERAGE OR PRICING DECISION.",
+  "catalogue_id": "B006",
+  "experiment_id": "exp-37-underwriting-submission-summary",
+  "autonomy": "A0",
+  "submission_id": "NF-SUB-001",
+  "caller_organisation_label": "Northfen Wharf Ltd",
+  "caller_label_is_not_a_cited_fact": true,
+  "caller_label_differs_from_cited_name": false,
+  "market_label": "commercial_non_consumer",
+  "as_of": "2026-11-05",
+  "stale_after_days": 90,
+  "intake": {
+    "called": true,
+    "experiment_id": "exp-12-document-intake",
+    "catalogue_id": "O001",
+    "autonomy_of_intake": "A1",
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "handed_off": false,
+    "accepted_into_queue": false,
+    "production_record_written": false,
+    "external_sent": false,
+    "underlying_matter_approved": false,
+    "underlying_matter_rejected": false,
+    "catalogue_stale": false,
+    "any_document_not_current": true,
+    "gateway_rules_stale": false,
+    "prompt_injection_detected": false,
+    "prompt_injection_followed": false,
+    "purpose_requested": null,
+    "files": [
+      {
+        "file_id": "proposal",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "schedule",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "policy_schedule",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "lossrun",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "surveyold",
+        "read_status": "read",
+        "date_status": "stale",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      }
+    ]
+  },
+  "sections": {
+    "insured_name": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F1",
+          "value": "The proposal names the insured as Northfen Wharf Ltd.",
+          "status": "stated",
+          "citation": {
+            "document_id": "proposal",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "risk_description": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F2",
+          "value": "The proposal describes a commercial warehouse used to store dry goods.",
+          "status": "stated",
+          "citation": {
+            "document_id": "proposal",
+            "page": 1,
+            "paragraph": 2,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "sums_insured": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F3",
+          "value": "The schedule states a building sum insured of GBP 2500000.",
+          "status": "stated",
+          "citation": {
+            "document_id": "schedule",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "locations": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F4",
+          "value": "The schedule names one location: 1 Example Wharf, Northfen.",
+          "status": "stated",
+          "citation": {
+            "document_id": "schedule",
+            "page": 1,
+            "paragraph": 2,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "loss_history": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F5",
+          "value": "The loss run states no losses for the five years ending 2026-10-01.",
+          "status": "stated",
+          "citation": {
+            "document_id": "lossrun",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "stated_exclusions": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F6",
+          "value": "The proposal states a subsidence exclusion.",
+          "status": "stated",
+          "citation": {
+            "document_id": "proposal",
+            "page": 1,
+            "paragraph": 3,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    },
+    "stated_warranties": {
+      "status": "not_stated",
+      "items": [
+        {
+          "gap_id": "G7",
+          "value": "not stated",
+          "status": "not_stated",
+          "citation": null,
+          "verdict": "not_stated",
+          "inferred": false
+        }
+      ]
+    },
+    "inception_or_period": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F7",
+          "value": "The proposal states inception on 2027-01-01 for twelve months.",
+          "status": "stated",
+          "citation": {
+            "document_id": "proposal",
+            "page": 1,
+            "paragraph": 4,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": []
+        }
+      ]
+    }
+  },
+  "facts": [
+    {
+      "fact_id": "F1",
+      "field": "insured_name",
+      "text": "The proposal names the insured as Northfen Wharf Ltd.",
+      "value": "The proposal names the insured as Northfen Wharf Ltd.",
+      "status": "stated",
+      "citation": {
+        "document_id": "proposal",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F2",
+      "field": "risk_description",
+      "text": "The proposal describes a commercial warehouse used to store dry goods.",
+      "value": "The proposal describes a commercial warehouse used to store dry goods.",
+      "status": "stated",
+      "citation": {
+        "document_id": "proposal",
+        "page": 1,
+        "paragraph": 2,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F3",
+      "field": "sums_insured",
+      "text": "The schedule states a building sum insured of GBP 2500000.",
+      "value": "The schedule states a building sum insured of GBP 2500000.",
+      "status": "stated",
+      "citation": {
+        "document_id": "schedule",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F4",
+      "field": "locations",
+      "text": "The schedule names one location: 1 Example Wharf, Northfen.",
+      "value": "The schedule names one location: 1 Example Wharf, Northfen.",
+      "status": "stated",
+      "citation": {
+        "document_id": "schedule",
+        "page": 1,
+        "paragraph": 2,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F5",
+      "field": "loss_history",
+      "text": "The loss run states no losses for the five years ending 2026-10-01.",
+      "value": "The loss run states no losses for the five years ending 2026-10-01.",
+      "status": "stated",
+      "citation": {
+        "document_id": "lossrun",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F6",
+      "field": "stated_exclusions",
+      "text": "The proposal states a subsidence exclusion.",
+      "value": "The proposal states a subsidence exclusion.",
+      "status": "stated",
+      "citation": {
+        "document_id": "proposal",
+        "page": 1,
+        "paragraph": 3,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    },
+    {
+      "fact_id": "F7",
+      "field": "inception_or_period",
+      "text": "The proposal states inception on 2027-01-01 for twelve months.",
+      "value": "The proposal states inception on 2027-01-01 for twelve months.",
+      "status": "stated",
+      "citation": {
+        "document_id": "proposal",
+        "page": 1,
+        "paragraph": 4,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "block_reason": null,
+      "experiment_29_number_check": true
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "G7",
+      "field": "stated_warranties",
+      "value": "not stated",
+      "status": "not_stated",
+      "citation": null,
+      "verdict": "not_stated",
+      "inferred": false
+    }
+  ],
+  "contradictions": [],
+  "not_used": [
+    {
+      "document_id": "surveyold",
+      "field": null,
+      "reason": "intake_date_not_current",
+      "reviewed_on": "2024-01-01"
+    }
+  ],
+  "summary": {
+    "stated_fact_count": 7,
+    "verdict_total": 7,
+    "verdicts": {
+      "supported": 7,
+      "citation_missing": 0,
+      "pinpoint_incomplete": 0,
+      "citation_not_in_submission": 0,
+      "pinpoint_not_in_document": 0,
+      "prohibited_action": 0,
+      "untrusted_instruction": 0,
+      "withheld_identifier": 0,
+      "stale_or_superseded": 0,
+      "number_or_date_mismatch": 0,
+      "span_does_not_support": 0
+    },
+    "failure_count": 0,
+    "gap_count": 1,
+    "contradiction_count": 0,
+    "not_used_count": 1,
+    "section_count": 8,
+    "each_stated_fact_has_one_verdict": true,
+    "other_failures_are_not_in_the_totals": true,
+    "gaps_are_not_verdicts": true,
+    "section_count_is_not_added_to_stated_fact_count": true,
+    "not_used_count_is_separate": true
+  },
+  "checker_passed": true,
+  "do_not_rely": true,
+  "do_not_rely_reasons": [
+    "missing_information",
+    "intake_or_document_not_current"
+  ],
+  "regulatory_notes": [
+    {
+      "id": "ia2015-s3",
+      "when": "The caller labelled the submission commercial_non_consumer.",
+      "shown": true,
+      "text": "Section 2(1) limits this Part to non-consumer insurance contracts. Section 3 is the duty of fair presentation. Section 5 is what the insurer knows, ought to know, or is presumed to know for section 3(5). Section 8 is the insurer's remedy, which this starter does not apply. A missing field is shown as not stated. That is not a finding that section 3(4) was or was not met, and it is not an enquiry to the broker."
+    },
+    {
+      "id": "prin-2a",
+      "when": "The caller labelled the submission retail.",
+      "shown": false,
+      "text": "PRIN 2A.1, opened 5 November 2026, says the Consumer Duty applies to retail market business. PRIN 2A.2 states the three cross-cutting obligations and says they exhaust Principle 12. This starter does not decide that the firm is in retail market business, and it does not decide that the firm met the Duty. PRIN 3 was not opened."
+    },
+    {
+      "id": "prin-2a-not-applied",
+      "when": "The caller did not label the submission retail.",
+      "shown": true,
+      "text": "PRIN 2A.1 says the Consumer Duty applies to retail market business. This starter does not apply those rules to a label other than retail, and it does not decide that the caller's label is correct. If the label is not stated, applicability is not stated."
+    },
+    {
+      "id": "ukgdpr-art5-art22",
+      "when": "Always, as a limit on this starter.",
+      "shown": true,
+      "text": "Article 5 was read, including data minimisation and accuracy. This starter copies cited lines and does not fill a gap by inference. Article 22 was shown as omitted on 5 November 2026. Article 22A(1) defines a solely automated decision as one with no meaningful human involvement. Coverage and price stay with the underwriter. This starter does not certify meaningful human involvement."
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": []
+  },
+  "prohibited_payload_keys": [],
+  "sources": [
+    {
+      "id": "ia2015-s1",
+      "title": "Insurance Act 2015, section 1",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/section/1",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. A non-consumer insurance contract is a contract of insurance that is not a consumer insurance contract. Consumer insurance contract has the same meaning as in the Consumer Insurance (Disclosure and Representations) Act 2012. That Act's text was not opened."
+    },
+    {
+      "id": "ia2015-s2",
+      "title": "Insurance Act 2015, section 2",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/section/2",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. Section 2(1): this Part applies to non-consumer insurance contracts only. Section 2(2) applies the Part to variations of those contracts, with the risk read as the changes relevant to the variation."
+    },
+    {
+      "id": "ia2015-s3",
+      "title": "Insurance Act 2015, section 3",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/section/3",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. Section 3(1): before a contract is entered into, the insured must make a fair presentation of the risk. Section 3(4) requires disclosure of every material circumstance the insured knows or ought to know, or, failing that, disclosure which gives the insurer sufficient information to put a prudent insurer on notice that it needs to make further enquiries. Section 3(5) lists circumstances that need not be disclosed in the absence of enquiry, including what the insurer knows, ought to know, or is presumed to know. This starter does not decide that a presentation was fair and it does not make those enquiries."
+    },
+    {
+      "id": "ia2015-s5",
+      "title": "Insurance Act 2015, section 5",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/section/5",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. Section 5 is the insurer's knowledge provision for section 3(5)(b) to (d). The insurer knows something only if it is known to an individual who participates in the decision whether to take the risk, and if so on what terms. What the insurer ought to know, and what it is presumed to know, are in subsections (2) and (3). This starter does not decide what the insurer knows."
+    },
+    {
+      "id": "ia2015-s8",
+      "title": "Insurance Act 2015, section 8",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/section/8",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The insurer has a remedy for a breach of the duty of fair presentation only if it shows that, but for the breach, it would not have entered into the contract at all, or would have done so only on different terms. Remedies are in Schedule 1, which was not opened. This starter does not decide that a breach is qualifying and does not apply a remedy."
+    },
+    {
+      "id": "ukgdpr-art5",
+      "title": "UK GDPR, Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. Article 5(1) lists the principles, including purpose limitation, data minimisation, and accuracy. Article 5(1)(e) now refers to Article 84B. Article 5(3) was inserted by the Data (Use and Access) Act 2025. This starter does not choose an Article 6 basis."
+    },
+    {
+      "id": "ukgdpr-art22",
+      "title": "UK GDPR, Article 22",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The article is shown as omitted. Chapter 3 Section 4A was substituted by the Data (Use and Access) Act 2025, section 80(1), in force for this purpose from 5 February 2026 (S.I. 2026/82). This starter does not quote a pre-substitution Article 22 as current law."
+    },
+    {
+      "id": "ukgdpr-art22a",
+      "title": "UK GDPR, Article 22A",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. Article 22A(1)(a): a decision is based solely on automated processing if there is no meaningful human involvement in the taking of the decision. Article 22A(1)(b): a significant decision produces a legal effect or a similarly significant effect. This starter does not take an underwriting decision and does not certify meaningful human involvement."
+    },
+    {
+      "id": "prin-2a-1",
+      "title": "FCA Handbook, PRIN 2A.1",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/1.html",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The page says the Consumer Duty applies to a firm's retail market business, or where the firm communicates or approves a financial promotion addressed to, or likely to be received by, a retail customer. It says the application is set out in PRIN 3, including PRIN 3.2.6R to PRIN 3.2.12G. PRIN 3 was not opened. FG22/5 was named on the page and was not opened."
+    },
+    {
+      "id": "prin-2a-2",
+      "title": "FCA Handbook, PRIN 2A.2",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/2.html",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The page states three cross-cutting obligations: a firm must act in good faith towards retail customers; a firm must avoid causing foreseeable harm to retail customers; a firm must enable and support retail customers to pursue their financial objectives. It says those rules exhaust what is required under Principle 12. This starter does not decide that a firm met them. The handbook markup did not show every rule number beside those three sentences, so the rule numbers are not repeated here."
+    },
+    {
+      "id": "harness-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. Customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. The page says this harness can take a goal, break it into steps, create and edit Word, Excel, PowerPoint, and PDF files, supports skills and memory, runs in a sandbox, and uses Copilot Credits. The billing overview linked from the table was not opened. The page did not mark the harness as preview."
+    },
+    {
+      "id": "generative-orchestration",
+      "title": "Generative orchestration guidance",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/generative-orchestration",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "reopened_for_this_experiment": true,
+      "stale": false,
+      "age_days": 0,
+      "note": "Opened 5 November 2026. The page says the planner can invoke a topic when its described purpose matches the user's need, and also by trigger phrases. It says tool names carry more weight than descriptions. It does not describe numeric routing weights. Whether the GitHub Copilot harness uses this same planner was not stated on the harness overview. That link is unverified."
+    },
+    {
+      "id": "schedule-1-not-opened",
+      "title": "Insurance Act 2015, Schedule 1",
+      "url": "https://www.legislation.gov.uk/ukpga/2015/4/schedule/1",
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "Not opened. Remedies are not described and are not applied."
+    },
+    {
+      "id": "cidra-not-opened",
+      "title": "Consumer Insurance (Disclosure and Representations) Act 2012",
+      "url": "https://www.legislation.gov.uk/ukpga/2012/6/contents",
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "Not opened. The consumer duty of reasonable care is not quoted."
+    },
+    {
+      "id": "prin-3-not-opened",
+      "title": "FCA Handbook, PRIN 3",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/3/",
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "Not opened. Retail-market application is not decided here."
+    },
+    {
+      "id": "lloyds-not-opened",
+      "title": "Lloyd's byelaws",
+      "url": null,
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "Not opened. No Lloyd's byelaw is applied. No syndicate is named."
+    },
+    {
+      "id": "foundry-not-opened",
+      "title": "Microsoft Foundry",
+      "url": null,
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "A product page was not opened for this experiment. Foundry is not called. UK region availability is unverified."
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue boundary for B006",
+      "url": null,
+      "last_verified": null,
+      "stale_applicable": false,
+      "reopened_for_this_experiment": false,
+      "stale": false,
+      "age_days": null,
+      "note": "Autonomy A0. The underwriter owns the coverage and pricing decision. This row is not a web page."
+    }
+  ],
+  "experiment_29_number_check": true,
+  "experiment_35_folders_present": [],
+  "human_approval": {
+    "underwriter_reviews_every_cited_fact": {
+      "recorded": false,
+      "performed_by_this_agent": false
+    },
+    "underwriter_decides_coverage": {
+      "recorded": false,
+      "performed_by_this_agent": false
+    },
+    "underwriter_sets_price_and_terms": {
+      "recorded": false,
+      "performed_by_this_agent": false
+    },
+    "underwriter_decides_whether_to_ask_the_broker": {
+      "recorded": false,
+      "performed_by_this_agent": false
+    }
+  },
+  "differences": {
+    "from_12": "Experiment 12 inventories text files and does not summarise them. It has no underwriting purpose. This experiment calls intake() with no purpose, so nothing is routed, and then copies lines from documents whose file was read. It does not confirm the files and it does not decide the risk.",
+    "from_33": "Experiment 33 copies a contiguous span and checks a pinpoint for a case bundle. This experiment uses that same contiguous-span rule for submission fields. It does not import Experiment 33, because that package lives under the module name src and would collide with this one. It does not recommend a case outcome.",
+    "from_29": "Experiment 29 can treat shared words as support, and its human gate is an evaluation owner on thresholds and a release. This experiment calls Experiment 29 only for the number and date boundary check. Support itself requires a contiguous copy of the cited lines. There is no threshold and no release. A pass is not an underwriting decision.",
+    "from_35": "Experiment 35 is a claims evaluation harness being built separately. This folder does not import it. eval/evaluate.py mirrors the approach: labelled cases, one score per case, field results kept on the case, no model judge, and no release of a pass."
+  },
+  "proposed_facts_were_checked": false,
+  "coverage_decision": null,
+  "price_suggested": null,
+  "terms_suggested": null,
+  "broker_contacted": false,
+  "underwriting_system_written": false,
+  "bound": false,
+  "summary_accepted_as_decision": false,
+  "reading_acknowledged": false,
+  "solely_automated_decision": false,
+  "market_label_decided_by_agent": false,
+  "model_called": false,
+  "network_called": false,
+  "foundry_called": false,
+  "a3_recommended": false,
+  "actions_taken": [],
+  "experiment_33_imported": false,
+  "experiment_35_imported": false,
+  "evaluation_released": false
+}
