@@ -1704,3 +1704,62 @@ class TestExperiment34Manifest:
         assert signoff["approver"] == "Caseworker"
         assert signoff["mandatory"] is True
         assert experiment_34_manifest["agent"]["id"] == "exp-34-ehcp-draft-assembler"
+
+
+class TestExperiment35Manifest:
+    """Test the Experiment 35 claims document triage manifest."""
+
+    @pytest.fixture
+    def experiment_35_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "35-claims-document-triage"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_35_manifest):
+        """Experiment 35 manifest should be valid."""
+        validate(instance=experiment_35_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_35_manifest):
+        """Experiment 35 should be autonomy level A1. The claims handler approves the class."""
+        level = experiment_35_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_35_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_35_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_35_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_35_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_35_manifest):
+        """Nothing is sent, and the claims system is not written."""
+        assert experiment_35_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_35_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_handler_approves_the_class(self, experiment_35_manifest):
+        """The catalogue checkpoint is the claims handler, and class approval is mandatory."""
+        points = experiment_35_manifest["human_approval"]["approval_points"]
+        approval = next(
+            point
+            for point in points
+            if point["action"].startswith("Approve or change the proposed class")
+        )
+        assert approval["approver"] == "Claims handler"
+        assert approval["mandatory"] is True
+        assert experiment_35_manifest["agent"]["id"] == "exp-35-claims-document-triage"
