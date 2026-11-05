@@ -1,0 +1,98 @@
+{
+  "tools": [
+    {
+      "name": "compare_sources",
+      "implementation": "compare",
+      "reads": [
+        "one synthetic pack supplied for this run",
+        "the pinned source notes in src/sources.py",
+        "Experiment 08, Experiment 12, and Experiment 33, by calling them"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "chooses_source": false,
+      "edits_record": false,
+      "contacts_anyone": false,
+      "queries_register": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "human_approval_to_resolve_material": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "list_material_discrepancies",
+      "implementation": "compare",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "chooses_source": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "explain_discrepancy",
+      "implementation": "compare",
+      "reads": ["one fact row already classified for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "changes_class": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "choose_source",
+      "implementation": "choose_source",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "edit_record",
+      "implementation": "edit_record",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_party",
+      "implementation": "contact_party",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "lookup_register",
+      "implementation": "lookup_register",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "recommend_a3",
+      "implementation": "recommend_a3",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_reviewer_resolution",
+      "implementation": "compare with a reviewer object",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "not_an_agent_tool": true,
+      "note": "A Reviewer may pass a separate resolutions object. The agent must not fill it in. correct_value stays null."
+    }
+  ]
+}
