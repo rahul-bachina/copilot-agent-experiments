@@ -1,0 +1,50 @@
+{
+  "tools": [
+    {
+      "name": "triage_claim_documents",
+      "implementation": "triage",
+      "reads": ["one synthetic claim pack", "as-of date", "Experiment 12 intake", "Experiment 08 via that intake", "Experiment 29 score_claim"],
+      "writes": false,
+      "sends": false,
+      "accepts_claim": false,
+      "declines_claim": false,
+      "settles_claim": false,
+      "tells_customer": false,
+      "writes_claims_system": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "score_supplied_summary",
+      "implementation": "score_supplied_summary",
+      "reads": ["one synthetic claim pack", "candidate sentences", "as-of date"],
+      "writes": false,
+      "sends": false,
+      "accepts_claim": false,
+      "declines_claim": false,
+      "settles_claim": false,
+      "tells_customer": false,
+      "writes_claims_system": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_handler_classification",
+      "implementation": "record_handler_classification",
+      "reads": ["draft triage"],
+      "writes": false,
+      "sends": false,
+      "accepts_claim": false,
+      "declines_claim": false,
+      "settles_claim": false,
+      "tells_customer": false,
+      "writes_claims_system": false,
+      "human_approval_to_run": true,
+      "human_approval_to_rely_on_output": false,
+      "callable_by_agent": false,
+      "approver": "Claims handler"
+    }
+  ]
+}
