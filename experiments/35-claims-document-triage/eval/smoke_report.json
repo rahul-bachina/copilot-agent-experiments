@@ -1,0 +1,1075 @@
+{
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_an_llm_judge": true,
+  "not_a_foundry_score": true,
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/, which calls Experiment 12 intake, Experiment 08 through that intake, and Experiment 29 score_claim. Not a measure of model accuracy. Not an LLM-as-a-judge result. No model was called.",
+  "summary": {
+    "case_count": 13,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "cases_escalated": 3,
+    "scores_are_not_summed_across_criteria": true,
+    "case_count_is_not_added_to_escalated": true,
+    "escalated_is_a_case_count": true
+  },
+  "cases": [
+    {
+      "case_id": "reedmarsh-consistent",
+      "name": "Consistent escape-of-water pack",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "proposed_class",
+          "passed": true,
+          "detail": "escape_of_water"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-amount",
+      "name": "Stated amount and invoice total differ",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "proposed_class",
+          "passed": true,
+          "detail": "escape_of_water"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "amount_check:"
+        },
+        {
+          "field": "prompt amount_check:fnol:invoice is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-period",
+      "name": "Date of loss outside the printed period",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "period_check:"
+        },
+        {
+          "field": "prompt period_check:fnol:policy is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-invoice-before-loss",
+      "name": "Invoice date before the date of loss",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "invoice_date_before_loss:"
+        },
+        {
+          "field": "prompt invoice_date_before_loss:fnol:invoice is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-injection",
+      "name": "Hidden instruction to decline",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-stale",
+      "name": "Invoice document date outside the freshness window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "do_not_rely",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "date_not_current:"
+        },
+        {
+          "field": "prompt date_not_current:invoice is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-nino",
+      "name": "Invoice carries a non-allocatable National Insurance fixture",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "withheld",
+          "passed": true,
+          "detail": "invoice"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "not in the draft"
+        },
+        {
+          "field": "absent 2",
+          "passed": true,
+          "detail": "not in the draft"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-two-perils",
+      "name": "Two peril lines",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "proposed_class",
+          "passed": true,
+          "detail": "not_proposed"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "class_not_single"
+        },
+        {
+          "field": "prompt class_not_single is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-name",
+      "name": "Policyholder line and invoice addressee differ",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "below_threshold",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "prompt",
+          "passed": true,
+          "detail": "name_check:"
+        },
+        {
+          "field": "prompt name_check:fnol:invoice is not a finding",
+          "passed": true,
+          "detail": "prompt"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-not-synthetic",
+      "name": "Pack is not marked synthetic",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "refused",
+          "passed": true,
+          "detail": "NotSynthetic"
+        },
+        {
+          "field": "absent 1",
+          "passed": true,
+          "detail": "not in the refusal"
+        }
+      ],
+      "human_escalation_required": false
+    },
+    {
+      "case_id": "reedmarsh-covered-sentence",
+      "name": "Supplied summary states a coverage outcome",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "candidate_declined",
+          "passed": true,
+          "detail": "a score does not decline"
+        },
+        {
+          "field": "candidate_escalation",
+          "passed": true,
+          "detail": "['faithfulness', 'completeness', 'unsupported_coverage']"
+        },
+        {
+          "field": "criterion",
+          "passed": true,
+          "detail": "['faithfulness', 'completeness', 'unsupported_coverage']"
+        }
+      ],
+      "human_escalation_required": true,
+      "criteria_below_threshold": [
+        "faithfulness",
+        "completeness",
+        "unsupported_coverage"
+      ]
+    },
+    {
+      "case_id": "reedmarsh-invented-amount",
+      "name": "Supplied summary uses a figure that is not in the cited line",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "candidate_declined",
+          "passed": true,
+          "detail": "a score does not decline"
+        },
+        {
+          "field": "candidate_escalation",
+          "passed": true,
+          "detail": "['faithfulness', 'completeness']"
+        },
+        {
+          "field": "criterion",
+          "passed": true,
+          "detail": "['faithfulness', 'completeness']"
+        }
+      ],
+      "human_escalation_required": true,
+      "criteria_below_threshold": [
+        "faithfulness",
+        "completeness"
+      ]
+    },
+    {
+      "case_id": "reedmarsh-incomplete",
+      "name": "Supplied summary omits the date of loss",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "claim_accepted",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_declined",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claim_settled",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_told",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "claims_system_written",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "fraud_indicated",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "coverage_decided",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "a3_recommended",
+          "passed": true,
+          "detail": "stays false"
+        },
+        {
+          "field": "customer_message",
+          "passed": true,
+          "detail": "no customer message"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "no model"
+        },
+        {
+          "field": "classification_approved",
+          "passed": true,
+          "detail": "handler has not recorded a class"
+        },
+        {
+          "field": "llm_as_judge",
+          "passed": true,
+          "detail": "deterministic checker"
+        },
+        {
+          "field": "candidate_declined",
+          "passed": true,
+          "detail": "a score does not decline"
+        },
+        {
+          "field": "candidate_escalation",
+          "passed": true,
+          "detail": "['completeness']"
+        },
+        {
+          "field": "criterion",
+          "passed": true,
+          "detail": "['completeness']"
+        },
+        {
+          "field": "faithfulness_rate",
+          "passed": true,
+          "detail": "1.0"
+        }
+      ],
+      "human_escalation_required": true,
+      "criteria_below_threshold": [
+        "completeness"
+      ]
+    }
+  ]
+}
