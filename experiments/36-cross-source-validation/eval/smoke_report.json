@@ -1,0 +1,330 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The scorer is the Python in src/. Not a measure of model accuracy. No model was called. Not a Microsoft Foundry score. Not a correction of any record.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "foundry_called": false,
+  "facts_are_not_added_to_total_cases": true,
+  "occurrences_are_not_added_to_total_cases": true,
+  "summary": {
+    "total_cases": 37,
+    "passed": 37,
+    "failed": 0,
+    "agreement_rate": 100.0,
+    "facts_are_not_added_to_total_cases": true,
+    "occurrences_are_not_added_to_total_cases": true
+  },
+  "cases": [
+    {
+      "id": "name-case-match",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "match",
+      "reason": "same_display"
+    },
+    {
+      "id": "name-suffix",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "name-title-initial",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "name-title-kept",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "name-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "address-abbrev",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "address-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "date-format",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "date-day-first",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "date-same-day",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "date-unparsed-same",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "match",
+      "reason": "same_unparsed_text"
+    },
+    {
+      "id": "date-unparsed-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "unparseable"
+    },
+    {
+      "id": "currency-format",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "currency-pence",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "postcode-space",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "postcode-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "crn-space",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "crn-pad",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "crn-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "crn-prefix",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "crn-unknown-prefix",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "unparseable"
+    },
+    {
+      "id": "figure-plural",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation"
+    },
+    {
+      "id": "figure-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "figure-unit",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "reference-case",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "match",
+      "reason": "same_display"
+    },
+    {
+      "id": "reference-different",
+      "mode": "pair",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2,
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ"
+    },
+    {
+      "id": "northfen-supplier",
+      "mode": "sample",
+      "passed": true,
+      "fact_count": 7,
+      "occurrence_count": 26
+    },
+    {
+      "id": "northfen-supplier-again",
+      "mode": "sample",
+      "passed": true,
+      "fact_count": 7,
+      "occurrence_count": 26
+    },
+    {
+      "id": "withheld-nhs",
+      "mode": "withheld",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2
+    },
+    {
+      "id": "pinpoint-mismatch",
+      "mode": "pinpoint",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2
+    },
+    {
+      "id": "fewer-than-two",
+      "mode": "single",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 1
+    },
+    {
+      "id": "reviewer-neither",
+      "mode": "resolution",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2
+    },
+    {
+      "id": "buried-resolution",
+      "mode": "buried",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2
+    },
+    {
+      "id": "stale-document",
+      "mode": "stale-document",
+      "passed": true,
+      "fact_count": 1,
+      "occurrence_count": 2
+    },
+    {
+      "id": "stale-pins",
+      "mode": "stale-pins",
+      "passed": true,
+      "fact_count": 7,
+      "occurrence_count": 26
+    },
+    {
+      "id": "not-synthetic",
+      "mode": "not-synthetic",
+      "passed": true,
+      "fact_count": null,
+      "occurrence_count": null
+    },
+    {
+      "id": "choose-source-refused",
+      "mode": "prohibited",
+      "passed": true,
+      "fact_count": null,
+      "occurrence_count": null
+    }
+  ],
+  "note": "total_cases counts cases once. Fact counts and occurrence counts stay on each case."
+}
