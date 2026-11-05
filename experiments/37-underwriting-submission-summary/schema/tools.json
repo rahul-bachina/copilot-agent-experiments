@@ -1,0 +1,127 @@
+{
+  "tools": [
+    {
+      "name": "summarise_submission",
+      "implementation": "summarise",
+      "reads": [
+        "one synthetic submission supplied for this run",
+        "the pinned source notes in src/sources.py"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "calls_experiment_12": true,
+      "calls_experiment_29_number_check": true,
+      "accepts_or_declines": false,
+      "suggests_price_or_terms": false,
+      "contacts_broker": false,
+      "writes_underwriting_system": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "check_submission_citations",
+      "implementation": "summarise",
+      "reads": [
+        "one synthetic submission",
+        "proposed facts with a document id, page, paragraph, and line range"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "accepts_or_declines": false,
+      "suggests_price_or_terms": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "list_missing_information",
+      "implementation": "summarise",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "infers_missing_values": false,
+      "contacts_broker": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "accept_risk",
+      "implementation": "accept_risk",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decline_risk",
+      "implementation": "decline_risk",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "suggest_price",
+      "implementation": "suggest_price",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "suggest_terms",
+      "implementation": "suggest_terms",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_broker",
+      "implementation": "contact_broker",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_underwriting_system",
+      "implementation": "write_underwriting_system",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "bind_cover",
+      "implementation": "bind_cover",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_underwriter_review",
+      "implementation": "record_underwriter_review",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "decides_coverage": false,
+      "note": "Not an agent tool. The command line does not expose it. It still cannot set coverage or price."
+    },
+    {
+      "name": "release_evaluation",
+      "implementation": "release_evaluation",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
