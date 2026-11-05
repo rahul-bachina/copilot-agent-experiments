@@ -118,6 +118,9 @@ DIAGRAMS = {
     "experiments/34-ehcp-draft-assembler/docs/architecture_diagram.png": (
         "experiments/img/34-ehcp-draft-assembler-architecture.png"
     ),
+    "experiments/37-underwriting-submission-summary/docs/architecture_diagram.png": (
+        "experiments/img/37-underwriting-submission-summary-architecture.png"
+    ),
 }
 
 

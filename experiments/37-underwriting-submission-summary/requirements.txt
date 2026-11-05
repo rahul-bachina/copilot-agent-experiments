@@ -1,0 +1,7 @@
+# Experiment 37 has no runtime dependencies beyond the standard library.
+# The summary, the citation checker, and the tests do not call a model
+# or the network. A clean environment can install just pytest.
+# Experiment 12 and Experiment 29 are imported from sibling folders.
+# Experiment 12 imports Experiment 08. Those folders use the standard library.
+
+pytest>=7.0.0

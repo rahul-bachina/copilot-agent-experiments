@@ -1,0 +1,183 @@
+{
+  "label": "Synthetic underwriting submissions. Not a live bordereau and not a model score.",
+  "cases": [
+    {
+      "id": "northfen-warehouse",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 7,
+        "gap_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "market_label": "commercial_non_consumer",
+        "gap_field": "stated_warranties",
+        "note_shown": "ia2015-s3",
+        "note_hidden": "prin-2a",
+        "reason": "missing_information"
+      }
+    },
+    {
+      "id": "northfen-warehouse-again",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 7,
+        "gap_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "market_label": "commercial_non_consumer"
+      }
+    },
+    {
+      "id": "retail-label",
+      "builder": "retail",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 1,
+        "market_label": "retail",
+        "note_shown": "prin-2a",
+        "note_hidden": "ia2015-s3",
+        "checker_passed": true,
+        "do_not_rely": true
+      }
+    },
+    {
+      "id": "market-not-stated",
+      "builder": "market_omitted",
+      "as_of": "2026-11-05",
+      "expect": {
+        "market_label": "not_stated",
+        "reason": "market_not_stated",
+        "note_hidden": "prin-2a",
+        "note_shown": "prin-2a-not-applied",
+        "checker_passed": true
+      }
+    },
+    {
+      "id": "number-mismatch",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "proposed": true,
+      "proposed_facts": [
+        {
+          "field": "sums_insured",
+          "text": "The schedule states a building sum insured of GBP 9999999.",
+          "citation": {
+            "document_id": "schedule",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          }
+        }
+      ],
+      "expect": {
+        "stated_fact_count": 1,
+        "failure_count": 1,
+        "checker_passed": false,
+        "verdict": "number_or_date_mismatch"
+      }
+    },
+    {
+      "id": "paraphrase",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "proposed": true,
+      "proposed_facts": [
+        {
+          "field": "sums_insured",
+          "text": "Building sum insured GBP 2500000, in other words.",
+          "citation": {
+            "document_id": "schedule",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          }
+        }
+      ],
+      "expect": {
+        "stated_fact_count": 1,
+        "verdict": "span_does_not_support",
+        "checker_passed": false
+      }
+    },
+    {
+      "id": "injection-not-followed",
+      "builder": "injection",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 0,
+        "gap_field": "risk_description",
+        "injection_followed": false,
+        "reason": "injection_detected",
+        "checker_passed": true,
+        "do_not_rely": true
+      }
+    },
+    {
+      "id": "two-sums",
+      "builder": "contradiction",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 2,
+        "contradiction_count": 1,
+        "resolved": false,
+        "checker_passed": true,
+        "reason": "contradiction"
+      }
+    },
+    {
+      "id": "identifier-withheld",
+      "builder": "withheld",
+      "as_of": "2026-11-05",
+      "expect": {
+        "stated_fact_count": 0,
+        "not_used_reason": "withheld_identifier",
+        "reason": "withheld_identifier",
+        "gap_field": "risk_description"
+      }
+    },
+    {
+      "id": "stale-pin",
+      "builder": "pin_stale",
+      "as_of": "2027-02-10",
+      "expect": {
+        "stated_fact_count": 1,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "reason": "source_pin_stale"
+      }
+    },
+    {
+      "id": "not-synthetic",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "refused": true,
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "citation-missing",
+      "builder": "sample",
+      "as_of": "2026-11-05",
+      "proposed": true,
+      "proposed_facts": [
+        {
+          "field": "sums_insured",
+          "text": "The schedule states a building sum insured of GBP 2500000.",
+          "citation": null
+        }
+      ],
+      "expect": {
+        "verdict": "citation_missing",
+        "failure_count": 1,
+        "checker_passed": false
+      }
+    }
+  ]
+}
