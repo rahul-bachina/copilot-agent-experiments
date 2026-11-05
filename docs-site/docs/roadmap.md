@@ -324,6 +324,16 @@ A draft filing of synthetic SEND advice under the regulation 12 section headings
 
 </article>
 
+<article class="plan-card" id="b005" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · B005 · Autonomy A0</p>
+
+## Cross-source validation
+
+A draft list of the same fact across synthetic source documents. Dates, amounts, postcodes, company numbers, and names are normalised by a fixed rule. Each value cites the document, page, paragraph, and line. The reviewer resolves every material discrepancy. It calls [Experiment 12](experiments/12-document-intake.md), [Experiment 08](experiments/08-uk-pii-redaction-gateway.md), and [Experiment 33](experiments/33-case-bundle-summariser.md). It does not choose which source is right, edit a record, contact anyone, or query Companies House. [Read the briefing](experiments/36-cross-source-validation.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B005 is Experiment 36.
