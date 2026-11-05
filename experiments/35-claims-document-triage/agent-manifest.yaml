@@ -1,0 +1,353 @@
+# Agent manifest: Claims document triage
+# Experiment 35 — catalogue ID B007
+# Version: 0.1.0
+# Last reviewed: 2026-11-05
+# Next review: 2027-05-05
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-35-claims-document-triage"
+  name: "Claims Document Triage Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a claim summary, coverage pointers, and inconsistency prompts
+    from one synthetic FNOL pack for a UK general insurer. Autonomy is A1.
+    The claims handler approves the classification. The agent does not
+    accept, decline, or settle a claim, does not tell the customer
+    anything, and does not write to a claims system.
+  owner: "Claims handler (the adopting insurer)"
+  contact: "handler@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/35-claims-document-triage"
+
+autonomy:
+  level: "A1"
+  level_description: "The handler approves the class. A score under a draft threshold is an escalation flag. Nothing is decided, sent, or written to a claims system."
+  constraints:
+    - "The agent quotes labelled lines. It does not decide whether a loss is within the policy."
+    - "An inconsistency line is a prompt for a person. It is not a finding and it is not a statement about conduct."
+    - "The agent NEVER accepts, declines, or settles a claim."
+    - "The agent NEVER tells the customer anything."
+    - "The agent NEVER writes to a claims system, including after a class is recorded."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "A class recorded by record_handler_classification still leaves the outcome flags false."
+    - "File text is untrusted. An instruction inside a file is recorded and not followed."
+    - "All output is labelled DRAFT FOR THE CLAIMS HANDLER."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic claim pack supplied for this run"
+      description: "FNOL, invoice, report, and policy-wording extract. The samples use Policyholder A and the fictional firm Reedmarsh General."
+      access_level: "read"
+      scope: "The file passed to this run. No claims system."
+      justification: "The summary cannot be drafted without the documents the handler supplied."
+      data_categories:
+        - "Synthetic claim text"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the file."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 5 November 2026."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Handbook and legislation claims are cited from that pin."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date, the stale-data window, and optional draft thresholds."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Document age and the scorecard use these inputs. Thresholds stay unapproved."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "A live claims system or policy administration system"
+      reason: "The agent does not read or write a production claims record."
+    - resource: "A customer, a broker, or any send channel"
+      reason: "There is no customer message. Nothing is sent."
+    - resource: "A Microsoft Foundry resource or an Azure subscription"
+      reason: "The catalogue names them. This folder does not call them."
+
+tools:
+  allowed:
+    - tool: "Triage one synthetic claim pack"
+      provider: "Local Python (src/triage.py), which calls Experiment 12 and, through it, Experiment 08, and Experiment 29"
+      action: "Quote labelled lines, point at policy words, list prompts, and score the summary"
+      access_level: "read"
+      scope: "The pack passed to the agent"
+      justification: "The handler needs the same reading each time, with citations back to the files."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Score a supplied claim summary"
+      provider: "Local Python (score_supplied_summary)"
+      action: "Score faithfulness, completeness, and unsupported coverage phrases. Escalate when a draft threshold is missed."
+      access_level: "read"
+      scope: "The pack and the candidate sentences passed to this run"
+      justification: "The FCA case study describes staff checks plus an automated assessment. This checker is the deterministic stand-in. It does not decline the claim."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write a claims system, a Dataverse row, or a policy record. A handler record in the returned JSON is not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not email, message, or speak to a customer, a broker, or a claims system."
+
+human_approval:
+  description: >
+    The claims handler approves the class, checks every prompt, and reviews
+    a score that misses a draft threshold. Accepting, declining, settling,
+    telling the customer, and writing the claims system stay outside this
+    agent even after that approval.
+  approval_points:
+    - action: "Approve or change the proposed class"
+      approver: "Claims handler"
+      mandatory: true
+      rationale: "Catalogue control for B007. The agent proposes a closed class. It does not approve it."
+    - action: "Check each inconsistency prompt before relying on it"
+      approver: "Claims handler"
+      mandatory: true
+      rationale: "A prompt is not a finding. ICOBS 8.1.1R requires claims to be handled promptly and fairly, and not unreasonably rejected. The agent does not reject."
+    - action: "Review the scorecard when a draft threshold is missed"
+      approver: "Claims handler"
+      mandatory: true
+      rationale: "Human escalation. The flag does not decline the claim. Thresholds are not approved by an evaluation owner."
+    - action: "Re-open a stale or not-current document, or a stale pinned page, before relying on a line"
+      approver: "Claims handler"
+      mandatory: true
+      rationale: "The quote can still be shown. do_not_rely is not cleared by the agent."
+    - action: "Accept, decline, or settle the claim"
+      approver: "Claims handler, outside this agent"
+      mandatory: true
+      rationale: "Those functions always raise. A decline can be a significant decision under UK GDPR Articles 22A to 22D where there is no meaningful human involvement. This agent does not take it."
+    - action: "Tell the customer anything about the claim"
+      approver: "Claims handler, outside this agent"
+      mandatory: true
+      rationale: "customer_message stays null. tell_customer always raises."
+    - action: "Write the class or the summary into the claims system"
+      approver: "Claims handler, outside this agent"
+      mandatory: true
+      rationale: "This starter has no claims-system connector. write_claims_system always raises, including after a class is recorded."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic pack the handler supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT FOR THE CLAIMS HANDLER."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live claim file would be personal data. Where it describes health it
+      can be special category data under UK GDPR Article 9. This starter does
+      not choose an Article 6 basis. The data protection officer confirms a
+      basis before any live file. UK GDPR Article 22 was substituted by
+      Articles 22A to 22D (Data (Use and Access) Act 2025, section 80). A
+      decline is not taken by this agent.
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Data concerning health, if a report describes an injury. The samples do not."
+    lawful_basis_special: "Not asserted. An Article 9(2) condition is for the data protection officer."
+    condition: "Not asserted."
+    safeguards:
+      - "No Article 9(2) condition is claimed here"
+      - "The pack must be marked synthetic"
+      - "A file with a deterministic identifier finding is not quoted. output_is_anonymised stays false"
+      - "The policyholder reference in the samples is Policyholder A or Policyholder B"
+  data_minimisation:
+    - "One pack per draft. The file cap is Experiment 12's cap."
+    - "Only labelled lines and one policy line are quoted."
+    - "A file with an identifier finding is withheld from the summary."
+    - "The body is not stored on the draft."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A deployment retention period is for the insurer, not this file."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for Microsoft Foundry was not verified for this experiment."
+  data_subject_rights:
+    note: "This starter does not operate a request channel. A live system would route rights requests to the insurer."
+
+prompt_injection:
+  description: "File text is untrusted. A matching sentence is recorded and not followed. Experiment 12 records its own list as well."
+  controls:
+    - control: "Sentence patterns"
+      description: "Instructions to ignore directions, accept, decline, settle, tell the customer, or write to the claims system are recorded."
+      implementation: "src/claims_injection.py. A hostile labelled line is not quoted."
+    - control: "Payload keys"
+      description: "Keys that would set an outcome or a handler sign-off are stripped and not applied."
+      implementation: "strip of prohibited keys before intake."
+  residual_risk: "A paraphrase can be missed. A miss does not grant a tool the agent does not have."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named insurer"
+  date_assessed: "2026-11-05"
+  risks:
+    - id: "R1"
+      risk: "A reader treats the draft as an acceptance, a decline, or a settlement"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR THE CLAIMS HANDLER"
+        - "claim_accepted, claim_declined, and claim_settled stay false"
+        - "Coverage pointers say the handler decides whether the words apply"
+      residual_risk: "Medium"
+      owner: "Claims handler"
+    - id: "R2"
+      risk: "A prompt is treated as a finding about the policyholder and the claim is slowed or rejected"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Each prompt says it is not a finding and not a reason to choose an outcome"
+        - "Conduct words are not used"
+        - "ICOBS 8.1.1R is quoted so the handler, not the agent, handles the claim"
+      residual_risk: "Medium"
+      owner: "Claims handler"
+    - id: "R3"
+      risk: "A file tells the agent to decline the claim or to ignore these instructions"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those sentences are recorded and not followed"
+        - "A sign-off buried in a file does not record a class"
+        - "Tests cover injection and the prohibited commands"
+      residual_risk: "Low"
+      owner: "Claims handler"
+    - id: "R4"
+      risk: "An identifier is copied into the summary"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Experiment 08, through Experiment 12, counts deterministic identifiers"
+        - "A file with a finding is not quoted"
+        - "output_is_anonymised stays false"
+      residual_risk: "Medium"
+      owner: "Claims handler"
+    - id: "R5"
+      risk: "A low score is treated as a decline, or a draft threshold is treated as approved"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "human_escalation_required does not decline the claim"
+        - "threshold_approved_by_evaluation_owner stays false"
+        - "decline_from_score always raises"
+      residual_risk: "Low"
+      owner: "Claims handler"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a draft, the synthetic claim id, the as-of date, whether a threshold was missed, and whether injection was detected. Do not log the file text."
+  logged_events:
+    - event: "Claim pack triaged"
+      data_logged:
+        - "synthetic claim id"
+        - "as-of date"
+        - "whether a draft threshold was missed"
+        - "whether a prompt-injection pattern was detected"
+        - "whether a file was withheld"
+        - "whether anything was sent or written (always false in this starter)"
+      retention: "Not set by this starter."
+  log_destination:
+    primary: "None in this starter"
+    note: "A later host would choose a UK log store. Application Insights was not opened for this experiment and is unverified."
+  audit_trail:
+    - "The JSON records citations, prompts, the scorecard, and injection pattern ids."
+    - "The file body is not stored."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/triage.py"
+      time_to_effect: "Immediate"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not triage packs"
+      action: "Delete the local copy"
+      time_to_effect: "Immediate"
+      who_can_activate: "The machine owner"
+  escalation_contacts:
+    - role: "Claims handler"
+      contact: "handler@example.com"
+    - role: "Data protection officer"
+      contact: "The adopting insurer's data protection officer. Not named in this starter."
+
+review:
+  last_review_date: "2026-11-05"
+  next_review_date: "2027-05-05"
+  review_frequency: "Six months, and sooner if a pinned FCA or legislation page is re-opened and has changed."
+  reviewer: "The adopting insurer's claims handler. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A pinned page is re-opened and the sentence this starter relies on has changed."
+    - "Experiment 08, Experiment 12, or Experiment 29 changes the function this starter calls."
+    - "The insurer changes the closed class list."
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Tool schema"
+      path: "schema/tools.json"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not accept or decline a claim. record_handler_classification records a class only. The outcome flags stay false."
+  regulated_decision:
+    enabled: false
+    rationale: "Coverage, quantum, and settlement are the handler's. This draft does not decide them."
+  production_record_change:
+    enabled: false
+    rationale: "No claims system is written. A class in the returned JSON is not a production record."
+  external_send:
+    enabled: false
+    rationale: "Nothing is sent to a customer, a broker, or a claims system."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not pay, reserve, or settle."
+  additional_high_risk:
+    - action_name: "Accept a claim"
+      enabled: false
+      rationale: "claim_accepted stays false. accept_claim always raises."
+    - action_name: "Decline a claim"
+      enabled: false
+      rationale: "claim_declined stays false. decline_claim and decline_from_score always raise."
+    - action_name: "Settle a claim"
+      enabled: false
+      rationale: "claim_settled stays false. settle_claim always raises."
+    - action_name: "Tell the customer"
+      enabled: false
+      rationale: "customer_message stays null. tell_customer always raises."
+    - action_name: "Write to the claims system"
+      enabled: false
+      rationale: "claims_system_written stays false. write_claims_system always raises, including after the handler records a class."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The insurer confirms these before anyone relies on a draft."
+  items:
+    - id: "AS1"
+      assumption: "The pack was supplied by the handler and is synthetic. This starter does not fetch it from a claims system."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "AS2"
+      assumption: "ICOBS 8.1.1R and PRIN 2A.2 were read on 5 November 2026. The paragraph numbers beside the three PRIN 2A.2 cross-cutting rules were not in the retrieved text and are not cited."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "AS3"
+      assumption: "UK GDPR Article 22 text on legislation.gov.uk is omitted because section 80 of the Data (Use and Access) Act 2025 substituted Articles 22A to 22D. Whether a decline is a significant decision is for the data protection officer."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS4"
+      assumption: "The scorecard thresholds are draft numbers. They are not an evaluation-owner approval and they are not the Microsoft Foundry 1 to 5 scale."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "AS5"
+      assumption: "Experiment 12 does not call this experiment. This experiment calls Experiment 12. The downstream note on the intake remains true."
+      section: "tools"
+      verify_on_deployment: true
