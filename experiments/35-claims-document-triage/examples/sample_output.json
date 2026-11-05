@@ -1,0 +1,551 @@
+{
+  "label": "DRAFT FOR THE CLAIMS HANDLER",
+  "catalogue_id": "B007",
+  "experiment_id": "exp-35-claims-document-triage",
+  "autonomy": "A1",
+  "firm_name": "Reedmarsh General",
+  "claim_id": "RM-2026-0142",
+  "as_of": "2026-11-05",
+  "stale_after_days": 90,
+  "sources_pinned_on": "2026-11-05",
+  "sources_stale": false,
+  "do_not_rely": false,
+  "model_called": false,
+  "network_called": false,
+  "output_is_anonymised": false,
+  "customer_message": null,
+  "actions_taken": [],
+  "flags": {
+    "claim_accepted": false,
+    "claim_declined": false,
+    "claim_settled": false,
+    "customer_told": false,
+    "claims_system_written": false,
+    "classification_approved": false,
+    "fraud_indicated": false,
+    "inconsistency_is_a_finding": false,
+    "coverage_decided": false,
+    "customer_message_present": false,
+    "a3_recommended": false
+  },
+  "claim_accepted": false,
+  "claim_declined": false,
+  "claim_settled": false,
+  "customer_told": false,
+  "claims_system_written": false,
+  "classification_approved_by_handler": false,
+  "fraud_indicated": false,
+  "coverage_decided": false,
+  "a3_recommended": false,
+  "purpose_requested": "claims_fnol",
+  "purpose_confirmed": false,
+  "intake_experiment_id": "exp-12-document-intake",
+  "intake_catalogue_id": "O001",
+  "gateway_called": true,
+  "intake_files_confirmed": false,
+  "intake_handed_off": false,
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": []
+  },
+  "intake_prompt_injection_detected": false,
+  "prohibited_payload_keys": [],
+  "files": [
+    {
+      "file_id": "fnol",
+      "filename": "fnol.txt",
+      "role": "fnol",
+      "read_status": "read",
+      "document_date": "2026-09-12",
+      "date_status": "within_window",
+      "age_days": 54,
+      "suggested_class": "unclassified",
+      "pii_finding_count": 0,
+      "pii_entity_types": [],
+      "withheld_for_identifier": false,
+      "content_recorded": false,
+      "checksum_matches": null
+    },
+    {
+      "file_id": "invoice",
+      "filename": "invoice.txt",
+      "role": "invoice",
+      "read_status": "read",
+      "document_date": "2026-09-20",
+      "date_status": "within_window",
+      "age_days": 46,
+      "suggested_class": "invoice",
+      "pii_finding_count": 0,
+      "pii_entity_types": [],
+      "withheld_for_identifier": false,
+      "content_recorded": false,
+      "checksum_matches": null
+    },
+    {
+      "file_id": "report",
+      "filename": "report.txt",
+      "role": "report",
+      "read_status": "read",
+      "document_date": "2026-09-18",
+      "date_status": "within_window",
+      "age_days": 48,
+      "suggested_class": "unclassified",
+      "pii_finding_count": 0,
+      "pii_entity_types": [],
+      "withheld_for_identifier": false,
+      "content_recorded": false,
+      "checksum_matches": null
+    },
+    {
+      "file_id": "policy",
+      "filename": "policy-extract.txt",
+      "role": "policy_wording",
+      "read_status": "read",
+      "document_date": "2026-09-01",
+      "date_status": "within_window",
+      "age_days": 65,
+      "suggested_class": "unclassified",
+      "pii_finding_count": 0,
+      "pii_entity_types": [],
+      "withheld_for_identifier": false,
+      "content_recorded": false,
+      "checksum_matches": null
+    }
+  ],
+  "summary": {
+    "label": "DRAFT CLAIM SUMMARY FOR THE HANDLER",
+    "framing": "Each line is a quote from a file this run read. A coverage pointer quotes the policy extract. Whether those words apply is for the handler. This draft does not choose a claims outcome and it has no message for the customer.",
+    "lines": [
+      {
+        "line_id": "fnol-l1",
+        "text": "Policyholder: Policyholder A",
+        "quote": "Policyholder: Policyholder A",
+        "source_file_id": "fnol",
+        "role": "fnol"
+      },
+      {
+        "line_id": "fnol-l2",
+        "text": "Policy number: RM-H-4401",
+        "quote": "Policy number: RM-H-4401",
+        "source_file_id": "fnol",
+        "role": "fnol"
+      },
+      {
+        "line_id": "fnol-l3",
+        "text": "Date of loss: 2026-09-12",
+        "quote": "Date of loss: 2026-09-12",
+        "source_file_id": "fnol",
+        "role": "fnol"
+      },
+      {
+        "line_id": "fnol-l4",
+        "text": "Peril: escape of water",
+        "quote": "Peril: escape of water",
+        "source_file_id": "fnol",
+        "role": "fnol"
+      },
+      {
+        "line_id": "fnol-l5",
+        "text": "Stated amount: 840",
+        "quote": "Stated amount: 840",
+        "source_file_id": "fnol",
+        "role": "fnol"
+      },
+      {
+        "line_id": "invoice-l1",
+        "text": "Invoice to: Policyholder A",
+        "quote": "Invoice to: Policyholder A",
+        "source_file_id": "invoice",
+        "role": "invoice"
+      },
+      {
+        "line_id": "invoice-l2",
+        "text": "Invoice date: 2026-09-20",
+        "quote": "Invoice date: 2026-09-20",
+        "source_file_id": "invoice",
+        "role": "invoice"
+      },
+      {
+        "line_id": "invoice-l3",
+        "text": "Invoice total: 840",
+        "quote": "Invoice total: 840",
+        "source_file_id": "invoice",
+        "role": "invoice"
+      },
+      {
+        "line_id": "report-l1",
+        "text": "Report date: 2026-09-18",
+        "quote": "Report date: 2026-09-18",
+        "source_file_id": "report",
+        "role": "report"
+      },
+      {
+        "line_id": "report-l2",
+        "text": "Date of loss: 2026-09-12",
+        "quote": "Date of loss: 2026-09-12",
+        "source_file_id": "report",
+        "role": "report"
+      },
+      {
+        "line_id": "report-l3",
+        "text": "Peril: escape of water",
+        "quote": "Peril: escape of water",
+        "source_file_id": "report",
+        "role": "report"
+      },
+      {
+        "line_id": "policy-l1",
+        "text": "Policy number: RM-H-4401",
+        "quote": "Policy number: RM-H-4401",
+        "source_file_id": "policy",
+        "role": "policy_wording"
+      },
+      {
+        "line_id": "policy-l2",
+        "text": "Period from: 2026-01-01",
+        "quote": "Period from: 2026-01-01",
+        "source_file_id": "policy",
+        "role": "policy_wording"
+      },
+      {
+        "line_id": "policy-l3",
+        "text": "Period to: 2026-12-31",
+        "quote": "Period to: 2026-12-31",
+        "source_file_id": "policy",
+        "role": "policy_wording"
+      },
+      {
+        "line_id": "policy-p5",
+        "text": "Escape of water from a fixed water installation is described in this extract.",
+        "quote": "Escape of water from a fixed water installation is described in this extract.",
+        "source_file_id": "policy",
+        "role": "policy_wording"
+      }
+    ],
+    "coverage_pointers": [
+      {
+        "pointer_id": "policy-p5",
+        "text": "Escape of water from a fixed water installation is described in this extract.",
+        "quote": "Escape of water from a fixed water installation is described in this extract.",
+        "source_file_id": "policy",
+        "handler_decides_whether_it_applies": true,
+        "coverage_decided": false
+      }
+    ],
+    "gaps": []
+  },
+  "inconsistency_prompts": [],
+  "classification": {
+    "proposed_class": "escape_of_water",
+    "approved": false,
+    "approved_class": null,
+    "handler_record": null,
+    "note": "Proposed class: escape_of_water. The peril line on the first notification matches that closed class. The handler approves or changes the class. Recording the class leaves the claims outcome untouched.",
+    "closed_list": [
+      "accidental_damage",
+      "escape_of_water",
+      "other",
+      "storm",
+      "theft"
+    ]
+  },
+  "scorecard": {
+    "label": "DRAFT EVALUATION SCORECARD",
+    "not_an_llm_judge": true,
+    "not_a_foundry_score": true,
+    "foundry_evaluator_called": false,
+    "llm_as_judge": false,
+    "faithfulness": {
+      "method": "experiment_29_score_claim",
+      "experiment_id": "exp-29-groundedness-evaluation",
+      "llm_as_judge": false,
+      "foundry_evaluator_called": false,
+      "claim_count": 15,
+      "supported_count": 15,
+      "supported_rate": 1.0,
+      "non_supported_count": 0,
+      "stale_claim_count": 0,
+      "stale_claim_count_is_separate": true,
+      "other_failures_are_not_in_the_totals": true,
+      "verdict_total": 15,
+      "verdicts": {
+        "supported": 15,
+        "citation_missing": 0,
+        "source_not_shown": 0,
+        "quote_not_in_source": 0,
+        "number_mismatch": 0,
+        "date_mismatch": 0,
+        "unsupported": 0
+      },
+      "claims": [
+        {
+          "claim_id": "fnol-l1",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "fnol-l2",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "fnol-l3",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "fnol-l4",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "fnol-l5",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "invoice-l1",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "invoice-l2",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "invoice-l3",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "report-l1",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "report-l2",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "report-l3",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "policy-l1",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "policy-l2",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "policy-l3",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        },
+        {
+          "claim_id": "policy-p5",
+          "verdict": "supported",
+          "other_failures": [],
+          "stale_source": false
+        }
+      ]
+    },
+    "completeness": {
+      "items": [
+        {
+          "id": "fnol_read",
+          "applicable": true,
+          "met": true,
+          "detail": "A first notification file was read and was not withheld."
+        },
+        {
+          "id": "fnol:Date of loss",
+          "applicable": true,
+          "met": true,
+          "detail": "The summary quotes the labelled line."
+        },
+        {
+          "id": "fnol:Peril",
+          "applicable": true,
+          "met": true,
+          "detail": "The summary quotes the labelled line."
+        },
+        {
+          "id": "invoice:invoice_total",
+          "applicable": true,
+          "met": true,
+          "detail": "The summary quotes the invoice total line."
+        },
+        {
+          "id": "policy:policy_quoted_or_listed",
+          "applicable": true,
+          "met": true,
+          "detail": "A line from the policy extract is in the summary."
+        }
+      ],
+      "applicable_count": 5,
+      "met_count": 5,
+      "rate": 1.0,
+      "met_count_is_not_added_to_faithfulness": true
+    },
+    "unsupported_coverage": {
+      "count": 0,
+      "hits": [],
+      "count_is_not_added_to_claim_count": true
+    },
+    "thresholds": {
+      "min_supported_rate": 1.0,
+      "min_completeness_rate": 1.0,
+      "max_unsupported_coverage": 0,
+      "approved_by_evaluation_owner": false,
+      "source": "draft_default",
+      "ignored_keys": [],
+      "experiment_29_stale_cap_is_not_applied": true,
+      "faithfulness_method": "experiment_29_score_claim"
+    },
+    "criteria_below_threshold": [],
+    "below_threshold": false,
+    "human_escalation_required": false,
+    "escalation_reason": null,
+    "escalation_does_not_decline_the_claim": true,
+    "scores_are_not_summed_across_criteria": true,
+    "threshold_approved_by_evaluation_owner": false
+  },
+  "sources": [
+    {
+      "id": "icobs-8-1-1",
+      "title": "ICOBS 8.1.1R",
+      "url": "https://www.handbook.fca.org.uk/handbook/ICOBS/8/1.html",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "An insurer must: (1) handle claims promptly and fairly; (2) provide reasonable guidance to help a policyholder make a claim and appropriate information on its progress; (3) not unreasonably reject a claim (including by terminating or avoiding a policy); and (4) settle claims promptly once settlement terms are agreed.",
+      "note": "The current handbook page was opened on 5 November 2026. The next numbered rule on that page is ICOBS 8.1.2. A point-in-time chapter view dated 21 January 2025 labels the same words ICOBS 8.1.1R. The current page's retrieved text did not print the characters 8.1.1 beside the first rule."
+    },
+    {
+      "id": "prin-2-1-principle-12",
+      "title": "PRIN 2.1 Principle 12",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2/1.html",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "A firm must act to deliver good outcomes for retail customers.",
+      "note": "The Principles table on the page opened on 5 November 2026."
+    },
+    {
+      "id": "prin-2a-2",
+      "title": "PRIN 2A.2 Cross-cutting obligations",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/2.html",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "A firm must act in good faith towards retail customers.",
+      "note": "The page shows the good-faith, foreseeable-harm, and financial-objectives sentences under those headings. The paragraph numbers beside those three rules were not in the text retrieved. They are not cited as a numbered rule."
+    },
+    {
+      "id": "uk-gdpr-article-22",
+      "title": "UK GDPR Article 22",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "",
+      "note": "The article text is omitted. Textual amendment F1 says Chapter 3 Section 4A was substituted for Article 22, in force on 5 February 2026, by the Data (Use and Access) Act 2025 section 80(1) and S.I. 2026/82 regulation 2(j)."
+    },
+    {
+      "id": "duaa-2025-section-80",
+      "title": "Data (Use and Access) Act 2025 section 80",
+      "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "For the purposes of Articles 22B and 22C— (a) a decision is based solely on automated processing if there is no meaningful human involvement in the taking of the decision, and (b) a decision is a significant decision, in relation to a data subject, if— (i) it produces a legal effect for the data subject, or (ii) it has a similarly significant effect for the data subject.",
+      "note": "Section 80(1) substitutes Articles 22A to 22D for Article 22. The page says there are no known outstanding effects. Commencement: in force at Royal Assent for specified purposes, and on 5 February 2026 in so far as not already in force, by S.I. 2026/82 regulation 2(j)."
+    },
+    {
+      "id": "fca-ai-good-practice",
+      "title": "FCA AI in financial services: good practice and areas for improvement",
+      "url": "https://www.fca.org.uk/publications/good-poor-practice/ai-financial-services",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "One firm assessed AI-generated claims information against a structured set of criteria, including completeness, faithfulness to source information, conciseness, adequacy of reasoning, and safety. It combined checks by staff with an automated assessment, including LLM-as-a-judge.",
+      "note": "Published 19 October 2026. Last updated 20 October 2026. Case study K is under section 3.2 Monitoring and oversight. The glossary defines LLM-as-a-judge as using one large language model to assess the output of another AI system. This starter's checker is deterministic. It is not that judge."
+    },
+    {
+      "id": "foundry-rag-evaluators",
+      "title": "Microsoft Foundry RAG evaluators",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "Groundedness measures how well the generated response aligns with the given context without fabricating content. Groundedness Pro is marked preview.",
+      "note": "The page says Groundedness returns pass or fail from a 1 to 5 scale, with a default pass threshold of 3. This starter does not use that scale and does not call the evaluator. Response Completeness is marked preview on the same page."
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "opened_on": "2026-11-05",
+      "age_days": 0,
+      "stale": false,
+      "quote": "The GitHub Copilot harness is a Microsoft Copilot Studio authoring and orchestration framework, not the GitHub Copilot service.",
+      "note": "A last-updated date was not in the text retrieved. The overview did not mark the harness itself as preview. Billing articles linked from the page were not opened."
+    }
+  ],
+  "human_approval": {
+    "classification": {
+      "required": true,
+      "approver": "Claims handler",
+      "recorded": false
+    },
+    "score_escalation": {
+      "required": false,
+      "approver": "Claims handler",
+      "recorded": false
+    },
+    "stale_or_not_current": {
+      "required": false,
+      "approver": "Claims handler",
+      "recorded": false
+    }
+  },
+  "automated_decision_note": "UK GDPR Article 22 was substituted by Articles 22A to 22D. A decline can be a significant decision where it produces a legal effect or a similarly significant effect, and it is based solely on automated processing where there is no meaningful human involvement. This draft does not take that decision. Whether a particular decline meets the test is for the data protection officer.",
+  "limitations": [
+    "This draft does not accept, decline, or settle a claim.",
+    "It does not tell the customer anything. There is no customer message.",
+    "It does not write to a claims system, including after a handler records a class.",
+    "An inconsistency line is a prompt for a person to check. It is not a finding and it is not a statement about the policyholder's conduct.",
+    "A coverage pointer is a quote. It is not a statement that the loss is or is not within the policy.",
+    "The class is a proposal until a claims handler records one. Recording a class is not an outcome.",
+    "The scorecard is a deterministic checker. It is not an LLM-as-a-judge and it is not a Microsoft Foundry score. Thresholds are not approved.",
+    "A score under a draft threshold asks a person to look. It does not decline the claim.",
+    "Conciseness and adequacy of reasoning, named in the FCA case study, are not scored.",
+    "Document inventory and UK identifier spans come from Experiment 12 and Experiment 08. A file with an identifier is not quoted. The text is not anonymised.",
+    "Faithfulness comes from Experiment 29. This module does not re-implement that checker.",
+    "Only labelled lines and one policy line are quoted. Other sentences in the file are not extracted.",
+    "No model was called."
+  ]
+}
