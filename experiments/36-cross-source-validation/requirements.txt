@@ -1,0 +1,6 @@
+# Experiment 36 has no runtime dependencies beyond the standard library.
+# The comparison, the normaliser, and the tests do not call a model or the
+# network. A clean environment can install just pytest.
+# Experiments 08, 12, and 33 must sit beside this folder. They are not installed.
+
+pytest>=7.0.0

@@ -1,0 +1,1268 @@
+{
+  "label": "DRAFT FOR THE REVIEWER. NOT A CORRECTION.",
+  "catalogue_id": "B005",
+  "experiment_id": "exp-36-cross-source-validation",
+  "autonomy": "A0",
+  "pack_id": "northfen-supplier-001",
+  "as_of": "2026-11-05",
+  "stale_after_days": 90,
+  "counts": {
+    "fact_count": 7,
+    "match_count": 1,
+    "immaterial_count": 4,
+    "material_count": 2,
+    "occurrence_count": 26
+  },
+  "counts_note": "occurrence_count is not included in fact_count. other_reasons are not extra facts.",
+  "awaiting_reviewer": true,
+  "all_material_resolved": false,
+  "do_not_rely": false,
+  "pins_stale": false,
+  "live_register": false,
+  "register_queried": false,
+  "agent_chose_source": false,
+  "records_edited": false,
+  "parties_contacted": false,
+  "correct_value_written": false,
+  "model_called": false,
+  "network_called": false,
+  "foundry_called": false,
+  "a3_recommended": false,
+  "output_is_anonymised": false,
+  "explanation_authored_by_model": false,
+  "actions_taken": [],
+  "prohibited_payload_keys": [],
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "intake_phrases": [
+      "ignore previous instructions"
+    ],
+    "hits": [
+      {
+        "document_id": "purchase-invoice",
+        "page": 1,
+        "paragraph": 1,
+        "line": 8,
+        "patterns": [
+          "ignore-instructions",
+          "treat-as-match",
+          "edit-record",
+          "contact"
+        ],
+        "text_recorded": false
+      }
+    ],
+    "zero_width_removed": 0
+  },
+  "intake": {
+    "called": true,
+    "experiment_id": "exp-12-document-intake",
+    "catalogue_id": "O001",
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "reviewer_decision": null,
+    "accepted_into_queue": false,
+    "content_recorded": false,
+    "catalogue_stale": false,
+    "any_document_not_current": false,
+    "output_is_anonymised": false,
+    "files": [
+      {
+        "file_id": "onboarding-form",
+        "read_status": "read",
+        "date_status": "within_window",
+        "age_days": 24,
+        "duplicate_of": null,
+        "content_recorded": false,
+        "finding_count": 2,
+        "entity_types": [
+          "crn",
+          "postcode"
+        ],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "supply-contract",
+        "read_status": "read",
+        "date_status": "within_window",
+        "age_days": 24,
+        "duplicate_of": null,
+        "content_recorded": false,
+        "finding_count": 2,
+        "entity_types": [
+          "crn",
+          "postcode"
+        ],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "purchase-invoice",
+        "read_status": "read",
+        "date_status": "within_window",
+        "age_days": 24,
+        "duplicate_of": null,
+        "content_recorded": false,
+        "finding_count": 1,
+        "entity_types": [
+          "crn"
+        ],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "register-extract",
+        "read_status": "read",
+        "date_status": "within_window",
+        "age_days": 24,
+        "duplicate_of": null,
+        "content_recorded": false,
+        "finding_count": 1,
+        "entity_types": [
+          "postcode"
+        ],
+        "output_is_anonymised": false
+      }
+    ]
+  },
+  "redaction": {
+    "called": true,
+    "experiment_id": "exp-08-uk-pii-redaction-gateway",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "model_suggestions_applied": false,
+    "withheld_occurrences": 0
+  },
+  "pinpoint": {
+    "experiment_id": "exp-33-case-bundle-summariser",
+    "span_check": "resolve_span",
+    "containment": "citation normalise"
+  },
+  "resolution": {
+    "supplied": false,
+    "rejected": []
+  },
+  "facts": [
+    {
+      "fact_key": "legal_name",
+      "field_type": "name",
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation",
+      "other_reasons": [],
+      "explanation": "The values differ on the page and are the same after the deterministic normaliser for this field type. The difference is formatting or an abbreviation in those rules. This is not a finding that either source is right.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": false,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "northfen supplies ltd",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1,
+              "field": "legal_name"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1,
+              "field": "legal_name"
+            },
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1,
+              "field": "legal_name"
+            },
+            {
+              "document_id": "register-extract",
+              "document_title": "Synthetic register extract",
+              "kind": "register_extract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 1,
+              "line_end": 1,
+              "field": "legal_name"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "field": "legal_name"
+          },
+          "quote": "Legal name: Northfen Supplies Limited",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "northfen supplies ltd",
+          "display_fold": "northfen supplies limited"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "field": "legal_name"
+          },
+          "quote": "Legal name: NORTHFEN SUPPLIES LTD",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "northfen supplies ltd",
+          "display_fold": "northfen supplies ltd"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "field": "legal_name"
+          },
+          "quote": "Legal name: Northfen Supplies Ltd",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "northfen supplies ltd",
+          "display_fold": "northfen supplies ltd"
+        },
+        {
+          "citation": {
+            "document_id": "register-extract",
+            "document_title": "Synthetic register extract",
+            "kind": "register_extract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "field": "legal_name"
+          },
+          "quote": "Legal name: Northfen Supplies Limited",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "northfen supplies ltd",
+          "display_fold": "northfen supplies limited"
+        }
+      ]
+    },
+    {
+      "fact_key": "company_number",
+      "field_type": "company_number",
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation",
+      "other_reasons": [],
+      "explanation": "The values differ on the page and are the same after the deterministic normaliser for this field type. The difference is formatting or an abbreviation in those rules. This is not a finding that either source is right.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": false,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "88990011",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 2,
+              "line_end": 2,
+              "field": "company_number"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 2,
+              "line_end": 2,
+              "field": "company_number"
+            },
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 2,
+              "line_end": 2,
+              "field": "company_number"
+            },
+            {
+              "document_id": "register-extract",
+              "document_title": "Synthetic register extract",
+              "kind": "register_extract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 2,
+              "line_end": 2,
+              "field": "company_number"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 2,
+            "line_end": 2,
+            "field": "company_number"
+          },
+          "quote": "Company number: 88990011",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "88990011",
+          "display_fold": "88990011"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 2,
+            "line_end": 2,
+            "field": "company_number"
+          },
+          "quote": "Company number: 88990011",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "88990011",
+          "display_fold": "88990011"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 2,
+            "line_end": 2,
+            "field": "company_number"
+          },
+          "quote": "Company number: 88990011",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "88990011",
+          "display_fold": "88990011"
+        },
+        {
+          "citation": {
+            "document_id": "register-extract",
+            "document_title": "Synthetic register extract",
+            "kind": "register_extract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 2,
+            "line_end": 2,
+            "field": "company_number"
+          },
+          "quote": "Company number: 8899 0011",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "88990011",
+          "display_fold": "8899 0011"
+        }
+      ]
+    },
+    {
+      "fact_key": "registered_postcode",
+      "field_type": "postcode",
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation",
+      "other_reasons": [],
+      "explanation": "The values differ on the page and are the same after the deterministic normaliser for this field type. The difference is formatting or an abbreviation in those rules. This is not a finding that either source is right.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": false,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "SW1A 1AA",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 3,
+              "line_end": 3,
+              "field": "registered_postcode"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 3,
+              "line_end": 3,
+              "field": "registered_postcode"
+            },
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 3,
+              "line_end": 3,
+              "field": "registered_postcode"
+            },
+            {
+              "document_id": "register-extract",
+              "document_title": "Synthetic register extract",
+              "kind": "register_extract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 3,
+              "line_end": 3,
+              "field": "registered_postcode"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 3,
+            "line_end": 3,
+            "field": "registered_postcode"
+          },
+          "quote": "Postcode: SW1A 1AA",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "SW1A 1AA",
+          "display_fold": "sw1a 1aa"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 3,
+            "line_end": 3,
+            "field": "registered_postcode"
+          },
+          "quote": "Postcode: SW1A 1AA",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "SW1A 1AA",
+          "display_fold": "sw1a 1aa"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 3,
+            "line_end": 3,
+            "field": "registered_postcode"
+          },
+          "quote": "Postcode: sw1a1aa",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "SW1A 1AA",
+          "display_fold": "sw1a1aa"
+        },
+        {
+          "citation": {
+            "document_id": "register-extract",
+            "document_title": "Synthetic register extract",
+            "kind": "register_extract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 3,
+            "line_end": 3,
+            "field": "registered_postcode"
+          },
+          "quote": "Postcode: SW1A 1AA",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "SW1A 1AA",
+          "display_fold": "sw1a 1aa"
+        }
+      ]
+    },
+    {
+      "fact_key": "agreement_date",
+      "field_type": "date",
+      "classification": "immaterial_difference",
+      "reason": "formatting_or_abbreviation",
+      "other_reasons": [],
+      "explanation": "The values differ on the page and are the same after the deterministic normaliser for this field type. The difference is formatting or an abbreviation in those rules. This is not a finding that either source is right.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": false,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "2026-03-01",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 4,
+              "line_end": 4,
+              "field": "agreement_date"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 4,
+              "line_end": 4,
+              "field": "agreement_date"
+            },
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 4,
+              "line_end": 4,
+              "field": "agreement_date"
+            },
+            {
+              "document_id": "register-extract",
+              "document_title": "Synthetic register extract",
+              "kind": "register_extract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 4,
+              "line_end": 4,
+              "field": "agreement_date"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 4,
+            "line_end": 4,
+            "field": "agreement_date"
+          },
+          "quote": "Agreement date: 1 March 2026",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "2026-03-01",
+          "display_fold": "1 march 2026"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 4,
+            "line_end": 4,
+            "field": "agreement_date"
+          },
+          "quote": "Agreement date: 01/03/2026",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "2026-03-01",
+          "display_fold": "01/03/2026"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 4,
+            "line_end": 4,
+            "field": "agreement_date"
+          },
+          "quote": "Agreement date: 2026-03-01",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "2026-03-01",
+          "display_fold": "2026-03-01"
+        },
+        {
+          "citation": {
+            "document_id": "register-extract",
+            "document_title": "Synthetic register extract",
+            "kind": "register_extract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 4,
+            "line_end": 4,
+            "field": "agreement_date"
+          },
+          "quote": "Agreement date: 1 March 2026",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "2026-03-01",
+          "display_fold": "1 march 2026"
+        }
+      ]
+    },
+    {
+      "fact_key": "supplier_ref",
+      "field_type": "reference",
+      "classification": "match",
+      "reason": "same_display",
+      "other_reasons": [],
+      "explanation": "The values are the same once case and whitespace are folded, or the unparsed text is the same. This is not a finding that the value is accurate.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": false,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "nf-1001",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 5,
+              "line_end": 5,
+              "field": "supplier_ref"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 5,
+              "line_end": 5,
+              "field": "supplier_ref"
+            },
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 5,
+              "line_end": 5,
+              "field": "supplier_ref"
+            },
+            {
+              "document_id": "register-extract",
+              "document_title": "Synthetic register extract",
+              "kind": "register_extract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 5,
+              "line_end": 5,
+              "field": "supplier_ref"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 5,
+            "line_end": 5,
+            "field": "supplier_ref"
+          },
+          "quote": "Supplier ref: NF-1001",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "nf-1001",
+          "display_fold": "nf-1001"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 5,
+            "line_end": 5,
+            "field": "supplier_ref"
+          },
+          "quote": "Supplier ref: NF-1001",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "nf-1001",
+          "display_fold": "nf-1001"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 5,
+            "line_end": 5,
+            "field": "supplier_ref"
+          },
+          "quote": "Supplier ref: NF-1001",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "nf-1001",
+          "display_fold": "nf-1001"
+        },
+        {
+          "citation": {
+            "document_id": "register-extract",
+            "document_title": "Synthetic register extract",
+            "kind": "register_extract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 5,
+            "line_end": 5,
+            "field": "supplier_ref"
+          },
+          "quote": "Supplier ref: NF-1001",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "nf-1001",
+          "display_fold": "nf-1001"
+        }
+      ]
+    },
+    {
+      "fact_key": "amount",
+      "field_type": "currency",
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ",
+      "other_reasons": [],
+      "explanation": "The values are not the same after the deterministic normaliser, or a citation could not be used. The reviewer resolves this. This tool does not choose a source, edit a record, or contact anyone.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": true,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "125000",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 6,
+              "line_end": 6,
+              "field": "amount"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 6,
+              "line_end": 6,
+              "field": "amount"
+            }
+          ]
+        },
+        {
+          "canonical": "125050",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 6,
+              "line_end": 6,
+              "field": "amount"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 6,
+            "line_end": 6,
+            "field": "amount"
+          },
+          "quote": "Amount: GBP 1250.00",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "125000",
+          "display_fold": "gbp 1250.00"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 6,
+            "line_end": 6,
+            "field": "amount"
+          },
+          "quote": "Amount: GBP 1,250.00",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "125000",
+          "display_fold": "gbp 1,250.00"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 6,
+            "line_end": 6,
+            "field": "amount"
+          },
+          "quote": "Amount: GBP 1250.50",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "125050",
+          "display_fold": "gbp 1250.50"
+        }
+      ]
+    },
+    {
+      "fact_key": "payment_terms",
+      "field_type": "figure",
+      "classification": "material_discrepancy",
+      "reason": "normalised_values_differ",
+      "other_reasons": [],
+      "explanation": "The values are not the same after the deterministic normaliser, or a citation could not be used. The reviewer resolves this. This tool does not choose a source, edit a record, or contact anyone.",
+      "explanation_authored_by_model": false,
+      "normaliser_accepted": true,
+      "resolution_required": true,
+      "resolved": false,
+      "resolved_by": null,
+      "reviewer_choice": null,
+      "reviewer_ref": null,
+      "correct_value": null,
+      "agent_chose_source": false,
+      "records_edited": false,
+      "shown_to_reviewer": true,
+      "do_not_rely": false,
+      "stale_documents": [],
+      "groups": [
+        {
+          "canonical": "30|days",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "onboarding-form",
+              "document_title": "Supplier onboarding form",
+              "kind": "form",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 7,
+              "line_end": 7,
+              "field": "payment_terms"
+            },
+            {
+              "document_id": "supply-contract",
+              "document_title": "Supply contract",
+              "kind": "contract",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 7,
+              "line_end": 7,
+              "field": "payment_terms"
+            }
+          ]
+        },
+        {
+          "canonical": "45|days",
+          "normaliser_accepted": true,
+          "citations": [
+            {
+              "document_id": "purchase-invoice",
+              "document_title": "Purchase invoice",
+              "kind": "invoice",
+              "page": 1,
+              "paragraph": 1,
+              "line_start": 7,
+              "line_end": 7,
+              "field": "payment_terms"
+            }
+          ]
+        }
+      ],
+      "occurrences": [
+        {
+          "citation": {
+            "document_id": "onboarding-form",
+            "document_title": "Supplier onboarding form",
+            "kind": "form",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 7,
+            "line_end": 7,
+            "field": "payment_terms"
+          },
+          "quote": "Payment terms: 30 days",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "30|days",
+          "display_fold": "30 days"
+        },
+        {
+          "citation": {
+            "document_id": "supply-contract",
+            "document_title": "Supply contract",
+            "kind": "contract",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 7,
+            "line_end": 7,
+            "field": "payment_terms"
+          },
+          "quote": "Payment terms: 30 days",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "30|days",
+          "display_fold": "30 days"
+        },
+        {
+          "citation": {
+            "document_id": "purchase-invoice",
+            "document_title": "Purchase invoice",
+            "kind": "invoice",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 7,
+            "line_end": 7,
+            "field": "payment_terms"
+          },
+          "quote": "Payment terms: 45 days",
+          "pinpoint_ok": true,
+          "withheld": false,
+          "withheld_types": [],
+          "used": true,
+          "accepted": true,
+          "canonical": "45|days",
+          "display_fold": "45 days"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "uk-gdpr-article-5",
+      "title": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "opened": true,
+      "note": "Opened on 5 November 2026. Article 5(1)(d) says personal data shall be accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay ('accuracy'). That paragraph had no footnote marker. Footnotes on the page were on Article 5(1)(b), Article 5(1)(e), and the inserted Article 5(3). This starter does not erase or rectify anything.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "dpa-2018-section-205",
+      "title": "Data Protection Act 2018, section 205",
+      "url": "https://www.legislation.gov.uk/ukpga/2018/12/section/205",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "opened": true,
+      "note": "Opened on 5 November 2026. Section 205(1) says 'inaccurate', in relation to personal data, means incorrect or misleading as to any matter of fact. The revision banner said the Act was up to date with all changes known to be in force on or before 1 November 2026, and that changes may be brought into force at a future date. Those future-change lists were not checked for an effect on this definition. A material discrepancy in this tool is not a finding that personal data is inaccurate under this section.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "companies-house-about",
+      "title": "Companies House",
+      "url": "https://www.gov.uk/government/organisations/companies-house",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "opened": true,
+      "note": "Opened on 5 November 2026. The page says: 'We incorporate and dissolve limited companies. We register company information and make it available to the public.' This starter does not query that register. A document kind of register_extract is text the reviewer supplied. Company numbers in the fixtures are synthetic and were not looked up.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "ico-accuracy",
+      "title": "ICO principle (d): accuracy",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/accuracy/",
+      "last_verified": "2026-11-05",
+      "stale_applicable": false,
+      "opened": false,
+      "note": "Requested on 5 November 2026. The response was HTTP 403. The page was not opened and is not quoted. A search snippet is not treated as the page. This row is not stale-tested.",
+      "age_days": null,
+      "stale": false
+    },
+    {
+      "id": "harness-overview",
+      "title": "Copilot Studio harnesses overview",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "opened": true,
+      "note": "Opened on 5 November 2026. The page says the GitHub Copilot harness is a Microsoft Copilot Studio authoring and orchestration framework, not the GitHub Copilot service, and that customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. It describes that harness as reasoning-heavy and multi-step, with skills, memory, file creation, and a sandbox, using Copilot Credits. The billing overview page was not opened. No tariff is stated here. The same page describes a Customer Conversation harness and a standard harness. This experiment does not use the Customer Conversation harness.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "skills-overview",
+      "title": "Skills overview for the GitHub Copilot harness",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview",
+      "last_verified": "2026-11-05",
+      "stale_applicable": true,
+      "opened": true,
+      "note": "Opened on 5 November 2026. The page says the orchestration runtime invokes a skill when a request matches the skill's purpose, and decides from the user's message and the skill's description. It does not describe routing weights or classic-orchestration trigger phrases. This starter does not assign routing weights.",
+      "age_days": 0,
+      "stale": false
+    },
+    {
+      "id": "exp-08-identifier-rules",
+      "title": "Experiment 08 company-number prefixes and postcode shapes",
+      "url": "experiments/08-uk-pii-redaction-gateway/src/identifiers.py",
+      "last_verified": "2026-10-26",
+      "stale_applicable": false,
+      "opened": false,
+      "note": "Imported, not re-opened. Experiment 08 pins the Companies House URI customer guide (2011) and the ILR specification 2015-16 Annex C. Those PDFs were not opened on 5 November 2026. This row is not stale-tested.",
+      "age_days": null,
+      "stale": false
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue row B005",
+      "url": null,
+      "last_verified": "2026-11-05",
+      "stale_applicable": false,
+      "opened": false,
+      "note": "The planning catalogue row says the reviewer resolves every material discrepancy and records the stack as CS-GH + AZ. That file is not in this repository. It was read from the task brief. This row is not stale-tested. The score in that file is not repeated here.",
+      "age_days": null,
+      "stale": false
+    }
+  ],
+  "human_approval": {
+    "reviewer_resolves_each_material_discrepancy": true,
+    "agent_marked_any_approval_done": false,
+    "stale_sources_reopened_by_agent": false,
+    "records_corrected_by_agent": false,
+    "lawful_basis_chosen_by_agent": false
+  },
+  "limitations": [
+    "The class is a rule in src/normalise.py. It is not a finding that personal data is inaccurate under the Data Protection Act 2018, section 205, and it does not erase or rectify anything under UK GDPR Article 5(1)(d).",
+    "The ICO accuracy page was requested on 5 November 2026 and returned HTTP 403. It was not opened and is not quoted.",
+    "Company numbers and postcodes use Experiment 08's imported shapes. The 2011 URI guide and the 2015 ILR annex were not re-opened. There is no Companies House lookup. A match is not a finding that the number has been issued.",
+    "Numeric company numbers are padded to eight digits. An unknown prefix is left unparsed. A 7-digit form and its zero-padded form are immaterial formatting, and the raw quotes are still shown.",
+    "Dates are UK day-first. 01/02/2026 is 1 February 2026, not 2 January. A two-digit year is not accepted.",
+    "A street abbreviation is expanded only when it is the last word. A town after the street word is not removed.",
+    "A leading title is removed only when the next token is a single letter. Other titles stay.",
+    "An unparsed value that is identical on every source is a match of the text, not a finding that the value is valid.",
+    "Immaterial rows are shown. The reviewer is not asked to resolve them. They are not a decision that the values are accurate.",
+    "A negation in the same line can hide one of this experiment's instruction phrases. Experiment 12's phrase list does not use that skip.",
+    "Experiment 08 does not detect an unlabelled NHS number, an unlabelled eight-digit company number, names, or email addresses. output_is_anonymised stays false.",
+    "The 90-day window is a stale flag. Article 5(1)(d) says 'without delay'. It does not state 90 days.",
+    "Experiment 12's purpose stays unconfirmed. This tool does not call the intake confirmation or routing functions.",
+    "No model was called. An explanation in the JSON is a fixed sentence for the class."
+  ]
+}
