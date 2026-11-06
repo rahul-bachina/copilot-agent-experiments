@@ -1,0 +1,1130 @@
+{
+  "label": "DRAFT FOR THE CREDIT OFFICER. NOT A CREDIT DECISION AND NOT A LIMIT.",
+  "catalogue_id": "B009",
+  "experiment_id": "exp-39-credit-memo-drafting",
+  "autonomy": "A1",
+  "pack_id": "MH-MEMO-001",
+  "applicant_name_as_labelled": "Mereholt Components Ltd",
+  "applicant_label_is_not_a_cited_fact": true,
+  "caller_label_differs_from_cited_name": false,
+  "applicant_is_fictional": true,
+  "product_label": "sme_consumer_facing",
+  "as_of": "2026-11-06",
+  "stale_after_days": 90,
+  "intake": {
+    "called": true,
+    "experiment_id": "exp-12-document-intake",
+    "catalogue_id": "O001",
+    "autonomy_of_intake": "A1",
+    "files_confirmed": false,
+    "purpose_confirmed": false,
+    "handed_off": false,
+    "accepted_into_queue": false,
+    "production_record_written": false,
+    "external_sent": false,
+    "underlying_matter_approved": false,
+    "underlying_matter_rejected": false,
+    "catalogue_stale": false,
+    "any_document_not_current": true,
+    "gateway_rules_stale": false,
+    "prompt_injection_detected": false,
+    "prompt_injection_followed": false,
+    "purpose_requested": null,
+    "files": [
+      {
+        "file_id": "profile",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "accounts",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "bureau",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "note",
+        "read_status": "read",
+        "date_status": "within_window",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      },
+      {
+        "file_id": "oldbureau",
+        "read_status": "read",
+        "date_status": "stale",
+        "suggested_class": "unclassified",
+        "finding_count": 0,
+        "entity_types": [],
+        "output_is_anonymised": false
+      }
+    ]
+  },
+  "sections": {
+    "company_profile": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F1",
+          "value": "The profile names the applicant as Mereholt Components Ltd.",
+          "status": "stated",
+          "citation": {
+            "document_id": "profile",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    },
+    "financial_highlights": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F2",
+          "value": "The accounts state turnover of GBP 4200000 for the year ended 2026-03-31.",
+          "status": "stated",
+          "citation": {
+            "document_id": "accounts",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        },
+        {
+          "fact_id": "F3",
+          "value": "The extract states turnover of GBP 4200000 for the year ended 2026-03-31.",
+          "status": "stated",
+          "citation": {
+            "document_id": "bureau",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    },
+    "limit_request": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F4",
+          "value": "The accounts state a request for a facility of GBP 250000.",
+          "status": "stated",
+          "citation": {
+            "document_id": "accounts",
+            "page": 1,
+            "paragraph": 2,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        },
+        {
+          "fact_id": "F5",
+          "value": "The note states a request for a facility of GBP 180000.",
+          "status": "stated",
+          "citation": {
+            "document_id": "note",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    },
+    "security": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F6",
+          "value": "The security note states a fixed charge over book debts.",
+          "status": "stated",
+          "citation": {
+            "document_id": "note",
+            "page": 1,
+            "paragraph": 2,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    },
+    "covenants": {
+      "status": "not_stated",
+      "items": [
+        {
+          "gap_id": "G5",
+          "value": "not stated",
+          "status": "not_stated",
+          "citation": null,
+          "verdict": "not_stated",
+          "inferred": false
+        }
+      ]
+    },
+    "risk_flags": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F7",
+          "value": "The note records that a payment narrative looked unusual.",
+          "status": "stated",
+          "citation": {
+            "document_id": "note",
+            "page": 1,
+            "paragraph": 3,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        },
+        {
+          "fact_id": "F8",
+          "value": "The note states that the pack mentions the director's age.",
+          "status": "stated",
+          "citation": {
+            "document_id": "note",
+            "page": 1,
+            "paragraph": 4,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    },
+    "information_gaps": {
+      "status": "stated",
+      "items": [
+        {
+          "fact_id": "F9",
+          "value": "The pack states that a debtor ageing is not in the file.",
+          "status": "stated",
+          "citation": {
+            "document_id": "note",
+            "page": 1,
+            "paragraph": 5,
+            "line_start": 1,
+            "line_end": 1
+          },
+          "verdict": "supported",
+          "other_failures": [],
+          "inferred": false
+        }
+      ]
+    }
+  },
+  "facts": [
+    {
+      "fact_id": "F1",
+      "field": "company_profile",
+      "text": "The profile names the applicant as Mereholt Components Ltd.",
+      "citation": {
+        "document_id": "profile",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F2",
+      "field": "financial_highlights",
+      "text": "The accounts state turnover of GBP 4200000 for the year ended 2026-03-31.",
+      "citation": {
+        "document_id": "accounts",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F3",
+      "field": "financial_highlights",
+      "text": "The extract states turnover of GBP 4200000 for the year ended 2026-03-31.",
+      "citation": {
+        "document_id": "bureau",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F4",
+      "field": "limit_request",
+      "text": "The accounts state a request for a facility of GBP 250000.",
+      "citation": {
+        "document_id": "accounts",
+        "page": 1,
+        "paragraph": 2,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F5",
+      "field": "limit_request",
+      "text": "The note states a request for a facility of GBP 180000.",
+      "citation": {
+        "document_id": "note",
+        "page": 1,
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F6",
+      "field": "security",
+      "text": "The security note states a fixed charge over book debts.",
+      "citation": {
+        "document_id": "note",
+        "page": 1,
+        "paragraph": 2,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F7",
+      "field": "risk_flags",
+      "text": "The note records that a payment narrative looked unusual.",
+      "citation": {
+        "document_id": "note",
+        "page": 1,
+        "paragraph": 3,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F8",
+      "field": "risk_flags",
+      "text": "The note states that the pack mentions the director's age.",
+      "citation": {
+        "document_id": "note",
+        "page": 1,
+        "paragraph": 4,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    },
+    {
+      "fact_id": "F9",
+      "field": "information_gaps",
+      "text": "The pack states that a debtor ageing is not in the file.",
+      "citation": {
+        "document_id": "note",
+        "page": 1,
+        "paragraph": 5,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "inferred": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "G5",
+      "field": "covenants",
+      "value": "not stated",
+      "status": "not_stated",
+      "citation": null,
+      "verdict": "not_stated",
+      "inferred": false
+    }
+  ],
+  "contradictions": [
+    {
+      "field": "financial_highlights",
+      "fact_ids": [
+        "F2",
+        "F3"
+      ],
+      "chosen_value": null,
+      "resolved_by_agent": false
+    },
+    {
+      "field": "limit_request",
+      "fact_ids": [
+        "F4",
+        "F5"
+      ],
+      "chosen_value": null,
+      "resolved_by_agent": false
+    }
+  ],
+  "not_used": [
+    {
+      "document_id": "oldbureau",
+      "file_id": "oldbureau",
+      "reason": "intake_date_not_current",
+      "quoted": false,
+      "field": "financial_highlights"
+    }
+  ],
+  "summary": {
+    "stated_fact_count": 9,
+    "verdict_total": 9,
+    "verdicts": {
+      "supported": 9,
+      "citation_missing": 0,
+      "pinpoint_incomplete": 0,
+      "citation_not_in_pack": 0,
+      "pinpoint_not_in_document": 0,
+      "prohibited_action": 0,
+      "untrusted_instruction": 0,
+      "withheld_identifier": 0,
+      "stale_or_superseded": 0,
+      "number_or_date_mismatch": 0,
+      "span_does_not_support": 0
+    },
+    "failure_count": 0,
+    "gap_count": 1,
+    "contradiction_count": 2,
+    "not_used_count": 1,
+    "section_count": 7,
+    "each_stated_fact_has_one_verdict": true,
+    "other_failures_are_not_in_the_totals": true,
+    "gaps_are_not_verdicts": true,
+    "section_count_is_not_added_to_stated_fact_count": true,
+    "cross_source_counts_are_not_added": true
+  },
+  "checklist": {
+    "items": [
+      {
+        "id": "company_profile",
+        "section": "company_profile",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F1"
+        ]
+      },
+      {
+        "id": "financial_highlights",
+        "section": "financial_highlights",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F2",
+          "F3"
+        ]
+      },
+      {
+        "id": "limit_request",
+        "section": "limit_request",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F4",
+          "F5"
+        ]
+      },
+      {
+        "id": "security",
+        "section": "security",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F6"
+        ]
+      },
+      {
+        "id": "covenants",
+        "section": "covenants",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "missing",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": []
+      },
+      {
+        "id": "risk_flags",
+        "section": "risk_flags",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F7",
+          "F8"
+        ]
+      },
+      {
+        "id": "information_gaps",
+        "section": "information_gaps",
+        "requirement_words": "A current cited line for this section, or the words not stated. The status does not decide credit and does not decide a regulatory duty.",
+        "status": "evidenced",
+        "sufficient": false,
+        "decides_the_credit": false,
+        "decides_the_duty": false,
+        "fact_ids": [
+          "F9"
+        ]
+      }
+    ],
+    "sufficient": false,
+    "decides_the_credit": false,
+    "pattern": "Experiment 16 checklist shape, mirrored locally. Experiment 16 is not imported."
+  },
+  "cross_source": {
+    "called": true,
+    "experiment_id": "exp-36-cross-source-validation",
+    "catalogue_id": "B005",
+    "reason": null,
+    "agent_chose_source": false,
+    "register_queried": false,
+    "records_edited": false,
+    "parties_contacted": false,
+    "correct_value_written": false,
+    "counts": {
+      "fact_count": 2,
+      "match_count": 0,
+      "immaterial_count": 1,
+      "material_count": 1,
+      "occurrence_count": 4
+    },
+    "counts_are_not_memo_facts": true,
+    "counts_note": "occurrence_count is not included in fact_count. other_reasons are not extra facts.",
+    "facts": [
+      {
+        "fact_key": "turnover",
+        "field_type": "currency",
+        "classification": "immaterial_difference",
+        "reason": "formatting_or_abbreviation",
+        "resolution_required": false,
+        "resolved": false,
+        "correct_value": null,
+        "agent_chose_source": false,
+        "occurrences": [
+          {
+            "document_id": "mgmt-accounts",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "quote": "Turnover: GBP 4200000",
+            "used": true,
+            "withheld": false
+          },
+          {
+            "document_id": "bureau-paste",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "quote": "Turnover: GBP 4,200,000.00",
+            "used": true,
+            "withheld": false
+          }
+        ]
+      },
+      {
+        "fact_key": "facility_request",
+        "field_type": "currency",
+        "classification": "material_discrepancy",
+        "reason": "normalised_values_differ",
+        "resolution_required": true,
+        "resolved": false,
+        "correct_value": null,
+        "agent_chose_source": false,
+        "occurrences": [
+          {
+            "document_id": "mgmt-accounts",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 2,
+            "line_end": 2,
+            "quote": "Facility request: GBP 250000",
+            "used": true,
+            "withheld": false
+          },
+          {
+            "document_id": "internal-note",
+            "page": 1,
+            "paragraph": 1,
+            "line_start": 1,
+            "line_end": 1,
+            "quote": "Facility request: GBP 180000",
+            "used": true,
+            "withheld": false
+          }
+        ]
+      }
+    ],
+    "material_fact_keys": [
+      "facility_request"
+    ]
+  },
+  "equality": {
+    "themes": [
+      "age"
+    ],
+    "themes_not_in_section_19_3": [],
+    "discrimination_found": false,
+    "section_13_applied": false,
+    "section_19_applied": false,
+    "section_29_applied": false,
+    "schedule_3_opened": false,
+    "decides_less_favourable_treatment": false
+  },
+  "special_category": {
+    "themes": [],
+    "article_9_condition_applied": false,
+    "used_as_a_credit_factor": false
+  },
+  "financial_crime": {
+    "phrases": [
+      "unusual"
+    ],
+    "narrative_for_human_review": true,
+    "audience": "MLRO",
+    "suspicion_decided": false,
+    "sar_filed": false,
+    "authorised_disclosure_made": false,
+    "mlro_decides": true,
+    "customer_text_produced": false,
+    "section_333a_opened": false
+  },
+  "regulatory_notes": [
+    {
+      "id": "no-solely-automated-credit-decision",
+      "applies_because": "every pack",
+      "text": "Article 22 was shown as omitted on 6 November 2026. Article 22A(1) says a decision is based solely on automated processing if there is no meaningful human involvement. A credit decision can be a significant decision. This draft does not take it. solely_automated_decision stays false. That flag does not certify meaningful human involvement.",
+      "source_ids": [
+        "uk-gdpr-article-22",
+        "uk-gdpr-article-22a",
+        "uk-gdpr-article-22c"
+      ],
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "article-9-not-a-credit-factor",
+      "applies_because": "every pack",
+      "text": "Article 9(1) prohibits processing the special categories it lists, unless a condition in Article 9(2) applies. Article 22B(1) restricts a significant decision based on that processing when the decision is solely automated. This draft does not apply an Article 9 condition and does not take the decision. A theme in a cited line is shown for the credit officer and the data protection officer. It is not a reason to approve or decline.",
+      "source_ids": [
+        "uk-gdpr-article-9",
+        "uk-gdpr-article-22b"
+      ],
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-lending-theme",
+      "applies_because": "every pack",
+      "text": "Section 4 lists the protected characteristics. Section 13(1) is direct discrimination. Section 19(1) is indirect discrimination. Section 29(1) and 29(2) restrict discrimination in the provision of a service, including as to terms. Schedule 3 was not opened. A word from section 4 in a cited line is a theme for the credit officer. It is not a finding that section 13, 19, or 29 was contravened.",
+      "source_ids": [
+        "equality-act-s4",
+        "equality-act-s13",
+        "equality-act-s19",
+        "equality-act-s29",
+        "equality-act-schedule-3-not-opened"
+      ],
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "financial-crime-narrative-only",
+      "applies_because": "every pack",
+      "text": "Regulation 21(3) requires a nominated officer. Regulation 21(5) is that officer's consideration of a disclosure. Section 330 is the regulated-sector disclosure offence. Section 331 is the nominated officer's offence. Section 338 defines an authorised disclosure. The MLRO decides any SAR. This draft copies a flagged line for that person. It does not decide suspicion, it does not make a disclosure, and it does not produce customer text. Section 333A was not opened.",
+      "source_ids": [
+        "mlr-2017-reg-21",
+        "poca-s330",
+        "poca-s331",
+        "poca-s338",
+        "poca-s333a-not-opened"
+      ],
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "consumer-duty-context",
+      "applies_because": "sme_consumer_facing",
+      "text": "PRIN 2A.1 says the Consumer Duty applies to a firm's retail market business, and that the application is set out in PRIN 3. PRIN 3 was not opened. The glossary definition of a retail customer, including any treatment of an SME, was not opened. The caller label is not a decision that the firm is in retail market business. PRIN 2A.2 was requested and the rule text was not returned, so the cross-cutting obligations are not quoted. This note is not a finding that the Duty was met.",
+      "source_ids": [
+        "prin-2a-1",
+        "prin-2a-2-not-retrieved",
+        "prin-3-not-opened"
+      ],
+      "applied_as_a_finding": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "uk-gdpr-article-5",
+      "title": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "Personal data shall be: (a) processed lawfully, fairly and in a transparent manner in relation to the data subject ('lawfulness, fairness and transparency'); (c) adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed ('data minimisation'); (d) accurate and, where necessary, kept up to date.",
+      "note": "Opened 6 November 2026. Article 5(1)(a), (c) and (d) were read, as was Article 5(2) on accountability. Article 5(3) was inserted by the Data (Use and Access) Act 2025 and says processing is not lawful by virtue only of being compatible with the purposes for which the personal data was collected. This starter does not choose an Article 6 basis and does not erase or rectify anything.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-9",
+      "title": "UK GDPR Article 9",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/9",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person's sex life or sexual orientation shall be prohibited.",
+      "note": "Opened 6 November 2026. Article 9(1) was read. Article 9(2) lists conditions that can disapply paragraph 1, including explicit consent and a domestic-law basis. This starter does not apply a condition. The Data Protection Act 2018 section 10 was not opened.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-22",
+      "title": "UK GDPR Article 22",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": null,
+      "note": "Opened 6 November 2026. Article 22 is shown as omitted. Chapter 3 Section 4A was substituted for Article 22 by the Data (Use and Access) Act 2025, section 80(1), in force for remaining purposes on 5 February 2026 (S.I. 2026/82, regulation 2(j)). The old Article 22 text is not quoted.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-22a",
+      "title": "UK GDPR Article 22A",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A decision is based solely on automated processing if there is no meaningful human involvement in the taking of the decision, and a decision is a significant decision, in relation to a data subject, if it produces a legal effect for the data subject, or it has a similarly significant effect for the data subject.",
+      "note": "Opened 6 November 2026. Article 22A(1) was read. Article 22A(2) says that, when considering meaningful human involvement, a person must consider, among other things, the extent to which the decision is reached by means of profiling. This starter does not take a credit decision and does not certify meaningful human involvement.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-22b",
+      "title": "UK GDPR Article 22B",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22B",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A significant decision based entirely or partly on processing described in Article 9(1) (processing of special categories of personal data) may not be taken based solely on automated processing, unless one of the following conditions is met. The first condition is that the decision is based entirely on processing of personal data to which the data subject has given explicit consent.",
+      "note": "Opened 6 November 2026. Paragraphs 1, 2, 3 and 4 were read from the page and the data.xml. Paragraph 3 is the contract or law condition together with Article 9(2)(g). Paragraph 4 restricts a significant decision based solely on automated processing where the decision-maker relies on Article 6(1)(ea). This starter does not take the decision and does not rely on either condition.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-22c",
+      "title": "UK GDPR Article 22C",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22C",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "The safeguards must consist of or include measures which provide the data subject with information about decisions described in paragraph 1 taken in relation to the data subject; enable the data subject to make representations about such decisions; enable the data subject to obtain human intervention on the part of the controller in relation to such decisions; enable the data subject to contest such decisions.",
+      "note": "Opened 6 November 2026. Article 22C(2) was read. This starter does not provide those safeguards, because it does not take the decision. A deployment that did take a significant decision would have to meet them. This folder does not.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "uk-gdpr-article-22d",
+      "title": "UK GDPR Article 22D",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22D",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "The Secretary of State may by regulations provide that, for the purposes of Article 22A(1)(a), there is, or is not, to be taken to be meaningful human involvement in the taking of a decision in cases described in the regulations.",
+      "note": "Opened 6 November 2026. Article 22D(1) was read. No regulations under Article 22D were opened. This starter does not treat any regulation as defining meaningful human involvement for credit.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-s4",
+      "title": "Equality Act 2010, section 4",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/4",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "The following characteristics are protected characteristics: age; disability; gender reassignment; marriage and civil partnership; pregnancy and maternity; race; religion or belief; sex; sexual orientation.",
+      "note": "Opened 6 November 2026. The page said section 4 is up to date with all changes known to be in force on or before 6 November 2026. The list is a theme list for the credit officer. It is not a finding of discrimination.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-s13",
+      "title": "Equality Act 2010, section 13",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/13",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A person (A) discriminates against another (B) if, because of a protected characteristic, A treats B less favourably than A treats or would treat others.",
+      "note": "Opened 6 November 2026. Section 13(1) was read. Section 13(2) is the age justification. This starter does not decide less favourable treatment and does not apply section 13(2).",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-s19",
+      "title": "Equality Act 2010, section 19",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/19",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A person (A) discriminates against another (B) if A applies to B a provision, criterion or practice which is discriminatory in relation to a relevant protected characteristic of B's.",
+      "note": "Opened 6 November 2026. Section 19(1) and 19(3) were read. Section 19(3) lists age, disability, gender reassignment, marriage and civil partnership, race, religion or belief, sex, and sexual orientation. It does not list pregnancy and maternity. This starter does not decide that a provision, criterion or practice is discriminatory.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-s29",
+      "title": "Equality Act 2010, section 29",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/29",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A person (a \"service-provider\") concerned with the provision of a service to the public or a section of the public (for payment or not) must not discriminate against a person requiring the service by not providing the person with the service.",
+      "note": "Opened 6 November 2026. The page said section 29 is up to date with all changes known to be in force on or before 5 November 2026. Section 29(1) and 29(2) were read. Section 29(2) covers terms, terminating the service, and any other detriment. Schedule 3 was not opened, so no services exception is applied. This starter does not decide that lending is or is not a service in a given case.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "prin-2a-1",
+      "title": "FCA Handbook, PRIN 2A.1",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/1.html",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "The Consumer Duty applies in relation to a firm's retail market business or where the firm communicates or approves financial promotions which are addressed to, or disseminated in such a way that they are likely to be received by, a retail customer.",
+      "note": "Opened 6 November 2026. The page says the application is set out in PRIN 3, including PRIN 3.2.6R to PRIN 3.2.12G. PRIN 3 was not opened. The page says the definition of a retail customer for the purposes of the Consumer Duty includes a prospective customer. The glossary definition of a retail customer, including any SME limb, was not opened. This starter does not decide that a firm is in retail market business, and it does not decide that the Duty was met. FG22/5 is named on the page and was not opened.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "prin-2a-2-not-retrieved",
+      "title": "FCA Handbook, PRIN 2A.2",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/2.html",
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Requested on 6 November 2026. The response did not include the rule text. The cross-cutting obligations are not quoted. They are not applied.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "mlr-2017-reg-21",
+      "title": "Money Laundering Regulations 2017, regulation 21",
+      "url": "https://www.legislation.gov.uk/uksi/2017/692/regulation/21",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "An individual in the relevant person's firm must be appointed as a nominated officer. Where a disclosure is made to the nominated officer, that officer must consider it in the light of any relevant information which is available to the relevant person and determine whether it gives rise to knowledge or suspicion or reasonable grounds for knowledge or suspicion that a person is engaged in money laundering or terrorist financing.",
+      "note": "Opened 6 November 2026. Regulation 21(3) and 21(5) were read. The page said regulation 21 is up to date with all changes known to be in force on or before 5 November 2026. This starter does not appoint the officer and does not make the regulation 21(5) determination. Regulation 28 was not re-opened for this experiment. JMLSG guidance was not opened.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "poca-s330",
+      "title": "Proceeds of Crime Act 2002, section 330",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/330",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A person commits an offence if the conditions in subsections (2) to (4) are satisfied. The first condition is that he knows or suspects, or has reasonable grounds for knowing or suspecting, that another person is engaged in money laundering. The fourth condition is that he does not make the required disclosure to a nominated officer, or a person authorised for the purposes of this Part by the Director General of the National Crime Agency, as soon as is practicable.",
+      "note": "Opened 6 November 2026. The page said section 330 is up to date with all changes known to be in force on or before 6 November 2026. Subsections (1) to (5) were read. The required disclosure is defined in subsection (5). This starter does not decide that the conditions are met and does not make the disclosure. Schedule 9, which determines a business in the regulated sector, was not opened.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "poca-s331",
+      "title": "Proceeds of Crime Act 2002, section 331",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/331",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "A person nominated to receive disclosures under section 330 commits an offence if the conditions in subsections (2) to (4) are satisfied.",
+      "note": "Opened 6 November 2026. Section 331(1) and 331(4) were read. Subsection (4) is the nominated officer's required disclosure to a person authorised by the Director General of the National Crime Agency. The MLRO, not this starter, decides any SAR. This starter does not make that disclosure.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "poca-s338",
+      "title": "Proceeds of Crime Act 2002, section 338",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/338",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "For the purposes of this Part a disclosure is authorised if it is a disclosure to a constable, a customs officer or a nominated officer by the alleged offender that property is criminal property, and the first, second or third condition set out below is satisfied.",
+      "note": "Opened 6 November 2026. Section 338(1) was read. This starter does not make an authorised disclosure and does not decide that property is criminal property.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "poca-s333a-not-opened",
+      "title": "Proceeds of Crime Act 2002, section 333A",
+      "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/333A",
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Not opened on 6 November 2026. Tipping-off wording is not quoted. The control in this starter is that no customer text is produced.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "harness-overview",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "The GitHub Copilot harness is a Microsoft Copilot Studio authoring and orchestration framework, not the GitHub Copilot service.",
+      "note": "Opened 6 November 2026. The page says customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. It says the GitHub Copilot harness can take a goal, break it into steps, supports skills and memory, creates and edits Word, Excel, PowerPoint, and PDF files, runs in a sandbox, and that agents and workflows on it use Copilot Credits. The billing pages linked from the table were not opened. The page did not mark the harness as preview. The standard harness is described as following the topics and rules the maker defines.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "generative-orchestration",
+      "title": "Generative orchestration guidance",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/generative-orchestration",
+      "last_verified": "2026-11-06",
+      "opened": true,
+      "age_days": 0,
+      "stale": false,
+      "quote": "In generative orchestration, the planner can invoke topics not only by trigger phrases but also whenever their described purpose matches the user's need.",
+      "note": "Opened 6 November 2026. The page says names carry more weight than descriptions. It does not describe numeric routing weights. It uses the words \"Standard harness (planner)\" for an LLM planning layer. The harness overview uses \"standard harness\" for rule-based agents. This starter does not treat those as the same component. That identification is unverified. The page describes autonomous triggers. This starter does not use one. Whether the GitHub Copilot harness uses this planner was not stated on the harness overview. That link is unverified.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "equality-act-schedule-3-not-opened",
+      "title": "Equality Act 2010, Schedule 3",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/schedule/3",
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Not opened. No services exception, including any financial-services exception, is applied.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "prin-3-not-opened",
+      "title": "FCA Handbook, PRIN 3",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/3/",
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Not opened. Whether a product is retail market business is not decided here.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "fg22-5-not-opened",
+      "title": "FCA FG22/5",
+      "url": "https://www.fca.org.uk/publication/finalised-guidance/fg22-5.pdf",
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Named on the PRIN 2A.1 page. Not opened. Not applied.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "foundry-not-opened",
+      "title": "Microsoft Foundry",
+      "url": null,
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "A product page was not opened on 6 November 2026. Foundry is named because the catalogue stack is FND. It is not called. UK region availability is unverified.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "fabric-not-opened",
+      "title": "Microsoft Fabric",
+      "url": null,
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "A product page was not opened on 6 November 2026. Fabric is named because the catalogue stack is FAB. A lakehouse, a warehouse, and a Power BI report are unverified. This starter does not write one.",
+      "applied_as_a_finding": false
+    },
+    {
+      "id": "catalogue-boundary",
+      "title": "Catalogue boundary for B009",
+      "url": null,
+      "last_verified": null,
+      "opened": false,
+      "age_days": null,
+      "stale": false,
+      "quote": null,
+      "note": "Autonomy A1. The credit officer owns the recommendation and every approval. This row is not a web page.",
+      "applied_as_a_finding": false
+    }
+  ],
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": []
+  },
+  "prohibited_payload_keys": [],
+  "checker_passed": true,
+  "do_not_rely": true,
+  "do_not_rely_reasons": [
+    "missing_information",
+    "contradiction",
+    "intake_or_document_not_current",
+    "equality_theme",
+    "financial_crime_narrative",
+    "material_cross_source_discrepancy"
+  ],
+  "differences": {
+    "experiment_12": "Experiment 12 inventories text files. It has no credit purpose. This experiment calls intake() with no purpose, so nothing is routed, and then copies lines from documents whose file was read. It does not confirm the files and it does not decide credit.",
+    "experiment_16": "Experiment 16 drafts a Money Laundering Regulations checklist and can record that a KYC reviewer confirmed documents. This experiment mirrors the checklist shape: a status, sufficient false, and decides_the_credit false. It does not import Experiment 16. That package lives under the module name src. It does not confirm identity, apply regulation 28, or onboard anyone.",
+    "experiment_36": "Experiment 36 classifies the same fact across sources. This experiment calls compare() when the pack supplies a comparisons object. It does not choose a source. The comparison counts stay on cross_source and are not added to the memo's stated-fact count.",
+    "experiment_37": "Experiment 37 copies a contiguous span and checks a pinpoint for a broker submission. This experiment uses that same rule for credit-memo sections. It does not import Experiment 37, because that package lives under the module name src. It does not decide coverage or price, and it does not decide credit."
+  },
+  "human_approval": {
+    "credit_officer_reviews_every_cited_fact": true,
+    "credit_officer_owns_recommendation_and_approval": true,
+    "limit_is_outside_this_agent": true,
+    "mlro_decides_any_sar": true,
+    "customer_or_bureau_contact_is_outside_this_agent": true,
+    "core_or_crm_post_is_outside_this_agent": true,
+    "dpo_confirms_lawful_basis_before_live_processing": true,
+    "agent_marked_any_approval_done": false
+  },
+  "limitations": [
+    "The checker is extractive. A true paraphrase fails. A copied line can still omit the line that changes the credit picture.",
+    "The section list is closed. A point outside those seven sections is not extracted.",
+    "A missing section is the words not stated. The value is not inferred.",
+    "Experiment 16 is not imported. The checklist does not decide that a Money Laundering Regulations duty is met.",
+    "Experiment 36 is called only when the pack supplies comparisons. No comparison is not a finding that the sources agree.",
+    "Comparison counts are not memo facts. They are not added to stated_fact_count.",
+    "The 90-day window is a freshness flag. It is not a statutory period.",
+    "Article 22 was shown as omitted on 6 November 2026. This draft does not certify meaningful human involvement under Article 22A.",
+    "No Article 9 condition is applied. Schedule 1 to the Data Protection Act 2018 was not opened.",
+    "Schedule 3 to the Equality Act 2010 was not opened. No services exception is applied.",
+    "PRIN 3 was not opened. The glossary definition of a retail customer was not opened. PRIN 2A.2 did not return rule text.",
+    "Section 333A of the Proceeds of Crime Act 2002 was not opened. No customer text is produced.",
+    "Regulation 28 was not re-opened. JMLSG guidance was not opened.",
+    "Microsoft Foundry and Microsoft Fabric product pages were not opened. Neither is called.",
+    "No model was called."
+  ],
+  "experiment_12_called": true,
+  "experiment_29_number_check": true,
+  "experiment_36_called": true,
+  "credit_decision": null,
+  "recommendation": null,
+  "limit_set": null,
+  "limit_requested_chosen": null,
+  "customer_contacted": false,
+  "bureau_contacted": false,
+  "core_banking_posted": false,
+  "crm_posted": false,
+  "sar_filed": false,
+  "suspicion_decided": false,
+  "discrimination_found": false,
+  "consumer_duty_met": null,
+  "reading_acknowledged": false,
+  "draft_approved_for_use": false,
+  "summary_accepted_as_decision": false,
+  "solely_automated_decision": false,
+  "product_label_decided_by_agent": false,
+  "model_called": false,
+  "network_called": false,
+  "foundry_called": false,
+  "fabric_called": false,
+  "lakehouse_written": false,
+  "a3_recommended": false,
+  "actions_taken": [],
+  "output_is_anonymised": false,
+  "experiment_16_imported": false,
+  "experiment_37_imported": false,
+  "evaluation_released": false
+}
