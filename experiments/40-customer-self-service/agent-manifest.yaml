@@ -1,0 +1,572 @@
+# Agent manifest: Customer Self-Service Agent
+# Experiment 40 — catalogue ID C001
+# Version: 0.1.0
+# Last reviewed: 2026-11-06
+# Next review: 2027-05-06
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-40-customer-self-service"
+  name: "Customer Self-Service Agent"
+  version: "0.1.0"
+  description: >
+    Helps a customer or a handler draft a reply to one synthetic enquiry from
+    a fixed knowledge base. Autonomy A1. The customer confirms an address-update
+    draft or an appointment-request draft. Confirmation does not change the
+    record. A handler approves any outward draft for their own channel. The
+    agent never resets a password, never takes a payment, never closes a
+    complaint, never changes a tariff or a contract, and never sends.
+  owner: "Customer service operations"
+  contact: "service@mereford.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/40-customer-self-service"
+
+autonomy:
+  level: "A1"
+  level_description: "Human approves every account-specific action"
+  constraints:
+    - "A customer confirms an address-update draft or an appointment-request draft. The agent only prepares it."
+    - "The agent NEVER resets a password, takes a payment, or closes a complaint"
+    - "The agent NEVER changes a tariff or a contract term"
+    - "The agent NEVER writes a production account, case, or appointment"
+    - "The agent NEVER sends an external message, including after a handler approves a draft for their own channel"
+    - "A human route is offered on every result, including a refusal"
+    - "Article text, identity, and the empty approval come from src/service.py, not from model output"
+    - "All output is advisory and is marked draft for customer service review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied enquiry"
+      description: "A single enquiry the customer or the handler pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One enquiry per invocation. The output does not echo the text."
+      justification: "The draft cannot match a page without the enquiry that was supplied."
+      data_categories:
+        - "Free text of one enquiry"
+        - "A sector label and a channel label, if supplied"
+        - "A synthetic account reference, if it matches the starter pattern"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the enquiry."
+    - resource: "Channel identity check"
+      description: "A separate object. method, result, checked_by, and as_of. Not read from the enquiry text."
+      access_level: "read"
+      scope: "One check for this run. A passed result is honoured only for a portal_session recorded by the channel, on the portal, for the same day and the same synthetic account reference."
+      justification: "Identity cannot be taken from a sentence that says the customer is verified."
+      may_contain_personal_data: false
+    - resource: "Separate review object"
+      description: "customer_confirm_address_draft, customer_confirm_appointment_draft, handler_take_handover, handler_approve_correspondence_for_own_send, or reject_draft."
+      access_level: "read"
+      scope: "One review, or a customer confirmation followed by a handler send-approval, for a draft already produced. Not read from the enquiry text."
+      justification: "Approval has to be deterministic and has to refuse a reset, a payment, a closure, a tariff change, a contract change, a write, and a send."
+      may_contain_personal_data: false
+    - resource: "Closed structured fields"
+      description: "An optional postcode equal to SYN 1AA, or an appointment date, slot, and place from a closed list."
+      access_level: "read"
+      scope: "Only values that match the starter's closed list. Any other postcode is dropped and not copied out."
+      justification: "An address draft needs a field a person can check. Free text is not that field."
+      may_contain_personal_data: false
+    - resource: "Synthetic knowledge base"
+      description: "Articles in src/catalogue.py for the invented organisation Mereford Customer Service."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Answers are quotations from these articles. The core does not browse a live knowledge base."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 redaction proposal"
+      description: "propose() from experiments/08-uk-pii-redaction-gateway. The redacted text is not copied into the draft."
+      access_level: "read"
+      scope: "One call per enquiry. Reversible maps are not requested. release() is not called."
+      justification: "UK identifiers in an enquiry should be counted before a draft is shown. This experiment does not ship a second redactor."
+      may_contain_personal_data: true
+    - resource: "Experiment 02 complaint analysis"
+      description: "analyse() from experiments/02-consumer-duty-complaint-intake, and only for a financial-services complaint or vulnerability flag."
+      access_level: "read"
+      scope: "One call. Evidence quotes are not copied. The DISP clock is not calculated. The customer is not labelled vulnerable."
+      justification: "The handler gate for a financial-services complaint already exists in Experiment 02. This starter does not re-implement that suggestion."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "Dynamics 365, the account system, and other production customer records"
+      reason: "The agent prepares a draft. It does not read a live account and it does not write one."
+    - resource: "Identity systems and password stores"
+      reason: "The agent does not reset a password and does not ask for a code. The identity check is a field the channel already recorded."
+    - resource: "Payment systems and card data"
+      reason: "The agent does not take or refund a payment."
+    - resource: "Tariff, pricing, and contract-administration systems"
+      reason: "The agent does not change a tariff or a contract term."
+    - resource: "Mailboxes, SMS gateways, and outbound letter services"
+      reason: "The agent does not send the draft."
+    - resource: "Live knowledge bases and the public website"
+      reason: "A live page would bypass last_reviewed. The catalogue is the file in this experiment."
+    - resource: "Other customers' enquiries and contact history"
+      reason: "One enquiry at a time. The agent does not search a contact history."
+
+tools:
+  allowed:
+    - tool: "Customer reply draft"
+      provider: "Local Python (src/service.py)"
+      action: "Match one enquiry to the synthetic catalogue or return a handover"
+      access_level: "read"
+      scope: "One enquiry. No network. No model. Calls Experiment 08 propose() and, for a financial-services complaint or vulnerability flag, Experiment 02 analyse()."
+      justification: "Which page applies, whether it is stale, and whether identity is trusted, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record a customer confirmation, a handler handover, a handler approval of a draft for their own send, or a rejection"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No execution, no write, and no send."
+      justification: "The approval has to be deterministic and has to refuse a reset, a payment, a closure, a tariff change, a contract change, a write, and a send."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "UK identifier proposal"
+      provider: "Experiment 08 (propose)"
+      action: "Count UK identifier spans in free text. The redacted string is not copied out."
+      access_level: "read"
+      scope: "The enquiry text for this run. reversible is false."
+      justification: "The starter does not ship a second redactor. Experiment 08 is the gateway."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Financial-services complaint suggestion"
+      provider: "Experiment 02 (analyse)"
+      action: "Suggest whether the text meets the handler's complaint screen. Do not close it and do not label the customer."
+      access_level: "read"
+      scope: "Financial-services complaint or vulnerability text only. No DISP clock."
+      justification: "The human gate already lives in Experiment 02. This starter calls the suggestion and still leaves the decision with a handler."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The article text, the identity flag, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a reset, a payment, a closure, a tariff or contract change, a write, or a send"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the person. Updating the account,
+      if a handler chooses to, is done in the organisation's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. A handler may approve a correspondence draft for their own
+      channel. That approval does not email, text, or post the draft.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not uphold or reject a complaint, and it does not approve
+      a tariff or a contract change. record_review can record a confirmation
+      or a handover. It cannot perform the action.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a firm met the Consumer Duty or PRIN 2A,
+      that a supplier met the Ofgem blog's expectations, or that an organisation
+      met the Equality Act 2010. It does not decide eligibility for a priority
+      services register.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against an account, a case, an appointment book, or
+      a Dynamics 365 record. Confirmation does not write one.
+
+  external_send:
+    enabled: false
+    rationale: >
+      The agent does not contact the customer. The human route is text in the
+      draft, not a message the agent sends. Handler approval of a draft does
+      not send it.
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment is taken and no refund is made."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Reset a password"
+      rationale: "A handler does this outside the agent. password_reset stays false, including after handler_take_handover."
+    - enabled: false
+      action_name: "Close a complaint"
+      rationale: "A handler does this outside the agent, under the organisation's own procedure. complaint_closed stays false."
+    - enabled: false
+      action_name: "Change a tariff or a contract"
+      rationale: "Those changes stay with a person. tariff_changed and contract_changed stay false."
+    - enabled: false
+      action_name: "Label a customer as vulnerable"
+      rationale: "Experiment 02's suggestion does not apply that label, and this starter does not add one."
+
+human_approval:
+  description: >
+    The customer confirms an address-update draft or an appointment-request
+    draft. A handler takes a prohibited action, a complaint, a vulnerability
+    or emergency handover, an unverified customer, a third-party request, or
+    a stale page. A handler may later approve a correspondence draft for
+    their own channel, and only after the customer has confirmed the account
+    draft. The agent has no path that acts on any of those choices.
+    Confirming a sentence in the chat does not reset a password, take a
+    payment, close a complaint, change a tariff or a contract, write a
+    record, book an appointment, or send a message.
+
+  approval_points:
+    - action: "Confirm an address-update draft"
+      approver: "Signed-in customer who is the subject of the account"
+      mandatory: true
+      rationale: "Catalogue checkpoint for C001. draft_reply() leaves human_approval null. Only record_review can set it, and only when the structured postcode is the synthetic value and identity is trusted. Confirmation does not change the record."
+    - action: "Confirm an appointment-request draft"
+      approver: "Signed-in customer who is the subject of the account"
+      mandatory: true
+      rationale: "The date, slot, and place must already be on the closed list. Confirmation does not book the appointment."
+    - action: "Approve a correspondence draft for the handler's own send"
+      approver: "Customer service handler"
+      mandatory: true
+      rationale: "Experiment 09 pattern. The handler approves the draft. The agent does not send it. This decision is refused until the customer has confirmed the account draft, and it is refused if the review names any recipient other than account-holder."
+    - action: "Reset a password, take a payment, close a complaint, or change a tariff or contract"
+      approver: "Customer service handler"
+      mandatory: true
+      rationale: "Outside the agent. The customer confirmation is refused. handler_take_handover records the handover and does not perform the action."
+    - action: "Take a vulnerability, emergency, complaint, unverified, or third-party handover"
+      approver: "Customer service handler"
+      mandatory: true
+      rationale: "The core returns a fixed script or withholds the account draft. A customer confirmation is refused."
+    - action: "Rely on a page after it is marked stale"
+      approver: "Customer service handler"
+      mandatory: true
+      rationale: "The body is not copied. The handler re-opens the organisation's own page. This starter cannot fetch that page."
+    - action: "Write the account or send a message"
+      approver: "Customer service handler"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled."
+
+  no_approval_required:
+    - action: "Read a published page that does not change the account"
+      rationale: "A knowledge answer has no external effect. A human route is still offered."
+    - action: "Re-run the same enquiry"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 5
+      was read on 6 November 2026. Article 5(1)(a) requires lawfulness, fairness,
+      and transparency. Article 5(3) says processing is not lawful merely because
+      it is compatible with the purpose for which the data was collected.
+      Article 6 was not opened on 6 November 2026. A public authority cannot
+      copy a private-sector basis from another experiment. The controller
+      confirms its own basis.
+    secondary: "None asserted. An organisation that later logs the enquiry in its own case system chooses the basis for that system."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a customer volunteers in an enquiry"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 6 November 2026. The controller confirms a condition, and completes a DPIA, before production use. This starter does not ask for this data, does not store the enquiry, and does not use it to take a decision."
+    safeguards:
+      - "One enquiry at a time, as supplied by the person running the draft"
+      - "The output does not echo the enquiry text, and it does not copy Experiment 08's redacted text"
+      - "A vulnerability phrase goes to a person. The customer is not labelled vulnerable."
+      - "Nothing is written to an account or a case"
+      - "Samples in this repository are synthetic"
+      - "No solely automated significant decision. Account changes, payments, tariff and contract changes, and complaint outcomes stay with a person, and this agent does not perform them."
+
+  data_minimisation:
+    - "The core reads one enquiry. It does not retrieve an account."
+    - "The draft names article ids and a synthetic account reference that matches the starter pattern. It does not copy the free text."
+    - "A postcode is copied only when it is the synthetic value SYN 1AA."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the handler then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process. Article 5(1)(d)
+      accuracy is why a stale page is not quoted. This starter does not itself
+      rectify an account.
+
+prompt_injection:
+  description: >
+    Enquiry text is untrusted. It may tell the model to ignore the catalogue,
+    skip the human route, reset a password, close a complaint, or send a
+    message. The core does not read the network. The model is not given a
+    tool that can reset, pay, close, write, or send.
+
+  controls:
+    - control: "Instructions separated from the enquiry"
+      description: "A sentence that is itself an instruction is not used to choose a page. The signal is recorded and followed is false."
+    - control: "Action instructions stop first"
+      description: "An instruction to reset a password now, take a payment now, close a complaint now, change a tariff or contract now, or send now returns a fixed script. No article body is quoted."
+    - control: "Identity is a separate object"
+      description: "A sentence that says the customer is verified is not the identity check. Phone, email, and web chat cannot carry a passed session."
+    - control: "Deterministic catalogue"
+      description: "The quoted body, the stale flag, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set a reset, a payment, a closure, a write, a send, or the review decision is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses those decisions. Direct functions raise ServiceForbidden."
+    - control: "Experiment 08"
+      description: "Free text goes through propose(). The redacted text is not copied out. release() is not called."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The handler
+    is the control. There is no autonomous action to take even if the brief is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-06"
+  risks:
+    - id: "R1"
+      risk: "Enquiry text is treated as authority to reset a password, take a payment, close a complaint, or change a tariff or contract"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no customer confirmation that performs them"
+        - "handler_take_handover does not perform the action"
+        - "reset_password, take_payment, close_complaint, change_tariff, and change_contract raise ServiceForbidden"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R2"
+      risk: "An address or appointment draft is applied because the customer confirmed the sentence"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "record_changed and appointment_booked stay false after confirmation"
+        - "The agent has no account-system tool"
+        - "A real postcode is not copied into the draft"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R3"
+      risk: "A message is sent because a handler approved a draft"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Sends are disabled"
+        - "The review schema rejects an email address"
+        - "Handler approval is refused until the customer has confirmed, and message_sent stays false"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R4"
+      risk: "A stale page is followed as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than the threshold is not quoted"
+        - "Equal to the threshold is still quoted, and that boundary is tested"
+        - "The core does not refresh the page from the web"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R5"
+      risk: "A financial-services complaint is closed, or a customer is labelled vulnerable, from the draft"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 02 analyse() is a suggestion. complaint_closed stays false"
+        - "customer_labelled_vulnerable stays false"
+        - "The DISP clock is not calculated and is not quoted as a date"
+      residual_risk: "Low"
+      owner: "Complaints handler"
+    - id: "R6"
+      risk: "A live enquiry, including a National Insurance number or health detail, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Experiment 08 counts UK identifiers. The redacted text is not copied out"
+        - "Samples use an invented organisation"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R7"
+      risk: "An energy customer is not told they are talking to an automated system, or cannot reach a person"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Every draft says it was written by an automated AI chatbot"
+        - "Every draft offers a person and a non-digital counter"
+        - "The Ofgem blog is cited for the energy scenario and is not treated as a verified licence condition"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the enquiry id, the outcome, and the later review. This starter logs
+    nothing because it keeps no store. Do not put the enquiry text in an
+    application trace. Experiment 08's audit record omits raw identifier values.
+    Do not add them back.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Enquiry id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's customer-service schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Article ids cited"
+        - "Whether any article or source was stale"
+        - "Whether identity was trusted"
+        - "Whether human_approval was left null"
+        - "Experiment 08 finding count and input hash, not the raw values"
+      retention: "Keep with the case if the handler relies on the draft. The enquiry text is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Timestamp"
+        - "executed false"
+        - "message_sent false"
+      retention: "Organisation's schedule. The agent does not write this event to a case system."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the enquiry narrative in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, Dynamics 365 writes, payments, or the account system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Customer service operations lead"
+      contact: "service@mereford.example"
+    - role: "Data protection officer"
+      contact: "dpo@mereford.example"
+
+review:
+  last_review_date: "2026-11-06"
+  next_review_date: "2027-05-06"
+  review_frequency: "6 months, and sooner if the catalogue articles, Article 5, Articles 22A to 22D, the Ofgem blog, PRIN 2A.1, or the Equality Act sections cited here change"
+  reviewer: "The adopting organisation's customer-service lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to a page in the organisation's real knowledge base, if one is later substituted for the synthetic file"
+    - "A change to UK GDPR Article 5 or Articles 22A to 22D, or to Data (Use and Access) Act 2025 section 80"
+    - "A change to the Ofgem AI blog, or a licence condition that replaces it"
+    - "A change to PRIN 2A or DISP, if the organisation is a financial-services firm"
+    - "A proposal to add a connector that can reset a password, take a payment, close a complaint, change a tariff or contract, write a record, or send a message"
+    - "A proposal to publish an unattended resolver that changes accounts"
+    - "A security incident involving a draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Reply core"
+      path: "src/service.py"
+    - name: "Synthetic catalogue"
+      path: "src/catalogue.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03. The pointers below
+    say which manifest sections a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 5 was read on 6 November 2026. Article 6 and Article 9 were not opened that day. The controller confirms the basis, and completes a DPIA, before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a review duty the organisation already has."
+      section: "src/catalogue.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "A passed portal_session is a channel field in the JSON. This starter does not call Microsoft Entra or a customer identity product and does not describe that product's sign-in behaviour. The session does not authorise a password reset or a record change."
+      section: "src/identity.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on customer enquiries."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No account, payment, messaging, or Dynamics 365 write connector is added without updating this manifest."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on mereford.example are placeholders. Mereford Customer Service is invented. The telephone number 01632 960040 is invented. The Ofcom numbering page was not opened on 6 November 2026."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Section 80 and Articles 22A to 22D were opened on 6 November 2026. S.I. 2026/82 and any regulations under Article 22D were not. This agent does not decide that Article 22C safeguards are met."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The Ofgem text is a blog dated 5 February 2026, not a licence condition verified in this folder. Fairness monitoring has not been done. The May 2026 ethical AI document was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "PRIN 2A.1 was opened on 6 November 2026. PRIN 2A.2 did not return rule text that day. DISP was not re-opened. This starter does not calculate a DISP clock and does not quote FG21/1 or FG22/5."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A10"
+      assumption: "Experiment 08 does not anonymise the text. This starter does not copy the redacted string into the draft and does not call release()."
+      section: "tools.allowed"
+      verify_on_deployment: true
