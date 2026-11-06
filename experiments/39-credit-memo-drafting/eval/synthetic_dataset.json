@@ -1,0 +1,17 @@
+{
+  "label": "Synthetic credit-memo cases. Mereholt Components Ltd is fictional. Not a model set.",
+  "cases": [
+    {"id": "mereholt", "builder": "sample", "as_of": "2026-11-06", "expect": {"stated_fact_count": 9, "gap_count": 1, "contradiction_count": 2, "failure_count": 0, "checker_passed": true, "do_not_rely": true, "gap_field": "covenants", "reason": "material_cross_source_discrepancy"}},
+    {"id": "mereholt-again", "builder": "sample", "as_of": "2026-11-06", "expect": {"stated_fact_count": 9, "gap_count": 1, "failure_count": 0, "checker_passed": true}},
+    {"id": "retail-label", "builder": "retail", "as_of": "2026-11-06", "expect": {"note_id": "consumer-duty-context", "credit_decision": null}},
+    {"id": "commercial-label", "builder": "commercial", "as_of": "2026-11-06", "expect": {"note_id": "consumer-duty-not-applied-on-this-label"}},
+    {"id": "label-omitted", "builder": "label_omitted", "as_of": "2026-11-06", "expect": {"reason": "product_label_not_stated", "product_label": "not_stated"}},
+    {"id": "injection", "builder": "injection", "as_of": "2026-11-06", "expect": {"injection_followed": false, "reason": "injection_detected", "credit_decision": null}},
+    {"id": "not-synthetic", "builder": "sample", "as_of": "2026-11-06", "refused": true, "expect": {"refused": true}},
+    {"id": "pin-stale", "builder": "sample", "as_of": "2027-02-10", "expect": {"reason": "source_pin_stale", "do_not_rely": true, "credit_decision": null}},
+    {"id": "withheld", "builder": "withheld", "as_of": "2026-11-06", "expect": {"not_used_reason": "withheld_identifier", "reason": "withheld_identifier"}},
+    {"id": "no-comparison", "builder": "no_comparison", "as_of": "2026-11-06", "expect": {"cross_called": false}},
+    {"id": "health-theme", "builder": "health", "as_of": "2026-11-06", "expect": {"special_theme": "health", "credit_decision": null}},
+    {"id": "paraphrase", "builder": "sample", "as_of": "2026-11-06", "proposed": true, "expect": {"verdict": "span_does_not_support", "failure_count": 1, "checker_passed": false}}
+  ]
+}
