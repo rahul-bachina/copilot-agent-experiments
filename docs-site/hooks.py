@@ -127,6 +127,9 @@ DIAGRAMS = {
     "experiments/37-underwriting-submission-summary/docs/architecture_diagram.png": (
         "experiments/img/37-underwriting-submission-summary-architecture.png"
     ),
+    "experiments/40-customer-self-service/docs/architecture_diagram.png": (
+        "experiments/img/40-customer-self-service-architecture.png"
+    ),
 }
 
 
