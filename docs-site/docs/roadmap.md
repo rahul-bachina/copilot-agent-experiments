@@ -354,6 +354,16 @@ A draft summary of one synthetic broker submission. Every stated fact carries a 
 
 </article>
 
+<article class="plan-card" id="b009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · B009 · Autonomy A1</p>
+
+## Credit memo drafting
+
+A draft credit memo from one synthetic pack. Every stated figure carries a pinpoint citation, and a missing section is shown as not stated. The credit officer owns the recommendation and every approval. It calls Experiment 12 to inventory the files, Experiment 29 for a number and date check, and Experiment 36 when a comparisons object is supplied. It does not approve or decline, set a limit, contact the customer or a bureau, post to a core banking or CRM system, or file a SAR. [Read the briefing](experiments/39-credit-memo-drafting.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B009 is Experiment 39.
