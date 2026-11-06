@@ -1,0 +1,69 @@
+"""Call Experiment 12. This module does not re-implement the inventory.
+
+Experiment 12 has no policy-wording purpose. No purpose is requested, so
+nothing is routed. Confirmation flags stay false. File content is not copied
+into the comparison.
+"""
+
+from __future__ import annotations
+
+from datetime import date
+from typing import Any
+
+from .siblings import CompareForbidden, load
+
+INTAKE_CATALOGUE_ID = "O001"
+
+
+def inventory(
+    files: list[dict[str, Any]],
+    *,
+    batch_id: str,
+    as_of: date,
+    stale_after_days: int,
+) -> dict[str, Any]:
+    siblings = load()
+    draft = siblings["intake"](
+        {"synthetic": True, "batch_id": batch_id, "files": files},
+        as_of=as_of,
+        stale_after_days=stale_after_days,
+        rules_as_of=as_of,
+    )
+    if draft.get("experiment_id") != siblings["intake_experiment_id"]:
+        raise CompareForbidden("the intake result is not Experiment 12")
+    rows = []
+    for row in draft["files"]:
+        pii = row["pii"]
+        rows.append(
+            {
+                "file_id": row["file_id"],
+                "read_status": row["read_status"],
+                "date_status": row["date_status"],
+                "suggested_class": row["suggested_class"],
+                "finding_count": pii["finding_count"],
+                "entity_types": list(pii["entity_types"]),
+                "output_is_anonymised": False,
+            }
+        )
+    flags = draft["flags"]
+    return {
+        "called": True,
+        "experiment_id": siblings["intake_experiment_id"],
+        "catalogue_id": draft["catalogue_id"],
+        "autonomy_of_intake": draft["autonomy"],
+        "files_confirmed": False,
+        "purpose_confirmed": False,
+        "handed_off": False,
+        "accepted_into_queue": flags["accepted_into_queue"],
+        "production_record_written": flags["production_record_written"],
+        "external_sent": flags["external_sent"],
+        "underlying_matter_approved": flags["underlying_matter_approved"],
+        "underlying_matter_rejected": flags["underlying_matter_rejected"],
+        "catalogue_stale": draft["catalogue_stale"],
+        "any_document_not_current": draft["any_document_not_current"],
+        "gateway_rules_stale": draft["gateway_rules_stale"],
+        "prompt_injection_detected": draft["prompt_injection"]["detected"],
+        "prompt_injection_followed": False,
+        "purpose_requested": None,
+        "files": rows,
+    }

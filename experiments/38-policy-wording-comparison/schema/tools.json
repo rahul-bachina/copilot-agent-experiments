@@ -1,0 +1,118 @@
+{
+  "tools": [
+    {
+      "name": "compare_policy_wordings",
+      "implementation": "compare",
+      "reads": [
+        "one synthetic pack of two or more wordings supplied for this run",
+        "the pinned source notes in src/sources.py"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "calls_document_intelligence": false,
+      "calls_experiment_12": true,
+      "calls_experiment_33_span_check": true,
+      "calls_experiment_29_number_check": true,
+      "interprets_favourability": false,
+      "recommends_buy_sell_or_renew": false,
+      "drafts_endorsement": false,
+      "contacts_broker": false,
+      "writes_policy_admin": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "list_material_differences",
+      "implementation": "compare",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "infers_missing_clauses": false,
+      "interprets_favourability": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "explain_comparison_row",
+      "implementation": "compare",
+      "reads": ["one row of the draft JSON, including its citations"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "interprets_favourability": false,
+      "drafts_endorsement": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "interpret_favourability",
+      "implementation": "interpret_favourability",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "recommend_buy_sell_renew",
+      "implementation": "recommend_buy_sell_renew",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "draft_endorsement",
+      "implementation": "draft_endorsement",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_broker",
+      "implementation": "contact_broker",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_policy_admin",
+      "implementation": "write_policy_admin",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_coverage",
+      "implementation": "decide_coverage",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_specialist_review",
+      "implementation": "record_specialist_review",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "note": "Not an agent tool. The command line does not expose it."
+    },
+    {
+      "name": "release_evaluation",
+      "implementation": "release_evaluation",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
