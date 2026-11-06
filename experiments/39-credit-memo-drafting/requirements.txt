@@ -1,0 +1,8 @@
+# Experiment 39 has no runtime dependencies beyond the standard library.
+# The memo, the citation checker, and the tests do not call a model
+# or the network. A clean environment can install just pytest.
+# Experiment 12, Experiment 08, Experiment 29, and Experiment 36 are
+# imported from sibling folders in this repository. Those folders use
+# the standard library.
+
+pytest>=7.0.0

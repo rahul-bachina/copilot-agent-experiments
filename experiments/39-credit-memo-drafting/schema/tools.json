@@ -1,0 +1,137 @@
+{
+  "tools": [
+    {
+      "name": "draft_credit_memo",
+      "implementation": "draft_memo",
+      "reads": [
+        "one synthetic credit pack supplied for this run",
+        "the pinned source notes in src/sources.py"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "calls_foundry": false,
+      "calls_fabric": false,
+      "calls_experiment_12": true,
+      "calls_experiment_29_number_check": true,
+      "calls_experiment_36_when_comparisons_supplied": true,
+      "approves_or_declines_credit": false,
+      "sets_a_limit": false,
+      "contacts_customer_or_bureau": false,
+      "posts_core_or_crm": false,
+      "files_a_sar": false,
+      "human_approval_to_run": false,
+      "human_approval_before_any_use": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "check_memo_citations",
+      "implementation": "draft_memo",
+      "reads": [
+        "one synthetic pack",
+        "proposed facts with a document id, page, paragraph, and line range"
+      ],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "approves_or_declines_credit": false,
+      "sets_a_limit": false,
+      "callable_by_agent": true,
+      "human_approval_before_any_use": true
+    },
+    {
+      "name": "list_missing_memo_sections",
+      "implementation": "draft_memo",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "infers_missing_values": false,
+      "contacts_customer_or_bureau": false,
+      "callable_by_agent": true,
+      "human_approval_before_any_use": true
+    },
+    {
+      "name": "approve_credit",
+      "implementation": "approve_credit",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decline_credit",
+      "implementation": "decline_credit",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "set_limit",
+      "implementation": "set_limit",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_customer",
+      "implementation": "contact_customer",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "contact_bureau",
+      "implementation": "contact_bureau",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "post_core_banking",
+      "implementation": "post_core_banking",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "post_crm",
+      "implementation": "post_crm",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "file_sar",
+      "implementation": "file_sar",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_credit_officer_review",
+      "implementation": "record_credit_officer_review",
+      "callable_by_agent": false,
+      "approves_credit": false,
+      "note": "Not an agent tool. The command line does not expose it. A recorded reading does not approve the draft for use."
+    },
+    {
+      "name": "release_evaluation",
+      "implementation": "release_evaluation",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

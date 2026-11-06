@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Thirty-eight starters you can read today
+## Thirty-nine starters you can read today
 
 </div>
 
@@ -1028,6 +1028,31 @@ The comparison runs locally. Nothing is ranked as more favourable, nothing is re
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 39 · B009 · Credit · Autonomy A1</p>
+
+### Credit memo drafting
+
+Draft a cited credit memo from one synthetic pack. Every stated figure carries a pinpoint citation. A missing section is not stated. The credit officer owns the recommendation and every approval.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is approved or declined, no limit is set, the customer and the bureau are not contacted, no core system is posted, and no SAR is filed.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/39-credit-memo-drafting.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/39-credit-memo-drafting)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -1050,7 +1075,7 @@ The comparison runs locally. Nothing is ranked as more favourable, nothing is re
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, and UK10 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, and UK10 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

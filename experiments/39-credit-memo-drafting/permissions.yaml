@@ -1,0 +1,384 @@
+# Agent manifest: Credit memo drafting
+# Experiment 39 — catalogue ID B009
+# Version: 0.1.0
+# Last reviewed: 2026-11-06
+# Next review: 2027-05-06
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-39-credit-memo-drafting"
+  name: "Credit Memo Drafting Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a structured credit memo from one synthetic pack for a credit
+    officer. Autonomy is A1. Every figure and claim is cited, and a missing
+    section is the words not stated. The credit officer owns the recommendation
+    and every approval. The agent does not approve or decline credit, set a
+    limit, contact the customer or a bureau, post to a core banking or CRM
+    system, or file a SAR.
+  owner: "Credit officer (the adopting lender, invoice-finance house, trade-credit insurer, or corporate credit team)"
+  contact: "credit-officer@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/39-credit-memo-drafting"
+
+autonomy:
+  level: "A1"
+  level_description: "The agent drafts. The credit officer approves the draft before any use, and owns the recommendation and every approval. Nothing is sent and nothing is written."
+  constraints:
+    - "Every stated figure and claim is a contiguous copy of cited lines. A missing section is the words not stated. Nothing is inferred."
+    - "The agent NEVER approves or declines credit and NEVER makes a recommendation."
+    - "The agent NEVER sets a limit."
+    - "The agent NEVER contacts the customer or a credit bureau."
+    - "The agent NEVER posts to a core banking system or a CRM."
+    - "The agent NEVER files a SAR. The MLRO decides any SAR."
+    - "The agent NEVER decides that the Consumer Duty or PRIN 2A was met."
+    - "The agent NEVER decides that the Equality Act 2010 was contravened."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "Pack text is untrusted. An instruction inside a document is recorded and not followed."
+    - "All output is labelled DRAFT FOR THE CREDIT OFFICER. NOT A CREDIT DECISION AND NOT A LIMIT."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic credit pack supplied for this run"
+      description: "Text files and documents already split into pages, paragraphs, and lines. The sample uses Mereholt Components Ltd, which is fictional."
+      access_level: "read"
+      scope: "The file passed to this run. No core banking system, CRM, or bureau."
+      justification: "The memo cannot be cited without the pack the credit officer supplied."
+      data_categories:
+        - "Synthetic credit text"
+        - "A company name, which would be personal data if it identified a sole trader"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the file."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 6 November 2026. Pages that were not opened are marked."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Statutory and product claims are cited from that pin and marked when a page was not opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the credit officer."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Document age and source currency are calculated from these inputs."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "A core banking system, a CRM, or a credit bureau"
+      reason: "The agent does not read or write a live credit record and does not query a bureau."
+    - resource: "A customer mailbox or any send channel"
+      reason: "The memo is returned to the credit officer. The customer is not contacted."
+    - resource: "A SAR filing channel or the National Crime Agency"
+      reason: "The MLRO decides any SAR. This agent does not file one."
+    - resource: "A Microsoft Foundry resource, a Microsoft Fabric lakehouse, or an Azure subscription"
+      reason: "The catalogue names Foundry and Fabric. This folder does not call them."
+
+tools:
+  allowed:
+    - tool: "Draft the memo from the pack supplied for this run"
+      provider: "Local Python (src/draft.py), which calls Experiment 12 intake, Experiment 29 number and date checks, and Experiment 36 when a comparisons object is supplied"
+      action: "Copy current lines under the closed section list, flag gaps, contradictions, and unsupported statements"
+      access_level: "read"
+      scope: "The pack passed to the agent"
+      justification: "The credit officer needs the same memo each time, with a pinpoint citation on every stated figure and claim."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Inventory files via Experiment 12"
+      provider: "experiments/12-document-intake"
+      action: "Inventory text files. Do not confirm a purpose, route, queue, or release."
+      access_level: "read"
+      scope: "The files array on the pack. No credit purpose is requested."
+      justification: "A file that was not read, is stale, or contains a deterministic identifier is not quoted."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Compare listed fields via Experiment 36"
+      provider: "experiments/36-cross-source-validation"
+      action: "Classify values the pack already lists. Do not choose a source or query a register."
+      access_level: "read"
+      scope: "The comparisons object, when the caller supplies one."
+      justification: "A material discrepancy is shown for the credit officer. It is not resolved here."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write a core banking system, a CRM, a Dataverse row, or a Fabric lakehouse. The JSON is a return value, not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not email the customer, a bureau, or the National Crime Agency."
+
+human_approval:
+  description: >
+    The credit officer reviews every cited figure and claim before the draft
+    is used. The recommendation, any approval or decline, and any limit stay
+    with the credit officer, outside this agent. The MLRO decides any SAR.
+  approval_points:
+    - action: "Review every cited figure and claim against the document, page, paragraph, and line, and approve the draft before any use"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "Catalogue control for B009. A passed checker is not a credit decision. Use of the memo stays outside this agent. draft_approved_for_use stays false."
+    - action: "Own the recommendation and any approval or decline"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "credit_decision and recommendation stay null. The agent has no approve or decline tool that succeeds."
+    - action: "Set any limit"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "limit_set stays null. A requested figure in the pack is not a limit the agent sets."
+    - action: "Decide whether a cited equality theme or a special-category theme changes the approach"
+      approver: "Credit officer, with the data protection officer where Article 9 is in scope"
+      mandatory: true
+      rationale: "A theme is not a finding of discrimination and not an Article 9 condition."
+    - action: "Decide any SAR"
+      approver: "MLRO"
+      mandatory: true
+      rationale: "Regulation 21(5) and sections 330, 331, and 338 were read. sar_filed stays false."
+    - action: "Decide whether to contact the customer or a bureau, outside this agent"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "customer_contacted and bureau_contacted stay false."
+    - action: "Post to a core banking system or a CRM, outside this agent"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "core_banking_posted and crm_posted stay false."
+    - action: "Re-open a stale pinned page before relying on the legal note"
+      approver: "Credit officer"
+      mandatory: true
+      rationale: "A stale pin sets do_not_rely. The quote can still be shown. The note is not cleared by the agent."
+    - action: "Confirm a lawful basis, and any Article 9 condition, before any live pack is processed"
+      approver: "Data protection officer"
+      mandatory: true
+      rationale: "The manifest does not assert an Article 6 basis or an Article 9 condition."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic pack the credit officer supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT FOR THE CREDIT OFFICER. NOT A CREDIT DECISION AND NOT A LIMIT."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live pack may contain personal data, for example where the applicant
+      is a sole trader. This starter does not choose an Article 6 basis.
+      Article 5 was read on 6 November 2026, including lawfulness, fairness,
+      transparency, data minimisation, and accuracy. The starter copies cited
+      lines and does not fill a gap by inference. Article 5(3) was read. It
+      is not used as a basis.
+  special_category_data:
+    may_process: false
+    categories_possible:
+      - "A cited line may mention health or another Article 9(1) theme. The sample does not. The agent does not use a theme as a credit factor."
+    lawful_basis_special: "Not asserted. No Article 9(2) condition is applied."
+    condition: "Not asserted. Data Protection Act 2018 section 10 was not opened."
+    safeguards:
+      - "No Article 9 condition is claimed here."
+      - "The pack must be marked synthetic."
+      - "A file with a deterministic identifier finding is not quoted. output_is_anonymised stays false."
+      - "Article 22 was shown as omitted on 6 November 2026. Article 22A defines a solely automated decision as one with no meaningful human involvement. Article 22B restricts a significant decision based on Article 9(1) data when it is solely automated. This starter does not take the decision and does not certify meaningful human involvement."
+  data_minimisation:
+    - "One pack per draft. The section list is closed."
+    - "A section with no usable paragraph is not stated. The value is not guessed."
+    - "File content is not copied into the memo. Quoted lines are the cited facts."
+    - "A stripped decision key is not echoed."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A deployment retention period is for the firm, not this file."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for Microsoft Foundry was not verified for this experiment."
+  data_subject_rights:
+    note: "This starter does not operate a request channel. A live system would route rights requests to the firm."
+
+prompt_injection:
+  description: "Pack text is untrusted. A matching sentence is recorded and not followed."
+  controls:
+    - control: "Sentence patterns"
+      description: "Instructions to ignore directions, approve or decline, set a limit, contact the customer or a bureau, post to a core system or a CRM, or file a SAR are recorded."
+      implementation: "src/injection.py. A sentence that already says do not, must not, never, or cannot is not a hit, unless it also states an affirmative decision."
+    - control: "Payload keys"
+      description: "Keys that would set a credit decision, a limit, a SAR, a send, or a write are stripped and not echoed."
+      implementation: "strip_prohibited before the pack is read."
+  residual_risk: "A negation in the same sentence can hide an instruction. A paraphrase can be missed. Neither grants a tool the agent does not have."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named firm"
+  date_assessed: "2026-11-06"
+  risks:
+    - id: "R1"
+      risk: "A reader treats the draft as an approval, a decline, or a limit"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR THE CREDIT OFFICER. NOT A CREDIT DECISION AND NOT A LIMIT."
+        - "credit_decision, recommendation, and limit_set stay null"
+        - "Approve, decline, and limit wording is not copied into a fact"
+      residual_risk: "Medium"
+      owner: "Credit officer"
+    - id: "R2"
+      risk: "A document tells the agent to approve the facility, file a SAR, or ignore these instructions"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those sentences are recorded and not copied"
+        - "A decision key buried in the pack does not set a flag"
+        - "Tests cover injection, a buried decision, and the prohibited command flags"
+      residual_risk: "Low"
+      owner: "Credit officer"
+    - id: "R3"
+      risk: "A cited line is accurate and the memo still omits the line that changes the picture"
+      likelihood: "High"
+      impact: "High"
+      controls:
+        - "A missing closed-list section is shown as not stated"
+        - "do_not_rely is true when a section is missing, even if every stated fact is supported"
+        - "The credit officer reviews every cited fact before any use"
+      residual_risk: "High"
+      owner: "Credit officer"
+    - id: "R4"
+      risk: "A stale extract, a stale legislation page, or an identifier is relied on"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "A file outside the window is not quoted"
+        - "A stale pin sets do_not_rely and the legal note is not cleared"
+        - "A file with a deterministic identifier finding is not quoted"
+      residual_risk: "Medium"
+      owner: "Credit officer"
+    - id: "R5"
+      risk: "A financial-crime phrase or an equality theme is read as a SAR or as a finding of discrimination"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The phrase is narrative for the MLRO. sar_filed stays false."
+        - "An equality theme is not a finding. Schedule 3 was not opened."
+        - "No customer text is produced. Section 333A was not opened."
+      residual_risk: "Medium"
+      owner: "MLRO"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a memo, the synthetic pack id, the as-of date, and whether injection was detected. Do not log the pack text."
+  logged_events:
+    - event: "Credit memo drafted"
+      data_logged:
+        - "synthetic pack id"
+        - "as-of date"
+        - "whether a prompt-injection pattern was detected"
+        - "whether a fact was withheld"
+        - "whether a SAR was filed (always false in this starter)"
+        - "whether a core system was posted (always false in this starter)"
+      retention: "Not set by this starter."
+  log_destination:
+    primary: "None in this starter"
+    note: "A later host would choose a UK log store. Application Insights was not opened for this experiment and is unverified."
+  audit_trail:
+    - "The JSON records citations, gaps, contradictions, and injection pattern ids."
+    - "Decision keys stripped from the pack are named, not valued."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/draft.py"
+      time_to_effect: "Immediate"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not draft memos"
+      action: "Delete the local copy"
+      time_to_effect: "Immediate"
+      who_can_activate: "The machine owner"
+  escalation_contacts:
+    - role: "Credit officer"
+      contact: "credit-officer@example.com"
+    - role: "MLRO"
+      contact: "The adopting firm's MLRO. Not named in this starter."
+    - role: "Data protection officer"
+      contact: "The adopting firm's data protection officer. Not named in this starter."
+
+review:
+  last_review_date: "2026-11-06"
+  next_review_date: "2027-05-06"
+  review_frequency: "Six months, and sooner if a pinned legislation or Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting firm's credit officer. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A pinned page is re-opened and the sentence this starter relies on has changed."
+    - "Experiment 12's intake result shape changes."
+    - "Experiment 29's number check changes."
+    - "Experiment 36's comparison result shape changes."
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Tool schema"
+      path: "schema/tools.json"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or decline credit. credit_decision stays null."
+  regulated_decision:
+    enabled: false
+    rationale: "The recommendation, the limit, suspicion, and whether the Consumer Duty or the Equality Act was met are for named people. This draft does not decide them. It is not a solely automated decision under Article 22A."
+  production_record_change:
+    enabled: false
+    rationale: "No core banking system, CRM, or lakehouse is written. The JSON is not a credit record."
+  external_send:
+    enabled: false
+    rationale: "The customer and the bureau are not contacted. Nothing is sent to the National Crime Agency."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not set a limit and does not advance, draw, or pay a facility."
+  additional_high_risk:
+    - action_name: "Approve credit"
+      enabled: false
+      rationale: "approve_credit always raises. The command flag exits without a draft."
+    - action_name: "Decline credit"
+      enabled: false
+      rationale: "decline_credit always raises."
+    - action_name: "Set a limit"
+      enabled: false
+      rationale: "set_limit always raises. limit_set stays null."
+    - action_name: "Contact the customer or a bureau"
+      enabled: false
+      rationale: "contact_customer and contact_bureau always raise."
+    - action_name: "Post to core banking or a CRM"
+      enabled: false
+      rationale: "post_core_banking and post_crm always raise."
+    - action_name: "File a SAR"
+      enabled: false
+      rationale: "file_sar always raises. The MLRO decides."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing. The scope policy was not re-opened for this experiment."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The firm confirms these before anyone relies on a memo."
+  items:
+    - id: "AS1"
+      assumption: "The pack was supplied by the credit officer and is synthetic. This starter does not fetch it from a core system, a CRM, or a bureau."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "AS2"
+      assumption: "Article 22 was shown as omitted on 6 November 2026. Articles 22A to 22D were read. This starter does not certify meaningful human involvement and does not take a significant decision."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS3"
+      assumption: "PRIN 2A.1 applies the Consumer Duty to retail market business. PRIN 3 was not opened. The glossary definition of a retail customer was not opened. A caller label is not that decision."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "AS4"
+      assumption: "The 90-day window is this starter's staleness rule, not a statutory period."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "AS5"
+      assumption: "Regulation 21(5) and Proceeds of Crime Act 2002 sections 330, 331, and 338 put the disclosure decision on a person, and on the nominated officer. Section 333A was not opened. This starter does not file."
+      section: "high_risk_actions"
+      verify_on_deployment: true
+    - id: "AS6"
+      assumption: "Equality Act 2010 sections 4, 13, 19, and 29 were read. Schedule 3 was not opened. A theme word is not a finding of discrimination."
+      section: "risk_assessment"
+      verify_on_deployment: true

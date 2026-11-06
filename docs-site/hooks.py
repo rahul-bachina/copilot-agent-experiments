@@ -130,6 +130,9 @@ DIAGRAMS = {
     "experiments/38-policy-wording-comparison/docs/architecture_diagram.png": (
         "experiments/img/38-policy-wording-comparison-architecture.png"
     ),
+    "experiments/39-credit-memo-drafting/docs/architecture_diagram.png": (
+        "experiments/img/39-credit-memo-drafting-architecture.png"
+    ),
 }
 
 
