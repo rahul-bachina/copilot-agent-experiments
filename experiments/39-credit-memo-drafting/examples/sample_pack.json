@@ -1,0 +1,266 @@
+{
+  "synthetic": true,
+  "pack_id": "MH-MEMO-001",
+  "applicant_name": "Mereholt Components Ltd",
+  "product_label": "sme_consumer_facing",
+  "files": [
+    {
+      "file_id": "profile",
+      "filename": "company-profile.txt",
+      "media_type": "text/plain",
+      "document_date": "2026-10-20",
+      "content": "The profile names the applicant as Mereholt Components Ltd.\nThis text is synthetic. It is not a real company profile.\n"
+    },
+    {
+      "file_id": "accounts",
+      "filename": "management-accounts.txt",
+      "media_type": "text/plain",
+      "document_date": "2026-10-18",
+      "content": "The accounts state turnover of GBP 4200000 for the year ended 2026-03-31.\nThe accounts state a request for a facility of GBP 250000.\nThis text is synthetic.\n"
+    },
+    {
+      "file_id": "bureau",
+      "filename": "bureau-extract.txt",
+      "media_type": "text/plain",
+      "document_date": "2026-10-18",
+      "content": "The extract states turnover of GBP 4200000 for the year ended 2026-03-31.\nThis text is synthetic. It is a pasted extract. It is not a live bureau response.\n"
+    },
+    {
+      "file_id": "note",
+      "filename": "internal-note.txt",
+      "media_type": "text/plain",
+      "document_date": "2026-10-18",
+      "content": "The note states a request for a facility of GBP 180000.\nThe security note states a fixed charge over book debts.\nThe note records that a payment narrative looked unusual.\nThe note states that the pack mentions the director's age.\nThe pack states that a debtor ageing is not in the file.\nThis text is synthetic.\n"
+    },
+    {
+      "file_id": "oldbureau",
+      "filename": "old-bureau-extract.txt",
+      "media_type": "text/plain",
+      "document_date": "2024-06-01",
+      "content": "The old extract states turnover of GBP 999999.\nThis text is synthetic and is outside the freshness window.\n"
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "profile",
+      "file_id": "profile",
+      "title": "Company profile",
+      "status": "current",
+      "reviewed_on": "2026-10-20",
+      "pages": [
+        {
+          "page": 1,
+          "paragraphs": [
+            {
+              "paragraph": 1,
+              "fact_key": "company_profile",
+              "lines": [
+                {"line": 1, "text": "The profile names the applicant as Mereholt Components Ltd."}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "accounts",
+      "file_id": "accounts",
+      "title": "Management accounts",
+      "status": "current",
+      "reviewed_on": "2026-10-18",
+      "pages": [
+        {
+          "page": 1,
+          "paragraphs": [
+            {
+              "paragraph": 1,
+              "fact_key": "financial_highlights",
+              "lines": [
+                {"line": 1, "text": "The accounts state turnover of GBP 4200000 for the year ended 2026-03-31."}
+              ]
+            },
+            {
+              "paragraph": 2,
+              "fact_key": "limit_request",
+              "lines": [
+                {"line": 1, "text": "The accounts state a request for a facility of GBP 250000."}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "bureau",
+      "file_id": "bureau",
+      "title": "Pasted bureau extract",
+      "status": "current",
+      "reviewed_on": "2026-10-18",
+      "pages": [
+        {
+          "page": 1,
+          "paragraphs": [
+            {
+              "paragraph": 1,
+              "fact_key": "financial_highlights",
+              "lines": [
+                {"line": 1, "text": "The extract states turnover of GBP 4200000 for the year ended 2026-03-31."}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "note",
+      "file_id": "note",
+      "title": "Internal note",
+      "status": "current",
+      "reviewed_on": "2026-10-18",
+      "pages": [
+        {
+          "page": 1,
+          "paragraphs": [
+            {
+              "paragraph": 1,
+              "fact_key": "limit_request",
+              "lines": [
+                {"line": 1, "text": "The note states a request for a facility of GBP 180000."}
+              ]
+            },
+            {
+              "paragraph": 2,
+              "fact_key": "security",
+              "lines": [
+                {"line": 1, "text": "The security note states a fixed charge over book debts."}
+              ]
+            },
+            {
+              "paragraph": 3,
+              "fact_key": "risk_flags",
+              "lines": [
+                {"line": 1, "text": "The note records that a payment narrative looked unusual."}
+              ]
+            },
+            {
+              "paragraph": 4,
+              "fact_key": "risk_flags",
+              "lines": [
+                {"line": 1, "text": "The note states that the pack mentions the director's age."}
+              ]
+            },
+            {
+              "paragraph": 5,
+              "fact_key": "information_gaps",
+              "lines": [
+                {"line": 1, "text": "The pack states that a debtor ageing is not in the file."}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "document_id": "oldbureau",
+      "file_id": "oldbureau",
+      "title": "Old bureau extract",
+      "status": "current",
+      "reviewed_on": "2024-06-01",
+      "pages": [
+        {
+          "page": 1,
+          "paragraphs": [
+            {
+              "paragraph": 1,
+              "fact_key": "financial_highlights",
+              "lines": [
+                {"line": 1, "text": "The old extract states turnover of GBP 999999."}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "comparisons": {
+    "synthetic": true,
+    "pack_id": "mereholt-compare-001",
+    "facts": [
+      {"fact_key": "turnover", "field_type": "currency"},
+      {"fact_key": "facility_request", "field_type": "currency"}
+    ],
+    "documents": [
+      {
+        "document_id": "mgmt-accounts",
+        "title": "Management accounts field list",
+        "kind": "form",
+        "status": "current",
+        "reviewed_on": "2026-10-18",
+        "pages": [
+          {
+            "page": 1,
+            "paragraphs": [
+              {
+                "paragraph": 1,
+                "lines": [
+                  {"line": 1, "text": "Turnover: GBP 4200000"},
+                  {"line": 2, "text": "Facility request: GBP 250000"}
+                ]
+              }
+            ]
+          }
+        ],
+        "fields": [
+          {"fact_key": "turnover", "page": 1, "paragraph": 1, "line": 1, "value": "GBP 4200000"},
+          {"fact_key": "facility_request", "page": 1, "paragraph": 1, "line": 2, "value": "GBP 250000"}
+        ]
+      },
+      {
+        "document_id": "bureau-paste",
+        "title": "Pasted bureau field list",
+        "kind": "register_extract",
+        "status": "current",
+        "reviewed_on": "2026-10-18",
+        "pages": [
+          {
+            "page": 1,
+            "paragraphs": [
+              {
+                "paragraph": 1,
+                "lines": [
+                  {"line": 1, "text": "Turnover: GBP 4,200,000.00"}
+                ]
+              }
+            ]
+          }
+        ],
+        "fields": [
+          {"fact_key": "turnover", "page": 1, "paragraph": 1, "line": 1, "value": "GBP 4,200,000.00"}
+        ]
+      },
+      {
+        "document_id": "internal-note",
+        "title": "Internal note field list",
+        "kind": "form",
+        "status": "current",
+        "reviewed_on": "2026-10-18",
+        "pages": [
+          {
+            "page": 1,
+            "paragraphs": [
+              {
+                "paragraph": 1,
+                "lines": [
+                  {"line": 1, "text": "Facility request: GBP 180000"}
+                ]
+              }
+            ]
+          }
+        ],
+        "fields": [
+          {"fact_key": "facility_request", "page": 1, "paragraph": 1, "line": 1, "value": "GBP 180000"}
+        ]
+      }
+    ]
+  }
+}
