@@ -356,13 +356,7 @@ copilot-agent-experiments/
     ├── 31-agent-cost-capacity/
     ├── 32-employee-case-intake/
     ├── 33-case-bundle-summariser/
-    ├── 34-ehcp-draft-assembler/
-    ├── 35-claims-document-triage/
-    ├── 36-cross-source-validation/
-    ├── 37-underwriting-submission-summary/
-    ├── 38-policy-wording-comparison/
-    ├── 39-credit-memo-drafting/
-    └── 40-customer-self-service/
+    └── 34-ehcp-draft-assembler/
 ```
 
 ## Agent Governance
