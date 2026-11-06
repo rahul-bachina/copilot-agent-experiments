@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Thirty-eight starters are in `experiments/`. The count is the number of folders.
+Thirty-nine starters are in `experiments/`. The folders are 01 to 38 and 40. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -69,6 +69,7 @@ Thirty-eight starters are in `experiments/`. The count is the number of folders.
 | 35 | [Claims Document Triage](experiments/35-claims-document-triage/) | Draft a reading of one synthetic FNOL pack with coverage pointers, inconsistency prompts, and a scorecard. The claims handler approves the class. Autonomy A1. The agent does not accept, decline, settle, tell the customer, or write a claims system. | ✅ Starter |
 | 36 | [Cross-Source Validation Agent](experiments/36-cross-source-validation/) | Compare the same fact across synthetic source documents and classify each difference as a match, an immaterial difference, or a material discrepancy. The reviewer resolves every material discrepancy. Experiments 12, 08, and 33 are called in-process. Autonomy A0. The agent does not choose which source is right, edit a record, contact anyone, or query a live register. | ✅ Starter |
 | 37 | [Underwriting Submission Summary](experiments/37-underwriting-submission-summary/) | Draft a cited summary of one synthetic broker submission. A missing field is not stated. The underwriter owns coverage and price. Autonomy A0. The agent does not accept or decline, suggest a price or terms, contact the broker, or write to an underwriting system. | ✅ Starter |
+| 38 | [Policy Wording Comparison](experiments/38-policy-wording-comparison/) | Compare two or more synthetic policy wordings with a pinpoint citation on every clause. A topic that one wording does not state is not stated. Autonomy A0. A wording specialist validates every interpretation. The agent does not rank favourability, recommend buy, sell, or renew, draft an endorsement, contact a broker, or write to a policy administration system. | ✅ Starter |
 | 40 | [Customer Self-Service Agent](experiments/40-customer-self-service/) | Answer one synthetic enquiry from a fixed knowledge base and prepare an address or appointment draft for confirmation. Autonomy A1. The agent does not reset a password, take a payment, close a complaint, change a tariff or a contract, write a record, or send. A person is always offered. | ✅ Starter |
 
 ## Getting Started
@@ -355,6 +356,10 @@ copilot-agent-experiments/
     ├── 32-employee-case-intake/
     ├── 33-case-bundle-summariser/
     ├── 34-ehcp-draft-assembler/
+    ├── 35-claims-document-triage/
+    ├── 36-cross-source-validation/
+    ├── 37-underwriting-submission-summary/
+    ├── 38-policy-wording-comparison/
     └── 40-customer-self-service/
 ```
 
