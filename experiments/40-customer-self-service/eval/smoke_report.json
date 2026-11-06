@@ -1,0 +1,3750 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic Mereford enquiries. Not a live customer sample and not a model dataset.",
+  "organisation_in_fixtures": "Mereford Customer Service is fictional.",
+  "summary": {
+    "total_cases": 27,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "meter",
+      "name": "Energy meter reading",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "knowledge_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "kb-energy-meter-reading"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "identity_trusted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "ofgem",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent LEGACY-BODY-DO-NOT-QUOTE",
+          "passed": true,
+          "detail": "LEGACY-BODY-DO-NOT-QUOTE"
+        },
+        {
+          "field": "present does not submit the reading",
+          "passed": true,
+          "detail": "does not submit the reading"
+        },
+        {
+          "field": "present automated AI chatbot",
+          "passed": true,
+          "detail": "automated AI chatbot"
+        }
+      ]
+    },
+    {
+      "case_id": "address",
+      "name": "Address draft not applied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "account_action_proposed"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "kb-address-update"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "action_kind",
+          "passed": true,
+          "detail": "address_update_draft"
+        },
+        {
+          "field": "absent I have moved",
+          "passed": true,
+          "detail": "I have moved"
+        },
+        {
+          "field": "present does not change the record",
+          "passed": true,
+          "detail": "does not change the record"
+        }
+      ]
+    },
+    {
+      "case_id": "address-confirm",
+      "name": "Customer confirmation does not write",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "recorded"
+        },
+        {
+          "field": "approval_not_execution",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "account_action_proposed"
+        },
+        {
+          "field": "customer_confirmed",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "send-after-confirm",
+      "name": "Handler send approval still does not send",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "recorded"
+        },
+        {
+          "field": "approval_not_execution",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "handler_approved_own_send",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "prior_confirmation",
+          "passed": true,
+          "detail": "customer_confirm_address_draft"
+        }
+      ]
+    },
+    {
+      "case_id": "send-before",
+      "name": "Send approval before confirmation is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "preconditions_not_met"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "preconditions_not_met"
+        }
+      ]
+    },
+    {
+      "case_id": "phone-address",
+      "name": "Phone cannot carry an address draft",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "identity_not_verified"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "identity_trusted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent An address-update draft can be prepared",
+          "passed": true,
+          "detail": "An address-update draft can be prepared"
+        },
+        {
+          "field": "absent SYN 1AA",
+          "passed": true,
+          "detail": "SYN 1AA"
+        }
+      ]
+    },
+    {
+      "case_id": "password",
+      "name": "Password reset is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "prohibited_password"
+        },
+        {
+          "field": "present does not reset a password",
+          "passed": true,
+          "detail": "does not reset a password"
+        }
+      ]
+    },
+    {
+      "case_id": "payment",
+      "name": "Payment is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "prohibited_payment"
+        }
+      ]
+    },
+    {
+      "case_id": "tariff",
+      "name": "Tariff change is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "prohibited_tariff"
+        },
+        {
+          "field": "absent 99.99",
+          "passed": true,
+          "detail": "99.99"
+        }
+      ]
+    },
+    {
+      "case_id": "contract",
+      "name": "Contract change is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "prohibited_contract"
+        }
+      ]
+    },
+    {
+      "case_id": "fs-complaint",
+      "name": "Financial complaint is not closed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "financial_complaint_handover"
+        },
+        {
+          "field": "analyse_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "clock",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "absent I am unhappy about the fees",
+          "passed": true,
+          "detail": "I am unhappy about the fees"
+        }
+      ]
+    },
+    {
+      "case_id": "fs-vulnerability",
+      "name": "Financial vulnerability is not a label",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "vulnerability_handover"
+        },
+        {
+          "field": "analyse_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "energy-vulnerability",
+      "name": "Energy hardship keeps the human route",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "vulnerability_handover"
+        },
+        {
+          "field": "analyse_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "ofgem",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "injection",
+      "name": "Close and send instructions are not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "instruction_not_followed"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "analyse_called",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-article",
+      "name": "Stale tariff table is not quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_article"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent LEGACY-BODY-DO-NOT-QUOTE",
+          "passed": true,
+          "detail": "LEGACY-BODY-DO-NOT-QUOTE"
+        }
+      ]
+    },
+    {
+      "case_id": "boundary",
+      "name": "Article at 180 days is still current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "knowledge_answer"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "present BOUNDARY-CURRENT",
+          "passed": true,
+          "detail": "BOUNDARY-CURRENT"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-sources",
+      "name": "Pinned sources outside the window withhold the page",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_article"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent does not submit the reading",
+          "passed": true,
+          "detail": "does not submit the reading"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A live record is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused_not_synthetic"
+        },
+        {
+          "field": "absent UNIQUE-LIVE-MARKER",
+          "passed": true,
+          "detail": "UNIQUE-LIVE-MARKER"
+        }
+      ]
+    },
+    {
+      "case_id": "nino",
+      "name": "National Insurance number is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "knowledge_answer"
+        },
+        {
+          "field": "gateway_entity",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "absent AB 12 34 56 C",
+          "passed": true,
+          "detail": "AB 12 34 56 C"
+        }
+      ]
+    },
+    {
+      "case_id": "public-hours",
+      "name": "Public counter hours",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "knowledge_answer"
+        },
+        {
+          "field": "article_id",
+          "passed": true,
+          "detail": "kb-public-hours"
+        },
+        {
+          "field": "section_149",
+          "passed": true,
+          "detail": "noted"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "present 09:00 to 16:00",
+          "passed": true,
+          "detail": "09:00 to 16:00"
+        }
+      ]
+    },
+    {
+      "case_id": "ambiguous",
+      "name": "Two pages are not merged",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "ambiguous"
+        },
+        {
+          "field": "body_quoted",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "emergency",
+      "name": "Immediate danger offers 999 and does not contact anyone",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "emergency_handover"
+        },
+        {
+          "field": "present call 999",
+          "passed": true,
+          "detail": "call 999"
+        }
+      ]
+    },
+    {
+      "case_id": "third-party",
+      "name": "Another account is not updated",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "third_party_handover"
+        },
+        {
+          "field": "identity_trusted",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "appointment",
+      "name": "Appointment confirmation does not book",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "recorded"
+        },
+        {
+          "field": "approval_not_execution",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "account_action_proposed"
+        },
+        {
+          "field": "action_kind",
+          "passed": true,
+          "detail": "appointment_request_draft"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "energy-complaint",
+      "name": "An energy complaint does not use DISP",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "service_complaint_handover"
+        },
+        {
+          "field": "analyse_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "present DISP and PRIN 2A are not applied",
+          "passed": true,
+          "detail": "DISP and PRIN 2A are not applied"
+        }
+      ]
+    },
+    {
+      "case_id": "payload-keys",
+      "name": "Payload flags are stripped",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "knowledge_answer"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "reset-decision",
+      "name": "A reset decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR CUSTOMER SERVICE REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "disclosure",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "password_reset",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "payment_taken",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "complaint_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "tariff_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contract_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "record_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "appointment_booked",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "message_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "customer_labelled_vulnerable",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "secrets_collected",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stale_article_quoted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        }
+      ]
+    }
+  ]
+}
