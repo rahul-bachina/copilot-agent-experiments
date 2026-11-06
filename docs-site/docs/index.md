@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Thirty-nine starters you can read today
+## Forty starters you can read today
 
 </div>
 
@@ -1053,6 +1053,31 @@ The draft runs locally. Nothing is approved or declined, no limit is set, the cu
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 40 · C001 · Customer service · Autonomy A1</p>
+
+### Customer self-service
+
+Answer one synthetic enquiry from a fixed knowledge base, explain the next step, and prepare an address or appointment draft for confirmation. A person is always offered.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. Nothing is written to an account, no payment is taken, no complaint is closed, and no message is sent.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/40-customer-self-service.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/40-customer-self-service)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -1075,7 +1100,7 @@ The draft runs locally. Nothing is approved or declined, no limit is set, the cu
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, and UK10 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, and C001 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

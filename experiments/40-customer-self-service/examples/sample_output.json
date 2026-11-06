@@ -1,0 +1,234 @@
+{
+  "label": "DRAFT FOR CUSTOMER SERVICE REVIEW",
+  "experiment": "40-customer-self-service",
+  "catalogue_id": "C001",
+  "autonomy": "A1",
+  "organisation": {
+    "id": "mereford-customer-service",
+    "name": "Mereford Customer Service",
+    "fictional": true,
+    "sectors_in_the_catalogue": [
+      "energy_retail",
+      "telecoms",
+      "financial_services",
+      "public_service"
+    ]
+  },
+  "model_called": false,
+  "network_called": false,
+  "executed": false,
+  "actions_taken": [],
+  "human_approval": null,
+  "enquiry_id": "SYN-ENQ-0040",
+  "enquiry_text_echoed": false,
+  "sector": "energy_retail",
+  "as_of": "2026-11-06",
+  "stale_after_days": 180,
+  "rules_current": true,
+  "any_source_stale": false,
+  "any_article_stale": false,
+  "sources": [
+    {
+      "id": "uk-gdpr-article-5",
+      "title": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "uk-gdpr-article-22a",
+      "title": "UK GDPR Article 22A",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "duaa-section-80",
+      "title": "Data (Use and Access) Act 2025, section 80",
+      "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "ofgem-ai-blog",
+      "title": "Understanding AI in the energy sector",
+      "url": "https://www.ofgem.gov.uk/blog/understanding-ai-energy-sector-benefits-risks-and-your-rights",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "equality-act-section-20",
+      "title": "Equality Act 2010, section 20",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/20",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "equality-act-section-29",
+      "title": "Equality Act 2010, section 29",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/29",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "equality-act-section-149",
+      "title": "Equality Act 2010, section 149",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "prin-2a-1",
+      "title": "PRIN 2A.1 Application and purpose",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/1.html",
+      "last_verified": "2026-11-06",
+      "stale": false
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-06",
+      "stale": false
+    }
+  ],
+  "ai_disclosure": "This response has been written by an automated AI chatbot. It is not a member of staff. You can ask for a person.",
+  "flags": {
+    "password_reset": false,
+    "payment_taken": false,
+    "complaint_closed": false,
+    "tariff_changed": false,
+    "contract_changed": false,
+    "record_changed": false,
+    "appointment_booked": false,
+    "message_sent": false,
+    "customer_labelled_vulnerable": false,
+    "secrets_collected": false,
+    "stale_article_quoted": false,
+    "customer_confirmed": false,
+    "handler_accepted_handover": false,
+    "handler_approved_own_send": false
+  },
+  "identity": {
+    "trusted": true,
+    "reason": "portal_session",
+    "third_party": false,
+    "check_stale": false,
+    "channel": "portal",
+    "sector": "energy_retail",
+    "customer_is_subject": true,
+    "account_ref": "SYN-ACC-1040"
+  },
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "followed": false,
+    "stripped_keys": []
+  },
+  "pii_gateway": {
+    "called": true,
+    "experiment": "08-uk-pii-redaction-gateway",
+    "catalogue_id": "O005",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "reversible": false,
+    "model_suggestions_applied": false,
+    "finding_count": 0,
+    "entity_types": [],
+    "input_sha256": "86b7dea760dd3e28b211ea63f3bcb7219f18c7a5fba90754838f5f476c082a43",
+    "rules_pinned_on": "2026-10-26",
+    "raw_values_logged": false,
+    "redacted_text_copied": false
+  },
+  "complaint_gate": {
+    "called": false,
+    "experiment": "02-consumer-duty-complaint-intake",
+    "catalogue_id": "C006",
+    "function": null,
+    "reason": "not_a_financial_services_complaint_or_vulnerability",
+    "customer_labelled_vulnerable": false,
+    "breach_found": false,
+    "complaint_closed": false,
+    "clock_calculated": false,
+    "handler_must_confirm": false
+  },
+  "outcome": "knowledge_answer",
+  "article": {
+    "id": "kb-energy-meter-reading",
+    "title": "How to give a meter reading",
+    "class": "information",
+    "sector": "energy_retail",
+    "last_reviewed": "2026-09-01",
+    "stale": false,
+    "body_quoted": true,
+    "body": "Read the numbers on the meter and submit them on the signed-in form you already use, or phone the published number. This article explains the next step. It does not submit the reading. Mereford Customer Service is fictional.",
+    "citation": "kb-energy-meter-reading, last reviewed 2026-09-01"
+  },
+  "citations": [
+    {
+      "article_id": "kb-energy-meter-reading",
+      "title": "How to give a meter reading",
+      "stale": false,
+      "body_quoted": true
+    }
+  ],
+  "proposed_action": null,
+  "correspondence_draft": null,
+  "human_route": {
+    "offered": true,
+    "ask_for_a_person": true,
+    "phone": "01632 960040",
+    "phone_is_live": false,
+    "non_digital": "Weekday counter at the invented Mereford office, 09:00 to 16:00.",
+    "queue": "general",
+    "pattern": "Experiment 13 warm handover. This starter does not import that code."
+  },
+  "regulatory": {
+    "lawful_basis_asserted": false,
+    "article_6_opened_on_2026_11_06": false,
+    "article_9_opened_on_2026_11_06": false,
+    "significant_decision_taken": false,
+    "article_22a": "Article 22A(1), opened 6 November 2026, defines a solely automated decision and a significant decision. This starter does not take one.",
+    "article_22c_safeguards_decided": false,
+    "article_22d_regulations_read": false,
+    "ofgem": {
+      "scenario_is_energy_retail": true,
+      "blog_opened": "2026-11-06",
+      "blog_date": "2026-02-05",
+      "ai_disclosure_included": true,
+      "human_route_included": true,
+      "non_digital_route_included": true,
+      "fairness_monitoring_done": false,
+      "licence_condition_verified": false,
+      "may_2026_ethical_ai_document_opened": false
+    },
+    "consumer_duty": {
+      "applied": false,
+      "prin_2a_1_opened": null,
+      "prin_2a_2_quoted": false,
+      "disp_clock_calculated": false,
+      "disp_reopened_on_2026_11_06": false,
+      "fg22_5_opened": false,
+      "fg21_1_opened": false,
+      "breach_found": false
+    },
+    "equality_act": {
+      "section_20_6_opened": "2026-11-06",
+      "section_29_7_opened": "2026-11-06",
+      "section_149_noted": false,
+      "accessible_format_offered": true,
+      "duty_met": false,
+      "due_regard_assessed": false
+    }
+  },
+  "next_steps": [
+    "Use the quoted page. It is an explanation of a next step, not a change to the account.",
+    "You can ask for a person. The phone number in this draft is invented.",
+    "You can ask for the information in another format. A person arranges that."
+  ],
+  "answer": {
+    "text": "Read the numbers on the meter and submit them on the signed-in form you already use, or phone the published number. This article explains the next step. It does not submit the reading. Mereford Customer Service is fictional. This response has been written by an automated AI chatbot. It is not a member of staff. You can ask for a person. You can ask for a person on 01632 960040, which is an invented number and not a live service, or at the weekday counter from 09:00 to 16:00. You can ask for this information in another format. A person arranges that. This starter does not decide that a reasonable adjustment has been made. Ofgem's blog of 5 February 2026 says energy companies should be clear when they are using AI, make it easy to speak to a human, and offer a non-digital alternative. This draft includes those three. It does not decide that a supplier has met that expectation, and it has not checked the system for fairness.",
+    "body_quoted": true,
+    "sufficient": true
+  }
+}

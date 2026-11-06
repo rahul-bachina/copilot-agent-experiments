@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Customer self-service review tool",
+  "description": "Input for record_review(). Customer confirmation does not change the record. Handler approval of a draft does not send it. Reset, payment, closure, tariff, contract, write, and send are not decisions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "customer_confirm_address_draft",
+        "customer_confirm_appointment_draft",
+        "handler_take_handover",
+        "handler_approve_correspondence_for_own_send",
+        "reject_draft"
+      ]
+    },
+    "actor": {"enum": ["customer", "handler"]},
+    "actor_id": {"type": "string"},
+    "recipient_role": {"enum": ["account-holder"]}
+  }
+}

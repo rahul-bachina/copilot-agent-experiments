@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "reply_tool.schema.json",
+  "title": "Customer self-service reply tool",
+  "description": "Input for draft_reply(). The tool reads one synthetic enquiry and returns a draft. It does not change a record and it does not send.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "text", "sector", "channel"],
+  "properties": {
+    "synthetic": {"const": true},
+    "enquiry_id": {"type": "string"},
+    "channel": {"enum": ["portal", "web_chat", "phone", "email"]},
+    "sector": {
+      "enum": ["energy_retail", "telecoms", "financial_services", "public_service"]
+    },
+    "text": {"type": "string", "maxLength": 4000},
+    "customer": {"type": "object"},
+    "subject_account": {"type": "object"},
+    "identity_check": {"type": "object"},
+    "structured": {"type": "object"}
+  }
+}

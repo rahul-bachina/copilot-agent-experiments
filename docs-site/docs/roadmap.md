@@ -374,6 +374,16 @@ A draft credit memo from one synthetic pack. Every stated figure carries a pinpo
 
 </article>
 
+<article class="plan-card" id="c001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C001 · Autonomy A1</p>
+
+## Customer self-service
+
+A draft reply to one synthetic enquiry from a fixed knowledge base. The customer confirms an address-update or appointment-request draft. The agent does not change the record, take a payment, close a complaint, change a tariff or a contract, or send a message. A person is always offered. It calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) and, for a financial-services complaint, [Experiment 02](experiments/02-consumer-duty-complaint-intake.md). The confirmation, handover, and draft-approval patterns follow [Experiment 21](experiments/21-it-service-desk.md), [Experiment 13](experiments/13-council-contact-front-door.md), and [Experiment 09](experiments/09-casework-correspondence-draft.md). [Read the briefing](experiments/40-customer-self-service.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40.
