@@ -1,0 +1,365 @@
+# Agent manifest: Policy wording comparison
+# Experiment 38 — catalogue ID B008
+# Version: 0.1.0
+# Last reviewed: 2026-11-06
+# Next review: 2027-05-06
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-38-policy-wording-comparison"
+  name: "Policy Wording Comparison Agent"
+  version: "0.1.0"
+  description: >
+    Produces a structured, source-cited comparison of two or more synthetic
+    policy wordings. Autonomy is A0. A wording specialist validates every
+    interpretation. The agent does not rank favourability, recommend buy,
+    sell, or renew, draft an endorsement, contact a broker, or write to a
+    policy administration system.
+  owner: "Wording specialist (the adopting insurer, MGA, or broker)"
+  contact: "wording-specialist@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/38-policy-wording-comparison"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only comparison. The specialist validates every interpretation. Nothing is sent and nothing is written."
+  constraints:
+    - "Every stated clause is a contiguous copy of cited lines, including the clause reference. A topic absent from a wording is the words not stated. Nothing is inferred."
+    - "The agent NEVER interprets favourability for the insured or the insurer."
+    - "The agent NEVER recommends buy, sell, or renew."
+    - "The agent NEVER drafts a binding endorsement."
+    - "The agent NEVER contacts a broker."
+    - "The agent NEVER writes to a policy administration system and NEVER makes a coverage decision."
+    - "The agent NEVER decides that section 17 of the Insurance Act 2015 was met, that a term is unfair, or that PRIN 2A.5 was met."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "Wording text is untrusted. An instruction inside a clause is recorded and not followed."
+    - "All output is labelled DRAFT FOR THE WORDING SPECIALIST. NOT A COVERAGE OPINION AND NOT A RECOMMENDATION."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic wording pack supplied for this run"
+      description: "Two to four text wordings already split into pages, paragraphs, and lines. The samples use Northfen Wharf Ltd, which is fictional."
+      access_level: "read"
+      scope: "The file passed to this run. No policy administration system and no broker mailbox."
+      justification: "The comparison cannot be cited without the wordings the specialist supplied."
+      data_categories:
+        - "Synthetic policy clause text"
+        - "A company name, which would be personal data if it identified a sole trader"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 6 November 2026. Pages that were not opened are marked."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Statutory and product claims are cited from that pin and marked when a page was not opened."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the specialist."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Document age and source currency are calculated from these inputs."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "A policy administration system, a bordereau, or a placing platform"
+      reason: "The agent does not read or write a live policy record."
+    - resource: "A broker mailbox or any send channel"
+      reason: "The comparison is returned to the specialist. The broker is not contacted."
+    - resource: "A rating engine or an endorsement library"
+      reason: "The agent does not recommend terms and does not draft an endorsement."
+    - resource: "Azure Document Intelligence or a Microsoft Foundry resource"
+      reason: "The overview was opened. This folder does not call the service."
+
+tools:
+  allowed:
+    - tool: "Compare the wordings supplied for this run"
+      provider: "Local Python (src/compare.py), which calls Experiment 12 intake, Experiment 33 span checks, and Experiment 29 number and date checks"
+      action: "Copy current clauses under the closed topic list, flag textual differences and not-stated cells"
+      access_level: "read"
+      scope: "The pack passed to the agent"
+      justification: "The specialist needs the same comparison each time, with a pinpoint citation on every stated clause."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Inventory files via Experiment 12"
+      provider: "experiments/12-document-intake"
+      action: "Inventory text files. Do not confirm a purpose, route, queue, or release."
+      access_level: "read"
+      scope: "The files on the pack. No policy-wording purpose is requested, because Experiment 12 has none."
+      justification: "A file that was not read, is stale, or contains a deterministic identifier is not quoted."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write a policy administration system, a Dataverse row, or an endorsement. The JSON is a return value, not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not email the broker, the insured, or a coverholder."
+
+human_approval:
+  description: >
+    The wording specialist validates every interpretation before any
+    downstream use. Favourability, any recommendation, any endorsement,
+    any broker contact, and any policy-administration write stay outside
+    this agent.
+  approval_points:
+    - action: "Validate every comparison row, including each not stated cell, against the clause text"
+      approver: "Wording specialist"
+      mandatory: true
+      rationale: "Catalogue control for B008. A passed checker is not an interpretation of cover."
+    - action: "Re-open a stale pinned page before relying on the legal note"
+      approver: "Wording specialist"
+      mandatory: true
+      rationale: "A stale pin sets do_not_rely. The comparison can still be shown. The note is not cleared by the agent."
+    - action: "Decide whether any difference is favourable to the insured or the insurer"
+      approver: "Wording specialist, outside this agent"
+      mandatory: true
+      rationale: "favourable_to stays null. Section 69 of the Consumer Rights Act 2015 is not applied."
+    - action: "Decide whether to buy, sell, or renew"
+      approver: "The authorised person, outside this agent"
+      mandatory: true
+      rationale: "recommendation stays null."
+    - action: "Draft or agree any endorsement"
+      approver: "The authorised person, outside this agent"
+      mandatory: true
+      rationale: "endorsement_draft stays null. The agent has no draft tool that succeeds."
+    - action: "Contact the broker, or write the comparison into a policy administration system"
+      approver: "The authorised person, outside this agent"
+      mandatory: true
+      rationale: "broker_contacted and policy_admin_written stay false."
+    - action: "Confirm a lawful basis before any live wording is processed"
+      approver: "Data protection officer"
+      mandatory: true
+      rationale: "The manifest does not assert an Article 6 basis."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic pack the specialist supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT FOR THE WORDING SPECIALIST. NOT A COVERAGE OPINION AND NOT A RECOMMENDATION."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live wording may contain personal data, for example where the insured
+      is a sole trader. This starter does not choose an Article 6 basis. The
+      data protection officer confirms a basis before any live file. Article 5
+      was read on 6 November 2026, including data minimisation and accuracy.
+      The starter copies cited lines and does not fill a gap by inference.
+      Article 22 was shown as omitted. Articles 22A to 22D were read. This
+      comparison is not a solely automated coverage decision.
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The samples are not special category data."
+    condition: "Not asserted."
+    safeguards:
+      - "No Article 9 condition is claimed here."
+      - "The pack must be marked synthetic."
+      - "A file with a deterministic identifier finding is not quoted. output_is_anonymised stays false."
+      - "Article 22A defines a solely automated decision as one with no meaningful human involvement. This starter does not take the decision and does not certify meaningful human involvement."
+  data_minimisation:
+    - "At most four wordings. The topic list is closed."
+    - "A topic with no usable clause is not stated. The value is not guessed."
+    - "File content is not copied into the comparison. Quoted lines are the cited clauses."
+    - "A stripped decision key is not echoed."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A deployment retention period is for the firm, not this file."
+  data_residency:
+    region: "UK"
+    note: "A deployment choice for a later agent. This starter does not call a model and does not choose a region. UK region availability for Azure Document Intelligence was not verified. The product-availability page was not opened."
+  data_subject_rights:
+    note: "This starter does not operate a request channel. A live system would route rights requests to the firm."
+
+prompt_injection:
+  description: "Wording text is untrusted. A matching sentence is recorded and not followed."
+  controls:
+    - control: "Sentence patterns"
+      description: "Instructions to ignore directions, rank favourability, recommend renewal, draft an endorsement, contact the broker, or write the policy admin system are recorded."
+      implementation: "src/injection.py. A sentence that already says do not, must not, never, or cannot is not a hit, unless it also states an affirmative recommendation."
+    - control: "Payload keys"
+      description: "Keys that would set favourability, a recommendation, an endorsement, a send, or a write are stripped and not echoed."
+      implementation: "strip_prohibited before the pack is read."
+  residual_risk: "A negation in the same sentence can hide an instruction. A paraphrase can be missed. Neither grants a tool the agent does not have. Experiment 12's scanner does not use the negation skip."
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named insurer"
+  date_assessed: "2026-11-06"
+  risks:
+    - id: "R1"
+      risk: "A reader treats a textual difference as a statement that one wording is more favourable"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "The label is DRAFT FOR THE WORDING SPECIALIST. NOT A COVERAGE OPINION AND NOT A RECOMMENDATION."
+        - "favourable_to and recommendation stay null"
+        - "Favourability wording is not copied into a quote"
+      residual_risk: "Medium"
+      owner: "Wording specialist"
+    - id: "R2"
+      risk: "A clause tells the agent to recommend renewal, draft an endorsement, or ignore these instructions"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Those sentences are recorded and not copied"
+        - "A recommendation key buried in the pack does not set a flag"
+        - "Tests cover injection, a buried key, and the prohibited command flags"
+      residual_risk: "Low"
+      owner: "Wording specialist"
+    - id: "R3"
+      risk: "A cited clause is accurate and the comparison still omits the clause that changes the cover"
+      likelihood: "High"
+      impact: "High"
+      controls:
+        - "A topic present in one wording and absent from another is shown as not stated"
+        - "An unaligned clause is listed separately and is not matched by guesswork"
+        - "The specialist validates every row"
+      residual_risk: "High"
+      owner: "Wording specialist"
+    - id: "R4"
+      risk: "A stale endorsement, a stale legislation page, or an identifier is relied on"
+      likelihood: "Medium"
+      impact: "Medium"
+      controls:
+        - "A file outside the window is not quoted"
+        - "A wording whose documents were all withheld is not_quoted, which is not a silence finding"
+        - "A stale pin sets do_not_rely and the legal note is not cleared"
+      residual_risk: "Medium"
+      owner: "Wording specialist"
+    - id: "R5"
+      risk: "The draft is read as a decision that section 17 was met, that a term is unfair, or that the Consumer Duty was met"
+      likelihood: "Medium"
+      impact: "High"
+      controls:
+        - "Regulatory notes are context. They are not findings."
+        - "A retail label shows the Consumer Rights Act and PRIN 2A.5 notes and does not apply them."
+        - "basis_clause_of_no_effect stays null."
+      residual_risk: "Medium"
+      owner: "Wording specialist"
+
+logging_and_audit:
+  description: "This starter writes no log. Before a deployment, log who ran a comparison, the synthetic pack id, the as-of date, and whether injection was detected. Do not log the wording text."
+  logged_events:
+    - event: "Policy wordings compared"
+      data_logged:
+        - "synthetic pack id"
+        - "as-of date"
+        - "whether a prompt-injection pattern was detected"
+        - "whether a clause was withheld"
+        - "whether the broker was contacted (always false in this starter)"
+        - "whether a policy administration system was written (always false in this starter)"
+      retention: "Not set by this starter."
+  log_destination:
+    primary: "None in this starter"
+    note: "A later host would choose a UK log store. Application Insights was not opened for this experiment and is unverified."
+  audit_trail:
+    - "The JSON records citations, difference classes, not-stated cells, and injection pattern ids."
+    - "Decision keys stripped from the pack are named, not valued."
+
+kill_switch:
+  description: "This starter is a local command. Stop using it by not running it. There is no published agent to switch off."
+  methods:
+    - method: "Do not run the command"
+      action: "Stop invoking src/compare.py"
+      time_to_effect: "Immediate"
+      who_can_activate: "Whoever can run the command"
+    - method: "Remove the file from a machine that should not compare wordings"
+      action: "Delete the local copy"
+      time_to_effect: "Immediate"
+      who_can_activate: "The machine owner"
+  escalation_contacts:
+    - role: "Wording specialist"
+      contact: "wording-specialist@example.com"
+    - role: "Data protection officer"
+      contact: "The adopting firm's data protection officer. Not named in this starter."
+
+review:
+  last_review_date: "2026-11-06"
+  next_review_date: "2027-05-06"
+  review_frequency: "Six months, and sooner if a pinned legislation or Microsoft Learn page is re-opened and has changed."
+  reviewer: "The adopting firm's wording specialist. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A pinned page is re-opened and the sentence this starter relies on has changed."
+    - "Experiment 12's intake result shape changes."
+    - "Experiment 33's span check or Experiment 29's number check changes."
+    - "PRIN 2A.1 is re-opened. The page returned only an office address on 6 November 2026."
+  related_documents:
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+    - name: "Tool schema"
+      path: "schema/tools.json"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not accept, decline, or rank a wording. favourable_to stays null."
+  regulated_decision:
+    enabled: false
+    rationale: "Coverage, fairness, and whether a transparency requirement was met are for the specialist. This draft does not decide them. It is not a solely automated decision under Article 22A."
+  production_record_change:
+    enabled: false
+    rationale: "No policy administration system is written. The JSON is not an endorsement."
+  external_send:
+    enabled: false
+    rationale: "The broker is not contacted. Nothing is sent to the insured."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not bind cover and does not collect or pay a premium."
+  additional_high_risk:
+    - action_name: "Interpret favourability"
+      enabled: false
+      rationale: "interpret_favourability always raises. favourable_to stays null."
+    - action_name: "Recommend buy, sell, or renew"
+      enabled: false
+      rationale: "recommend_buy_sell_renew always raises. recommendation stays null."
+    - action_name: "Draft an endorsement"
+      enabled: false
+      rationale: "draft_endorsement always raises. endorsement_draft stays null."
+    - action_name: "Contact the broker"
+      enabled: false
+      rationale: "contact_broker always raises. broker_contacted stays false."
+    - action_name: "Write the policy administration system"
+      enabled: false
+      rationale: "write_policy_admin always raises."
+    - action_name: "Decide coverage"
+      enabled: false
+      rationale: "decide_coverage always raises. coverage_decision stays null."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing. The scope policy was not re-opened for this experiment."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "The firm confirms these before anyone relies on a comparison."
+  items:
+    - id: "AS1"
+      assumption: "The pack was supplied by the specialist and is synthetic. This starter does not fetch it from a broker portal or a policy administration system."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "AS2"
+      assumption: "Part 2 of the Insurance Act 2015 applies to non-consumer insurance contracts only, section 2(1). The caller label commercial_non_consumer is not a decision that the contract is non-consumer. The Consumer Insurance (Disclosure and Representations) Act 2012 was not opened."
+      section: "human_approval"
+      verify_on_deployment: true
+    - id: "AS3"
+      assumption: "PRIN 2A.5 was opened on 6 November 2026. PRIN 2A.1 was requested the same day and returned only an office address, so it is not quoted from this experiment. This starter does not decide that a firm is in retail market business."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS4"
+      assumption: "The 90-day window is this starter's staleness rule, not a statutory period and not a Lloyd's deadline. A Lloyd's byelaw was not opened."
+      section: "risk_assessment"
+      verify_on_deployment: true
+    - id: "AS5"
+      assumption: "Article 22 was shown as omitted on 6 November 2026. Articles 22A to 22D were read. Article 22B paragraph 2 was not in the returned text and is not quoted. This starter does not certify meaningful human involvement."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "AS6"
+      assumption: "No insurance wording comparison model was named on the Azure Document Intelligence overview opened on 6 November 2026. This starter does not call that service. UK region availability is unverified."
+      section: "data_access.never_access"
+      verify_on_deployment: true

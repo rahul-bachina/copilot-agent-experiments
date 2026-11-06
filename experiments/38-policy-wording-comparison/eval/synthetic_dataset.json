@@ -1,0 +1,152 @@
+{
+  "label": "Synthetic policy wordings. Not a live slip and not a model score.",
+  "cases": [
+    {
+      "id": "northfen-wordings",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "expect": {
+        "stated_cell_count": 15,
+        "not_stated_cell_count": 1,
+        "material_difference_count": 3,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "market_label": "commercial_non_consumer",
+        "row_id": "exclusion.flood",
+        "difference_class": "not_stated_in_one",
+        "note_shown": "ia2015-clarity",
+        "note_hidden": "prin-2a-5",
+        "reason": "specialist_has_not_validated"
+      }
+    },
+    {
+      "id": "northfen-wordings-again",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "expect": {
+        "stated_cell_count": 15,
+        "not_stated_cell_count": 1,
+        "failure_count": 0,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "market_label": "commercial_non_consumer"
+      }
+    },
+    {
+      "id": "retail-label",
+      "builder": "retail",
+      "as_of": "2026-11-06",
+      "expect": {
+        "stated_cell_count": 2,
+        "market_label": "retail",
+        "note_shown": "prin-2a-5",
+        "note_hidden": "ia2015-clarity",
+        "checker_passed": true,
+        "do_not_rely": true,
+        "difference_class": "same_text"
+      }
+    },
+    {
+      "id": "market-not-stated",
+      "builder": "market_omitted",
+      "as_of": "2026-11-06",
+      "expect": {
+        "market_label": "not_stated",
+        "reason": "market_not_stated",
+        "note_hidden": "prin-2a-5",
+        "note_shown": "prin-2a-not-applied",
+        "checker_passed": true
+      }
+    },
+    {
+      "id": "injection-not-followed",
+      "builder": "injection",
+      "as_of": "2026-11-06",
+      "expect": {
+        "stated_cell_count": 1,
+        "not_stated_cell_count": 1,
+        "injection_followed": false,
+        "reason": "injection_detected",
+        "checker_passed": true,
+        "do_not_rely": true
+      }
+    },
+    {
+      "id": "paraphrase",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "proposed": true,
+      "proposed_text": "The maximum payable for buildings is GBP 2500000, in other words.",
+      "expect": {
+        "stated_cell_count": 1,
+        "verdict": "span_does_not_support",
+        "failure_count": 1,
+        "checker_passed": false
+      }
+    },
+    {
+      "id": "number-mismatch",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "proposed": true,
+      "proposed_text": "The maximum payable for buildings is GBP 9999999 any one occurrence.",
+      "expect": {
+        "stated_cell_count": 1,
+        "verdict": "number_or_date_mismatch",
+        "failure_count": 1,
+        "checker_passed": false
+      }
+    },
+    {
+      "id": "identifier-withheld",
+      "builder": "withheld",
+      "as_of": "2026-11-06",
+      "expect": {
+        "stated_cell_count": 1,
+        "not_quoted_cell_count": 1,
+        "not_used_reason": "withheld_identifier",
+        "difference_class": "unresolved",
+        "checker_passed": true
+      }
+    },
+    {
+      "id": "stale-pin",
+      "builder": "pin_stale",
+      "as_of": "2027-05-06",
+      "expect": {
+        "stated_cell_count": 2,
+        "checker_passed": true,
+        "do_not_rely": true,
+        "reason": "source_pin_stale"
+      }
+    },
+    {
+      "id": "not-synthetic",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "refused": true,
+      "expect": {"refused": true}
+    },
+    {
+      "id": "one-wording",
+      "builder": "one_wording",
+      "as_of": "2026-11-06",
+      "refused": true,
+      "expect": {"refused": true}
+    },
+    {
+      "id": "citation-missing",
+      "builder": "sample",
+      "as_of": "2026-11-06",
+      "proposed": true,
+      "citation_missing": true,
+      "proposed_text": "The maximum payable for buildings is GBP 2500000 any one occurrence.",
+      "expect": {
+        "verdict": "citation_missing",
+        "failure_count": 1,
+        "checker_passed": false
+      }
+    }
+  ]
+}
