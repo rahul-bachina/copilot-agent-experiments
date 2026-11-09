@@ -384,6 +384,16 @@ A draft reply to one synthetic enquiry from a fixed knowledge base. The customer
 
 </article>
 
+<article class="plan-card" id="c004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C004 · Autonomy A1</p>
+
+## Response drafting
+
+A draft customer response from one synthetic case and approved snippets. Every quoted sentence names its snippet. A tone screen and a plain-English screen run before the representative reviews the text. The representative sends. It calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) to count identifiers and [Experiment 09](experiments/09-casework-correspondence-draft.md) for the citation gate. It does not send, write a case, offer redress, or decide that PRIN 2A.5 was met. [Read the briefing](experiments/43-response-drafting.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C004 is Experiment 43.

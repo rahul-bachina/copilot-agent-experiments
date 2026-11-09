@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Forty starters are in `experiments/`. The folders are 01 to 40. The count is the number of folders.
+Forty-one starters are in `experiments/`. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -72,6 +72,7 @@ Forty starters are in `experiments/`. The folders are 01 to 40. The count is the
 | 38 | [Policy Wording Comparison](experiments/38-policy-wording-comparison/) | Compare two or more synthetic policy wordings with a pinpoint citation on every clause. A topic that one wording does not state is not stated. Autonomy A0. A wording specialist validates every interpretation. The agent does not rank favourability, recommend buy, sell, or renew, draft an endorsement, contact a broker, or write to a policy administration system. | ✅ Starter |
 | 39 | [Credit Memo Drafting](experiments/39-credit-memo-drafting/) | Draft a cited credit memo from one synthetic pack. A missing section is not stated. The credit officer owns the recommendation and every approval. Autonomy A1. The agent does not approve or decline, set a limit, contact the customer or a bureau, post to a core system, or file a SAR. | ✅ Starter |
 | 40 | [Customer Self-Service Agent](experiments/40-customer-self-service/) | Answer one synthetic enquiry from a fixed knowledge base and prepare an address or appointment draft for confirmation. Autonomy A1. The agent does not reset a password, take a payment, close a complaint, change a tariff or a contract, write a record, or send. A person is always offered. | ✅ Starter |
+| 43 | [Response Drafting Agent](experiments/43-response-drafting/) | Draft one customer response from a synthetic case and approved snippets, with source references and tone and plain-English screens. Autonomy A1. The representative sends. The agent does not send, write a case, offer redress, or decide that PRIN 2A.5 was met. | ✅ Starter |
 
 ## Getting Started
 
