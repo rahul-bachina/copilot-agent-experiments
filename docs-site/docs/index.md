@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Forty-one starters you can read today
+## Forty-two starters you can read today
 
 </div>
 
@@ -1080,6 +1080,31 @@ The draft runs locally. Nothing is written to an account, no payment is taken, n
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 42 · C003 · Customer service · Autonomy A1</p>
+
+### Case routing assistant
+
+Propose a queue, a priority, and a reason for one synthetic case. Vulnerability and statutory-clock cases stay with a person. The adviser confirms before any reroute.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The proposal runs locally. Nothing is rerouted, closed, or escalated, and a routing rule is not edited.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/42-case-routing-assistant.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/42-case-routing-assistant)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 43 · C004 · Customer service · Autonomy A1</p>
 
 ### Response drafting
@@ -1125,7 +1150,7 @@ The draft runs locally. Nothing is sent, no case is written, and no redress is o
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, and C004 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C003, and C004 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

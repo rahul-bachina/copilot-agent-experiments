@@ -1,0 +1,516 @@
+# Agent manifest: Case Routing Assistant
+# Experiment 42 — catalogue ID C003
+# Version: 0.1.0
+# Last reviewed: 2026-11-09
+# Next review: 2027-05-09
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-42-case-routing-assistant"
+  name: "Case Routing Assistant"
+  version: "0.1.0"
+  description: >
+    Proposes a queue, a priority, and a reason for one synthetic case.
+    Autonomy A1. An adviser confirms a proposed route. The queue owner
+    approves a material routing-rule change. Vulnerability and statutory-clock
+    cases always propose a human queue. The agent never reroutes, closes,
+    escalates, or edits a rule.
+  owner: "Contact centre operations"
+  contact: "routing@northmere.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/42-case-routing-assistant"
+
+autonomy:
+  level: "A1"
+  level_description: "Human approves everything"
+  constraints:
+    - "An adviser confirms a proposed route. The agent only prepares it."
+    - "The queue owner approves a material change to a routing rule. The agent does not edit the rule file."
+    - "Vulnerability and statutory-clock cases always propose a human queue."
+    - "A confidence band cannot move a case off a human queue."
+    - "The agent NEVER reroutes, closes, escalates, sends, or decides entitlement."
+    - "A protected characteristic is not a routing feature."
+    - "Queue, priority, reason, and the empty approval come from src/routing.py, not from model output."
+    - "All output is advisory and is marked draft for queue review."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied case"
+      description: "A single case the adviser pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One case per invocation. The output does not echo the text."
+      justification: "The assistant cannot match a rule without the case that was supplied."
+      data_categories:
+        - "Free text of one case"
+        - "A channel label and a sector label, if they are on the allow-list"
+        - "An optional statutory-clock kind and Awaab fields"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the case."
+
+    - resource: "Separate review object"
+      description: "adviser_confirm_proposed_route, adviser_accept_human_queue, queue_owner_approve_rule_change, or reject_proposal."
+      access_level: "read"
+      scope: "One review for a proposal already produced. Not read from the case text."
+      justification: "Approval has to be deterministic and has to refuse a reroute, a close, and a rule edit."
+      may_contain_personal_data: false
+
+    - resource: "Approved routing rules"
+      description: "Rules in src/rules.py for the invented Northmere contact centre."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "A queue is proposed only from a current, owner-approved rule, or a human queue is proposed instead."
+      may_contain_personal_data: false
+
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+    - resource: "Experiment 15 scan"
+      description: "scan() from experiments/15-vulnerability-urgency-scanner. Phrases and redacted text are not copied out."
+      access_level: "read"
+      scope: "One call per case. Experiment 15 calls Experiment 08. release() is not called."
+      justification: "Vulnerability categories come from the shared scanner. This experiment does not ship a second list."
+      may_contain_personal_data: true
+
+    - resource: "Experiment 05 statutory clock"
+      description: "calculate_statutory_clock() for an Awaab illustration. Officer approval is forced off."
+      access_level: "read"
+      scope: "One call when structured fields are present. Illustrations are not copied. Deadlines are not applied as a route."
+      justification: "The clock calculation stays in Experiment 05. This experiment does not reimplement it."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Dynamics 365, case-management, and queue systems"
+      reason: "The proposal is not written back. The agent does not reroute."
+    - resource: "Mailboxes, SMS gateways, and contact-centre diallers"
+      reason: "The agent does not send and does not place a call."
+    - resource: "Routing-rule administration"
+      reason: "A recorded approval does not edit the rule file."
+    - resource: "Live knowledge bases"
+      reason: "A live page would bypass the stale window."
+    - resource: "Other people's cases"
+      reason: "One case at a time."
+
+tools:
+  allowed:
+    - tool: "Routing proposal"
+      provider: "Local Python (src/routing.py)"
+      action: "Propose a queue, a priority, and a reason, or a human queue"
+      access_level: "read"
+      scope: "One case. No network. No model."
+      justification: "Which rule applies, and whether a human queue is mandatory, are comparisons."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record an adviser confirmation, a human-queue acceptance, a queue-owner rule approval, or a rejection"
+      access_level: "read"
+      scope: "The proposal for this run and a separate review object. No reroute and no rule edit."
+      justification: "The approval has to be deterministic."
+      human_approval_required: true
+      output_requires_human_review: true
+
+    - tool: "Vulnerability scan"
+      provider: "Experiment 15 (scan)"
+      action: "Return indicator categories. Phrases are not copied."
+      access_level: "read"
+      scope: "The case text for this run. model is not passed."
+      justification: "The shared scanner is the vulnerability check. This experiment does not keep a second phrase list."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Awaab clock illustration"
+      provider: "Experiment 05 (calculate_statutory_clock)"
+      action: "Illustrate deadlines with officer approval forced off"
+      access_level: "read"
+      scope: "Structured fields only, when supplied. Not applied as a route."
+      justification: "Dates for that regime stay in Experiment 05."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The queue, the band, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a reroute, a close, an escalation, a send, or a rule edit"
+      access_level: "read"
+      scope: "The proposal for this run"
+      justification: "A proposal that moves a case is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The proposal is returned to the adviser. Moving the case,
+      if someone chooses to, is done in the organisation's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming a proposal does not email, text, or call anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or refuse a case outcome. record_review can
+      record a confirmation. It cannot move the case.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide entitlement, a complaint, or that a duty
+      under the Equality Act 2010 or UK GDPR has been met.
+
+  production_record_change:
+    enabled: false
+    rationale: >
+      No create or update against a case system or a routing-rule store.
+      Confirmation does not write one.
+
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact the resident or a partner agency."
+
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Reroute a case"
+      rationale: "reroute_case raises RoutingForbidden. rerouted stays false, including after adviser_confirm_proposed_route."
+    - enabled: false
+      action_name: "Close or escalate a case"
+      rationale: "Those functions raise. The flags stay false."
+    - enabled: false
+      action_name: "Change a routing rule"
+      rationale: "Queue-owner approval is a record. The rule file is not edited."
+    - enabled: false
+      action_name: "Use a protected characteristic as a routing feature"
+      rationale: "The feature is refused. The flag protected_characteristic_used_as_a_feature stays false."
+
+human_approval:
+  description: >
+    The adviser confirms a proposed service route, or accepts a human queue.
+    The queue owner approves a material routing-rule change. The agent has
+    no path that acts on that choice. Confirming a sentence in the chat does
+    not reroute, close, escalate, or edit a rule. A confidence band cannot
+    replace the confirmation.
+
+  approval_points:
+    - action: "Confirm a proposed route"
+      approver: "Adviser who is looking at the case"
+      mandatory: true
+      rationale: "propose_route() leaves human_approval null. Only record_review can set it, and only for a current proposed route. Confirmation does not reroute."
+
+    - action: "Accept a human queue"
+      approver: "Adviser who is looking at the case"
+      mandatory: true
+      rationale: "Vulnerability, statutory-clock, fairness, adjustment, complaint, and entitlement cases propose a human queue. Accepting it does not escalate or close."
+
+    - action: "Approve a material routing-rule change"
+      approver: "Queue owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for C003. The record does not edit the rule file. A protected characteristic cannot be approved as a feature."
+
+    - action: "Rely on a rule after it is marked stale"
+      approver: "Queue owner"
+      mandatory: true
+      rationale: "The queue is not proposed. The owner re-reads the organisation's own rule. This starter cannot fetch that rule."
+
+    - action: "Close, escalate, or send"
+      approver: "The person authorised for that action"
+      mandatory: true
+      rationale: "Outside the agent. Those flags stay false."
+
+  no_approval_required:
+    - action: "View the proposal"
+      rationale: "Reading a proposal has no external effect."
+    - action: "Re-run the same case"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 9 November 2026. Do not copy a basis from another
+      experiment.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a resident volunteers in a case"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 9 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One case at a time, as supplied by the person running the proposal"
+      - "The output does not echo the case text, the Experiment 15 phrases, or the redacted text"
+      - "Nothing is written to a case record"
+      - "Samples in this repository are synthetic"
+      - "No solely automated significant decision. The agent does not move a queue."
+
+  data_minimisation:
+    - "The core reads one case. It does not retrieve a contact history."
+    - "The proposal names rule ids and category ids. It does not name the person."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the adviser then saves."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      A subject-access case is proposed to a human queue. Article 12A was not opened, so no period is stated.
+
+prompt_injection:
+  description: >
+    Case text is untrusted. It may tell the model to ignore the rules, close
+    the case, or clear a vulnerability flag. The core does not read the
+    network. The model is not given a tool that can reroute, close, or edit a rule.
+
+  controls:
+    - control: "Instructions separated from the case"
+      description: "A sentence that is itself an instruction is not used to choose a service rule. The signal is recorded and followed is false."
+    - control: "Human queues are not cleared"
+      description: "A sentence that says the person is not vulnerable does not remove a vulnerability queue."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set the approval, a reroute, or a close is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses reroute, close, escalate, and rule-edit decisions."
+    - control: "Experiment 15 and Experiment 08"
+      description: "Free text goes through scan(). Phrases and redacted text are not copied out."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The adviser
+    is the control. There is no autonomous move to make even if the brief is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-09"
+  risks:
+    - id: "R1"
+      risk: "Case text is treated as authority to reroute, close, or escalate"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "A confirmation does not perform them"
+        - "The direct functions raise RoutingForbidden"
+      residual_risk: "Low"
+      owner: "Contact centre operations"
+
+    - id: "R2"
+      risk: "A vulnerability or statutory-clock case is placed on a routine queue"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those cases propose a human queue"
+        - "The confidence band is not_used and cannot override"
+        - "A clearance sentence does not remove the queue"
+      residual_risk: "Medium"
+      owner: "Contact centre operations"
+
+    - id: "R3"
+      risk: "A protected characteristic is used as a routing feature"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "An instruction or a proposed feature is refused"
+        - "The queue owner cannot approve that feature"
+        - "No duty is marked as met"
+      residual_risk: "Medium"
+      owner: "Equalities lead"
+
+    - id: "R4"
+      risk: "A stale or unapproved rule is followed"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days is not proposed"
+        - "Equal to 180 days is still proposed, and that boundary is tested"
+        - "An unapproved rule is not applied"
+      residual_risk: "Low"
+      owner: "Queue owner"
+
+    - id: "R5"
+      risk: "A statutory period is invented"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "FOI and EIR dates are not calculated"
+        - "Article 12A was not opened, so no subject-access period is stated"
+        - "Experiment 05 is called with officer approval forced off"
+      residual_risk: "Low"
+      owner: "Contact centre operations"
+
+    - id: "R6"
+      risk: "A live case, including a National Insurance number, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Experiment 15 counts identifiers via Experiment 08. The redacted text is not copied out"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the case id, the outcome, and the later review. This starter logs
+    nothing because it keeps no store. Do not put the case text in an
+    application trace.
+
+  logged_events:
+    - event: "Proposal requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Case id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's contact-centre schedule. Not set by this starter."
+    - event: "Proposal result"
+      data_logged:
+        - "Outcome"
+        - "Proposed queue id"
+        - "Confidence band"
+        - "Whether any rule or source was stale"
+        - "Whether human_approval was left null"
+        - "Experiment 15 category ids and finding count, not the phrases"
+      retention: "Keep with the case if the adviser relies on the proposal. The case text is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Timestamp"
+        - "executed false"
+        - "rerouted false"
+        - "rules_changed false"
+      retention: "Organisation's schedule. The agent does not write this event to a case system."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the case narrative in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for case systems, mail, or telephony"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Contact centre operations lead"
+      contact: "routing@northmere.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-09"
+  next_review_date: "2027-05-09"
+  review_frequency: "6 months, and sooner if section 80, Article 12A, section 10, or regulation 5 changes"
+  reviewer: "The adopting organisation's queue owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to a routing rule, if the organisation later substitutes its own file"
+    - "A change to Data (Use and Access) Act 2025 section 80 or UK GDPR Articles 22A to 22D"
+    - "Article 12A being opened, if a subject-access period is later stated"
+    - "A change to Equality Act 2010 sections 19, 29, or 149"
+    - "A proposal to add a connector that can reroute, close, message, or edit a rule"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Routing core"
+      path: "src/routing.py"
+    - name: "Routing rules"
+      path: "src/rules.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 9 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a review duty the organisation already has."
+      section: "src/rules.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Article 12A was not opened. No subject-access period is stated."
+      section: "src/clocks.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "S.I. 2026/82 was not opened. The commencement line was read on the section 80 page only."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on resident cases."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on northmere.example.gov.uk are placeholders. Northmere Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Experiment 05 is not given officer approval. An operative deadline from that module would be a defect."
+      section: "src/clocks.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Experiment 15 does not anonymise the text. This assistant does not copy phrases or the redacted string."
+      section: "tools.allowed"
+      verify_on_deployment: true

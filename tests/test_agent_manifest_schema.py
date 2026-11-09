@@ -1883,6 +1883,65 @@ class TestExperiment40Manifest:
         assert experiment_40_manifest["agent"]["id"] == "exp-40-customer-self-service"
 
 
+class TestExperiment42Manifest:
+    """Test the Experiment 42 case routing assistant manifest."""
+
+    @pytest.fixture
+    def experiment_42_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "42-case-routing-assistant"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_42_manifest):
+        """Experiment 42 manifest should be valid."""
+        validate(instance=experiment_42_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_42_manifest):
+        """Experiment 42 should be autonomy level A1. The queue owner approves material rule changes."""
+        level = experiment_42_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_42_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_42_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_42_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_42_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_42_manifest):
+        """Nothing is sent, and the case system is not written."""
+        assert experiment_42_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_42_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_queue_owner_approves_a_material_rule_change(self, experiment_42_manifest):
+        """The catalogue checkpoint is the queue owner, and it is mandatory."""
+        points = experiment_42_manifest["human_approval"]["approval_points"]
+        approval = next(
+            point
+            for point in points
+            if point["action"] == "Approve a material routing-rule change"
+        )
+        assert approval["approver"] == "Queue owner"
+        assert approval["mandatory"] is True
+        assert experiment_42_manifest["agent"]["id"] == "exp-42-case-routing-assistant"
+
+
 class TestExperiment43Manifest:
     """Test the Experiment 43 response drafting manifest."""
 
