@@ -1,0 +1,525 @@
+# Agent manifest: Response Drafting Agent
+# Experiment 43 — catalogue ID C004
+# Version: 0.1.0
+# Last reviewed: 2026-11-09
+# Next review: 2027-05-09
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-43-response-drafting"
+  name: "Response Drafting Agent"
+  version: "0.1.0"
+  description: >
+    Helps a representative draft a customer response from one synthetic case
+    and approved knowledge snippets. Autonomy A1. The representative reviews
+    the draft and sends it on their own channel. The agent never sends, never
+    writes a case, never offers redress, and never decides that a firm met
+    PRIN 2A.5.
+  owner: "Customer service operations"
+  contact: "service@harberton.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/43-response-drafting"
+
+autonomy:
+  level: "A1"
+  level_description: "The representative sends the response"
+  constraints:
+    - "The representative reviews the draft. The agent only prepares it."
+    - "The agent NEVER sends an external message, including after the representative approves a draft for their own channel"
+    - "The agent NEVER writes a production case or mailbox"
+    - "The agent NEVER offers redress, upholds or rejects a complaint, or closes a case"
+    - "Policy sentences are verbatim approved snippets that pass Experiment 09's citation gate, or the draft states a gap"
+    - "A human route is offered on every result, including a refusal"
+    - "Citations, the tone screen, the plain-English screen, and the empty approval come from src/response.py, not from model output"
+    - "All output is advisory and is marked draft for representative review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied case"
+      description: "A single case the representative pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One case per invocation. The draft does not echo the text."
+      justification: "The draft cannot match a snippet without the case that was supplied."
+      data_categories:
+        - "Free text of one case"
+        - "A sector label and a channel label, if supplied"
+        - "A synthetic case id, if it matches the starter pattern"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the case."
+    - resource: "Separate review object"
+      description: "representative_approve_for_own_send, representative_request_revision, or reject_draft."
+      access_level: "read"
+      scope: "One review for a draft already produced. Not read from the case text."
+      justification: "Approval has to be deterministic and has to refuse a send, a write, redress, a closure, and a promised outcome."
+      may_contain_personal_data: false
+    - resource: "Approved knowledge snippets"
+      description: "Snippets in fixtures/knowledge_snippets.json for the invented organisation Harberton Service, or a list the caller supplies for one run."
+      access_level: "read"
+      scope: "Files in this experiment, or one list on the case. A live knowledge base is not read."
+      justification: "Answers are quotations from these snippets. Experiment 09's gate decides whether a snippet may be cited."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 redaction proposal"
+      description: "propose() from experiments/08-uk-pii-redaction-gateway. The redacted text is not copied into the output."
+      access_level: "read"
+      scope: "One call per case. Reversible maps are not requested. release() is not called."
+      justification: "UK identifiers in a case should be counted before a draft is shown. This experiment does not ship a second redactor."
+      may_contain_personal_data: true
+    - resource: "Experiment 09 citation gate"
+      description: "line_applicability() from experiments/09-casework-correspondence-draft."
+      access_level: "read"
+      scope: "One call per matching snippet. The correspondence drafter is not run. No letter is sent."
+      justification: "A snippet is cited only when that gate says it is current, in force, and not yet due for review."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Dynamics 365, mailboxes, and other production customer records"
+      reason: "The agent prepares a draft. It does not read a live case and it does not write one."
+    - resource: "Outbound email, SMS, letter, and chat services"
+      reason: "The representative sends. The agent does not."
+    - resource: "Payment and redress systems"
+      reason: "The agent does not offer or pay redress."
+    - resource: "Live knowledge bases and the public website"
+      reason: "A live page would bypass the citation gate. The snippets are the file in this experiment."
+    - resource: "Other customers' cases and contact history"
+      reason: "One case at a time. The agent does not search a contact history."
+
+tools:
+  allowed:
+    - tool: "Customer response draft"
+      provider: "Local Python (src/response.py)"
+      action: "Quote approved snippets or state a gap, then run the tone and plain-English screens"
+      access_level: "read"
+      scope: "One case. No network. No model. Calls Experiment 08 propose() and Experiment 09 line_applicability()."
+      justification: "Which snippet may be cited, and whether a sentence fails the screen, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record a representative approval for their own send, a request for revision, or a rejection"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No execution, no write, and no send."
+      justification: "The approval has to be deterministic and has to refuse a send, a write, redress, a closure, and a promised outcome."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "UK identifier proposal"
+      provider: "Experiment 08 (propose)"
+      action: "Count UK identifier spans in free text. The redacted string is not copied out."
+      access_level: "read"
+      scope: "The case text for this run. reversible is false."
+      justification: "The starter does not ship a second redactor. Experiment 08 is the gateway."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Snippet citation gate"
+      provider: "Experiment 09 (line_applicability)"
+      action: "Decide whether one snippet is current, in force, and not overdue for review."
+      access_level: "read"
+      scope: "Snippet metadata only. The correspondence drafter is not invoked."
+      justification: "The citation rule already lives in Experiment 09. This starter does not fork it."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quoted snippets, the screens, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a send, a write, redress, a closure, or a promised outcome"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the representative. Updating the
+      case, if they choose to, is done in the organisation's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The representative may approve a draft for their own channel.
+      That approval does not email, text, or post the draft.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not uphold or reject a complaint. record_review can record
+      the representative's review of a draft. It cannot perform a send or a decision.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a firm met the Consumer Duty or PRIN 2A.5,
+      that Article 12 was met, or that the Equality Act 2010 duty was met.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a case, a mailbox, or a Dynamics 365 record."
+
+  external_send:
+    enabled: false
+    rationale: >
+      The representative sends the response. The agent does not. Approval of a
+      draft for the representative's own channel does not send it.
+
+  spend_transact:
+    enabled: false
+    rationale: "No redress is offered and no payment is made."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Offer redress"
+      rationale: "A representative does this outside the agent. redress_offered stays false."
+    - enabled: false
+      action_name: "Close a case"
+      rationale: "A representative does this outside the agent. complaint_closed stays false."
+    - enabled: false
+      action_name: "Choose a recipient address"
+      rationale: "The case text cannot approve a recipient. The review schema has no email field."
+
+human_approval:
+  description: >
+    Catalogue checkpoint for C004: the representative sends the response.
+    draft_response() leaves human_approval null. Only record_review can set
+    it, and only for representative_approve_for_own_send, and only when the
+    tone screen and the plain-English screen passed. That record does not
+    send. The agent has no path that sends, writes, offers redress, or
+    closes a case. Words in the case cannot approve the draft.
+
+  approval_points:
+    - action: "Representative reviews the draft and sends it on their own channel"
+      approver: "Customer service representative"
+      mandatory: true
+      rationale: "Catalogue checkpoint for C004. The agent prepares the draft. The representative sends it outside the agent. record_review can record the review. message_sent stays false."
+    - action: "Approve a draft for the representative's own send"
+      approver: "Customer service representative"
+      mandatory: true
+      rationale: "Experiment 09 pattern. The representative approves the text. The agent does not send it. Refused if the tone screen or the plain-English screen failed, if sources are outside the window, if immediate-danger wording was flagged, or if the review names any recipient other than customer-on-case."
+    - action: "Request a revision or reject the draft"
+      approver: "Customer service representative"
+      mandatory: true
+      rationale: "The representative can send the draft back or reject it. Neither decision rewrites the draft with a model, and neither sends it."
+    - action: "Rely on a snippet the citation gate refused"
+      approver: "Customer service representative"
+      mandatory: true
+      rationale: "Withdrawn, future, and overdue snippets are not pasted. On the review date the snippet is not cited. The representative re-opens the organisation's own source. This starter cannot fetch that source."
+    - action: "Send, write the case, offer redress, or close the case"
+      approver: "Customer service representative"
+      mandatory: true
+      rationale: "Outside the agent. Those decisions are refused. Direct functions raise DraftForbidden."
+
+  no_approval_required:
+    - action: "Prepare a draft that quotes a current snippet or states a gap"
+      rationale: "The draft has no external effect. A human route is still offered. The representative's send remains mandatory before anything leaves the organisation."
+    - action: "Re-run the same case"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 9 November 2026. Article 12(1) was opened that day.
+      It requires clear and plain language for privacy information and for
+      communications under Articles 15 to 22D and Article 34. A routine
+      service reply is not presented here as that information. Article 5 was
+      not opened on 9 November 2026. The controller confirms its own basis.
+    secondary: "None asserted. An organisation that later logs the case in its own system chooses the basis for that system."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a customer volunteers in a case"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 9 November 2026. The controller confirms a condition, and completes a DPIA, before production use. This starter does not ask for this data, does not store the case, and does not use it to take a decision."
+    safeguards:
+      - "One case at a time, as supplied by the representative"
+      - "The draft does not echo the case text, and it does not copy Experiment 08's redacted text"
+      - "Immediate-danger wording stops the draft for a person. The customer is not labelled vulnerable."
+      - "Nothing is written to a case or a mailbox"
+      - "Samples in this repository are synthetic"
+      - "No send, no complaint outcome, and no redress decision is taken by the agent"
+
+  data_minimisation:
+    - "The core reads one case. It does not retrieve a customer record."
+    - "The draft names snippet ids. It does not copy the case text."
+    - "Refused snippet wording is not copied out."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the representative then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process. Article 12 was
+      read because it governs how privacy information is given. This starter
+      does not itself answer a rights request.
+
+prompt_injection:
+  description: >
+    Case text is untrusted. It may tell the model to ignore the snippets,
+    send the reply, approve a recipient, or treat a withdrawn snippet as
+    current. The core does not read the network. The model is not given a
+    tool that can send, write, or pay.
+
+  controls:
+    - control: "Instructions separated from the case"
+      description: "A sentence that is itself an instruction does not approve a recipient and does not select a withdrawn snippet. The signal is recorded and followed is false."
+    - control: "Case text cannot approve"
+      description: "Experiment 09 pattern. Recipient approval is not read from the case. The review object is separate, and it has no email field."
+    - control: "Deterministic snippets"
+      description: "The quoted body, the citation gate, the screens, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set a send, a write, redress, a closure, or the review decision is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses those decisions. Direct functions raise DraftForbidden."
+    - control: "Experiment 08"
+      description: "Free text goes through propose(). The redacted text is not copied out. release() is not called."
+    - control: "Experiment 09"
+      description: "line_applicability() refuses a snippet that is withdrawn, not yet in force, or due for review, including on the review date."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The
+    representative is the control. There is no autonomous send even if the
+    brief is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-09"
+  risks:
+    - id: "R1"
+      risk: "A draft is sent because the representative approved the text, or because the case said to send"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Sends are disabled"
+        - "The review schema rejects an email address"
+        - "message_sent stays false after representative_approve_for_own_send"
+        - "send_message raises DraftForbidden"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R2"
+      risk: "A withdrawn, overdue, or not-yet-in-force snippet is pasted as current"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 09 line_applicability() is the gate"
+        - "On the review date the snippet is not cited"
+        - "Refused wording is not copied into the output"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R3"
+      risk: "The draft promises redress or decides a complaint"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those phrases block the snippet and the tone screen"
+        - "Send approval is refused when the tone screen fails"
+        - "offer_redress, close_case, and promise_outcome raise DraftForbidden"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R4"
+      risk: "A financial-services reply is treated as proof the firm met PRIN 2A.5"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "outcome_met stays false"
+        - "The screen is not described as the test in PRIN 2A.5.10R"
+        - "PRIN 2A.5 is not applied outside financial_services"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+    - id: "R5"
+      risk: "A live case, including a National Insurance number or health detail, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Experiment 08 counts UK identifiers. The redacted text is not copied out"
+        - "Samples use an invented organisation"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R6"
+      risk: "Pinned sources are followed after they are outside the starter window"
+      likelihood: "Low"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "More than 180 days after 9 November 2026, no snippet is quoted"
+        - "Equal to 180 days is still quoted, and that boundary is tested"
+        - "The core does not refresh the pages from the web"
+      residual_risk: "Low"
+      owner: "Customer service operations"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the case id, the snippets cited, the screen results, and the later
+    review. This starter logs nothing because it keeps no store. Do not put
+    the case text in an application trace. Experiment 08's audit record omits
+    raw identifier values. Do not add them back.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Case id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's customer-service schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Snippet ids cited and refused"
+        - "Whether the tone screen and the plain-English screen passed"
+        - "Whether any source was outside the window"
+        - "Whether human_approval was left null"
+        - "Experiment 08 finding count and input hash, not the raw values"
+      retention: "Keep with the case if the representative relies on the draft. The case text is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Timestamp"
+        - "executed false"
+        - "message_sent false"
+      retention: "Organisation's schedule. The agent does not write this event to a case system."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the case narrative in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, Dynamics 365 writes, or payments"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Customer service operations lead"
+      contact: "service@harberton.example"
+    - role: "Data protection officer"
+      contact: "dpo@harberton.example"
+
+review:
+  last_review_date: "2026-11-09"
+  next_review_date: "2027-05-09"
+  review_frequency: "6 months, and sooner if the snippets, PRIN 2A.5, Article 12, or Equality Act section 20 change"
+  reviewer: "The adopting organisation's customer-service lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to a snippet in the organisation's real knowledge base, if one is later substituted for the synthetic file"
+    - "A change to PRIN 2A.5, including the testing rule at PRIN 2A.5.10R"
+    - "A change to UK GDPR Article 12, or a decision to rely on an article that was not opened on 9 November 2026"
+    - "A change to Equality Act 2010 section 20"
+    - "A proposal to add a connector that can send, write a case, offer redress, or close a case"
+    - "A proposal to let the agent send after approval"
+    - "A security incident involving a draft"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Draft core"
+      path: "src/response.py"
+    - name: "Synthetic snippets"
+      path: "fixtures/knowledge_snippets.json"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The scope policy was not
+    opened for this experiment on 9 November 2026. A body that wants a draft
+    pack uses Experiment 03. The pointers below say which manifest sections
+    a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 12 was read on 9 November 2026. Article 5, Article 6, Article 9, and Article 22A were not. The controller confirms the basis, and completes a DPIA, before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day window and the 25-word sentence cap are starter defaults, not duties the organisation already has. The screen is not PRIN 2A.5.10R testing."
+      section: "src/response.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 09's citation gate is called as published in that experiment. On the review date a snippet is not cited. This starter does not fork that rule."
+      section: "src/response.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on customer cases."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No mailbox, payment, or Dynamics 365 write connector is added without updating this manifest."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on harberton.example are placeholders. Harberton Service is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "PRIN 2A.5.3 is cited as a rule because the same PDF cross-refers to PRIN 2A.5.3R. The status letter on PRIN 2A.5.7 was not cleanly labelled in the PDF extraction. FG22/5 and PRIN 2A.2 were not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Section 20(6) was opened on 9 November 2026. Section 29 and Schedule 2 were not. This starter does not decide that the adjustment duty applies or that it has been met."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Experiment 08 does not anonymise the text. This starter does not copy the redacted string into the output and does not call release()."
+      section: "tools.allowed"
+      verify_on_deployment: true
+    - id: "A10"
+      assumption: "Microsoft Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Microsoft Purview, and Application Insights were not opened on 9 November 2026. They are unverified here."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
