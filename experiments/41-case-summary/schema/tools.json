@@ -1,0 +1,127 @@
+{
+  "tools": [
+    {
+      "name": "extract_cited_case_summary",
+      "implementation": "summarise",
+      "reads": ["one synthetic case history supplied for this run", "the pinned source notes in src/sources.py"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "contacts_customer": false,
+      "changes_record": false,
+      "closes_complaint": false,
+      "offers_redress": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "check_pinpoint_citations",
+      "implementation": "summarise",
+      "reads": ["one synthetic case history", "proposed sentences with an event id, paragraph, and line range"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "contacts_customer": false,
+      "changes_record": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "list_gaps_and_stale_data",
+      "implementation": "summarise",
+      "reads": ["the draft JSON already produced for this run"],
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "resolves_contradictions": false,
+      "contacts_customer": false,
+      "changes_record": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "count_uk_identifiers",
+      "implementation": "experiments/08-uk-pii-redaction-gateway propose",
+      "writes": false,
+      "sends": false,
+      "calls_network": false,
+      "calls_model": false,
+      "copies_redacted_text": false,
+      "calls_release": false,
+      "callable_by_agent": true,
+      "human_approval_to_rely_on_output": true
+    },
+    {
+      "name": "contact_customer",
+      "implementation": "contact_customer",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_case_record",
+      "implementation": "write_case_record",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "close_complaint",
+      "implementation": "close_complaint",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "offer_redress",
+      "implementation": "offer_redress",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "decide_outcome",
+      "implementation": "decide_outcome",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_external",
+      "implementation": "send_external",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "accept_summary",
+      "implementation": "accept_summary",
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_accuracy_check",
+      "implementation": "record_accuracy_check",
+      "writes": false,
+      "sends": false,
+      "contacts_customer": false,
+      "changes_record": false,
+      "callable_by_agent": false,
+      "always_raises": false,
+      "note": "Not an agent tool. The command line does not expose it. A service representative may record a check outside the agent. That check does not change the case record."
+    }
+  ]
+}

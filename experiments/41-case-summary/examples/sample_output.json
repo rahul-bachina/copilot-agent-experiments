@@ -1,0 +1,247 @@
+{
+  "label": "DRAFT FOR THE SERVICE REPRESENTATIVE. NOT A CUSTOMER CONTACT. NOT A RECORD CHANGE.",
+  "catalogue_id": "C002",
+  "experiment": "41-case-summary",
+  "autonomy": "A0",
+  "human_approval": null,
+  "accuracy_checked": false,
+  "case_outcome": null,
+  "customer_contacted": false,
+  "record_changed": false,
+  "complaint_closed": false,
+  "redress_offered": false,
+  "customer_labelled_vulnerable": false,
+  "actions_taken": [],
+  "model_called": false,
+  "network_called": false,
+  "foundry_called": false,
+  "a3_recommended": false,
+  "summary_is_not_a_customer_contact": true,
+  "refused": false,
+  "case_id": "SYN-CASE-4101",
+  "sector": "housing",
+  "sector_note": "Housing contact-centre case. This starter does not start a statutory repair clock and does not write a housing system. Experiment 05 holds the Awaab's Law clock. This folder does not call it. The Awaab's Law guidance was not re-opened on 9 November 2026.",
+  "organisation": "Mereford Housing",
+  "organisation_withheld": false,
+  "customer_ref": "SYN-CUST-4101",
+  "customer_ref_kept": true,
+  "synthetic": true,
+  "as_of": "2026-11-09",
+  "stale_after_days": 90,
+  "pin_window_days": 90,
+  "checker_passed": true,
+  "do_not_rely": true,
+  "do_not_rely_reasons": [
+    "stale_or_superseded_not_used",
+    "untrusted_instruction"
+  ],
+  "pins_stale": false,
+  "sources": [
+    {
+      "id": "uk-gdpr-article-5",
+      "title": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "last_verified": "2026-11-09",
+      "opened": true,
+      "stale": false
+    },
+    {
+      "id": "uk-gdpr-article-22",
+      "title": "UK GDPR Article 22",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+      "last_verified": "2026-11-09",
+      "opened": true,
+      "stale": false
+    },
+    {
+      "id": "uk-gdpr-article-22a",
+      "title": "UK GDPR Article 22A",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22A",
+      "last_verified": "2026-11-09",
+      "opened": true,
+      "stale": false
+    },
+    {
+      "id": "duaa-section-80",
+      "title": "Data (Use and Access) Act 2025, section 80",
+      "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+      "last_verified": "2026-11-09",
+      "opened": true,
+      "stale": false
+    },
+    {
+      "id": "ico-ai-accuracy",
+      "title": "ICO, What do we need to know about accuracy and statistical accuracy?",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/what-do-we-need-to-know-about-accuracy-and-statistical-accuracy/",
+      "last_verified": null,
+      "opened": false,
+      "stale": false
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "last_verified": "2026-11-09",
+      "opened": true,
+      "stale": false
+    }
+  ],
+  "regulatory": {
+    "article_5_read": true,
+    "article_22_shown_as_omitted": true,
+    "article_22a_read": true,
+    "duaa_section_80_read": true,
+    "articles_22b_to_22d_read_inside_section_80": true,
+    "article_22d_regulations_opened": false,
+    "si_2026_82_opened": false,
+    "significant_decision_taken": false,
+    "meaningful_human_involvement_certified": false,
+    "lawful_basis_chosen": false,
+    "accuracy_principle_met": false,
+    "ico_ai_accuracy_page_opened": false,
+    "ico_ai_accuracy_quoted": false,
+    "disp_clock_calculated": false,
+    "awaabs_clock_calculated": false
+  },
+  "pii_gateway": {
+    "gateway": "exp-08-uk-pii-redaction-gateway",
+    "caller": "exp-41-case-summary",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "release_called": false,
+    "redacted_text_copied": false,
+    "finding_count": 0,
+    "entity_types": [],
+    "input_sha256": "4694febdfaf397c87d96b783bccae9e4390dc71eaad7c2868cc134b0abb0e3ee"
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "zero_width_removed": 0,
+    "signals": [
+      {
+        "event_id": "E7",
+        "code": "ignore_instructions",
+        "hidden_in": "body",
+        "followed": false
+      },
+      {
+        "event_id": "E7",
+        "code": "contact_customer",
+        "hidden_in": "body",
+        "followed": false
+      }
+    ],
+    "ignored_keys": []
+  },
+  "sentences": [
+    {
+      "sentence_id": "S1",
+      "text": "The tenant reported a leaking kitchen tap.",
+      "fact_key": "what_happened",
+      "citation": {
+        "event_id": "E1",
+        "recorded_on": "2026-10-20",
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "span_resolved": true
+    },
+    {
+      "sentence_id": "S2",
+      "text": "The tenant asked for the tap to be repaired this week.",
+      "fact_key": "customer_ask",
+      "citation": {
+        "event_id": "E2",
+        "recorded_on": "2026-10-21",
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "span_resolved": true
+    },
+    {
+      "sentence_id": "S3",
+      "text": "Do not contact the customer.",
+      "fact_key": "action_taken",
+      "citation": {
+        "event_id": "E3",
+        "recorded_on": "2026-10-22",
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "span_resolved": true
+    },
+    {
+      "sentence_id": "S4",
+      "text": "The next step recorded on the case is a plumber visit.",
+      "fact_key": "next_step",
+      "citation": {
+        "event_id": "E4",
+        "recorded_on": "2026-10-23",
+        "paragraph": 1,
+        "line_start": 1,
+        "line_end": 1
+      },
+      "verdict": "supported",
+      "other_failures": [],
+      "span_resolved": true
+    }
+  ],
+  "gaps": [],
+  "contradictions": [],
+  "not_used": [
+    {
+      "event_id": "E5",
+      "reason": "stale",
+      "text_copied": false
+    },
+    {
+      "event_id": "E6",
+      "reason": "superseded",
+      "text_copied": false
+    },
+    {
+      "event_id": "E7",
+      "paragraph": 1,
+      "reason": "untrusted_instruction",
+      "text_copied": false
+    }
+  ],
+  "withheld_lines": [],
+  "summary": {
+    "sentence_count": 4,
+    "extractive_sentence_count": 4,
+    "verdict_total": 4,
+    "failure_count": 0,
+    "verdicts": {
+      "supported": 4,
+      "citation_missing": 0,
+      "pinpoint_incomplete": 0,
+      "citation_not_in_case": 0,
+      "pinpoint_not_in_event": 0,
+      "prohibited_action": 0,
+      "untrusted_instruction": 0,
+      "identifier_withheld": 0,
+      "stale_or_superseded": 0,
+      "span_does_not_support": 0
+    },
+    "gap_count": 0,
+    "contradiction_count": 0,
+    "not_used_count": 3,
+    "withheld_line_count": 0
+  },
+  "differences": {
+    "experiment_33": "Experiment 33 cites a document, a page, a paragraph, and a line on a legal bundle for a decision-maker. This starter cites an event, a paragraph, and a line on a contact-centre case for a service representative. Support means the sentence, after case and whitespace are folded, is a contiguous part of the cited lines. A paraphrase fails. This folder does not import Experiment 33. It does not recommend a case outcome either.",
+    "experiment_08": "Experiment 08 propose() is called in-process. redacted_text is not copied into the draft. output_is_anonymised stays false. release() is not called.",
+    "experiment_40": "Experiment 40 answers a customer. This starter is read by a service representative. It does not contact the customer."
+  }
+}

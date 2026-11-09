@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Forty-one starters you can read today
+## Forty-two starters you can read today
 
 </div>
 
@@ -1080,6 +1080,31 @@ The draft runs locally. Nothing is written to an account, no payment is taken, n
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 41 · C002 · Customer service · Autonomy A0</p>
+
+### Case summary
+
+Draft a cited reading of one synthetic contact-centre case. Every sentence names its event, paragraph, and line. The service representative checks accuracy.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The draft runs locally. The customer is not contacted, the case record is not changed, and no complaint is closed.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/41-case-summary.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/41-case-summary)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 42 · C003 · Customer service · Autonomy A1</p>
 
 ### Case routing assistant
@@ -1125,7 +1150,7 @@ The proposal runs locally. Nothing is rerouted, closed, or escalated, and a rout
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, and C003 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, and C003 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
