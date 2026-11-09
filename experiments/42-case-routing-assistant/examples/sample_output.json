@@ -1,0 +1,212 @@
+{
+  "label": "DRAFT FOR QUEUE REVIEW",
+  "catalogue_id": "C003",
+  "autonomy": "A1",
+  "experiment": "exp-42-case-routing-assistant",
+  "outcome": "proposed_route",
+  "case_id": "SYN-CASE-4201",
+  "channel": "web_form",
+  "sector": "council",
+  "as_of": "2026-11-09",
+  "proposed_queue": "q-waste",
+  "priority": "routine",
+  "reasons": [
+    {
+      "id": "R-RULE",
+      "text": "One approved service rule matched, and it names a service topic. A person must confirm before any reroute. This result does not reroute the case.",
+      "source": "rule-waste"
+    }
+  ],
+  "confidence": {
+    "band": "high",
+    "basis": "deterministic_rule_match",
+    "matched_rule_count": 1,
+    "conflict": false,
+    "overrides_human_route": false,
+    "note": "This band counts approved rules that matched. It is not a model probability. It cannot move a human-mandatory case."
+  },
+  "classification": {
+    "primary_type": "other",
+    "service_topic": "waste",
+    "statutory_kinds": [],
+    "experiment_01_model_called": false,
+    "pattern": "Classification names follow Experiment 01 (foi_request, eir_request, subject_access_request, complaint, mixed, other). They are assigned here by keyword. Experiment 01's model is not called."
+  },
+  "human_approval": null,
+  "human_route": {
+    "offered": true,
+    "phone_published": false,
+    "note": "A person can take this case. This starter does not publish a telephone number and does not read a live contact page."
+  },
+  "ai_disclosure": "This draft was prepared by an automated assistant. A person decides the queue. Nothing has been rerouted, closed, or escalated.",
+  "flags": {
+    "rerouted": false,
+    "queue_changed": false,
+    "priority_changed": false,
+    "closed": false,
+    "escalated": false,
+    "rules_changed": false,
+    "message_sent": false,
+    "entitlement_decided": false,
+    "person_labelled_vulnerable": false,
+    "protected_characteristic_used_as_a_feature": false,
+    "confidence_overrode_human_route": false,
+    "clock_applied_as_a_route": false
+  },
+  "rules": {
+    "current_ids": [
+      "rule-waste"
+    ],
+    "stale_ids": [],
+    "unapproved_ids": [],
+    "applied": true,
+    "applied_means_rerouted": false
+  },
+  "vulnerability": {
+    "called": true,
+    "experiment": "exp-15-vulnerability-urgency-scanner",
+    "categories": [],
+    "finding_count": 0,
+    "input_sha256": "3561521fd9fd7878abceb8540e12ef1dd3709f3b00f614fab62740af18e6bc12",
+    "phrases_copied": false,
+    "person_labelled_vulnerable": false,
+    "error": null
+  },
+  "statutory_clock": {
+    "present": false,
+    "kinds": [],
+    "deadline_phrase": false,
+    "date_calculated": false,
+    "citations": []
+  },
+  "fairness": {
+    "characteristic_used_as_a_feature": false,
+    "instruction_detected": false,
+    "adjustment_mentioned": false,
+    "duty_met": false,
+    "due_regard_carried_out": false,
+    "section_149_list_includes_marriage": false,
+    "section_19_list_includes_marriage": true
+  },
+  "rule_change": null,
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "followed": false,
+    "stripped_keys": []
+  },
+  "sources": [
+    {
+      "id": "duaa_s80",
+      "title": "Data (Use and Access) Act 2025, section 80",
+      "url": "https://www.legislation.gov.uk/ukpga/2025/18/section/80",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Section 80(1) substitutes Articles 22A to 22D for Article 22 of the UK GDPR. Article 22A(1)(a) says a decision is based solely on automated processing if there is no meaningful human involvement in the taking of the decision. Article 22A(1)(b) says a decision is significant if it produces a legal effect or a similarly significant effect. Article 22C(2) requires safeguards which include information, representations, human intervention, and the ability to contest. The page states that section 80 is in force at 5 February 2026 in so far as not already in force, by S.I. 2026/82, regulation 2(j). That instrument was not opened."
+    },
+    {
+      "id": "uk_gdpr_art_22",
+      "title": "UK GDPR Article 22",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/22",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "The article text is omitted. A footnote says Chapter 3 Section 4A was substituted for Article 22 by the Data (Use and Access) Act 2025, section 80(1), from 5 February 2026 in so far as not already in force, by S.I. 2026/82. The instrument was not opened."
+    },
+    {
+      "id": "uk_gdpr_art_12",
+      "title": "UK GDPR Article 12",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/12",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Article 12(3) says the controller provides information on action taken on a request under Articles 15 to 22D without undue delay and in any event before the end of the applicable time period, and it points to Article 12A. Article 12A was not opened. This starter does not state a number of days for a subject access request."
+    },
+    {
+      "id": "equality_s19",
+      "title": "Equality Act 2010, section 19",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/19",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Section 19(1) and (2) define indirect discrimination as a provision, criterion or practice that puts people who share a relevant protected characteristic at a particular disadvantage, and that is not shown to be a proportionate means of achieving a legitimate aim. Section 19(3) lists age, disability, gender reassignment, marriage and civil partnership, race, religion or belief, sex, and sexual orientation. This starter does not decide that a rule meets or fails that test."
+    },
+    {
+      "id": "equality_s29",
+      "title": "Equality Act 2010, section 29",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/29",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Section 29(1) says a service-provider must not discriminate against a person requiring the service by not providing it. Section 29(2) covers the terms, terminating the service, and any other detriment. Section 29(7) says a duty to make reasonable adjustments applies to a service-provider. Section 20 was not opened, so the content of that duty is not quoted."
+    },
+    {
+      "id": "equality_s149",
+      "title": "Equality Act 2010, section 149",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Section 149(1) says a public authority must, in the exercise of its functions, have due regard to the need to eliminate discrimination, advance equality of opportunity, and foster good relations. Section 149(7) lists the relevant protected characteristics for that duty. Marriage and civil partnership is not in that list. It is in section 19(3). This starter does not carry out the due-regard assessment."
+    },
+    {
+      "id": "foia_s10",
+      "title": "Freedom of Information Act 2000, section 10",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/36/section/10",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Section 10(1), subject to subsections (2) and (3), says a public authority must comply with section 1(1) promptly and in any event not later than the twentieth working day following the date of receipt. Section 10(6) defines a working day as any day other than a Saturday, a Sunday, Christmas Day, Good Friday, or a bank holiday under the Banking and Financial Dealings Act 1971 in any part of the United Kingdom. This starter does not calculate that day. Experiment 05's England and Wales calendar is not used for this Act."
+    },
+    {
+      "id": "eir_reg5",
+      "title": "Environmental Information Regulations 2004, regulation 5",
+      "url": "https://www.legislation.gov.uk/uksi/2004/3391/regulation/5",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "Regulation 5(2) says information shall be made available under paragraph (1) as soon as possible and no later than 20 working days after the date of receipt of the request. Regulation 2, which would define working day, was not opened. The day is not calculated."
+    },
+    {
+      "id": "harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "retrieved": "2026-11-09",
+      "stale": false,
+      "quoted": true,
+      "taken": "The GitHub Copilot harness is a Microsoft Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. The standard harness follows the topics and rules the maker defines. The Customer Conversation harness is described for contact-centre voice and chat, with a route to a human representative. Agents on the GitHub Copilot harness and on the Customer Conversation harness use Copilot Credits. No price is stated on the overview. The billing and licensing articles were not opened."
+    }
+  ],
+  "sources_not_opened": [
+    "UK GDPR Article 6",
+    "UK GDPR Article 9",
+    "UK GDPR Article 12A",
+    "UK GDPR Article 22D regulations",
+    "S.I. 2026/82",
+    "Equality Act 2010, section 4",
+    "Equality Act 2010, section 13",
+    "Equality Act 2010, section 20",
+    "Environmental Information Regulations 2004, regulation 2",
+    "DISP",
+    "The Housing Ombudsman Complaint Handling Code",
+    "The AI Playbook",
+    "The ATRS scope policy"
+  ],
+  "input_sha256": "3561521fd9fd7878abceb8540e12ef1dd3709f3b00f614fab62740af18e6bc12",
+  "pii_gateway": {
+    "via": "exp-15-vulnerability-urgency-scanner",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "redacted_text_copied": false
+  },
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "case_text_echoed": false,
+  "confirmation_required_before_reroute": true,
+  "reroute_available_in_this_starter": false,
+  "sources_current": true,
+  "legal_retrieval_date": "2026-11-09"
+}

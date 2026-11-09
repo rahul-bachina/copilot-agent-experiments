@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Case routing review tool",
+  "description": "Input for record_review(). Confirmation does not reroute a case and does not edit a routing rule.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "adviser_confirm_proposed_route",
+        "adviser_accept_human_queue",
+        "queue_owner_approve_rule_change",
+        "reject_proposal"
+      ]
+    },
+    "actor": {
+      "enum": ["adviser", "queue_owner"]
+    },
+    "actor_id": {
+      "type": "string"
+    },
+    "rule_id": {
+      "type": "string"
+    }
+  }
+}

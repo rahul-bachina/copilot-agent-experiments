@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "routing_tool.schema.json",
+  "title": "Case routing proposal tool",
+  "description": "Input for propose_route(). Returns a queue proposal. Does not reroute, close, escalate, or edit a rule.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "text"],
+  "properties": {
+    "synthetic": {
+      "const": true
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^SYN-CASE-\\d{4}$"
+    },
+    "channel": {
+      "enum": ["web_form", "email", "phone", "portal", "letter"]
+    },
+    "sector": {
+      "enum": ["council", "housing", "utility", "financial_services", "other"]
+    },
+    "text": {
+      "type": "string"
+    },
+    "statutory_clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": ["foi", "eir", "sar", "awaabs", "disp"]
+        },
+        "fields": {
+          "type": "object"
+        }
+      }
+    },
+    "proposed_rule_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "feature"],
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "feature": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
