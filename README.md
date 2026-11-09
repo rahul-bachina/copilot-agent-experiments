@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Forty-one starters are in `experiments/`. The folders are 01 to 41. The count is the number of folders.
+Forty-two starters are in `experiments/`. The folders are 01 to 42. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -73,6 +73,7 @@ Forty-one starters are in `experiments/`. The folders are 01 to 41. The count is
 | 39 | [Credit Memo Drafting](experiments/39-credit-memo-drafting/) | Draft a cited credit memo from one synthetic pack. A missing section is not stated. The credit officer owns the recommendation and every approval. Autonomy A1. The agent does not approve or decline, set a limit, contact the customer or a bureau, post to a core system, or file a SAR. | ✅ Starter |
 | 40 | [Customer Self-Service Agent](experiments/40-customer-self-service/) | Answer one synthetic enquiry from a fixed knowledge base and prepare an address or appointment draft for confirmation. Autonomy A1. The agent does not reset a password, take a payment, close a complaint, change a tariff or a contract, write a record, or send. A person is always offered. | ✅ Starter |
 | 41 | [Case Summary Agent](experiments/41-case-summary/) | Draft a cited reading of one synthetic contact-centre case. Every sentence names its event, paragraph, and line. Autonomy A0. The service representative checks accuracy. The agent does not contact the customer, change the record, close a complaint, or offer redress. | ✅ Starter |
+| 42 | [Case Routing Assistant](experiments/42-case-routing-assistant/) | Propose a queue, a priority, and a reason for one synthetic case. Autonomy A1. The adviser confirms a route. The queue owner approves a material rule change. Vulnerability and statutory-clock cases always propose a human queue. The agent does not reroute, close, escalate, or edit a rule. | ✅ Starter |
 
 ## Getting Started
 

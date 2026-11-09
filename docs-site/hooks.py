@@ -139,6 +139,9 @@ DIAGRAMS = {
     "experiments/41-case-summary/docs/architecture_diagram.png": (
         "experiments/img/41-case-summary-architecture.png"
     ),
+    "experiments/42-case-routing-assistant/docs/architecture_diagram.png": (
+        "experiments/img/42-case-routing-assistant-architecture.png"
+    ),
 }
 
 
