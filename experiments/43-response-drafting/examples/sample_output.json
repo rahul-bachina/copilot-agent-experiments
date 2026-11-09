@@ -1,0 +1,199 @@
+{
+  "label": "DRAFT FOR REPRESENTATIVE REVIEW",
+  "catalogue_id": "C004",
+  "experiment": "43",
+  "autonomy": "A1",
+  "organisation": "Harberton Service (fictional)",
+  "case_id": "SYN-CASE-4301",
+  "as_of": "2026-11-09",
+  "sector": "financial_services",
+  "channel": "email",
+  "library_id": "harberton-synthetic-v1",
+  "outcome": "draft_with_citations",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "case_text_echoed": false,
+  "draft": {
+    "text": "DRAFT.\n\nNOT SENT.\n\nThe representative reviews this text.\n\nThe representative sends it on their own channel.\n\nAn automated assistant prepared this draft.\n\nA person at Harberton Service can help.\n\nThat includes help at a counter.\n\nAsk a person if you need large print or audio.\n\nThis draft does not decide what is reasonable.\n\nThe Harberton Service contact centre is open from 09:00 to 17:00 on weekdays. It is closed on bank holidays. This line does not book a call.\n\nCited snippet KB-HOURS-01.\n\nStatus current.\n\nReview due 2027-06-01.\n\nNothing has been sent.\n\nNo case record has been written.\n\nNo redress has been offered.",
+    "may_be_sent_by_agent": false,
+    "policy_sentences_are_cited_snippets_only": true
+  },
+  "sources_cited": [
+    {
+      "id": "KB-HOURS-01",
+      "topic": "contact_hours",
+      "reason": "current",
+      "status": "current",
+      "effective_on": "2026-01-01",
+      "review_due_on": "2027-06-01",
+      "text": "The Harberton Service contact centre is open from 09:00 to 17:00 on weekdays. It is closed on bank holidays. This line does not book a call.",
+      "text_withheld": false
+    }
+  ],
+  "snippets_refused": [
+    {
+      "id": "KB-HOURS-00",
+      "topic": "contact_hours",
+      "reason": "withdrawn",
+      "status": "withdrawn",
+      "effective_on": "2024-01-01",
+      "review_due_on": "2025-01-01",
+      "text_withheld": true
+    }
+  ],
+  "gaps": [],
+  "tone": {
+    "passed": true,
+    "findings": [],
+    "blocks_send_approval": false,
+    "is_a_legal_finding": false
+  },
+  "plain_english": {
+    "passed": true,
+    "average_words_per_sentence": 6.0,
+    "long_sentences": [],
+    "jargon": [],
+    "sentence_cap": 25,
+    "is_a_reading_age": false,
+    "is_prin_2a_5_10_testing": false,
+    "duty_met": false
+  },
+  "pii_gateway": {
+    "called": true,
+    "caller": "exp-43-response-drafting",
+    "finding_count": 0,
+    "entity_types": [],
+    "input_sha256": "5be947d93485e25fd2d52d4e3c1311e081ffb6b63fa58dd9b57811b5b356f18d",
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "release_called": false,
+    "reversible_requested": false
+  },
+  "prompt_injection": {
+    "detected": false,
+    "signals": [],
+    "followed": false
+  },
+  "stale": {
+    "narrative_signals": [],
+    "rules_current": true,
+    "window_days": 180,
+    "pinned_on": "2026-11-09"
+  },
+  "vulnerability": {
+    "signals": [],
+    "requires_immediate_human_review": false,
+    "person_labelled_vulnerable": false
+  },
+  "complaint": {
+    "wording_present": false,
+    "outcome_decided": false
+  },
+  "recipient": {
+    "proposed_role": "The customer already on the case. The representative types any address in their own system.",
+    "approved": false,
+    "approved_address": null,
+    "may_be_chosen_by_agent": false,
+    "case_text_cannot_approve": true,
+    "approval_source": "not_approved"
+  },
+  "human_route": {
+    "offered": true,
+    "who": "Customer service representative",
+    "representative_sends": true,
+    "agent_sends": false
+  },
+  "flags": {
+    "message_sent": false,
+    "case_written": false,
+    "redress_offered": false,
+    "complaint_closed": false,
+    "outcome_promised": false,
+    "customer_labelled_vulnerable": false,
+    "stale_snippet_quoted": false,
+    "withdrawn_snippet_quoted": false,
+    "representative_approved_own_send": false,
+    "revision_requested": false,
+    "draft_rejected": false
+  },
+  "regulatory": {
+    "consumer_duty": {
+      "applied": true,
+      "prin_2a_5_opened_on": "2026-11-09",
+      "rules_named": [
+        "PRIN 2A.5.3R",
+        "PRIN 2A.5.7",
+        "PRIN 2A.5.10R"
+      ],
+      "outcome_met": false,
+      "testing_under_2a_5_10_done": false,
+      "status_letter_on_2a_5_7": "not_cleanly_labelled_in_the_pdf_extract",
+      "not_applied_reason": null
+    },
+    "article_12": {
+      "opened_on": "2026-11-09",
+      "applies_to_this_reply": false,
+      "article_12_met": false,
+      "note": "Article 12(1) governs privacy information and communications under Articles 15 to 22D and Article 34. This service reply is not presented as that information."
+    },
+    "equality_act": {
+      "section_20_6_opened_on": "2026-11-09",
+      "section_29_opened": false,
+      "alternative_format_offered": true,
+      "duty_met": false
+    },
+    "significant_decision_taken": false,
+    "not_opened_on_2026_11_09": [
+      "UK GDPR Article 5",
+      "UK GDPR Article 6",
+      "UK GDPR Article 9",
+      "UK GDPR Article 22A",
+      "Equality Act 2010 section 29",
+      "Equality Act 2010 Schedule 2",
+      "PRIN 2A.2",
+      "FG22/5",
+      "DISP",
+      "ATRS mandatory scope policy"
+    ]
+  },
+  "pinned_sources": [
+    {
+      "id": "prin-2a-5",
+      "opened_on": "2026-11-09",
+      "url": "https://handbook.fca.org.uk/handbook/prin2a/prin2as5"
+    },
+    {
+      "id": "uk-gdpr-article-12",
+      "opened_on": "2026-11-09",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/12"
+    },
+    {
+      "id": "equality-act-section-20",
+      "opened_on": "2026-11-09",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/20"
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "opened_on": "2026-11-09",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview"
+    }
+  ],
+  "decisions_not_taken": [
+    "send",
+    "final_recipient",
+    "policy_invention",
+    "production_case_write",
+    "complaint_outcome",
+    "redress",
+    "vulnerability_label",
+    "plain_english_certification",
+    "consumer_duty_met",
+    "article_12_met",
+    "equality_duty_met"
+  ],
+  "stripped_keys": [],
+  "approval_pattern": "experiment-09-text-and-recipient-stay-with-the-representative"
+}
