@@ -384,6 +384,16 @@ A draft reply to one synthetic enquiry from a fixed knowledge base. The customer
 
 </article>
 
+<article class="plan-card" id="c003" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C003 · Autonomy A1</p>
+
+## Case routing assistant
+
+A queue, a priority, and a reason for one synthetic case. The adviser confirms a proposed route. The queue owner approves a material rule change. Vulnerability and statutory-clock cases always propose a human queue. It calls [Experiment 15](experiments/15-vulnerability-urgency-scanner.md) for indicator categories and [Experiment 05](experiments/05-awaabs-law-hazard-triage.md) for an Awaab's Law illustration with officer approval forced off. Classification names follow [Experiment 01](experiments/01-foi-complaint-triage.md). That model is not called. The agent does not reroute, close, escalate, or edit a rule. [Read the briefing](experiments/42-case-routing-assistant.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C003 is Experiment 42.
