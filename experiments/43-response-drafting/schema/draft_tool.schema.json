@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "draft_tool.schema.json",
+  "title": "Response drafting tool",
+  "description": "Input for draft_response(). The tool reads one synthetic case and returns a draft. It does not send and it does not write a case.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "case_id", "text", "sector", "channel"],
+  "properties": {
+    "synthetic": {"const": true},
+    "case_id": {"type": "string"},
+    "channel": {"enum": ["email", "letter", "web_form", "phone_note"]},
+    "sector": {
+      "enum": ["financial_services", "energy", "telecoms", "public_service", "general"]
+    },
+    "text": {"type": "string", "maxLength": 4000}
+  }
+}
