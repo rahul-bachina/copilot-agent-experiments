@@ -1,0 +1,6 @@
+# Experiment 44 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 08 propose(), Experiment 21 match_articles() and is_stale(),
+# and Experiment 40 match_articles() and is_stale(). Those use the standard library.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0
