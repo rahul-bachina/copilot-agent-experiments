@@ -145,6 +145,9 @@ DIAGRAMS = {
     "experiments/43-response-drafting/docs/architecture_diagram.png": (
         "experiments/img/43-response-drafting-architecture.png"
     ),
+    "experiments/46-field-visit-preparation/docs/architecture_diagram.png": (
+        "experiments/img/46-field-visit-preparation-architecture.png"
+    ),
 }
 
 

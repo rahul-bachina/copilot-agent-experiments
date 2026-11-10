@@ -414,6 +414,16 @@ A draft customer response from one synthetic case and approved snippets. Every q
 
 </article>
 
+<article class="plan-card" id="c008" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C008 · Autonomy A0</p>
+
+## Field visit preparation
+
+A pre-visit brief for one synthetic work order in UK housing, a utility, or facilities. The technician confirms the asset and the safety context. Safety holds, missing information, and vulnerability or access flags are listed. It calls [Experiment 15](experiments/15-vulnerability-urgency-scanner.md) for indicator categories, [Experiment 12](experiments/12-document-intake.md) when the pack has text files, and [Experiment 05](experiments/05-awaabs-law-hazard-triage.md) for a housing illustration with officer approval forced off. The agent does not schedule, dispatch, or close a work order. [Read the briefing](experiments/46-field-visit-preparation.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C008 is Experiment 46.
