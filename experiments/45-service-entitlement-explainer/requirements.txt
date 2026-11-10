@@ -1,0 +1,6 @@
+# Experiment 45 has no runtime dependencies. The core uses the standard library
+# and calls Experiment 38's citation normalise, which itself calls Experiments
+# 33, 12, and 29. Those folders use the standard library. Tests use pytest.
+# A clean environment can install just this file.
+
+pytest>=7.0.0
