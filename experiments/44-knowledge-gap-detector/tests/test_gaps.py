@@ -416,19 +416,19 @@ def test_unknown_actor_cannot_confirm():
 
 
 def test_not_synthetic_is_refused_without_the_text():
-    secret = "LIVE-CUSTOMER-RECORD-ALPHA-7741"
+    live_text = "LIVE-CUSTOMER-RECORD-ALPHA-7741"
     report = detect_gaps(
         {
             "synthetic": False,
             "pack_id": "SYN-PACK-0001",
             "sector": "public_service",
-            "queries": [{"id": "SYN-QRY-0001", "text": secret}],
+            "queries": [{"id": "SYN-QRY-0001", "text": live_text}],
         },
         AS_OF,
     )
     assert report["outcome"] == "refused"
     assert report["refusal_reason"] == "not_synthetic"
-    assert secret not in blob(report)
+    assert live_text not in blob(report)
     assert report["human_route"]["offered"] is True
     assert report["pii_gateway"]["called"] is False
 
