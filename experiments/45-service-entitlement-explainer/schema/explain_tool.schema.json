@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "explain_tool.schema.json",
+  "title": "Service entitlement explanation tool",
+  "description": "Input for explain(). The tool reads one synthetic plan and an approved rules table and returns a draft. It does not grant, refuse, or change an entitlement, and it does not send.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "question", "sector", "contract", "rules_table"],
+  "properties": {
+    "synthetic": {"const": true},
+    "request_id": {"type": "string"},
+    "organisation": {"type": "string"},
+    "sector": {
+      "enum": ["home_services", "telecoms", "financial_services", "public_service"]
+    },
+    "customer_reference": {"type": "string"},
+    "question": {"type": "string", "maxLength": 4000},
+    "contract": {"type": "object"},
+    "rules_table": {"type": "object"}
+  }
+}

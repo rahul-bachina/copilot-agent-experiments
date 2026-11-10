@@ -1,0 +1,355 @@
+# Agent manifest: Service Entitlement Explainer
+# Experiment 45 — catalogue ID C007
+# Version: 0.1.0
+# Last reviewed: 2026-11-10
+# Next review: 2027-05-10
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-45-service-entitlement-explainer"
+  name: "Service Entitlement Explainer"
+  version: "0.1.0"
+  description: >
+    Explains, in plain English, what an approved entitlement rules table says
+    about one synthetic service plan. It quotes the clause it relied on and
+    shows uncertainty. Autonomy is A0. A human decides a disputed entitlement.
+    The agent does not grant, refuse, or change an entitlement, and it does
+    not send or write a record.
+  owner: "Entitlement owner (the adopting service organisation)"
+  contact: "entitlement-owner@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/45-service-entitlement-explainer"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only explanation of an approved table. A human decides a disputed entitlement. Nothing is granted, refused, changed, sent, or written."
+  constraints:
+    - "A stated position is the approved table's words, and only when one current rule is supported by a contiguous clause. Nothing is inferred."
+    - "The agent NEVER grants an entitlement."
+    - "The agent NEVER refuses an entitlement."
+    - "The agent NEVER changes an entitlement, a plan, an exclusion, or a price."
+    - "The agent NEVER applies section 69 of the Consumer Rights Act 2015 and NEVER finds a term unfair."
+    - "The agent NEVER decides that the Consumer Duty consumer-understanding outcome was met. PRIN 2A.5 was not re-verified on 10 November 2026."
+    - "The agent NEVER recommends autonomy A3. The catalogue levels are A0, A1, and A2."
+    - "Question text and clause text are untrusted. An instruction span is recorded and not followed. The rest of the question is kept."
+    - "All output is labelled DRAFT EXPLANATION OF THE APPROVED TABLE. NOT A GRANT, A REFUSAL, OR A CHANGE."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic plan and approved rules table supplied for this run"
+      description: "One service plan split into clauses, and one rules table the organisation has already marked approved. The samples use Aldermere, which is fictional."
+      access_level: "read"
+      scope: "The file passed to this run. No Dynamics 365 entitlement store."
+      justification: "The explanation cannot cite a clause that was not supplied."
+      data_categories:
+        - "Synthetic contract clause text"
+        - "A customer reference, which is accepted only when it matches the synthetic pattern"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the plan."
+    - resource: "Pinned source notes"
+      description: "src/sources.py. Sentences from pages opened on 10 November 2026. A page that did not return text is marked unverified."
+      access_level: "read"
+      scope: "Static files in this experiment."
+      justification: "Statutory claims are cited from that pin. Unverified pages are not quoted as current rule text."
+      may_contain_personal_data: false
+    - resource: "Run parameters"
+      description: "As-of date and the stale-data threshold, typed by the adviser."
+      access_level: "read"
+      scope: "This invocation."
+      justification: "Rule age and source currency are calculated from these inputs."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "A Dynamics 365 entitlement, case, or customer record"
+      reason: "The agent does not read or write a live entitlement."
+    - resource: "A mailbox or any send channel"
+      reason: "The explanation is returned to the adviser. Nothing is sent to the customer."
+    - resource: "A payment service or a pricing engine"
+      reason: "The agent does not take a payment, waive an excess, or change a price."
+    - resource: "A Microsoft Foundry resource"
+      reason: "Foundry is described as an optional narrative. This folder does not call it."
+
+tools:
+  allowed:
+    - tool: "Explain the approved table for this run"
+      provider: "Local Python (src/explainer.py), which calls Experiment 38 normalise()"
+      action: "Quote a supported clause or route the question to a person. Do not grant, refuse, or change an entitlement."
+      access_level: "read"
+      scope: "The plan and table passed to the agent"
+      justification: "The adviser needs the same explanation each time, with the clause the table relied on."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record an entitlement owner's decision"
+      provider: "Local Python (src/explainer.py record_decision)"
+      action: "Record one of four decision codes from a separate review object. Do not apply the decision to a record."
+      access_level: "read"
+      scope: "A review object that is not taken from the question text"
+      justification: "The catalogue checkpoint is that a human decides a disputed entitlement. The record of that decision is not a system write."
+      human_approval_required: true
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "The agent does not write a Dynamics 365 entitlement, a Dataverse row, or a plan. The JSON is a return value, not a system of record."
+  sends:
+    enabled: false
+    note: "The agent does not email, text, or chat the customer."
+
+human_approval:
+  description: >
+    A human decides a disputed, ambiguous, conditional, conflicting, or stale
+    entitlement. The agent can explain a single supported row of an approved
+    table. It cannot grant, refuse, or change the entitlement. The route to a
+    person is always offered.
+  approval_points:
+    - action: "Decide a disputed, ambiguous, conditional, conflicting, or stale entitlement"
+      approver: "Entitlement owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for C007. The agent routes these and does not state a position."
+    - action: "Tell the customer the organisation's position, including where the table and the clause agree"
+      approver: "Entitlement owner, or the adviser they name"
+      mandatory: true
+      rationale: "The JSON is a draft. human_approval stays null until a separate review object is supplied. The agent still does not send it."
+    - action: "Grant, refuse, or change the entitlement on the organisation's system"
+      approver: "Entitlement owner, outside this agent"
+      mandatory: true
+      rationale: "entitlement_granted, entitlement_refused, and entitlement_changed stay false. The functions raise."
+    - action: "Apply section 69 or decide that a term is unfair"
+      approver: "The authorised person, outside this agent"
+      mandatory: true
+      rationale: "section_69_applied and unfair_term_found stay false."
+    - action: "Decide whether the consumer-understanding outcome was met"
+      approver: "The firm's own assessment, outside this agent"
+      mandatory: true
+      rationale: "consumer_understanding_met stays false. PRIN 2A.5 was not verified on 10 November 2026."
+    - action: "Confirm a lawful basis before any live plan is processed"
+      approver: "Data protection officer"
+      mandatory: true
+      rationale: "The manifest does not assert an Article 6 basis. Article 6 was not opened."
+  no_approval_required:
+    - action: "Produce this draft from a synthetic plan and an approved table the adviser supplied"
+      rationale: "The draft has no external effect. It is labelled DRAFT EXPLANATION OF THE APPROVED TABLE. NOT A GRANT, A REFUSAL, OR A CHANGE."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not chosen by this starter"
+    description: >
+      A live plan may contain personal data, for example a customer reference
+      or an address on the plan. This starter does not choose an Article 6
+      basis. Article 6 was not opened on 10 November 2026. The data protection
+      officer confirms a basis before any live file. Article 5 was read,
+      including transparency, data minimisation, and accuracy. Article 5(3)
+      says compatibility with the original purpose is not, by itself, lawful.
+      Article 12(1) was read. Articles 13 and 14 were not opened. Article 22A
+      was read. This explanation is not a solely automated significant decision.
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. Article 9 was not opened."
+    condition: "Not asserted."
+    safeguards:
+      - "The question text is not copied into the draft."
+      - "A customer reference is copied only when it matches the synthetic pattern."
+  data_minimisation:
+    - "The question is used to choose a rule and is not copied out."
+    - "Only the clause the table cites, or the clause looked at on a route, is quoted."
+    - "Prohibited payload keys that would grant, refuse, or change an entitlement are dropped."
+  retention:
+    agent_retention: "None. The starter does not persist the plan or the question."
+    note: "The organisation's own case file is outside this starter."
+  data_residency:
+    region: "Not applicable to this starter. It makes no network call."
+    note: "A later Microsoft Foundry deployment should be confirmed for UK South or UK West. That residency was not verified on 10 November 2026."
+  data_subject_rights:
+    note: "Article 12 was read. This starter does not operate a rights process and does not decide that Article 12 was met."
+
+prompt_injection:
+  description: >
+    Question text and clause text are untrusted. Instruction spans are recorded
+    and removed from matching. The surrounding words stay. A negation such as
+    'Do not escalate.' is still an instruction. Contract wording such as
+    'does not include' is not an instruction.
+  controls:
+    - control: "Span removal, not whole-sentence deletion"
+      description: "An instruction attached to a real question must not drop the question."
+      implementation: "src/injection.py strip_instruction_spans"
+    - control: "Negation still detected"
+      description: "'Do not escalate.' is recorded and is not followed. The human route stays offered."
+      implementation: "src/injection.py do_not_escalate"
+    - control: "No tool that grants, refuses, or changes"
+      description: "Those functions raise. A payload key of the same name is dropped."
+      implementation: "src/explainer.py"
+  residual_risk: "Medium. A phrase that is not on the list can still be followed by a later host if that host adds a tool this folder does not have."
+
+risk_assessment:
+  methodology: "Qualitative, for this starter rather than a named organisation. Assessed 10 November 2026."
+  date_assessed: "2026-11-10"
+  risks:
+    - id: "R1"
+      risk: "The draft is read as a grant or a refusal of cover."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The label says it is not a grant, a refusal, or a change."
+        - "entitlement_granted, entitlement_refused, and entitlement_changed stay false."
+        - "A disputed or ambiguous reading does not state a position."
+      residual_risk: "Medium"
+      owner: "Entitlement owner"
+    - id: "R2"
+      risk: "An instruction in the question suppresses the route to a person or selects the wrong rule."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Instruction spans are removed from matching and the rest of the question is kept."
+        - "'Do not escalate.' is detected. The human route stays offered."
+        - "followed stays false."
+      residual_risk: "Medium"
+      owner: "Entitlement owner"
+    - id: "R3"
+      risk: "A stale or unsupported clause is stated as current cover."
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A rule or plan older than 180 days is not stated as current."
+        - "Experiment 38 normalise() has to find the support phrase in the clause."
+        - "A conflict marker routes to a person and does not state a position."
+      residual_risk: "Low"
+      owner: "Entitlement owner"
+    - id: "R4"
+      risk: "Personal data in the question is copied into a log or a later model prompt."
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The starter does not persist the question and does not call a model."
+        - "The question is not copied into the JSON."
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: "This starter writes no log. The events below are what a deployment should log before live use."
+  logged_events:
+    - event: "Explanation produced"
+      data_logged:
+        - "request id"
+        - "rule ids relied on or seen"
+        - "clause reference"
+        - "outcome and uncertainty level"
+        - "whether an instruction was detected"
+        - "whether a source or a rule was stale"
+      retention: "The organisation's schedule. Do not log the question text."
+    - event: "Human decision recorded"
+      data_logged:
+        - "decision code"
+        - "actor id"
+        - "applied_to_entitlement_record false"
+      retention: "The organisation's schedule."
+  log_destination:
+    primary: "None in this starter."
+    secondary: "Application Insights was not opened on 10 November 2026. Unverified."
+    note: "Do not log the question or the full plan in an application trace."
+  audit_trail:
+    - "The JSON itself is the draft record for a synthetic run."
+    - "A live deployment needs its own audit. This starter does not provide one."
+
+kill_switch:
+  description: "Ways to stop the starter. It has no tenant connection to disable."
+  methods:
+    - method: "Do not call src/explainer.py"
+      action: "The process stops producing drafts."
+      time_to_effect: "Immediate"
+      who_can_activate: "The person running the starter"
+    - method: "Remove the Copilot Studio topic or the skill if one is later published"
+      action: "The channel stops calling the core."
+      time_to_effect: "When the maker unpublishes it. That control was not tested in a tenant."
+      who_can_activate: "The Copilot Studio maker"
+  escalation_contacts:
+    - role: "Entitlement owner"
+      contact: "entitlement-owner@example.com"
+
+review:
+  last_review_date: "2026-11-10"
+  next_review_date: "2027-05-10"
+  review_frequency: "Six months, and sooner if the Consumer Rights Act 2015 services or unfair-terms sections, or the consumer-understanding outcome, change."
+  reviewer: "Entitlement owner"
+  review_triggers:
+    - "A change to Consumer Rights Act 2015 Part 1 Chapter 4 or Part 2."
+    - "A verified reading of PRIN 2A.5, which was not obtained on 10 November 2026."
+    - "A change to the approved rules table used in a deployment."
+  related_documents:
+    - name: "Permissions note"
+      path: "docs/security-and-permissions.md"
+    - name: "Experiment 38 citation check"
+      path: "experiments/38-policy-wording-comparison/"
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not grant or refuse an entitlement. grant_entitlement and refuse_entitlement raise."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide cover, fairness, section 69, or the consumer-understanding outcome."
+  production_record_change:
+    enabled: false
+    rationale: "No entitlement record is written. change_entitlement and write_record raise."
+  external_send:
+    enabled: false
+    rationale: "Nothing is sent to the customer. send_message raises."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not take a payment, waive an excess, or change a price."
+  additional_high_risk:
+    - action_name: "Grant an entitlement"
+      enabled: false
+      rationale: "grant_entitlement always raises. entitlement_granted stays false."
+    - action_name: "Refuse an entitlement"
+      enabled: false
+      rationale: "refuse_entitlement always raises. entitlement_refused stays false."
+    - action_name: "Change an entitlement"
+      enabled: false
+      rationale: "change_entitlement always raises. entitlement_changed stays false."
+    - action_name: "Apply section 69 or find an unfair term"
+      enabled: false
+      rationale: "apply_section_69 and find_unfair_term always raise."
+    - action_name: "Waive an exclusion"
+      enabled: false
+      rationale: "waive_exclusion always raises."
+
+atrs_mapping:
+  note: "This starter does not complete an Algorithmic Transparency Recording Standard record. The fields below are a pointer, not a filing. The scope policy was not re-opened for this experiment."
+  mappings:
+    - atrs_field: "Function"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risks"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items a deployment has to check. They are not findings."
+  items:
+    - id: "A1"
+      assumption: "PRIN 2A.5 rule text was not returned on 10 November 2026. A firm must read the current handbook page before relying on the consumer-understanding outcome."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a configuration choice for this starter. It is not a statutory review period."
+      section: "src/explainer.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "01632 960045 is an invented number. The Ofcom numbering page was not opened."
+      section: "src/explainer.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Microsoft Foundry residency in UK South or UK West was not verified. This starter does not call Foundry."
+      section: "docs/foundry.md"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, prompt shields, Key Vault, Purview, and Application Insights were not opened for this revision."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

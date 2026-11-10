@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Entitlement owner decision record",
+  "description": "Input for record_decision(). The tool records one decision code from an entitlement owner. It does not grant, refuse, or change an entitlement, and it does not send.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "human_decides_included",
+        "human_decides_not_included",
+        "human_requests_more_information",
+        "reject_explanation"
+      ]
+    },
+    "actor": {"const": "entitlement_owner"},
+    "actor_id": {"type": "string"}
+  }
+}

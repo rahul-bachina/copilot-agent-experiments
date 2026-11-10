@@ -1,0 +1,42 @@
+{
+  "organisation": "Aldermere Packaged Account",
+  "sector": "financial_services",
+  "sample_question": "Am I covered for travel insurance?",
+  "contract": {
+    "contract_id": "SYN-PLAN-PACK-2026",
+    "title": "Aldermere Packaged Account",
+    "status": "current",
+    "reviewed_on": "2026-09-01",
+    "clauses": [
+      {
+        "clause_ref": "2.1",
+        "status": "current",
+        "text": "The packaged account includes worldwide travel insurance arranged by the account provider, with an excess of 50 pounds."
+      }
+    ]
+  },
+  "rules_table": {
+    "table_id": "rules-pack-2026-09",
+    "status": "approved",
+    "approved_by": "entitlement-owner",
+    "approved_on": "2026-09-01",
+    "rules": [
+      {
+        "rule_id": "R-TRAVEL",
+        "topic": "travel_insurance",
+        "phrases": ["travel insurance"],
+        "outcome_on_table": "included",
+        "clause_ref": "2.1",
+        "support_phrase": "includes worldwide travel insurance",
+        "conflict_if_clause_contains": ["does not include worldwide travel insurance"],
+        "plain_english": "The approved table says the packaged account includes worldwide travel insurance arranged by the account provider, with an excess of 50 pounds.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      }
+    ]
+  }
+}
