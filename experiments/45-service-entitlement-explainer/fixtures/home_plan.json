@@ -1,0 +1,147 @@
+{
+  "organisation": "Aldermere Home Plan",
+  "sector": "home_services",
+  "sample_question": "Am I covered for an annual boiler service?",
+  "contract": {
+    "contract_id": "SYN-PLAN-HOME-2026",
+    "title": "Aldermere Home Care Plan",
+    "status": "current",
+    "reviewed_on": "2026-09-01",
+    "clauses": [
+      {
+        "clause_ref": "4.1",
+        "status": "current",
+        "text": "The plan includes one annual service of a domestic gas boiler at the address on the plan."
+      },
+      {
+        "clause_ref": "4.2",
+        "status": "current",
+        "text": "The plan does not include a boiler that is more than 15 years old."
+      },
+      {
+        "clause_ref": "5.1",
+        "status": "current",
+        "text": "The plan does not include accidental damage."
+      },
+      {
+        "clause_ref": "6.1",
+        "status": "current",
+        "text": "An engineer will attend within a reasonable time. What is reasonable depends on the facts."
+      },
+      {
+        "clause_ref": "7.1",
+        "status": "current",
+        "text": "The plan includes a repair to a leaking pipe inside the home."
+      },
+      {
+        "clause_ref": "8.1",
+        "status": "current",
+        "text": "Spare parts may be included where the engineer considers it reasonable."
+      }
+    ]
+  },
+  "rules_table": {
+    "table_id": "rules-home-2026-09",
+    "status": "approved",
+    "approved_by": "entitlement-owner",
+    "approved_on": "2026-09-01",
+    "rules": [
+      {
+        "rule_id": "R-BOILER-SERVICE",
+        "topic": "annual_boiler_service",
+        "phrases": ["annual boiler service", "yearly boiler service"],
+        "outcome_on_table": "included",
+        "clause_ref": "4.1",
+        "support_phrase": "includes one annual service of a domestic gas boiler",
+        "conflict_if_clause_contains": ["does not include one annual service"],
+        "plain_english": "The approved table says the plan includes one annual service of a domestic gas boiler at the address on the plan.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      },
+      {
+        "rule_id": "R-BOILER-AGE",
+        "topic": "boiler_age",
+        "phrases": ["boiler more than 15 years", "boiler over 15 years"],
+        "outcome_on_table": "not_included",
+        "clause_ref": "4.2",
+        "support_phrase": "does not include a boiler that is more than 15 years old",
+        "conflict_if_clause_contains": ["the plan includes a boiler that is more than 15 years old"],
+        "plain_english": "The approved table says the plan does not include a boiler that is more than 15 years old.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      },
+      {
+        "rule_id": "R-ACCIDENTAL",
+        "topic": "accidental_damage",
+        "phrases": ["accidental damage"],
+        "outcome_on_table": "not_included",
+        "clause_ref": "5.1",
+        "support_phrase": "does not include accidental damage",
+        "conflict_if_clause_contains": ["the plan includes accidental damage"],
+        "plain_english": "The approved table says the plan does not include accidental damage.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      },
+      {
+        "rule_id": "R-CALLOUT",
+        "topic": "call_out_time",
+        "phrases": ["call-out time", "how long for an engineer"],
+        "outcome_on_table": "conditional",
+        "clause_ref": "6.1",
+        "support_phrase": "within a reasonable time",
+        "conflict_if_clause_contains": [],
+        "plain_english": "The approved table says an engineer will attend within a reasonable time and that a person has to decide what is reasonable.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      },
+      {
+        "rule_id": "R-LEAK",
+        "topic": "plumbing_leak",
+        "phrases": ["plumbing leak", "leaking pipe"],
+        "outcome_on_table": "included",
+        "clause_ref": "7.1",
+        "support_phrase": "includes a repair to a leaking pipe",
+        "conflict_if_clause_contains": ["does not include a repair to a leaking pipe"],
+        "plain_english": "The approved table says the plan includes a repair to a leaking pipe inside the home.",
+        "ambiguous": false,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      },
+      {
+        "rule_id": "R-PARTS",
+        "topic": "spare_parts",
+        "phrases": ["spare parts"],
+        "outcome_on_table": "included",
+        "clause_ref": "8.1",
+        "support_phrase": "Spare parts may be included",
+        "conflict_if_clause_contains": [],
+        "plain_english": "The approved table says spare parts may be included where the engineer considers it reasonable.",
+        "ambiguous": true,
+        "disputed": false,
+        "status": "approved",
+        "effective_on": "2026-04-01",
+        "review_due_on": "2027-03-01",
+        "approved_on": "2026-09-01"
+      }
+    ]
+  }
+}
