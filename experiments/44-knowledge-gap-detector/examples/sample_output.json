@@ -1,0 +1,660 @@
+{
+  "label": "DRAFT FOR KNOWLEDGE MANAGER REVIEW",
+  "catalogue_id": "C005",
+  "experiment": "44-knowledge-gap-detector",
+  "agent_id": "exp-44-knowledge-gap-detector",
+  "autonomy": "A0",
+  "organisation": "Northmere Knowledge Service (fictional)",
+  "pack_id": "SYN-PACK-0001",
+  "sector": "public_service",
+  "as_of": "2026-11-10",
+  "outcome": "review_ready",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "source_text_echoed": false,
+  "published": false,
+  "articles_edited": false,
+  "gap_confirmed": false,
+  "flags": {
+    "article_published": false,
+    "article_edited": false,
+    "article_deleted": false,
+    "message_sent": false,
+    "knowledge_base_written": false,
+    "consumer_duty_outcome_met": false,
+    "equality_duty_met": false,
+    "data_minimisation_met": false
+  },
+  "human_route": {
+    "offered": true,
+    "approver": "Knowledge manager",
+    "agent_publishes": false,
+    "agent_edits": false,
+    "sentence": "A knowledge manager reviews this draft. This agent does not publish an article and does not edit one."
+  },
+  "prompt_injection": {
+    "detected": true,
+    "signals": [
+      "do_not_escalate"
+    ],
+    "followed": false,
+    "hints_dropped": []
+  },
+  "stale": {
+    "rules_current": true,
+    "pinned_on": "2026-11-10",
+    "window_days": 180,
+    "boundary": "more than 180 days after the pin is outside; 180 days is inside"
+  },
+  "pii_gateway": {
+    "called": true,
+    "finding_count": 1,
+    "entity_types": [
+      "nino"
+    ],
+    "items": [
+      {
+        "id": "SYN-QRY-0001",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "486ac131c6619b8b021be0e31aa59aa3283683e244719b92dc7e03a13afad2d1"
+      },
+      {
+        "id": "SYN-QRY-0002",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "3b808710ffabc1088b9a0a9d5b063077e1579f588c22fb219d69896d8854354b"
+      },
+      {
+        "id": "SYN-QRY-0003",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "0fb12239f735c9d257dc84fe0f03e21427fa3f6038370ab4514434cab9575909"
+      },
+      {
+        "id": "SYN-QRY-0004",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "02009bbf4dc9025b532b830ac64c2f39a3fd48659891563146cb0dd4fc453aea"
+      },
+      {
+        "id": "SYN-NOTE-0001",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "5a27083e7070fc5dc374e58345c3fc51ef908d15aca0d7b702298833ff7c217c"
+      },
+      {
+        "id": "SYN-NOTE-0002",
+        "finding_count": 1,
+        "entity_types": [
+          "nino"
+        ],
+        "input_sha256": "e82490c9fb747da4982e7a24b7eb4192898726ecb3469a0fc7de536bad60f56d"
+      },
+      {
+        "id": "SYN-MISS-0001",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "6cc23049e37a9595387651a90eb79f50f2193c25563106e1358dbfffdb5b4641"
+      },
+      {
+        "id": "SYN-MISS-0002",
+        "finding_count": 0,
+        "entity_types": [],
+        "input_sha256": "e3977319934152129e66e4c30e1389e61d2ee4a5087a66fb422635915ea42e68"
+      }
+    ],
+    "output_is_anonymised": false,
+    "agent_may_release": false,
+    "redacted_text_copied": false
+  },
+  "related_catalogues": {
+    "experiment_21": {
+      "called": false,
+      "current_ids": [],
+      "stale_ids": []
+    },
+    "experiment_40": {
+      "called": true,
+      "current_ids": [
+        "kb-public-hours",
+        "kb-public-missed"
+      ],
+      "stale_ids": []
+    }
+  },
+  "items": [
+    {
+      "id": "SYN-QRY-0001",
+      "kind": "query",
+      "outcomes": [
+        "covered"
+      ],
+      "topics": [
+        "opening-hours"
+      ],
+      "citable_ids": [
+        "KB-HOURS-01"
+      ],
+      "not_citable": [
+        {
+          "id": "KB-HOURS-OLD",
+          "topic": "opening-hours",
+          "reason": "withdrawn"
+        }
+      ],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [
+        "kb-public-hours"
+      ],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-QRY-0002",
+      "kind": "query",
+      "outcomes": [
+        "content_gap"
+      ],
+      "topics": [
+        "blue-badge"
+      ],
+      "citable_ids": [],
+      "not_citable": [],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-QRY-0003",
+      "kind": "query",
+      "outcomes": [
+        "content_gap"
+      ],
+      "topics": [
+        "missed-bin"
+      ],
+      "citable_ids": [],
+      "not_citable": [],
+      "injection_signals": [
+        "do_not_escalate"
+      ],
+      "legitimate_content_kept": true,
+      "related_current_ids": [
+        "kb-public-missed"
+      ],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-QRY-0004",
+      "kind": "query",
+      "outcomes": [
+        "conflict"
+      ],
+      "topics": [
+        "concessionary-bus"
+      ],
+      "citable_ids": [
+        "KB-BUS-NO",
+        "KB-BUS-YES"
+      ],
+      "not_citable": [],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-NOTE-0001",
+      "kind": "case_note",
+      "outcomes": [
+        "stale_coverage"
+      ],
+      "topics": [
+        "legacy-bus-leaflet"
+      ],
+      "citable_ids": [],
+      "not_citable": [
+        {
+          "id": "KB-BUS-OLD",
+          "topic": "legacy-bus-leaflet",
+          "reason": "review_due"
+        }
+      ],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-NOTE-0002",
+      "kind": "case_note",
+      "outcomes": [
+        "covered"
+      ],
+      "topics": [
+        "opening-hours"
+      ],
+      "citable_ids": [
+        "KB-HOURS-01"
+      ],
+      "not_citable": [
+        {
+          "id": "KB-HOURS-OLD",
+          "topic": "opening-hours",
+          "reason": "withdrawn"
+        }
+      ],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [
+        "kb-public-hours"
+      ],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-MISS-0001",
+      "kind": "search_miss",
+      "outcomes": [
+        "content_gap"
+      ],
+      "topics": [
+        "blue-badge"
+      ],
+      "citable_ids": [],
+      "not_citable": [],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [],
+      "related_stale_ids": []
+    },
+    {
+      "id": "SYN-MISS-0002",
+      "kind": "search_miss",
+      "outcomes": [
+        "retrieval_miss"
+      ],
+      "topics": [
+        "opening-hours"
+      ],
+      "citable_ids": [
+        "KB-HOURS-01"
+      ],
+      "not_citable": [
+        {
+          "id": "KB-HOURS-OLD",
+          "topic": "opening-hours",
+          "reason": "withdrawn"
+        }
+      ],
+      "injection_signals": [],
+      "legitimate_content_kept": true,
+      "related_current_ids": [
+        "kb-public-hours"
+      ],
+      "related_stale_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "kind": "conflict",
+      "topic": "concessionary-bus",
+      "article_ids": [
+        "KB-BUS-NO",
+        "KB-BUS-YES"
+      ],
+      "claim": "apply-online",
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-BUS-NO"
+        },
+        {
+          "kind": "article",
+          "id": "KB-BUS-YES"
+        }
+      ],
+      "winner_chosen": false,
+      "detail": "Two current articles take opposite positions. This starter does not choose one.",
+      "finding_id": "F-001"
+    },
+    {
+      "kind": "content_gap",
+      "topic": "blue-badge",
+      "article_ids": [],
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0002"
+        },
+        {
+          "kind": "search_miss",
+          "id": "SYN-MISS-0001"
+        }
+      ],
+      "detail": "No current approved article matched this topic.",
+      "finding_id": "F-002"
+    },
+    {
+      "kind": "content_gap",
+      "topic": "missed-bin",
+      "article_ids": [],
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0003"
+        }
+      ],
+      "detail": "No current approved article matched this topic.",
+      "finding_id": "F-003"
+    },
+    {
+      "kind": "not_yet_in_force",
+      "topic": "garden-waste",
+      "article_ids": [
+        "KB-GARDEN"
+      ],
+      "reason": "not_yet_in_force",
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-GARDEN"
+        }
+      ],
+      "detail": "The article is not treated as current coverage. Its body is not copied.",
+      "finding_id": "F-004"
+    },
+    {
+      "kind": "retrieval_miss",
+      "topic": "opening-hours",
+      "article_ids": [
+        "KB-HOURS-01"
+      ],
+      "evidence_links": [
+        {
+          "kind": "search_miss",
+          "id": "SYN-MISS-0002"
+        }
+      ],
+      "detail": "A current article exists. The search log recorded zero results.",
+      "finding_id": "F-005"
+    },
+    {
+      "kind": "stale_article",
+      "topic": "legacy-bus-leaflet",
+      "article_ids": [
+        "KB-BUS-OLD"
+      ],
+      "reason": "review_due",
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-BUS-OLD"
+        },
+        {
+          "kind": "case_note",
+          "id": "SYN-NOTE-0001"
+        }
+      ],
+      "detail": "The article is not treated as current coverage. Its body is not copied.",
+      "finding_id": "F-006"
+    },
+    {
+      "kind": "withdrawn",
+      "topic": "opening-hours",
+      "article_ids": [
+        "KB-HOURS-OLD"
+      ],
+      "reason": "withdrawn",
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-HOURS-OLD"
+        }
+      ],
+      "detail": "The article is not treated as current coverage. Its body is not copied.",
+      "finding_id": "F-007"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-BLUE-BADGE",
+      "topic": "blue-badge",
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0002"
+        },
+        {
+          "kind": "search_miss",
+          "id": "SYN-MISS-0001"
+        }
+      ],
+      "related_current_ids": [],
+      "related_stale_ids": [],
+      "confirmed": false,
+      "published": false
+    },
+    {
+      "gap_id": "GAP-MISSED-BIN",
+      "topic": "missed-bin",
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0003"
+        }
+      ],
+      "related_current_ids": [
+        "kb-public-missed"
+      ],
+      "related_stale_ids": [],
+      "confirmed": false,
+      "published": false
+    }
+  ],
+  "outlines": [
+    {
+      "kind": "new_article",
+      "topic": "blue-badge",
+      "article_id": null,
+      "proposed_title": "Draft: renewing a blue badge",
+      "sections": [
+        "Who this is for",
+        "The question, written by the knowledge manager. This outline does not copy the query.",
+        "The steps a reader can take",
+        "What this article does not decide",
+        "How to ask for another format",
+        "The date the article should next be reviewed"
+      ],
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0002"
+        },
+        {
+          "kind": "search_miss",
+          "id": "SYN-MISS-0001"
+        }
+      ],
+      "published": false,
+      "edited": false,
+      "outline_id": "OUT-001"
+    },
+    {
+      "kind": "new_article",
+      "topic": "missed-bin",
+      "article_id": null,
+      "proposed_title": "Draft: a missed bin collection",
+      "sections": [
+        "Who this is for",
+        "The question, written by the knowledge manager. This outline does not copy the query.",
+        "The steps a reader can take",
+        "What this article does not decide",
+        "How to ask for another format",
+        "The date the article should next be reviewed"
+      ],
+      "evidence_links": [
+        {
+          "kind": "query",
+          "id": "SYN-QRY-0003"
+        }
+      ],
+      "published": false,
+      "edited": false,
+      "outline_id": "OUT-002"
+    },
+    {
+      "kind": "not_yet_in_force",
+      "topic": "garden-waste",
+      "article_id": "KB-GARDEN",
+      "proposed_title": "Draft: garden waste",
+      "sections": [
+        "Who this is for",
+        "The question, written by the knowledge manager. This outline does not copy the query.",
+        "The steps a reader can take",
+        "What this article does not decide",
+        "How to ask for another format",
+        "The date the article should next be reviewed"
+      ],
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-GARDEN"
+        }
+      ],
+      "published": false,
+      "edited": false,
+      "outline_id": "OUT-003"
+    },
+    {
+      "kind": "refresh_article",
+      "topic": "legacy-bus-leaflet",
+      "article_id": "KB-BUS-OLD",
+      "proposed_title": "Draft: refresh the bus-pass leaflet",
+      "sections": [
+        "Who this is for",
+        "The question, written by the knowledge manager. This outline does not copy the query.",
+        "The steps a reader can take",
+        "What this article does not decide",
+        "How to ask for another format",
+        "The date the article should next be reviewed"
+      ],
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-BUS-OLD"
+        },
+        {
+          "kind": "case_note",
+          "id": "SYN-NOTE-0001"
+        }
+      ],
+      "published": false,
+      "edited": false,
+      "outline_id": "OUT-004"
+    },
+    {
+      "kind": "withdrawn_article",
+      "topic": "opening-hours",
+      "article_id": "KB-HOURS-OLD",
+      "proposed_title": "Draft: counter opening hours",
+      "sections": [
+        "Who this is for",
+        "The question, written by the knowledge manager. This outline does not copy the query.",
+        "The steps a reader can take",
+        "What this article does not decide",
+        "How to ask for another format",
+        "The date the article should next be reviewed"
+      ],
+      "evidence_links": [
+        {
+          "kind": "article",
+          "id": "KB-HOURS-OLD"
+        }
+      ],
+      "published": false,
+      "edited": false,
+      "outline_id": "OUT-005"
+    }
+  ],
+  "counts": {
+    "content_gaps": 2,
+    "evidence_rows_on_gaps": 3,
+    "findings": 7,
+    "outlines": 5,
+    "content_gaps_equal_unique_topics": true
+  },
+  "regulatory": {
+    "consumer_duty": {
+      "applied": false,
+      "withheld_because_sources_stale": false,
+      "provisions_read": [],
+      "cross_references_seen": [],
+      "status_letter_on_2a_5_7": "not cleanly labelled in the PDF extraction",
+      "outcome_met": false,
+      "screen_is_the_test_in_2a_5_10": false
+    },
+    "equality_act": {
+      "section_read": "20(6)",
+      "duty_met": false,
+      "section_29_opened": false,
+      "schedule_2_opened": false
+    },
+    "uk_gdpr": {
+      "article_read": "5(1)(c)",
+      "data_minimisation_met": false,
+      "source_text_copied": false,
+      "article_6_opened": false
+    }
+  },
+  "sources": [
+    {
+      "id": "prin-2a-5",
+      "title": "PRIN 2A.5 Consumer Duty: retail customer outcome on consumer understanding",
+      "url": "https://handbook.fca.org.uk/handbook/prin2a/prin2as5",
+      "opened_on": "2026-11-10",
+      "outside_window": false
+    },
+    {
+      "id": "uk-gdpr-article-5",
+      "title": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "opened_on": "2026-11-10",
+      "outside_window": false
+    },
+    {
+      "id": "equality-act-section-20",
+      "title": "Equality Act 2010, section 20",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/20",
+      "opened_on": "2026-11-10",
+      "outside_window": false
+    },
+    {
+      "id": "copilot-studio-harnesses",
+      "title": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "opened_on": "2026-11-10",
+      "outside_window": false
+    }
+  ],
+  "not_opened": [
+    "UK GDPR Article 6",
+    "UK GDPR Article 9",
+    "UK GDPR Article 22A",
+    "Equality Act 2010 section 29",
+    "Equality Act 2010 Schedule 2",
+    "PRIN 2A.2",
+    "FG22/5",
+    "DISP",
+    "ATRS mandatory scope policy",
+    "Dynamics 365 Customer Service knowledge-article product pages",
+    "Microsoft Fabric product pages",
+    "Usage-based billing for Copilot Studio",
+    "Licensing for agents powered by the standard harness"
+  ],
+  "limitations_note": "Keyword hints miss wording that is not on the list. The 25-word cap is not PRIN 2A.5.7 and not the test in PRIN 2A.5.10. Confirming a gap does not publish an article."
+}
