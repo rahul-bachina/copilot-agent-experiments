@@ -145,6 +145,9 @@ DIAGRAMS = {
     "experiments/43-response-drafting/docs/architecture_diagram.png": (
         "experiments/img/43-response-drafting-architecture.png"
     ),
+    "experiments/44-knowledge-gap-detector/docs/architecture_diagram.png": (
+        "experiments/img/44-knowledge-gap-detector-architecture.png"
+    ),
     "experiments/45-service-entitlement-explainer/docs/architecture_diagram.png": (
         "experiments/img/45-service-entitlement-explainer-architecture.png"
     ),

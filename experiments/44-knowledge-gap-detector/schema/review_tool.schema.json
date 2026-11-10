@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Knowledge gap confirmation tool",
+  "description": "Input for record_confirmation(). The knowledge manager confirms, rejects, or defers a listed gap. Confirmation does not publish or edit an article. Publish, edit, delete, and send are not decisions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": ["confirm_gap", "reject_gap", "defer"]
+    },
+    "actor": {"enum": ["knowledge_manager"]},
+    "actor_id": {"type": "string"},
+    "gap_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

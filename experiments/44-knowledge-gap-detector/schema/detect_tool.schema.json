@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "detect_tool.schema.json",
+  "title": "Knowledge gap detection tool",
+  "description": "Input for detect_gaps(). Reads one synthetic pack. Does not publish, edit, or delete a knowledge article, and does not send.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "pack_id", "sector"],
+  "properties": {
+    "synthetic": {"const": true},
+    "pack_id": {"type": "string", "pattern": "^SYN-PACK-\\d{4}$"},
+    "sector": {
+      "enum": [
+        "public_service",
+        "financial_services",
+        "it_service",
+        "energy_retail",
+        "telecoms"
+      ]
+    },
+    "queries": {"type": "array", "items": {"type": "object"}},
+    "case_notes": {"type": "array", "items": {"type": "object"}},
+    "search_misses": {"type": "array", "items": {"type": "object"}}
+  }
+}

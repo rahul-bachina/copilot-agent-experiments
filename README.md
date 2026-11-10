@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Forty-five starters are in `experiments/`. The folders are 01 to 43, 45, and 46. The count is the number of folders.
+Forty-six starters are in `experiments/`. The folders are 01 to 46. The count is the number of folders.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -75,6 +75,7 @@ Forty-five starters are in `experiments/`. The folders are 01 to 43, 45, and 46.
 | 41 | [Case Summary Agent](experiments/41-case-summary/) | Draft a cited reading of one synthetic contact-centre case. Every sentence names its event, paragraph, and line. Autonomy A0. The service representative checks accuracy. The agent does not contact the customer, change the record, close a complaint, or offer redress. | ✅ Starter |
 | 42 | [Case Routing Assistant](experiments/42-case-routing-assistant/) | Propose a queue, a priority, and a reason for one synthetic case. Autonomy A1. The adviser confirms a route. The queue owner approves a material rule change. Vulnerability and statutory-clock cases always propose a human queue. The agent does not reroute, close, escalate, or edit a rule. | ✅ Starter |
 | 43 | [Response Drafting Agent](experiments/43-response-drafting/) | Draft one customer response from a synthetic case and approved snippets, with source references and tone and plain-English screens. Autonomy A1. The representative sends. The agent does not send, write a case, offer redress, or decide that PRIN 2A.5 was met. | ✅ Starter |
+| 44 | [Knowledge Gap Detector](experiments/44-knowledge-gap-detector/) | Review synthetic queries, case notes, and search-miss logs against an approved knowledge base. Autonomy A0. The knowledge manager confirms gaps. The agent does not publish or edit an article, and it does not decide that PRIN 2A.5 was met. | ✅ Starter |
 | 45 | [Service Entitlement Explainer](experiments/45-service-entitlement-explainer/) | Explain what an approved entitlement table says about one synthetic service plan, quote the clause, and show uncertainty. Autonomy A0. A human decides a disputed entitlement. The agent does not grant, refuse, or change cover, and it does not decide that PRIN 2A.5 was met. | ✅ Starter |
 | 46 | [Field Visit Preparation Agent](experiments/46-field-visit-preparation/) | Assemble a pre-visit brief from one synthetic work order, asset history, site access notes, and safety records. Autonomy A0. The technician confirms the asset and the safety context. The agent does not schedule, dispatch, or close a work order. | ✅ Starter |
 
