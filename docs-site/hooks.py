@@ -148,6 +148,9 @@ DIAGRAMS = {
     "experiments/45-service-entitlement-explainer/docs/architecture_diagram.png": (
         "experiments/img/45-service-entitlement-explainer-architecture.png"
     ),
+    "experiments/46-field-visit-preparation/docs/architecture_diagram.png": (
+        "experiments/img/46-field-visit-preparation-architecture.png"
+    ),
 }
 
 

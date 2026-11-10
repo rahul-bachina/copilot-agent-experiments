@@ -1,0 +1,454 @@
+# Agent manifest: Field Visit Preparation Agent
+# Experiment 46 — catalogue ID C008
+# Version: 0.1.0
+# Last reviewed: 2026-11-10
+# Next review: 2027-05-10
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-46-field-visit-preparation"
+  name: "Field Visit Preparation Agent"
+  version: "0.1.0"
+  description: >
+    Assembles a pre-visit brief for one synthetic work order from asset
+    history, site access notes, and safety records. Autonomy A0. The field
+    technician confirms the asset and the safety context. The agent highlights
+    safety hazards, missing information, and vulnerability or access flags.
+    It never schedules, dispatches, or closes a work order.
+  owner: "Field service operations"
+  contact: "field.ops@calderwell.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/46-field-visit-preparation"
+
+autonomy:
+  level: "A0"
+  level_description: "No autonomous capability. The technician confirms context. The agent only prepares a brief."
+  constraints:
+    - "The technician confirms the asset and the safety context. The agent only prepares the brief."
+    - "The agent NEVER schedules a visit, dispatches a technician, or closes a work order"
+    - "The agent NEVER authorises entry, clears a safety hold, or decides that a hazard category is approved"
+    - "Confirmation does not write a work order and does not send a message"
+    - "A sentence in the work order cannot confirm the asset or the safety context"
+    - "Hazard lists, the empty approval, and the statutory illustration come from Python, not from model output"
+    - "All output is advisory and is marked draft for technician confirmation"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied work-order pack"
+      description: "A single pack the technician pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. The output does not echo the narrative, the address, or a code."
+      justification: "The brief cannot list hazards or gaps without the pack that was supplied."
+      data_categories:
+        - "Work-order summary"
+        - "Asset description and a synthetic asset id"
+        - "Site access notes"
+        - "Safety record labels"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Separate review object"
+      description: "Technician confirmation, supervisor acknowledgement of a hold, or rejection. Not read from the pack text."
+      access_level: "read"
+      scope: "One review for a brief already produced."
+      justification: "Approval has to be deterministic and has to refuse a schedule, a dispatch, and a close."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 15 vulnerability scan"
+      description: "scan() from experiments/15-vulnerability-urgency-scanner. Phrases are not copied out."
+      access_level: "read"
+      scope: "The excised narrative for this run. No model is passed."
+      justification: "This experiment does not carry a second vulnerability list."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+    - resource: "Experiment 12 document intake"
+      description: "intake() when the pack includes text files. File content is not copied out."
+      access_level: "read"
+      scope: "The documents on this pack. files_confirmed stays false."
+      justification: "This experiment does not carry a second document inventory."
+      may_contain_personal_data: true
+    - resource: "Experiment 05 hazard triage"
+      description: "triage() for a housing pack, with officer approval forced off. Quotes are not copied out."
+      access_level: "read"
+      scope: "One illustration. No operative deadline is passed through."
+      justification: "This experiment does not carry a second statutory clock."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "Scheduling and dispatch systems"
+      reason: "The agent does not schedule or dispatch."
+    - resource: "Work-order production records"
+      reason: "The brief is not written back and a work order is not closed."
+    - resource: "Key safes, door codes, and password stores"
+      reason: "A code-shaped phrase is flagged and not copied. The agent does not store a code."
+    - resource: "Mailboxes, SMS gateways, and tenant messaging"
+      reason: "The agent does not send the brief."
+    - resource: "Live housing, utility, or facilities systems"
+      reason: "The pack is the file the technician supplied. The core does not query a live system."
+
+tools:
+  allowed:
+    - tool: "Field brief"
+      provider: "Local Python (src/prepare.py)"
+      action: "Assemble one brief from a synthetic pack"
+      access_level: "read"
+      scope: "One pack. No network. No model. Calls Experiments 15, 12, and 05 in process."
+      justification: "Which hazard was named, which record is stale, and whether a clock is operative are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record a technician confirmation, a supervisor note, or a rejection"
+      access_level: "read"
+      scope: "The brief for this run and a separate review object. No schedule and no write."
+      justification: "The approval has to be deterministic and has to refuse a dispatch and a close."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hazard list, the gaps, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a schedule, a dispatch, a close, or an authorised entry"
+      access_level: "read"
+      scope: "The brief for this run"
+      justification: "A brief that dispatches a technician is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The brief is returned to the technician. Updating the work
+      order, if someone chooses to, is done in the organisation's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming the context does not email, text, or call anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a hazard category, clear a hold, or reject a
+      work order. record_review can record a confirmation. It cannot perform a visit.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that section 2 or section 3 of the Health and
+      Safety at Work etc. Act 1974 was met, that regulation 3 of the Management
+      of Health and Safety at Work Regulations 1999 was carried out, or that
+      section 10A of the Landlord and Tenant Act 1985 applies.
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a work order, an asset, or a safety record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact the tenant, the technician, or a supervisor."
+  spend_transact:
+    enabled: false
+    rationale: "No parts are ordered and no fee is spent."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Schedule or dispatch a visit"
+      rationale: "Those functions raise VisitForbidden. scheduled and dispatched stay false after confirmation."
+    - enabled: false
+      action_name: "Authorise entry or clear a safety hold"
+      rationale: "entry_authorised and hold_cleared stay false. A supervisor note does not clear a hold."
+    - enabled: false
+      action_name: "Copy a door code or label a person vulnerable"
+      rationale: "code_copied and person_labelled_vulnerable stay false."
+
+human_approval:
+  description: >
+    The field technician confirms the asset and the safety context on a
+    separate review object. A supervisor may record that a hold was seen.
+    The agent has no path that acts on that choice. Confirming a sentence
+    in the chat does not schedule a visit, dispatch a technician, close the
+    work order, authorise entry, or clear a hold.
+
+  approval_points:
+    - action: "Confirm the asset and the safety context"
+      approver: "Field technician named on the review object"
+      mandatory: true
+      rationale: "prepare_brief leaves human_approval null. Only record_review can set it, and only when the asset id matches and the technician records that the safety context was read."
+    - action: "Acknowledge gaps, a safety hold, or stale sources"
+      approver: "Field technician"
+      mandatory: true
+      rationale: "A gap, a hold, or a stale pin blocks confirmation until the review object says it was seen. That acknowledgement does not clear the hold."
+    - action: "Note that a safety hold was seen"
+      approver: "Supervisor"
+      mandatory: true
+      rationale: "Optional. It does not confirm the technician's context and it does not clear the hold."
+    - action: "Schedule, dispatch, or close the work order"
+      approver: "The organisation's own scheduler"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled."
+    - action: "Approve an Awaab's Law category or an operative clock"
+      approver: "Housing officer, in the organisation's own process"
+      mandatory: true
+      rationale: "Experiment 05 is called with officer approval forced off. This agent cannot approve the category."
+
+  no_approval_required:
+    - action: "View the brief"
+      rationale: "Reading a brief has no external effect."
+    - action: "Re-run the same pack"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was read on 10 November 2026. Points (ea) and (f) of Article 6(1) do not
+      apply to processing carried out by public authorities in the performance
+      of their tasks. A utility or a facilities contractor confirms its own
+      basis. Do not copy a basis from another experiment.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a tenant or a caller volunteers in a note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 10 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One pack at a time, as supplied by the person running the brief"
+      - "The output does not echo the narrative and does not copy Experiment 15's phrases"
+      - "Nothing is written to a work order"
+      - "Samples in this repository are synthetic"
+      - "No solely automated visit decision. The technician confirms context, and this agent still does not dispatch."
+  data_minimisation:
+    - "Article 5(1)(c) was read on 10 November 2026. The brief keeps ids, catalogue labels, and flags. It does not keep the narrative."
+    - "A code-shaped phrase is not copied."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the technician then saves. That schedule is not set here."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Work-order text is untrusted. It may tell the model to ignore the rules,
+    close the work order, or not to escalate. The core does not read the
+    network. The model is not given a tool that can schedule, dispatch, or close.
+  controls:
+    - control: "Instruction clauses are removed, and the rest of the sentence stays"
+      description: "A defect named in the same sentence as an instruction is still matched. A sentence that is only an instruction is not used as a hazard. Do not escalate is still recorded."
+    - control: "Site rules are not treated as instructions to the agent"
+      description: "Do not enter the loft stays in the matching text and is an access flag."
+    - control: "Confirmation is a separate object"
+      description: "A sentence that says the safety context is already confirmed is a signal. It does not set human_approval."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set scheduled, closed, or officer approval is stripped."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses schedule, dispatch, and close. Direct functions raise VisitForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The technician
+    is the control. There is no autonomous dispatch even if the brief is wrong.
+    A paraphrase that uses none of the pinned phrases is not detected.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-10"
+  risks:
+    - id: "R1"
+      risk: "A work-order sentence is treated as authority to dispatch, to close, or to skip a safety hold"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Do not escalate and close the work order are recorded and not followed"
+        - "schedule_visit, dispatch_technician, and close_work_order raise VisitForbidden"
+      residual_risk: "Low"
+      owner: "Field service operations"
+    - id: "R2"
+      risk: "A technician is sent to a gas, electrical, asbestos, or structural hold without seeing it"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those phrases and a defect_open record become a safety hold"
+        - "Confirmation requires the hold to be acknowledged and does not clear it"
+      residual_risk: "Medium"
+      owner: "Health and safety"
+    - id: "R3"
+      risk: "An instruction sentence is stripped so thoroughly that a real defect disappears from the brief"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Only the instruction clause is removed"
+        - "Tests keep mould and a smell of gas when they share a sentence with an instruction"
+      residual_risk: "Medium"
+      owner: "Field service operations"
+    - id: "R4"
+      risk: "A stale safety record or a stale legal pin is treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days is stale. Equal to 180 days is current."
+        - "Stale pins are not quoted. Confirmation of a stale pin requires acknowledgement."
+      residual_risk: "Low"
+      owner: "Field service operations"
+    - id: "R5"
+      risk: "A door code or a live address is copied into the brief or a log"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The narrative is not copied"
+        - "A code-shaped phrase sets a flag and the digits are not written out"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R6"
+      risk: "An Awaab's Law illustration is treated as an operative deadline or as a clearance to visit"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Officer approval is forced off"
+        - "The illustration is not applied as a visit clearance"
+        - "Utility and facilities packs do not call the clock"
+      residual_risk: "Low"
+      owner: "Housing repairs"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the work-order id if it
+    matched the synthetic pattern, the outcome, and the later review. This
+    starter logs nothing because it keeps no store. Do not put the narrative
+    or a door code in an application trace.
+  logged_events:
+    - event: "Brief requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Work-order id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's field-service schedule. Not set by this starter."
+    - event: "Brief result"
+      data_logged:
+        - "Outcome"
+        - "Hold and highlight ids"
+        - "Whether any record or source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the work order if the technician relies on the brief. The narrative is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "scheduled false"
+      retention: "Organisation's schedule. The agent does not write this event to a work-order system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the narrative or a door code."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for scheduling, messaging, or a work-order write"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Field service operations lead"
+      contact: "field.ops@calderwell.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@calderwell.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-10"
+  next_review_date: "2027-05-10"
+  review_frequency: "6 months, and sooner if the pinned legislation or the hazard lists change"
+  reviewer: "The adopting organisation's field-service lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to section 2, 3, or 7 of the Health and Safety at Work etc. Act 1974"
+    - "A change to regulation 3 of the Management of Health and Safety at Work Regulations 1999"
+    - "A change to section 10A or to SI 2025/1042, including a made Phase 2 instrument"
+    - "A change to UK GDPR Article 5 or Article 6"
+    - "A proposal to add a connector that can schedule, dispatch, message, or write a work order"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Brief core"
+      path: "src/prepare.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 was read on 10 November 2026. Article 9 was not opened. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a statutory review period."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Keyword holds are not a suitable and sufficient risk assessment under regulation 3 of the Management of Health and Safety at Work Regulations 1999."
+      section: "src/hazards.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Experiment 05 is called with officer approval forced off. Phase 2 commencement was not re-opened on 10 November 2026 and is unverified here."
+      section: "src/prepare.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on work orders."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on calderwell.example.gov.uk are placeholders. Calderwell Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, prompt shields, Key Vault, Purview, and Application Insights were not opened on 10 November 2026. Treat the product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
