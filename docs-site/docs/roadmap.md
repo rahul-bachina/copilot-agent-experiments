@@ -414,6 +414,16 @@ A draft customer response from one synthetic case and approved snippets. Every q
 
 </article>
 
+<article class="plan-card" id="c007" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C007 · Autonomy A0</p>
+
+## Service entitlement explainer
+
+An explanation of one synthetic service plan against an approved entitlement rules table, for a UK service organisation. The clause is quoted. Uncertainty is shown. A human decides a disputed, ambiguous, conditional, conflicting, or stale entitlement. It calls [Experiment 38](experiments/38-policy-wording-comparison.md) for the citation check. The human route follows [Experiment 40](experiments/40-customer-self-service.md) and does not import it. The agent does not grant, refuse, or change the entitlement, and it does not decide that PRIN 2A.5 was met. [Read the briefing](experiments/45-service-entitlement-explainer.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C007 is Experiment 45.
