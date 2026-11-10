@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Field visit review tool",
+  "description": "A separate review object for record_review(). Confirmation records that the technician has read the asset and the safety context. It does not schedule, dispatch, close, or authorise entry.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "actor_id"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "technician_confirm_asset_and_safety",
+        "supervisor_acknowledge_hold",
+        "reject_brief"
+      ]
+    },
+    "actor_role": {"enum": ["Field technician", "Supervisor"]},
+    "actor_id": {"type": "string"},
+    "asset_id": {"type": "string"},
+    "safety_context_read": {"type": "boolean"},
+    "acknowledge_gaps": {"type": "boolean"},
+    "acknowledge_safety_hold": {"type": "boolean"},
+    "acknowledge_stale": {"type": "boolean"}
+  }
+}

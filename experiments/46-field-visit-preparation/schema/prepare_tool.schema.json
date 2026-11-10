@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "prepare_tool.schema.json",
+  "title": "Field visit preparation tool",
+  "description": "Input for prepare_brief(). The tool reads one synthetic work-order pack and returns a brief. It does not schedule, it does not dispatch, and it does not close a work order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "work_order_id", "sector", "asset", "work_order", "safety_records"],
+  "properties": {
+    "synthetic": {"const": true},
+    "work_order_id": {"type": "string"},
+    "sector": {"enum": ["housing", "utility", "facilities"]},
+    "organisation": {"type": "string"},
+    "social_housing_in_england": {"type": "boolean"},
+    "aware_at": {"type": "string"},
+    "asset": {"type": "object"},
+    "work_order": {"type": "object"},
+    "site_access": {"type": "object"},
+    "safety_records": {"type": "array"},
+    "documents": {"type": "array"}
+  }
+}

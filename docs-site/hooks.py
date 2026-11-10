@@ -148,6 +148,9 @@ DIAGRAMS = {
     "experiments/44-knowledge-gap-detector/docs/architecture_diagram.png": (
         "experiments/img/44-knowledge-gap-detector-architecture.png"
     ),
+    "experiments/46-field-visit-preparation/docs/architecture_diagram.png": (
+        "experiments/img/46-field-visit-preparation-architecture.png"
+    ),
 }
 
 
