@@ -2058,3 +2058,62 @@ class TestExperiment43Manifest:
         assert send["approver"] == "Customer service representative"
         assert send["mandatory"] is True
         assert experiment_43_manifest["agent"]["id"] == "exp-43-response-drafting"
+
+
+class TestExperiment44Manifest:
+    """Test the Experiment 44 knowledge gap detector manifest."""
+
+    @pytest.fixture
+    def experiment_44_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "44-knowledge-gap-detector"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_44_manifest):
+        """Experiment 44 manifest should be valid."""
+        validate(instance=experiment_44_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_44_manifest):
+        """Experiment 44 should be autonomy level A0. The knowledge manager confirms gaps."""
+        level = experiment_44_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_44_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_44_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_44_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_44_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_44_manifest):
+        """Nothing is sent, and no knowledge article is written."""
+        assert experiment_44_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_44_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_knowledge_manager_confirms_gaps(self, experiment_44_manifest):
+        """The catalogue checkpoint is the knowledge manager, and it is mandatory."""
+        points = experiment_44_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Knowledge manager confirms gaps"
+        )
+        assert confirm["approver"] == "Knowledge manager"
+        assert confirm["mandatory"] is True
+        assert experiment_44_manifest["agent"]["id"] == "exp-44-knowledge-gap-detector"

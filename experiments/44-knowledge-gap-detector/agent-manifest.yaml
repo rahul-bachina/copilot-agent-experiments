@@ -1,0 +1,526 @@
+# Agent manifest: Knowledge Gap Detector
+# Experiment 44 — catalogue ID C005
+# Version: 0.1.0
+# Last reviewed: 2026-11-10
+# Next review: 2027-05-10
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-44-knowledge-gap-detector"
+  name: "Knowledge Gap Detector"
+  version: "0.1.0"
+  description: >
+    Helps a knowledge manager review synthetic customer queries, case notes,
+    and search-miss logs against an approved knowledge base. Autonomy A0.
+    The manager confirms gaps. The agent flags likely gaps, stale or
+    conflicting articles, and draft outlines. It never publishes or edits
+    a knowledge article, and it does not decide that PRIN 2A.5 was met.
+  owner: "Knowledge management"
+  contact: "km@northmere.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/44-knowledge-gap-detector"
+
+autonomy:
+  level: "A0"
+  level_description: "Knowledge manager confirms gaps"
+  constraints:
+    - "The knowledge manager confirms every gap. The agent only prepares the review."
+    - "The agent NEVER publishes, edits, or deletes a knowledge article, including after a gap is confirmed"
+    - "The agent NEVER writes a Dynamics 365, Fabric, or other production record"
+    - "The agent NEVER sends an external message"
+    - "A human route is offered on every result, including a refusal"
+    - "Gap ids, stale articles, conflicts, and the empty approval come from src/gaps.py, not from model output"
+    - "Customer and case text is not copied into the review"
+    - "All output is advisory and is marked draft for knowledge-manager review"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic review pack"
+      description: "Queries, case notes, and search-miss logs the knowledge manager pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. The review does not echo the text."
+      justification: "A gap cannot be proposed without the items that were supplied."
+      data_categories:
+        - "Free text of queries, case notes, and search strings"
+        - "A sector label"
+        - "Synthetic ids, if they match the starter patterns"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Separate confirmation object"
+      description: "confirm_gap, reject_gap, or defer, from a knowledge manager."
+      access_level: "read"
+      scope: "One confirmation for a review already produced. Not read from the pack text."
+      justification: "Confirmation has to be deterministic and has to refuse publish, edit, delete, and send."
+      may_contain_personal_data: false
+    - resource: "Approved knowledge base"
+      description: "Articles in fixtures/knowledge_base.json for the invented organisation Northmere Knowledge Service, or a list the caller supplies for one run."
+      access_level: "read"
+      scope: "Files in this experiment, or one list on the call. A live knowledge base is not read. Article bodies are not copied into the output."
+      justification: "Coverage, staleness, and conflict are comparisons against these articles."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 redaction proposal"
+      description: "propose() from experiments/08-uk-pii-redaction-gateway. The redacted text is not copied into the output."
+      access_level: "read"
+      scope: "One call per item. Reversible maps are not requested. release() is not called."
+      justification: "UK identifiers in a pack should be counted before a review is shown. This experiment does not ship a second redactor."
+      may_contain_personal_data: true
+    - resource: "Experiment 21 IT service-desk catalogue"
+      description: "match_articles() and is_stale() from experiments/21-it-service-desk. Article bodies are not copied. match_articles() is called only for an it_service pack. is_stale() is the last_reviewed window for this starter's own articles."
+      access_level: "read"
+      scope: "In-process read of the synthetic catalogue. No ticket is written."
+      justification: "An IT query may already have a page in the service-desk catalogue. That is evidence, not a substitute for the approved base, and not a publish."
+      may_contain_personal_data: false
+    - resource: "Experiment 40 customer self-service catalogue"
+      description: "match_articles() and is_stale() from experiments/40-customer-self-service. Article bodies are not copied. Called for public_service, financial_services, energy_retail, and telecoms packs."
+      access_level: "read"
+      scope: "In-process read of the synthetic catalogue. No customer record is written and nothing is sent."
+      justification: "A service query may already have a page in the self-service catalogue. That is evidence for the knowledge manager."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Dynamics 365 knowledge articles and other production customer records"
+      reason: "The agent prepares a review. It does not read a live article and it does not write one."
+    - resource: "Microsoft Fabric workspaces and lakehouses"
+      reason: "The catalogue names Fabric. This starter does not connect to it."
+    - resource: "Outbound email, SMS, letter, and chat services"
+      reason: "The agent does not send."
+    - resource: "Publishing and content-management systems"
+      reason: "The knowledge manager publishes, outside this agent, if they decide to."
+    - resource: "Live public websites and search indexes"
+      reason: "A live page would bypass the approved base. The articles are the file in this experiment."
+
+tools:
+  allowed:
+    - tool: "Knowledge gap review"
+      provider: "Local Python (src/gaps.py)"
+      action: "Flag gaps, stale and conflicting articles, and draft outlines, with evidence links"
+      access_level: "read"
+      scope: "One pack. No network. No model. Calls Experiment 08 propose(), Experiment 21 is_stale(), and, where the sector fits, Experiment 21 or Experiment 40 match_articles()."
+      justification: "Which topic is uncovered, and which article is stale or in conflict, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Gap confirmation"
+      provider: "Local Python (record_confirmation)"
+      action: "Record a knowledge manager's confirm, reject, or defer decision"
+      access_level: "read"
+      scope: "The review for this run and a separate confirmation object. No publish, no edit, and no send."
+      justification: "The confirmation has to be deterministic and has to refuse publish, edit, delete, and send."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "UK identifier proposal"
+      provider: "Experiment 08 (propose)"
+      action: "Count UK identifier spans in free text. The redacted string is not copied out."
+      access_level: "read"
+      scope: "The pack text for this run. reversible is false."
+      justification: "The starter does not ship a second redactor. Experiment 08 is the gateway."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Related catalogue lookup"
+      provider: "Experiment 21 and Experiment 40"
+      action: "Return article ids from the synthetic catalogues. Bodies are not copied."
+      access_level: "read"
+      scope: "The cleaned text of one item. No ticket and no customer record is written."
+      justification: "The knowledge manager should see when a topic already has a page in a related starter."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The gap ids, the screens, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a publish, an edit, a delete, or a send"
+      access_level: "read"
+      scope: "The review for this run"
+      justification: "A review that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The review is returned to the knowledge manager. Publishing
+      or editing an article, if they choose to, is done in the organisation's
+      own system.
+
+  sends:
+    enabled: false
+    note: "No sends. Confirmation of a gap does not email or post the outline."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject an article. record_confirmation can
+      record the manager's view of a gap. It cannot publish or withdraw an article.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a firm met the Consumer Duty or PRIN 2A.5,
+      that Article 5(1)(c) was met, or that the Equality Act 2010 duty was met.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a knowledge article, a case, or a Fabric table."
+
+  external_send:
+    enabled: false
+    rationale: "The agent does not send. Confirmation of a gap does not send the outline."
+
+  spend_transact:
+    enabled: false
+    rationale: "No payment and no licence purchase."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish a knowledge article"
+      rationale: "A knowledge manager does this outside the agent. published stays false."
+    - enabled: false
+      action_name: "Edit or delete a knowledge article"
+      rationale: "A knowledge manager does this outside the agent. articles_edited stays false."
+    - enabled: false
+      action_name: "Choose which conflicting article is right"
+      rationale: "winner_chosen stays false. The manager decides outside the agent."
+
+human_approval:
+  description: >
+    Catalogue checkpoint for C005: the knowledge manager confirms gaps.
+    detect_gaps() leaves human_approval null. Only record_confirmation can set
+    it, and only for confirm_gap, and only for gap ids the review already
+    listed, and only when pinned sources are inside the window. That record
+    does not publish and does not edit. Words in the pack cannot confirm a gap.
+
+  approval_points:
+    - action: "Knowledge manager confirms gaps"
+      approver: "Knowledge manager"
+      mandatory: true
+      rationale: "Catalogue checkpoint for C005. The agent prepares the review. The manager confirms. record_confirmation can record that. published stays false."
+    - action: "Reject a gap or defer it"
+      approver: "Knowledge manager"
+      mandatory: true
+      rationale: "The manager can reject or defer. Neither decision publishes an article, and neither sets human_approval."
+    - action: "Publish, edit, or delete an article"
+      approver: "Knowledge manager"
+      mandatory: true
+      rationale: "Outside the agent. Those decisions are refused. Direct functions raise GapForbidden."
+    - action: "Choose the winning side of a conflict"
+      approver: "Knowledge manager"
+      mandatory: true
+      rationale: "The review lists both article ids. winner_chosen stays false."
+    - action: "Rely on an article the freshness rule refused"
+      approver: "Knowledge manager"
+      mandatory: true
+      rationale: "Withdrawn, future, and overdue articles are not treated as coverage. On the review date the article is not citable. The body is not copied."
+
+  no_approval_required:
+    - action: "Prepare a review that lists gaps, stale articles, conflicts, and outlines"
+      rationale: "The review has no external effect. A human route is still offered. Confirmation remains mandatory before any article is written."
+    - action: "Re-run the same pack"
+      rationale: "No write and no publish. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 10 November 2026. Article 5(1)(c) was opened that day.
+      It requires personal data to be adequate, relevant and limited to what
+      is necessary. The review keeps ids, hashes, and finding counts. It does
+      not copy the pack text. That is this starter's minimisation practice.
+      It is not a finding that Article 5(1)(c) was met. Article 9 and
+      Article 22A were not opened on 10 November 2026.
+    secondary: "None asserted. An organisation that later logs the pack in its own system chooses the basis for that system."
+
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a customer volunteers in a query or a case note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 10 November 2026. The controller confirms a condition, and completes a DPIA, before production use. This starter does not ask for this data, does not store the pack, and does not use it to take a decision."
+    safeguards:
+      - "One pack at a time, as supplied by the knowledge manager"
+      - "The review does not echo the pack text, and it does not copy Experiment 08's redacted text"
+      - "Nothing is written to a knowledge article or a case"
+      - "Samples in this repository are synthetic"
+      - "No publish, no edit, and no send is taken by the agent"
+
+  data_minimisation:
+    - "The core reads one pack. It does not retrieve a customer record."
+    - "The review names ids. It does not copy the query, the note, or the search string."
+    - "Article bodies, including withdrawn and overdue wording, are not copied out."
+    - "Experiment 21 and Experiment 40 return ids only."
+    - "Notes are scanned for instructions aimed at the agent. They are not stored."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the knowledge manager then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process. Article 5 was
+      read because data minimisation is the practice this starter follows.
+      This starter does not itself answer a rights request.
+
+prompt_injection:
+  description: >
+    Pack text is untrusted. It may tell the model to ignore the articles,
+    publish now, or pretend to be the knowledge manager. The core does not
+    read the network. The model is not given a tool that can publish, edit,
+    or send. A negation such as 'Do not escalate.' is recorded. The rest of
+    the sentence is kept for matching.
+
+  controls:
+    - control: "Instructions separated from the pack"
+      description: "Only the matched instruction phrase is removed. A question beside it is kept. hints_dropped must stay empty. followed is false."
+    - control: "Pack text cannot confirm"
+      description: "Confirmation is not read from the pack. The confirmation object is separate, and it has no publish field."
+    - control: "Deterministic comparison"
+      description: "Gap ids, freshness, conflicts, screens, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set a publish, an edit, or the confirmation is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_confirmation refuses publish, edit, delete, and send. Direct functions raise GapForbidden."
+    - control: "Experiment 08"
+      description: "Free text goes through propose(). The redacted text is not copied out. release() is not called."
+
+  residual_risk: >
+    A manipulated model can still narrate a misleading brief. The knowledge
+    manager is the control. There is no autonomous publish even if the brief
+    is wrong.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-10"
+  risks:
+    - id: "R1"
+      risk: "An outline is published because the manager confirmed the gap, or because the pack said to publish"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Writes are disabled"
+        - "The confirmation schema has no publish decision"
+        - "published stays false after confirm_gap"
+        - "publish_article raises GapForbidden"
+      residual_risk: "Low"
+      owner: "Knowledge management"
+    - id: "R2"
+      risk: "A stale, withdrawn, or not-yet-in-force article is treated as current coverage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "On the review date the article is not citable"
+        - "Experiment 21 is_stale() is the last_reviewed window"
+        - "The body is not copied into the output"
+      residual_risk: "Low"
+      owner: "Knowledge management"
+    - id: "R3"
+      risk: "A conflict is resolved by the agent"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Both article ids are listed"
+        - "winner_chosen stays false"
+      residual_risk: "Low"
+      owner: "Knowledge management"
+    - id: "R4"
+      risk: "A financial-services screen is treated as proof the firm met PRIN 2A.5"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "outcome_met stays false"
+        - "The screen is not described as the test in PRIN 2A.5.10"
+        - "PRIN 2A.5 is not applied outside financial_services"
+      residual_risk: "Low"
+      owner: "Knowledge management"
+    - id: "R5"
+      risk: "A live query, including a National Insurance number, is pasted into a shared test run"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The core refuses a record that is not marked synthetic, and does not echo it"
+        - "Experiment 08 counts UK identifiers. The redacted text is not copied out"
+        - "The review keeps ids and hashes, not the pack text"
+        - "Samples use an invented organisation"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R6"
+      risk: "Pinned sources are followed after they are outside the starter window"
+      likelihood: "Low"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "More than 180 days after 10 November 2026, outlines are omitted and confirmation is refused"
+        - "Equal to 180 days is still inside the window, and that boundary is tested"
+        - "The core does not refresh the pages from the web"
+      residual_risk: "Low"
+      owner: "Knowledge management"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the pack id, the gap ids, and the later confirmation. This starter
+    logs nothing because it keeps no store. Do not put the pack text in an
+    application trace. Experiment 08's audit record omits raw identifier
+    values. Do not add them back.
+
+  logged_events:
+    - event: "Review requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Pack id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's knowledge-management schedule. Not set by this starter."
+    - event: "Review result"
+      data_logged:
+        - "Outcome"
+        - "Gap ids and article ids"
+        - "Whether any source was outside the window"
+        - "Whether human_approval was left null"
+        - "Experiment 08 finding count and input hash, not the raw values"
+      retention: "Keep with the review if the manager relies on it. The pack text is not in this event."
+    - event: "Confirmation recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Gap ids"
+        - "executed false"
+        - "published false"
+      retention: "Organisation's schedule. The agent does not write this event to a knowledge base."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the pack text in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for publishing, Dynamics 365 writes, Fabric writes, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Knowledge manager"
+      contact: "km@northmere.example"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example"
+
+review:
+  last_review_date: "2026-11-10"
+  next_review_date: "2027-05-10"
+  review_frequency: "6 months, and sooner if the articles, PRIN 2A.5, Article 5, or Equality Act section 20 change"
+  reviewer: "The adopting organisation's knowledge manager and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to an article in the organisation's real knowledge base, if one is later substituted for the synthetic file"
+    - "A change to PRIN 2A.5, including the testing rule at PRIN 2A.5.10"
+    - "A change to UK GDPR Article 5, or a decision to rely on an article that was not opened on 10 November 2026"
+    - "A change to Equality Act 2010 section 20"
+    - "A proposal to add a connector that can publish, edit, or send"
+    - "A proposal to let the agent publish after confirmation"
+    - "A security incident involving a review"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Review core"
+      path: "src/gaps.py"
+    - name: "Synthetic knowledge base"
+      path: "fixtures/knowledge_base.json"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The scope policy was not
+    opened for this experiment on 10 November 2026. A body that wants a draft
+    pack uses Experiment 03. The pointers below say which manifest sections
+    a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 5(1)(c) was read on 10 November 2026. Article 6, Article 9, and Article 22A were not. The controller confirms the basis, and completes a DPIA, before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day window and the 25-word sentence cap are starter defaults. The screen is not PRIN 2A.5.10 testing. The review-due rule, including on the review date itself, is this starter's rule."
+      section: "src/gaps.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 21's is_stale() is the last_reviewed window. On exactly 180 days the article is still inside that window, because that is what the function does. A future last_reviewed date is stale under that function. This starter does not fork the function."
+      section: "src/gaps.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on customer text."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "No publishing, mail, Dynamics 365 write, or Fabric write connector is added without updating this manifest."
+      section: "data_access.never_access"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on northmere.example are placeholders. Northmere Knowledge Service is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "PRIN 2A.5.3 and PRIN 2A.5.10 are cited with an R because the PDF cross-refers to PRIN 2A.5.3R and PRIN 2A.5.10R. The status letter on PRIN 2A.5.7 was not cleanly labelled in the PDF extraction. The handbook HTML page did not return the rule text on 10 November 2026. FG22/5 and PRIN 2A.2 were not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Section 20(6) was opened on 10 November 2026. The page said it was up to date with changes known to be in force on or before 07 November 2026. Section 29 and Schedule 2 were not opened. This starter does not decide that the adjustment duty applies or that it has been met."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Experiment 08 does not anonymise the text. This starter does not copy the redacted string into the output and does not call release()."
+      section: "tools.allowed"
+      verify_on_deployment: true
+    - id: "A10"
+      assumption: "Microsoft Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Microsoft Purview, and Application Insights were not opened on 10 November 2026. They are unverified here. Dynamics 365 and Fabric product pages were not opened."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

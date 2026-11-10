@@ -1,0 +1,2534 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic knowledge-gap packs for Northmere Knowledge Service. Not a model evaluation.",
+  "organisation_in_fixtures": "Northmere Knowledge Service (fictional)",
+  "summary": {
+    "total_cases": 19,
+    "passed": 19,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "KG-01",
+      "name": "Public pack: one gap for two blue-badge items, plus a kept bin question",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge', 'missed-bin']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "2"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['blue-badge', 'missed-bin']"
+        },
+        {
+          "field": "content_gaps",
+          "passed": true,
+          "detail": "2"
+        },
+        {
+          "field": "evidence_rows",
+          "passed": true,
+          "detail": "3"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['do_not_escalate']"
+        },
+        {
+          "field": "hints_dropped",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "exp21_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "exp40_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "related_current",
+          "passed": true,
+          "detail": "['kb-public-hours', 'kb-public-missed']"
+        },
+        {
+          "field": "finding_kind",
+          "passed": true,
+          "detail": "['conflict', 'content_gap', 'not_yet_in_force', 'retrieval_miss', 'stale_article', 'withdrawn']"
+        },
+        {
+          "field": "winner_chosen",
+          "passed": true,
+          "detail": "[False]"
+        },
+        {
+          "field": "entity_type",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent LEGACY-BODY-DO-NOT-QUOTE",
+          "passed": true,
+          "detail": "LEGACY-BODY-DO-NOT-QUOTE"
+        },
+        {
+          "field": "absent TN 11 22 33 D",
+          "passed": true,
+          "detail": "TN 11 22 33 D"
+        },
+        {
+          "field": "absent How do I renew a blue ba",
+          "passed": true,
+          "detail": "How do I renew a blue ba"
+        },
+        {
+          "field": "absent blue badge renewal",
+          "passed": true,
+          "detail": "blue badge renewal"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-02",
+      "name": "Financial statement is covered. The fee article fails the screen. The outcome is not met.",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "exp40_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "related_current",
+          "passed": true,
+          "detail": "['kb-fs-statement']"
+        },
+        {
+          "field": "finding_kind",
+          "passed": true,
+          "detail": "['accessibility', 'plain_english']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent Where is my statement?",
+          "passed": true,
+          "detail": "Where is my statement?"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-03",
+      "name": "IT VPN error is a gap in the approved base and a current page in Experiment 21",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['vpn-809']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['vpn-809']"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "exp21_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "exp40_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "related_current",
+          "passed": true,
+          "detail": "['kb-vpn-809']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent The VPN client shows err",
+          "passed": true,
+          "detail": "The VPN client shows err"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-04",
+      "name": "Do not escalate, on its own, is an instruction and not a gap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "content_gaps",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['do_not_escalate']"
+        },
+        {
+          "field": "hints_dropped",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-05",
+      "name": "Do not park is a real question, not an instruction",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['yellow-lines']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['yellow-lines']"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "hints_dropped",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent Do not park on the yello",
+          "passed": true,
+          "detail": "Do not park on the yello"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-06",
+      "name": "An instruction beside a blue-badge question does not drop the question",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['ignore_instructions', 'publish_now']"
+        },
+        {
+          "field": "hints_dropped",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent How do I renew a blue ba",
+          "passed": true,
+          "detail": "How do I renew a blue ba"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-07",
+      "name": "A pack that is not marked synthetic is refused and not echoed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent LIVE-CUSTOMER-RECORD-ALP",
+          "passed": true,
+          "detail": "LIVE-CUSTOMER-RECORD-ALP"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-08",
+      "name": "A publish decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge', 'missed-bin']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "2"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap_confirmed",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-09",
+      "name": "The knowledge manager confirms a gap. Nothing is published.",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "gap_confirmed",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "recorded"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "recorded"
+        },
+        {
+          "field": "approval_not_publish",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval_not_executed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-10",
+      "name": "Sources outside the window omit outlines and refuse confirmation",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outlines_empty",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "stale_sources"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-11",
+      "name": "Exactly 180 days after the pin is still inside the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outlines_empty",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-12",
+      "name": "An article is not coverage on its review date",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "finding_kind",
+          "passed": true,
+          "detail": "['stale_article']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent LEGACY-BODY-DO-NOT-QUOTE",
+          "passed": true,
+          "detail": "LEGACY-BODY-DO-NOT-QUOTE"
+        },
+        {
+          "field": "absent What are the opening hou",
+          "passed": true,
+          "detail": "What are the opening hou"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-13",
+      "name": "A zero-result search against a current article is a retrieval miss, not a second gap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "content_gaps",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "finding_kind",
+          "passed": true,
+          "detail": "['conflict', 'not_yet_in_force', 'retrieval_miss', 'stale_article', 'withdrawn']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-14",
+      "name": "Two current bus-pass articles conflict. No winner is chosen.",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "finding_kind",
+          "passed": true,
+          "detail": "['conflict', 'not_yet_in_force', 'stale_article', 'withdrawn']"
+        },
+        {
+          "field": "winner_chosen",
+          "passed": true,
+          "detail": "[False]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent Can I apply for a conces",
+          "passed": true,
+          "detail": "Can I apply for a conces"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-15",
+      "name": "A published flag inside the pack is ignored",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['prohibited_key']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap_confirmed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-16",
+      "name": "An energy meter question is a gap, with Experiment 40 evidence",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['meter-reading']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['meter-reading']"
+        },
+        {
+          "field": "duty_applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "exp40_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "related_current",
+          "passed": true,
+          "detail": "['kb-energy-meter-reading']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-17",
+      "name": "A legacy VPN page in Experiment 21 is stale evidence, not coverage",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['legacy-vpn']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "['legacy-vpn']"
+        },
+        {
+          "field": "exp21_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "related_stale",
+          "passed": true,
+          "detail": "['kb-stale-vpn-legacy']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent LEGACY-BODY-DO-NOT-QUOTE",
+          "passed": true,
+          "detail": "LEGACY-BODY-DO-NOT-QUOTE"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-18",
+      "name": "Pretending to be the knowledge manager does not confirm a gap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_ready"
+        },
+        {
+          "field": "gap_topics",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "injection_detected",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['mark_confirmed', 'impersonate_manager']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap_confirmed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "KG-19",
+      "name": "Defer leaves the gap unconfirmed and unpublished",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR KNOWLEDGE MANAGER REVIEW"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "edited",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_released",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unique_gaps",
+          "passed": true,
+          "detail": "['blue-badge']"
+        },
+        {
+          "field": "gap_count_matches",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap_confirmed",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "recorded_without_confirmation"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "recorded_without_confirmation"
+        }
+      ]
+    }
+  ]
+}
