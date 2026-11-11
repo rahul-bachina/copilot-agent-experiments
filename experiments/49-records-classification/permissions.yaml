@@ -1,0 +1,469 @@
+# Agent manifest: Records Classification Assistant
+# Experiment 49 — catalogue ID M009
+# Version: 0.1.0
+# Last reviewed: 2026-11-11
+# Next review: 2027-05-11
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-49-records-classification"
+  name: "Records Classification Assistant"
+  version: "0.1.0"
+  description: >
+    Proposes a file-plan category, a retention entry, a disposal action, a
+    Government Security Classifications marking, and personal-data indicators
+    for one synthetic document. Autonomy A1. The records manager confirms or
+    changes every field. Low-confidence and sensitive items go to a human
+    queue. A label stub runs only after confirmation. The agent does not
+    delete, dispose of, move, or downgrade a record, and it does not call
+    Microsoft Purview.
+  owner: "Records management"
+  contact: "records.manager@merrowfield.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/49-records-classification"
+
+autonomy:
+  level: "A1"
+  level_description: "The records manager confirms every classification before any label stub. The stub does not change a record."
+  constraints:
+    - "The records manager confirms or changes every proposed field. The agent does not."
+    - "The agent NEVER deletes, disposes of, moves, or downgrades a record"
+    - "The agent NEVER applies a Purview retention label or sensitivity label in a tenant"
+    - "Low confidence, personal data, a possible OFFICIAL-SENSITIVE marking, and a legal hold go to a human queue"
+    - "A sentence in the document cannot confirm the classification"
+    - "Categories, retention entries, and markings come from the Python core, not from model output"
+    - "All output is advisory until record_confirmation, and the label action remains a stub"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied document"
+      description: "A single text the records manager pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One document per invocation. The output does not echo the body or an identifier value."
+      justification: "The proposal cannot name evidence without the text that was supplied."
+      data_categories:
+        - "Document text"
+        - "A synthetic document id"
+        - "An existing security marking, if the caller supplies one"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the document."
+    - resource: "Separate review object"
+      description: "Records-manager confirmation, change, or rejection. Not read from the document text."
+      access_level: "read"
+      scope: "One review for a draft already produced."
+      justification: "Approval has to be deterministic and has to refuse a disposal, a deletion, a move, and a downgrade."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue and fictional file plan"
+      description: "Static citations in src/sources.py and the fictional scheme in src/scheme.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened. Periods are labelled as configuration."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() for the text file. File content is not copied out."
+      access_level: "read"
+      scope: "The one document. files_confirmed stays false."
+      justification: "This experiment does not carry a second document inventory."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 identifier gateway"
+      description: "propose() for UK identifier types. Values are not copied out."
+      access_level: "read"
+      scope: "The one document. reversible is false. No model is passed."
+      justification: "This experiment does not carry a second identifier detector."
+      may_contain_personal_data: true
+    - resource: "Experiment 19 DPIA screen"
+      description: "screen() on answers the caller supplies, or on an empty answer set. dpia_required stays null."
+      access_level: "read"
+      scope: "Recorded yes, no, or unknown answers. Free text is not copied out."
+      justification: "This experiment does not carry a second Article 35 screen."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Live records stores, SharePoint libraries, and EDRMS systems"
+      reason: "The document is the text the records manager supplied. The core does not query a live store."
+    - resource: "Microsoft Purview"
+      reason: "The label action is a stub. It does not create or apply a retention label or a sensitivity label."
+    - resource: "Disposal, destruction, and transfer workflows"
+      reason: "The agent does not delete, dispose of, or move a record."
+    - resource: "Mailboxes and external send"
+      reason: "The agent does not send the draft."
+
+tools:
+  allowed:
+    - tool: "Classify"
+      provider: "Local Python (src/classify.py)"
+      action: "Propose a classification for one synthetic document"
+      access_level: "read"
+      scope: "One document. No network. No model. Calls Experiments 12, 08, and 19 in process."
+      justification: "Which phrase matched, which identifier type was present, and whether a source is stale are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Confirm"
+      provider: "Local Python (record_confirmation)"
+      action: "Record a records-manager confirmation, change, or rejection of every field"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No disposal and no write."
+      justification: "The approval has to be deterministic and has to refuse a downgrade and a destroy action during a legal hold."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Label stub"
+      provider: "Local Python (apply_confirmed_labels)"
+      action: "Record a stub receipt after every field has been confirmed"
+      access_level: "read"
+      scope: "The confirmed draft. No Purview call. No tenant write."
+      justification: "The catalogue action is approval-gated. In this starter the action returns JSON and does not change a record."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The category, the marking, the confidence, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a deletion, a disposal, a move, a downgrade, or a tenant label"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that disposes of a record is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the records manager. The label stub
+      is JSON in the response. It is not a Purview write and it is not a
+      change to a record.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming a classification does not email anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a classification. record_confirmation can
+      record the records manager's decision. It cannot dispose of a record.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that the Public Records Act 1958 was met,
+      that the section 46 code was followed, that Article 5(1)(e) was met,
+      or that a Government Security Classifications marking is correct.
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, label, move, or delete against a live record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the draft."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the GitHub Copilot harness, are the tenant's billing. This starter does not spend them."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Delete, dispose, or move a record"
+      rationale: "Those functions raise RecordsForbidden. deleted, disposed, and moved stay false after the stub."
+    - enabled: false
+      action_name: "Downgrade a security marking"
+      rationale: "downgrade_proposed stays false. A lower marking than the existing one is refused."
+    - enabled: false
+      action_name: "Apply a Purview label"
+      rationale: "labels_applied_in_tenant and purview.called stay false. The stub is not a tenant write."
+
+human_approval:
+  description: >
+    The records manager confirms or changes every proposed field on a
+    separate review object. Queued items have to be marked reviewed. The
+    agent has no path that deletes, disposes, moves, or downgrades. A
+    sentence in the document does not confirm the classification. The label
+    stub runs only after confirmation and still does not call Purview.
+
+  approval_points:
+    - action: "Confirm or change every classification field"
+      approver: "Records manager"
+      mandatory: true
+      rationale: "classify_record leaves human_approval null. Only record_confirmation can set it, and only when file plan, retention, disposal, marking, and the personal-data indicator are all present."
+    - action: "Review a queued item"
+      approver: "Records manager"
+      mandatory: true
+      rationale: "Personal data, a possible OFFICIAL-SENSITIVE marking, a legal hold, low confidence, and an existing higher marking block confirmation until queue_reviewed is true. That review does not dispose of the record."
+    - action: "Acknowledge gaps or a stale pin"
+      approver: "Records manager"
+      mandatory: true
+      rationale: "A gap or a stale pin blocks confirmation until the review object says it was seen. A stale pin also blocks the label stub."
+    - action: "Ask for the stubbed label receipt"
+      approver: "Records manager"
+      mandatory: true
+      rationale: "apply_confirmed_labels refuses a draft that is not confirmed. The receipt says Purview was not called."
+    - action: "Delete, dispose, move, or downgrade the record"
+      approver: "The organisation's own records process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled. The direct functions raise RecordsForbidden."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same document"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 11 November 2026. Article 5(1)(e) was read that day.
+      Storage limitation is reported as a reading where a personal-data
+      indicator is present. storage_limitation_met stays false. Article 84B
+      was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a safeguarding, care, or sickness note may contain"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 11 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One document at a time, as supplied by the person running the draft"
+      - "The output does not echo the body and does not copy identifier values"
+      - "Nothing is written to a records store"
+      - "Samples in this repository are synthetic"
+      - "No solely automated disposal. The records manager confirms every field, and this agent still does not dispose."
+  data_minimisation:
+    - "The draft keeps ids, scheme labels, matched phrases from the fictional scheme, and flags. It does not keep the body."
+    - "Identifier values are not copied. Experiment 08 is called with reversible false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention schedule applies to whatever the records manager then saves. That schedule is not set here. Configured periods in the fictional scheme are not statutory periods."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Document text is untrusted. It may tell the model to ignore the rules,
+    delete the record, or not to queue it. The core does not read the
+    network. The model is not given a tool that can delete, dispose, move,
+    or downgrade.
+  controls:
+    - control: "Instruction clauses are removed, and the rest of the sentence stays"
+      description: "A category phrase in the same sentence as an instruction is still matched. A sentence that is only an instruction is not used as a category. Delete this record is still recorded."
+    - control: "Legal-hold cues are not treated as instructions to destroy"
+      description: "Do not destroy stays in the matching text and is a legal-hold cue. The proposed disposal action is do not dispose. It is not executed."
+    - control: "HTML comments are not evidence"
+      description: "A category phrase that appears only inside an HTML comment does not select a category. An instruction inside the comment is recorded."
+    - control: "Confirmation is a separate object"
+      description: "A sentence that says the classification is already confirmed is not a confirmation. human_approval stays null until record_confirmation."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set deleted, disposed, or human approval is stripped."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_confirmation refuses dispose, delete, move, and downgrade. Direct functions raise RecordsForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading draft. The records
+    manager is the control. There is no autonomous disposal even if the draft
+    is wrong. A paraphrase that uses none of the pinned phrases is not detected.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-11"
+  risks:
+    - id: "R1"
+      risk: "A document sentence is treated as authority to delete, dispose, or downgrade"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Delete this record and downgrade are recorded and not followed"
+        - "delete_record, dispose_record, move_record, and downgrade_record raise RecordsForbidden"
+      residual_risk: "Low"
+      owner: "Records management"
+    - id: "R2"
+      risk: "Personal data, a safeguarding file, or a legal hold is classified as ordinary OFFICIAL and left off the queue"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Personal-data indicators, sensitive scheme categories, and legal-hold cues force the human queue"
+        - "Confirmation of a queued item requires queue_reviewed"
+        - "A legal hold blocks a destroy disposal action"
+      residual_risk: "Medium"
+      owner: "Records management"
+    - id: "R3"
+      risk: "An existing SECRET or OFFICIAL-SENSITIVE marking is replaced with a lower one"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The proposal keeps the higher marking"
+        - "record_confirmation refuses a lower marking"
+        - "downgraded stays false"
+      residual_risk: "Low"
+      owner: "Security"
+    - id: "R4"
+      risk: "A configured retention period is treated as a statutory period or as authority to destroy"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "statutory_period stays false"
+        - "The scheme note says the periods are configuration"
+        - "The label stub does not execute disposal"
+      residual_risk: "Medium"
+      owner: "Records management"
+    - id: "R5"
+      risk: "A stale legal pin is quoted as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days is stale. Equal to 180 days is current."
+        - "Stale pins are not quoted. The label stub is refused while the pin is stale."
+      residual_risk: "Low"
+      owner: "Records management"
+    - id: "R6"
+      risk: "An identifier value is copied into the draft or a log"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The body is not copied"
+        - "Experiment 08 is called with reversible false and only the entity type is kept"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the document id if it
+    matched the synthetic pattern, the outcome, and the later review. This
+    starter logs nothing because it keeps no store. Do not put the body or
+    an identifier value in an application trace.
+  logged_events:
+    - event: "Classification requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Document id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's records-management schedule. Not set by this starter."
+    - event: "Classification result"
+      data_logged:
+        - "Outcome"
+        - "Category id, retention entry id, disposal action, and marking suggestion"
+        - "Whether any source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the classification file if the records manager relies on the draft. The body is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "labels_applied_in_tenant false"
+      retention: "Organisation's schedule. The agent does not write this event to a records system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the body or an identifier value."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for Purview, a records write, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Records manager"
+      contact: "records.manager@merrowfield.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@merrowfield.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-11"
+  next_review_date: "2027-05-11"
+  review_frequency: "6 months, and sooner if the pinned legislation or the fictional scheme changes"
+  reviewer: "The adopting organisation's records manager and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to section 3 or section 10 of the Public Records Act 1958"
+    - "A change to section 46 of the Freedom of Information Act 2000 or a revised section 46 code"
+    - "A change to the Government Security Classifications Policy"
+    - "A change to UK GDPR Article 5, including Article 84B"
+    - "A proposal to add a connector that can label, delete, move, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Classification core"
+      path: "src/classify.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 11 November 2026. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The fictional Merrowfield scheme is not a statutory retention schedule and not a National Archives schedule."
+      section: "src/scheme.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The 180-day stale window is a starter default, not a review period in the section 46 code."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Public Records Act First Schedule was not opened. This starter does not decide that a record is a public record."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Article 84B and Freedom of Information Act 2000 section 48 were not opened. Their text is unverified here."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on documents."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on merrowfield.example.gov.uk are placeholders. Merrowfield Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, prompt shields, Key Vault, and Application Insights were not opened on 11 November 2026. Treat that product behaviour as unverified. Purview records management and sensitivity labels were opened and are described only as far as those pages went. The licensing table was not opened."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

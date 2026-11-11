@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "label_tool.schema.json",
+  "title": "Stubbed label action",
+  "description": "Apply a label stub only to a draft the records manager has already confirmed. The tool does not call Microsoft Purview. It does not delete, dispose, move, or downgrade a record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["confirmed_draft"],
+  "properties": {
+    "confirmed_draft": {
+      "type": "object",
+      "description": "The JSON returned by record_confirmation after every field was confirmed. This object is not a Purview write."
+    }
+  }
+}
