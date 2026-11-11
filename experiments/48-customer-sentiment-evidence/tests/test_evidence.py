@@ -235,13 +235,13 @@ def test_injection_is_not_followed_and_the_rest_of_the_sentence_is_kept():
 
 
 def test_not_synthetic_is_refused_without_echoing_the_text():
-    secret = "Customer Jane Alderton account 12345678 was unhappy about the fee."
+    supplied = "Customer Jane Alderton account 12345678 was unhappy about the fee."
     pack = prepare_pack(
-        {"synthetic": False, "records": [_record("SYN-R-001", secret)]},
+        {"synthetic": False, "records": [_record("SYN-R-001", supplied)]},
         AS_OF,
     )
     assert pack["outcome"] == "refused_not_synthetic"
-    assert secret not in json.dumps(pack)
+    assert supplied not in json.dumps(pack)
     assert pack["human_route"]["offered"] is True
     confirmed = _confirm(pack)
     assert confirmed["review"]["reason"] == "pack_refused"
