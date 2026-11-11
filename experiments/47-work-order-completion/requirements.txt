@@ -1,0 +1,6 @@
+# Experiment 47 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 46 prepare_brief(), Experiment 15 scan(), and Experiment 05 triage().
+# Those experiments use the standard library. Experiment 15 calls Experiment 08.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0

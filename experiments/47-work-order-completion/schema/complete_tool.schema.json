@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "complete_tool.schema.json",
+  "title": "Work order completion tool",
+  "description": "Input for draft_completion(). The tool reads one synthetic completion pack and returns proposed field values. It does not write them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "work_order_id", "sector", "asset_id", "original_job", "visit"],
+  "properties": {
+    "synthetic": {"const": true},
+    "work_order_id": {"type": "string"},
+    "asset_id": {"type": "string"},
+    "sector": {"enum": ["housing", "utility", "facilities"]},
+    "organisation": {"type": "string"},
+    "social_housing_in_england": {"type": "boolean"},
+    "aware_at": {"type": "string"},
+    "technician_id": {"type": "string"},
+    "original_job": {"type": "object"},
+    "pre_visit_pack": {"type": "object"},
+    "pre_visit_brief": {"type": "object"},
+    "visit": {"type": "object"}
+  }
+}
