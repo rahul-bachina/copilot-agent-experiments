@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Forty-six starters you can read today
+## Forty-seven starters you can read today
 
 </div>
 
@@ -1228,6 +1228,31 @@ The brief runs locally. Nothing is scheduled, dispatched, or closed, and a safet
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 48 · C010 · Customer service · Autonomy A0</p>
+
+### Customer sentiment evidence
+
+Produce an evidence pack from one synthetic batch of complaints, survey free text, contact notes, and reviews. The analyst confirms the sample frame and the limitations.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The pack runs locally. Nothing is published, no customer is contacted, and no conclusion is made about an individual.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/48-customer-sentiment-evidence.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/48-customer-sentiment-evidence)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -1250,7 +1275,7 @@ The brief runs locally. Nothing is scheduled, dispatched, or closed, and a safet
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, and C008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, and C010 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

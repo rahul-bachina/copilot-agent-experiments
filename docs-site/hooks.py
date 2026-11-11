@@ -154,6 +154,9 @@ DIAGRAMS = {
     "experiments/46-field-visit-preparation/docs/architecture_diagram.png": (
         "experiments/img/46-field-visit-preparation-architecture.png"
     ),
+    "experiments/48-customer-sentiment-evidence/docs/architecture_diagram.png": (
+        "experiments/img/48-customer-sentiment-evidence-architecture.png"
+    ),
 }
 
 
