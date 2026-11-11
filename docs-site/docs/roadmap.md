@@ -454,6 +454,16 @@ A draft completion record for one synthetic work order in UK housing, a utility,
 
 </article>
 
+<article class="plan-card" id="m009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · M009 · Autonomy A1</p>
+
+## Records classification
+
+A draft classification for one synthetic document in a UK public body: file-plan category, retention entry, disposal action, Government Security Classifications marking, and personal-data indicators. The records manager confirms or changes every field. Low-confidence items, personal data, a possible OFFICIAL-SENSITIVE marking, and a legal hold go to a human queue. It calls [Experiment 12](experiments/12-document-intake.md) to inventory the text, [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier types, and [Experiment 19](experiments/19-privacy-impact-assessment.md) for a DPIA screen that does not decide a DPIA is required. The agent does not delete, dispose of, move, or downgrade a record, and it does not call Microsoft Purview. [Read the briefing](experiments/49-records-classification.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. M009 is Experiment 49.
