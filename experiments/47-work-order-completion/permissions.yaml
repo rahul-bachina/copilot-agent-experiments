@@ -1,0 +1,488 @@
+# Agent manifest: Work Order Completion Assistant
+# Experiment 47 — catalogue ID C009
+# Version: 0.1.0
+# Last reviewed: 2026-11-11
+# Next review: 2027-05-11
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-47-work-order-completion"
+  name: "Work Order Completion Assistant"
+  version: "0.1.0"
+  description: >
+    Drafts a completion record for one synthetic work order from the
+    technician's notes, photo descriptions, and parts used. Autonomy A1.
+    The technician approves every field before a stub write. The stub is
+    in the returned JSON. The agent does not close the job, raise a charge,
+    order parts, or contact the customer.
+  owner: "Field service operations"
+  contact: "field.ops@calderwell.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/47-work-order-completion"
+
+autonomy:
+  level: "A1"
+  level_description: "The technician approves every proposed field. The stub write runs only after that approval, and only for the fields named again."
+  constraints:
+    - "The agent proposes field values. It does not invent a missing fact."
+    - "Each field is approved on its own. A sentence in the notes cannot approve a field."
+    - "The stub write applies only to fields approved on an earlier review."
+    - "The agent NEVER closes a job, raises a charge, orders parts, or contacts the customer."
+    - "The agent NEVER clears a hazard, labels a person as vulnerable, or decides that a duty was met."
+    - "Hazard lists, inconsistencies, and the empty approval come from Python, not from model output."
+    - "All output is a draft until the technician approves the field."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied completion pack"
+      description: "Notes, photo descriptions as text, parts used, the original job, and an optional pre-visit brief or pack. Samples are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. The output does not echo the notes, the photo text, or a code."
+      justification: "The draft cannot list work done, parts, or clashes without the pack that was supplied."
+      data_categories:
+        - "Work-order id and asset id"
+        - "Technician notes"
+        - "Photo descriptions supplied as text"
+        - "Part codes and quantities"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Separate review object"
+      description: "Field approvals or a stub-write request. Not read from the visit notes."
+      access_level: "read"
+      scope: "One review for a draft already produced."
+      justification: "Approval has to be deterministic and has to name each field."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 46 pre-visit brief"
+      description: "prepare_brief() when the pack includes a pre-visit pack. A supplied brief is read for structured ids only."
+      access_level: "read"
+      scope: "One brief. The full brief is not copied into the completion record."
+      justification: "The completion check needs the pre-visit holds and the asset id. This experiment does not carry a second brief."
+      may_contain_personal_data: true
+    - resource: "Experiment 15 vulnerability scan"
+      description: "scan() on the excised visit text. Phrases are not copied out."
+      access_level: "read"
+      scope: "The visit text for this run. No model is passed."
+      justification: "This experiment does not carry a second vulnerability list."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+    - resource: "Experiment 05 hazard triage"
+      description: "triage() for a housing visit, with officer approval forced off. Quotes are not copied out."
+      access_level: "read"
+      scope: "One follow-up illustration. No operative deadline is passed through."
+      justification: "This experiment does not carry a second statutory clock."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "Work-order production systems"
+      reason: "The stub write is in the returned JSON. It is not a production update."
+    - resource: "Charging, invoicing, and parts-ordering systems"
+      reason: "The agent does not raise a charge and does not order parts."
+    - resource: "Mailboxes, SMS gateways, and customer messaging"
+      reason: "The agent does not contact the customer."
+    - resource: "Key safes, door codes, and password stores"
+      reason: "A code-shaped phrase is flagged and not copied."
+    - resource: "Live housing, utility, or facilities systems"
+      reason: "The pack is the file the technician supplied. The core does not query a live system."
+
+tools:
+  allowed:
+    - tool: "Completion draft"
+      provider: "Local Python (src/complete.py)"
+      action: "Propose field values for one synthetic completion pack"
+      access_level: "read"
+      scope: "One pack. No network. No model. Calls Experiments 46, 15, and 05 in process."
+      justification: "Which field is missing, which note clashes with a photo, and whether a clock is operative are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Field approval"
+      provider: "Local Python (record_review)"
+      action: "Record the technician's approval of named fields"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No write."
+      justification: "Each field has to be approved before any stub write."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The field values, the clashes, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that closes a job, raises a charge, orders parts, or contacts the customer"
+      access_level: "read"
+      scope: "The record for this run"
+      justification: "A completion record that closes the job is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: true
+    note: >
+      The only write is an in-memory stub inside the returned JSON, and only
+      for fields the technician approved on an earlier review and names again.
+      It does not update a production work order. Closing, charging, ordering
+      parts, and contacting the customer are not writes this agent can make.
+    allowed_writes:
+      - tool: "Stub completion fields"
+        provider: "Local Python (record_review)"
+        action: "Copy approved field values onto the returned JSON"
+        access_level: "write"
+        scope: "Fields already approved for this draft. production_system_written stays false."
+        justification: "The catalogue checkpoint is that the technician approves every record update. The sample makes that update a stub."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a field does not email, text, or call the customer,
+      and it does not give the written summary in regulation 9.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a hazard category, accept a charge, or reject
+      a job. record_review can record a field approval. It cannot close the job.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that section 2, 3, or 7 of the Health and
+      Safety at Work etc. Act 1974 was met, that regulation 3 of the Management
+      of Health and Safety at Work Regulations 1999 was carried out, that
+      section 10A of the Landlord and Tenant Act 1985 applies, or that Article
+      5 of the UK GDPR was met.
+  production_record_change:
+    enabled: false
+    rationale: "The stub is not a create or update against a production work order, asset, charge, or parts order."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact the customer, the technician, or a supervisor."
+  spend_transact:
+    enabled: false
+    rationale: "No parts are ordered and no charge is raised."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Close the job"
+      rationale: "close_job raises CompletionForbidden. job_closed stays false after the stub write."
+    - enabled: false
+      action_name: "Raise a charge or order parts"
+      rationale: "raise_charge and order_parts raise CompletionForbidden. Those flags stay false."
+    - enabled: false
+      action_name: "Contact the customer or clear a hazard"
+      rationale: "contact_customer and clear_hazard raise CompletionForbidden. A safety acknowledgement does not clear the hazard."
+
+human_approval:
+  description: >
+    The field technician approves each proposed field on a separate review
+    object. A later review stub-writes only the fields that were approved
+    and are named again. A sentence in the notes cannot approve a field.
+    Closing the job, raising a charge, ordering parts, and contacting the
+    customer stay outside the agent.
+
+  approval_points:
+    - action: "Approve one proposed field"
+      approver: "Field technician named on the review object"
+      mandatory: true
+      rationale: "draft_completion leaves human_approval null. record_review sets it only for field ids the technician marks approved. Other fields stay unapproved."
+    - action: "Acknowledge an inconsistency, a safety escalation, stale sources, or a missing pre-visit brief"
+      approver: "Field technician"
+      mandatory: true
+      rationale: "Those blocks stop approval until the review object says they were seen. The acknowledgement does not decide which source is right and does not clear a hazard."
+    - action: "Stub-write the approved fields"
+      approver: "Field technician"
+      mandatory: true
+      rationale: "The stub write refuses a field that was not approved on an earlier review. It writes only inside the returned JSON."
+    - action: "Supply a missing value"
+      approver: "Field technician"
+      mandatory: true
+      rationale: "A missing field can be filled only from the closed catalogue on the review object. Free text is refused. A proposed value cannot be replaced."
+    - action: "Close the job, raise a charge, order parts, or contact the customer"
+      approver: "The organisation's own work-order process"
+      mandatory: true
+      rationale: "Outside the agent. Those decisions are refused. Sends are disabled. The production write is disabled."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same pack"
+      rationale: "No production write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was read on 11 November 2026. Points (ea) and (f) of Article 6(1) do not
+      apply to processing carried out by public authorities in the performance
+      of their tasks. A utility or a facilities contractor confirms its own
+      basis. Do not copy a basis from another experiment.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a resident or a caller volunteers in a note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 11 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One pack at a time, as supplied by the person running the draft"
+      - "The output does not echo the notes and does not copy Experiment 15's phrases"
+      - "The stub write keeps catalogue values, not the note text"
+      - "Samples in this repository are synthetic"
+      - "No solely automated completion decision. The technician approves each field."
+  data_minimisation:
+    - "Article 5(1)(c) was read on 11 November 2026. The record keeps ids, catalogue labels, and flags. It does not keep the notes or the photo text."
+    - "Article 5(1)(d) was read the same day. Clashes stay on the record. The agent does not decide which source is accurate and does not erase a field on its own."
+    - "A code-shaped phrase is not copied."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever a person then saves. That schedule is not set here."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process. Article 5(1)(d) describes erasure or rectification of inaccurate data. This starter does not carry out that step."
+
+prompt_injection:
+  description: >
+    Visit notes and photo descriptions are untrusted. They may tell the model
+    to ignore the rules, close the job, raise a charge, order parts, or
+    approve every field. The core does not read the network. The model is not
+    given a tool that can close, charge, order, or contact.
+  controls:
+    - control: "Instruction clauses are removed, and the rest of the sentence stays"
+      description: "A defect named in the same sentence as an instruction is still matched. A sentence that is only an instruction is not used as work done."
+    - control: "Site rules are not treated as instructions to the agent"
+      description: "Do not enter the loft stays in the matching text and is an access flag."
+    - control: "Approval is a separate object"
+      description: "A sentence that says all fields are approved is a signal. It does not set human_approval."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set job_closed, human_approval, or officer approval is stripped."
+    - control: "The stub write checks the earlier approval"
+      description: "Naming a field on the write review is not enough. The field must already be approved. Close, charge, order, and contact raise CompletionForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading draft. The technician
+    is the control. There is no autonomous close even if the draft is wrong.
+    A paraphrase that uses none of the pinned phrases is not detected.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-11"
+  risks:
+    - id: "R1"
+      risk: "A note is treated as authority to close the job, raise a charge, order parts, or contact the customer"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "The phrases are recorded and not followed"
+        - "close_job, raise_charge, order_parts, and contact_customer raise CompletionForbidden"
+      residual_risk: "Low"
+      owner: "Field service operations"
+    - id: "R2"
+      risk: "A field is written that the technician did not approve"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The stub write refuses a field with no earlier approval"
+        - "Approving one field does not approve the others"
+        - "production_system_written stays false"
+      residual_risk: "Low"
+      owner: "Field service operations"
+    - id: "R3"
+      risk: "An inaccurate completion is stored because a photo and a note disagree and the clash is dropped"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The clash stays on the record"
+        - "The field is blocked until the technician acknowledges it"
+        - "The acknowledgement does not choose a winner"
+      residual_risk: "Medium"
+      owner: "Field service operations"
+    - id: "R4"
+      risk: "A gas, electrical, asbestos, or structural hazard is left off the completion"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those phrases, and an unaddressed pre-visit hold, set a safety escalation"
+        - "Approval requires the escalation to be marked as seen"
+        - "Seen does not clear the hazard"
+      residual_risk: "Medium"
+      owner: "Health and safety"
+    - id: "R5"
+      risk: "A stale legal pin or a stale pre-visit brief is treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days is stale. Equal to 180 days is current."
+        - "Stale pins are not quoted. A stale brief blocks approval until it is acknowledged."
+      residual_risk: "Low"
+      owner: "Field service operations"
+    - id: "R6"
+      risk: "A door code or a health phrase is copied into the record or a log"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The notes are not copied"
+        - "Experiment 15 categories are kept and the phrases are not"
+        - "A code-shaped phrase sets a flag and the digits are not written out"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R7"
+      risk: "An Awaab's Law illustration is treated as an operative deadline or as a completed regulation 9 summary"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Officer approval is forced off"
+        - "written_summary_sent stays false"
+        - "Utility and facilities packs do not call the clock"
+      residual_risk: "Low"
+      owner: "Housing repairs"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the work-order id if it
+    matched the synthetic pattern, the outcome, the field ids approved, and
+    the field ids stub-written. This starter logs nothing because it keeps no
+    store. Do not put the notes, the photo text, or a door code in an
+    application trace.
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Work-order id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's field-service schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Field ids and whether each was missing"
+        - "Inconsistency ids"
+        - "Whether human_approval was left null"
+      retention: "Keep with the work order if the technician relies on the draft. The notes are not in this event."
+    - event: "Field approved or stub-written"
+      data_logged:
+        - "Decision"
+        - "Field ids"
+        - "executed false for any production system"
+        - "job_closed false"
+      retention: "Organisation's schedule. The agent does not write this event to a work-order system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the notes or a door code."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for a work-order write, a charge, parts ordering, or messaging"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Field service operations lead"
+      contact: "field.ops@calderwell.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@calderwell.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-11"
+  next_review_date: "2027-05-11"
+  review_frequency: "6 months, and sooner if the pinned legislation or the field lists change"
+  reviewer: "The adopting organisation's field-service lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to section 2, 3, or 7 of the Health and Safety at Work etc. Act 1974"
+    - "A change to regulation 3 of the Management of Health and Safety at Work Regulations 1999"
+    - "A change to section 10A or to SI 2025/1042, including a made Phase 2 instrument"
+    - "A change to UK GDPR Article 5 or Article 6"
+    - "A proposal to add a connector that can close a job, raise a charge, order parts, message a customer, or write a production work order"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Completion core"
+      path: "src/complete.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 was read on 11 November 2026. Article 9 was not opened. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window is a starter default, not a statutory review period."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Keyword holds are not a suitable and sufficient risk assessment under regulation 3 of the Management of Health and Safety at Work Regulations 1999."
+      section: "src/complete.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Experiment 05 is called with officer approval forced off. Phase 2 was not opened on 11 November 2026 and its status is unverified."
+      section: "src/complete.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The mandatory field list is a starter rule, not a statutory form."
+      section: "src/complete.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on work orders."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on calderwell.example.gov.uk are placeholders. Calderwell Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, prompt shields, Key Vault, Purview, and Application Insights were not opened on 11 November 2026. Treat the product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
