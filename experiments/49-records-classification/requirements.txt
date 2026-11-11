@@ -1,0 +1,6 @@
+# Experiment 49 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 12 intake(), Experiment 08 propose(), and Experiment 19 screen().
+# Those experiments use the standard library.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0
