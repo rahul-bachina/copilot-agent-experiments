@@ -1,0 +1,266 @@
+{
+  "label": "DRAFT RECORDS CLASSIFICATION FOR RECORDS MANAGER CONFIRMATION",
+  "catalogue_id": "M009",
+  "experiment_id": "exp-49-records-classification",
+  "autonomy": "A1",
+  "organisation": "Merrowfield Borough Council",
+  "organisation_is_fictional": true,
+  "document_id": "SYN-REC-0491",
+  "filename": "cabinet-minutes.txt",
+  "jurisdiction": "england",
+  "as_of": "2026-11-11",
+  "outcome": "ready_for_confirmation",
+  "text_recorded": false,
+  "text_sha256": "b2166cb752700b0b9ffb4f34edcc7c1ea1fb6d18c5cbb446dc94fa4f1f39724a",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "scheme": {
+    "id": "merrowfield-bcs-synthetic-2026",
+    "note": "Fictional business classification scheme. A configured period is not a statutory retention period. A configured disposal action is not authority to destroy, transfer, or move a record.",
+    "statutory_periods": false
+  },
+  "proposals": {
+    "file_plan": {
+      "category_id": "GOV-CMT",
+      "title": "Corporate governance \u2014 committee papers",
+      "candidates": [
+        "GOV-CMT"
+      ],
+      "evidence": [
+        "cabinet minutes",
+        "council minutes"
+      ],
+      "confidence": "high",
+      "decided": false
+    },
+    "retention": {
+      "entry_id": "GOV-CMT-R",
+      "label": "Configured: review six years after the meeting date. Not a statutory period.",
+      "statutory_period": false,
+      "evidence": [
+        "cabinet minutes",
+        "council minutes"
+      ],
+      "confidence": "high",
+      "decided": false
+    },
+    "disposal": {
+      "action": "transfer_for_review_of_permanent_value",
+      "executed": false,
+      "evidence": [
+        "cabinet minutes",
+        "council minutes"
+      ],
+      "confidence": "high",
+      "decided": false
+    },
+    "gsc": {
+      "suggestion": "OFFICIAL",
+      "existing_marking": null,
+      "body_marking": null,
+      "basis": "scheme_default",
+      "downgrade_proposed": false,
+      "sensitive_marking_is_a_fourth_tier": false,
+      "evidence": [
+        "cabinet minutes",
+        "council minutes"
+      ],
+      "confidence": "high",
+      "decided": false
+    },
+    "personal_data": {
+      "indicated": false,
+      "identifier_types": [],
+      "keyword_cues": [],
+      "health_cues": [],
+      "special_category_possible": false,
+      "special_category_decided": false,
+      "absence_is_not_a_finding": true,
+      "values_recorded": false,
+      "evidence": [],
+      "confidence": "medium",
+      "decided": false
+    }
+  },
+  "human_queue": {
+    "required": false,
+    "reasons": []
+  },
+  "legal_hold": {
+    "indicated": false,
+    "cues": []
+  },
+  "gaps": [],
+  "flags": {
+    "deleted": false,
+    "disposed": false,
+    "moved": false,
+    "downgraded": false,
+    "labels_applied_in_tenant": false,
+    "labels_stubbed": false,
+    "classification_confirmed": false,
+    "downgrade_proposed": false
+  },
+  "reuse": {
+    "intake": {
+      "called": true,
+      "experiment_id": "exp-12-document-intake",
+      "catalogue_id": "O001",
+      "read_status": "read",
+      "intake_class": "unclassified",
+      "files_confirmed": false,
+      "content_recorded": false,
+      "catalogue_stale": false,
+      "char_count": 157
+    },
+    "gateway": {
+      "called": true,
+      "experiment_id": "exp-08-uk-pii-redaction-gateway",
+      "catalogue_id": "O005",
+      "finding_count": 0,
+      "entity_types": [],
+      "rules_pinned_on": "2026-10-26",
+      "output_is_anonymised": false,
+      "agent_may_release": false,
+      "values_recorded": false
+    },
+    "screening": {
+      "called": true,
+      "experiment_id": "exp-19-privacy-impact-assessment",
+      "catalogue_id": "L006",
+      "screen_result": "insufficient_facts",
+      "indicated_on_recorded_answers": false,
+      "dpia_required": null,
+      "dpia_required_decided_by_this_tool": false,
+      "answers_supplied": false,
+      "note": "Passed through Experiment 19. A screen result is the recorded answers, not a decision that a DPIA is required."
+    }
+  },
+  "prompt_injection": {
+    "detected": false,
+    "followed": false,
+    "signals": [],
+    "body_marking": null
+  },
+  "prohibited_payload_keys": [],
+  "screening_answers_rejected": false,
+  "stale": {
+    "rules_current": true,
+    "pinned_on": "2026-11-11",
+    "age_days": 0,
+    "stale_after_days": 180,
+    "quotes_withheld": false
+  },
+  "sources": [
+    {
+      "id": "pra-s3",
+      "name": "Public Records Act 1958, section 3",
+      "url": "https://www.legislation.gov.uk/ukpga/Eliz2/6-7/51/section/3",
+      "opened_on": "2026-11-11",
+      "taken": "Section 3(1) places a duty on every person responsible for public records which are not in the Public Record Office or an appointed place of deposit to make arrangements for the selection of those records which ought to be permanently preserved and for their safe-keeping. Section 3(4) says records selected for permanent preservation shall be transferred not later than 20 years after their creation, subject to the retention proviso in that subsection. Section 3(6) says records rejected as not required for permanent preservation shall be destroyed or, with the approval required by that subsection, disposed of in any other way. This starter does not select, transfer, destroy, or dispose."
+    },
+    {
+      "id": "pra-s10",
+      "name": "Public Records Act 1958, section 10",
+      "url": "https://www.legislation.gov.uk/ukpga/Eliz2/6-7/51/section/10",
+      "opened_on": "2026-11-11",
+      "taken": "Section 10(1) says public records has the meaning assigned by the First Schedule, and records includes records conveying information by any means. The First Schedule was not opened. This starter does not decide that a body, or a record, is a public record."
+    },
+    {
+      "id": "foia-s46",
+      "name": "Freedom of Information Act 2000, section 46",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/36/section/46",
+      "opened_on": "2026-11-11",
+      "taken": "Section 46(1) says the Secretary of State shall issue, and may revise, a code of practice providing guidance to relevant authorities on the practice which it would, in his opinion, be desirable for them to follow in connection with the keeping, management and destruction of their records. Section 46(7) defines a relevant authority as any public authority, and any office or body which is not a public authority but whose administrative and departmental records are public records. The page said there are currently no known outstanding effects. Section 48 was not opened."
+    },
+    {
+      "id": "s46-code",
+      "name": "Code of Practice on the management of records, section 46",
+      "url": "https://www.gov.uk/government/publications/code-of-practice-on-the-management-of-records-issued-under-section-46-the-freedom-of-information-act-2000",
+      "opened_on": "2026-11-11",
+      "taken": "The GOV.UK page, published 15 July 2021 by The National Archives, links a 32-page PDF. The PDF says it was laid before Parliament on 15 July 2021. Paragraph 2.3.1 says authorities must define how long to keep information and dispose of it when it is no longer needed, by destroying it, transferring it to another body, or transferring it to an archive. Paragraph 2.3.2 includes exceptional circumstances such as a moratorium on destruction, a police investigation, a public inquiry, or legal action. Paragraph 2.5 cites UK GDPR Article 5(1)(e) in the code's own words. Paragraph 2.6.2 says disposition decisions must be recorded and taken by people authorised to do so. Annex B says the code fulfils the section 46(1) duty to provide guidance, and that the Commissioner may issue a practice recommendation under section 48. The section 48 text was not opened. This starter does not decide that the code was followed, and it does not destroy a record."
+    },
+    {
+      "id": "gscp",
+      "name": "Government Security Classifications Policy",
+      "url": "https://www.gov.uk/government/publications/government-security-classifications/government-security-classifications-policy-html",
+      "opened_on": "2026-11-11",
+      "taken": "The HTML page says it was updated on 5 August 2024. The executive summary describes three classification tiers (OFFICIAL, SECRET and TOP SECRET). Paragraph 1 says the policy is not a statutory scheme. Paragraph 9 points to the section 46 code for keeping, management and destruction. Paragraph 25 says the -SENSITIVE marking is applied to OFFICIAL information and should be applied immediately after the OFFICIAL classification. The policy's own handling example is written OFFICIAL-SENSITIVE. -SENSITIVE is not a fourth tier. Guidance 1.1 was opened the same day. This starter does not decide the marking and does not downgrade one."
+    },
+    {
+      "id": "uk-gdpr-art-5",
+      "name": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "opened_on": "2026-11-11",
+      "taken": "Article 5(1)(e) says personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed. Personal data may be stored for longer periods insofar as they will be processed solely for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 84B. The words Article 84B were substituted on 5 February 2026. Article 84B was not opened. Article 5(2) is the accountability principle. This starter does not decide that storage limitation was met."
+    },
+    {
+      "id": "purview-records",
+      "name": "Microsoft Purview records management",
+      "url": "https://learn.microsoft.com/en-us/purview/get-started-with-records-management",
+      "opened_on": "2026-11-11",
+      "taken": "The get-started page describes a file plan for retention and deletion settings, retention labels applied by a person or automatically, and disposition reviews so that somebody reviews and approves before content is deleted at the end of its retention period. It recommends the Records Management admin role group. The service-description licensing table was not opened. This starter does not call Purview."
+    },
+    {
+      "id": "purview-sensitivity",
+      "name": "Microsoft Purview sensitivity labels",
+      "url": "https://learn.microsoft.com/en-us/purview/sensitivity-labels",
+      "opened_on": "2026-11-11",
+      "taken": "The page says sensitivity labels let an organisation classify and protect data, including encryption and content markings. Each item can have a single sensitivity label from the organisation. Documents and emails can have both a sensitivity label and a retention label. Extending labels to the Microsoft Purview Data Map is described as currently in preview. This starter does not apply a label in a tenant."
+    },
+    {
+      "id": "harness",
+      "name": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "opened_on": "2026-11-11",
+      "taken": "The overview says the GitHub Copilot harness is a Microsoft Copilot Studio authoring and orchestration framework, not the GitHub Copilot service, and that customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. Agents and workflows on that harness use Copilot Credits. The standard harness follows the topics and rules the maker defines. The page states no price. The linked billing pages were not opened."
+    }
+  ],
+  "regulatory": {
+    "public_record_decided": false,
+    "pra_transfer_due_decided": false,
+    "code_applied": true,
+    "code_complied": false,
+    "storage_limitation_engaged_as_a_reading": false,
+    "storage_limitation_met": false,
+    "article_84b_opened": false,
+    "gsc_applied_by_agent": false,
+    "disposal_executed": false,
+    "welsh_public_record_decided": false,
+    "outside_code_scope": false
+  },
+  "purview": {
+    "called": false,
+    "retention_label_suggested_name": "synthetic:GOV-CMT-R",
+    "sensitivity_label_suggested_name": "OFFICIAL",
+    "disposition_review_executed": false,
+    "note": "Microsoft Purview retention labels and sensitivity labels are the described Microsoft 365 route. This stub does not call Purview."
+  },
+  "human_route": {
+    "offered": true,
+    "agent_disposes": false,
+    "agent_deletes": false,
+    "publishes_a_telephone_number": false,
+    "note": "A records manager can classify the record in the organisation's own system. This starter does not publish a telephone number."
+  },
+  "limitations": [
+    "This draft does not confirm a classification. The records manager confirms or changes every field.",
+    "A keyword match is not a decision that the record belongs in that category.",
+    "Configured retention periods are not statutory periods and are not a National Archives schedule.",
+    "The agent does not delete, dispose of, move, or downgrade a record, including after confirmation.",
+    "The label action is a stub. It does not call Microsoft Purview and it does not apply a tenant label.",
+    "OFFICIAL-SENSITIVE is the policy's written form of the -SENSITIVE marking on OFFICIAL. It is not a fourth tier. Suggesting it is not a decision that the marking is required.",
+    "Absence of a personal-data indicator is not a finding that the text contains no personal data. Names and email addresses are not detected.",
+    "Experiment 08 does not release text. This output is not anonymised.",
+    "Experiment 19 does not decide that a DPIA is required. dpia_required stays null.",
+    "The Public Records Act First Schedule was not opened. This starter does not decide that a record is a public record.",
+    "Article 84B, Article 6, Article 9, and Freedom of Information Act 2000 section 48 were not opened.",
+    "The section 46 code does not apply to bodies subject to the Freedom of Information (Scotland) Act 2002. This starter does not state Scots law.",
+    "A file over 20,000 characters is not scanned. An instruction in it is not detected.",
+    "The 180-day window is a stale flag for this starter. It is not a statutory review period.",
+    "No model was called."
+  ]
+}

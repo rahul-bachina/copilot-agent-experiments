@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "confirmation_tool.schema.json",
+  "title": "Records classification confirmation",
+  "description": "A separate review object. The records manager confirms or changes every proposed field. Confirmation does not apply a label and does not delete, dispose, move, or downgrade a record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision",
+    "actor_role",
+    "actor_id",
+    "document_id",
+    "every_field_confirmed",
+    "file_plan_category",
+    "retention_entry",
+    "disposal_action",
+    "gsc_marking",
+    "personal_data_indicated"
+  ],
+  "properties": {
+    "decision": {
+      "enum": ["confirm_classification", "change_classification", "reject_proposal"]
+    },
+    "actor_role": {"const": "Records manager"},
+    "actor_id": {"type": "string"},
+    "document_id": {"type": "string"},
+    "every_field_confirmed": {"const": true},
+    "file_plan_category": {"type": ["string", "null"]},
+    "retention_entry": {"type": ["string", "null"]},
+    "disposal_action": {
+      "enum": [
+        "review",
+        "transfer_for_review_of_permanent_value",
+        "review_then_destroy_not_executed",
+        "do_not_dispose_legal_hold",
+        "unspecified"
+      ]
+    },
+    "gsc_marking": {
+      "type": ["string", "null"],
+      "enum": ["OFFICIAL", "OFFICIAL-SENSITIVE", "SECRET", "TOP SECRET", null]
+    },
+    "personal_data_indicated": {"type": "boolean"},
+    "queue_reviewed": {"type": "boolean"},
+    "acknowledge_gaps": {"type": "boolean"},
+    "acknowledge_stale": {"type": "boolean"}
+  }
+}
