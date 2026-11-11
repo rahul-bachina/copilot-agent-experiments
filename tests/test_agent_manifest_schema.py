@@ -2117,3 +2117,62 @@ class TestExperiment44Manifest:
         assert confirm["approver"] == "Knowledge manager"
         assert confirm["mandatory"] is True
         assert experiment_44_manifest["agent"]["id"] == "exp-44-knowledge-gap-detector"
+
+
+class TestExperiment49Manifest:
+    """Test the Experiment 49 records classification manifest."""
+
+    @pytest.fixture
+    def experiment_49_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "49-records-classification"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_49_manifest):
+        """Experiment 49 manifest should be valid."""
+        validate(instance=experiment_49_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_49_manifest):
+        """Experiment 49 should be autonomy level A1. The records manager confirms."""
+        level = experiment_49_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_49_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_49_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_49_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_49_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_49_manifest):
+        """Nothing is sent, and no record is written."""
+        assert experiment_49_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_49_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_records_manager_confirms_every_field(self, experiment_49_manifest):
+        """The catalogue checkpoint is the records manager, and it is mandatory."""
+        points = experiment_49_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Confirm or change every classification field"
+        )
+        assert confirm["approver"] == "Records manager"
+        assert confirm["mandatory"] is True
+        assert experiment_49_manifest["agent"]["id"] == "exp-49-records-classification"
