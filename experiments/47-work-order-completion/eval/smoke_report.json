@@ -1,0 +1,2234 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic work-order completion packs. Not a model evaluation.",
+  "organisation_in_fixtures": "Calderwell Borough Council, Calderwell Heat Network, and Calderwell Facilities are invented.",
+  "summary": {
+    "total_cases": 19,
+    "passed": 19,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "C01",
+      "name": "Housing visit with mould still visible",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "needs_review"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "follow_up_job",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "safety",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "awaabs_follow",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "awaabs_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "significant"
+        },
+        {
+          "field": "vulnerability",
+          "passed": true,
+          "detail": "['possible_financial_hardship']"
+        },
+        {
+          "field": "work_done",
+          "passed": true,
+          "detail": "['wiped']"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['do_not_escalate']"
+        },
+        {
+          "field": "absent cannot afford",
+          "passed": true,
+          "detail": "cannot afford"
+        },
+        {
+          "field": "absent Do not escalate",
+          "passed": true,
+          "detail": "Do not escalate"
+        }
+      ]
+    },
+    {
+      "case_id": "C02",
+      "name": "Not synthetic",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused_not_synthetic"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent PURPLE-HERRING-TOKEN",
+          "passed": true,
+          "detail": "PURPLE-HERRING-TOKEN"
+        }
+      ]
+    },
+    {
+      "case_id": "C03",
+      "name": "Gas hold and charge language",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "needs_review"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "safety",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "operative",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "category",
+          "passed": true,
+          "detail": "emergency"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['gas']"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['close_the_job', 'raise_a_charge']"
+        }
+      ]
+    },
+    {
+      "case_id": "C04",
+      "name": "Photo contradicts a cleared note",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "inconsistency",
+          "passed": true,
+          "detail": "['photo_contradicts_notes']"
+        }
+      ]
+    },
+    {
+      "case_id": "C05",
+      "name": "Part not mentioned in the notes",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "inconsistency",
+          "passed": true,
+          "detail": "['part_not_mentioned']"
+        },
+        {
+          "field": "absent extract fan",
+          "passed": true,
+          "detail": "extract fan"
+        }
+      ]
+    },
+    {
+      "case_id": "C06",
+      "name": "Utility pump, ready for field approval",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "ready_for_field_approval"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "awaabs_follow",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "awaabs_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "work_done",
+          "passed": true,
+          "detail": "['investigated']"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['none_stated']"
+        }
+      ]
+    },
+    {
+      "case_id": "C07",
+      "name": "Original mould problem not in the notes",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "follow_up_job",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "inconsistency",
+          "passed": true,
+          "detail": "['original_problem_not_addressed']"
+        }
+      ]
+    },
+    {
+      "case_id": "C08",
+      "name": "Stale legal pins",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "quotes_withheld",
+          "passed": true,
+          "detail": "withheld"
+        },
+        {
+          "field": "absent erased or rectified without delay",
+          "passed": true,
+          "detail": "erased or rectified without delay"
+        }
+      ]
+    },
+    {
+      "case_id": "C09",
+      "name": "Pin exactly 180 days old is current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "C10",
+      "name": "Stub write without a prior approval",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "approval_required_before_write"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "written",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "stub_executed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "C11",
+      "name": "Approve one field, then stub-write only that field",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "stub_fields_written"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "written",
+          "passed": true,
+          "detail": "['work_done']"
+        },
+        {
+          "field": "stub_executed",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "approved_fields",
+          "passed": true,
+          "detail": "['work_done']"
+        }
+      ]
+    },
+    {
+      "case_id": "C12",
+      "name": "Close is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "stub_executed",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "C13",
+      "name": "Door code is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "work_done",
+          "passed": true,
+          "detail": "['investigated']"
+        },
+        {
+          "field": "absent 987654",
+          "passed": true,
+          "detail": "987654"
+        }
+      ]
+    },
+    {
+      "case_id": "C14",
+      "name": "Note cannot approve the fields",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['close_the_job', 'approve_all_fields']"
+        }
+      ]
+    },
+    {
+      "case_id": "C15",
+      "name": "Do not enter the loft stays an access flag",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['none_stated']"
+        },
+        {
+          "field": "access",
+          "passed": true,
+          "detail": "['do_not_enter']"
+        }
+      ]
+    },
+    {
+      "case_id": "C16",
+      "name": "Missing technician id",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "missing_mandatory"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "['technician_id']"
+        }
+      ]
+    },
+    {
+      "case_id": "C17",
+      "name": "Facilities job does not apply section 10A",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "ready_for_field_approval"
+        },
+        {
+          "field": "awaabs_called",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "work_done",
+          "passed": true,
+          "detail": "['investigated']"
+        }
+      ]
+    },
+    {
+      "case_id": "C18",
+      "name": "Pre-visit gas defect is not addressed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "safety",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "inconsistency",
+          "passed": true,
+          "detail": "['pre_visit_hold_not_addressed']"
+        }
+      ]
+    },
+    {
+      "case_id": "C19",
+      "name": "Zero-width do not escalate",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT WORK ORDER COMPLETION FOR TECHNICIAN APPROVAL"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_closes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "job_closed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "charges",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ordered",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "labelled",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "production",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "summary_sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outstanding",
+          "passed": true,
+          "detail": "['damp_mould']"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['do_not_escalate']"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "['zero_width']"
+        }
+      ]
+    }
+  ]
+}

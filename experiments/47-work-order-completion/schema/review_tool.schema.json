@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Completion field review",
+  "description": "A separate review object. It is not read from the visit notes. technician_approve_fields does not write. technician_stub_write writes only fields approved on an earlier review, and only inside the returned JSON.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "actor_id", "work_order_id"],
+  "properties": {
+    "decision": {
+      "enum": ["technician_approve_fields", "technician_stub_write", "reject_draft"]
+    },
+    "actor_role": {"const": "Field technician"},
+    "actor_id": {"type": "string"},
+    "work_order_id": {"type": "string"},
+    "fields": {"type": "array"},
+    "inconsistency_acknowledged": {"type": "boolean"},
+    "safety_escalation_seen": {"type": "boolean"},
+    "stale_sources_acknowledged": {"type": "boolean"},
+    "brief_stale_acknowledged": {"type": "boolean"},
+    "pre_visit_missing_acknowledged": {"type": "boolean"}
+  }
+}

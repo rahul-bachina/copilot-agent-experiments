@@ -154,6 +154,9 @@ DIAGRAMS = {
     "experiments/46-field-visit-preparation/docs/architecture_diagram.png": (
         "experiments/img/46-field-visit-preparation-architecture.png"
     ),
+    "experiments/47-work-order-completion/docs/architecture_diagram.png": (
+        "experiments/img/47-work-order-completion-architecture.png"
+    ),
     "experiments/49-records-classification/docs/architecture_diagram.png": (
         "experiments/img/49-records-classification-architecture.png"
     ),
