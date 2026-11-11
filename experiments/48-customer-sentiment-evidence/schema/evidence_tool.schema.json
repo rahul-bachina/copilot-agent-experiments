@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "evidence_tool.schema.json",
+  "title": "Customer sentiment evidence tool",
+  "description": "Input for prepare_pack(). The tool reads one synthetic batch and returns an evidence pack. It does not publish, it does not contact a customer, and it does not conclude about an individual.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "batch_id", "sector", "period", "sample_frame", "records"],
+  "properties": {
+    "synthetic": {"const": true},
+    "batch_id": {"type": "string"},
+    "organisation": {"type": "string"},
+    "sector": {"enum": ["financial_services", "public_service"]},
+    "period": {"type": "object"},
+    "sample_frame": {"type": "object"},
+    "records": {"type": "array"}
+  }
+}
