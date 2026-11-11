@@ -1,0 +1,3200 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "model_called": false,
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "S01",
+      "name": "Draft pack stays not ready",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "draft_pending_analyst"
+        },
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT CUSTOMER SENTIMENT EVIDENCE. Not ready. Th"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "present",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "prin_applied",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "complaints_called",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "complaint_theme",
+          "passed": true,
+          "detail": "{'SYN-R-001': 'fees_and_charges', 'SYN-R-002': 'service_delay'}"
+        },
+        {
+          "field": "sampling_bias",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "small_numbers",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "number_verified",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S02",
+      "name": "Analyst confirms the frame and the limitations",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "sample_frame_and_limitations_confirmed"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "sample_frame_and_limitations_confirmed"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "ready"
+        },
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "CUSTOMER SENTIMENT EVIDENCE. The analyst confirm"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S03",
+      "name": "Limitations not read",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "limitations_not_read"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "limitations_not_read"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S04",
+      "name": "Sample frame not confirmed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "sample_frame_not_confirmed"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "sample_frame_not_confirmed"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S05",
+      "name": "Publish is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S06",
+      "name": "Contact is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S07",
+      "name": "An individual conclusion is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S08",
+      "name": "A board-report approval is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S09",
+      "name": "A batch that is not synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused_not_synthetic"
+        },
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "REFUSED. No evidence pack was produced from this"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S10",
+      "name": "An instruction in the body is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "draft_pending_analyst"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['ignore_instructions', 'mark_all_positive']"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "['body', 'body']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S11",
+      "name": "An instruction in an HTML comment is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['publish_pack', 'contact_customer']"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "['html_comment', 'html_comment']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S12",
+      "name": "A zero-width instruction is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['ignore_instructions']"
+        },
+        {
+          "field": "hidden_in",
+          "passed": true,
+          "detail": "['zero_width']"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S13",
+      "name": "An exact duplicate is one voice",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "2"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "1"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S14",
+      "name": "Small numbers and sampling bias are stated",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sampling_bias",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "small_numbers",
+          "passed": true,
+          "detail": "True"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S15",
+      "name": "A census with no stated exclusion does not flag sampling bias",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "sampling_bias",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "small_numbers",
+          "passed": true,
+          "detail": "True"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S16",
+      "name": "Stale sources withhold the quotations",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "quotes_withheld",
+          "passed": true,
+          "detail": "withheld"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S17",
+      "name": "A public-service pack does not apply PRIN",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "7"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "8"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "present",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "field": "prin_applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "complaints_called",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S18",
+      "name": "An out-of-period record is not a voice",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "unique_voices",
+          "passed": true,
+          "detail": "1"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S19",
+      "name": "A missing sampling method cannot be marked ready",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "sample_frame_incomplete"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "sample_frame_incomplete"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "sample_frame_incomplete"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "case_id": "S20",
+      "name": "An open period must be acknowledged",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "C010"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_echoed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_publishes",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "agent_contacts",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "contacted_customer",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "individual_conclusion",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "board_report_approved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "duty_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome_tested",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "quotes_meet_article_4_1_5",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "output_is_anonymised",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "not_the_board_report",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "no_finding",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "counts_sum",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "channel_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "period_n",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "voice_n",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "in_frame_split",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "review_executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_refused",
+          "passed": true,
+          "detail": "open_period_not_acknowledged"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "open_period_not_acknowledged"
+        },
+        {
+          "field": "ready",
+          "passed": true,
+          "detail": "False"
+        }
+      ],
+      "failed": []
+    }
+  ]
+}

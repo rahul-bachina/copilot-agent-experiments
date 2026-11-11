@@ -1,0 +1,829 @@
+{
+  "label": "DRAFT CUSTOMER SENTIMENT EVIDENCE. Not ready. The analyst has not confirmed the sample frame and the limitations.",
+  "catalogue_id": "C010",
+  "experiment": "48-customer-sentiment-evidence",
+  "autonomy": "A0",
+  "status": "draft",
+  "outcome": "draft_pending_analyst",
+  "ready": false,
+  "as_of": "2026-11-11",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "text_echoed": false,
+  "flags": {
+    "published": false,
+    "contacted_customer": false,
+    "individual_conclusion": false,
+    "board_report_approved": false,
+    "regulatory_return_submitted": false,
+    "production_record_written": false,
+    "duty_met": false,
+    "outcome_tested": false,
+    "quotes_meet_article_4_1_5": false,
+    "output_is_anonymised": false,
+    "reversible_map_kept": false,
+    "statistical_purpose_asserted": false
+  },
+  "human_route": {
+    "offered": true,
+    "agent_publishes": false,
+    "agent_contacts": false,
+    "how": "The analyst can stop and produce the pack in the organisation's own process."
+  },
+  "batch_id": "SYN-SENT-048",
+  "sector": "financial_services",
+  "organisation": "Calderwell Mutual",
+  "organisation_is_fictional_in_the_samples": true,
+  "period": {
+    "start": "2026-07-01",
+    "end": "2026-09-30"
+  },
+  "period_open": false,
+  "sample_frame": {
+    "population_description": "Synthetic complaints, survey answers, contact notes, and reviews supplied for July to September 2026. People who did not write in are not in this file.",
+    "sampling_method": "convenience",
+    "channels_in_frame": [
+      "complaint",
+      "survey",
+      "contact_note",
+      "review"
+    ],
+    "known_exclusions": [
+      "customers who did not contact the firm",
+      "webchat, which was not exported"
+    ],
+    "gaps": [],
+    "complete": true
+  },
+  "counts": {
+    "records_supplied": 9,
+    "in_frame_records": 8,
+    "unique_voices": 7,
+    "not_counted_as_extra_voices": 1,
+    "excluded": {
+      "out_of_period": [
+        "SYN-R-009"
+      ]
+    },
+    "texts_not_scanned_too_long": 0,
+    "direct_identifier_fields_ignored": false
+  },
+  "distribution": {
+    "denominator": "unique_voices",
+    "themes_must_not_be_summed": true,
+    "overall": {
+      "denominator": "unique_voices",
+      "n": 7,
+      "counts": {
+        "negative": 4,
+        "positive": 2,
+        "mixed": 1,
+        "unclear": 0
+      },
+      "counts_sum_to_n": true,
+      "negative_proportion": 0.571429,
+      "positive_proportion": 0.285714,
+      "negative_wilson_95": {
+        "low": 0.250454,
+        "high": 0.841783
+      },
+      "positive_wilson_95": {
+        "low": 0.082217,
+        "high": 0.641071
+      },
+      "interval_defined": true,
+      "intervals_are_not_a_partition": true,
+      "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+      "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+    },
+    "by_channel": [
+      {
+        "channel": "complaint",
+        "denominator": "unique_voices",
+        "n": 2,
+        "counts": {
+          "negative": 2,
+          "positive": 0,
+          "mixed": 0,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 1.0,
+        "positive_proportion": 0.0,
+        "negative_wilson_95": {
+          "low": 0.342372,
+          "high": 1.0
+        },
+        "positive_wilson_95": {
+          "low": 0.0,
+          "high": 0.657628
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      },
+      {
+        "channel": "contact_note",
+        "denominator": "unique_voices",
+        "n": 1,
+        "counts": {
+          "negative": 0,
+          "positive": 0,
+          "mixed": 1,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 0.0,
+        "positive_proportion": 0.0,
+        "negative_wilson_95": {
+          "low": 0.0,
+          "high": 0.793457
+        },
+        "positive_wilson_95": {
+          "low": 0.0,
+          "high": 0.793457
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      },
+      {
+        "channel": "review",
+        "denominator": "unique_voices",
+        "n": 2,
+        "counts": {
+          "negative": 1,
+          "positive": 1,
+          "mixed": 0,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 0.5,
+        "positive_proportion": 0.5,
+        "negative_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "positive_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      },
+      {
+        "channel": "survey",
+        "denominator": "unique_voices",
+        "n": 2,
+        "counts": {
+          "negative": 1,
+          "positive": 1,
+          "mixed": 0,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 0.5,
+        "positive_proportion": 0.5,
+        "negative_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "positive_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      }
+    ],
+    "by_period": [
+      {
+        "period": "2026-07",
+        "denominator": "unique_voices",
+        "n": 2,
+        "counts": {
+          "negative": 2,
+          "positive": 0,
+          "mixed": 0,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 1.0,
+        "positive_proportion": 0.0,
+        "negative_wilson_95": {
+          "low": 0.342372,
+          "high": 1.0
+        },
+        "positive_wilson_95": {
+          "low": 0.0,
+          "high": 0.657628
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      },
+      {
+        "period": "2026-08",
+        "denominator": "unique_voices",
+        "n": 3,
+        "counts": {
+          "negative": 1,
+          "positive": 1,
+          "mixed": 1,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 0.333333,
+        "positive_proportion": 0.333333,
+        "negative_wilson_95": {
+          "low": 0.06149,
+          "high": 0.792345
+        },
+        "positive_wilson_95": {
+          "low": 0.06149,
+          "high": 0.792345
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      },
+      {
+        "period": "2026-09",
+        "denominator": "unique_voices",
+        "n": 2,
+        "counts": {
+          "negative": 1,
+          "positive": 1,
+          "mixed": 0,
+          "unclear": 0
+        },
+        "counts_sum_to_n": true,
+        "negative_proportion": 0.5,
+        "positive_proportion": 0.5,
+        "negative_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "positive_wilson_95": {
+          "low": 0.094529,
+          "high": 0.905471
+        },
+        "interval_defined": true,
+        "intervals_are_not_a_partition": true,
+        "wilson_source": "experiments/07-consultation-themes/src/stats.py",
+        "caveat": "The Wilson interval is the sampling uncertainty of one proportion in this sample, from Experiment 07. It assumes a simple random sample and independent texts. It is not a model confidence score. It does not include coding error or bias from a convenience sample. The negative interval and the positive interval are separate. Mixed and unclear texts sit in the denominator and in neither numerator. A narrow interval is not a finding that an outcome was met."
+      }
+    ],
+    "channel_n_equals_overall": true,
+    "period_n_equals_overall": true
+  },
+  "voices": [
+    {
+      "record_id": "SYN-R-001",
+      "cluster_id": "C-SYN-R-001",
+      "cluster_size": 1,
+      "channel": "complaint",
+      "period": "2026-07",
+      "sentiment": "negative",
+      "theme_ids": [
+        "unclear_information"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-002",
+      "cluster_id": "C-SYN-R-002",
+      "cluster_size": 1,
+      "channel": "complaint",
+      "period": "2026-07",
+      "sentiment": "negative",
+      "theme_ids": [
+        "could_not_get_support"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-003",
+      "cluster_id": "C-SYN-R-003",
+      "cluster_size": 1,
+      "channel": "survey",
+      "period": "2026-08",
+      "sentiment": "positive",
+      "theme_ids": [
+        "support_helped"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-004",
+      "cluster_id": "C-SYN-R-004",
+      "cluster_size": 2,
+      "channel": "survey",
+      "period": "2026-08",
+      "sentiment": "negative",
+      "theme_ids": [
+        "unclear_information"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-006",
+      "cluster_id": "C-SYN-R-006",
+      "cluster_size": 1,
+      "channel": "contact_note",
+      "period": "2026-08",
+      "sentiment": "mixed",
+      "theme_ids": [
+        "unclear_information",
+        "support_helped"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-007",
+      "cluster_id": "C-SYN-R-007",
+      "cluster_size": 1,
+      "channel": "review",
+      "period": "2026-09",
+      "sentiment": "positive",
+      "theme_ids": [
+        "support_helped"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    },
+    {
+      "record_id": "SYN-R-008",
+      "cluster_id": "C-SYN-R-008",
+      "cluster_size": 1,
+      "channel": "review",
+      "period": "2026-09",
+      "sentiment": "negative",
+      "theme_ids": [
+        "unclear_information"
+      ],
+      "text_code_not_a_customer_conclusion": true
+    }
+  ],
+  "not_counted_as_extra_voices": [
+    {
+      "record_id": "SYN-R-005",
+      "cluster_id": "C-SYN-R-004",
+      "counted_in_denominator": false
+    }
+  ],
+  "themes": [
+    {
+      "theme_id": "unclear_information",
+      "family": "consumer_understanding",
+      "outcome_relevance": "consumer_understanding",
+      "record_ids": [
+        "SYN-R-001",
+        "SYN-R-004",
+        "SYN-R-005",
+        "SYN-R-006",
+        "SYN-R-008"
+      ],
+      "unique_voice_count": 4,
+      "quotes": [
+        {
+          "record_id": "SYN-R-001",
+          "channel": "complaint",
+          "excerpt": "I am unhappy about the fee on my account. The letter was unclear and I do not understand it. This complaint caused inconvenience.",
+          "excerpt_is_redacted": true
+        },
+        {
+          "record_id": "SYN-R-004",
+          "channel": "survey",
+          "excerpt": "I am unhappy. The letter about my account was unclear and I do not understand the charge. This is a complaint about the inconvenience of the wait.",
+          "excerpt_is_redacted": true
+        }
+      ],
+      "do_not_sum_with_other_themes": true
+    },
+    {
+      "theme_id": "could_not_get_support",
+      "family": "consumer_support",
+      "outcome_relevance": "consumer_support",
+      "record_ids": [
+        "SYN-R-002"
+      ],
+      "unique_voice_count": 1,
+      "quotes": [
+        {
+          "record_id": "SYN-R-002",
+          "channel": "complaint",
+          "excerpt": "I waited on hold and could not get through. Nobody answered. I am unhappy. [NAME]. NINO [NINO-1].",
+          "excerpt_is_redacted": true
+        }
+      ],
+      "do_not_sum_with_other_themes": true
+    },
+    {
+      "theme_id": "support_helped",
+      "family": "consumer_support",
+      "outcome_relevance": "consumer_support",
+      "record_ids": [
+        "SYN-R-003",
+        "SYN-R-006",
+        "SYN-R-007"
+      ],
+      "unique_voice_count": 3,
+      "quotes": [
+        {
+          "record_id": "SYN-R-003",
+          "channel": "survey",
+          "excerpt": "The adviser was helpful and explained clearly. Thank you. The point about the account was clear.",
+          "excerpt_is_redacted": true
+        },
+        {
+          "record_id": "SYN-R-006",
+          "channel": "contact_note",
+          "excerpt": "The customer said the charge was unclear but the adviser was helpful and resolved the question about the account.",
+          "excerpt_is_redacted": true
+        }
+      ],
+      "do_not_sum_with_other_themes": true
+    }
+  ],
+  "complaints_root_cause": {
+    "called": true,
+    "experiment": "20-complaints-root-cause-mi",
+    "method": "classify",
+    "not_a_regulatory_return": true,
+    "reason": null,
+    "rows": [
+      {
+        "record_id": "SYN-R-001",
+        "theme": "fees_and_charges",
+        "product": "not_identified",
+        "duty_outcome_touched": "price_and_value",
+        "source": "experiment_02_analyse",
+        "breach_found": false,
+        "customer_labelled_vulnerable": false,
+        "text_code_not_a_customer_conclusion": true
+      },
+      {
+        "record_id": "SYN-R-002",
+        "theme": "service_delay",
+        "product": "not_identified",
+        "duty_outcome_touched": null,
+        "source": "experiment_02_analyse",
+        "breach_found": false,
+        "customer_labelled_vulnerable": false,
+        "text_code_not_a_customer_conclusion": true
+      }
+    ]
+  },
+  "outcome_testing": {
+    "applied": true,
+    "is_the_prin_2a_8_report": false,
+    "monitoring_carried_out": false,
+    "finding": null,
+    "understanding": {
+      "rules": [
+        "PRIN 2A.5.3R(1)",
+        "PRIN 2A.5.3R(2)",
+        "PRIN 2A.5.10R(1)"
+      ],
+      "monitoring_point": "PRIN 2A.9.9R(3)",
+      "relevant_theme_ids": [
+        "unclear_information"
+      ],
+      "record_ids": [
+        "SYN-R-001",
+        "SYN-R-004",
+        "SYN-R-005",
+        "SYN-R-006",
+        "SYN-R-008"
+      ],
+      "finding": null
+    },
+    "support": {
+      "rules": [
+        "PRIN 2A.6.2R"
+      ],
+      "monitoring_point": "PRIN 2A.9.9R(4)",
+      "relevant_theme_ids": [
+        "could_not_get_support",
+        "support_helped"
+      ],
+      "record_ids": [
+        "SYN-R-002",
+        "SYN-R-003",
+        "SYN-R-006",
+        "SYN-R-007"
+      ],
+      "finding": null
+    },
+    "root_cause_processes": {
+      "rule": "PRIN 2A.9.11R",
+      "number_verified": false,
+      "note": "Experiment 20 assigns one root-cause code per in-frame complaint. That is not the process PRIN 2A.9.11R requires a firm to have."
+    },
+    "board_report": {
+      "rules": [
+        "PRIN 2A.8.3R",
+        "PRIN 2A.8.4R",
+        "PRIN 2A.8.5R"
+      ],
+      "this_pack_is_that_report": false,
+      "prin_2a_8_5_number_verified": false
+    }
+  },
+  "limitations": [
+    {
+      "id": "sampling_bias",
+      "applies": true,
+      "text": "A convenience sample, an unstated method, or a list of exclusions can miss the people who did not write in. A census of the file the analyst supplied is not a census of every customer. The interval does not correct for that."
+    },
+    {
+      "id": "small_numbers",
+      "applies": true,
+      "threshold": 30,
+      "threshold_basis": "starter_default_not_a_statute",
+      "text": "Fewer than 30 unique voices is marked as small numbers. The threshold is a starter default. It is not a rule in PRIN 2A. A small sample can move a proportion a long way when one text is recoded."
+    },
+    {
+      "id": "model_error",
+      "applies": true,
+      "text": "No model was called. The codes are a keyword list. A keyword list misses paraphrase and can false-match. A later model would add model error. This pack does not measure that error."
+    },
+    {
+      "id": "residual_identification",
+      "applies": true,
+      "text": "Experiment 08 replaces detected UK identifiers and does not claim anonymisation. This starter also replaces an email, a mobile-shaped number, and a 'my name is' introduction. Those patterns are not Article 4(1)(5). Residual text can still identify a person. quotes_meet_article_4_1_5 is false. No reversible map is kept."
+    },
+    {
+      "id": "not_statistical_purpose",
+      "applies": true,
+      "text": "UK GDPR Article 4(5), the paragraph on statistical purposes, requires the resulting information to be aggregate data that is not personal data. Representative quotes may still be personal data. This pack does not assert that paragraph. It also does not use a quote in support of a decision about a particular person."
+    },
+    {
+      "id": "not_individual_conclusions",
+      "applies": true,
+      "text": "A sentiment code and a theme are codes on one text, for the aggregate. They are not a conclusion about the person who wrote it. individual_conclusion stays false."
+    },
+    {
+      "id": "themes_overlap",
+      "applies": true,
+      "text": "A text can sit in more than one theme. Theme counts must not be added up and called a population. The population is the unique-voice denominator on the distribution."
+    },
+    {
+      "id": "wilson_assumptions",
+      "applies": true,
+      "text": "The Wilson interval assumes a simple random sample. Campaign copies are clustered first, by Experiment 07, so an exact duplicate is not a second voice. Near-duplicate clustering can still join texts that are not the same sentiment. The counted sentiment is the representative's, which is the lowest record id in the cluster."
+    },
+    {
+      "id": "not_a_board_report",
+      "applies": true,
+      "text": "This pack is not the report a governing body approves under PRIN 2A.8.4R(1), and it is not the monitoring in PRIN 2A.9. duty_met and outcome_tested stay false. Where a provision number was not reprinted on the 11 November 2026 rendering, number_verified is false."
+    },
+    {
+      "id": "lexicons_may_disagree",
+      "applies": true,
+      "text": "Experiment 20, which calls Experiment 02, can name a different root cause from the theme list in this folder. The pack does not pick a winner and does not call that difference a breach."
+    }
+  ],
+  "sources": [
+    {
+      "id": "prin_2a_5_3_1",
+      "provision": "PRIN 2A.5.3R(1)",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/5.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "named_on_the_page",
+      "applied_to_this_pack": true,
+      "taken": "A firm must support retail customer understanding so that its communications: (a) meet the information needs of retail customers; (b) are likely to be understood by retail customers; and (c) equip retail customers to make decisions that are effective, timely and properly informed.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_5_3_2",
+      "provision": "PRIN 2A.5.3R(2)",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/5.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "limb_2_of_the_rule_the_page_calls_PRIN_2A.5.3R",
+      "applied_to_this_pack": true,
+      "taken": "A firm must communicate information to retail customers in a way which is clear, fair and not misleading.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_5_10",
+      "provision": "PRIN 2A.5.10R(1)",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/5.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "named_on_the_page",
+      "applied_to_this_pack": true,
+      "taken": "Where appropriate, a firm must: (a) test communications before communicating them to retail customers; and (b) (as set out in PRIN 2A.9) regularly monitor the impact of the communications once they have been communicated, to identify whether they are supporting good outcomes for retail customers.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_6_2",
+      "provision": "PRIN 2A.6.2R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/6.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "named_on_the_page",
+      "applied_to_this_pack": true,
+      "taken": "A firm must design and deliver support to retail customers such that it: (1) meets the needs of retail customers, including those with characteristics of vulnerability; (2) ensures that retail customers can use their product as reasonably anticipated; (3) ensures that it includes appropriate friction in its customer journeys to mitigate the risk of harm and give retail customers sufficient opportunity to understand and assess their options, including any risks; and (4) ensures that retail customers do not face unreasonable barriers (including unreasonable additional costs) during the lifecycle of a product, such as when they want to: (a) make general enquiries or requests to the firm; or (f) make a complaint.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_6_delays",
+      "provision": "PRIN 2A.6 page, sentence about PRIN 2A.6.2R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/6.html",
+      "opened_on": "2026-11-11",
+      "number_verified": false,
+      "number_basis": "rendering_did_not_print_a_provision_number",
+      "applied_to_this_pack": true,
+      "taken": "A firm would be unlikely to meet its obligations in PRIN 2A.6.2R if its support to retail customers causes or would be likely to cause unreasonable delays when retail customers attempt to engage with the firm, including disproportionately longer call waiting times to cancel or make changes to an existing product than to purchase a new product.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_8_3",
+      "provision": "PRIN 2A.8.3R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/8.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "named_on_the_PRIN_2A.9_page_as_the_report_required_under_PRIN_2A.8.3R",
+      "applied_to_this_pack": true,
+      "taken": "A firm must prepare a report for its governing body setting out the results of its monitoring under PRIN 2A.9 and any actions required as a result of the monitoring.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_8_4",
+      "provision": "PRIN 2A.8.4R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/8.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "the_following_paragraph_on_the_page_cites_PRIN_2A.8.4R(1)",
+      "applied_to_this_pack": true,
+      "taken": "At least annually, the governing body of a firm must: (1) review and approve the firm's report on the outcomes being received by retail customers; (2) confirm whether it is satisfied that the firm is complying with its obligations under the Consumer Duty; and (3) assess whether the firm's future business strategy is consistent with its obligations under the Consumer Duty.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_8_5",
+      "provision": "PRIN 2A.8.5R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/8.html",
+      "opened_on": "2026-11-11",
+      "number_verified": false,
+      "number_basis": "sentence_reread_on_2026-11-11_number_from_experiment_20_pin_of_2026-10-29",
+      "applied_to_this_pack": true,
+      "taken": "When approving the firm's report under PRIN 2A.8.4R(1), the governing body of the firm must also agree: (1) any action required to address any identified risk that retail customers may not receive good outcomes; (2) any action required to address any identified instance where retail customers have not received good outcomes; and (3) any amendments to the firm's business strategy to ensure that it remains consistent with meeting the firm's obligations under the Consumer Duty.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_9_8",
+      "provision": "PRIN 2A.9.8R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/9.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "number_stated_on_the_fca_good_practice_page_opened_2026-11-11",
+      "applied_to_this_pack": true,
+      "taken": "A firm must regularly monitor the outcomes retail customers receive from: (1) the products the firm manufactures or distributes; (2) the communications the firm has with retail customers; and (3) the customer support the firm provides to retail customers.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_9_9_3",
+      "provision": "PRIN 2A.9.9R(3)",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/9.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "the_following_rule_on_the_page_calls_this_list_PRIN_2A.9.9R",
+      "applied_to_this_pack": true,
+      "taken": "whether retail customers are equipped with the right information to make effective, timely and properly informed decisions",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_9_9_4",
+      "provision": "PRIN 2A.9.9R(4)",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/9.html",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "the_following_rule_on_the_page_calls_this_list_PRIN_2A.9.9R",
+      "applied_to_this_pack": true,
+      "taken": "whether retail customers receive the support they need",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "prin_2a_9_11",
+      "provision": "PRIN 2A.9.11R",
+      "url": "https://www.handbook.fca.org.uk/handbook/PRIN/2A/9.html",
+      "opened_on": "2026-11-11",
+      "number_verified": false,
+      "number_basis": "sentence_reread_on_2026-11-11_number_from_experiment_20_pin_of_2026-10-29_page_names_PRIN_2A.9.12R_on_the_following_rule",
+      "applied_to_this_pack": true,
+      "taken": "A firm must have in place processes to identify the root causes of any failure to deliver the outcomes listed in PRIN 2A.9.9R for retail customers.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "uk_gdpr_art_4_1_5",
+      "provision": "UK GDPR Article 4(1)(5)",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/4",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "point_5_of_article_4_1_on_legislation_gov_uk",
+      "applied_to_this_pack": false,
+      "taken": "pseudonymisation means the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately and is subject to technical and organisational measures to ensure that the personal data are not attributed to an identified or identifiable natural person",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "uk_gdpr_art_4_5_stats",
+      "provision": "UK GDPR Article 4(5)",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/4",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "paragraph_5_inserted_by_the_Data_Use_and_Access_Act_2025_section_67",
+      "applied_to_this_pack": false,
+      "taken": "References in this Regulation to the processing of personal data for the purposes of statistical purposes are references to processing for statistical surveys or for the production of statistical results where (a) the information that results from the processing is aggregate data that is not personal data, and (b) the controller does not use the personal data processed, or the information that results from the processing, in support of measures or decisions with respect to a particular data subject to whom the personal data relates.",
+      "text_withheld": false,
+      "withheld_reason": null
+    },
+    {
+      "id": "uk_gdpr_art_5_1_c",
+      "provision": "UK GDPR Article 5(1)(c)",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "opened_on": "2026-11-11",
+      "number_verified": true,
+      "number_basis": "named_on_the_page",
+      "applied_to_this_pack": false,
+      "taken": "adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed ('data minimisation')",
+      "text_withheld": false,
+      "withheld_reason": null
+    }
+  ],
+  "stale": {
+    "rules_current": true,
+    "pinned_on": "2026-11-11",
+    "stale_after_days": 180
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "signals": [
+      {
+        "signal": "ignore_instructions",
+        "hidden_in": "body",
+        "followed": false
+      },
+      {
+        "signal": "mark_all_positive",
+        "hidden_in": "body",
+        "followed": false
+      }
+    ]
+  },
+  "reuse": {
+    "experiment_08": {
+      "called": true,
+      "finding_count": 1,
+      "entity_types": [
+        "nino"
+      ],
+      "output_is_anonymised": false,
+      "reversible_map_kept": false,
+      "model_suggestions_applied": false
+    },
+    "experiment_07": {
+      "called": true,
+      "cluster": true,
+      "wilson": true
+    },
+    "experiment_20": {
+      "called": true,
+      "experiment_02_called_by_experiment_20": true
+    },
+    "local_suppression": [
+      "email",
+      "name_introduction",
+      "phone"
+    ]
+  },
+  "raw_text_kept": false,
+  "draft_checksum": "d1a3aca802290dabf9af0bff62797b8e5486b42ffd22d8c3e0e745169dc1013a"
+}

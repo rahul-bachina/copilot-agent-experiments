@@ -157,6 +157,9 @@ DIAGRAMS = {
     "experiments/47-work-order-completion/docs/architecture_diagram.png": (
         "experiments/img/47-work-order-completion-architecture.png"
     ),
+    "experiments/48-customer-sentiment-evidence/docs/architecture_diagram.png": (
+        "experiments/img/48-customer-sentiment-evidence-architecture.png"
+    ),
     "experiments/49-records-classification/docs/architecture_diagram.png": (
         "experiments/img/49-records-classification-architecture.png"
     ),

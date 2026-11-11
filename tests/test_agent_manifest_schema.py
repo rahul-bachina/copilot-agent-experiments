@@ -2119,6 +2119,65 @@ class TestExperiment44Manifest:
         assert experiment_44_manifest["agent"]["id"] == "exp-44-knowledge-gap-detector"
 
 
+class TestExperiment48Manifest:
+    """Test the Experiment 48 customer sentiment evidence manifest."""
+
+    @pytest.fixture
+    def experiment_48_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "48-customer-sentiment-evidence"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_48_manifest):
+        """Experiment 48 manifest should be valid."""
+        validate(instance=experiment_48_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_48_manifest):
+        """Experiment 48 should be autonomy level A0. The analyst confirms the sample frame."""
+        level = experiment_48_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_48_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_48_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_48_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_48_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_48_manifest):
+        """Nothing is sent, and no customer record is written."""
+        assert experiment_48_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_48_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_analyst_confirms_the_sample_frame(self, experiment_48_manifest):
+        """The catalogue checkpoint is the analyst, and it is mandatory."""
+        points = experiment_48_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Confirm the sample frame and the limitations"
+        )
+        assert confirm["approver"] == "Analyst named on the review object"
+        assert confirm["mandatory"] is True
+        assert experiment_48_manifest["agent"]["id"] == "exp-48-customer-sentiment-evidence"
+
+
 class TestExperiment49Manifest:
     """Test the Experiment 49 records classification manifest."""
 

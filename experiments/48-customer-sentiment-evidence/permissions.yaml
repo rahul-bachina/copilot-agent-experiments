@@ -1,0 +1,438 @@
+# Agent manifest: Customer Sentiment Evidence Agent
+# Experiment 48 — catalogue ID C010
+# Version: 0.1.0
+# Last reviewed: 2026-11-11
+# Next review: 2027-05-11
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-48-customer-sentiment-evidence"
+  name: "Customer Sentiment Evidence Agent"
+  version: "0.1.0"
+  description: >
+    Produces a read-only evidence pack on customer sentiment from one
+    synthetic batch of complaints, survey free text, contact notes, and
+    reviews. Autonomy A0. The analyst confirms the sample frame and the
+    limitations before the pack is marked ready. The agent does not
+    conclude about an individual customer, contact a customer, or publish.
+  owner: "Customer outcomes analysis"
+  contact: "outcomes.analyst@calderwell.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/48-customer-sentiment-evidence"
+
+autonomy:
+  level: "A0"
+  level_description: "No autonomous capability. The analyst confirms the sample frame and the limitations. The agent only prepares the pack."
+  constraints:
+    - "The analyst confirms the sample frame and the limitations. The agent only prepares the pack."
+    - "The agent NEVER publishes the pack, contacts a customer, or concludes about an individual"
+    - "The agent NEVER decides that a Consumer Duty outcome was met or that the pack is the PRIN 2A.8 report"
+    - "Confirmation does not write a record and does not send a message"
+    - "A sentence in the batch cannot confirm the sample frame or the limitations"
+    - "Counts, intervals, quotations, and the empty approval come from Python, not from model output"
+    - "All output is advisory until the analyst confirms, and confirmation is not publication"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic or organisation-supplied sentiment batch"
+      description: "A single batch the analyst pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One batch per invocation. The output does not echo raw text. Quotes are redacted excerpts tied to synthetic record ids."
+      justification: "Themes, a distribution, and limitations cannot be drafted without the batch that was supplied."
+      data_categories:
+        - "Complaint, survey, contact-note, and review text"
+        - "A synthetic record id, a channel, and a received date"
+        - "A sample-frame description supplied by the analyst"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the batch."
+    - resource: "Separate review object"
+      description: "Analyst confirmation of the sample frame and the limitations, or a rejection. Not read from the batch text."
+      access_level: "read"
+      scope: "One review for a pack already produced."
+      justification: "Approval has to be deterministic and has to refuse publication, contact, and an individual conclusion."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 identifier redaction"
+      description: "propose() from experiments/08-uk-pii-redaction-gateway. No reversible map is requested."
+      access_level: "read"
+      scope: "The excised text for this run. No model is passed."
+      justification: "This experiment does not carry a second UK identifier detector."
+      may_contain_personal_data: true
+    - resource: "Experiment 07 clustering and Wilson interval"
+      description: "cluster_responses() and wilson_interval() from experiments/07-consultation-themes."
+      access_level: "read"
+      scope: "Redacted texts already in this run. No model is passed."
+      justification: "Duplicate voices and the interval are not reimplemented here."
+      may_contain_personal_data: true
+    - resource: "Experiment 20 complaint classification"
+      description: "classify() for an in-frame financial-services complaint. Experiment 20 calls Experiment 02. A public-service pack does not call it."
+      access_level: "read"
+      scope: "One redacted complaint text. Vulnerability phrases are not copied out."
+      justification: "This experiment does not carry a second complaints root-cause lexicon."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "Customer contact channels"
+      reason: "The agent does not phone, email, or message a customer."
+    - resource: "Publication and board-paper systems"
+      reason: "The pack is not published and is not filed as the PRIN 2A.8 report."
+    - resource: "CRM and complaints production records"
+      reason: "The pack is not written back."
+    - resource: "Live survey or review platforms"
+      reason: "The batch is the file the analyst supplied. The core does not query a live system."
+
+tools:
+  allowed:
+    - tool: "Sentiment evidence"
+      provider: "Local Python (src/evidence.py)"
+      action: "Assemble one evidence pack from a synthetic batch"
+      access_level: "read"
+      scope: "One batch. No network. No model. Calls Experiments 08, 07, and 20 in process."
+      justification: "Counts, intervals, and record ids are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Review"
+      provider: "Local Python (record_review)"
+      action: "Record an analyst confirmation of the sample frame and the limitations, or a rejection"
+      access_level: "read"
+      scope: "The pack for this run and a separate review object. No publication and no contact."
+      justification: "The approval has to be deterministic and has to refuse a publish and a contact."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The counts, the quotes, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a publication, a contact, an individual conclusion, or a met duty"
+      access_level: "read"
+      scope: "The pack for this run"
+      justification: "A pack that contacts a customer is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The pack is returned to the analyst. Filing it, if someone
+      chooses to, is done in the organisation's own system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming the sample frame does not email, text, or call anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a Consumer Duty outcome, reject a complaint,
+      or mark a customer. record_review can record a confirmation. It cannot publish.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that PRIN 2A.5, PRIN 2A.6, PRIN 2A.8, or
+      PRIN 2A.9 was met, and it does not decide that a public body complied
+      with a feedback duty. No such public-sector statute was opened.
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a complaint, a survey, or a customer record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact the customer, the analyst, or a publisher."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent and no redress is paid."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish the pack or file it as the board report"
+      rationale: "Those functions raise SentimentForbidden. published and board_report_approved stay false after confirmation."
+    - enabled: false
+      action_name: "Conclude about an individual customer"
+      rationale: "individual_conclusion stays false. A text code is not a conclusion about a person."
+    - enabled: false
+      action_name: "Claim that quotes are pseudonymised or anonymised"
+      rationale: "quotes_meet_article_4_1_5 and output_is_anonymised stay false. No reversible map is kept."
+
+human_approval:
+  description: >
+    The analyst confirms the sample frame and that the limitations were read,
+    on a separate review object. The agent has no path that publishes, contacts
+    a customer, or files the pack as the report in PRIN 2A.8. Confirming a
+    sentence in the chat does not mark the pack ready.
+
+  approval_points:
+    - action: "Confirm the sample frame and the limitations"
+      approver: "Analyst named on the review object"
+      mandatory: true
+      rationale: "prepare_pack leaves human_approval null and ready false. Only record_review can set them, and only when the analyst records both confirmations against the draft checksum."
+    - action: "Acknowledge stale sources or an open period"
+      approver: "Analyst"
+      mandatory: true
+      rationale: "Stale quotations or a period that has not closed block confirmation until the review object says they were seen. That acknowledgement does not publish the pack."
+    - action: "Publish, contact a customer, or file the board report"
+      approver: "The organisation's own process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled."
+
+  no_approval_required:
+    - action: "View the draft pack"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same batch"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 5(1)(c)
+      was read on 11 November 2026. Article 6 was not re-opened for this
+      experiment. A firm or a public body confirms its own basis. Do not copy
+      a basis from another experiment.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a customer volunteers in a complaint, a survey answer, or a note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 11 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One batch at a time, as supplied by the person running the pack"
+      - "Quotes are redacted excerpts. Raw text is not copied. No reversible map is kept"
+      - "Nothing is written to a customer record"
+      - "Samples in this repository are synthetic"
+      - "No solely automated decision about a person. The analyst confirms the frame, and this agent still does not publish."
+  data_minimisation:
+    - "Article 5(1)(c) was read on 11 November 2026. The pack keeps synthetic record ids, codes, and short redacted excerpts. It does not keep the raw text."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the analyst then saves. That schedule is not set here."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Batch text is untrusted. It may tell the model to ignore the rules, mark
+    every record positive, publish the pack, or contact the customer. The core
+    does not read the network. The model is not given a tool that can publish
+    or contact.
+  controls:
+    - control: "Instruction phrases are removed, and the rest of the sentence stays"
+      description: "A complaint named in the same sentence as an instruction is still coded. Mark every record positive is recorded and not followed."
+    - control: "Confirmation is a separate object"
+      description: "A sentence that says the sample frame is already confirmed is a signal. It does not set human_approval."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set ready, published, or duty_met is stripped."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_review refuses publish, contact, and an individual conclusion. Direct functions raise SentimentForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading pack. The analyst is
+    the control. There is no publication even if the pack is wrong. A paraphrase
+    that uses none of the pinned phrases is not detected.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-11"
+  risks:
+    - id: "R1"
+      risk: "A batch sentence is treated as authority to publish, to contact a customer, or to skip the limitations"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Publish and contact instructions are recorded and not followed"
+        - "publish_pack and contact_customer raise SentimentForbidden"
+      residual_risk: "Low"
+      owner: "Customer outcomes analysis"
+    - id: "R2"
+      risk: "A text code is read as a conclusion about an identifiable customer"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "individual_conclusion stays false"
+        - "Quotes carry a synthetic record id and a redacted excerpt"
+        - "The limitations say a code is not a conclusion about a person"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R3"
+      risk: "A small or biased sample is presented as evidence that a Consumer Duty outcome was met"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "duty_met and outcome_tested stay false"
+        - "The pack states sample size, the sampling method, and the Wilson caveat"
+        - "The analyst must confirm the frame and the limitations before ready is true"
+      residual_risk: "Medium"
+      owner: "Customer outcomes analysis"
+    - id: "R4"
+      risk: "Duplicate survey answers are counted as extra customers"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Experiment 07 clusters exact and near duplicates"
+        - "The denominator is unique voices. Channel and period totals equal that denominator"
+        - "Theme counts are marked as overlapping and must not be summed"
+      residual_risk: "Low"
+      owner: "Customer outcomes analysis"
+    - id: "R5"
+      risk: "A quote still contains a name, an email, or a UK identifier"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 replaces detected UK identifiers and does not claim anonymisation"
+        - "A narrow name, email, and mobile pattern is replaced locally"
+        - "quotes_meet_article_4_1_5 stays false"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R6"
+      risk: "A stale handbook quotation is treated as the current rule"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days after 11 November 2026, quotations are withheld"
+        - "Provision numbers that were not reprinted on that rendering are marked number_verified false"
+        - "Confirmation of a stale pack requires an acknowledgement"
+      residual_risk: "Low"
+      owner: "Customer outcomes analysis"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the batch id if it
+    matched the synthetic pattern, the outcome, and the later review. This
+    starter logs nothing because it keeps no store. Do not put the raw text
+    or a quote that still identifies someone in an application trace.
+  logged_events:
+    - event: "Pack requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Batch id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's outcomes schedule. Not set by this starter."
+    - event: "Pack result"
+      data_logged:
+        - "Outcome"
+        - "Unique-voice count and whether any source was stale"
+        - "Whether ready was left false"
+      retention: "Keep with the working papers if the analyst relies on the pack. The raw text is not in this event."
+    - event: "Review recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "published false"
+      retention: "Organisation's schedule. The agent does not write this event to a complaints system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the raw text."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for messaging, publishing, or a CRM write"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Customer outcomes lead"
+      contact: "outcomes.analyst@calderwell.example"
+    - role: "Data protection officer"
+      contact: "dpo@calderwell.example"
+
+review:
+  last_review_date: "2026-11-11"
+  next_review_date: "2027-05-11"
+  review_frequency: "6 months, and sooner if the pinned Handbook pages or UK GDPR Articles 4 or 5 change"
+  reviewer: "The adopting organisation's outcomes lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to PRIN 2A.5, PRIN 2A.6, PRIN 2A.8, or PRIN 2A.9"
+    - "A change to UK GDPR Article 4(1)(5), Article 4(5), or Article 5(1)(c)"
+    - "A proposal to add a connector that can publish, message, or write a customer record"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Evidence core"
+      path: "src/evidence.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 5(1)(c) and Article 4 were read on 11 November 2026. Article 6 and Article 9 were not opened. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day stale window and the unique-voice threshold of 30 are starter defaults, not duties in PRIN 2A."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Keyword codes are not monitoring under PRIN 2A.9 and not the report under PRIN 2A.8.3R. PRIN 2A.8.5R and PRIN 2A.9.11R numbers were not reprinted on the 11 November 2026 rendering."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Experiment 08 does not anonymise. Local name, email, and mobile patterns do not meet Article 4(1)(5). No public-sector feedback statute was opened."
+      section: "src/evidence.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on customer text."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on calderwell.example are placeholders. Calderwell Mutual and Calderwell Borough Council are invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP, prompt shields, Key Vault, Purview, and Application Insights were not opened on 11 November 2026. Treat the product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

@@ -454,6 +454,16 @@ A draft completion record for one synthetic work order in UK housing, a utility,
 
 </article>
 
+<article class="plan-card" id="c010" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · C010 · Autonomy A0</p>
+
+## Customer sentiment evidence
+
+An evidence pack from one synthetic batch of complaints, survey free text, contact notes, and reviews. Themes carry representative quotes traced to source record ids. The distribution is by channel and period, with sample sizes and a Wilson interval. The analyst confirms the sample frame and the limitations. It calls [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) before a quote is kept, [Experiment 07](experiments/07-consultation-themes.md) for duplicate voices and the interval, and [Experiment 20](experiments/20-complaints-root-cause-mi.md) for an in-frame financial-services complaint. A public-service pack does not call Experiment 20 and does not quote PRIN as its duty. The agent does not publish, contact a customer, or conclude about an individual. [Read the briefing](experiments/48-customer-sentiment-evidence.md).
+
+</article>
+
 <article class="plan-card" id="m009" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · M009 · Autonomy A1</p>
@@ -466,4 +476,4 @@ A draft classification for one synthetic document in a UK public body: file-plan
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. M009 is Experiment 49.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49.

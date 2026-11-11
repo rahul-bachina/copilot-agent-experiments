@@ -1,0 +1,7 @@
+# Experiment 48 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 08 propose(), Experiment 07 cluster_responses() and
+# wilson_interval(), and Experiment 20 classify(), which calls Experiment 02.
+# Those experiments use the standard library. Tests use pytest.
+# A clean environment can install just this file.
+
+pytest>=7.0.0
