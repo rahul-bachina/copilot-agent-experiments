@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "curate_tool.schema.json",
+  "title": "SharePoint curation tool",
+  "description": "Read one synthetic site snapshot and return a draft. The tool does not delete, does not unpublish, does not move, and does not change permissions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "site_id", "requesting_user", "items", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "site_id": {"type": "string"},
+    "jurisdiction": {
+      "enum": ["england", "wales", "scotland", "northern_ireland", "unspecified"]
+    },
+    "requesting_user": {"type": "object"},
+    "items": {"type": "array"},
+    "queries": {"type": "array"},
+    "knowledge_pack_id": {"type": "string"},
+    "as_of": {"type": "string"}
+  }
+}

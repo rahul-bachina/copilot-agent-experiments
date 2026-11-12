@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "approval_tool.schema.json",
+  "title": "Site-owner approval",
+  "description": "A separate approval object. The site owner approves named proposal ids. Approval does not delete, unpublish, move, or change permissions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "actor_id", "site_id", "proposal_ids"],
+  "properties": {
+    "decision": {
+      "enum": ["approve_actions", "reject_actions", "defer"]
+    },
+    "actor_role": {"const": "Site owner"},
+    "actor_id": {"type": "string"},
+    "site_id": {"type": "string"},
+    "proposal_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "queue_reviewed": {"type": "boolean"}
+  }
+}
