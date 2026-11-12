@@ -163,6 +163,9 @@ DIAGRAMS = {
     "experiments/49-records-classification/docs/architecture_diagram.png": (
         "experiments/img/49-records-classification-architecture.png"
     ),
+    "experiments/52-word-proposal-drafting/docs/architecture_diagram.png": (
+        "experiments/img/52-word-proposal-drafting-architecture.png"
+    ),
 }
 
 

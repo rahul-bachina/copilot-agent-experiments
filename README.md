@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Forty-nine starters are in `experiments/`. The folders are 01 to 49.
+Fifty starters are in `experiments/`. The folders are 01 to 49 and 52.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -81,6 +81,7 @@ Forty-nine starters are in `experiments/`. The folders are 01 to 49.
 | 47 | [Work Order Completion Assistant](experiments/47-work-order-completion/) | Draft a completion record from one synthetic visit: notes, photo descriptions, and parts used. Autonomy A1. The technician approves every field before an in-memory stub write. The agent does not close the job, raise a charge, order parts, or contact the customer. | ✅ Starter |
 | 48 | [Customer Sentiment Evidence Agent](experiments/48-customer-sentiment-evidence/) | Produce a read-only evidence pack on customer sentiment from one synthetic batch of complaints, survey free text, contact notes, and reviews. Autonomy A0. The analyst confirms the sample frame and the limitations. The agent does not conclude about an individual, contact a customer, or publish. | ✅ Starter |
 | 49 | [Records Classification Assistant](experiments/49-records-classification/) | Propose a file-plan category, retention entry, disposal action, security marking, and personal-data indicators for one synthetic document. Autonomy A1. The records manager confirms every classification. The agent does not delete, dispose of, move, or downgrade a record. | ✅ Starter |
+| 52 | [Word Proposal Drafting Agent](experiments/52-word-proposal-drafting/) | Draft a cited bid response from one synthetic invitation and an approved library. Autonomy A1. The author accepts the complete draft before it is used anywhere. The agent does not submit, send, or invent a price or a certificate. | ✅ Starter |
 
 ## Getting Started
 
