@@ -1,0 +1,238 @@
+{
+  "label": "Synthetic SharePoint snapshots for a deterministic smoke test. Not a model evaluation.",
+  "organisation": "Merrowfield Borough Council (fictional)",
+  "cases": [
+    {
+      "id": "sample-visible-set",
+      "name": "Sample intranet keeps a hidden payroll file out of the draft",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "expect": {
+        "outcome": "human_queue",
+        "withheld_count": 1,
+        "visible_count": 11,
+        "has_type": ["broken_link", "merge", "archive", "knowledge_gap", "human_queue", "missing_metadata"],
+        "human_approval_null": true,
+        "absent": ["CANARY-HIDDEN-PAYROLL", "JM 45 67 89 D", "AB 12 34 56 C", "Payroll.aspx", "SYN-SP-0507"]
+      }
+    },
+    {
+      "id": "negation-not-personal",
+      "name": "A denial of personal data is not a positive match",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "expect": {
+        "item": {"id": "SYN-SP-0512", "queued": false},
+        "has_type": ["inconsistent_metadata"]
+      }
+    },
+    {
+      "id": "injection-not-followed",
+      "name": "Delete this page is recorded and not followed",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "expect": {
+        "injection": true,
+        "signal": "delete_page",
+        "item": {"id": "SYN-SP-0508", "queued": false},
+        "absent": ["Ignore previous instructions"]
+      }
+    },
+    {
+      "id": "open-marking",
+      "name": "An unlisted marking goes to the human queue",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "expect": {
+        "item": {"id": "SYN-SP-0511", "queued": true},
+        "lacks_type": []
+      }
+    },
+    {
+      "id": "pii-not-copied",
+      "name": "An identifier queues the page and the value is not copied",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "expect": {
+        "item": {"id": "SYN-SP-0506", "queued": true},
+        "absent": ["JM 45 67 89 D", "456789"]
+      }
+    },
+    {
+      "id": "stale-pin",
+      "name": "A stale pin withholds quotations and does not approve",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2027-08-01",
+      "expect": {
+        "outcome": "stale_sources",
+        "rules_current": false,
+        "quotes_withheld": true,
+        "human_approval_null": true,
+        "absent": ["accurate and, where necessary, kept up to date", "in accordance with Article 84B", "properly authorised"]
+      }
+    },
+    {
+      "id": "scotland-no-disposition",
+      "name": "The section 46 code is not applied to a Scottish snapshot",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "set": {"jurisdiction": "scotland"},
+      "expect": {
+        "outcome": "outside_code_scope",
+        "lacks_type": ["archive", "merge"],
+        "has_type": ["missing_metadata"]
+      }
+    },
+    {
+      "id": "no-principals",
+      "name": "No principals withholds every item",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "set": {"principals": []},
+      "expect": {
+        "outcome": "refused",
+        "withheld_count": 12,
+        "visible_count": 0,
+        "absent": ["CANARY-HIDDEN-PAYROLL", "Meeting room booking"]
+      }
+    },
+    {
+      "id": "not-synthetic",
+      "name": "A snapshot that is not marked synthetic is refused",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "set": {"synthetic": false},
+      "expect": {
+        "outcome": "refused",
+        "human_approval_null": true,
+        "absent": ["CANARY-HIDDEN-PAYROLL", "Meeting room booking"]
+      }
+    },
+    {
+      "id": "stub-after-approval",
+      "name": "One metadata proposal is stubbed only after the site owner approves it",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "missing_metadata", "item_id": "SYN-SP-0502", "queue_reviewed": true},
+      "apply": true,
+      "expect": {
+        "approved": true,
+        "stub": true,
+        "applied_in_tenant": false
+      }
+    },
+    {
+      "id": "queue-not-reviewed",
+      "name": "Other proposals stay unapproved until the human queue is reviewed",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "missing_metadata", "item_id": "SYN-SP-0502", "queue_reviewed": false},
+      "expect": {
+        "review_reason": "queue_not_reviewed",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "queue-is-not-a-change",
+      "name": "A human-queue proposal cannot be approved as a curation change",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "human_queue", "item_id": "SYN-SP-0505", "queue_reviewed": true},
+      "expect": {
+        "review_reason": "queue_is_not_a_change",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "delete-refused",
+      "name": "A delete decision is refused",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "missing_metadata", "item_id": "SYN-SP-0502", "decision": "delete_page", "queue_reviewed": true},
+      "expect": {
+        "review_reason": "prohibited_decision",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "unpublish-refused",
+      "name": "An unpublish decision is refused",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "archive", "item_id": "SYN-SP-0504", "decision": "unpublish_page", "queue_reviewed": true},
+      "expect": {
+        "review_reason": "prohibited_decision",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "move-refused",
+      "name": "A move decision is refused",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "merge", "item_id": "SYN-SP-0502", "decision": "move_page", "queue_reviewed": true},
+      "expect": {
+        "review_reason": "prohibited_decision",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "permissions-refused",
+      "name": "A permission change is refused",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "approve": {"type": "broken_link", "item_id": "SYN-SP-0501", "decision": "change_permissions", "queue_reviewed": true},
+      "expect": {
+        "review_reason": "prohibited_decision",
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "stub-without-approval",
+      "name": "The stub does not run before approval",
+      "fixture": "examples/sample_site.json",
+      "as_of": "2026-11-12",
+      "apply": true,
+      "expect": {
+        "stub": false,
+        "human_approval_null": true
+      }
+    },
+    {
+      "id": "banner-line",
+      "name": "A short banner that is not OFFICIAL goes to a person",
+      "as_of": "2026-11-12",
+      "snapshot": {
+        "synthetic": true,
+        "site_id": "SYN-SITE-0060",
+        "jurisdiction": "england",
+        "requesting_user": {"id": "SYN-USER-060", "principals": ["SYN-PRIN-STAFF"]},
+        "items": [
+          {
+            "item_id": "SYN-SP-0601",
+            "kind": "page",
+            "title": "Marked banner",
+            "url": "/sites/intranet/SitePages/Banner.aspx",
+            "content_type": "Guidance",
+            "owner": "SYN-OWNER-WEB",
+            "review_date": "2027-06-01",
+            "audience": "staff",
+            "last_modified": "2026-10-01",
+            "published": true,
+            "is_home": true,
+            "readers": ["SYN-PRIN-STAFF"],
+            "sensitivity": "OFFICIAL",
+            "personal_data_flag": false,
+            "links": [],
+            "text": "OFFICIAL-SENSITIVE\nThis guidance tells staff how to read a banner. Staff guidance covers the banner."
+          }
+        ]
+      },
+      "expect": {
+        "outcome": "human_queue",
+        "item": {"id": "SYN-SP-0601", "queued": true},
+        "lacks_type": ["archive", "merge"]
+      }
+    }
+  ]
+}

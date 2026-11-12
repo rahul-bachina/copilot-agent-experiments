@@ -304,9 +304,16 @@ def _phrase_counts(matching: str) -> dict[str, int]:
     return counts
 
 
-def _banner_not_ordinary(matching: str) -> bool:
-    for line in matching.splitlines():
-        token = line.strip()
+def _banner_not_ordinary(text: str) -> bool:
+    """A short banner line that is not OFFICIAL goes to a person.
+
+    The check runs on each line after negation is removed, so a denial is
+    not a positive match. A normal sentence does not match.
+    """
+
+    for line in text.splitlines():
+        cleaned, _report = prepare_text(line)
+        token = cleaned.strip()
         if not token or len(token) > 40:
             continue
         if token.upper() in {"OFFICIAL", "NONE", "UNMARKED"}:
@@ -828,7 +835,7 @@ def _read_item(raw: dict, principals: set[str]) -> tuple[str, dict | None]:
         "matching": matching if not too_large else "",
         "tokens": _tokens(matching) if matching else set(),
         "injection": injection,
-        "banner": _banner_not_ordinary(matching) if matching else False,
+        "banner": _banner_not_ordinary(text) if text and not too_large else False,
     }
 
 

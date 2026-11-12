@@ -78,7 +78,7 @@ python eval/evaluate.py
 python src/curate.py --input examples/sample_site.json --as-of 2026-11-12
 ```
 
-`eval/evaluate.py` prints a **deterministic smoke test**. The fixtures are synthetic. `eval/smoke_report.json` is that run. It is not a model score. A live Microsoft Foundry run has not been done. Each case is counted once.
+`eval/evaluate.py` prints a **deterministic smoke test**. The fixtures are synthetic. `eval/smoke_report.json` is that run. It is not a model score. A live Microsoft Foundry run has not been done. Each case is counted once. The checked-in report is 18 passed, 0 failed, 0 errors, 18 cases.
 
 The exit code is 0 when a draft or a refusal is produced. The exit code is 2 when the input cannot be read.
 
