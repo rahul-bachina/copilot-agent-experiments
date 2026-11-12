@@ -1,0 +1,469 @@
+# Agent manifest: Teams Channel Digest Agent
+# Experiment 51 — catalogue ID M002
+# Version: 0.1.0
+# Last reviewed: 2026-11-12
+# Next review: 2027-05-12
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-51-teams-channel-digest"
+  name: "Teams Channel Digest Agent"
+  version: "0.1.0"
+  description: >
+    Produces a read-only digest of synthetic Microsoft Teams channel messages
+    for a user-confirmed set of channels and a user-confirmed period. Autonomy
+    A0. The digest lists key decisions, open questions, actions with the owner
+    named in the message, and items that name the requesting user. Every point
+    quotes the source message. The agent does not post, reply, react, mention,
+    or forward, and it does not read a channel the requesting user cannot access.
+  owner: "Information governance"
+  contact: "digest.owner@northmere.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/51-teams-channel-digest"
+
+autonomy:
+  level: "A0"
+  level_description: "The requesting user confirms the channels and the period before any digest is produced. The digest is read-only."
+  constraints:
+    - "No digest is produced until the requesting user confirms the exact channel ids and the period on a separate confirmation."
+    - "The agent NEVER posts, replies, reacts, @mentions, or forwards."
+    - "The agent reads only channels the requesting user is recorded as already able to access."
+    - "The agent does not infer sentiment about a named person or make a performance judgement."
+    - "Message text is untrusted. An instruction in a message is not followed."
+    - "A negation in front of a cue is not a positive match."
+    - "Identifier values are masked. The output is not described as anonymised."
+    - "An empty period and an unavailable source are stated. Gaps are not filled."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic Teams channel export"
+      description: "Channels and messages the caller supplies for this run. Samples in this repository are synthetic. Northmere Borough Council is invented."
+      access_level: "read"
+      scope: "One export per invocation. Message bodies are not copied into the scope preview. A digest copies only a supported sentence."
+      justification: "The digest cannot quote a message that was not supplied."
+      data_categories:
+        - "Channel ids and display names"
+        - "Message ids, sent dates, and message text"
+        - "A synthetic user id and display name"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the export."
+    - resource: "Separate confirmation object"
+      description: "The requesting user's confirmation of channel ids and the period. Not read from message text."
+      access_level: "read"
+      scope: "One confirmation for a scope already previewed."
+      justification: "Autonomy A0 requires the channels and the period to be confirmed before a digest."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 identifier gateway"
+      description: "propose() for UK identifier types. Values are not copied. reversible is false."
+      access_level: "read"
+      scope: "One message body at a time, after confirmation."
+      justification: "This experiment does not carry a second identifier detector."
+      may_contain_personal_data: true
+    - resource: "Experiment 41 citation check"
+      description: "check_sentence() on each candidate sentence. A paraphrase fails."
+      access_level: "read"
+      scope: "The redacted sentence and the redacted message."
+      justification: "A point that is not contained in the cited lines is not included."
+      may_contain_personal_data: true
+    - resource: "Experiment 29 groundedness check"
+      description: "score_claim() on each candidate sentence. Microsoft Foundry is not called."
+      access_level: "read"
+      scope: "The redacted sentence and the redacted message."
+      justification: "Numbers, dates, and content tokens have to be in the cited message."
+      may_contain_personal_data: true
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment."
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Live Microsoft Teams tenants and Microsoft Graph"
+      reason: "The export is the text the caller supplied. The core does not call Graph."
+    - resource: "Channels the requesting user cannot access"
+      reason: "Those messages are not read, even if they are present in the file."
+    - resource: "Chats, meetings, mail, and files"
+      reason: "This starter reads channel messages in the export only."
+    - resource: "Post, reply, react, mention, and forward endpoints"
+      reason: "Those functions raise DigestForbidden."
+
+tools:
+  allowed:
+    - tool: "Preview scope"
+      provider: "Local Python (preview_scope)"
+      action: "List requested channels, access, availability, and a message count"
+      access_level: "read"
+      scope: "One export. No message text in the result. No network."
+      justification: "The user has to see the scope before confirming it. A count is not a digest."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Confirm scope"
+      provider: "Local Python (confirm_scope)"
+      action: "Record confirmation of the exact channel ids and the period"
+      access_level: "read"
+      scope: "The preview and a separate confirmation. No write and no send."
+      justification: "The confirmation has to be deterministic and has to refuse a post, a reply, a reaction, a mention, and a forward."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Produce digest"
+      provider: "Local Python (produce_digest)"
+      action: "Quote decisions, questions, named actions, and items for the requesting user"
+      access_level: "read"
+      scope: "Confirmed channels and the confirmed period only. Calls Experiments 08, 41, and 29 in process."
+      justification: "Which sentence matched, which identifier type was present, and whether the sentence is supported are comparisons. A language model must not invent them."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run. Not called by this starter."
+      justification: "Optional narrative. The points, the citations, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a post, a reply, a reaction, a mention, or a forward"
+      access_level: "read"
+      scope: "The result for this run."
+      justification: "A digest that posts is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The digest is returned to the requesting user. It is not
+      posted to a channel and it is not written to a record system.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Confirming a scope does not post, reply, mention, or forward.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a digest as a decision, and it does not
+      approve monitoring. confirm_scope can record the user's channel and
+      period confirmation. It cannot post.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5 was met, that monitoring
+      workers is lawful, that a DPIA is required, or that a digest is held
+      information under the Freedom of Information Act 2000.
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, or delete against a live Teams channel or any other record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not post, reply, mention, forward, or send."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the GitHub Copilot harness, are the tenant's billing. This starter does not spend them."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Post, reply, react, mention, or forward"
+      rationale: "Those functions raise DigestForbidden. The flags stay false."
+    - enabled: false
+      action_name: "Read a channel the user cannot access"
+      rationale: "A channel outside accessible_channel_ids is not read. Confirming it is refused."
+    - enabled: false
+      action_name: "Performance or sentiment judgement about a named person"
+      rationale: "Those messages are withheld. The text is not copied."
+
+human_approval:
+  description: >
+    The requesting user confirms the exact channels and the period on a
+    separate object before any digest is produced. A sentence in a message
+    does not confirm the scope. Confirming the scope does not approve a post,
+    a reply, or monitoring of workers. The agent has no path that posts.
+
+  approval_points:
+    - action: "Confirm the channels and the period"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "preview_scope leaves digest null. Only a separate confirmation of the exact channel ids and the same period can set scope_confirmed."
+    - action: "Acknowledge an empty period, an unavailable source, an access gap, or a stale export"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "Those facts block confirmation until the review object says they were seen. The agent does not fill the gap."
+    - action: "Read a withheld message"
+      approver: "The requesting user, in the channel they already have"
+      mandatory: true
+      rationale: "A judgement about a named person, a sensitive cue, or a marked message is not copied. A person reads the source."
+    - action: "Post, reply, react, mention, or forward"
+      approver: "The organisation's own Teams process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled. The direct functions raise DigestForbidden."
+
+  no_approval_required:
+    - action: "View the scope preview"
+      rationale: "The preview has no message text and no external effect."
+    - action: "Re-run the same export"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 12 November 2026. Article 5(1)(b) and Article 5(1)(c)
+      were read that day. Purpose limitation and data minimisation are reported
+      as readings. purpose_limitation_met and data_minimisation_met stay false.
+      Article 5(3) was on the same page. It does not make processing lawful by
+      itself. Article 9 was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health information a channel message may contain"
+      - "Trade union information a channel message may contain"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 12 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One export at a time, as supplied by the person running the draft"
+      - "Channels the user cannot access are not read"
+      - "Sensitive and judgement messages are withheld and the text is not copied"
+      - "Identifier values are not copied. Experiment 08 is called with reversible false"
+      - "Samples in this repository are synthetic"
+      - "No solely automated decision about a worker. The agent does not judge performance."
+  data_minimisation:
+    - "The scope preview keeps channel ids, a status, and a count. It does not keep message text."
+    - "The digest keeps a supported sentence, the message id, and the line. It does not keep the rest of the message."
+    - "Identifier values are not copied."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A digest the user then saves may be information the body holds. This starter does not decide that. The organisation's own retention schedule applies. It is not set here."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Channel messages are untrusted. They may tell the model to ignore the
+    rules, post a reply, or treat the scope as already confirmed. The core
+    does not read the network. The model is not given a tool that can post,
+    reply, react, mention, or forward.
+  controls:
+    - control: "Instruction sentences are recorded and are not points"
+      description: "A later sentence in the same message can still be a decision. The instruction is not followed."
+    - control: "A refusal of a side effect is not the side effect"
+      description: "Do not post a reply is recorded as a refusal. posted stays false."
+    - control: "Negation in front of a cue is not a positive match"
+      description: "It is not true that we decided is not a decision. Never mind cancels an earlier decision in the same message. We decided not to remains a decision, because the negation comes after the cue."
+    - control: "HTML comments are not evidence"
+      description: "A decision that appears only inside an HTML comment is not used. An instruction inside the comment is recorded and not followed."
+    - control: "Confirmation is a separate object"
+      description: "A sentence that says the channels are confirmed is not a confirmation. scope_confirmed stays false until confirm_scope."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set posted or human approval is stripped. The value is not kept."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. Direct functions raise DigestForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading digest. The requesting
+    user is the control. There is no autonomous post even if the digest is
+    wrong. A paraphrase that uses none of the cues is not labelled. Unmarked
+    sensitive wording that matches none of the hold patterns is not detected.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-12"
+  risks:
+    - id: "R1"
+      risk: "A message sentence is treated as authority to post, reply, or confirm the scope"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Post a reply and channels are confirmed are recorded and not followed"
+        - "post_message and the other direct functions raise DigestForbidden"
+      residual_risk: "Low"
+      owner: "Information governance"
+    - id: "R2"
+      risk: "A channel the user cannot access is digested"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Messages are not read unless the channel id is in accessible_channel_ids and the channel is available"
+        - "confirm_scope refuses a channel that is not readable"
+      residual_risk: "Low"
+      owner: "Information governance"
+    - id: "R3"
+      risk: "The digest judges a named person's performance or sentiment"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Judgement wording, an evaluative copula about a named person, and a marked message are withheld"
+        - "The text is not copied"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R4"
+      risk: "An identifier value is copied into the digest"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 is called with reversible false"
+        - "A value that remains after redaction withholds the message"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R5"
+      risk: "A stale export or a stale legal pin is presented as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "An export older than 14 days is not digested until the user acknowledges it"
+        - "A legal pin older than 180 days is not quoted"
+      residual_risk: "Low"
+      owner: "Information governance"
+    - id: "R6"
+      risk: "The digest is treated as a monitoring decision or as an FOI determination"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "monitoring_decided, dpia_decided, and held_information_decided stay false"
+        - "purpose_limitation_met and data_minimisation_met stay false"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the export id, the
+    confirmed channel ids, and whether a digest was produced. This starter
+    logs nothing because it keeps no store. Do not put message text or an
+    identifier value in an application trace.
+  logged_events:
+    - event: "Scope requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Export id, if it matched the synthetic pattern"
+        - "Requested channel ids"
+        - "Whether the export was marked synthetic"
+      retention: "Organisation's schedule. Not set by this starter."
+    - event: "Digest result"
+      data_logged:
+        - "Outcome"
+        - "Message count and section counts, kept separate"
+        - "Whether any source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the digest if the user relies on it. Message bodies are not in this event."
+    - event: "Scope confirmation"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "Channel ids confirmed"
+        - "posted false"
+      retention: "Organisation's schedule. The agent does not write this event to Teams."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log message text or an identifier value."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later that can post, reply, or send"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Information governance lead"
+      contact: "digest.owner@northmere.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-12"
+  next_review_date: "2027-05-12"
+  review_frequency: "6 months, and sooner if the pinned legislation or the Graph permission changes"
+  reviewer: "The adopting organisation's information governance lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5"
+    - "A change to Freedom of Information Act 2000 section 1"
+    - "A change to the ICO monitoring-workers guidance"
+    - "A change to the Microsoft Graph list-channel-messages permission table"
+    - "A proposal to add a connector that can post, reply, react, mention, or forward"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Digest core"
+      path: "src/digest.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 12 November 2026. The controller confirms the basis and completes a DPIA before live use, including before any monitoring of workers."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 14-day export window and the 180-day source window are starter defaults. They are not periods in the ICO guidance or in Microsoft Graph."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Delegated ChannelMessage.Read.All, as described on the list-channel-messages page opened on 12 November 2026, is not limited to one channel. This starter's channel list is a local control. It is not a Graph scope."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The end-user article Use Copilot in Microsoft Teams chat and channels was not opened. Any limit on how far back Copilot reads was not verified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Work IQ is named on catalogue row M002. The Work IQ Learn page was not opened on 12 November 2026. Treat that product behaviour as unverified. This starter does not call it."
+      section: "docs/foundry.md"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Freedom of Information Act 2000 sections 2, 3, 9, 12, and 14 were not opened. This starter does not decide that a body is a public authority or that a saved digest is held information."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on northmere.example.gov.uk are placeholders. Northmere Borough Council and Northmere Mutual are invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, prompt shields, Key Vault, and Application Insights were not opened on 12 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
