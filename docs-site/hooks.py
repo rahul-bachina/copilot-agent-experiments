@@ -163,6 +163,9 @@ DIAGRAMS = {
     "experiments/49-records-classification/docs/architecture_diagram.png": (
         "experiments/img/49-records-classification-architecture.png"
     ),
+    "experiments/50-sharepoint-knowledge-curator/docs/architecture_diagram.png": (
+        "experiments/img/50-sharepoint-knowledge-curator-architecture.png"
+    ),
 }
 
 
