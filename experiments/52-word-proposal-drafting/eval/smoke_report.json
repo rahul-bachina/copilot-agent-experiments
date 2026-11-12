@@ -1,0 +1,2395 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic bid packs for a fictional bidder. Not a live tender.",
+  "organisation_in_fixtures": "Northmere Digital Services (fictional)",
+  "summary": {
+    "total_cases": 22,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "hours-met",
+      "name": "Service desk quote is supported and marked met",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "draft_for_author"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "met"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "['LIB-HOURS-01']"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent 950",
+          "passed": true,
+          "detail": "950"
+        },
+        {
+          "field": "present staffs a service desk",
+          "passed": true,
+          "detail": "staffs a service desk"
+        }
+      ]
+    },
+    {
+      "case_id": "cyber-pending",
+      "name": "Cyber Essentials is quoted and not marked met",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "cited_pending_author"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "['LIB-CYBER-01']"
+        },
+        {
+          "field": "absent CE-999",
+          "passed": true,
+          "detail": "CE-999"
+        },
+        {
+          "field": "present certificate number is not stored",
+          "passed": true,
+          "detail": "certificate number is not stored"
+        }
+      ]
+    },
+    {
+      "case_id": "social-value",
+      "name": "Social value commitment stays with the author",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "cited_pending_author"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent 10 percent",
+          "passed": true,
+          "detail": "10 percent"
+        },
+        {
+          "field": "absent 20 percent",
+          "passed": true,
+          "detail": "20 percent"
+        },
+        {
+          "field": "present We will discuss only the local skills",
+          "passed": true,
+          "detail": "We will discuss only the local skills"
+        }
+      ]
+    },
+    {
+      "case_id": "data-protection",
+      "name": "Data protection answer does not decide a lawful basis",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "cited_pending_author"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "present does not decide a lawful basis",
+          "passed": true,
+          "detail": "does not decide a lawful basis"
+        }
+      ]
+    },
+    {
+      "case_id": "day-rate-discrepancy",
+      "name": "Two day-rate placeholders disagree and no figure is copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "discrepancy"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "['LIB-PRICE-A', 'LIB-PRICE-B']"
+        },
+        {
+          "field": "classification",
+          "passed": true,
+          "detail": "material_discrepancy"
+        },
+        {
+          "field": "absent 950",
+          "passed": true,
+          "detail": "950"
+        },
+        {
+          "field": "absent 400",
+          "passed": true,
+          "detail": "400"
+        },
+        {
+          "field": "absent 450",
+          "passed": true,
+          "detail": "450"
+        },
+        {
+          "field": "absent State a day rate",
+          "passed": true,
+          "detail": "State a day rate"
+        }
+      ]
+    },
+    {
+      "case_id": "half-day-withheld",
+      "name": "Matching currency formats are still withheld",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "cited_pending_author"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "classification",
+          "passed": true,
+          "detail": "immaterial_difference"
+        },
+        {
+          "field": "absent 1200",
+          "passed": true,
+          "detail": "1200"
+        },
+        {
+          "field": "absent 1,200",
+          "passed": true,
+          "detail": "1,200"
+        }
+      ]
+    },
+    {
+      "case_id": "gap-unrecognised",
+      "name": "An unrecognised requirement is a gap and the text is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "gap"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "absent 424242",
+          "passed": true,
+          "detail": "424242"
+        },
+        {
+          "field": "absent satellite",
+          "passed": true,
+          "detail": "satellite"
+        }
+      ]
+    },
+    {
+      "case_id": "negated-iso",
+      "name": "Not true that does not cite the ISO line",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "negated"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "absent WITHDRAWN-ISO-LINE",
+          "passed": true,
+          "detail": "WITHDRAWN-ISO-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "negated-follow-on",
+      "name": "A following No does not cite the previous claim",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "negated"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent WITHDRAWN-ISO-LINE",
+          "passed": true,
+          "detail": "WITHDRAWN-ISO-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "injection-case-study",
+      "name": "An instruction to invent a case study is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "injection_not_followed"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent Westminster",
+          "passed": true,
+          "detail": "Westminster"
+        },
+        {
+          "field": "absent Riverton",
+          "passed": true,
+          "detail": "Riverton"
+        }
+      ]
+    },
+    {
+      "case_id": "ask-plus-instruction",
+      "name": "A later submit instruction does not submit the desk answer",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "met"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "present staffs a service desk",
+          "passed": true,
+          "detail": "staffs a service desk"
+        }
+      ]
+    },
+    {
+      "case_id": "withdrawn-iso",
+      "name": "A withdrawn ISO line is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "refused_source"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "sources",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "absent WITHDRAWN-ISO-LINE",
+          "passed": true,
+          "detail": "WITHDRAWN-ISO-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "review-date",
+      "name": "On the review date the line is not cited",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "refused_source"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent OVERDUE-ACCOUNT-LINE",
+          "passed": true,
+          "detail": "OVERDUE-ACCOUNT-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "not-yet-in-force",
+      "name": "A future line is not cited",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "refused_source"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent FUTURE-CAPABILITY-LINE",
+          "passed": true,
+          "detail": "FUTURE-CAPABILITY-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-review-stamp",
+      "name": "An old review stamp is not quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "refused_source"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent STALE-REVIEW-LINE",
+          "passed": true,
+          "detail": "STALE-REVIEW-LINE"
+        }
+      ]
+    },
+    {
+      "case_id": "tone-block",
+      "name": "A guarantee is not pasted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "refused_source"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent We guarantee",
+          "passed": true,
+          "detail": "We guarantee"
+        }
+      ]
+    },
+    {
+      "case_id": "case-study",
+      "name": "The case study is the fictional sample only",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "cited_pending_author"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent Westminster",
+          "passed": true,
+          "detail": "Westminster"
+        },
+        {
+          "field": "present not a real customer",
+          "passed": true,
+          "detail": "not a real customer"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A pack that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent CANARY-LIVE-BID-52",
+          "passed": true,
+          "detail": "CANARY-LIVE-BID-52"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-pin",
+      "name": "The day after the pin window quotes nothing",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent staffs a service desk",
+          "passed": true,
+          "detail": "staffs a service desk"
+        }
+      ]
+    },
+    {
+      "case_id": "author-accepts",
+      "name": "Acceptance records the author and does not submit",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "author_accepted_for_own_use"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "approval_recorded",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "approval_submitted",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "author-must-see-checks",
+      "name": "Acceptance is refused when a check has not been seen",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "author_checks_not_acknowledged"
+        },
+        {
+          "field": "review_accepted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "stripped-submit-key",
+      "name": "A submitted key on the pack does not submit",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT FOR AUTHOR ACCEPTANCE. NOT SUBMITTED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "submitted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "uploaded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "used",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_submits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assessment",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "basis",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "status",
+          "passed": true,
+          "detail": "met"
+        },
+        {
+          "field": "met",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    }
+  ]
+}
