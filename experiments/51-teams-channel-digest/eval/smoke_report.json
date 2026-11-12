@@ -1,0 +1,2706 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "catalogue_id": "M002",
+  "experiment": "51-teams-channel-digest",
+  "summary": {
+    "total_cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0,
+    "each_case_counted_once": true,
+    "section_counts_are_not_added_to_case_count": true
+  },
+  "cases": [
+    {
+      "case_id": "S01",
+      "name": "A decision is quoted only after the user confirms the channel and the period",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "digest"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep Saturday library hours through March 2027."
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S02",
+      "name": "No digest is produced before confirmation, and the message text is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "scope_only"
+        },
+        {
+          "field": "channel_status",
+          "passed": true,
+          "detail": "['ready']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "S03",
+      "name": "An empty period is stated and nothing is invented",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "channel_status",
+          "passed": true,
+          "detail": "['no_messages_in_period']"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S04",
+      "name": "An unavailable source is stated and its messages are not read",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "channel_status",
+          "passed": true,
+          "detail": "['source_unavailable']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "S05",
+      "name": "A channel the user cannot access is not read, even if they try to confirm it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "confirmation_reason",
+          "passed": true,
+          "detail": "channel_not_readable"
+        },
+        {
+          "field": "channel_status",
+          "passed": true,
+          "detail": "['ready', 'not_accessible']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "S06",
+      "name": "Not true that we decided is not a decision",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "negation_reason",
+          "passed": true,
+          "detail": "['negation_before_cue']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S07",
+      "name": "Never mind cancels the earlier decision in the same message",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "negation_reason",
+          "passed": true,
+          "detail": "['retraction', 'cancelled_by_later_retraction']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S08",
+      "name": "An instruction to post is not followed, and the later decision is kept",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep the Saturday library hours."
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S09",
+      "name": "A National Insurance number is masked and the value is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided the resident reference is [NINO-1] for the file note."
+        },
+        {
+          "field": "entity",
+          "passed": true,
+          "detail": "['nino']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S10",
+      "name": "A performance comment about a named person is withheld",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "withheld_reason",
+          "passed": true,
+          "detail": "['judgement_about_a_named_person']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S11",
+      "name": "An evaluative sentence that does not use the word performance is withheld",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "withheld_reason",
+          "passed": true,
+          "detail": "['judgement_about_a_named_person']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S12",
+      "name": "A message marked for a person is withheld without a keyword",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "withheld_reason",
+          "passed": true,
+          "detail": "['marked_for_a_person']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S13",
+      "name": "A stale export is not digested until the user has seen that it is stale",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "confirmation_reason",
+          "passed": true,
+          "detail": "stale_export_not_acknowledged"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "stale_export",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "S14",
+      "name": "A stale export can be digested after the user acknowledges it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep the hours."
+        },
+        {
+          "field": "stale_export",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S15",
+      "name": "A confirmation that asks the agent to post is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "confirmation_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "S16",
+      "name": "A record that is not marked synthetic is refused without copying the text",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "S17",
+      "name": "An action keeps the owner named in the sentence",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "owner",
+          "passed": true,
+          "detail": "Priya Shah"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S18",
+      "name": "A question addressed to the requesting user is both a question and an attention item",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S19",
+      "name": "A message outside the period is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep Saturday library hours."
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S20",
+      "name": "We decided not to is a decision, because the negation comes after the cue",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided not to close the Saturday library."
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S21",
+      "name": "A decision that exists only inside an HTML comment is not used",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep the hours."
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S22",
+      "name": "Hospital wording is held for a person and is not turned into a decision",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "withheld_reason",
+          "passed": true,
+          "detail": "['sensitive_content']"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S23",
+      "name": "A regulated-firm label does not decide that FOIA section 1 applies",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep the control log."
+        },
+        {
+          "field": "sources_current",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    },
+    {
+      "case_id": "S24",
+      "name": "A stale legal pin is not quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "DRAFT TEAMS CHANNEL DIGEST. NOT POSTED. NOT A MONITORING DECISION."
+        },
+        {
+          "field": "posted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "replied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "reacted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "mentioned",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "forwarded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "foundry",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "a3",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "purpose_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "minimisation_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "monitoring",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "held",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "digest_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "decision",
+          "passed": true,
+          "detail": "We decided to keep the hours."
+        },
+        {
+          "field": "sources_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "no_combined_total",
+          "passed": true,
+          "detail": "separate"
+        }
+      ]
+    }
+  ]
+}

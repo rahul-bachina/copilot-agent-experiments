@@ -166,6 +166,9 @@ DIAGRAMS = {
     "experiments/50-sharepoint-knowledge-curator/docs/architecture_diagram.png": (
         "experiments/img/50-sharepoint-knowledge-curator-architecture.png"
     ),
+    "experiments/51-teams-channel-digest/docs/architecture_diagram.png": (
+        "experiments/img/51-teams-channel-digest-architecture.png"
+    ),
 }
 
 
