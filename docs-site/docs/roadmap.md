@@ -474,6 +474,16 @@ A draft classification for one synthetic document in a UK public body: file-plan
 
 </article>
 
+<article class="plan-card" id="m001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · M001 · Autonomy A1</p>
+
+## SharePoint knowledge curator
+
+A draft curation for one synthetic SharePoint snapshot: missing or inconsistent metadata, duplicates, stale or orphaned pages, and broken links. The site owner approves every metadata change and every publishing action. Personal data and any marking that is not ordinary OFFICIAL go to a human queue and are not curated. It calls [Experiment 12](experiments/12-document-intake.md) to inventory visible text, [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier types, [Experiment 49](experiments/49-records-classification.md) for a records classification, and [Experiment 44](experiments/44-knowledge-gap-detector.md) when the snapshot includes queries. The agent does not delete, unpublish, move, or change permissions, and it does not call SharePoint or Microsoft Graph. [Read the briefing](experiments/50-sharepoint-knowledge-curator.md).
+
+</article>
+
 <article class="plan-card" id="m002" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · M002 · Autonomy A0</p>
@@ -496,4 +506,4 @@ A cited bid draft for one synthetic UK public-sector invitation. The compliance 
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M002 is Experiment 51. M004 is Experiment 52.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52.

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "stub_tool.schema.json",
+  "title": "Curation stub",
+  "description": "Record a stub receipt for proposals the site owner has already approved. The tool does not call SharePoint, does not call Microsoft Graph, does not delete, does not unpublish, does not move, and does not change permissions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["confirmed_draft"],
+  "properties": {
+    "confirmed_draft": {
+      "type": "object",
+      "description": "The draft after record_approval. A page sentence is not a confirmed draft."
+    }
+  }
+}

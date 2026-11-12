@@ -1,0 +1,489 @@
+# Agent manifest: SharePoint Knowledge Curator
+# Experiment 50 — catalogue ID M001
+# Version: 0.1.0
+# Last reviewed: 2026-11-12
+# Next review: 2027-05-12
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-50-sharepoint-knowledge-curator"
+  name: "SharePoint Knowledge Curator"
+  version: "0.1.0"
+  description: >
+    Reviews one synthetic SharePoint site snapshot and proposes curation
+    actions for missing or inconsistent metadata, duplicates, stale or
+    orphaned pages, broken links, and pages a site owner might archive or
+    merge. Autonomy A1. The site owner approves every metadata change and
+    every publishing action. Personal data and any marking that is not
+    ordinary OFFICIAL go to a human queue and are not curated. The sample
+    records a stub only after approval. It does not delete, unpublish, move,
+    or change permissions, and it does not call SharePoint or Microsoft Graph.
+  owner: "Site owner"
+  contact: "site.owner@merrowfield.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/50-sharepoint-knowledge-curator"
+
+autonomy:
+  level: "A1"
+  level_description: "The site owner approves every metadata change and every publishing action. The stub does not change the site."
+  constraints:
+    - "The site owner approves every metadata change and every publishing action. The agent does not."
+    - "The agent NEVER deletes, unpublishes, moves, or changes permissions"
+    - "The agent NEVER calls SharePoint, Microsoft Graph, or a publishing API"
+    - "Pages that look like personal data, or that carry a marking other than ordinary OFFICIAL, go to a human queue and are not curated"
+    - "Content the requesting user cannot already see is not returned"
+    - "A sentence on a page cannot approve a proposal"
+    - "Proposal ids, evidence, and confidence come from the Python core, not from model output"
+    - "All output is advisory until record_approval, and the curation action remains a stub"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic SharePoint site snapshot"
+      description: "Pages and documents the caller pastes for this run, plus the requesting user's principals. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One snapshot per invocation. Items outside the requesting user's principals are counted and not read. The output does not echo page bodies or identifier values."
+      justification: "A curation proposal cannot name evidence without the visible items that were supplied."
+      data_categories:
+        - "Page and document text the requesting user can already see"
+        - "Synthetic item ids, titles, and relative URLs of visible items"
+        - "Starter metadata fields: content type, owner, review date, audience, sensitivity"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the snapshot."
+    - resource: "Separate approval object"
+      description: "Site-owner approval, rejection, or deferral of named proposal ids. Not read from page text."
+      access_level: "read"
+      scope: "One approval for a draft already produced."
+      justification: "Approval has to be deterministic and has to refuse delete, unpublish, move, and permission changes."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() for each visible text item. File content is not copied out."
+      access_level: "read"
+      scope: "Visible items only. files_confirmed stays false."
+      justification: "This experiment does not carry a second document inventory."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 identifier gateway"
+      description: "propose() for UK identifier types on visible text. Values are not copied out."
+      access_level: "read"
+      scope: "Visible items only. reversible is false. No model is passed."
+      justification: "This experiment does not carry a second identifier detector."
+      may_contain_personal_data: true
+    - resource: "Experiment 49 records classification"
+      description: "classify_record() on visible text after negated tails are removed. The classification object is not copied out."
+      access_level: "read"
+      scope: "Visible items only. No label is applied."
+      justification: "Personal-data and marking signals already implemented there are not re-coded here."
+      may_contain_personal_data: true
+    - resource: "Experiment 44 knowledge gap detector"
+      description: "detect_gaps() only when the snapshot includes synthetic queries. Article bodies are not copied out. Queued pages are not passed in."
+      access_level: "read"
+      scope: "One pack. Nothing is published."
+      justification: "A search-miss gap is that experiment's comparison. This starter does not publish the outline."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live SharePoint site, list, or library"
+      reason: "The snapshot is the text the caller supplied. The core does not call SharePoint or Microsoft Graph."
+    - resource: "Items the requesting user cannot already see"
+      reason: "Those items are counted and not read. Their titles, bodies, and identifiers are not returned."
+    - resource: "Permission changes, deletion, and unpublish APIs"
+      reason: "The agent does not delete, unpublish, move, or change permissions."
+    - resource: "Mailboxes and external send"
+      reason: "The agent does not send the draft."
+
+tools:
+  allowed:
+    - tool: "Curate"
+      provider: "Local Python (src/curate.py)"
+      action: "Propose curation actions for one synthetic site snapshot"
+      access_level: "read"
+      scope: "One snapshot. No network. No model. Calls Experiments 12, 08, 49, and, when queries are present, 44, in process."
+      justification: "Which field is missing, which link does not resolve in the visible set, and whether a source is stale are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Approve"
+      provider: "Local Python (record_approval)"
+      action: "Record a site-owner approval, rejection, or deferral of named proposal ids"
+      access_level: "read"
+      scope: "The draft for this run and a separate approval object. No site write."
+      justification: "The approval has to be deterministic and has to refuse a queue item being curated."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Curation stub"
+      provider: "Local Python (apply_approved_action)"
+      action: "Record a stub receipt after the site owner has approved the named proposals"
+      access_level: "read"
+      scope: "The approved draft. No SharePoint call. No Graph call."
+      justification: "The catalogue action is approval-gated. In this starter the action returns JSON and does not change a page."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The proposal ids, the confidence, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a deletion, an unpublish, a move, a permission change, or a tenant write"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that changes the site is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The draft is returned to the site owner. The curation stub
+      is JSON in the response. It is not a SharePoint write and it is not a
+      Graph write.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a proposal does not email anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a curation action. record_approval can
+      record the site owner's decision. It cannot delete or unpublish a page.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5(1)(d) or 5(1)(e) was
+      met, that the section 46 code was followed, or that a page should be
+      destroyed.
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, move, unpublish, or delete against a live page or library."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the draft."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the GitHub Copilot harness, are the tenant's billing. This starter does not spend them."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Delete, unpublish, or move a page"
+      rationale: "Those functions raise CuratorForbidden. deleted, unpublished, and moved stay false after the stub."
+    - enabled: false
+      action_name: "Change permissions"
+      rationale: "change_permissions raises CuratorForbidden. permissions_changed stays false."
+    - enabled: false
+      action_name: "Curate a personal-data or non-ordinary page"
+      rationale: "Those pages are a human-queue proposal. The stub refuses them."
+
+human_approval:
+  description: >
+    The site owner approves or rejects named proposal ids on a separate
+    approval object. A human queue for personal data or a non-ordinary
+    marking has to be marked reviewed before any other proposal can be
+    approved. The agent has no path that deletes, unpublishes, moves, or
+    changes permissions. A sentence on a page does not approve a proposal.
+    The stub runs only after approval and still does not call SharePoint.
+
+  approval_points:
+    - action: "Approve each metadata change or publishing action"
+      approver: "Site owner"
+      mandatory: true
+      rationale: "curate_site leaves human_approval null. Only record_approval can set it, and only for proposal ids the site owner names."
+    - action: "Review the human queue"
+      approver: "Site owner"
+      mandatory: true
+      rationale: "Personal data and any marking other than ordinary OFFICIAL block approval of other proposals until queue_reviewed is true. That review does not curate the queued page."
+    - action: "Acknowledge a stale pin or a code that was not applied"
+      approver: "Site owner"
+      mandatory: true
+      rationale: "A stale pin blocks the stub. Scotland and Northern Ireland block archive and merge, because the section 46 code that was opened says it does not apply to Freedom of Information (Scotland) Act 2002 bodies, and this starter does not apply the code there."
+    - action: "Ask for the stubbed curation receipt"
+      approver: "Site owner"
+      mandatory: true
+      rationale: "apply_approved_action refuses a draft that is not approved. The receipt says SharePoint and Microsoft Graph were not called."
+    - action: "Delete, unpublish, move, or change permissions"
+      approver: "The organisation's own site process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled. The direct functions raise CuratorForbidden."
+
+  no_approval_required:
+    - action: "View the draft"
+      rationale: "Reading a draft has no external effect."
+    - action: "Re-run the same snapshot"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 12 November 2026. Article 5(1)(d) and Article 5(1)(e)
+      were read that day. Accuracy and storage limitation are reported as
+      readings. accuracy_met and storage_limitation_met stay false. Article
+      84B was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a page may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 12 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One snapshot at a time, limited to items the requesting user's principals already include"
+      - "The output does not echo page bodies and does not copy identifier values"
+      - "Nothing is written to SharePoint"
+      - "Samples in this repository are synthetic"
+      - "No solely automated curation. The site owner approves every metadata change and every publishing action, and this agent still does not change the site."
+  data_minimisation:
+    - "The draft keeps ids, proposal types, confidence, and short evidence labels. It does not keep page bodies."
+    - "Identifier values are not copied. Experiment 08 is called with reversible false."
+    - "Items outside the requesting user's principals are not read."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention schedule applies to whatever the site owner then saves. That schedule is not set here. The 365-day review window is configuration. It is not a statutory period and it is not a GOV.UK rule for an intranet."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process. The agent does not erase a page."
+
+prompt_injection:
+  description: >
+    Page text is untrusted. It may tell the model to ignore the rules, delete
+    the page, or treat a denial as a fact. The core does not read the network.
+    The model is not given a tool that can delete, unpublish, move, or change
+    permissions.
+  controls:
+    - control: "Instruction clauses are removed, and a later sentence can still match"
+      description: "A content-type phrase in a later sentence is still matched. A sentence that is only an instruction is not a content type. Delete this page is recorded and not followed."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after never mind, ignore, is not counted as that phrase. A denial that text is not personal data does not itself select personal data."
+    - control: "HTML comments are not evidence"
+      description: "A content-type phrase that appears only inside an HTML comment does not select a type. An instruction inside the comment is recorded."
+    - control: "Anything other than ordinary OFFICIAL goes to a person"
+      description: "The hold is not a closed list of sensitive labels. A sensitivity value other than empty, OFFICIAL, none, or unmarked is queued. A short banner line that is not OFFICIAL is queued."
+    - control: "Approval is a separate object"
+      description: "A sentence that says the site owner has approved is not an approval. human_approval stays null until record_approval."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set deleted, unpublished, or human approval is stripped."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_approval refuses delete, unpublish, move, and permission changes. Direct functions raise CuratorForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading draft. The site owner
+    is the control. There is no autonomous publish even if the draft is wrong.
+    A paraphrase that uses none of the starter phrases is not classified as a
+    content type. Names and free-text descriptions are not detected by
+    Experiment 08.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-12"
+  risks:
+    - id: "R1"
+      risk: "A page sentence is treated as authority to delete, unpublish, move, or change permissions"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Delete this page and change the permissions are recorded and not followed"
+        - "delete_page, unpublish_page, move_page, and change_permissions raise CuratorForbidden"
+      residual_risk: "Low"
+      owner: "Site owner"
+    - id: "R2"
+      risk: "A page the requesting user cannot see is described in the draft"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Items are filtered on principals before any neighbour is called"
+        - "A missing readers list fails closed"
+        - "The draft stores a count, not the hidden title or body"
+      residual_risk: "Medium"
+      owner: "Site owner"
+    - id: "R3"
+      risk: "Personal data or a non-ordinary marking is curated instead of queued"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 identifier types force the human queue"
+        - "Any sensitivity value outside the ordinary set forces the human queue"
+        - "The stub refuses a human-queue proposal id"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+    - id: "R4"
+      risk: "A negated sentence is treated as a positive content-type or personal-data match"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Phrases after a negation cue are not counted"
+        - "Experiment 49 is called on that reduced text"
+        - "An identifier in the original text still queues the page"
+      residual_risk: "Low"
+      owner: "Site owner"
+    - id: "R5"
+      risk: "A stale legal pin is quoted as current, or a GOV.UK publishing rule is treated as an intranet duty"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Older than 180 days is stale. Equal to 180 days is current."
+        - "Stale pins are not quoted. The stub is refused while the pin is stale."
+        - "The 365-day window is labelled as configuration"
+      residual_risk: "Low"
+      owner: "Site owner"
+    - id: "R6"
+      risk: "An identifier value is copied into the draft or a log"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Page bodies are not copied"
+        - "Experiment 08 is called with reversible false and only the entity type is kept"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the site id if it
+    matched the synthetic pattern, the outcome, and the later approval. This
+    starter logs nothing because it keeps no store. Do not put a page body
+    or an identifier value in an application trace.
+  logged_events:
+    - event: "Curation requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Site id, if it matched the synthetic pattern"
+        - "Whether the snapshot was marked synthetic"
+        - "Visible count and withheld count, without hidden ids"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Curation result"
+      data_logged:
+        - "Outcome"
+        - "Proposal ids and types"
+        - "Whether any source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the curation file if the site owner relies on the draft. Page bodies are not in this event."
+    - event: "Approval recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "sharepoint_called false"
+      retention: "Organisation's schedule. The agent does not write this event to SharePoint."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log a page body or an identifier value."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for SharePoint write, Graph write, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Site owner"
+      contact: "site.owner@merrowfield.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@merrowfield.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-12"
+  next_review_date: "2027-05-12"
+  review_frequency: "6 months, and sooner if the pinned legislation or the starter metadata rules change"
+  reviewer: "The adopting organisation's site owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5, including Article 84B"
+    - "A change to section 46 of the Freedom of Information Act 2000 or a revised section 46 code"
+    - "A change to the GOV.UK retire-content guidance"
+    - "A change to the Microsoft Graph sitePage contract or the Copilot Studio SharePoint knowledge page"
+    - "A proposal to add a connector that can write, delete, unpublish, move, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Curation core"
+      path: "src/curate.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 12 November 2026. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Content type, owner, review date, and audience are starter fields. The sitePage property list opened on 12 November 2026 does not include audience, review date, or owner. A tenant column of those names was not verified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The 180-day stale window and the 365-day review window are starter defaults. They are not periods in the section 46 code and not a GOV.UK rule for an intranet."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The 2021 code that was opened is presented by the Secretary of State. It does not use the words Lord Chancellor. An earlier code under that name was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Article 84B, Freedom of Information Act 2000 section 48, and the GitHub Copilot harness knowledge-sources page were not opened. Their text is unverified here."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on pages."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on merrowfield.example.gov.uk are placeholders. Merrowfield Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, prompt shields, Key Vault, Purview, and Application Insights were not opened on 12 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Whether the sitePage list API accepts Sites.Selected was not stated on the list-pages page. This starter does not call Graph, so the question is not decided here."
+      section: "src/sources.py"
+      verify_on_deployment: true

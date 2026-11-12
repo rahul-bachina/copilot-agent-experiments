@@ -1,0 +1,10 @@
+# Experiment 50 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 12 intake(), Experiment 08 propose(), Experiment 49
+# classify_record(), and, when the snapshot includes queries, Experiment 44
+# detect_gaps(). Those experiments use the standard library.
+# Tests use pytest. PyYAML and jsonschema check permissions.yaml against
+# schemas/agent-manifest.schema.json. A clean environment can install just this file.
+
+pytest>=7.0.0
+PyYAML>=6.0
+jsonschema>=4.0.0

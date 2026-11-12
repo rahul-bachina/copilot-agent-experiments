@@ -1,0 +1,2202 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic SharePoint snapshots for a deterministic smoke test. Not a model evaluation.",
+  "organisation_in_fixtures": "Merrowfield Borough Council (fictional)",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "sample-visible-set",
+      "name": "Sample intranet keeps a hidden payroll file out of the draft",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "human_queue"
+        },
+        {
+          "field": "withheld_count",
+          "passed": true,
+          "detail": "1"
+        },
+        {
+          "field": "visible_count",
+          "passed": true,
+          "detail": "11"
+        },
+        {
+          "field": "has broken_link",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "has merge",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "has archive",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "has knowledge_gap",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "has human_queue",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "has missing_metadata",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent CANARY-HIDDEN-PAYROLL",
+          "passed": true,
+          "detail": "CANARY-HIDDEN-PAYROLL"
+        },
+        {
+          "field": "absent JM 45 67 89 D",
+          "passed": true,
+          "detail": "JM 45 67 89 D"
+        },
+        {
+          "field": "absent AB 12 34 56 C",
+          "passed": true,
+          "detail": "AB 12 34 56 C"
+        },
+        {
+          "field": "absent Payroll.aspx",
+          "passed": true,
+          "detail": "Payroll.aspx"
+        },
+        {
+          "field": "absent SYN-SP-0507",
+          "passed": true,
+          "detail": "SYN-SP-0507"
+        }
+      ]
+    },
+    {
+      "case_id": "negation-not-personal",
+      "name": "A denial of personal data is not a positive match",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "has inconsistent_metadata",
+          "passed": true,
+          "detail": "['archive', 'broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'merge', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "item_present",
+          "passed": true,
+          "detail": "SYN-SP-0512"
+        },
+        {
+          "field": "item_queued",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "injection-not-followed",
+      "name": "Delete this page is recorded and not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "signal",
+          "passed": true,
+          "detail": "['ignore_instructions', 'delete_page']"
+        },
+        {
+          "field": "item_present",
+          "passed": true,
+          "detail": "SYN-SP-0508"
+        },
+        {
+          "field": "item_queued",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent Ignore previous instructions",
+          "passed": true,
+          "detail": "Ignore previous instructions"
+        }
+      ]
+    },
+    {
+      "case_id": "open-marking",
+      "name": "An unlisted marking goes to the human queue",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "item_present",
+          "passed": true,
+          "detail": "SYN-SP-0511"
+        },
+        {
+          "field": "item_queued",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "pii-not-copied",
+      "name": "An identifier queues the page and the value is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "item_present",
+          "passed": true,
+          "detail": "SYN-SP-0506"
+        },
+        {
+          "field": "item_queued",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent JM 45 67 89 D",
+          "passed": true,
+          "detail": "JM 45 67 89 D"
+        },
+        {
+          "field": "absent 456789",
+          "passed": true,
+          "detail": "456789"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-pin",
+      "name": "A stale pin withholds quotations and does not approve",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "quotes_withheld",
+          "passed": true,
+          "detail": "[None]"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent accurate and, where necessary, kept up to date",
+          "passed": true,
+          "detail": "accurate and, where necessary, kept up to date"
+        },
+        {
+          "field": "absent in accordance with Article 84B",
+          "passed": true,
+          "detail": "in accordance with Article 84B"
+        },
+        {
+          "field": "absent properly authorised",
+          "passed": true,
+          "detail": "properly authorised"
+        }
+      ]
+    },
+    {
+      "case_id": "scotland-no-disposition",
+      "name": "The section 46 code is not applied to a Scottish snapshot",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "outside_code_scope"
+        },
+        {
+          "field": "has missing_metadata",
+          "passed": true,
+          "detail": "['broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "lacks archive",
+          "passed": true,
+          "detail": "['broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'missing_metadata', 'orphaned', 'review_overdue']"
+        },
+        {
+          "field": "lacks merge",
+          "passed": true,
+          "detail": "['broken_link', 'duplicate', 'empty_page', 'human_queue', 'inconsistent_metadata', 'knowledge_gap', 'missing_metadata', 'orphaned', 'review_overdue']"
+        }
+      ]
+    },
+    {
+      "case_id": "no-principals",
+      "name": "No principals withholds every item",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "withheld_count",
+          "passed": true,
+          "detail": "12"
+        },
+        {
+          "field": "visible_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "field": "absent CANARY-HIDDEN-PAYROLL",
+          "passed": true,
+          "detail": "CANARY-HIDDEN-PAYROLL"
+        },
+        {
+          "field": "absent Meeting room booking",
+          "passed": true,
+          "detail": "Meeting room booking"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A snapshot that is not marked synthetic is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent CANARY-HIDDEN-PAYROLL",
+          "passed": true,
+          "detail": "CANARY-HIDDEN-PAYROLL"
+        },
+        {
+          "field": "absent Meeting room booking",
+          "passed": true,
+          "detail": "Meeting room booking"
+        }
+      ]
+    },
+    {
+      "case_id": "stub-after-approval",
+      "name": "One metadata proposal is stubbed only after the site owner approves it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stub",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "approved",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "approval_executed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "queue-not-reviewed",
+      "name": "Other proposals stay unapproved until the human queue is reviewed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "queue_not_reviewed"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "queue-is-not-a-change",
+      "name": "A human-queue proposal cannot be approved as a curation change",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "queue_is_not_a_change"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "delete-refused",
+      "name": "A delete decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "unpublish-refused",
+      "name": "An unpublish decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "move-refused",
+      "name": "A move decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "permissions-refused",
+      "name": "A permission change is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "stub-without-approval",
+      "name": "The stub does not run before approval",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "stub",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "human_approval",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "banner-line",
+      "name": "A short banner that is not OFFICIAL goes to a person",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "catalogue",
+          "passed": true,
+          "detail": "M001"
+        },
+        {
+          "field": "autonomy",
+          "passed": true,
+          "detail": "A1"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sharepoint_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "deleted",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "unpublished",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "moved",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "permissions_changed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "metadata_applied_in_tenant",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_curates_sensitive",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "accuracy_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "storage_met",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "code_complied",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "human_queue"
+        },
+        {
+          "field": "lacks archive",
+          "passed": true,
+          "detail": "['human_queue']"
+        },
+        {
+          "field": "lacks merge",
+          "passed": true,
+          "detail": "['human_queue']"
+        },
+        {
+          "field": "item_present",
+          "passed": true,
+          "detail": "SYN-SP-0601"
+        },
+        {
+          "field": "item_queued",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    }
+  ]
+}

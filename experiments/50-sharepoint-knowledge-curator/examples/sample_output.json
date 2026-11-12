@@ -1,0 +1,1041 @@
+{
+  "label": "DRAFT SHAREPOINT CURATION FOR SITE OWNER APPROVAL",
+  "catalogue_id": "M001",
+  "experiment_id": "exp-50-sharepoint-knowledge-curator",
+  "autonomy": "A1",
+  "organisation": "Merrowfield Borough Council (fictional)",
+  "organisation_is_fictional": true,
+  "site_id": "SYN-SITE-0050",
+  "requesting_user_id": "SYN-USER-050",
+  "jurisdiction": "england",
+  "as_of": "2026-11-12",
+  "outcome": "human_queue",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "sharepoint_called": false,
+  "graph_called": false,
+  "text_recorded": false,
+  "visible_count": 11,
+  "withheld_count": 1,
+  "unreadable_count": 0,
+  "withheld_ids_recorded": false,
+  "proposals": [
+    {
+      "type": "archive",
+      "item_ids": [
+        "SYN-SP-0504"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "kind": "review_window_exceeded",
+          "days": 894,
+          "statutory_period": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": true,
+      "curated": false,
+      "field": "review_date",
+      "proposal_id": "P-001"
+    },
+    {
+      "type": "broken_link",
+      "item_ids": [
+        "SYN-SP-0501"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "unresolved_in_visible_site",
+          "href": "/sites/intranet/SitePages/Missing.aspx",
+          "target_disclosed": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "href": "/sites/intranet/SitePages/Missing.aspx",
+      "proposal_id": "P-002"
+    },
+    {
+      "type": "duplicate",
+      "item_ids": [
+        "SYN-SP-0502",
+        "SYN-SP-0503"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "token_overlap",
+          "jaccard": 0.92,
+          "shared_tokens": 11,
+          "text_recorded": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-003"
+    },
+    {
+      "type": "empty_page",
+      "item_ids": [
+        "SYN-SP-0510"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "text_empty"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-004"
+    },
+    {
+      "type": "human_queue",
+      "item_ids": [
+        "SYN-SP-0505"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "human_queue",
+          "reasons": [
+            "sensitivity_not_ordinary",
+            "existing_higher_marking",
+            "official_sensitive"
+          ]
+        },
+        {
+          "kind": "sensitivity_value",
+          "value": "OFFICIAL-SENSITIVE"
+        }
+      ],
+      "requires_approval": false,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-005"
+    },
+    {
+      "type": "human_queue",
+      "item_ids": [
+        "SYN-SP-0506"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "human_queue",
+          "reasons": [
+            "identifier",
+            "personal_data",
+            "official_sensitive"
+          ]
+        },
+        {
+          "kind": "identifier_types",
+          "entity_types": [
+            "nino"
+          ],
+          "values_recorded": false
+        }
+      ],
+      "requires_approval": false,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-006"
+    },
+    {
+      "type": "human_queue",
+      "item_ids": [
+        "SYN-SP-0511"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "human_queue",
+          "reasons": [
+            "sensitivity_not_ordinary"
+          ]
+        },
+        {
+          "kind": "sensitivity_value",
+          "value": "COMMERCIAL-IN-CONFIDENCE"
+        }
+      ],
+      "requires_approval": false,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-007"
+    },
+    {
+      "type": "inconsistent_metadata",
+      "item_ids": [
+        "SYN-SP-0509"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "phrase_count",
+          "content_type": "Guidance",
+          "count": 2,
+          "declared": "Policy"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "content_type",
+      "proposal_id": "P-008"
+    },
+    {
+      "type": "knowledge_gap",
+      "item_ids": [],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "kind": "experiment_44_content_gap",
+          "gap_id": "GAP-BLUE-BADGE",
+          "topic": "blue-badge",
+          "published": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": true,
+      "curated": false,
+      "topic": "blue-badge",
+      "proposal_id": "P-009"
+    },
+    {
+      "type": "merge",
+      "item_ids": [
+        "SYN-SP-0502",
+        "SYN-SP-0503"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "token_overlap",
+          "jaccard": 0.92,
+          "shared_tokens": 11,
+          "text_recorded": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": true,
+      "curated": false,
+      "proposal_id": "P-010"
+    },
+    {
+      "type": "missing_metadata",
+      "item_ids": [
+        "SYN-SP-0502"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "field_absent",
+          "field": "owner"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "owner",
+      "proposal_id": "P-011"
+    },
+    {
+      "type": "missing_metadata",
+      "item_ids": [
+        "SYN-SP-0510"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "field_absent",
+          "field": "audience"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "audience",
+      "proposal_id": "P-012"
+    },
+    {
+      "type": "missing_metadata",
+      "item_ids": [
+        "SYN-SP-0510"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "field_absent",
+          "field": "content_type"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "content_type",
+      "proposal_id": "P-013"
+    },
+    {
+      "type": "missing_metadata",
+      "item_ids": [
+        "SYN-SP-0510"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "field_absent",
+          "field": "owner"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "owner",
+      "proposal_id": "P-014"
+    },
+    {
+      "type": "missing_metadata",
+      "item_ids": [
+        "SYN-SP-0510"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "field_absent",
+          "field": "review_date"
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": true,
+      "publishing_action": false,
+      "curated": false,
+      "field": "review_date",
+      "proposal_id": "P-015"
+    },
+    {
+      "type": "orphaned",
+      "item_ids": [
+        "SYN-SP-0503"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "kind": "no_inbound_link_in_export",
+          "inbound": 0,
+          "navigation_included": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-016"
+    },
+    {
+      "type": "orphaned",
+      "item_ids": [
+        "SYN-SP-0504"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "kind": "no_inbound_link_in_export",
+          "inbound": 0,
+          "navigation_included": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "proposal_id": "P-017"
+    },
+    {
+      "type": "review_overdue",
+      "item_ids": [
+        "SYN-SP-0502"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "days_overdue",
+          "days": 42,
+          "window_days": 365,
+          "statutory_period": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "field": "review_date",
+      "proposal_id": "P-018"
+    },
+    {
+      "type": "review_overdue",
+      "item_ids": [
+        "SYN-SP-0504"
+      ],
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "days_overdue",
+          "days": 894,
+          "window_days": 365,
+          "statutory_period": false
+        }
+      ],
+      "requires_approval": true,
+      "metadata_action": false,
+      "publishing_action": false,
+      "curated": false,
+      "field": "review_date",
+      "proposal_id": "P-019"
+    }
+  ],
+  "items": [
+    {
+      "item_id": "SYN-SP-0501",
+      "kind": "page",
+      "title": "Merrowfield intranet home",
+      "url": "/sites/intranet/SitePages/Home.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 118
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0502",
+      "kind": "page",
+      "title": "Meeting room booking",
+      "url": "/sites/intranet/SitePages/Rooms.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 110
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0503",
+      "kind": "page",
+      "title": "Meeting room booking copy",
+      "url": "/sites/intranet/SitePages/Rooms-copy.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 128
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0504",
+      "kind": "page",
+      "title": "Staff fair 2024",
+      "url": "/sites/intranet/SitePages/Fair-2024.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 94
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0505",
+      "kind": "page",
+      "title": "Restricted facilities note",
+      "url": "/sites/intranet/SitePages/Restricted.aspx",
+      "queued": true,
+      "queue_reasons": [
+        "sensitivity_not_ordinary",
+        "existing_higher_marking",
+        "official_sensitive"
+      ],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 34
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [
+            "existing_higher_marking",
+            "official_sensitive"
+          ],
+          "personal_data_indicated": false,
+          "marking_suggestion": "OFFICIAL-SENSITIVE",
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0506",
+      "kind": "page",
+      "title": "Staff identifier note",
+      "url": "/sites/intranet/SitePages/Note.aspx",
+      "queued": true,
+      "queue_reasons": [
+        "identifier",
+        "personal_data",
+        "official_sensitive"
+      ],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 70
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 1,
+          "entity_types": [
+            "nino"
+          ],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [
+            "personal_data",
+            "official_sensitive"
+          ],
+          "personal_data_indicated": true,
+          "marking_suggestion": "OFFICIAL-SENSITIVE",
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0508",
+      "kind": "page",
+      "title": "Printer reset",
+      "url": "/sites/intranet/SitePages/Printers.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 138
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0509",
+      "kind": "page",
+      "title": "Stationery cupboard",
+      "url": "/sites/intranet/SitePages/Stationery.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 150
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0510",
+      "kind": "page",
+      "title": "Blank page",
+      "url": "/sites/intranet/SitePages/Blank.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": false,
+          "reason": "not_called",
+          "content_recorded": false,
+          "files_confirmed": false
+        },
+        "gateway": {
+          "called": false,
+          "reason": "not_called",
+          "finding_count": 0,
+          "entity_types": [],
+          "values_recorded": false
+        },
+        "classification": {
+          "called": false,
+          "reason": "not_called",
+          "sensitive_reasons": []
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0511",
+      "kind": "page",
+      "title": "Supplier timetable",
+      "url": "/sites/intranet/SitePages/Commercial.aspx",
+      "queued": true,
+      "queue_reasons": [
+        "sensitivity_not_ordinary"
+      ],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 81
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    },
+    {
+      "item_id": "SYN-SP-0512",
+      "kind": "page",
+      "title": "Noticeboard",
+      "url": "/sites/intranet/SitePages/Notice.aspx",
+      "queued": false,
+      "queue_reasons": [],
+      "published": true,
+      "reuse": {
+        "intake": {
+          "called": true,
+          "experiment_id": "exp-12-document-intake",
+          "catalogue_id": "O001",
+          "read_status": "read",
+          "intake_class": "unclassified",
+          "files_confirmed": false,
+          "content_recorded": false,
+          "char_count": 147
+        },
+        "gateway": {
+          "called": true,
+          "experiment_id": "exp-08-uk-pii-redaction-gateway",
+          "catalogue_id": "O005",
+          "finding_count": 0,
+          "entity_types": [],
+          "output_is_anonymised": false,
+          "agent_may_release": false,
+          "values_recorded": false
+        },
+        "classification": {
+          "called": true,
+          "experiment_id": "exp-49-records-classification",
+          "catalogue_id": "M009",
+          "outcome": "human_queue",
+          "sensitive_reasons": [],
+          "personal_data_indicated": false,
+          "marking_suggestion": null,
+          "legal_hold": false,
+          "human_approval": null,
+          "text_recorded": false
+        }
+      }
+    }
+  ],
+  "flags": {
+    "deleted": false,
+    "unpublished": false,
+    "moved": false,
+    "permissions_changed": false,
+    "metadata_applied_in_tenant": false,
+    "published_by_agent": false,
+    "sharepoint_called": false,
+    "graph_called": false,
+    "stub_recorded": false,
+    "approval_recorded": false
+  },
+  "human_route": {
+    "offered": true,
+    "channel": "Site owner, outside this agent",
+    "agent_deletes": false,
+    "agent_unpublishes": false,
+    "agent_moves": false,
+    "agent_changes_permissions": false,
+    "agent_curates_sensitive": false
+  },
+  "prompt_injection": {
+    "detected": true,
+    "followed": false,
+    "signals": [
+      "ignore_instructions",
+      "delete_page"
+    ]
+  },
+  "stale": {
+    "rules_current": true,
+    "pinned_on": "2026-11-12",
+    "age_days": 0,
+    "stale_after_days": 180,
+    "quotes_withheld": false
+  },
+  "sources": [
+    {
+      "id": "uk-gdpr-art-5",
+      "name": "UK GDPR Article 5",
+      "url": "https://www.legislation.gov.uk/eur/2016/679/article/5",
+      "opened_on": "2026-11-12",
+      "taken": "Article 5(1)(d) says personal data shall be accurate and, where necessary, kept up to date, and that every reasonable step must be taken to ensure that personal data that are inaccurate are erased or rectified without delay. Article 5(1)(e) says personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed. The longer-storage limb says processing solely for archiving in the public interest, scientific or historical research, or statistics is in accordance with Article 84B. Article 84B was not opened. This starter does not decide that either principle was met, and it does not erase personal data."
+    },
+    {
+      "id": "foia-s46",
+      "name": "Freedom of Information Act 2000, section 46",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/36/section/46",
+      "opened_on": "2026-11-12",
+      "taken": "Section 46(1) says the Secretary of State shall issue, and may revise, a code of practice providing guidance to relevant authorities on the practice which it would, in his opinion, be desirable for them to follow in connection with the keeping, management and destruction of their records. The words Secretary of State in subsection (1) were substituted on 9 December 2015. Section 46(6) requires the code to be laid before Parliament. Section 46(7) defines a relevant authority. The page said there are currently no known outstanding effects. Section 46(5)(b) now says the Commission, after a substitution dated 30 September 2026. That instrument was not opened. Section 48 was not opened."
+    },
+    {
+      "id": "s46-code",
+      "name": "Code of Practice on the management of records, section 46",
+      "url": "https://www.gov.uk/government/publications/code-of-practice-on-the-management-of-records-issued-under-section-46-the-freedom-of-information-act-2000",
+      "opened_on": "2026-11-12",
+      "taken": "The GOV.UK page, published 15 July 2021 by The National Archives, links a 32-page PDF. The PDF says it was presented to Parliament by the Secretary of State for Digital, Culture, Media and Sport pursuant to section 46(6), and laid before Parliament on 15 July 2021. The extracted PDF text does not contain the words Lord Chancellor. Paragraph 1.4.3 says the code does not apply to bodies subject to the Freedom of Information (Scotland) Act 2002. Paragraph 2.3.1 says authorities must define how long to keep information and dispose of it when it is no longer needed. Paragraph 2.5 paraphrases Article 5(1)(e) in the code's own words. That paraphrase predates the Article 84B substitution. Paragraph 2.6.2 says disposition decisions must be recorded and that those taking them must be properly authorised to do so. This starter does not take a disposition decision."
+    },
+    {
+      "id": "govuk-content",
+      "name": "GOV.UK content design and retiring content",
+      "url": "https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/plan-manage-content/retire-content/",
+      "opened_on": "2026-11-12",
+      "taken": "Requesting the content design guidance URL returned a page titled Writing to GOV.UK standards. The retire-content page says withdraw keeps content at the same URL with a banner, and unpublish removes it. It says guidance should usually be updated rather than withdrawn. News articles and press releases that are over a year old are an example of content that can be withdrawn. Unpublish includes the case where content has been included in another page, and the case where it contains someone's personal details. This guidance is about GOV.UK publishing. An intranet is not GOV.UK. This starter does not withdraw, unpublish, or delete."
+    },
+    {
+      "id": "graph-sitepage",
+      "name": "Microsoft Graph sitePage resource, v1.0",
+      "url": "https://learn.microsoft.com/en-us/graph/api/resources/sitepage?view=graph-rest-1.0",
+      "opened_on": "2026-11-12",
+      "taken": "The sitePage resource lists title, contentType as contentTypeInfo, publishingState, webUrl, createdBy, and lastModifiedDateTime. The property list that was opened does not include an audience column, a review date, or an owner column. Delete and Publish are methods on the resource. The list-pages page lists Sites.Read.All as the least privileged permission for delegated and application access, and Sites.ReadWrite.All as higher. Sites.Selected is described on a separate page as access to specific site collections after an explicit assignment. That list-pages page does not say Sites.Selected is accepted. This starter calls neither API."
+    },
+    {
+      "id": "copilot-sharepoint-knowledge",
+      "name": "Copilot Studio SharePoint knowledge source",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-sharepoint",
+      "opened_on": "2026-11-12",
+      "taken": "The page says it describes features used in agents or agent flows powered by the standard harness. It says the agent surfaces only content the user has permission to access, and that without permission the agent responds with no response. Read is the minimum it states. It says the agent searches the registered URL and subpaths, and does not crawl hyperlinks inside a registered page. SharePoint lists added as knowledge are described as ingested into Dataverse. The GitHub Copilot harness knowledge-sources page was not opened."
+    },
+    {
+      "id": "harness",
+      "name": "Harnesses in Copilot Studio",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview",
+      "opened_on": "2026-11-12",
+      "taken": "The standard harness follows the topics and rules the maker defines. The GitHub Copilot harness is a Copilot Studio authoring and orchestration framework, not the GitHub Copilot service. The page says customer data is not sent to or processed by the GitHub Copilot service when agents run in Copilot Studio. Agents on the GitHub Copilot harness use Copilot Credits. The page states no price. The comparison table says files, skills, and memory are not a focus of the standard harness."
+    }
+  ],
+  "regulatory": {
+    "accuracy_met": false,
+    "storage_limitation_met": false,
+    "code_applied": true,
+    "code_complied": false,
+    "disposition_allowed": true,
+    "article_84b_opened": false,
+    "lord_chancellor_named_in_opened_code": false,
+    "review_window_days": 365,
+    "review_window_is_statutory": false
+  },
+  "reuse": {
+    "experiment_12": {
+      "called": true,
+      "content_recorded": false
+    },
+    "experiment_08": {
+      "called": true,
+      "finding_count": 1,
+      "entity_types": [
+        "nino"
+      ],
+      "values_recorded": false,
+      "output_is_anonymised": false
+    },
+    "experiment_49": {
+      "called": true
+    },
+    "experiment_44": {
+      "called": true,
+      "experiment_id": "exp-44-knowledge-gap-detector",
+      "catalogue_id": "C005",
+      "reason": null,
+      "content_gaps": [
+        {
+          "gap_id": "GAP-BLUE-BADGE",
+          "topic": "blue-badge",
+          "published": false,
+          "confirmed": false
+        }
+      ],
+      "other_finding_count": 7,
+      "outlines_copied": false,
+      "published": false,
+      "text_recorded": false
+    }
+  },
+  "limitations": [
+    "Content type, owner, review date, and audience are starter fields. They are not sitePage properties verified on 12 November 2026.",
+    "The 365-day window is configuration. It is not a GOV.UK rule for an intranet.",
+    "Orphan means no inbound link in this export. Navigation is not included.",
+    "An unresolved link is unresolved in the visible set. A hidden target is not confirmed.",
+    "No identifier from Experiment 08 is not a finding that the page has no personal data.",
+    "Article 84B was not opened. accuracy_met and storage_limitation_met stay false."
+  ]
+}
