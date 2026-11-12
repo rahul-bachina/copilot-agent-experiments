@@ -1,0 +1,468 @@
+# Agent manifest: Word Proposal Drafting Agent
+# Experiment 52 — catalogue ID M004
+# Version: 0.1.0
+# Last reviewed: 2026-11-12
+# Next review: 2027-05-12
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-52-word-proposal-drafting"
+  name: "Word Proposal Drafting Agent"
+  version: "0.1.0"
+  description: >
+    Helps an author draft a structured bid response from one synthetic
+    invitation, an approved library, and price placeholders. Autonomy A1.
+    The author accepts the complete draft before it is used anywhere. The
+    agent never invents a capability, case study, customer, accreditation,
+    statistic, or price, never marks a requirement as met without a supported
+    citation, and never submits or sends the draft.
+  owner: "Bid author"
+  contact: "bids@northmere.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/52-word-proposal-drafting"
+
+autonomy:
+  level: "A1"
+  level_description: "The author accepts the complete draft before it is used anywhere"
+  constraints:
+    - "The author accepts the complete draft. The agent only prepares it."
+    - "The agent NEVER submits, sends, or uploads a proposal, including after the author accepts the draft"
+    - "The agent NEVER invents a capability, case study, customer, accreditation, statistic, or price"
+    - "A requirement is marked met only when an approved quote is supported by Experiment 29"
+    - "Every claim without an approved source stays with the author"
+    - "A human route is offered on every result, including a refusal"
+    - "Citations, gaps, and the empty approval come from src/proposal.py, not from model output"
+    - "All output is a draft for the author"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic invitation or requirement list"
+      description: "Requirements the author pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. The requirement text is not copied into the draft."
+      justification: "The draft cannot map a requirement without the text that was supplied."
+      data_categories:
+        - "Free text of requirements"
+        - "A synthetic proposal id, if it matches the starter pattern"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the invitation."
+    - resource: "Approved library"
+      description: "Past answers and capability statements in fixtures/approved_library.json, or a list supplied for one run."
+      access_level: "read"
+      scope: "The file in this experiment, or one list on the call. A live share is not read."
+      justification: "Answers are quotations from these entries. Experiment 09's citation gate and Experiment 29's score decide whether a quote may be used."
+      may_contain_personal_data: false
+    - resource: "Separate acceptance object"
+      description: "author_accept_complete_draft, author_request_revision, or reject_draft."
+      access_level: "read"
+      scope: "One review for a draft already produced. Not read from the invitation."
+      justification: "Acceptance has to be deterministic and has to refuse a submit, a send, and an upload."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Tender portals, inboxes, and the buyer's e-procurement system"
+      reason: "The agent prepares a draft. It does not submit it."
+    - resource: "Microsoft Graph and the Word JavaScript API"
+      reason: "The .docx is built locally. It is not uploaded."
+    - resource: "Live bid libraries and the public website"
+      reason: "A live page would bypass the citation gate."
+    - resource: "Price books and certificate registers"
+      reason: "A figure or a certificate number is not looked up and is not invented."
+
+tools:
+  allowed:
+    - tool: "Proposal draft"
+      provider: "Local Python (src/proposal.py)"
+      action: "Quote an approved entry or state a gap, then list the claims the author must check"
+      access_level: "read"
+      scope: "One pack. No network. No model. Calls Experiments 43, 29, and 36."
+      justification: "Which source may be cited, and whether a quote is supported, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Author acceptance"
+      provider: "Local Python (record_acceptance)"
+      action: "Record that the author accepts the complete draft, asks for a revision, or rejects it"
+      access_level: "read"
+      scope: "The draft for this run and a separate review object. No submit and no upload."
+      justification: "Acceptance has to be deterministic and has to refuse a submit, a send, and an upload."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Local Word file"
+      provider: "Local Python (src/word_draft.py)"
+      action: "Write the same draft as an Office Open XML .docx on the machine that ran the core"
+      access_level: "read"
+      scope: "The JSON for this run. The file is not uploaded."
+      justification: "The author needs a Word file they can read. Building it locally does not submit it."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quotes, the gaps, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a submit, a send, an upload, or a requirement met without a supported source"
+      access_level: "read"
+      scope: "The draft for this run"
+      justification: "A draft that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes to a portal, a library, or a Graph drive. A local .docx is
+      a file the author asked the core to build. It is not a submission.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The author may accept a draft for their own later use.
+      That acceptance does not submit, email, or upload the draft.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not accept or reject a bid. record_acceptance can record
+      the author's review of a draft. It cannot submit the draft.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a tender notice was answered, that an
+      assessment summary was written, that PPN 026 or PPN 014 was met, or
+      that a lawful basis was chosen.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a portal, a library, or a drive item."
+
+  external_send:
+    enabled: false
+    rationale: >
+      The author uses the draft outside the agent. The agent does not send it.
+      Acceptance of the complete draft does not submit it.
+
+  spend_transact:
+    enabled: false
+    rationale: "No price is committed and no payment is made."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Submit a bid"
+      rationale: "submit_bid raises ProposalForbidden. submitted stays false."
+    - enabled: false
+      action_name: "Upload to a portal or to Microsoft Graph"
+      rationale: "upload_to_portal raises ProposalForbidden. graph_called stays false."
+    - enabled: false
+      action_name: "Invent a price, certificate, statistic, or case study"
+      rationale: "invent_claim raises ProposalForbidden. A figure in the invitation is not copied."
+
+human_approval:
+  description: >
+    Catalogue checkpoint for M004: the author accepts the complete draft
+    before it is used anywhere. draft_proposal() leaves human_approval null.
+    Only record_acceptance can set it, and only for author_accept_complete_draft,
+    and only when every row was acknowledged and every author check and gap
+    was seen. That record does not submit the draft and does not mark it as
+    used. Words in the invitation cannot accept the draft.
+
+  approval_points:
+    - action: "Author accepts the complete draft before it is used anywhere"
+      approver: "Bid author"
+      mandatory: true
+      rationale: "Catalogue checkpoint for M004. The agent prepares the draft. The author accepts it. record_acceptance can record that. submitted and used_anywhere stay false."
+    - action: "Acknowledge every price, commitment, accreditation, statistic, case study, gap, and anything else that was not marked met"
+      approver: "Bid author"
+      mandatory: true
+      rationale: "A claim without a supported citation is not met. Acceptance is refused until the author says those rows were seen."
+    - action: "Ask for a revision or reject the draft"
+      approver: "Bid author"
+      mandatory: true
+      rationale: "The author can send the draft back or reject it. Neither decision rewrites the draft with a model, and neither submits it."
+    - action: "Submit, send, or upload the proposal"
+      approver: "Bid author"
+      mandatory: true
+      rationale: "Outside the agent. Those actions are refused. Direct functions raise ProposalForbidden."
+
+  no_approval_required:
+    - action: "Prepare a draft that quotes a current entry or states a gap"
+      rationale: "The draft has no external effect. A human route is still offered. The author's acceptance remains mandatory before the draft is used anywhere."
+    - action: "Re-run the same pack"
+      rationale: "No submit and no upload. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. PPN 020
+      was opened on 12 November 2026 and says the primary UK legal framework
+      is the UK GDPR, and that the Data Protection Act 2018 has to be read
+      with it. Articles 6, 9, and 28 were not opened. The Data Protection
+      Act 2018 was not opened. The controller confirms its own basis.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The starter does not ask for special-category data."
+    safeguards:
+      - "One pack at a time, as supplied by the author"
+      - "The draft does not copy the requirement text"
+      - "Nothing is submitted or uploaded"
+      - "Samples in this repository are synthetic"
+
+  data_minimisation:
+    - "The core reads one pack. It does not retrieve a bid record."
+    - "The draft names library ids. It does not copy the requirement text."
+    - "Refused wording and price figures are not copied out."
+    - "Instructions aimed at the agent are recorded as pattern names, not stored as the requirement."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the author then saves. That schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process.
+
+prompt_injection:
+  description: >
+    Invitation text is untrusted. It may tell the model to ignore the
+    library, invent a case study, submit the bid, or mark every requirement
+    as met. The core does not read the network. The model is not given a
+    tool that can submit, send, or upload.
+
+  controls:
+    - control: "Instructions are not requirements"
+      description: "A sentence that is itself an instruction is not matched to the library. followed is false."
+    - control: "Negation is not a positive match"
+      description: "A sentence that negates a claim, or a following sentence that is only 'no', is not used to cite a source."
+    - control: "Unrecognised text goes to the author"
+      description: "Anything that does not match an approved source is a gap. The text is not copied. It is not marked met."
+    - control: "Deterministic quotes"
+      description: "The quoted body, the citation gate, the groundedness verdict, and the empty approval are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set a submit, a price, or the approval is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_acceptance refuses a submit. Direct functions raise ProposalForbidden."
+
+  residual_risk: >
+    A sentence the negation list does not catch can still cite an approved
+    line the buyer did not want. The author is the control, because nothing
+    is marked used and nothing is submitted. A manipulated model can still
+    narrate a misleading brief around the JSON.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-12"
+  risks:
+    - id: "R1"
+      risk: "A draft is submitted because the author accepted the text, or because the invitation said to submit"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Sends and writes are disabled"
+        - "submitted stays false after author_accept_complete_draft"
+        - "submit_bid raises ProposalForbidden"
+      residual_risk: "Low"
+      owner: "Bid author"
+    - id: "R2"
+      risk: "A requirement is marked met without an approved source, or a price or certificate is invented"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "requirement_met requires a supported quote"
+        - "Price figures are withheld"
+        - "The requirement text is not copied"
+      residual_risk: "Low"
+      owner: "Bid author"
+    - id: "R3"
+      risk: "A withdrawn, overdue, or stale library line is pasted as current"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 09 line_applicability is the citation gate"
+        - "Experiment 29 passage_currency flags an old review stamp"
+        - "Refused wording is not copied"
+      residual_risk: "Low"
+      owner: "Bid author"
+    - id: "R4"
+      risk: "The draft is treated as proof that PPN 026, PPN 014, or UK GDPR was met"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "ppn_026_met, ppn_014_met, and lawful_basis_decided stay false"
+        - "cyber_essentials_held stays null"
+        - "An assessment summary is not produced"
+      residual_risk: "Low"
+      owner: "Bid author"
+    - id: "R5"
+      risk: "Pinned sources are followed after they are outside the starter window"
+      likelihood: "Low"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "More than 180 days after 12 November 2026, no entry is quoted"
+        - "Equal to 180 days is still inside the window, and that boundary is tested"
+        - "The core does not refresh the pages from the web"
+      residual_risk: "Low"
+      owner: "Bid author"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the proposal id, the library ids cited, and the later acceptance.
+    This starter logs nothing because it keeps no store. Do not put the
+    requirement text in an application trace.
+
+  logged_events:
+    - event: "Draft requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Proposal id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's bid schedule. Not set by this starter."
+    - event: "Draft result"
+      data_logged:
+        - "Outcome"
+        - "Library ids cited and refused"
+        - "Whether any requirement was marked met"
+        - "Whether human_approval was left null"
+      retention: "Keep with the bid if the author relies on the draft. The requirement text is not in this event."
+    - event: "Acceptance recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "submitted false"
+      retention: "Organisation's schedule. The agent does not write this event to a portal."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the requirement text in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, Graph writes, or a tender portal"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Bid lead"
+      contact: "bids@northmere.example"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example"
+
+review:
+  last_review_date: "2026-11-12"
+  next_review_date: "2027-05-12"
+  review_frequency: "6 months, and sooner if the library, the Procurement Act 2023, or PPN 026 changes"
+  reviewer: "The adopting organisation's bid lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to an entry in the organisation's real bid library, if one is later substituted for the synthetic file"
+    - "A change to Procurement Act 2023 section 21 or section 50"
+    - "A change to PPN 026, including the 1 January 2027 commencement the note describes"
+    - "A change to PPN 014 or PPN 020"
+    - "A proposal to add a connector that can submit, send, or upload"
+    - "A proposal to let the agent submit after acceptance"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Draft core"
+      path: "src/proposal.py"
+    - name: "Approved library"
+      path: "fixtures/approved_library.json"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The scope policy was not
+    opened for this experiment on 12 November 2026. A body that wants a draft
+    pack uses Experiment 03. The pointers below say which manifest sections
+    a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. PPN 020 was read on 12 November 2026. UK GDPR Articles 6, 9, and 28, and the Data Protection Act 2018, were not. The controller confirms the basis before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day window is a starter default, not a review duty. Experiment 29's stale-after-days constant is called as published. This starter does not fork it."
+      section: "src/proposal.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Experiment 09's citation gate is called as published. On the review date an entry is not cited."
+      section: "src/proposal.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "PPN 026 says it should be applied to procurements commenced on or after 1 January 2027. On 12 November 2026 that date is still ahead. This starter does not decide which social-value edition applies."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on bid text."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on northmere.example are placeholders. Northmere Digital Services, Aldergate Borough Council, and Riverton District Council are invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Section 56, section 19 beyond the cross-reference, the Procurement Regulations 2024, and the Public Services (Social Value) Act 2012 were not opened. None of those is treated as decided."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Microsoft Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Microsoft Purview, and Application Insights were not opened on 12 November 2026. They are unverified here."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

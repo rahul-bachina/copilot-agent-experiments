@@ -494,6 +494,16 @@ A read-only digest of synthetic Microsoft Teams channel messages for a UK public
 
 </article>
 
+<article class="plan-card" id="m004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · M004 · Autonomy A1</p>
+
+## Word proposal drafting
+
+A cited bid draft for one synthetic UK public-sector invitation. The compliance matrix maps every requirement to an approved quote or to a gap. Prices are compared and withheld. The author accepts the complete draft before it is used anywhere. It calls [Experiment 43](experiments/43-response-drafting.md) for the tone and plain-English screens, [Experiment 09](experiments/09-casework-correspondence-draft.md) for the citation gate, [Experiment 29](experiments/29-groundedness-evaluation.md) to score each quote, and [Experiment 36](experiments/36-cross-source-validation.md) to compare price placeholders. The agent does not submit, send, or upload, and it does not invent a capability, a customer, a certificate, a statistic, or a price. [Read the briefing](experiments/52-word-proposal-drafting.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52.

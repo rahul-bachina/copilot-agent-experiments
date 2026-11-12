@@ -169,6 +169,9 @@ DIAGRAMS = {
     "experiments/51-teams-channel-digest/docs/architecture_diagram.png": (
         "experiments/img/51-teams-channel-digest-architecture.png"
     ),
+    "experiments/52-word-proposal-drafting/docs/architecture_diagram.png": (
+        "experiments/img/52-word-proposal-drafting-architecture.png"
+    ),
 }
 
 
