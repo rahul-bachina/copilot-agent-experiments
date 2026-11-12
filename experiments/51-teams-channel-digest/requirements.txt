@@ -1,0 +1,6 @@
+# Experiment 51 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 08 propose(), Experiment 41 check_sentence(), and Experiment 29 score_claim().
+# Those experiments use the standard library.
+# Tests use pytest. A clean environment can install just this file.
+
+pytest>=7.0.0

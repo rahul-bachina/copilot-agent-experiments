@@ -1,0 +1,31 @@
+{
+  "experiment": "exp-51-teams-channel-digest",
+  "catalogue_id": "M002",
+  "autonomy": "A0",
+  "side_effects": "none",
+  "tools": [
+    {
+      "name": "preview_scope",
+      "access": "read",
+      "human_approval_required": false,
+      "produces_digest": false,
+      "description": "List the requested channels the user can already access, the period, and a message count. Do not copy message text."
+    },
+    {
+      "name": "confirm_scope",
+      "access": "read",
+      "human_approval_required": true,
+      "produces_digest": false,
+      "description": "Record the requesting user's confirmation of the exact channel ids and the period. This does not post and does not approve monitoring."
+    },
+    {
+      "name": "produce_digest",
+      "access": "read",
+      "human_approval_required": true,
+      "requires_scope_confirmation": true,
+      "produces_digest": true,
+      "description": "Return a read-only digest of the confirmed channels and period. Every point quotes a source message."
+    }
+  ],
+  "forbidden": ["post", "reply", "react", "mention", "forward", "send", "graph_write"]
+}
