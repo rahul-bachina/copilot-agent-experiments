@@ -504,6 +504,16 @@ A cited bid draft for one synthetic UK public-sector invitation. The compliance 
 
 </article>
 
+<article class="plan-card" id="m006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · M006 · Autonomy A0</p>
+
+## Excel assumption review
+
+A read-only review of one synthetic financial model for a UK public body or a regulated firm. The model owner confirms the workbook, the ranges, and the formulas. The report inventories inputs, names hard-coded numbers inside formulas, names inconsistent formulas and broken or circular references, and compares units and date bases without choosing a side. A one-at-a-time sensitivity is computed in Python. It calls [Experiment 36](experiments/36-cross-source-validation.md) for paired values, [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier types, [Experiment 15](experiments/15-vulnerability-urgency-scanner.md) so a safeguarding phrase stops the routine review, and [Experiment 30](experiments/30-agent-regression-test-generator.md) to draft regression cases that are not merged. The agent does not edit the workbook, judge an assumption, or invent a benchmark. [Read the briefing](experiments/54-excel-assumption-review.md).
+
+</article>
+
 <article class="plan-card" id="m007" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · M007 · Autonomy A0</p>
@@ -516,4 +526,4 @@ A ranked list of files in locations the requesting user has confirmed, for a UK 
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M007 is Experiment 55.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M006 is Experiment 54. M007 is Experiment 55.
