@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Fifty-four starters you can read today
+## Fifty-five starters you can read today
 
 </div>
 
@@ -1380,6 +1380,31 @@ The draft runs locally. Nothing is submitted, sent, or uploaded, and a price or 
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 53 · M005 · Microsoft 365 · Autonomy A1</p>
+
+### PowerPoint narrative builder
+
+Propose a cited slide outline from one synthetic briefing, an approved figures sheet, and a short policy extract. The presenter approves the outline and every citation before any slide file is produced.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The outline runs locally. Nothing is published, sent, or shared, and a figure, a logo, a customer, or an outcome is not invented.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/53-powerpoint-narrative-builder.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/53-powerpoint-narrative-builder)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 54 · M006 · Microsoft 365 · Autonomy A0</p>
 
 ### Excel assumption review
@@ -1450,7 +1475,7 @@ The list runs locally. Nothing outside the confirmed locations is listed, and no
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M006, and M007 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, and M007 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "outline_tool.schema.json",
+  "title": "Narrative outline tool",
+  "description": "Input for propose_outline(). The tool reads one synthetic pack. It does not publish, send, or share.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "pack_id", "briefing_note", "figures_sheet", "policy_extract"],
+  "properties": {
+    "synthetic": {"const": true},
+    "pack_id": {"type": "string", "pattern": "^SYN-DECK-\\d{4}$"},
+    "organisation": {"type": "string", "maxLength": 200},
+    "audience": {"type": "string", "maxLength": 200},
+    "protective_marking": {"type": "string", "maxLength": 80},
+    "legal_hold": {"type": "boolean"},
+    "briefing_note": {"type": "object"},
+    "figures_sheet": {"type": "object"},
+    "policy_extract": {"type": "object"},
+    "requested_points": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["point_id", "text"],
+        "properties": {
+          "point_id": {"type": "string", "pattern": "^Q[0-9]{1,2}$"},
+          "text": {"type": "string", "maxLength": 2000}
+        }
+      }
+    }
+  }
+}

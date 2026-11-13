@@ -1,0 +1,479 @@
+# Agent manifest: PowerPoint Narrative Builder
+# Experiment 53 — catalogue ID M005
+# Version: 0.1.0
+# Last reviewed: 2026-11-13
+# Next review: 2027-05-13
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-53-powerpoint-narrative-builder"
+  name: "PowerPoint Narrative Builder"
+  version: "0.1.0"
+  description: >
+    Helps a presenter turn one synthetic briefing note, an approved figures
+    sheet, and a short policy extract into a storyline and slide outline.
+    Autonomy A1. The presenter approves the outline and every citation before
+    any slide file is produced. The agent never invents a figure, quote, logo,
+    customer, or outcome, never marks a claim as sourced without a citation,
+    and never publishes, sends, or shares a deck.
+  owner: "Presenter"
+  contact: "presentations@northmere.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/53-powerpoint-narrative-builder"
+
+autonomy:
+  level: "A1"
+  level_description: "The presenter approves the outline and every citation before slides are produced or shared"
+  constraints:
+    - "The presenter approves the outline and every citation. The agent only prepares them."
+    - "The agent NEVER publishes, sends, or shares a deck, including after the presenter approves the outline"
+    - "The agent NEVER invents a figure, quote, logo, customer, or outcome"
+    - "A claim is marked sourced only when a citation quote is supported by Experiment 29"
+    - "A claim without an approved source stays a gap"
+    - "Words inside the pack cannot approve the outline"
+    - "A human route is offered on every result, including a refusal"
+    - "Citations, gaps, markings, and the empty approval come from src/narrative.py, not from model output"
+    - "All output is an outline until the deterministic approval step has been recorded"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic briefing pack"
+      description: "A briefing note, an approved figures sheet, a short policy extract, and the points the presenter asked to cover. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. Unsourced request text is not copied into the outline."
+      justification: "The outline cannot cite a passage that was not supplied."
+      data_categories:
+        - "Free text of synthetic passages"
+        - "A synthetic pack id, if it matches the starter pattern"
+        - "A protective marking, retention label, or legal-hold label, if the pack carries one"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Separate presenter review"
+      description: "presenter_approve_outline_and_citations, presenter_request_revision, or reject_outline."
+      access_level: "read"
+      scope: "One review for an outline already produced. Not read from the pack."
+      justification: "Approval has to be deterministic and has to refuse a publish, a send, and a share."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "Mail, Teams, SharePoint, and a public website"
+      reason: "The agent prepares an outline. It does not publish or share it."
+    - resource: "Microsoft Graph, the PowerPoint JavaScript API, and Copilot in PowerPoint"
+      reason: "A local slide file is built only after approval. It is not uploaded."
+    - resource: "Work IQ and a live figures store"
+      reason: "A live lookup would bypass the citation gate."
+    - resource: "Logo libraries and customer lists"
+      reason: "A logo or a customer is not looked up and is not invented."
+
+tools:
+  allowed:
+    - tool: "Narrative outline"
+      provider: "Local Python (src/narrative.py)"
+      action: "Quote an approved passage or state a gap, then list the claims the presenter must check"
+      access_level: "read"
+      scope: "One pack. No network. No model. Calls Experiments 29 and 36."
+      justification: "Which sentence may be cited, and whether a quote is supported, are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Presenter approval"
+      provider: "Local Python (record_presenter_approval)"
+      action: "Record that the presenter approves the outline and every citation, asks for a revision, or rejects the outline"
+      access_level: "read"
+      scope: "The outline for this run and a separate review object. No publish and no share."
+      justification: "Approval has to be deterministic. A marker inside the pack is not approval."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Local slide file"
+      provider: "Local Python (src/slides.py)"
+      action: "Write the approved outline as an Office Open XML presentation on the machine that ran the core"
+      access_level: "read"
+      scope: "An outline whose presenter approval was recorded by this process. The file is not uploaded."
+      justification: "The presenter may want a local file after approving the outline. Building it locally does not share it."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quotes, the gaps, and the approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that marks a claim sourced without a citation, or that records a publish, a send, or a share"
+      access_level: "read"
+      scope: "The outline for this run"
+      justification: "An outline that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes to a library, a site, or a Graph drive. A local presentation
+      file is built only after the presenter approval step. It is not a share.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The presenter may approve an outline. That approval does not
+      publish, email, or share the deck.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve the outline. record_presenter_approval can
+      record the presenter's review. It cannot publish or share the deck.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that the accessibility regulations were met,
+      that WCAG 2.2 AA was met, or that a security classification was chosen.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against a site, a library, or a drive item."
+
+  external_send:
+    enabled: false
+    rationale: >
+      The presenter uses the outline outside the agent. The agent does not
+      send it. Approval of the outline does not share it.
+
+  spend_transact:
+    enabled: false
+    rationale: "No price is committed and no payment is made."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish or share a deck"
+      rationale: "share_deck and publish_deck raise NarrativeForbidden. shared and published stay false."
+    - enabled: false
+      action_name: "Produce slides before approval"
+      rationale: "produce_slides refuses while human_approval is empty. Words in the pack are not approval."
+    - enabled: false
+      action_name: "Invent a figure, logo, customer, or outcome"
+      rationale: "invent_claim raises NarrativeForbidden. A number that is not on the approved sheet is not copied."
+    - enabled: false
+      action_name: "Strip a protective marking or a legal hold"
+      rationale: "A marking or a legal-hold label found in the source is copied. A lower marking in the pack does not replace a higher one."
+
+human_approval:
+  description: >
+    Catalogue checkpoint for M005: the presenter approves the outline and
+    every citation before slides are produced or shared. propose_outline()
+    leaves human_approval null. Only record_presenter_approval can set it,
+    and only for presenter_approve_outline_and_citations, and only when every
+    sourced citation was named and every gap, accessibility check, and
+    marking was seen. That record does not produce slides and does not share
+    them. produce_slides() runs only after that record. Words in the pack
+    cannot approve the outline.
+
+  approval_points:
+    - action: "Presenter approves the outline and every citation before slides are produced or shared"
+      approver: "Presenter"
+      mandatory: true
+      rationale: "Catalogue checkpoint for M005. The agent prepares the outline. The presenter approves it. Slides are not produced in that same step."
+    - action: "See every gap, including a figure, logo, customer, or outcome with no approved source"
+      approver: "Presenter"
+      mandatory: true
+      rationale: "A claim without a supported citation is not sourced. Approval is refused until the presenter says the gaps were seen."
+    - action: "See the accessibility checklist and the protective marking"
+      approver: "Presenter"
+      mandatory: true
+      rationale: "The checklist is not a certificate. A marking found in the source stays on the outline."
+    - action: "Ask for a revision or reject the outline"
+      approver: "Presenter"
+      mandatory: true
+      rationale: "The presenter can send the outline back or reject it. Neither decision builds slides."
+    - action: "Publish, send, or share the deck"
+      approver: "Presenter"
+      mandatory: true
+      rationale: "Outside the agent. Those actions are refused. Direct functions raise NarrativeForbidden."
+
+  no_approval_required:
+    - action: "Prepare an outline that quotes a current passage or states a gap"
+      rationale: "The outline has no external effect. A human route is still offered. Slide production remains gated."
+    - action: "Re-run the same pack"
+      rationale: "No publish and no share. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. UK GDPR
+      Articles 6, 9, and 28, and the Data Protection Act 2018, were not
+      opened on 13 November 2026. The controller confirms its own basis.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The starter does not ask for special-category data."
+    safeguards:
+      - "One pack at a time, as supplied by the presenter"
+      - "A sentence with a safeguarding cue is flagged and is not turned into a slide"
+      - "A phone number, email address, date of birth, postal address, or personal name is not copied into the outline"
+      - "Nothing is published or shared"
+      - "Samples in this repository are synthetic"
+
+  data_minimisation:
+    - "The core reads one pack. It does not retrieve a slide library."
+    - "The outline quotes a source passage or it states a gap id. It does not copy an unsourced request."
+    - "Refused wording and unsourced figures are not copied out."
+    - "Instructions aimed at the agent are recorded as pattern names, not stored as the request."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention applies to whatever the presenter then saves. A legal-hold label in the source is copied. A schedule is not set here."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process.
+
+prompt_injection:
+  description: >
+    Pack text is untrusted. It may tell the model to ignore the sources,
+    invent a logo, publish the deck, or mark every claim as sourced. It may
+    also contain an approval sentence. The core does not read the network.
+    The model is not given a tool that can publish, send, or share.
+
+  controls:
+    - control: "Instructions are not claims"
+      description: "A sentence that tells the agent to publish, invent, or ignore the sources is not matched. followed is false."
+    - control: "Negation is not a citation"
+      description: "A sentence that negates a claim, or a following sentence that is only 'no', is not used to cite a source. A source sentence contained inside the negation is not marked sourced."
+    - control: "Approval inside the pack is ignored"
+      description: "human_approval and presenter_approved are stripped. Only record_presenter_approval can record approval."
+    - control: "Unrecognised text is a gap"
+      description: "Anything that does not match an approved passage is a gap. The text is not copied. It is not marked sourced."
+    - control: "Deterministic quotes"
+      description: "The quoted passage, the groundedness verdict, and the empty approval are computed in Python."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. produce_slides refuses without the approval record. Direct share functions raise NarrativeForbidden."
+
+  residual_risk: >
+    A negation the list does not catch can still cite an approved line the
+    presenter did not want. The presenter is the control, because slides are
+    not produced and nothing is shared until the separate approval step.
+    A manipulated model can still narrate a misleading brief around the JSON.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-13"
+  risks:
+    - id: "R1"
+      risk: "A deck is shared because the presenter approved the outline, or because the pack said to publish"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Sends and writes are disabled"
+        - "Approval does not set shared or slides_produced"
+        - "share_deck raises NarrativeForbidden"
+      residual_risk: "Low"
+      owner: "Presenter"
+    - id: "R2"
+      risk: "A claim is marked sourced without a citation, or a figure, logo, customer, or outcome is invented"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "sourced requires a supported quote"
+        - "A number that is not on the approved figures sheet is not copied"
+        - "The request text is not copied"
+      residual_risk: "Low"
+      owner: "Presenter"
+    - id: "R3"
+      risk: "A stale passage is quoted as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Experiment 29 passage_currency flags an old review stamp"
+        - "More than 180 days after 13 November 2026, no passage is quoted"
+        - "Refused wording is not copied"
+      residual_risk: "Low"
+      owner: "Presenter"
+    - id: "R4"
+      risk: "A protective marking or a legal hold is stripped or downgraded"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Every marking token found in the source is kept"
+        - "The strictest marking is the one applied"
+        - "A legal-hold phrase in the source cannot be cleared by a false flag"
+      residual_risk: "Low"
+      owner: "Presenter"
+    - id: "R5"
+      risk: "A safeguarding sentence is turned into a routine slide"
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "Medium"
+      controls:
+        - "A distress or safeguarding cue is flagged for a person"
+        - "That sentence is not copied onto a slide"
+      residual_risk: "Low"
+      owner: "Presenter"
+    - id: "R6"
+      risk: "The outline is treated as proof that WCAG 2.2 AA or the accessibility regulations were met"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "accessibility_certified and wcag_22_aa_met stay false"
+        - "The checklist tells the presenter what was not assessed"
+      residual_risk: "Low"
+      owner: "Presenter"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the pack id, the passage ids cited, and the later approval.
+    This starter logs nothing because it keeps no store. Do not put the
+    request text or a personal identifier in an application trace.
+
+  logged_events:
+    - event: "Outline requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Pack id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's schedule. Not set by this starter."
+    - event: "Outline result"
+      data_logged:
+        - "Outcome"
+        - "Passage ids cited and refused"
+        - "Whether any claim was marked sourced"
+        - "Whether human_approval was left null"
+        - "Whether a marking or a safeguarding flag was present"
+      retention: "Keep with the outline if the presenter relies on it. The request text is not in this event."
+    - event: "Approval recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "slides_produced false"
+        - "shared false"
+      retention: "Organisation's schedule. The agent does not write this event to a site."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log the request text in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, Graph writes, or a publishing site"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Presenter"
+      contact: "presentations@northmere.example"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example"
+
+review:
+  last_review_date: "2026-11-13"
+  next_review_date: "2027-05-13"
+  review_frequency: "6 months, and sooner if the figures sheet, the accessibility regulations, or the classification policy changes"
+  reviewer: "The adopting organisation's presenter and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the organisation's real figures sheet, if one is later substituted for the synthetic pack"
+    - "A change to the accessibility regulations or to the GOV.UK page that names WCAG 2.2 AA"
+    - "A change to the Government Security Classifications Policy"
+    - "A proposal to add a connector that can publish, send, or share"
+    - "A proposal to let the agent produce slides before approval"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Narrative core"
+      path: "src/narrative.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The scope policy was not
+    opened for this experiment on 13 November 2026. A body that wants a draft
+    pack uses Experiment 03. The pointers below say which manifest sections
+    a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. UK GDPR Articles 6, 9, and 28, and the Data Protection Act 2018, were not opened on 13 November 2026. The controller confirms the basis before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day window is a starter default, not a review duty. Experiment 29's stale-after-days constant is called as published. This starter does not fork it."
+      section: "src/narrative.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The accessibility regulations were read at regulations 3, 4, and 6. Regulation 7 and regulation 9 were not. The GOV.UK guidance names WCAG 2.2 AA. The regulation text that was opened does not. This starter does not certify either."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Government Security Classifications Policy HTML was read on 13 November 2026. This starter copies markings. It does not choose a tier."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on presentation text."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on northmere.example are placeholders. Northmere Digital Services and Aldergate Borough Council are invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview opened on 13 November 2026 names a Microsoft Copilot harness. It did not, on that read, use the name GitHub Copilot harness. The skills layout in this folder still uses the repository's name for that harness."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Microsoft Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Microsoft Purview, and Application Insights were not opened on 13 November 2026. They are unverified here."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

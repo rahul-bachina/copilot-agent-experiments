@@ -1,0 +1,336 @@
+{
+  "label": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED.",
+  "catalogue_id": "M005",
+  "experiment": 53,
+  "autonomy": "A1",
+  "pack_id": "SYN-DECK-5301",
+  "as_of": "2026-11-13",
+  "human_approval": null,
+  "actions_taken": [],
+  "executed": false,
+  "model_called": false,
+  "network_called": false,
+  "request_text_recorded": false,
+  "flags": {
+    "slides_produced": false,
+    "shared": false,
+    "published": false,
+    "sent": false,
+    "uploaded": false,
+    "graph_called": false,
+    "powerpoint_api_called": false,
+    "logo_added": false,
+    "customer_invented": false,
+    "outcome_invented": false,
+    "figure_invented": false,
+    "classification_downgraded": false,
+    "marking_stripped": false
+  },
+  "regulatory": {
+    "accessibility_certified": false,
+    "wcag_22_aa_met": false,
+    "regulations_scope_decided": false,
+    "classification_chosen": false,
+    "lawful_basis_decided": false
+  },
+  "human_route": {
+    "offered": true,
+    "agent_publishes": false,
+    "agent_shares": false,
+    "agent_sends": false
+  },
+  "sources_pinned_on": "2026-11-13",
+  "not_opened": [
+    "equality-act-2010",
+    "dda-1995",
+    "psbar-reg-7",
+    "psbar-reg-9",
+    "wcag-22",
+    "powerpoint-javascript",
+    "graph-upload",
+    "uk-gdpr",
+    "retention-schedule"
+  ],
+  "reuse": {
+    "experiment_29": "score_claim and passage_currency",
+    "experiment_36": "normalise_value and classify_values",
+    "experiment_52_pattern": "approval is a separate step, negation is not a citation, pack text is not approval"
+  },
+  "organisation": "Northmere Digital Services (fictional)",
+  "audience": "Aldergate Borough Council leadership team (fictional)",
+  "markings": {
+    "found": [
+      "OFFICIAL"
+    ],
+    "applied": "OFFICIAL",
+    "missing": false,
+    "legal_hold": false,
+    "retention_labels": [],
+    "stripped": false,
+    "downgraded": false
+  },
+  "stale": {
+    "rules_current": true,
+    "window_days": 180,
+    "pinned_on": "2026-11-13",
+    "review_window_days": 90,
+    "passages": [
+      {
+        "passage_id": "BN-P1",
+        "stale": false,
+        "stale_reason": "within_draft_threshold"
+      },
+      {
+        "passage_id": "BN-P2",
+        "stale": false,
+        "stale_reason": "within_draft_threshold"
+      },
+      {
+        "passage_id": "POL-P1",
+        "stale": false,
+        "stale_reason": "within_draft_threshold"
+      },
+      {
+        "passage_id": "FIG-1",
+        "stale": false,
+        "stale_reason": "within_draft_threshold"
+      }
+    ]
+  },
+  "prompt_injection": {
+    "detected": false,
+    "patterns": [],
+    "followed": false,
+    "prohibited_keys_stripped": []
+  },
+  "key_message": {
+    "text": "The synthetic service desk answers routine requests from the approved catalogue.",
+    "sourced": true,
+    "citations": [
+      {
+        "document_id": "BN-5301",
+        "document_kind": "briefing_note",
+        "passage_id": "BN-P1",
+        "quote": "The synthetic service desk answers routine requests from the approved catalogue."
+      }
+    ],
+    "reason": null
+  },
+  "claims": [
+    {
+      "claim_id": "KEY",
+      "point_id": "KEY",
+      "sourced": true,
+      "text": "The synthetic service desk answers routine requests from the approved catalogue.",
+      "citations": [
+        {
+          "document_id": "BN-5301",
+          "document_kind": "briefing_note",
+          "passage_id": "BN-P1",
+          "quote": "The synthetic service desk answers routine requests from the approved catalogue."
+        }
+      ],
+      "groundedness": {
+        "verdict": "supported",
+        "stale_source": false,
+        "stale_reason": null
+      },
+      "cross_source": {
+        "called": false,
+        "classification": null,
+        "reason": null
+      },
+      "passage_id": "BN-P1",
+      "kind": "narrative",
+      "label": null
+    },
+    {
+      "claim_id": "Q2",
+      "point_id": "Q2",
+      "sourced": true,
+      "text": "Staff check the approved catalogue before they draft a reply.",
+      "citations": [
+        {
+          "document_id": "BN-5301",
+          "document_kind": "briefing_note",
+          "passage_id": "BN-P2",
+          "quote": "Staff check the approved catalogue before they draft a reply."
+        }
+      ],
+      "groundedness": {
+        "verdict": "supported",
+        "stale_source": false,
+        "stale_reason": null
+      },
+      "cross_source": {
+        "called": false,
+        "classification": null,
+        "reason": null
+      },
+      "passage_id": "BN-P2",
+      "kind": "narrative",
+      "label": null
+    },
+    {
+      "claim_id": "Q3",
+      "point_id": "Q3",
+      "sourced": true,
+      "text": "The approved figures sheet records 1240 routine requests closed in October 2026.",
+      "citations": [
+        {
+          "document_id": "FIG-5301",
+          "document_kind": "figures_sheet",
+          "passage_id": "FIG-1",
+          "quote": "The approved figures sheet records 1240 routine requests closed in October 2026."
+        }
+      ],
+      "groundedness": {
+        "verdict": "supported",
+        "stale_source": false,
+        "stale_reason": null
+      },
+      "cross_source": {
+        "called": true,
+        "classification": "single_approved_value",
+        "reason": "1240|"
+      },
+      "passage_id": "FIG-1",
+      "kind": "figure",
+      "label": "Routine requests closed in the pilot month"
+    }
+  ],
+  "gaps": [
+    {
+      "point_id": "Q4",
+      "reason": "customer_not_in_source",
+      "sourced": false,
+      "citation": null,
+      "claim_text_recorded": false,
+      "note": "No approved source covers this point. It is not sourced."
+    },
+    {
+      "point_id": "Q5",
+      "reason": "logo_not_approved",
+      "sourced": false,
+      "citation": null,
+      "claim_text_recorded": false,
+      "note": "No approved source covers this point. It is not sourced."
+    },
+    {
+      "point_id": "Q6",
+      "reason": "negated",
+      "sourced": false,
+      "citation": null,
+      "claim_text_recorded": false,
+      "note": "No approved source covers this point. It is not sourced."
+    }
+  ],
+  "slides": [
+    {
+      "slide_id": "S0",
+      "claim_id": "KEY",
+      "headline": "The synthetic service desk answers routine requests from the approved catalogue.",
+      "supporting_points": [
+        {
+          "document_id": "BN-5301",
+          "document_kind": "briefing_note",
+          "passage_id": "BN-P1",
+          "quote": "The synthetic service desk answers routine requests from the approved catalogue."
+        }
+      ],
+      "speaker_notes": "OFFICIAL\nThe synthetic service desk answers routine requests from the approved catalogue.\nSource BN-5301 BN-P1.\nNot shared.",
+      "sourced": true,
+      "kind": "narrative",
+      "alt_text": null
+    },
+    {
+      "slide_id": "S1",
+      "claim_id": "Q2",
+      "headline": "Staff check the approved catalogue before they draft a reply.",
+      "supporting_points": [
+        {
+          "document_id": "BN-5301",
+          "document_kind": "briefing_note",
+          "passage_id": "BN-P2",
+          "quote": "Staff check the approved catalogue before they draft a reply."
+        }
+      ],
+      "speaker_notes": "OFFICIAL\nStaff check the approved catalogue before they draft a reply.\nSource BN-5301 BN-P2.\nNot shared.",
+      "sourced": true,
+      "kind": "narrative",
+      "alt_text": null
+    },
+    {
+      "slide_id": "S2",
+      "claim_id": "Q3",
+      "headline": "The approved figures sheet records 1240 routine requests closed in October 2026.",
+      "supporting_points": [
+        {
+          "document_id": "FIG-5301",
+          "document_kind": "figures_sheet",
+          "passage_id": "FIG-1",
+          "quote": "The approved figures sheet records 1240 routine requests closed in October 2026."
+        }
+      ],
+      "speaker_notes": "OFFICIAL\nThe approved figures sheet records 1240 routine requests closed in October 2026.\nSource FIG-5301 FIG-1.\nNot shared.",
+      "sourced": true,
+      "kind": "figure",
+      "alt_text": "Routine requests closed in the pilot month"
+    }
+  ],
+  "accessibility": {
+    "alt_text": {
+      "logo_added": false,
+      "items": [
+        {
+          "slide_id": "S0",
+          "alt_text": null,
+          "reason": "no_image"
+        },
+        {
+          "slide_id": "S1",
+          "alt_text": null,
+          "reason": "no_image"
+        },
+        {
+          "slide_id": "S2",
+          "alt_text": "Routine requests closed in the pilot month",
+          "reason": "figure_label"
+        }
+      ],
+      "certified": false
+    },
+    "reading_order": {
+      "slide_ids": [
+        "S0",
+        "S1",
+        "S2"
+      ],
+      "speaker_notes_follow_slides": true,
+      "certified": false
+    },
+    "colour_contrast": {
+      "assessed": false,
+      "presenter_must_check": true,
+      "wcag_22_aa_certified": false,
+      "note": "This starter does not render colours. GOV.UK guidance names WCAG 2.2 AA. The regulation text that was opened does not."
+    },
+    "plain_english": {
+      "word_limit": 25,
+      "limit_is_guidance": true,
+      "guidance": "Publishing accessible documents says aim for around 25 words or less per sentence. The GOV.UK style guide says use plain English. This count is not a certificate.",
+      "over_limit": [],
+      "certified": false
+    },
+    "accessibility_certified": false
+  },
+  "safeguarding": {
+    "flagged": false,
+    "point_ids": []
+  },
+  "personal_data": {
+    "withheld": false,
+    "categories": []
+  },
+  "outcome": "outline_for_presenter"
+}

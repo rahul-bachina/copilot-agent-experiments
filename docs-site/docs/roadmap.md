@@ -504,6 +504,16 @@ A cited bid draft for one synthetic UK public-sector invitation. The compliance 
 
 </article>
 
+<article class="plan-card" id="m005" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · M005 · Autonomy A1</p>
+
+## PowerPoint narrative builder
+
+A cited slide outline for one synthetic UK public-sector briefing. The presenter approves the outline and every citation before any slide file is produced. It calls [Experiment 29](experiments/29-groundedness-evaluation.md) to score each quote and [Experiment 36](experiments/36-cross-source-validation.md) to compare figure values. The approval gate follows [Experiment 52](experiments/52-word-proposal-drafting.md). The agent does not publish, send, or share, and it does not invent a figure, a logo, a customer, or an outcome. [Read the briefing](experiments/53-powerpoint-narrative-builder.md).
+
+</article>
+
 <article class="plan-card" id="m006" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · M006 · Autonomy A0</p>
@@ -526,4 +536,4 @@ A ranked list of files in locations the requesting user has confirmed, for a UK 
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M006 is Experiment 54. M007 is Experiment 55.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55.
