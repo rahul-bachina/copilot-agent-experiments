@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Fifty-two starters you can read today
+## Fifty-three starters you can read today
 
 </div>
 
@@ -1378,6 +1378,31 @@ The draft runs locally. Nothing is submitted, sent, or uploaded, and a price or 
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 55 · M007 · Microsoft 365 · Autonomy A0</p>
+
+### OneDrive document finder
+
+Rank files inside locations the requesting user has confirmed. Each hit carries the reason, the location, the last modified date, and the sensitivity label.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The list runs locally. Nothing outside the confirmed locations is listed, and nothing is moved, deleted, shared, or given new permissions.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/55-onedrive-document-finder.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/55-onedrive-document-finder)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -1400,7 +1425,7 @@ The draft runs locally. Nothing is submitted, sent, or uploaded, and a price or 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, and M004 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, and M007 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

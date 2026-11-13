@@ -172,6 +172,9 @@ DIAGRAMS = {
     "experiments/52-word-proposal-drafting/docs/architecture_diagram.png": (
         "experiments/img/52-word-proposal-drafting-architecture.png"
     ),
+    "experiments/55-onedrive-document-finder/docs/architecture_diagram.png": (
+        "experiments/img/55-onedrive-document-finder-architecture.png"
+    ),
 }
 
 
