@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-two starters are in `experiments/`. The folders are 01 to 52.
+Fifty-three starters are in `experiments/`. The folders are 01 to 53.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -84,6 +84,7 @@ Fifty-two starters are in `experiments/`. The folders are 01 to 52.
 | 50 | [SharePoint Knowledge Curator](experiments/50-sharepoint-knowledge-curator/) | Propose curation actions for one synthetic SharePoint snapshot: missing or inconsistent metadata, duplicates, stale or orphaned pages, and broken links. Autonomy A1. The site owner approves every metadata change and every publishing action. The agent does not delete, unpublish, move, or change permissions. | ✅ Starter |
 | 51 | [Teams Channel Digest Agent](experiments/51-teams-channel-digest/) | Produce a read-only digest of synthetic Teams channel messages for a user-confirmed set of channels and a period. Autonomy A0. Every point quotes the source message. The agent does not post, reply, react, mention, or forward. | ✅ Starter |
 | 52 | [Word Proposal Drafting Agent](experiments/52-word-proposal-drafting/) | Draft a cited bid response from one synthetic invitation and an approved library. Autonomy A1. The author accepts the complete draft before it is used anywhere. The agent does not submit, send, or invent a price or a certificate. | ✅ Starter |
+| 53 | [PowerPoint Narrative Builder](experiments/53-powerpoint-narrative-builder/) | Propose a cited slide outline from one synthetic briefing, an approved figures sheet, and a short policy extract. Autonomy A1. The presenter approves the outline and every citation before any slide file is produced. The agent does not publish, send, or invent a figure, a logo, or a customer. | ✅ Starter |
 
 ## Getting Started
 

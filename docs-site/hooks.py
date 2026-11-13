@@ -172,6 +172,9 @@ DIAGRAMS = {
     "experiments/52-word-proposal-drafting/docs/architecture_diagram.png": (
         "experiments/img/52-word-proposal-drafting-architecture.png"
     ),
+    "experiments/53-powerpoint-narrative-builder/docs/architecture_diagram.png": (
+        "experiments/img/53-powerpoint-narrative-builder-architecture.png"
+    ),
 }
 
 
