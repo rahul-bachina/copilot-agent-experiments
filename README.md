@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-four starters are in `experiments/`. The folders are 01 to 53 and 55.
+Fifty-five starters are in `experiments/`. The folders are 01 to 55.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -85,6 +85,7 @@ Fifty-four starters are in `experiments/`. The folders are 01 to 53 and 55.
 | 51 | [Teams Channel Digest Agent](experiments/51-teams-channel-digest/) | Produce a read-only digest of synthetic Teams channel messages for a user-confirmed set of channels and a period. Autonomy A0. Every point quotes the source message. The agent does not post, reply, react, mention, or forward. | ✅ Starter |
 | 52 | [Word Proposal Drafting Agent](experiments/52-word-proposal-drafting/) | Draft a cited bid response from one synthetic invitation and an approved library. Autonomy A1. The author accepts the complete draft before it is used anywhere. The agent does not submit, send, or invent a price or a certificate. | ✅ Starter |
 | 53 | [PowerPoint Narrative Builder](experiments/53-powerpoint-narrative-builder/) | Propose a cited slide outline from one synthetic briefing, an approved figures sheet, and a short policy extract. Autonomy A1. The presenter approves the outline and every citation before any slide file is produced. The agent does not publish, send, or invent a figure, a logo, or a customer. | ✅ Starter |
+| 54 | [Excel Assumption Review Agent](experiments/54-excel-assumption-review/) | Review one synthetic workbook after the model owner confirms the ranges and the formulas. Autonomy A0. The agent inventories inputs, names formula issues, and computes a sensitivity. It does not edit the workbook, judge an assumption, or invent a benchmark. | ✅ Starter |
 | 55 | [OneDrive Document Finder](experiments/55-onedrive-document-finder/) | Rank files inside locations the requesting user has confirmed, with the reason, the location, the date, and the sensitivity label. Autonomy A0. The agent does not search outside that selection, reveal a file above clearance, move, delete, share, or change permissions. | ✅ Starter |
 
 ## Getting Started

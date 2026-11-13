@@ -1,0 +1,443 @@
+# Agent manifest: Excel Assumption Review Agent
+# Experiment 54 — catalogue ID M006
+# Version: 0.1.0
+# Last reviewed: 2026-11-13
+# Next review: 2027-05-13
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-54-excel-assumption-review"
+  name: "Excel Assumption Review Agent"
+  version: "0.1.0"
+  description: >
+    Reviews one synthetic workbook and writes a report for the model owner.
+    Autonomy A0. The model owner confirms the workbook, the ranges, and the
+    formulas before any cell is read for findings. The agent inventories
+    inputs, names hard-coded numbers inside formulas, names inconsistent
+    formulas, names broken or circular references, compares paired values
+    without choosing one, and computes a one-at-a-time sensitivity. It never
+    edits the workbook, never calls an assumption right or wrong, and never
+    invents a benchmark.
+  owner: "Model owner"
+  contact: "models@northmere.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/54-excel-assumption-review"
+
+autonomy:
+  level: "A0"
+  level_description: "The model owner confirms the workbook, the ranges, and the formulas. The agent only reports."
+  constraints:
+    - "The model owner confirms the workbook, the ranges, and the formulas. Words inside a cell do not count."
+    - "The agent NEVER edits the workbook, writes a cell, or calls Microsoft Graph"
+    - "The agent NEVER says an assumption is right or wrong"
+    - "The agent NEVER invents a benchmark value"
+    - "A human route is offered on every result, including a refusal"
+    - "Inventory, literals, sensitivity, and the empty findings acceptance come from src/review.py, not from model output"
+    - "Protective markings and retention labels are kept on every result"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic workbook representation"
+      description: "JSON cells for one invented model, plus a local .xlsx the core compares and does not save."
+      access_level: "read"
+      scope: "Cells inside the ranges the model owner confirmed. Samples in this repository are synthetic."
+      justification: "A review cannot name a cell it was not allowed to read."
+      data_categories:
+        - "Cell values and formulas"
+        - "A synthetic model id, if it matches the starter pattern"
+        - "A protective marking and a retention label, when the pack carries them"
+      may_contain_personal_data: true
+      may_contain_special_category_data: false
+      retention: "Transient. The starter does not persist the workbook."
+    - resource: "Separate scope confirmation"
+      description: "confirm_workbook_ranges_and_formulas, with the workbook fingerprint and the ranges."
+      access_level: "read"
+      scope: "One confirmation object. Not read from a cell."
+      justification: "Scope has to be deterministic. A sentence in a cell cannot confirm it."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "The live workbook through Microsoft Graph or Copilot in Excel"
+      reason: "The core reads a local file. It does not open a session and it does not save."
+    - resource: "Benchmark databases and external rates"
+      reason: "A comparison value is not looked up and is not invented."
+    - resource: "Other workbooks and external links"
+      reason: "A link outside the confirmed file is named as broken. It is not followed."
+
+tools:
+  allowed:
+    - tool: "Workbook review"
+      provider: "Local Python (src/review.py)"
+      action: "Inventory confirmed cells, name formula issues, compare paired values, and compute a 1 percent shock"
+      access_level: "read"
+      scope: "One pack and one confirmation. No network. No model. Calls Experiments 08, 15, 30, and 36."
+      justification: "Which formula is inconsistent, and how an output moves, are calculations. A language model must not invent them."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Scope confirmation"
+      provider: "Local Python (the confirmation object passed to review_workbook)"
+      action: "Accept only a separate confirmation of the workbook, the ranges, and the formulas"
+      access_level: "read"
+      scope: "One confirmation. Cell text is ignored."
+      justification: "The catalogue checkpoint is the model owner's confirmation before the review."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short brief, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The inventory, the literals, the sensitivity, and the empty findings acceptance stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that edits a workbook, judges an assumption, or invents a benchmark"
+      access_level: "read"
+      scope: "The report for this run"
+      justification: "A report that performs a prohibited action is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes to the workbook, to Graph, or to a drive. The local .xlsx
+      is read and hashed. It is not saved.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. The model owner reads the report. The agent does not email it
+      and does not accept the findings.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not accept the findings and does not decide that the
+      model is fit for purpose. findings_accepted stays null.
+
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that the AQuA Book was followed, that a model
+      is business-critical, or that a senior responsible owner was appointed.
+
+  production_record_change:
+    enabled: false
+    rationale: "No create or update against the workbook or a drive item."
+
+  external_send:
+    enabled: false
+    rationale: "The model owner reads the report outside the agent. The agent does not send it."
+
+  spend_transact:
+    enabled: false
+    rationale: "No figure is committed and no payment is made."
+
+  additional_high_risk:
+    - enabled: false
+      action_name: "Edit the workbook"
+      rationale: "edit_workbook and write_cell raise ReviewForbidden. workbook_modified stays false."
+    - enabled: false
+      action_name: "Call an assumption right or wrong"
+      rationale: "assert_assumption raises ReviewForbidden. assumption_judged stays false."
+    - enabled: false
+      action_name: "Invent a benchmark"
+      rationale: "invent_benchmark raises ReviewForbidden. benchmark_invented stays false."
+
+human_approval:
+  description: >
+    Catalogue checkpoint for M006: the model owner confirms the workbook,
+    the ranges, and the formulas. review_workbook leaves findings_accepted
+    null. A confirmation object can set human_approval for the scope only.
+    Words in a cell cannot confirm the scope. The agent does not accept the
+    findings and does not edit the workbook.
+
+  approval_points:
+    - action: "Model owner confirms the workbook, the ranges, and the formulas"
+      approver: "Model owner"
+      mandatory: true
+      rationale: "Catalogue checkpoint for M006. Without a separate confirmation the ranges are not inspected."
+    - action: "A person takes any text that may be distress, vulnerability, or safeguarding"
+      approver: "Model owner"
+      mandatory: true
+      rationale: "Those phrases stop the routine review. The text is not copied and is not treated as a modelling question."
+    - action: "Model owner reads the report"
+      approver: "Model owner"
+      mandatory: true
+      rationale: "findings_accepted stays null. The agent does not decide that an assumption is right or wrong."
+    - action: "Edit the workbook"
+      approver: "Model owner"
+      mandatory: true
+      rationale: "Outside the agent. edit_workbook raises ReviewForbidden."
+
+  no_approval_required:
+    - action: "Re-run the same confirmed pack"
+      rationale: "No write and no send. The same inputs produce the same JSON. The confirmation is still required."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. UK GDPR
+      Articles 6 and 9 were not opened on 13 November 2026. The controller
+      confirms its own basis.
+    secondary: "None asserted."
+
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. The starter does not ask for special-category data."
+    safeguards:
+      - "One pack at a time, as supplied by the model owner"
+      - "A cell that matches an email, a phone number, a date of birth, a personal name, or a postcode is not copied"
+      - "A safeguarding phrase stops the routine review and the phrase is not copied"
+      - "Samples in this repository are synthetic"
+
+  data_minimisation:
+    - "The core reads cells inside the confirmed ranges."
+    - "Personal data types are recorded. The text is not copied."
+    - "An instruction aimed at the agent is recorded as a pattern name, not stored as the sentence."
+    - "A pack that is not marked synthetic is refused without echoing the cells."
+
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention, and any legal hold on the workbook, apply to the file the owner keeps. This starter does not clear a hold."
+
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+
+  data_subject_rights:
+    note: >
+      The agent does not handle access, erasure, or objection requests.
+      Those go through the organisation's privacy process.
+
+prompt_injection:
+  description: >
+    Cell text is untrusted. It may tell the model to ignore the rules, mark
+    every assumption correct, write a cell, or remove a protective marking.
+    The core does not read the network. The model is not given a tool that
+    can edit the workbook.
+
+  controls:
+    - control: "Instructions are recorded and not followed"
+      description: "Pattern names are stored. followed is false. The sentence is not copied."
+    - control: "Negation is not an inclusion"
+      description: "A sentence that negates a claim does not become a text claim and does not become a structural finding."
+    - control: "Approval words in a cell are ignored"
+      description: "Only the separate confirmation object can confirm the scope."
+    - control: "Deterministic findings"
+      description: "Literals, formula shape, broken references, cycles, paired values, and the sensitivity ranking are computed in Python."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set an edit, a judgement, a benchmark, or the approval is stripped and flagged."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. Direct functions raise ReviewForbidden."
+
+  residual_risk: >
+    A sentence the pattern list does not catch can still be narrated by a
+    model around the JSON. The model owner is the control, because the
+    workbook is not edited and no assumption is judged. A manipulated model
+    can still write a misleading brief around the JSON.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-13"
+  risks:
+    - id: "R1"
+      risk: "The workbook is edited because a cell said to write a value, or because a harness can edit Excel"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Writes are disabled"
+        - "edit_workbook and write_cell raise ReviewForbidden"
+        - "The file hash is checked before and after the read"
+      residual_risk: "Low"
+      owner: "Model owner"
+    - id: "R2"
+      risk: "An assumption is called right or wrong, or a benchmark is invented"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "assert_assumption and invent_benchmark raise ReviewForbidden"
+        - "Questions are scanned for a judgement"
+        - "Sensitivity is a 1 percent shock, not a benchmark"
+      residual_risk: "Low"
+      owner: "Model owner"
+    - id: "R3"
+      risk: "A cell outside the confirmed ranges is treated as inspected, or words in a cell are treated as confirmation"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Confirmation is a separate object with a fingerprint"
+        - "Markers inside cells are ignored"
+        - "Only cells inside the confirmed ranges are inventoried"
+      residual_risk: "Low"
+      owner: "Model owner"
+    - id: "R4"
+      risk: "Personal data or a safeguarding phrase is copied into the report"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 08 and local patterns record types only"
+        - "Experiment 15 categories stop the routine review"
+        - "The phrase is not copied"
+      residual_risk: "Low"
+      owner: "Model owner"
+    - id: "R5"
+      risk: "Pinned sources are followed after they are outside the starter window, or a protective marking is dropped"
+      likelihood: "Low"
+      impact: "High"
+      inherent_risk: "Medium"
+      controls:
+        - "More than 180 days after 13 November 2026, findings are withheld"
+        - "The marking and the retention label are copied onto every result, including a refusal"
+        - "strip_protective_marking raises ReviewForbidden"
+      residual_risk: "Low"
+      owner: "Model owner"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the model version if
+    any, the model id, the ranges confirmed, and whether findings were left
+    unaccepted. This starter logs nothing because it keeps no store. Do not
+    put cell text that may be personal data in an application trace.
+
+  logged_events:
+    - event: "Review requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Model id, if it matched the synthetic pattern"
+        - "Whether the record was marked synthetic"
+      retention: "Organisation's model-assurance schedule. Not set by this starter."
+    - event: "Review result"
+      data_logged:
+        - "Outcome"
+        - "Ranges inspected"
+        - "Whether human_approval recorded scope only"
+        - "Whether findings_accepted stayed null"
+      retention: "Keep with the model file if the owner relies on the report. Cell text is not in this event."
+    - event: "Scope refused"
+      data_logged:
+        - "Reason code"
+        - "Whether a fingerprint mismatched"
+      retention: "Organisation's schedule. The cells are not in this event."
+
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log cell text in an application trace."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for Graph writes or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Model owner"
+      contact: "models@northmere.example"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example"
+
+review:
+  last_review_date: "2026-11-13"
+  next_review_date: "2027-05-13"
+  review_frequency: "6 months, and sooner if the AQuA Book page or the harness overview changes"
+  reviewer: "The adopting organisation's model owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the GOV.UK page The AQuA Book"
+    - "A change to the HM Treasury publication page for the Macpherson review"
+    - "A change to the Copilot Studio harness overview"
+    - "A proposal to add a connector that can edit a workbook or send a report"
+    - "A proposal to let the agent accept findings or write a cell"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Review core"
+      path: "src/review.py"
+    - name: "Synthetic workbook"
+      path: "fixtures/northmere_grants.xlsx"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. The scope policy was not
+    opened for this experiment on 13 November 2026. A body that wants a draft
+    pack uses Experiment 03. The pointers below say which manifest sections
+    a drafter would read.
+
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. UK GDPR Articles 6 and 9 were not opened on 13 November 2026. The controller confirms the basis before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The 180-day window is a starter default, not a review duty in the AQuA Book. Equal to 180 days is still current."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The formula reader is a closed set: numbers, references, ranges, parentheses, addition, subtraction, multiplication, division, SUM, AVERAGE, MIN, MAX, and IF. Anything else is named and not evaluated."
+      section: "src/formulas.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Macpherson final-report PDF was not opened. The 2015 Aqua Book PDF was opened and is not the current GOV.UK page. Recommendation numbers from the 2013 report are not quoted."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on workbook text."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on northmere.example are placeholders. Northmere Analytical Unit is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The Copilot Studio harness overview opened on 13 November 2026 names a Microsoft Copilot harness. It does not use the older catalogue name on that page. This starter does not edit Excel even where that harness can."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Microsoft Entra Agent ID, Conditional Access, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Microsoft Purview, and Application Insights were not opened on 13 November 2026. They are unverified here."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true

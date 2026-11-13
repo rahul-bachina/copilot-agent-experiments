@@ -175,6 +175,9 @@ DIAGRAMS = {
     "experiments/53-powerpoint-narrative-builder/docs/architecture_diagram.png": (
         "experiments/img/53-powerpoint-narrative-builder-architecture.png"
     ),
+    "experiments/54-excel-assumption-review/docs/architecture_diagram.png": (
+        "experiments/img/54-excel-assumption-review-architecture.png"
+    ),
     "experiments/55-onedrive-document-finder/docs/architecture_diagram.png": (
         "experiments/img/55-onedrive-document-finder-architecture.png"
     ),

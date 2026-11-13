@@ -1,0 +1,2058 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "catalogue_id": "M006",
+  "summary": {
+    "total_cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "scope-not-confirmed",
+      "name": "No separate confirmation",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "scope_not_confirmed"
+        },
+        {
+          "field": "ranges",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "marker-inside-cell",
+      "name": "Approval words inside a cell are ignored when no confirmation is passed",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "scope_not_confirmed"
+        },
+        {
+          "field": "ranges",
+          "passed": true,
+          "detail": "[]"
+        }
+      ]
+    },
+    {
+      "case_id": "bad-fingerprint",
+      "name": "A confirmation for a different workbook is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "scope_not_confirmed"
+        },
+        {
+          "field": "ranges",
+          "passed": true,
+          "detail": "[]"
+        }
+      ]
+    },
+    {
+      "case_id": "inventory",
+      "name": "Confirmed review inventories Inputs!C2 and does not judge it",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "not_literal",
+          "passed": true,
+          "detail": "['Calc!C4', 'Calc!E2', 'Calc!E3', 'Calc!E4', 'Calc!G2', 'Calc!G3']"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "hardcoded-literal",
+      "name": "Calc!E4 contains 1.025 inside a formula",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "literal",
+          "passed": true,
+          "detail": "[('Calc!C4', '1.02'), ('Calc!E2', '1'), ('Calc!E3', '1'), ('Calc!E4', '1.025'), ('Calc!G2', '1'), ('Calc!G3', '1')]"
+        }
+      ]
+    },
+    {
+      "case_id": "another-literal",
+      "name": "Calc!C4 contains 1.02 inside a formula",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "literal",
+          "passed": true,
+          "detail": "[('Calc!C4', '1.02'), ('Calc!E2', '1'), ('Calc!E3', '1'), ('Calc!E4', '1.025'), ('Calc!G2', '1'), ('Calc!G3', '1')]"
+        }
+      ]
+    },
+    {
+      "case_id": "negation",
+      "name": "A negated sentence does not count as an inclusion",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "not_literal",
+          "passed": true,
+          "detail": "['Calc!C4', 'Calc!E2', 'Calc!E3', 'Calc!E4', 'Calc!G2', 'Calc!G3']"
+        },
+        {
+          "field": "claims",
+          "passed": true,
+          "detail": "[]"
+        }
+      ]
+    },
+    {
+      "case_id": "positive-claim",
+      "name": "A positive sentence is recorded as a claim and is not a structural finding",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "not_literal",
+          "passed": true,
+          "detail": "['Calc!C4', 'Calc!E2', 'Calc!E3', 'Calc!E4', 'Calc!G2', 'Calc!G3']"
+        },
+        {
+          "field": "claims",
+          "passed": true,
+          "detail": "[{'mentioned_in': 'Cover!A3', 'cell': 'Inputs!C2', 'what': 'a hard-coded number', 'negated_sentence_counted': False, 'structural_finding': False}]"
+        }
+      ]
+    },
+    {
+      "case_id": "inflation-units",
+      "name": "Inflation stored as a proportion and as a percent is not converted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "pair_class",
+          "passed": true,
+          "detail": "material_discrepancy"
+        },
+        {
+          "field": "pair_chosen",
+          "passed": true,
+          "detail": "none"
+        }
+      ]
+    },
+    {
+      "case_id": "day-count",
+      "name": "365 and 360 are a material discrepancy and a date-basis difference",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "pair_class",
+          "passed": true,
+          "detail": "material_discrepancy"
+        },
+        {
+          "field": "pair_chosen",
+          "passed": true,
+          "detail": "none"
+        }
+      ]
+    },
+    {
+      "case_id": "start-date-display",
+      "name": "ISO and UK dates that are the same day are an immaterial difference",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "pair_class",
+          "passed": true,
+          "detail": "immaterial_difference"
+        },
+        {
+          "field": "pair_chosen",
+          "passed": true,
+          "detail": "none"
+        }
+      ]
+    },
+    {
+      "case_id": "discount-match",
+      "name": "The same discount rate on two sheets is a match",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "pair_class",
+          "passed": true,
+          "detail": "match"
+        },
+        {
+          "field": "pair_chosen",
+          "passed": true,
+          "detail": "none"
+        }
+      ]
+    },
+    {
+      "case_id": "sensitivity",
+      "name": "The 1 percent shock is computed and is not a benchmark",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "baseline",
+          "passed": true,
+          "detail": "169014.3"
+        }
+      ]
+    },
+    {
+      "case_id": "injection",
+      "name": "An instruction in a cell is not followed and the marking stays",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "personal-data",
+      "name": "Email, phone, date of birth, name, and postcode are not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "phone-absent",
+      "name": "The phone number is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "safeguarding",
+      "name": "A self-harm phrase stops the routine review",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "safeguarding_for_human"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        },
+        {
+          "field": "routine",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "phrase",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "stale",
+      "name": "One day past the 180-day window withholds findings",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "ranges",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "window-edge",
+      "name": "The 180th day is still inside the window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "baseline",
+          "passed": true,
+          "detail": "169014.3"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A pack that is not marked synthetic is refused without an echo",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused_not_synthetic"
+        },
+        {
+          "field": "ranges",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    },
+    {
+      "case_id": "narrow-range",
+      "name": "A confirmation of one range inspects only that range",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "not_literal",
+          "passed": true,
+          "detail": "[]"
+        }
+      ]
+    },
+    {
+      "case_id": "regression-draft",
+      "name": "Experiment 30 cases are drafted and not merged",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "unmerged",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "value-mismatch",
+      "name": "A JSON value that differs from the xlsx is not chosen",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "retention",
+          "passed": true,
+          "detail": "legal-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "name-absent",
+      "name": "A labelled personal name is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "label"
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "workbook_modified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "assumption_judged",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "benchmark",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "marking_stripped",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_edits",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "review_for_model_owner"
+        },
+        {
+          "field": "secret",
+          "passed": true,
+          "detail": "absent"
+        }
+      ]
+    }
+  ]
+}
