@@ -1,0 +1,527 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic OneDrive index. Not a live tenant. Not a model score.",
+  "organisation_in_fixtures": "Merrowfield Borough Council (fictional)",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "OD-01",
+      "name": "Ranked matches stay inside the confirmed locations",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "matches"
+        },
+        {
+          "name": "catalogue_id",
+          "passed": true,
+          "detail": "M007"
+        },
+        {
+          "name": "autonomy",
+          "passed": true,
+          "detail": "A0"
+        },
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0001"
+        },
+        {
+          "name": "absent CANARY-SECRET-BRIEF",
+          "passed": true,
+          "detail": "CANARY-SECRET-BRIEF"
+        },
+        {
+          "name": "absent CANARY-OUTSIDE-FINANCE",
+          "passed": true,
+          "detail": "CANARY-OUTSIDE-FINANCE"
+        },
+        {
+          "name": "absent CANARY-HIDDEN-PAYROLL",
+          "passed": true,
+          "detail": "CANARY-HIDDEN-PAYROLL"
+        },
+        {
+          "name": "absent SYN-OD-0099",
+          "passed": true,
+          "detail": "SYN-OD-0099"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-02",
+      "name": "Nothing in the permitted locations matches",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "no_match"
+        },
+        {
+          "name": "statement",
+          "passed": true,
+          "detail": "Nothing in the permitted locations matches this request."
+        },
+        {
+          "name": "match_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "name": "absent CANARY-SECRET-BODY",
+          "passed": true,
+          "detail": "CANARY-SECRET-BODY"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-03",
+      "name": "A negated sentence is not a match",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "matches"
+        },
+        {
+          "name": "file_absent",
+          "passed": true,
+          "detail": "SYN-OD-0011"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-04",
+      "name": "OFFICIAL clearance does not receive OFFICIAL-SENSITIVE content",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "matches"
+        },
+        {
+          "name": "file_absent",
+          "passed": true,
+          "detail": "SYN-OD-0007"
+        },
+        {
+          "name": "absent OFFICIAL-SENSITIVE",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "name": "absent Housing repairs sensitive annex",
+          "passed": true,
+          "detail": "Housing repairs sensitive annex"
+        },
+        {
+          "name": "absent CANARY-SECRET-BRIEF",
+          "passed": true,
+          "detail": "CANARY-SECRET-BRIEF"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-05",
+      "name": "An unconfirmed selection searches nothing",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "locations_not_confirmed"
+        },
+        {
+          "name": "match_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "absent CANARY-OUTSIDE-BODY",
+          "passed": true,
+          "detail": "CANARY-OUTSIDE-BODY"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-06",
+      "name": "A non-synthetic index is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "not_synthetic"
+        },
+        {
+          "name": "match_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "name": "absent CANARY-SECRET-BRIEF",
+          "passed": true,
+          "detail": "CANARY-SECRET-BRIEF"
+        },
+        {
+          "name": "absent Housing repairs budget 2026",
+          "passed": true,
+          "detail": "Housing repairs budget 2026"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-07",
+      "name": "An empty query searches nothing",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "empty_query"
+        },
+        {
+          "name": "match_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "name": "absent CANARY-HIDDEN-BODY",
+          "passed": true,
+          "detail": "CANARY-HIDDEN-BODY"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-08",
+      "name": "Legal hold and retention label are kept",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0004"
+        },
+        {
+          "name": "legal_hold",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "retention_label",
+          "passed": true,
+          "detail": "inquiry-hold"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-09",
+      "name": "A safeguarding cue is not a routine hit",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0005"
+        },
+        {
+          "name": "human_flag",
+          "passed": true,
+          "detail": "safeguarding"
+        },
+        {
+          "name": "snippet_withheld",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "routine",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "absent self-harm",
+          "passed": true,
+          "detail": "self-harm"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-10",
+      "name": "A superseded version and a duplicate are flagged",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0002"
+        },
+        {
+          "name": "superseded_by",
+          "passed": true,
+          "detail": "SYN-OD-0001"
+        },
+        {
+          "name": "likely_stale",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "duplicate",
+          "passed": true,
+          "detail": "SYN-OD-0001"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-11",
+      "name": "A later version outside clearance is not named",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0014"
+        },
+        {
+          "name": "later_hidden",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "hidden_id_absent",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "absent CANARY-LATER-SECRET",
+          "passed": true,
+          "detail": "CANARY-LATER-SECRET"
+        },
+        {
+          "name": "absent SYN-OD-0099",
+          "passed": true,
+          "detail": "SYN-OD-0099"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-12",
+      "name": "An instruction in a file is not followed",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0013"
+        },
+        {
+          "name": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "signal",
+          "passed": true,
+          "detail": "['ignore_instructions', 'search_all_locations', 'pretend_approval', 'delete_file', 'show_secret']"
+        },
+        {
+          "name": "deleted",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "name": "absent CANARY-SECRET-BRIEF",
+          "passed": true,
+          "detail": "CANARY-SECRET-BRIEF"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-13",
+      "name": "Identifier values, a phone, an email, a name, a date of birth, and an address are not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-0006"
+        },
+        {
+          "name": "absent 07700 900123",
+          "passed": true,
+          "detail": "07700 900123"
+        },
+        {
+          "name": "absent priya.nair@merrowfield.example.gov.uk",
+          "passed": true,
+          "detail": "priya.nair@merrowfield.example.gov.uk"
+        },
+        {
+          "name": "absent Dr Priya Nair",
+          "passed": true,
+          "detail": "Dr Priya Nair"
+        },
+        {
+          "name": "absent 14/03/1984",
+          "passed": true,
+          "detail": "14/03/1984"
+        },
+        {
+          "name": "absent 14 Harbour Lane",
+          "passed": true,
+          "detail": "14 Harbour Lane"
+        },
+        {
+          "name": "absent QQ 12 34 56 C",
+          "passed": true,
+          "detail": "QQ 12 34 56 C"
+        },
+        {
+          "name": "absent ME1 2AB",
+          "passed": true,
+          "detail": "ME1 2AB"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-14",
+      "name": "A stale pin is not quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "rules_current",
+          "passed": true,
+          "detail": "stale"
+        },
+        {
+          "name": "absent adequate, relevant and limited to what is necessary",
+          "passed": true,
+          "detail": "adequate, relevant and limited to what is necessary"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-15",
+      "name": "Missing readers fail closed",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "match_count",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "name": "not_permitted",
+          "passed": true,
+          "detail": "count"
+        },
+        {
+          "name": "absent CANARY-NO-READERS",
+          "passed": true,
+          "detail": "CANARY-NO-READERS"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-16",
+      "name": "Delete is refused and a queue must be reviewed before acknowledgement",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "deleted",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "name": "ack_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-17",
+      "name": "Acknowledgement does not move, share, or change permissions",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "moved",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "name": "shared",
+          "passed": true,
+          "detail": "flag"
+        },
+        {
+          "name": "acknowledged",
+          "passed": true,
+          "detail": "decision"
+        },
+        {
+          "name": "executed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "OD-18",
+      "name": "An unrecognised label is withheld",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "file_absent",
+          "passed": true,
+          "detail": "SYN-OD-0012"
+        },
+        {
+          "name": "absent CANARY-UNKNOWN-LABEL",
+          "passed": true,
+          "detail": "CANARY-UNKNOWN-LABEL"
+        },
+        {
+          "name": "absent SPECIAL-PROJECT",
+          "passed": true,
+          "detail": "SPECIAL-PROJECT"
+        }
+      ]
+    }
+  ]
+}

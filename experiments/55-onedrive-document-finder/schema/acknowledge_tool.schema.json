@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "acknowledge_tool.schema.json",
+  "title": "Acknowledge a find result",
+  "description": "Record that the requesting user saw the list. The tool does not move, delete, share, or change permissions. A sentence inside a file is not this object.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "index_id"],
+  "properties": {
+    "decision": {"enum": ["acknowledge", "defer"]},
+    "actor_role": {"const": "Requesting user"},
+    "index_id": {"type": "string"},
+    "queue_reviewed": {"type": "boolean"},
+    "stale_seen": {"type": "boolean"}
+  }
+}
