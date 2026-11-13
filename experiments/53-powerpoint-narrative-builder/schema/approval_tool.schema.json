@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "approval_tool.schema.json",
+  "title": "Presenter approval tool",
+  "description": "Input for record_presenter_approval(). A separate review object. It does not publish or share, and it does not produce slides.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "actor_id", "pack_id", "outline_seen", "citations_approved", "accessibility_seen", "markings_seen"],
+  "properties": {
+    "decision": {
+      "enum": [
+        "presenter_approve_outline_and_citations",
+        "presenter_request_revision",
+        "reject_outline"
+      ]
+    },
+    "actor_role": {"const": "presenter"},
+    "actor_id": {"type": "string", "pattern": "^SYN-PRES-\\d{3}$"},
+    "pack_id": {"type": "string", "pattern": "^SYN-DECK-\\d{4}$"},
+    "outline_seen": {"type": "boolean"},
+    "citations_approved": {"type": "array", "items": {"type": "string"}, "maxItems": 24},
+    "gaps_seen": {"type": "boolean"},
+    "accessibility_seen": {"type": "boolean"},
+    "markings_seen": {"type": "boolean"},
+    "safeguarding_seen": {"type": "boolean"}
+  }
+}
