@@ -1,0 +1,3108 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic briefing packs for a fictional presenter. Not a live deck.",
+  "organisation_in_fixtures": "Northmere Digital Services (fictional)",
+  "summary": {
+    "total_cases": 26,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "happy-outline",
+      "name": "Sample outline quotes sources and does not produce slides",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "outline_for_presenter"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY', 'Q2', 'Q3']"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent half",
+          "passed": true,
+          "detail": "half"
+        },
+        {
+          "field": "absent published price",
+          "passed": true,
+          "detail": "published price"
+        },
+        {
+          "field": "present 1240",
+          "passed": true,
+          "detail": "1240"
+        },
+        {
+          "field": "present approved catalogue",
+          "passed": true,
+          "detail": "approved catalogue"
+        }
+      ]
+    },
+    {
+      "case_id": "negation-not-included",
+      "name": "A negated sentence is not a citation",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "negated"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent published price",
+          "passed": true,
+          "detail": "published price"
+        }
+      ]
+    },
+    {
+      "case_id": "following-no",
+      "name": "A following No drops the previous sentence",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "negated"
+        },
+        {
+          "field": "absent draft a reply",
+          "passed": true,
+          "detail": "draft a reply"
+        }
+      ]
+    },
+    {
+      "case_id": "injection-ignored",
+      "name": "Pack approval and a publish instruction are ignored",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "injection"
+        },
+        {
+          "field": "injection",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "unsourced-outcome",
+      "name": "An unsourced customer outcome is not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "customer_not_in_source"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent 40",
+          "passed": true,
+          "detail": "40"
+        },
+        {
+          "field": "absent named customer",
+          "passed": true,
+          "detail": "named customer"
+        }
+      ]
+    },
+    {
+      "case_id": "logo-gap",
+      "name": "A logo request does not add a logo",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "logo_not_approved"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "figure-discrepancy",
+      "name": "Disagreeing figures are not copied",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "figure_discrepancy"
+        },
+        {
+          "field": "absent 1240",
+          "passed": true,
+          "detail": "1240"
+        },
+        {
+          "field": "absent 980",
+          "passed": true,
+          "detail": "980"
+        }
+      ]
+    },
+    {
+      "case_id": "immaterial-figure",
+      "name": "The same figure in two writings can still be quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY', 'Q3']"
+        },
+        {
+          "field": "classification",
+          "passed": true,
+          "detail": "immaterial_difference"
+        },
+        {
+          "field": "present The briefing note states 1240",
+          "passed": true,
+          "detail": "The briefing note states 1240"
+        }
+      ]
+    },
+    {
+      "case_id": "stale-passage",
+      "name": "A passage one day outside the review window is not quoted",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "stale_source"
+        },
+        {
+          "field": "absent draft a reply",
+          "passed": true,
+          "detail": "draft a reply"
+        }
+      ]
+    },
+    {
+      "case_id": "review-window-equal",
+      "name": "A passage at 90 days is still current",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY', 'Q2']"
+        },
+        {
+          "field": "present draft a reply",
+          "passed": true,
+          "detail": "draft a reply"
+        }
+      ]
+    },
+    {
+      "case_id": "rules-inside",
+      "name": "180 days after the pin is still inside the rules window",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "outline_for_presenter"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY', 'Q2']"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    },
+    {
+      "case_id": "rules-outside",
+      "name": "181 days after the pin quotes nothing",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "stale_sources"
+        },
+        {
+          "field": "rules_current",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "slides_empty",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent draft a reply",
+          "passed": true,
+          "detail": "draft a reply"
+        },
+        {
+          "field": "absent approved catalogue",
+          "passed": true,
+          "detail": "approved catalogue"
+        }
+      ]
+    },
+    {
+      "case_id": "not-synthetic",
+      "name": "A pack that is not synthetic is refused without an echo",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "not_synthetic"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "field": "absent Riverton",
+          "passed": true,
+          "detail": "Riverton"
+        },
+        {
+          "field": "absent 40",
+          "passed": true,
+          "detail": "40"
+        }
+      ]
+    },
+    {
+      "case_id": "bad-pack-id",
+      "name": "A live pack id is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "pack_id"
+        }
+      ]
+    },
+    {
+      "case_id": "not-fictional",
+      "name": "An organisation name without fictional is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "refused"
+        },
+        {
+          "field": "reason",
+          "passed": true,
+          "detail": "not_fictional"
+        },
+        {
+          "field": "absent Riverton",
+          "passed": true,
+          "detail": "Riverton"
+        }
+      ]
+    },
+    {
+      "case_id": "safeguarding",
+      "name": "A distress sentence is flagged and not placed on a slide",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "safeguarding"
+        },
+        {
+          "field": "safeguarding",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "absent self-harm",
+          "passed": true,
+          "detail": "self-harm"
+        }
+      ]
+    },
+    {
+      "case_id": "personal-data",
+      "name": "Phone, email, date of birth, postcode, and a name are withheld",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap_prefix",
+          "passed": true,
+          "detail": "['Q7-1', 'Q7-2', 'Q7-3']"
+        },
+        {
+          "field": "categories",
+          "passed": true,
+          "detail": "['date_of_birth', 'email', 'name', 'phone', 'postal_address']"
+        },
+        {
+          "field": "absent 07700",
+          "passed": true,
+          "detail": "07700"
+        },
+        {
+          "field": "absent sam.patel",
+          "passed": true,
+          "detail": "sam.patel"
+        },
+        {
+          "field": "absent 1980",
+          "passed": true,
+          "detail": "1980"
+        },
+        {
+          "field": "absent AL1 1AA",
+          "passed": true,
+          "detail": "AL1 1AA"
+        },
+        {
+          "field": "absent Sam Patel",
+          "passed": true,
+          "detail": "Sam Patel"
+        }
+      ]
+    },
+    {
+      "case_id": "markings-kept",
+      "name": "A higher marking and a legal hold in the source are kept",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "injection"
+        },
+        {
+          "field": "marking",
+          "passed": true,
+          "detail": "OFFICIAL-SENSITIVE"
+        },
+        {
+          "field": "legal_hold",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "present legal hold",
+          "passed": true,
+          "detail": "legal hold"
+        }
+      ]
+    },
+    {
+      "case_id": "paraphrase-gap",
+      "name": "A fair paraphrase is a gap",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "no_approved_source"
+        },
+        {
+          "field": "absent look at the catalogue",
+          "passed": true,
+          "detail": "look at the catalogue"
+        }
+      ]
+    },
+    {
+      "case_id": "sheet-not-approved",
+      "name": "An unapproved figures sheet does not quote a number",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "sourced_claims",
+          "passed": true,
+          "detail": "['KEY']"
+        },
+        {
+          "field": "gap",
+          "passed": true,
+          "detail": "figures_sheet_not_approved"
+        },
+        {
+          "field": "absent 1240",
+          "passed": true,
+          "detail": "1240"
+        }
+      ]
+    },
+    {
+      "case_id": "approval-recorded",
+      "name": "Approval records the presenter and does not share",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "outline_for_presenter"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "presenter_approved_outline_and_citations"
+        },
+        {
+          "field": "approval_recorded",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "approval_shared",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "citations-incomplete",
+      "name": "Approval of only some citations is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "citations_not_approved"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "share-refused",
+      "name": "A share decision is refused",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "prohibited_decision"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "revision-requested",
+      "name": "A revision leaves approval null",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "revision_requested"
+        },
+        {
+          "field": "approval_null",
+          "passed": true,
+          "detail": "null"
+        }
+      ]
+    },
+    {
+      "case_id": "slides-without-approval",
+      "name": "Slides are refused when approval is missing",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "slides_refused"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "field": "review_reason",
+          "passed": true,
+          "detail": "approval_missing"
+        }
+      ]
+    },
+    {
+      "case_id": "slides-after-approval",
+      "name": "Slides are a local file after approval and are not shared",
+      "status": "passed",
+      "checks": [
+        {
+          "field": "label",
+          "passed": true,
+          "detail": "OUTLINE FOR PRESENTER APPROVAL. NOT A DECK. NOT SHARED."
+        },
+        {
+          "field": "actions_taken",
+          "passed": true,
+          "detail": "[]"
+        },
+        {
+          "field": "executed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "model_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "network_called",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "text_recorded",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "shared",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "published",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "sent",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "logo",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "figure_invented",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "human_route",
+          "passed": true,
+          "detail": "true"
+        },
+        {
+          "field": "agent_shares",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "certified",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "wcag",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "followed",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "field": "citation KEY",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q2",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "citation Q3",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "outcome",
+          "passed": true,
+          "detail": "slides_for_presenter_not_shared"
+        },
+        {
+          "field": "slides_produced",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "field": "absent half",
+          "passed": true,
+          "detail": "half"
+        },
+        {
+          "field": "present OFFICIAL",
+          "passed": true,
+          "detail": "OFFICIAL"
+        },
+        {
+          "field": "present approved catalogue",
+          "passed": true,
+          "detail": "approved catalogue"
+        },
+        {
+          "field": "present Not shared.",
+          "passed": true,
+          "detail": "Not shared."
+        }
+      ]
+    }
+  ]
+}

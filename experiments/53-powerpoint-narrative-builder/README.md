@@ -91,7 +91,7 @@ python eval/evaluate.py
 python src/narrative.py --input examples/sample_pack.json --as-of 2026-11-13
 ```
 
-`eval/evaluate.py` prints a **deterministic smoke test**. The fixtures are synthetic. `eval/smoke_report.json` is that run. It is not a model score. Each case is counted once. A live Microsoft Foundry run has not been done.
+`eval/evaluate.py` prints a **deterministic smoke test**. The fixtures are synthetic. `eval/smoke_report.json` is that run: 26 passed, 0 failed, 0 errors, 26 cases. It is not a model score. Each case is counted once. A live Microsoft Foundry run has not been done.
 
 The exit code is 0 when an outline or a refusal is produced. The exit code is 2 when the input cannot be read.
 
