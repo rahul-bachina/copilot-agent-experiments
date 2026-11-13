@@ -2294,3 +2294,62 @@ class TestExperiment50Manifest:
         assert confirm["approver"] == "Site owner"
         assert confirm["mandatory"] is True
         assert experiment_50_manifest["agent"]["id"] == "exp-50-sharepoint-knowledge-curator"
+
+
+class TestExperiment55Manifest:
+    """Test the Experiment 55 OneDrive document finder manifest."""
+
+    @pytest.fixture
+    def experiment_55_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "55-onedrive-document-finder"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_55_manifest):
+        """Experiment 55 manifest should be valid."""
+        validate(instance=experiment_55_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_55_manifest):
+        """Experiment 55 should be autonomy level A0. The requesting user confirms locations."""
+        level = experiment_55_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_55_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_55_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_55_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_55_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_55_manifest):
+        """Nothing is sent, and no file is written."""
+        assert experiment_55_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_55_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_requesting_user_confirms_the_permitted_locations(self, experiment_55_manifest):
+        """The catalogue checkpoint is the requesting user, and it is mandatory."""
+        points = experiment_55_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Confirm the permitted locations"
+        )
+        assert confirm["approver"] == "Requesting user"
+        assert confirm["mandatory"] is True
+        assert experiment_55_manifest["agent"]["id"] == "exp-55-onedrive-document-finder"

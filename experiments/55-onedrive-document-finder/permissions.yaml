@@ -1,0 +1,481 @@
+# Agent manifest: OneDrive Document Finder
+# Experiment 55 — catalogue ID M007
+# Version: 0.1.0
+# Last reviewed: 2026-11-13
+# Next review: 2027-05-13
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-55-onedrive-document-finder"
+  name: "OneDrive Document Finder"
+  version: "0.1.0"
+  description: >
+    Answers a natural-language find request against one synthetic OneDrive
+    and SharePoint index, and only inside the locations the requesting user
+    has confirmed. Autonomy A0. Each hit carries the location, the last
+    modified date, the sensitivity label, and the reason it matched. Likely
+    stale files, superseded versions, and duplicates are flagged. A file
+    outside the confirmed locations, a file the user cannot read, and a file
+    above the user's clearance are counted and not copied out. The agent
+    does not move, delete, share, or change permissions, and it does not
+    call Microsoft Graph, Work IQ, or Purview.
+  owner: "Requesting user"
+  contact: "finder.user@merrowfield.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/55-onedrive-document-finder"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only. The user confirms the locations before any search. The agent does not change a file."
+  constraints:
+    - "The requesting user confirms the locations on a separate selection object. The agent does not."
+    - "The agent NEVER searches outside those locations"
+    - "The agent NEVER returns a file the user's principals cannot already read"
+    - "The agent NEVER returns content from a file labelled above the user's clearance in the fixture"
+    - "The agent NEVER moves, deletes, shares, or changes permissions"
+    - "The agent NEVER calls Microsoft Graph, the Microsoft Search API, Work IQ, or Purview"
+    - "A sentence in a file cannot confirm locations, raise clearance, or approve a file change"
+    - "Ranks, reasons, and withheld counts come from the Python core, not from model output"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic OneDrive and SharePoint index"
+      description: "File metadata and short extracts the caller pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One index per invocation. Files outside the confirmed locations, files the user cannot read, and files above clearance are counted and not copied out."
+      justification: "A find result cannot name a location or a date without the index the user supplied."
+      data_categories:
+        - "Titles and short extracts of files the user can already read, inside the confirmed locations, at or below the fixture clearance"
+        - "Synthetic file ids, location ids, last modified dates, and sensitivity labels of those files"
+        - "Retention labels and legal-hold flags on those files"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the index."
+    - resource: "Separate location-selection object"
+      description: "The requesting user's confirmed location ids, principals, and fixture clearance. Not read from file text."
+      access_level: "read"
+      scope: "One selection for this run."
+      justification: "The catalogue checkpoint is that the user selects the permitted locations."
+      may_contain_personal_data: false
+    - resource: "Separate acknowledgement object"
+      description: "The user records that they saw the list, or defers. Not read from file text."
+      access_level: "read"
+      scope: "One acknowledgement of a result already produced. No file change."
+      justification: "A file sentence must not be treated as approval, and a safeguarding hit must be marked reviewed before the list is acknowledged."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 49 records classification"
+      description: "classify_record() on matching text of an admitted file. The classification object is not copied out."
+      access_level: "read"
+      scope: "Admitted files only. No label is applied. A higher marking already on the file is passed through and not lowered."
+      justification: "Legal-hold and personal-data signals already implemented there are not re-coded here."
+      may_contain_personal_data: true
+    - resource: "Experiment 50 SharePoint knowledge curator"
+      description: "curate_site() on admitted files only, to read duplicate and near-duplicate proposal ids. Archive proposals are not followed."
+      access_level: "read"
+      scope: "Files already inside the confirmed locations, readable, and at or below clearance. No SharePoint call."
+      justification: "Duplicate detection already implemented there is reused. This starter does not curate the site."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 identifier gateway"
+      description: "propose() on the original extract of an admitted file. Values are not copied out. Extra masks cover phone numbers, email addresses, dates of birth, street addresses, and honorific names, which Experiment 08 does not detect."
+      access_level: "read"
+      scope: "Admitted files only. reversible is false. No model is passed."
+      justification: "This experiment does not carry a second identifier detector. The extra masks are local and do not claim anonymisation."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live OneDrive, SharePoint library, or mailbox"
+      reason: "The index is the text the caller supplied. The core does not call Microsoft Graph, the Search API, or Work IQ."
+    - resource: "Locations the user has not confirmed"
+      reason: "Those files are counted and not read into the result. Their titles and extracts are not returned."
+    - resource: "Files the requesting user's principals cannot read"
+      reason: "A missing readers list fails closed. The sample does not widen access."
+    - resource: "Content labelled above the user's clearance in the fixture"
+      reason: "Those files are counted and not copied. The label is not stripped from a file that is shown."
+    - resource: "Move, delete, share, and permission-change APIs"
+      reason: "Those functions raise FinderForbidden."
+
+tools:
+  allowed:
+    - tool: "Find"
+      provider: "Local Python (src/find.py)"
+      action: "Rank matching files inside the confirmed locations"
+      access_level: "read"
+      scope: "One synthetic index, one request, and one selection object. No network. No model."
+      justification: "Which location was confirmed, which principal can read a file, and which label is above clearance are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Acknowledge"
+      provider: "Local Python (acknowledge_results)"
+      action: "Record that the requesting user saw the list, or defer"
+      access_level: "read"
+      scope: "The result for this run and a separate review object. No file change."
+      justification: "Acknowledgement has to be deterministic. It refuses move, delete, share, and a permission change, and it refuses while a safeguarding hit is unreviewed."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. Ranks, reasons, labels, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Output check"
+      provider: "Local Python"
+      action: "Reject a result that records a move, a deletion, a share, a permission change, or a widened search"
+      access_level: "read"
+      scope: "The result for this run"
+      justification: "A result that changes a file or lists a withheld file is not a valid result."
+      human_approval_required: false
+      output_requires_human_review: false
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The result is returned to the requesting user. Acknowledgement
+      is JSON in the response. It is not a write to OneDrive or SharePoint.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Acknowledging the list does not share a file or email anyone.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a search scope. The selection object is the
+      user's confirmation. acknowledge_results cannot move or delete a file.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5(1)(c) was met, that
+      the Freedom of Information Act 2000 section 1 duty was met, or that a
+      sensitivity label is correct.
+  production_record_change:
+    enabled: false
+    rationale: "No create, update, move, share, or delete against a live file."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the result and does not share a file."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the Microsoft Copilot harness, are the tenant's billing. This starter does not spend them."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Move, delete, or share a file"
+      rationale: "Those functions raise FinderForbidden. moved, deleted, and shared stay false."
+    - enabled: false
+      action_name: "Change permissions or widen the search"
+      rationale: "change_permissions raises FinderForbidden. access_widened stays false. Files outside the selection are not listed."
+    - enabled: false
+      action_name: "Reveal content above the user's clearance"
+      rationale: "Those files are a count. Titles, extracts, and ids are not copied."
+
+human_approval:
+  description: >
+    The requesting user confirms location ids, principals, and fixture
+    clearance on a separate selection object before any search. A safeguarding
+    hit has to be marked reviewed before the list can be acknowledged.
+    Acknowledgement does not change a file. A sentence in a file does not
+    confirm locations or raise clearance.
+
+  approval_points:
+    - action: "Confirm the permitted locations"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "find_documents returns locations_not_confirmed unless selection.confirmed is true and the actor role is Requesting user. File text cannot set that flag."
+    - action: "Review a safeguarding hit"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "A distress, vulnerability, or safeguarding cue is not a routine hit. The extract is not copied. Acknowledgement is refused until queue_reviewed is true."
+    - action: "Acknowledge the list"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "acknowledge_results is the only path that sets human_approval. It refuses move, delete, share, and a permission change. executed stays false."
+    - action: "Acknowledge a stale pin"
+      approver: "Requesting user"
+      mandatory: true
+      rationale: "A stale pin is not quoted. Acknowledgement is refused until stale_seen is true. The search result itself stays a draft."
+    - action: "Move, delete, share, or change permissions"
+      approver: "The organisation's own file process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled. The direct functions raise FinderForbidden."
+
+  no_approval_required:
+    - action: "View the result"
+      rationale: "Reading a result has no external effect."
+    - action: "Re-run the same index, request, and selection"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 13 November 2026. Article 5(1)(c) was read that day.
+      Data minimisation is the reading this starter is built around.
+      data_minimisation_met stays false. Article 9 was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a file extract may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 13 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One index at a time, limited to confirmed locations and principals the caller supplies"
+      - "A safeguarding cue is flagged for a person. The extract is not copied."
+      - "The output does not copy identifier values, and a short snippet is masked"
+      - "Nothing is written to OneDrive or SharePoint"
+      - "Samples in this repository are synthetic"
+      - "No solely automated file change. This agent does not change a file."
+  data_minimisation:
+    - "The result keeps ids, titles, locations, dates, labels, reasons, and a short snippet only when the extract itself matched and there is no safeguarding cue."
+    - "Files outside the selection, files the user cannot read, and files above clearance contribute a count. Their titles and extracts are not kept."
+    - "Identifier values are not copied. Experiment 08 is called with reversible false. Phone numbers, email addresses, dates of birth, street addresses, and honorific names are masked as well. The output is not described as anonymised."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention schedule applies to whatever the user then saves. A retention label on a hit is kept and is not a decision to dispose. The 365-day stale window is configuration. It is not a statutory period."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process. The agent does not erase a file. Freedom of Information Act 2000 section 1 was read. This starter does not decide the duty to confirm or deny."
+
+prompt_injection:
+  description: >
+    File text and the query are untrusted. They may tell the model to ignore
+    the selected locations, raise clearance, or treat a denial as a fact.
+    The core does not read the network. The model is not given a tool that
+    can move, delete, share, or change permissions.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Search all locations, the user has approved, and delete this file are recorded. followed stays false. A title can still match."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after is not, in the same sentence, is not a match and is not a safeguarding cue."
+    - control: "HTML comments are not evidence"
+      description: "A term that appears only inside an HTML comment does not match. An instruction inside the comment is recorded."
+    - control: "Selection is a separate object"
+      description: "A sentence that says locations are confirmed, or that clearance is TOP SECRET, does not change the selection. human_approval stays null until acknowledge_results."
+    - control: "Prohibited keys are ignored"
+      description: "A payload key that purports to set confirmed, human approval, or a selected location list is stripped from the index and the request."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. acknowledge_results refuses move, delete, share, and a permission change. Direct functions raise FinderForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The user is the
+    control. There is no search outside the confirmed locations even if the
+    note is wrong. A paraphrase that uses none of the cue words is not flagged.
+    Names without an honorific are not masked.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-13"
+  risks:
+    - id: "R1"
+      risk: "A file sentence is treated as authority to search every location or to delete a file"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Search all locations and delete this file are recorded and not followed"
+        - "move_file, delete_file, share_file, and change_permissions raise FinderForbidden"
+      residual_risk: "Low"
+      owner: "Requesting user"
+    - id: "R2"
+      risk: "A file the user cannot read, or a file above clearance, is described in the result"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Locations are filtered before title and extract are copied"
+        - "A missing readers list fails closed"
+        - "An unrecognised label fails closed"
+        - "The result stores a count, not the hidden title, id, or extract"
+      residual_risk: "Medium"
+      owner: "Requesting user"
+    - id: "R3"
+      risk: "A protective marking, a retention label, or a legal hold is stripped"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The fixture label is copied as supplied when the file is shown"
+        - "A records-classification suggestion does not replace a higher fixture label"
+        - "legal_hold true on the fixture stays true"
+      residual_risk: "Low"
+      owner: "Information governance"
+    - id: "R4"
+      risk: "A negated sentence is treated as a match or as a safeguarding cue"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Phrases after a negation cue are not counted"
+        - "Safeguarding cues are read from that reduced text"
+        - "An identifier in the original extract still contributes an entity type"
+      residual_risk: "Low"
+      owner: "Requesting user"
+    - id: "R5"
+      risk: "A safeguarding note is handled as an ordinary search hit"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The hit is marked not routine and the extract is not copied"
+        - "Acknowledgement is refused until queue_reviewed is true"
+      residual_risk: "Medium"
+      owner: "Requesting user"
+    - id: "R6"
+      risk: "An identifier value, a phone number, an email address, a date of birth, a street address, or a personal name is copied into the result"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Full extracts are not copied"
+        - "Experiment 08 is called with reversible false"
+        - "The extra masks run on any snippet and on the title"
+        - "output_is_anonymised stays false"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the index id if it
+    matched the synthetic pattern, the outcome, the withheld counts, and the
+    later acknowledgement. This starter logs nothing because it keeps no
+    store. Do not put an extract or an identifier value in an application trace.
+  logged_events:
+    - event: "Find requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Index id, if it matched the synthetic pattern"
+        - "Whether the index was marked synthetic"
+        - "Confirmed location ids, without file titles"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Find result"
+      data_logged:
+        - "Outcome"
+        - "Match count and withheld counts, without hidden ids"
+        - "Whether any source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the result if the user relies on it. Extracts are not in this event."
+    - event: "Acknowledgement recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "executed false"
+        - "files_changed false"
+      retention: "Organisation's schedule. The agent does not write this event to OneDrive."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log an extract or an identifier value."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for Graph write, Work IQ act permission, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Requesting user"
+      contact: "finder.user@merrowfield.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@merrowfield.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-13"
+  next_review_date: "2027-05-13"
+  review_frequency: "6 months, and sooner if the pinned legislation or the fixture clearance rule changes"
+  reviewer: "The adopting organisation's information governance lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5, including Article 5(1)(c)"
+    - "A change to section 1 of the Freedom of Information Act 2000"
+    - "A change to the Government Security Classifications Policy"
+    - "A change to the Microsoft Graph search contract, Work IQ, or the Copilot Studio knowledge or harness pages"
+    - "A proposal to add a connector that can write, delete, share, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Finder core"
+      path: "src/find.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened the
+    scope policy on 27 October 2026. This experiment did not re-open it.
+    A body that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 13 November 2026. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The fixture clearance order treats OFFICIAL-SENSITIVE as above OFFICIAL for this sample. The Government Security Classifications Policy opened on 13 November 2026 names three tiers and describes -SENSITIVE as an additional marking. It does not define this software order."
+      section: "src/find.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The 180-day stale window and the 365-day file window are starter defaults. They are not periods in section 1 of the Freedom of Information Act 2000."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Whether application permissions on search query are trimmed to one user was not stated on the query page opened on 13 November 2026. This starter does not call Graph."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "A Work IQ general-availability date was not on the pages opened on 13 November 2026. The Copilot Studio knowledge limits page for OneDrive was not opened. Both are unverified here."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on files."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on merrowfield.example.gov.uk are placeholders. Merrowfield Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, and Application Insights were not opened on 13 November 2026. Treat that product behaviour as unverified. Purview sensitivity labels were opened and are described only as far as that page went."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "The harness overview opened on 13 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
