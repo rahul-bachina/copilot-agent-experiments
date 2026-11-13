@@ -1,6 +1,9 @@
 # Experiment 53 has no runtime dependencies. The core uses the standard library.
 # It calls Experiment 29 score_claim and passage_currency, and Experiment 36
-# normalise_value and classify_values. Tests use pytest. A clean environment
-# can install just this file.
+# normalise_value and classify_values. Tests use pytest. The schema test also
+# loads the manifest with PyYAML and checks it with jsonschema. A clean
+# environment can install just this file.
 
 pytest>=7.0.0
+pyyaml>=6.0
+jsonschema>=4.17.0
