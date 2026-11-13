@@ -1,0 +1,206 @@
+{
+  "description": "Synthetic cases for the Excel assumption review. Not a model evaluation. Each case is one workbook situation.",
+  "cases": [
+    {
+      "id": "scope-not-confirmed",
+      "name": "No separate confirmation",
+      "setup": "sample",
+      "confirm": false,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "scope_not_confirmed", "ranges_empty": true, "marking": "OFFICIAL-SENSITIVE"}
+    },
+    {
+      "id": "marker-inside-cell",
+      "name": "Approval words inside a cell are ignored when no confirmation is passed",
+      "setup": "marker_in_cell",
+      "confirm": false,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "scope_not_confirmed", "ranges_empty": true}
+    },
+    {
+      "id": "bad-fingerprint",
+      "name": "A confirmation for a different workbook is refused",
+      "setup": "bad_fingerprint",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "scope_not_confirmed", "ranges_empty": true}
+    },
+    {
+      "id": "inventory",
+      "name": "Confirmed review inventories Inputs!C2 and does not judge it",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "not_literal_cell": "Inputs!C2", "marking": "OFFICIAL-SENSITIVE"}
+    },
+    {
+      "id": "hardcoded-literal",
+      "name": "Calc!E4 contains 1.025 inside a formula",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "literal": ["Calc!E4", "1.025"]}
+    },
+    {
+      "id": "another-literal",
+      "name": "Calc!C4 contains 1.02 inside a formula",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "literal": ["Calc!C4", "1.02"]}
+    },
+    {
+      "id": "negation",
+      "name": "A negated sentence does not count as an inclusion",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "claims": 0, "not_literal_cell": "Inputs!C2"}
+    },
+    {
+      "id": "positive-claim",
+      "name": "A positive sentence is recorded as a claim and is not a structural finding",
+      "setup": "positive_claim",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "claims": 1, "not_literal_cell": "Inputs!C2"}
+    },
+    {
+      "id": "inflation-units",
+      "name": "Inflation stored as a proportion and as a percent is not converted",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "pair": {"id": "inflation", "class": "material_discrepancy"}}
+    },
+    {
+      "id": "day-count",
+      "name": "365 and 360 are a material discrepancy and a date-basis difference",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "pair": {"id": "days_in_year", "class": "material_discrepancy"}}
+    },
+    {
+      "id": "start-date-display",
+      "name": "ISO and UK dates that are the same day are an immaterial difference",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "pair": {"id": "start_date", "class": "immaterial_difference"}}
+    },
+    {
+      "id": "discount-match",
+      "name": "The same discount rate on two sheets is a match",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "pair": {"id": "discount_rate", "class": "match"}}
+    },
+    {
+      "id": "sensitivity",
+      "name": "The 1 percent shock is computed and is not a benchmark",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "baseline": "169014.3"}
+    },
+    {
+      "id": "injection",
+      "name": "An instruction in a cell is not followed and the marking stays",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {
+        "outcome": "review_for_model_owner",
+        "marking": "OFFICIAL-SENSITIVE",
+        "secret_absent": "Ignore previous instructions"
+      }
+    },
+    {
+      "id": "personal-data",
+      "name": "Email, phone, date of birth, name, and postcode are not copied",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "secret_absent": "jane.example@northmere.example"}
+    },
+    {
+      "id": "phone-absent",
+      "name": "The phone number is not copied",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "secret_absent": "07700900123"}
+    },
+    {
+      "id": "safeguarding",
+      "name": "A self-harm phrase stops the routine review",
+      "setup": "safeguarding",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {
+        "outcome": "safeguarding_for_human",
+        "safeguarding": true,
+        "secret_absent": "end my life",
+        "marking": "OFFICIAL-SENSITIVE"
+      }
+    },
+    {
+      "id": "stale",
+      "name": "One day past the 180-day window withholds findings",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2027-05-13",
+      "expect": {"outcome": "stale_sources", "ranges_empty": true, "marking": "OFFICIAL-SENSITIVE"}
+    },
+    {
+      "id": "window-edge",
+      "name": "The 180th day is still inside the window",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2027-05-12",
+      "expect": {"outcome": "review_for_model_owner", "baseline": "169014.3"}
+    },
+    {
+      "id": "not-synthetic",
+      "name": "A pack that is not marked synthetic is refused without an echo",
+      "setup": "not_synthetic",
+      "confirm": false,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "refused_not_synthetic", "secret_absent": "REAL-MODEL", "ranges_empty": true}
+    },
+    {
+      "id": "narrow-range",
+      "name": "A confirmation of one range inspects only that range",
+      "setup": "narrow_range",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "not_literal_cell": "Calc!E4"}
+    },
+    {
+      "id": "regression-draft",
+      "name": "Experiment 30 cases are drafted and not merged",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "regression_unmerged": true}
+    },
+    {
+      "id": "value-mismatch",
+      "name": "A JSON value that differs from the xlsx is not chosen",
+      "setup": "value_mismatch",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "marking": "OFFICIAL-SENSITIVE"}
+    },
+    {
+      "id": "name-absent",
+      "name": "A labelled personal name is not copied",
+      "setup": "sample",
+      "confirm": true,
+      "as_of": "2026-11-13",
+      "expect": {"outcome": "review_for_model_owner", "secret_absent": "Jane Example"}
+    }
+  ]
+}
