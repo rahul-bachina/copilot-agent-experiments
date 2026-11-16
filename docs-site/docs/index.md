@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Fifty-six starters you can read today
+## Fifty-seven starters you can read today
 
 </div>
 
@@ -1455,6 +1455,31 @@ The list runs locally. Nothing outside the confirmed locations is listed, and no
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 56 · M008 · Microsoft 365 · Autonomy A1</p>
+
+### Intranet content freshness
+
+Review one synthetic intranet inventory. The report names overdue pages, withdrawn or superseded guidance, broken or stale links and contacts, pages with no current owner, and likely duplicates.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named content owner approves each task. The agent does not edit, publish, unpublish, delete, reassign an owner, or message staff.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/56-intranet-content-freshness.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/56-intranet-content-freshness)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 58 · H001 · HR · Autonomy A0</p>
 
 ### Employee handbook
@@ -1500,7 +1525,7 @@ The answer runs locally. It does not decide an individual's entitlement, and it 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, and H001 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, and H001 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

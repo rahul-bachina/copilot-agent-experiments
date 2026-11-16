@@ -181,6 +181,9 @@ DIAGRAMS = {
     "experiments/55-onedrive-document-finder/docs/architecture_diagram.png": (
         "experiments/img/55-onedrive-document-finder-architecture.png"
     ),
+    "experiments/56-intranet-content-freshness/docs/architecture_diagram.png": (
+        "experiments/img/56-intranet-content-freshness-architecture.png"
+    ),
     "experiments/58-employee-handbook/docs/architecture_diagram.png": (
         "experiments/img/58-employee-handbook-architecture.png"
     ),

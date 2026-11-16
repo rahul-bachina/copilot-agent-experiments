@@ -1,0 +1,484 @@
+# Agent manifest: Intranet Content Freshness Agent
+# Experiment 56 — catalogue ID M008
+# Version: 0.1.0
+# Last reviewed: 2026-11-16
+# Next review: 2027-05-16
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-56-intranet-content-freshness"
+  name: "Intranet Content Freshness Agent"
+  version: "0.1.0"
+  description: >
+    Reviews one synthetic SharePoint-style intranet inventory and drafts a
+    freshness report: pages overdue for review, pages that cite a superseded
+    policy or withdrawn guidance, broken or stale links and contacts, pages
+    with no current owner, and likely duplicates. Autonomy A1. For each
+    ordinary finding it drafts an update task for the named content owner.
+    A task stub is recorded only after that owner approves the named task ids
+    on a separate object. The agent does not edit, publish, unpublish, or
+    delete a page, does not reassign ownership, and does not message staff.
+  owner: "Content owner"
+  contact: "content.owner@merrowfield.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/56-intranet-content-freshness"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant proposes review tasks. The named content owner approves each task before a stub is recorded. The agent does not change a page."
+  constraints:
+    - "The content owner approves named task ids on a separate object. A sentence in a page does not."
+    - "The agent NEVER edits, publishes, unpublishes, or deletes a page"
+    - "The agent NEVER reassigns ownership"
+    - "The agent NEVER messages staff. The only message a later deployment would send is the approval request to the named content owner, and this starter does not send it."
+    - "The agent NEVER calls Microsoft Graph, SharePoint, Planner, or Power Automate"
+    - "A page the requesting user cannot read is a count. Its title and body are not copied."
+    - "A higher protective marking, a legal hold, or a safeguarding cue blocks a routine task. The body is not copied."
+    - "Unparseable dates, intervals, and page views are flagged. They are not coerced to zero or to a default."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic intranet page inventory"
+      description: "Page metadata, short text, links, contacts, and policy citations the caller pastes for this run. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One inventory per invocation. Pages the requesting user cannot read are counted and not copied."
+      justification: "A freshness finding cannot name a page or a date without the inventory the caller supplied."
+      data_categories:
+        - "Synthetic page ids, titles of ordinary pages, owners, review dates, and page-view counts that parsed"
+        - "Masked contact evidence for a former or stale contact"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the inventory."
+    - resource: "Named content owner id on the inventory"
+      description: "The owner who may approve tasks. Read from inventory metadata, not from page text."
+      access_level: "read"
+      scope: "One owner id for this run."
+      justification: "The catalogue checkpoint is that the named content owner approves each task."
+      may_contain_personal_data: false
+    - resource: "Separate location selection, only when a linked file index is present"
+      description: "Passed to Experiment 55. Not read from page text. This starter does not invent a query."
+      access_level: "read"
+      scope: "One selection, and only when the caller supplied both a linked index and a selection."
+      justification: "A linked file is checked only inside locations the requesting user has already confirmed."
+      may_contain_personal_data: false
+    - resource: "Separate approval object"
+      description: "The content owner's decision on named task ids. Not read from page text."
+      access_level: "read"
+      scope: "One decision on a report already produced. No page change."
+      justification: "A page sentence must not be treated as approval."
+      may_contain_personal_data: false
+    - resource: "Pinned source catalogue"
+      description: "Static citations in src/sources.py. The core does not download them."
+      access_level: "read"
+      scope: "Files in this experiment"
+      justification: "Governance sentences name the page they came from and the date it was opened."
+      may_contain_personal_data: false
+    - resource: "Experiment 50 SharePoint knowledge curator"
+      description: "curate_site() on ordinary admitted pages, to read duplicate and near-duplicate proposal ids. Archive proposals are not followed."
+      access_level: "read"
+      scope: "Pages already readable, not above OFFICIAL, and not a safeguarding or oversize page. No SharePoint call."
+      justification: "Duplicate detection already implemented there is reused. This starter does not curate the site."
+      may_contain_personal_data: true
+    - resource: "Experiment 55 OneDrive document finder"
+      description: "find_documents() only when a linked index and a confirmed location selection are both present. File ids and stale or superseded flags are copied. Snippets and titles are not."
+      access_level: "read"
+      scope: "The caller's linked index. No Graph call."
+      justification: "Stale and superseded file signals already implemented there are reused. A missing match is not treated as fresh."
+      may_contain_personal_data: true
+    - resource: "Experiment 49 records classification and Experiment 08 identifier gateway"
+      description: "classify_record() and propose() on ordinary pages only. SECRET, safeguarding, and oversize text are not sent. reversible is false. No model is passed."
+      access_level: "read"
+      scope: "Ordinary admitted pages. A higher marking is not lowered. A fixture legal hold is not cleared."
+      justification: "Legal-hold signals and identifier detection already implemented there are not re-coded here."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live SharePoint site, OneDrive library, or mailbox"
+      reason: "The inventory is the text the caller supplied. The core does not call Microsoft Graph or SharePoint."
+    - resource: "Pages the requesting user's principals cannot read"
+      reason: "A missing readers list fails closed. Titles and bodies are not returned."
+    - resource: "Edit, publish, unpublish, delete, and ownership-change APIs"
+      reason: "Those functions raise FreshnessForbidden."
+    - resource: "A message to staff other than an approval request that this starter does not send"
+      reason: "message_staff raises FreshnessForbidden. approval_request_sent stays false."
+
+tools:
+  allowed:
+    - tool: "Review"
+      provider: "Local Python (src/freshness.py)"
+      action: "Draft a freshness report and proposed tasks"
+      access_level: "read"
+      scope: "One synthetic inventory. No network. No model."
+      justification: "Which page is overdue, which policy is withdrawn, and which page the user cannot read are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record approval"
+      provider: "Local Python (record_approval)"
+      action: "Record the content owner's decision on named task ids"
+      access_level: "read"
+      scope: "The report for this run and a separate review object. No page change and no Planner call."
+      justification: "Approval has to be deterministic. It refuses an edit, a publish, an unpublish, a delete, a reassignment, and a message to staff."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Create approved stubs"
+      provider: "Local Python (create_approved_tasks)"
+      action: "Record JSON stubs for task ids already approved through record_approval"
+      access_level: "read"
+      scope: "Named task ids on an approved report. Planner and Power Automate are not called."
+      justification: "A stub is not a Planner task. executed stays false."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. Findings, evidence, and the empty approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. The report is returned to the content owner. A task stub is
+      JSON in the response. It is not a write to SharePoint or Planner.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a task does not message staff. This starter does
+      not send the approval request either.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a task. record_approval stores a decision
+      the content owner has already made. It cannot edit a page.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5(1)(d) was met, that
+      an intranet page is in scope of the accessibility regulations, or that
+      a page met the Service Standard.
+  production_record_change:
+    enabled: false
+    rationale: "No edit, publish, unpublish, or delete against a live page, and no Planner task is created."
+  external_send:
+    enabled: false
+    rationale: "The agent does not message staff and does not send the approval request."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the Microsoft Copilot harness, are the tenant's billing. This starter does not spend them."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Edit, publish, unpublish, or delete a page"
+      rationale: "Those functions raise FreshnessForbidden. pages_edited, published, unpublished, and deleted stay false."
+    - enabled: false
+      action_name: "Reassign page ownership"
+      rationale: "reassign_owner raises FreshnessForbidden. An orphan task says reassigns_ownership false."
+    - enabled: false
+      action_name: "Message staff"
+      rationale: "message_staff raises FreshnessForbidden. messages_sent and approval_request_sent stay false."
+
+human_approval:
+  description: >
+    The named content owner approves each proposed task before a stub is
+    recorded. A human queue, including a safeguarding cue, a higher marking,
+    or an unparseable field, has to be marked reviewed before other tasks
+    can be approved. A stale source pin is not quoted, and approval is
+    refused until stale_seen is true. Approval does not change a page. A
+    sentence in a page does not approve a task.
+
+  approval_points:
+    - action: "Approve each proposed update task"
+      approver: "Content owner"
+      mandatory: true
+      rationale: "record_approval is the only path that sets human_approval. The actor id has to match the inventory content owner. Task ids have to already exist. create_approved_tasks refuses a report that did not come through that step."
+    - action: "Review the human queue before other tasks are approved"
+      approver: "Content owner"
+      mandatory: true
+      rationale: "Safeguarding, a higher marking, a legal hold, and an unparseable field are queued. Approval of other tasks is refused until queue_reviewed is true. The extract is not copied."
+    - action: "See a stale source pin before approving"
+      approver: "Content owner"
+      mandatory: true
+      rationale: "A pin older than 180 days is not quoted. Approval is refused until stale_seen is true. The 180-day window is configuration, not a statutory period."
+    - action: "Edit, publish, unpublish, delete, reassign, or message staff"
+      approver: "The organisation's own content process"
+      mandatory: true
+      rationale: "Outside the agent. Writes and sends are disabled. The direct functions raise FreshnessForbidden."
+
+  no_approval_required:
+    - action: "View the report"
+      rationale: "Reading a report has no external effect."
+    - action: "Re-run the same inventory and as-of date"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 16 November 2026. Article 5(1)(d) was read that day.
+      Accuracy of personal contact data is the reading this starter is built
+      around. accuracy_met stays false. The agent does not erase or rectify.
+      Article 5(1)(e) now cites Article 84B, which was not opened. Article 9
+      was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a page may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 16 November 2026. The controller confirms a condition, and completes a DPIA, before production use."
+    safeguards:
+      - "One inventory at a time, limited to principals the caller supplies"
+      - "A safeguarding cue is flagged for a person. The extract is not copied."
+      - "Contact values that match a pattern are masked. A value that does not match is withheld, not copied raw."
+      - "Nothing is written to SharePoint or Planner"
+      - "Samples in this repository are synthetic"
+      - "No solely automated page change. This agent does not change a page."
+  data_minimisation:
+    - "Ordinary findings keep page ids, a finding type, and the evidence fields that were parsed."
+    - "Pages the user cannot read contribute a count. Their titles and bodies are not kept."
+    - "SECRET, OFFICIAL-SENSITIVE, and unrecognised markings withhold the title and the body."
+    - "Identifier values are not copied. Phone numbers, email addresses, dates of birth, street addresses, and honorific names are masked when a pattern matches. output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "The organisation's own retention schedule applies to whatever the owner then saves. A retention label and a legal hold are kept and are not a decision to dispose. The 180-day source window, the 365-day link window, and the review interval are configuration. They are not statutory periods."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process. The agent does not erase a page and does not rectify a contact."
+
+prompt_injection:
+  description: >
+    Page text is untrusted. It may tell the model to ignore the review, to
+    treat a task as approved, to delete a page, or to claim a clearance.
+    The core does not read the network. The model is not given a tool that
+    can edit a page or message staff.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Ignore instructions, the content owner has approved, delete this page, and my clearance is are recorded. followed stays false. A real overdue date can still be a finding."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after is not, in the same sentence, is not a policy citation and is not a safeguarding cue. A structured policy citation on the page still counts."
+    - control: "HTML comments are markings, not freshness evidence"
+      description: "Comment text is removed from the matching text. After instruction removal it is still scanned for a protective marking. A SECRET comment raises the marking. A clearance claim inside a comment does not."
+    - control: "Approval is a separate object"
+      description: "human_approval, confirmed, and selection keys on the inventory are stripped. human_approval stays null until record_approval."
+    - control: "Self-declared clearance is not a marking and not a clearance"
+      description: "My clearance is TOP SECRET is an injection signal. It does not raise the page marking and it does not change who can read the page."
+    - control: "No tools with side effects"
+      description: "Writes and sends are disabled. record_approval refuses edit, publish, unpublish, delete, reassign, and message_staff. Direct functions raise FreshnessForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The content
+    owner is the control. There is no page change even if the note is wrong.
+    A paraphrase that uses none of the cue words is not flagged. Names
+    without an honorific are not masked.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-16"
+  risks:
+    - id: "R1"
+      risk: "A page sentence is treated as authority to delete a page or to create a task"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes have no tool"
+        - "Delete this page and the content owner has approved are recorded and not followed"
+        - "edit_page, publish_page, unpublish_page, delete_page, reassign_owner, and message_staff raise FreshnessForbidden"
+      residual_risk: "Low"
+      owner: "Content owner"
+    - id: "R2"
+      risk: "A page the user cannot read, or a page with a higher marking, is described in the report"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Readers are checked before title and body are copied"
+        - "A missing readers list fails closed"
+        - "The higher of metadata, body, and HTML-comment markings is kept"
+        - "An unrecognised marking fails closed"
+      residual_risk: "Medium"
+      owner: "Content owner"
+    - id: "R3"
+      risk: "A protective marking, a retention label, or a legal hold is stripped or lowered"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A conflicting or compound label takes the higher marking"
+        - "A fixture legal hold stays true, including when the neighbour says otherwise"
+        - "A retention label is copied and is not a disposal decision"
+      residual_risk: "Low"
+      owner: "Information governance"
+    - id: "R4"
+      risk: "An unparseable date, interval, or page-view count is stored as zero or as a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Those fields are flagged and not stored as a number"
+        - "An overdue finding is not raised from a missing or unparseable date"
+      residual_risk: "Low"
+      owner: "Content owner"
+    - id: "R5"
+      risk: "A safeguarding note is handled as an ordinary update task"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The page is queued and the extract is not copied"
+        - "Approval of other tasks is refused until queue_reviewed is true"
+      residual_risk: "Medium"
+      owner: "Content owner"
+    - id: "R6"
+      risk: "A personal contact, a phone number, an email address, a date of birth, a street address, or a name is copied raw"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Page bodies are not copied into the report"
+        - "A contact field is masked only when a pattern matches, and withheld when it does not"
+        - "output_is_anonymised stays false. accuracy_met stays false."
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the inventory id if it
+    matched the synthetic pattern, the outcome, the withheld counts, and the
+    later approval. This starter logs nothing because it keeps no store. Do
+    not put a page body or a contact value in an application trace.
+  logged_events:
+    - event: "Review requested"
+      data_logged:
+        - "Timestamp"
+        - "Runner identity"
+        - "Inventory id, if it matched the synthetic pattern"
+        - "Whether the inventory was marked synthetic"
+        - "Content owner id, without page bodies"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Freshness report"
+      data_logged:
+        - "Outcome"
+        - "Finding count and withheld counts, without hidden titles"
+        - "Whether any source was stale"
+        - "Whether human_approval was left null"
+      retention: "Keep with the report if the owner relies on it. Page bodies are not in this event."
+    - event: "Approval recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role and whether the actor id matched"
+        - "Task ids"
+        - "executed false"
+      retention: "Organisation's schedule. The agent does not write this event to SharePoint."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not log a page body or a contact value."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for Graph write, Planner, SharePoint write, or mail"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "Content owner"
+      contact: "content.owner@merrowfield.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@merrowfield.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-16"
+  next_review_date: "2027-05-16"
+  review_frequency: "6 months, and sooner if the pinned legislation or the task-approval rule changes"
+  reviewer: "The adopting organisation's content owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5, including Article 5(1)(d)"
+    - "A change to the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018"
+    - "A change to the GOV.UK Service Standard or the content design guidance"
+    - "A change to the sitePage or plannerTask contracts, Power Automate approvals, or the Copilot Studio harness pages"
+    - "A proposal to add a connector that can edit a page, create a Planner task, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Freshness core"
+      path: "src/freshness.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. Experiment 13 opened an
+    accessibility note earlier. This experiment opened SI 2018/952 on
+    16 November 2026 and does not decide whether a page is in scope. A body
+    that wants a draft pack uses Experiment 03.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Scope"
+      manifest_section: "data_access"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+    - atrs_field: "Risk assessment"
+      manifest_section: "risk_assessment"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6, Article 9, and Article 84B were not opened on 16 November 2026. Article 5(1)(d) was read. accuracy_met stays false. The controller confirms the basis and completes a DPIA before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Regulation 7 of SI 2018/952 was not opened. The agent does not decide whether an intranet page is in scope, and it does not assess WCAG. accessibility_scope_decided stays false."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The 180-day source window, the 365-day link window, and the accepted review-interval range are starter defaults. They are not periods in the accessibility regulations or in Article 5."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The sitePage resource opened on 16 November 2026 does not include a content owner, a review interval, a last-reviewed date, or page views. Those are starter fields. The list-pages permission table was not re-opened that day."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "A JSON stub is not a Planner task. POST /planner/tasks was read. It is not called. planId is null. Power Automate Start and wait for an approval was read. It is not called."
+      section: "src/freshness.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The harness overview opened on 16 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on merrowfield.example.gov.uk are placeholders. Merrowfield Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview beyond pages not opened here, and Application Insights were not opened on 16 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Production inference, if used, runs in Microsoft Foundry in a UK region and is not trained on pages. No Foundry resource is deployed by this starter."
+      section: "uk_gdpr.data_residency"
+      verify_on_deployment: true
