@@ -1,0 +1,115 @@
+{
+  "label": "DETERMINISTIC SMOKE TEST. Synthetic intranet inventory. Not a model evaluation.",
+  "organisation": "Merrowfield Borough Council (fictional)",
+  "cases": [
+    {
+      "id": "F01",
+      "name": "Overdue page is a proposed task and nothing is approved",
+      "expect": {
+        "outcome": "report",
+        "catalogue_id": "M008",
+        "autonomy": "A1",
+        "label": "INTRANET FRESHNESS REPORT FOR THE CONTENT OWNER",
+        "human_approval_null": true,
+        "finding": "overdue_review",
+        "accuracy_met": false
+      }
+    },
+    {
+      "id": "F02",
+      "name": "A structured citation of a withdrawn policy is a finding",
+      "expect": {"finding": "withdrawn_policy"}
+    },
+    {
+      "id": "F03",
+      "name": "A former contact is masked and the raw email is absent",
+      "expect": {
+        "finding": "stale_contact",
+        "mask_kind": "email",
+        "absent": ["ada.north@merrowfield.example.gov.uk", "07700 900456", "QQ 12 34 56 C"]
+      }
+    },
+    {
+      "id": "F04",
+      "name": "A former owner is an orphan and ownership is not reassigned",
+      "expect": {"finding": "orphaned_owner"}
+    },
+    {
+      "id": "F05",
+      "name": "The two hybrid-working pages are one duplicate pair",
+      "expect": {"duplicate_pages": ["SYN-PAGE-0005", "SYN-PAGE-0006"]}
+    },
+    {
+      "id": "F06",
+      "name": "A broken link on an ordinary page is a finding",
+      "expect": {"finding": "broken_link", "views_not_zero": true}
+    },
+    {
+      "id": "F07",
+      "name": "A linked file the finder marks superseded is a finding",
+      "expect": {"finding": "linked_file", "absent": ["CANARY-SECRET-FILE", "CANARY-OUTSIDE-FILE"]}
+    },
+    {
+      "id": "F08",
+      "name": "A SECRET cover page is not copied",
+      "expect": {"page_id": "SYN-PAGE-0008", "marking": "SECRET", "no_task": true, "absent": ["CANARY-SECRET-PAGE"]}
+    },
+    {
+      "id": "F09",
+      "name": "A negated withdrawn-guidance sentence is not a citation",
+      "expect": {"finding_absent": "withdrawn_guidance_mentioned", "absent": ["POL-OLD"]}
+    },
+    {
+      "id": "F10",
+      "name": "Approval words inside a page are not an approval",
+      "expect": {"human_approval_null": true, "signal": "pretend_approval", "finding": "overdue_review"}
+    },
+    {
+      "id": "F11",
+      "name": "Unparseable views and intervals are not stored as zero",
+      "expect": {"queue_reason": "review_interval_unparseable", "views_not_zero": true}
+    },
+    {
+      "id": "F12",
+      "name": "A legal hold and a retention label are kept and block a routine task",
+      "expect": {"page_id": "SYN-PAGE-0009", "legal_hold": true, "retention_label": "inquiry-hold", "no_task": true}
+    },
+    {
+      "id": "F13",
+      "name": "A safeguarding cue is queued and the extract is not copied",
+      "expect": {"queue_reason": "safeguarding", "absent": ["self-harm"]}
+    },
+    {
+      "id": "F14",
+      "name": "A page the user cannot read is a count",
+      "expect": {"not_permitted": 1, "absent": ["CANARY-HIDDEN-PAGE", "CANARY-NO-READERS", "CANARY-BAD-ID"]}
+    },
+    {
+      "id": "F15",
+      "name": "A SECRET mark inside an HTML comment is kept and the canary is not copied",
+      "expect": {"page_id": "SYN-PAGE-0019", "marking": "SECRET", "absent": ["CANARY-COMMENT-SECRET"]}
+    },
+    {
+      "id": "F16",
+      "name": "The owner approves one task and a stub is recorded without Planner",
+      "mode": "approve",
+      "expect": {"stub": true}
+    },
+    {
+      "id": "F17",
+      "name": "A request to message staff is refused",
+      "mode": "prohibited",
+      "expect": {"approval_reason": "prohibited_decision", "messages_sent": false, "human_approval_null": true}
+    },
+    {
+      "id": "F18",
+      "name": "A stale pin is not quoted",
+      "as_of": "2027-08-01",
+      "expect": {
+        "rules_current": false,
+        "human_approval_null": true,
+        "absent": ["perceivable, operable, understandable and robust"]
+      }
+    }
+  ]
+}

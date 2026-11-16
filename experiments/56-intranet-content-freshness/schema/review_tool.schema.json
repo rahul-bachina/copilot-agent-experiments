@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review_tool.schema.json",
+  "title": "Intranet freshness review tool",
+  "description": "Read one synthetic intranet inventory and draft a freshness report. The tool does not edit, publish, unpublish, or delete a page, does not reassign an owner, does not message staff, and does not call Microsoft Graph or SharePoint.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "inventory_id", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "inventory_id": {"type": "string", "pattern": "^SYN-INV-\\d{4}$"},
+    "content_owner_id": {"type": "string", "pattern": "^SYN-OWNER-[A-Z0-9-]{1,24}$"},
+    "as_of": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+  }
+}

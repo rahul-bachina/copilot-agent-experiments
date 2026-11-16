@@ -2353,3 +2353,62 @@ class TestExperiment55Manifest:
         assert confirm["approver"] == "Requesting user"
         assert confirm["mandatory"] is True
         assert experiment_55_manifest["agent"]["id"] == "exp-55-onedrive-document-finder"
+
+
+class TestExperiment56Manifest:
+    """Test the Experiment 56 intranet content freshness manifest."""
+
+    @pytest.fixture
+    def experiment_56_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "56-intranet-content-freshness"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_56_manifest):
+        """Experiment 56 manifest should be valid."""
+        validate(instance=experiment_56_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_56_manifest):
+        """Experiment 56 should be autonomy level A1. The content owner approves each task."""
+        level = experiment_56_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_56_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_56_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_56_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_56_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_56_manifest):
+        """Nothing is sent, and no page is written."""
+        assert experiment_56_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_56_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_content_owner_approves_each_update_task(self, experiment_56_manifest):
+        """The catalogue checkpoint is the content owner, and it is mandatory."""
+        points = experiment_56_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Approve each proposed update task"
+        )
+        assert confirm["approver"] == "Content owner"
+        assert confirm["mandatory"] is True
+        assert experiment_56_manifest["agent"]["id"] == "exp-56-intranet-content-freshness"
