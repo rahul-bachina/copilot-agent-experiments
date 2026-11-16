@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-five starters are in `experiments/`. The folders are 01 to 55.
+Fifty-six starters are in `experiments/`. The folders are 01 to 55, and 58.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -87,6 +87,7 @@ Fifty-five starters are in `experiments/`. The folders are 01 to 55.
 | 53 | [PowerPoint Narrative Builder](experiments/53-powerpoint-narrative-builder/) | Propose a cited slide outline from one synthetic briefing, an approved figures sheet, and a short policy extract. Autonomy A1. The presenter approves the outline and every citation before any slide file is produced. The agent does not publish, send, or invent a figure, a logo, or a customer. | ✅ Starter |
 | 54 | [Excel Assumption Review Agent](experiments/54-excel-assumption-review/) | Review one synthetic workbook after the model owner confirms the ranges and the formulas. Autonomy A0. The agent inventories inputs, names formula issues, and computes a sensitivity. It does not edit the workbook, judge an assumption, or invent a benchmark. | ✅ Starter |
 | 55 | [OneDrive Document Finder](experiments/55-onedrive-document-finder/) | Rank files inside locations the requesting user has confirmed, with the reason, the location, the date, and the sensitivity label. Autonomy A0. The agent does not search outside that selection, reveal a file above clearance, move, delete, share, or change permissions. | ✅ Starter |
+| 58 | [Employee Handbook Agent](experiments/58-employee-handbook/) | Answer one question from the HR-approved handbook version in force on the date asked about, with the section and the effective date. Autonomy A0. The agent does not decide an individual's entitlement, give individual legal, medical, or tax advice, or treat a word in the question as approval of a source. | ✅ Starter |
 
 ## Getting Started
 
@@ -315,6 +316,13 @@ cd ../33-case-bundle-summariser
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/summarise.py --bundle examples/sample_bundle.json --as-of 2026-11-04
+
+# Experiment 58 needs no credentials either. The handbook answer is deterministic.
+# Experiments 08, 11, 15, 32, and 50 sit beside it. The assistant calls them in-process.
+cd ../58-employee-handbook
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/answer.py --handbook fixtures/handbook.json --scope examples/sample_scope.json --question examples/sample_question.json --as-of 2026-11-16
 ```
 
 ## Repository Structure

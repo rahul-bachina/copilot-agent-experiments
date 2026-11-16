@@ -534,6 +534,16 @@ A ranked list of files in locations the requesting user has confirmed, for a UK 
 
 </article>
 
+<article class="plan-card" id="h001" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · H001 · Autonomy A0</p>
+
+## Employee handbook
+
+A read-only answer to one question about a synthetic employee handbook. HR approves which documents and versions are in scope. The assistant quotes the version in force on the date asked about, with the section and the effective date, or says the handbook does not cover the question. It calls [Experiment 11](experiments/11-era-2025-hr-assistant.md) for Employment Rights Act 2025 dates that are not re-opened here, [Experiment 32](experiments/32-employee-case-intake.md) for a category proposal and the Acas paragraph pin, [Experiment 15](experiments/15-vulnerability-urgency-scanner.md) so a distress or safeguarding phrase is routed, [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier types, and [Experiment 50](experiments/50-sharepoint-knowledge-curator.md) only when a curation note is requested. The agent does not decide an individual's entitlement, give individual legal, medical, or tax advice, or call SharePoint, Microsoft Graph, or Microsoft 365 Copilot. [Read the briefing](experiments/58-employee-handbook.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. H001 is Experiment 58.
