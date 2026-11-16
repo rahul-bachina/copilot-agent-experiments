@@ -1,0 +1,517 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic collaboration-space onboarding cases. Not a model evaluation.",
+  "organisation_in_fixtures": "Merrowfield Borough Council (fictional)",
+  "summary": {
+    "total_cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "agreement_rate": 100.0
+  },
+  "cases": [
+    {
+      "case_id": "member-draft",
+      "name": "A member request stays a draft",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "role_proposed",
+          "passed": true,
+          "detail": "member"
+        },
+        {
+          "name": "justified_label",
+          "passed": true,
+          "detail": "OFFICIAL"
+        },
+        {
+          "name": "external_share",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "live_graph",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "coerced",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "absent",
+          "passed": true,
+          "detail": "canary-external-link"
+        },
+        {
+          "name": "manifest_approved",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "member-apply",
+      "name": "The owner approval object records a simulated member add",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "applied"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "owner_granted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "guest_granted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "external_share",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "live_graph",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "approval-in-request",
+      "name": "Approval keys on the request are not approval",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "approval-sentence",
+      "name": "An approval sentence does not grant owner rights",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "human_approval",
+          "passed": true,
+          "detail": "null"
+        },
+        {
+          "name": "role_proposed",
+          "passed": true,
+          "detail": "member"
+        },
+        {
+          "name": "external_share",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "injection_followed",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "owner-downgraded",
+      "name": "Owner without a justification is downgraded",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "role_proposed",
+          "passed": true,
+          "detail": "member"
+        }
+      ]
+    },
+    {
+      "case_id": "owner-needs-boolean",
+      "name": "A justified owner proposal is not applied without the boolean",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "owner_not_explicitly_approved"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "owner_granted",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "owner-explicit",
+      "name": "Owner rights apply only with the explicit boolean",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "applied"
+        },
+        {
+          "name": "owner_granted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "external_share",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "live_graph",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "guest-disabled",
+      "name": "A disabled guest policy is not overridden",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "guest_refused"
+        },
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "not_applicable"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "guest_granted",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "absent",
+          "passed": true,
+          "detail": "canary-external-link"
+        }
+      ]
+    },
+    {
+      "case_id": "guest-explicit",
+      "name": "Guest access needs the policy and the boolean",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "applied"
+        },
+        {
+          "name": "guest_granted",
+          "passed": true,
+          "detail": "True"
+        },
+        {
+          "name": "external_share",
+          "passed": true,
+          "detail": "false"
+        },
+        {
+          "name": "live_graph",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "secret-cover",
+      "name": "A SECRET cover page blocks the add",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "above_justified_label"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "effective_label",
+          "passed": true,
+          "detail": "SECRET"
+        },
+        {
+          "name": "absent",
+          "passed": true,
+          "detail": "CANARY-SECRET-COVER"
+        }
+      ]
+    },
+    {
+      "case_id": "secret-document",
+      "name": "OFFICIAL metadata and a SECRET document take the higher marking",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "above_justified_label"
+        },
+        {
+          "name": "effective_label",
+          "passed": true,
+          "detail": "SECRET"
+        },
+        {
+          "name": "absent",
+          "passed": true,
+          "detail": "CANARY-SECRET-ANNEX"
+        }
+      ]
+    },
+    {
+      "case_id": "negation",
+      "name": "A negated tenant-vulnerability sentence does not justify that label",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "justified_label",
+          "passed": true,
+          "detail": "OFFICIAL"
+        }
+      ]
+    },
+    {
+      "case_id": "negated-need",
+      "name": "A negated programme-board sentence does not count as that need",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "needs_human"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "coerced",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "unparseable-role",
+      "name": "An unknown role is not coerced to member",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "needs_human"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "coerced",
+          "passed": true,
+          "detail": "false"
+        }
+      ]
+    },
+    {
+      "case_id": "stale",
+      "name": "A stale export is not applied until the owner has seen it",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "stale_not_acknowledged"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        }
+      ]
+    },
+    {
+      "case_id": "safeguarding",
+      "name": "A distress cue is not routine onboarding",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "safeguarding_review"
+        },
+        {
+          "name": "apply_outcome",
+          "passed": true,
+          "detail": "not_applicable"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "absent",
+          "passed": true,
+          "detail": "suicide"
+        }
+      ]
+    },
+    {
+      "case_id": "clearance-claim",
+      "name": "A self-declared clearance does not raise the label",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "justified_label",
+          "passed": true,
+          "detail": "OFFICIAL"
+        }
+      ]
+    },
+    {
+      "case_id": "legal-hold",
+      "name": "A shown document keeps its legal hold and retention label",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "outcome",
+          "passed": true,
+          "detail": "proposal_ready"
+        },
+        {
+          "name": "applied",
+          "passed": true,
+          "detail": "False"
+        },
+        {
+          "name": "file_present",
+          "passed": true,
+          "detail": "SYN-OD-5702"
+        },
+        {
+          "name": "legal_hold",
+          "passed": true,
+          "detail": "True"
+        }
+      ]
+    }
+  ]
+}
