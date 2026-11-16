@@ -1,0 +1,12 @@
+# Experiment 56 has no runtime dependencies. The core uses the standard library.
+# It calls Experiment 49 classify_record(), Experiment 50 curate_site() for
+# duplicate signals among ordinary pages, Experiment 55 find_documents() when
+# a linked index and a separate location selection are both present, and
+# Experiment 08 propose() through those neighbours. Those experiments use the
+# standard library. Tests use pytest. PyYAML and jsonschema check
+# permissions.yaml against schemas/agent-manifest.schema.json. A clean
+# environment can install just this file.
+
+pytest>=7.0.0
+PyYAML>=6.0
+jsonschema>=4.0.0
