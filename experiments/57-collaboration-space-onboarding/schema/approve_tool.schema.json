@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workspace owner approval. This object is not read from the request.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "approver_role", "request_id", "space_id"],
+  "properties": {
+    "decision": {"type": "string", "enum": ["approve", "defer", "refuse"]},
+    "approver_role": {"type": "string", "const": "Workspace owner"},
+    "approver_ref": {"type": "string"},
+    "request_id": {"type": "string"},
+    "space_id": {"type": "string"},
+    "owner_rights_approved": {"type": "boolean"},
+    "guest_access_approved": {"type": "boolean"},
+    "links_approved": {"type": "boolean"},
+    "stale_seen": {"type": "boolean"},
+    "safeguarding_reviewed": {"type": "boolean"},
+    "external_share_approved": {"type": "boolean", "const": false}
+  }
+}

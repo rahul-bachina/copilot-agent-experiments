@@ -1,0 +1,437 @@
+# Agent manifest: Collaboration Space Onboarding Agent
+# Experiment 57 — catalogue ID M010
+# Version: 0.1.0
+# Last reviewed: 2026-11-16
+# Next review: 2027-05-16
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-57-collaboration-space-onboarding"
+  name: "Collaboration Space Onboarding Agent"
+  version: "0.1.0"
+  description: >
+    Explains one synthetic Teams and SharePoint collaboration space and
+    drafts a membership proposal for a workspace owner to approve. Autonomy
+    A1. The proposal names the team, the channels, member or owner, and
+    internal or guest. It checks least privilege, the fixture sensitivity
+    marking, and the guest policy. Owner rights and guest access are applied
+    in the sample only when the separate approval object says so. The sample
+    does not call Microsoft Graph, does not share a file or a link externally,
+    and does not treat approval text inside the request as approval.
+  owner: "Workspace owner"
+  contact: "workspace.owner@merrowfield.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/57-collaboration-space-onboarding"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant prepares the proposal. The workspace owner approves each membership and each internal link before the sample records a simulated change."
+  constraints:
+    - "The workspace owner approves on a separate approval object. The agent does not."
+    - "The agent NEVER grants owner rights unless owner_rights_approved is the boolean true on that object"
+    - "The agent NEVER grants guest or external access unless the fixture policy allows it and guest_access_approved is the boolean true"
+    - "The agent NEVER adds a person to a space whose marking is above the label the justification supports"
+    - "The agent NEVER shares a file or a link externally"
+    - "The agent NEVER treats approval text inside a request as approval"
+    - "The agent NEVER calls live Microsoft Graph"
+    - "A self-declared clearance in the request is not a clearance"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic collaboration space"
+      description: "Team, channels, guest policy, markings, documents, and internal links the caller pastes. Samples in this repository are synthetic."
+      access_level: "read"
+      scope: "One space per invocation. Material above the justified label is counted and not copied out."
+      justification: "The explanation and the proposal cannot name a channel or a document without the fixture the caller supplied."
+      data_categories:
+        - "Channel names and purposes at or below the justified label"
+        - "Document titles, retention labels, and legal-hold flags for documents the proposal may show"
+        - "Synthetic person refs on the membership request"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the space."
+    - resource: "Membership request"
+      description: "Role, account type, channels, and justification. Approval keys on this object are stripped."
+      access_level: "read"
+      scope: "One request. The justification is not copied into the result."
+      justification: "The proposal has to say what was asked and why, without treating the request as approval."
+      may_contain_personal_data: true
+    - resource: "Separate workspace-owner approval object"
+      description: "The only object that can set human_approval. Not read from the request."
+      access_level: "read"
+      scope: "One approval of a proposal already produced."
+      justification: "Owner rights, guest access, stale data, and a safeguarding hold are decided on this object."
+      may_contain_personal_data: false
+    - resource: "Experiment 55 OneDrive document finder"
+      description: "find_documents() for key documents already at or below the justified label."
+      access_level: "read"
+      scope: "Documents the fixture marks as readable by the member principal. No live OneDrive call."
+      justification: "Document finding already implemented there is reused. This starter does not widen access."
+      may_contain_personal_data: true
+    - resource: "Experiment 51 Teams channel digest"
+      description: "produce_digest() on a fixture export and a fixture scope confirmation. That confirmation does not approve membership."
+      access_level: "read"
+      scope: "One synthetic export. Points above the label or with a safeguarding cue are not copied."
+      justification: "Channel conventions already extracted there are reused. This starter does not post."
+      may_contain_personal_data: true
+    - resource: "Experiment 03 permissions-manifest generator"
+      description: "generate_manifest() with approve left false. The draft is not an approval of the membership."
+      access_level: "read"
+      scope: "One inventory record built from the proposal. The YAML is not copied out."
+      justification: "The manifest generator already refuses to mark a manifest approved."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live team, Microsoft 365 group, or SharePoint site"
+      reason: "The space is the fixture the caller supplied. The core does not call Microsoft Graph."
+    - resource: "Files and links for an external audience"
+      reason: "External URLs are counted and not copied. share_link_external raises OnboardingForbidden."
+    - resource: "Content above the justified label"
+      reason: "Titles and extracts are not copied. A SECRET cover page raises the marking."
+    - resource: "A self-declared clearance in the request"
+      reason: "It is recorded as ignored. It does not change the justified label."
+
+tools:
+  allowed:
+    - tool: "Prepare"
+      provider: "Local Python (prepare_onboarding)"
+      action: "Explain the space and draft a membership proposal"
+      access_level: "read"
+      scope: "One synthetic space and one request. No network. No model."
+      justification: "The label, the guest policy, and the role check are comparisons. A language model must not invent them."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Apply"
+      provider: "Local Python (apply_membership)"
+      action: "Record a simulated group membership add after the workspace owner approves"
+      access_level: "read"
+      scope: "The proposal and a separate approval object. No live Graph call."
+      justification: "The approval has to be deterministic. The recorded call is a sample of POST /groups/{id}/members/$ref or owners/$ref. Nothing is sent."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The label, the role, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No directory write. apply_membership returns JSON. The simulated Graph
+      record has live_graph_called false and status_received null.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a membership does not email a guest or share a link.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a membership. The approval object is the
+      workspace owner's decision. A sentence in the request cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5(1)(c) or Article 5(1)(f)
+      was met, and it does not decide that a sensitivity label is correct.
+  production_record_change:
+    enabled: false
+    rationale: "The simulated Graph record is not a create or update against a live directory."
+  external_send:
+    enabled: false
+    rationale: "The agent does not share a file or a link externally and does not send an invitation."
+  spend_transact:
+    enabled: false
+    rationale: "No fee is spent. Copilot Credits, if a tenant later uses the Microsoft Copilot harness, are the tenant's billing."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Grant owner rights without the explicit boolean"
+      rationale: "apply_membership leaves owner_granted false unless owner_rights_approved is true and the proposal role is owner."
+    - enabled: false
+      action_name: "Grant guest access against a disabled policy"
+      rationale: "guest_policy disabled returns guest_refused. An approval flag cannot override it."
+    - enabled: false
+      action_name: "Share a file or a link externally"
+      rationale: "share_file_external and share_link_external raise OnboardingForbidden. external_share_applied stays false."
+
+human_approval:
+  description: >
+    The workspace owner approves membership and internal links on a separate
+    object. Owner rights and guest access need their own booleans on that
+    object. A safeguarding cue is not processed as routine onboarding. A
+    stale export is not applied until stale_seen is true. Approval text
+    inside the request is stripped or recorded and is not followed.
+
+  approval_points:
+    - action: "Approve the membership proposal"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "apply_membership is the only path that sets human_approval. The approver role has to be Workspace owner and the decision has to be approve."
+    - action: "Grant owner rights"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "owner_rights_approved must be the boolean true. A downgraded member proposal is not upgraded."
+    - action: "Grant guest or external access"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "guest_access_approved must be the boolean true and the fixture policy must be owner_approval. A disabled policy is not overridden."
+    - action: "Approve internal links for later use"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "links_approved marks internal links only. External URLs are never copied and shared_externally stays false."
+    - action: "Confirm a stale space export"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "An export older than the starter window is not applied until stale_seen is true. The window is configuration, not a statutory period."
+    - action: "Review a safeguarding cue"
+      approver: "Workspace owner"
+      mandatory: true
+      rationale: "A distress, vulnerability, or safeguarding cue is not routine onboarding. The cue is not copied. A justification cue is not applied even after review."
+
+  no_approval_required:
+    - action: "Read the draft proposal"
+      rationale: "Reading a proposal has no external effect. human_approval stays null."
+    - action: "Re-run the same space and request"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 16 November 2026. Article 5(1)(c) and Article 5(1)(f)
+      were read that day. data_minimisation_met and
+      integrity_and_confidentiality_met stay false. Article 9 was not opened.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a justification or a document extract may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 16 November 2026."
+    safeguards:
+      - "A safeguarding cue is flagged for a person. The cue text is not copied."
+      - "Material above the justified label is not copied."
+      - "External URLs are not copied."
+      - "Samples in this repository are synthetic."
+      - "No solely automated membership change. The sample does not call Graph."
+  data_minimisation:
+    - "The justification is not copied into the result."
+    - "Document extracts are not copied. A short copied string is masked, and the mask report counts only replacements that were made."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on a shown document are kept. They are not a decision to dispose. The 30-day stale window is configuration."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Request text and fixture text are untrusted. They may say the owner has
+    approved, that the person is cleared to TOP SECRET, or that a file should
+    be shared externally. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Pretend approval, pretend clearance, and share-externally sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after does not include, in the same sentence, is not an access need, a marking, or a safeguarding cue."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until apply_membership."
+    - control: "No live Graph tool"
+      description: "call_live_graph, share_file_external, and share_link_external raise OnboardingForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The workspace
+    owner is the control. There is no live directory change even if the note
+    is wrong. A paraphrase that uses none of the cue words is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-16"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the request is treated as the workspace owner's approval"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "apply_membership reads only the separate approval object"
+      residual_risk: "Low"
+      owner: "Workspace owner"
+    - id: "R2"
+      risk: "Owner rights or guest access are granted without an explicit boolean"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The booleans are tested with is True"
+        - "A disabled guest policy cannot be overridden"
+        - "A member proposal is not upgraded to owner"
+      residual_risk: "Low"
+      owner: "Workspace owner"
+    - id: "R3"
+      risk: "A person is added to a space above the label the justification supports"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound or conflicting marking takes the higher tier"
+        - "A self-declared clearance is ignored"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R4"
+      risk: "A file or a link is shared externally"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "External URLs are counted and not copied"
+        - "The share functions raise OnboardingForbidden"
+        - "external_share_applied stays false"
+      residual_risk: "Low"
+      owner: "Workspace owner"
+    - id: "R5"
+      risk: "A safeguarding note is handled as routine onboarding"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The outcome is safeguarding_review when the cue is in the justification"
+        - "The cue is not copied"
+        - "That outcome is not applied"
+      residual_risk: "Medium"
+      owner: "Workspace owner"
+    - id: "R6"
+      risk: "An unreadable role, date, or label is coerced to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The outcome is needs_human"
+        - "coerced stays false"
+        - "OFFICIAL is not assumed"
+      residual_risk: "Low"
+      owner: "Workspace owner"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the space id if it
+    matched the synthetic pattern, the outcome, and whether a simulated add
+    was recorded. This starter logs nothing because it keeps no store. Do
+    not put a justification or an external URL in an application trace.
+  logged_events:
+    - event: "Onboarding prepared"
+      data_logged:
+        - "Timestamp"
+        - "Space id, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Approval recorded"
+      data_logged:
+        - "Decision"
+        - "Actor role"
+        - "applied true or false"
+        - "live_graph_called false"
+      retention: "Organisation's schedule. The agent does not write this event to a directory."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Workspace owner"
+      contact: "workspace.owner@merrowfield.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@merrowfield.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-16"
+  next_review_date: "2027-05-16"
+  review_frequency: "6 months, and sooner if the pinned legislation or the Graph membership contract changes"
+  reviewer: "The adopting organisation's information governance lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5, including Article 5(1)(c) or Article 5(1)(f)"
+    - "A change to the Government Security Classifications Policy"
+    - "A change to the Microsoft Graph member or owner contract, Teams guest access, Entra access reviews, or Purview container labels"
+    - "A proposal to add a connector that can call Graph or share a link"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Onboarding core"
+      path: "src/onboard.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The membership draft from this starter is also
+    not an approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 16 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The fixture rank treats OFFICIAL-SENSITIVE as above OFFICIAL. The Government Security Classifications Policy opened on 16 November 2026 does not define that software order. Paragraph 25 describes -SENSITIVE as an additional marking on OFFICIAL."
+      section: "src/labels.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The 30-day stale window is a starter default. It is not a period in UK GDPR or in the NCSC page opened on 16 November 2026."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "A document marking is treated as a marking of the space, because this sample does not assume the library is narrower than the team. Whether a Teams member can open every library file was not re-tested against a tenant."
+      section: "src/onboard.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The Microsoft Graph API for private channel members was not opened on 16 November 2026. The sample does not simulate that call."
+      section: "src/onboard.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, and Application Insights were not opened on 16 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview opened on 16 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Contact addresses on merrowfield.example.gov.uk are placeholders. Merrowfield Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
