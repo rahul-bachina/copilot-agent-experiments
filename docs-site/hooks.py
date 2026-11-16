@@ -181,6 +181,9 @@ DIAGRAMS = {
     "experiments/55-onedrive-document-finder/docs/architecture_diagram.png": (
         "experiments/img/55-onedrive-document-finder-architecture.png"
     ),
+    "experiments/57-collaboration-space-onboarding/docs/architecture_diagram.png": (
+        "experiments/img/57-collaboration-space-onboarding-architecture.png"
+    ),
 }
 
 
