@@ -1,0 +1,368 @@
+# Agent manifest: Employee Handbook Agent
+# Experiment 58 — catalogue ID H001
+# Version: 0.1.0
+# Last reviewed: 2026-11-16
+# Next review: 2027-05-16
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-58-employee-handbook"
+  name: "Employee Handbook Agent"
+  version: "0.1.0"
+  description: >
+    Answers an employee question from the HR-approved version of a synthetic
+    handbook that is in force on the date asked about. Autonomy A0. The answer
+    cites the section and the effective date, or it says the handbook does not
+    cover the question, or it names a person. It does not decide an individual's
+    entitlement and it does not give individual legal, medical, or tax advice.
+  owner: "People and culture"
+  contact: "handbook-agent@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/58-employee-handbook"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only. HR approves the source scope before a question is answered."
+  constraints:
+    - "HR approves which documents and versions are in scope. A sentence in the question is not that approval."
+    - "The agent answers only from an approved version in force on the date asked about."
+    - "The agent NEVER decides an individual's entitlement, sick pay, tax, or a flexible-working request."
+    - "The agent NEVER gives individual legal, medical, or tax advice."
+    - "The agent NEVER confirms a grievance, disciplinary outcome, or protected disclosure."
+    - "The agent NEVER sends a message or writes a personnel record."
+    - "Dates, versions, markings, and the empty entitlement come from src/answer.py."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic handbook"
+      description: "Versioned sections for leave, flexible working, expenses, conduct, grievance, and sickness absence. Riverbend Workshops CIC is invented."
+      access_level: "read"
+      scope: "Documents whose ids are on the HR scope object, at or below the handbook ceiling."
+      justification: "An answer cannot cite a section that HR has not put in scope."
+      data_categories:
+        - "Policy text"
+        - "Effective dates"
+        - "Protective markings, legal holds, and retention labels"
+      may_contain_personal_data: false
+      retention: "Transient. This starter does not persist the handbook."
+    - resource: "HR scope object"
+      description: "Approver role, approval reference, document ids, and the handbook ceiling. Separate from the question."
+      access_level: "read"
+      scope: "One object per run."
+      justification: "The catalogue checkpoint is HR approval of sources and effective dates."
+      may_contain_personal_data: false
+    - resource: "The question"
+      description: "One question. It is untrusted. It is not copied into the answer."
+      access_level: "read"
+      scope: "One question."
+      justification: "The topic has to be read. Identifiers are counted and not stored."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The question text is not written to the result."
+    - resource: "Pinned sources"
+      description: "Statutory pins in src/sources.py, plus Experiment 11 and Experiment 32 pins when the question needs them. Nothing is downloaded."
+      access_level: "read"
+      scope: "Files in this repository."
+      justification: "A statutory minimum is a quotation from a page that was opened, not a model paraphrase."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "Payroll, personnel files, and the HR case system"
+      reason: "The agent does not look up a person and does not decide entitlement."
+    - resource: "A document above the handbook ceiling, including one whose cover says SECRET"
+      reason: "The body is not copied. The marking, legal hold, and retention label are kept."
+    - resource: "SharePoint, Microsoft Graph, and Microsoft 365 Copilot"
+      reason: "This starter does not call them. A deployment that adds a knowledge source is a separate decision."
+    - resource: "Northern Ireland employment legislation"
+      reason: "The pages opened here are marked England and Wales and Scotland, or say that Northern Ireland rules differ."
+
+tools:
+  allowed:
+    - tool: "Handbook answer"
+      provider: "Local Python (src/answer.py)"
+      action: "Quote the approved in-force section or name a person"
+      access_level: "read"
+      scope: "One question. No network. No model."
+      justification: "Version selection, negation, and the empty entitlement are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Optional narrative of JSON fields that are already in the result"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional. Citations and the empty entitlement stay in Python."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No write. Filing an answer is a person's step in the employer's own system."
+  sends:
+    enabled: false
+    note: "No send. The answer is returned to the person who asked."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve a flexible-working request, an expense, or a grievance. human_approval stays null until a separate HR seen-step, which still does not decide."
+  regulated_decision:
+    enabled: false
+    rationale: "Entitlement, a reasonable adjustment, a protected disclosure, and tax are not decided. entitlement_decision stays null."
+  production_record_change:
+    enabled: false
+    rationale: "No personnel, payroll, or handbook record is created or updated. approve_source raises."
+  external_send:
+    enabled: false
+    rationale: "The agent does not email the employee, HR, Acas, or HMRC. send_answer raises."
+  spend_transact:
+    enabled: false
+    rationale: "No expense is paid and no leave is booked."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Approve a handbook source"
+      rationale: "HR approves document ids on the scope object, outside the agent."
+    - enabled: false
+      action_name: "Decide an individual's entitlement"
+      rationale: "decide_entitlement raises. A handbook figure is not applied to a person."
+    - enabled: false
+      action_name: "Remove a marking, legal hold, or retention label"
+      rationale: "An instruction to strip a label is recorded and not followed. The higher marking is kept."
+
+human_approval:
+  description: >
+    HR approves the scope before a question is answered. The agent has no
+    path that approves a source, decides a case, or sends the answer.
+    Words inside the question do not count as that approval.
+
+  approval_points:
+    - action: "Approve which handbook documents and versions are in scope"
+      approver: "HR"
+      mandatory: true
+      rationale: "Catalogue checkpoint for H001. The scope object is the approval. A marker inside a file or a question is ignored."
+    - action: "Rely on the answer, including a statutory pin"
+      approver: "The employee, and HR where the pin is stale or the case is personal"
+      mandatory: true
+      rationale: "The answer is a quotation or a gap. It is not a decision."
+    - action: "Take a grievance, disciplinary, health, pregnancy, disability, whistleblowing, distress, or safeguarding case"
+      approver: "The named human route"
+      mandatory: true
+      rationale: "Those questions are routed. They are not answered as routine policy."
+    - action: "Decide entitlement, sick pay, tax, or a flexible-working request"
+      approver: "HR or the relevant adviser"
+      mandatory: true
+      rationale: "Outside the agent, including after the answer is read."
+    - action: "Publish or change the handbook"
+      approver: "HR"
+      mandatory: true
+      rationale: "This agent does not publish. Experiment 50 may propose curation. It does not apply it."
+    - action: "Re-check a statutory pin after it is marked stale"
+      approver: "HR"
+      mandatory: true
+      rationale: "The core does not download legislation.gov.uk, GOV.UK, or Acas."
+
+  no_approval_required:
+    - action: "Read the answer"
+      rationale: "Reading has no external effect."
+    - action: "Ask the same question again"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the employer's lawful basis. A candidate
+      for an internal policy answer, which the employer confirms, is Article
+      6(1)(f). A question about health, pregnancy, or disability may be
+      special-category data. Article 9 is not asserted.
+    secondary: "Article 6(1)(b) or 6(1)(c) may be relevant to the employer's own process. The employer confirms it."
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. A personal health, pregnancy, or disability question is routed and the question text is not copied."
+    safeguards:
+      - "The sample handbook is synthetic"
+      - "The question text is not copied into the result"
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal-name cues are counted and not stored, in addition to Experiment 08"
+      - "No solely automated decision about a person"
+  data_minimisation:
+    - "Bodies above the ceiling are not copied."
+    - "Experiment 08 redacted text is not copied into the result."
+  retention:
+    agent_retention: "None in this starter."
+    note: "The employer's retention schedule applies to whatever a person saves. A legal hold on a source is preserved and is not a disposal instruction."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "Access, erasure, and objection go through the employer's privacy process. This agent does not handle them."
+
+prompt_injection:
+  description: >
+    Questions and handbook sections are untrusted. They may say to ignore the
+    effective date, grant a number of days, strip a legal hold, or treat a
+    draft as approved. The core records the instruction and does not follow it.
+  controls:
+    - control: "Scope is a separate object"
+      description: "Approval words in the question or in a file do not add a document id."
+    - control: "Instruction sentences are not quoted"
+      description: "A section that is only an instruction is not cited."
+    - control: "No side-effect tools"
+      description: "Writes, sends, entitlement, and source approval are disabled."
+    - control: "Markings survive an instruction to strip them"
+      description: "The higher of the metadata label and the cover label is kept, with the legal hold and every retention label."
+  residual_risk: >
+    A model narration could still mis-state a quotation. The person reading
+    the JSON is the control. There is no autonomous action to take.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named employer"
+  date_assessed: "2026-11-16"
+  risks:
+    - id: "R1"
+      risk: "A superseded handbook version is quoted as if it were current, or a draft is treated as approved because the question says so"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The version is chosen by effective dates on the scope ids"
+        - "A superseded answer says so, and names the later version"
+        - "File approval markers are ignored"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R2"
+      risk: "A handbook figure is applied as the person's entitlement, or a personal case is answered as policy"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "entitlement_decision stays null"
+        - "Personal, health, pregnancy, disability, grievance, whistleblowing, and distress questions are routed"
+        - "Out-of-range and unreadable figures are not coerced to zero"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R3"
+      risk: "A SECRET cover or a legal hold is missed, or a user's claimed clearance is trusted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Markings are read from metadata and from the text, and the higher label wins"
+        - "Legal hold and every retention label are kept"
+        - "Clearance words in the question are not trusted"
+      residual_risk: "Low"
+      owner: "Information security"
+    - id: "R4"
+      risk: "A statutory minimum is paraphrased, or an Employment Rights Act 2025 change that was not opened is stated as in force"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Pins name the section or regulation and the date the page was opened"
+        - "Experiment 11 dates are labelled as not re-opened here"
+        - "A stale pin is not refreshed and may_be_relied_on is false"
+      residual_risk: "Medium"
+      owner: "People and culture"
+    - id: "R5"
+      risk: "A question that contains health or contact details is stored in the result"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The question text is not copied"
+        - "Identifier counts do not store the values"
+        - "The starter does not persist the run"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the scope reference,
+    the as-of date, the outcome, and whether a source was stale. Do not log
+    the question text. This starter keeps no store.
+  logged_events:
+    - event: "Question answered or routed"
+      data_logged:
+        - "Timestamp"
+        - "Scope reference"
+        - "Outcome"
+        - "Whether a pin was stale"
+      retention: "Employer's schedule. Not set by this starter."
+    - event: "HR later relies on the answer, outside the agent"
+      data_logged:
+        - "HR identity"
+        - "Timestamp"
+      retention: "Employer's schedule. The agent does not write this event."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the employer already operates. Do not log the question."
+
+kill_switch:
+  description: "Ways to stop the agent being used."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed identity used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SharePoint write, or the HR system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "People and culture lead"
+      contact: "handbook-agent@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+review:
+  last_review_date: "2026-11-16"
+  next_review_date: "2027-05-16"
+  review_frequency: "6 months, and sooner if a pinned Act or the handbook scope changes"
+  reviewer: "The adopting employer's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Working Time Regulations 1998 regulations 13 or 13A, or to regulation 15B if it is later opened"
+    - "A change to Employment Rights Act 1996 section 80F or to the flexible-working commencement instruments"
+    - "A commencement instrument for an Employment Rights Act 2025 amendment that this starter has not opened"
+    - "A proposal to add a SharePoint, mail, or HR-system connector"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Answer core"
+      path: "src/answer.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+assumptions:
+  description: "Items an employer confirms before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "Article 6 is not asserted. The employer confirms a basis before live use. Article 9 is not asserted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The handbook in this folder is synthetic. A live handbook is a different scope, approved by that employer's HR, and is not this file."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Regulation 15B of the Working Time Regulations 1998 was not opened. Irregular-hours accrual is not stated."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "S.I. 2024/438 was not opened as its own page. The 6 April 2024 date is taken from the section 80F footnotes."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Employment Rights Act 2025 pages used for the preventative duty were opened by Experiment 11 on 27 October 2026 and were not re-opened here."
+      section: "src/answer.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders. Riverbend Workshops CIC is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

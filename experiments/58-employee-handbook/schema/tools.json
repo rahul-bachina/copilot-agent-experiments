@@ -1,0 +1,68 @@
+{
+  "tools": [
+    {
+      "name": "answer_handbook_question",
+      "implementation": "answer_handbook",
+      "reads": [
+        "one synthetic handbook",
+        "one HR scope object",
+        "one question",
+        "an as-of date and an optional about-date",
+        "Experiment 11 commencement pins when the question asks about the Employment Rights Act 2025",
+        "Experiment 32 category keywords and Acas paragraph pins",
+        "Experiment 15 phrase list",
+        "Experiment 08 propose()",
+        "Experiment 50 curate_site() when curation is requested"
+      ],
+      "writes": false,
+      "sends": false,
+      "decides_entitlement": false,
+      "gives_legal_advice": false,
+      "gives_medical_advice": false,
+      "gives_tax_advice": false,
+      "approves_sources": false,
+      "calls_sharepoint": false,
+      "calls_graph": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "acknowledge_answer",
+      "implementation": "acknowledge",
+      "reads": ["the answer", "a separate HR review object"],
+      "writes": false,
+      "sends": false,
+      "decides_entitlement": false,
+      "approves_sources": false,
+      "human_approval_to_run": true,
+      "approver": "HR",
+      "callable_by_agent": false,
+      "note": "The agent must not call this. A sentence inside the question is not this step. Seeing the answer does not decide entitlement."
+    },
+    {
+      "name": "decide_entitlement",
+      "implementation": "decide_entitlement",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_answer",
+      "implementation": "send_answer",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_record",
+      "implementation": "write_record",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "approve_source",
+      "implementation": "approve_source",
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
