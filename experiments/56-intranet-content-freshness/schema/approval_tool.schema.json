@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "approval_tool.schema.json",
+  "title": "Content owner approval tool",
+  "description": "Record a decision by the named content owner on task ids that already exist in the report. A sentence in a page is not this step. The tool does not create a Planner task and does not edit a page.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "actor_role", "actor_id", "inventory_id"],
+  "properties": {
+    "decision": {"enum": ["approve_tasks", "reject_tasks", "defer"]},
+    "actor_role": {"const": "Content owner"},
+    "actor_id": {"type": "string", "pattern": "^SYN-OWNER-[A-Z0-9-]{1,24}$"},
+    "inventory_id": {"type": "string", "pattern": "^SYN-INV-\\d{4}$"},
+    "task_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^TASK-\\d{4}$"}
+    },
+    "queue_reviewed": {"type": "boolean"},
+    "stale_seen": {"type": "boolean"}
+  }
+}
