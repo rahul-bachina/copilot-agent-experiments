@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-seven starters are in `experiments/`. The folders are 01 to 56, and 58.
+Fifty-eight starters are in `experiments/`. The folders are 01 to 58.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -88,6 +88,7 @@ Fifty-seven starters are in `experiments/`. The folders are 01 to 56, and 58.
 | 54 | [Excel Assumption Review Agent](experiments/54-excel-assumption-review/) | Review one synthetic workbook after the model owner confirms the ranges and the formulas. Autonomy A0. The agent inventories inputs, names formula issues, and computes a sensitivity. It does not edit the workbook, judge an assumption, or invent a benchmark. | ✅ Starter |
 | 55 | [OneDrive Document Finder](experiments/55-onedrive-document-finder/) | Rank files inside locations the requesting user has confirmed, with the reason, the location, the date, and the sensitivity label. Autonomy A0. The agent does not search outside that selection, reveal a file above clearance, move, delete, share, or change permissions. | ✅ Starter |
 | 56 | [Intranet Content Freshness Agent](experiments/56-intranet-content-freshness/) | Review one synthetic intranet inventory and propose update tasks for overdue pages, withdrawn guidance, stale links and contacts, orphans, and duplicates. Autonomy A1. The named content owner approves each task. The agent does not edit, publish, unpublish, delete, reassign, or message staff. | ✅ Starter |
+| 57 | [Collaboration Space Onboarding](experiments/57-collaboration-space-onboarding/) | Explain one synthetic Teams and SharePoint space and draft a membership proposal. Autonomy A1. The workspace owner approves membership, owner rights, and guest access. The sample does not call Microsoft Graph or share a file or a link externally. | ✅ Starter |
 | 58 | [Employee Handbook Agent](experiments/58-employee-handbook/) | Answer one question from the HR-approved handbook version in force on the date asked about, with the section and the effective date. Autonomy A0. The agent does not decide an individual's entitlement, give individual legal, medical, or tax advice, or treat a word in the question as approval of a source. | ✅ Starter |
 
 ## Getting Started

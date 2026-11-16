@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Propose a collaboration-space membership",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["space_id", "request_id", "as_of"],
+  "properties": {
+    "space_id": {"type": "string", "pattern": "^SYN-SPACE-\\d{4}$"},
+    "request_id": {"type": "string", "pattern": "^SYN-REQ-\\d{4}$"},
+    "as_of": {"type": "string", "format": "date"}
+  }
+}

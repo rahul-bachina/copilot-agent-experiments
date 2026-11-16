@@ -1,0 +1,124 @@
+{
+  "synthetic": true,
+  "space_id": "SYN-SPACE-0001",
+  "organisation": "Merrowfield Borough Council (fictional)",
+  "display_name": "Housing repairs programme",
+  "purpose": "Coordinate the council housing repairs programme for 2026.",
+  "cover_page": "OFFICIAL\nHousing repairs programme workspace.",
+  "team_id": "SYN-TEAM-0001",
+  "group_id": "SYN-GROUP-0001",
+  "sensitivity_label": "OFFICIAL",
+  "purview_container_label": "General",
+  "guest_policy": "disabled",
+  "external_sharing": "organisation_only",
+  "privacy": "private",
+  "exported_on": "2026-11-10",
+  "owner_need_phrase": "administer the team",
+  "finder_query": "programme board",
+  "document_location": {"location_id": "LOC-REPAIRS", "name": "Repairs library"},
+  "conventions": [
+    "Post programme decisions in the General channel.",
+    "Do not paste a tenant case into General."
+  ],
+  "access_needs": [
+    {"phrase": "programme board", "label": "OFFICIAL"},
+    {"phrase": "repairs review", "label": "OFFICIAL"},
+    {"phrase": "tenant vulnerability case", "label": "OFFICIAL-SENSITIVE"}
+  ],
+  "channels": [
+    {
+      "channel_id": "SYN-CH-GENERAL",
+      "name": "General",
+      "purpose": "Announcements for the repairs programme.",
+      "membership": "team",
+      "sensitivity_label": "OFFICIAL",
+      "conventions": "Keep posts short and do not name a tenant."
+    },
+    {
+      "channel_id": "SYN-CH-CASES",
+      "name": "Tenant cases",
+      "purpose": "Named tenant vulnerability cases for the repairs programme.",
+      "membership": "private",
+      "sensitivity_label": "OFFICIAL-SENSITIVE",
+      "need_phrase": "tenant vulnerability case",
+      "conventions": "Need to know only."
+    }
+  ],
+  "documents": [
+    {
+      "file_id": "SYN-OD-5701",
+      "title": "Housing repairs programme board pack",
+      "last_modified": "2026-09-01",
+      "sensitivity_label": "OFFICIAL",
+      "retention_label": "Housing-repairs-7y",
+      "legal_hold": false,
+      "readers": ["SYN-PRIN-MEMBER"],
+      "extract": "The housing repairs programme board pack for 2026 covers routine works."
+    },
+    {
+      "file_id": "SYN-OD-5702",
+      "title": "Housing repairs programme board evidence",
+      "last_modified": "2026-08-01",
+      "sensitivity_label": "OFFICIAL",
+      "retention_label": "inquiry-hold",
+      "legal_hold": true,
+      "readers": ["SYN-PRIN-MEMBER"],
+      "extract": "Programme board evidence is under a legal hold. Do not destroy this file."
+    }
+  ],
+  "pinned_links": [
+    {
+      "link_id": "SYN-LINK-0001",
+      "title": "Repairs handbook",
+      "url": "https://merrowfield.example.gov.uk/repairs",
+      "audience": "internal"
+    },
+    {
+      "link_id": "SYN-LINK-0002",
+      "title": "External pack",
+      "url": "https://external.example/canary-external-link",
+      "audience": "external"
+    }
+  ],
+  "channel_export": {
+    "synthetic": true,
+    "organisation": "Merrowfield Borough Council (fictional)",
+    "sector": "public_body",
+    "export_id": "SYN-EXP-057",
+    "retrieved_on": "2026-11-10",
+    "requesting_user": {
+      "user_id": "SYN-USER-057",
+      "display_name": "Rowan Hale",
+      "accessible_channel_ids": ["SYN-CH-GENERAL"]
+    },
+    "request": {
+      "channel_ids": ["SYN-CH-GENERAL"],
+      "period_start": "2026-11-01",
+      "period_end": "2026-11-12"
+    },
+    "channels": [
+      {
+        "channel_id": "SYN-CH-GENERAL",
+        "display_name": "General",
+        "available": true,
+        "messages": [
+          {
+            "message_id": "SYN-MSG-5701",
+            "sent_on": "2026-11-03",
+            "author_display_name": "Alex Wren",
+            "body": "We decided to keep the programme board pack in the General channel."
+          }
+        ]
+      }
+    ]
+  },
+  "channel_digest_confirmation": {
+    "decision": "confirm_channels_and_period",
+    "actor_role": "Requesting user",
+    "actor_id": "SYN-USER-057",
+    "export_id": "SYN-EXP-057",
+    "channel_ids": ["SYN-CH-GENERAL"],
+    "period_start": "2026-11-01",
+    "period_end": "2026-11-12"
+  }
+}

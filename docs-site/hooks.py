@@ -184,6 +184,9 @@ DIAGRAMS = {
     "experiments/56-intranet-content-freshness/docs/architecture_diagram.png": (
         "experiments/img/56-intranet-content-freshness-architecture.png"
     ),
+    "experiments/57-collaboration-space-onboarding/docs/architecture_diagram.png": (
+        "experiments/img/57-collaboration-space-onboarding-architecture.png"
+    ),
     "experiments/58-employee-handbook/docs/architecture_diagram.png": (
         "experiments/img/58-employee-handbook-architecture.png"
     ),
