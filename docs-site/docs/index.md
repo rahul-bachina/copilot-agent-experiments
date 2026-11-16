@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Fifty-six starters you can read today
+## Fifty-seven starters you can read today
 
 </div>
 
@@ -1478,6 +1478,31 @@ The named content owner approves each task. The agent does not edit, publish, un
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 57 · M010 · Microsoft 365 · Autonomy A1</p>
+
+### Collaboration space onboarding
+
+Explain one synthetic Teams and SharePoint space and draft who should join, as a member or an owner, internal or guest.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The workspace owner approves membership on a separate object. Owner rights and guest access each need their own boolean. The sample does not call Microsoft Graph or share a file or a link externally.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/57-collaboration-space-onboarding.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/57-collaboration-space-onboarding)
+
+</div>
+
+</article>
+
 </div>
 
 </article>
@@ -1500,7 +1525,7 @@ The named content owner approves each task. The agent does not edit, publish, un
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, and M008 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, and M010 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
