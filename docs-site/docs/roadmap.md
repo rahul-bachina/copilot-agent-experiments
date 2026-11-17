@@ -574,6 +574,26 @@ A draft checklist for one synthetic new starter. HR approves which onboarding do
 
 </article>
 
+<article class="plan-card" id="h003" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · H003 · Autonomy A0</p>
+
+## Manager one-to-one preparation
+
+A read-only prep note for one synthetic one-to-one. The line manager selects the previous notes, the agreed objectives, the employee's own shared updates, and the team calendar items. The assistant quotes follow-ups and suggests open questions, each with a citation. It calls [Experiment 51](experiments/51-teams-channel-digest.md) for an action or a decision on a line, [Experiment 41](experiments/41-case-summary.md) so a quotation has to be the cited line, [Experiment 15](experiments/15-vulnerability-urgency-scanner.md) so a distress or safeguarding phrase is flagged rather than treated as routine, and [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier types. The agent does not rate performance, compare employees, infer health or a protected characteristic, recommend disciplinary or capability action, or read a mailbox or a chat. [Read the briefing](experiments/60-manager-one-to-one-prep.md).
+
+</article>
+
+<article class="plan-card" id="h004" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · H004 · Autonomy A1</p>
+
+## Learning path planner
+
+A sequenced learning plan from a synthetic course catalogue, a synthetic role skills framework, and the goals an employee states. Each step cites the catalogue entry, or the result says no suitable course is in the catalogue. Stale and withdrawn courses are excluded. A cost or a date that cannot be read is not replaced with zero. It calls [Experiment 58](experiments/58-employee-handbook.md) for one fixed handbook question, [Experiment 44](experiments/44-knowledge-gap-detector.md) so a knowledge-base gap is not treated as a course, and [Experiment 36](experiments/36-cross-source-validation.md) when a course has two figures. The employee and their manager both approve the plan id. A reasonable adjustment is not decided by the assistant. A distress or wellbeing cue is routed to a person. The agent does not enrol, book, or spend, and it does not infer ability from a protected characteristic. [Read the briefing](experiments/61-learning-path-planner.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61.

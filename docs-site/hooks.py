@@ -193,6 +193,12 @@ DIAGRAMS = {
     "experiments/59-new-starter-guide/docs/architecture_diagram.png": (
         "experiments/img/59-new-starter-guide-architecture.png"
     ),
+    "experiments/60-manager-one-to-one-prep/docs/architecture_diagram.png": (
+        "experiments/img/60-manager-one-to-one-prep-architecture.png"
+    ),
+    "experiments/61-learning-path-planner/docs/architecture_diagram.png": (
+        "experiments/img/61-learning-path-planner-architecture.png"
+    ),
 }
 
 
