@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-eight starters are in `experiments/`. The folders are 01 to 58.
+Fifty-nine starters are in `experiments/`. The folders are 01 to 58 and 61.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -90,6 +90,7 @@ Fifty-eight starters are in `experiments/`. The folders are 01 to 58.
 | 56 | [Intranet Content Freshness Agent](experiments/56-intranet-content-freshness/) | Review one synthetic intranet inventory and propose update tasks for overdue pages, withdrawn guidance, stale links and contacts, orphans, and duplicates. Autonomy A1. The named content owner approves each task. The agent does not edit, publish, unpublish, delete, reassign, or message staff. | ✅ Starter |
 | 57 | [Collaboration Space Onboarding](experiments/57-collaboration-space-onboarding/) | Explain one synthetic Teams and SharePoint space and draft a membership proposal. Autonomy A1. The workspace owner approves membership, owner rights, and guest access. The sample does not call Microsoft Graph or share a file or a link externally. | ✅ Starter |
 | 58 | [Employee Handbook Agent](experiments/58-employee-handbook/) | Answer one question from the HR-approved handbook version in force on the date asked about, with the section and the effective date. Autonomy A0. The agent does not decide an individual's entitlement, give individual legal, medical, or tax advice, or treat a word in the question as approval of a source. | ✅ Starter |
+| 61 | [Learning Path Planner](experiments/61-learning-path-planner/) | Draft a sequenced learning plan from a synthetic course catalogue, a role skills framework, and the goals the employee states. Autonomy A1. The employee and their manager both approve the plan before an enrolment request is recorded. The agent does not enrol, book, or spend. | ✅ Starter |
 
 ## Getting Started
 
