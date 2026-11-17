@@ -1,0 +1,378 @@
+# Agent manifest: Manager One-to-One Preparation Agent
+# Experiment 60 — catalogue ID H003
+# Version: 0.1.0
+# Last reviewed: 2026-11-17
+# Next review: 2027-05-17
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-60-manager-one-to-one-prep"
+  name: "Manager One-to-One Preparation Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a short prep note for one synthetic one-to-one from the sources a
+    line manager has already selected. Autonomy A0. The note quotes follow-ups,
+    agreed objectives, the employee's own shared updates, and team calendar
+    items, each with a citation. It does not rate performance, compare
+    employees, infer health or a protected characteristic, or read a mailbox
+    or a chat the manager did not select.
+  owner: "People and culture"
+  contact: "one-to-one-prep@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/60-manager-one-to-one-prep"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only. The line manager selects the authorised context before a note is drafted."
+  constraints:
+    - "The manager selects source ids on a separate object. A sentence in a note is not that selection."
+    - "The agent quotes only previous one-to-one notes, agreed objectives, employee shared updates, and team calendar items that were selected."
+    - "The agent NEVER rates performance, compares employees, or profiles an employee."
+    - "The agent NEVER infers health, a protected characteristic, or personal circumstances."
+    - "The agent NEVER recommends disciplinary or capability action."
+    - "The agent NEVER reads a mailbox or a chat, including one the pack happens to contain."
+    - "Distress, wellbeing, and safeguarding signs are flagged for a person. They are not routine agenda items."
+    - "Dates, markings, citations, and the empty rating come from src/prepare.py."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic selection"
+      description: "Manager id, employee id, selected source ids, and an approval reference. Separate from the notes."
+      access_level: "read"
+      scope: "One object per run. The selector must be the directory line manager for that employee."
+      justification: "Catalogue checkpoint for H003. The manager selects the authorised context."
+      data_categories:
+        - "Meeting reference"
+        - "Source identifiers"
+      may_contain_personal_data: false
+      retention: "Transient. This starter does not persist the selection."
+    - resource: "Selected synthetic sources"
+      description: "Previous one-to-one notes, agreed objectives, the employee's own shared updates, and team calendar items. Harbourside Instruments Ltd is invented."
+      access_level: "read"
+      scope: "Source ids on the selection, of an allowed kind, at or below the ceiling and the directory clearance."
+      justification: "A prep note cannot cite a source the manager did not select."
+      data_categories:
+        - "Work follow-ups"
+        - "Protective markings, legal holds, and retention labels"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. Bodies above the ceiling are not copied. Flagged sentences are not copied."
+    - resource: "Synthetic directory"
+      description: "Id, role, manager, reports, and clearance for the fixture. Not a sentence in a note."
+      access_level: "read"
+      scope: "The people named on this pack."
+      justification: "A self-declared role, guest status, or clearance in the notes is not trusted."
+      may_contain_personal_data: false
+    - resource: "Pinned sources"
+      description: "Statutory and ICO pins in src/sources.py. Nothing is downloaded."
+      access_level: "read"
+      scope: "Files in this repository."
+      justification: "A legal sentence is a quotation from a page that was opened, not a model paraphrase."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "Mailboxes and chats, including messages of the employee"
+      reason: "Those kinds are not meeting context. Selecting one does not authorise a read. The body is not copied."
+    - resource: "A source above the ceiling, including one whose cover says SECRET"
+      reason: "The body is not copied. The higher marking, the legal hold, and every retention label are kept."
+    - resource: "Microsoft Graph, Work IQ, and a live calendar"
+      reason: "This starter does not call them. Work IQ behaviour was not opened on 17 November 2026 and is unverified here."
+    - resource: "Personnel files, performance scores, and disciplinary records"
+      reason: "The agent does not rate, compare, or recommend a sanction."
+
+tools:
+  allowed:
+    - tool: "One-to-one prep note"
+      provider: "Local Python (src/prepare.py)"
+      action: "Quote selected follow-ups and name a person where a note shows distress"
+      access_level: "read"
+      scope: "One meeting. No network. No model."
+      justification: "Selection, negation, markings, and the empty rating are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Optional narrative of JSON fields that are already in the result"
+      access_level: "read"
+      scope: "The JSON for this run, with flagged sentences already omitted"
+      justification: "Optional. Citations and the empty rating stay in Python."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No write. Saving a note is a person's step in the employer's own system."
+  sends:
+    enabled: false
+    note: "No send. The note is returned to the manager who selected the context."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve a rating or a sanction. human_approval stays null until a separate seen-step, which still does not rate."
+  regulated_decision:
+    enabled: false
+    rationale: "Performance, comparison, health, and protected characteristics are not decided. Those fields stay null."
+  production_record_change:
+    enabled: false
+    rationale: "No personnel record is created or updated. write_personnel_record raises."
+  external_send:
+    enabled: false
+    rationale: "The agent does not email the employee, HR, or an assistance programme. send_note raises."
+  spend_transact:
+    enabled: false
+    rationale: "No payment and no benefit change."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Select sources from words inside a note"
+      rationale: "The selection object is the authorisation. approve_from_content raises."
+    - enabled: false
+      action_name: "Rate performance or compare employees"
+      rationale: "rate_performance and compare_employees raise."
+    - enabled: false
+      action_name: "Read a mailbox or a chat"
+      rationale: "read_mailbox and read_chat raise. An unselected or forbidden source is not copied."
+    - enabled: false
+      action_name: "Remove a marking, legal hold, or retention label"
+      rationale: "An instruction to strip a label is recorded and not followed. The higher marking is kept."
+
+human_approval:
+  description: >
+    The line manager selects the context before a note is drafted. The agent
+    has no path that rates performance, reads a mailbox, or sends the note.
+    Words inside a note do not count as that selection or as the later seen-step.
+
+  approval_points:
+    - action: "Select the authorised context for this meeting"
+      approver: "Line manager"
+      mandatory: true
+      rationale: "Catalogue checkpoint for H003. The selection object is the approval. A marker inside a note is ignored."
+    - action: "Rely on the prep note"
+      approver: "The same line manager, for this meeting id and these source ids"
+      mandatory: true
+      rationale: "The note is a quotation or a gap. It is not a performance view. The seen-step is acknowledge(), which the agent cannot call."
+    - action: "Handle a distress, wellbeing, safeguarding, or personal-circumstance flag"
+      approver: "Line manager, with HR or the employee assistance programme"
+      mandatory: true
+      rationale: "Those signs are flagged. They are not summarised as routine agenda items."
+    - action: "Rate performance, compare employees, or start a disciplinary or capability step"
+      approver: "The employer's own process"
+      mandatory: true
+      rationale: "Outside the agent, including after the note is read."
+    - action: "Re-check a statutory pin after it is marked stale"
+      approver: "The employer"
+      mandatory: true
+      rationale: "The core does not download legislation.gov.uk, GOV.UK, or ico.org.uk."
+
+  no_approval_required:
+    - action: "Read the prep note"
+      rationale: "Reading has no external effect."
+    - action: "Ask for the same selection again"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the employer's lawful basis. Article 5(1)(a)
+      requires processing to be lawful, fair, and transparent. Article 5(1)(c)
+      requires data minimisation. A candidate for an internal prep note, which
+      the employer confirms, is not chosen here. A note about health or a
+      protected characteristic may be special-category data. Article 9 is not
+      asserted. Article 6 was not opened.
+    secondary: "Article 6(1)(b) or 6(1)(f) may be relevant to the employer's own process. The employer confirms it."
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. A health, pregnancy, or other personal-circumstance line is flagged and the sentence is not copied."
+    safeguards:
+      - "The sample employer is synthetic"
+      - "Flagged sentences are not copied into the prep note"
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal-name cues are masked, and the values are not stored, in addition to Experiment 08"
+      - "No solely automated significant decision about a person"
+  data_minimisation:
+    - "Sources the manager did not select are not copied."
+    - "Mailboxes and chats are not copied."
+    - "Bodies above the ceiling are not copied."
+    - "Experiment 08 redacted values are not stored."
+  retention:
+    agent_retention: "None in this starter."
+    note: "The employer's retention schedule applies to whatever a person saves. A legal hold on a source is preserved and is not a disposal instruction."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "Access, erasure, and objection go through the employer's privacy process. This agent does not handle them."
+
+prompt_injection:
+  description: >
+    Notes are untrusted. They may say to ignore instructions, rate performance,
+    read a mailbox, or strip a legal hold. The core records the instruction
+    and does not follow it.
+  controls:
+    - control: "Selection is a separate object"
+      description: "Approval words in a note do not add a source id or complete the seen-step."
+    - control: "Instruction sentences are not quoted"
+      description: "A line that is only an instruction is not a follow-up."
+    - control: "No side-effect tools"
+      description: "Writes, sends, ratings, and mailbox reads are disabled."
+    - control: "Markings survive an instruction to strip them"
+      description: "The higher of the metadata label and the cover label is kept, with the legal hold and every retention label."
+  residual_risk: >
+    A model narration could still mis-state a quotation. The person reading
+    the JSON is the control. There is no autonomous action to take.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named employer"
+  date_assessed: "2026-11-17"
+  risks:
+    - id: "R1"
+      risk: "A mailbox, a chat, or another unselected source is summarised because the pack contained it or a note said to read it"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Only selected ids of an allowed kind are quoted"
+        - "Mailbox and chat kinds are refused even when selected"
+        - "An instruction to read a mailbox is recorded and not followed"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R2"
+      risk: "The note rates performance, compares employees, or recommends a disciplinary or capability step"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those fields stay null"
+        - "The functions raise"
+        - "A request in a note is recorded and the sentence is not copied"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R3"
+      risk: "A distress, wellbeing, or safeguarding sign is turned into a routine agenda item, or a denial is treated as the sign"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Experiment 15 and a paraphrase list flag the line"
+        - "A phrase inside a denial is not a flag"
+        - "The sentence is not copied"
+      residual_risk: "Medium"
+      owner: "People and culture"
+    - id: "R4"
+      risk: "A SECRET cover or a legal hold is missed, or a clearance typed into a note is trusted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Markings are read from metadata and from the text, and the higher label wins"
+        - "A negated marking is not treated as present"
+        - "Legal hold and every retention label are kept"
+        - "Clearance and role words in a note are not trusted"
+      residual_risk: "Low"
+      owner: "Information security"
+    - id: "R5"
+      risk: "A statutory sentence is paraphrased, or an Article 22D regulation that was not read is stated as made"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Pins name the article and the date the page was opened"
+        - "Article 22B(2) and S.I. 2026/82 regulation 5 are marked as not read"
+        - "A stale pin is not refreshed"
+      residual_risk: "Medium"
+      owner: "Data protection officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the meeting reference,
+    the selection reference, the as-of date, and whether a source was stale.
+    Do not log note text or a flagged sentence. This starter keeps no store.
+  logged_events:
+    - event: "Prep note drafted or refused"
+      data_logged:
+        - "Timestamp"
+        - "Meeting reference"
+        - "Selection reference"
+        - "Outcome"
+        - "Whether a source was stale"
+      retention: "Employer's schedule. Not set by this starter."
+    - event: "Line manager later relies on the note, outside the agent"
+      data_logged:
+        - "Manager id from the directory"
+        - "Meeting id and source ids"
+        - "Timestamp"
+      retention: "Employer's schedule. The agent does not write this event."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the employer already operates. Do not log the notes."
+
+kill_switch:
+  description: "Ways to stop the agent being used."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed identity used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, chat, or the HR system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "People and culture lead"
+      contact: "one-to-one-prep@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+review:
+  last_review_date: "2026-11-17"
+  next_review_date: "2027-05-17"
+  review_frequency: "6 months, and sooner if a pinned Article or the ICO monitoring guidance changes"
+  reviewer: "The adopting employer's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Articles 5, 22A, 22B, 22C, or 22D"
+    - "A regulation made under Article 22D, which was not read on 17 November 2026"
+    - "A change to the ICO monitoring-workers guidance while the Data (Use and Access) Act review banner is up"
+    - "A proposal to add a mail, chat, Graph, or HR-system connector"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Prep core"
+      path: "src/prepare.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+assumptions:
+  description: "Items an employer confirms before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "Article 6 and Article 9 are not asserted. The employer confirms a basis before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The notes in this folder are synthetic. A live one-to-one is a different selection, made by that employee's line manager, and is not this file."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Article 22B(2) was not in the text returned on 17 November 2026. S.I. 2026/82 regulation 5 was not opened. No Article 22D regulations were read. Whether any have been made is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The ICO monitoring pages still name Article 22 and carry a Data (Use and Access) Act review banner. They were not reconciled with Articles 22A to 22D."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The 180-day stale window is a configuration choice for this starter. It is not a statutory retention period."
+      section: "src/prepare.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders. Harbourside Instruments Ltd is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
