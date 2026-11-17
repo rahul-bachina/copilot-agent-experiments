@@ -1,0 +1,444 @@
+# Agent manifest: Learning Path Planner
+# Experiment 61 — catalogue ID H004
+# Version: 0.1.0
+# Last reviewed: 2026-11-17
+# Next review: 2027-05-17
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-61-learning-path-planner"
+  name: "Learning Path Planner"
+  version: "0.1.0"
+  description: >
+    Drafts a sequenced learning plan from a synthetic course catalogue, a
+    synthetic role skills framework, and the goals an employee states.
+    Autonomy A1. The employee and their manager both approve the exact plan
+    before an enrolment request is recorded. The agent does not enrol, book,
+    or spend. It does not infer skill from a protected characteristic, rank
+    employees, or use the plan for performance or promotion. A reasonable
+    adjustment, an accessibility need, distress, or a wellbeing signal is
+    routed to a person.
+  owner: "Line manager"
+  contact: "learning.planner@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/61-learning-path-planner"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant drafts the plan. The employee and the manager each approve that plan id before an enrolment request is recorded. The agent does not enrol, book, or spend."
+  constraints:
+    - "The employee and the manager approve on separate approval objects. The agent does not."
+    - "The agent NEVER enrols, books, or spends"
+    - "The agent NEVER treats approval text inside a goal or a course description as approval"
+    - "The agent NEVER infers skill or ability from a protected characteristic"
+    - "The agent NEVER ranks employees or uses the plan for performance or promotion"
+    - "The agent NEVER decides that a reasonable adjustment has been made"
+    - "A self-declared role or clearance in the request is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic course catalogue"
+      description: "Costs, durations, prerequisites, review dates, markings, retention labels, and legal holds. Samples are synthetic."
+      access_level: "read"
+      scope: "One catalogue per invocation. Course descriptions are not copied into the plan."
+      justification: "A step has to cite a catalogue entry. A withdrawn or stale entry has to be flagged."
+      data_categories:
+        - "Course identifiers, costs, and durations"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the catalogue."
+    - resource: "Synthetic role skills framework and directory"
+      description: "The role and the manager come from the directory. The request does not set them."
+      access_level: "read"
+      scope: "One employee reference."
+      justification: "The plan has to follow the role the directory holds, and the manager who can approve."
+      may_contain_personal_data: true
+    - resource: "Employee goals"
+      description: "The goals the employee states. Approval keys on this object are stripped."
+      access_level: "read"
+      scope: "One request. The goals are not copied into the result."
+      justification: "Skill phrases are matched only where the goals affirm them."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+    - resource: "Separate approval objects"
+      description: "The only objects that can set human_approval. Not read from the goals."
+      access_level: "read"
+      scope: "One employee approval and one manager approval of a plan already produced."
+      justification: "An enrolment request waits for both, keyed to the plan id."
+      may_contain_personal_data: false
+    - resource: "Experiment 58 employee handbook"
+      description: "answer_handbook() on a fixed question about time off for study or training."
+      access_level: "read"
+      scope: "The synthetic handbook and the sample HR scope. No entitlement is decided."
+      justification: "The handbook either quotes a section or says it does not cover the question."
+      may_contain_personal_data: false
+    - resource: "Experiment 44 knowledge gap detector"
+      description: "detect_gaps() on the cleaned goals. A gap is not confirmed and is not a course."
+      access_level: "read"
+      scope: "One synthetic pack. Article bodies are not copied."
+      justification: "A knowledge-base gap is a different catalogue from the course list."
+      may_contain_personal_data: true
+    - resource: "Experiment 36 cross-source validation"
+      description: "compare() when a course has a second cost or duration. The agent does not choose a source."
+      access_level: "read"
+      scope: "One synthetic pack per course that has two sources."
+      justification: "A material discrepancy is shown to a person. It is not resolved here."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live learning-management system or a payment account"
+      reason: "The catalogue is the fixture the caller supplied. The core does not enrol, book, or spend."
+    - resource: "A self-declared role, guest status, or clearance in the request"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Course descriptions above the directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Draft"
+      provider: "Local Python (draft_plan)"
+      action: "Draft a sequenced learning plan with catalogue citations"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Matching, dates, and money are comparisons. A language model must not invent a course."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record approval"
+      provider: "Local Python (record_approval)"
+      action: "Record the employee or manager approval of one plan id"
+      access_level: "read"
+      scope: "The plan and a separate approval object. No enrolment and no spend."
+      justification: "The approval has to be deterministic and keyed to the named person and the plan id."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record adjustment seen"
+      provider: "Local Python (record_adjustment_review)"
+      action: "Record that a named person has seen an adjustment route"
+      access_level: "read"
+      scope: "The plan and a separate review object. The adjustment is not decided."
+      justification: "Equality Act 2010 sections 20 and 21 were read. The agent does not decide the duty was met."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The sequence, the budget, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No learning-system write. record_approval returns JSON. enrolled stays
+      false and spent_gbp stays null.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a plan does not email a provider or a learner.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a plan. The approval objects are the
+      employee's and the manager's decisions. A sentence in the goals cannot set them.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that Equality Act 2010 section 19, 20, or 21
+      was met, and it does not decide that an employee qualifies under
+      Employment Rights Act 1996 section 63D.
+  production_record_change:
+    enabled: false
+    rationale: "The enrolment request is a JSON record. It is not a write to a learning system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the plan to a provider, a learner, or anyone else."
+  spend_transact:
+    enabled: false
+    rationale: "Costs are information. spend() raises. The apprenticeship levy is not drawn."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Enrol or book a course"
+      rationale: "enrol() and book() raise. enrolled and booked stay false after an enrolment request."
+    - enabled: false
+      action_name: "Infer skill from a protected characteristic or rank employees"
+      rationale: "infer_ability() and rank_employees() raise. The flags stay false."
+    - enabled: false
+      action_name: "Use the plan for performance or promotion"
+      rationale: "decide_performance() and decide_promotion() raise. That request is refused."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold or a retention label on a step or an exclusion is kept."
+
+human_approval:
+  description: >
+    The employee and the manager approve the plan on separate objects, keyed
+    to the plan id. An adjustment route also needs a named person to record
+    that they have seen it. The agent does not decide the adjustment. Approval
+    text inside the goals or a course description is not that step. A
+    wellbeing cue is not processed as a routine plan.
+
+  approval_points:
+    - action: "Approve the learning plan as the employee"
+      approver: "Employee"
+      mandatory: true
+      rationale: "record_approval accepts the employee only when approver_ref is the directory employee and the plan id matches."
+    - action: "Approve the learning plan as the manager"
+      approver: "Line manager"
+      mandatory: true
+      rationale: "record_approval accepts the manager only when approver_ref is the directory manager of that employee and the plan id matches."
+    - action: "See a reasonable-adjustment or accessibility route"
+      approver: "Line manager or people partner"
+      mandatory: true
+      rationale: "record_adjustment_review sets seen. adjustment_decided stays false. An enrolment request waits for this and for both plan approvals."
+    - action: "Confirm stale pins or an unreadable budget"
+      approver: "Line manager"
+      mandatory: true
+      rationale: "stale_seen or budget_unreadable_seen must be the boolean true. A string is not coerced. The budget is not replaced with zero."
+    - action: "Review a wellbeing or distress cue"
+      approver: "Line manager"
+      mandatory: true
+      rationale: "The outcome is wellbeing_route. The cue is not copied. Approvals do not raise an enrolment request."
+
+  no_approval_required:
+    - action: "Read the draft plan"
+      rationale: "Reading a plan has no external effect. human_approval stays null."
+    - action: "Re-run the same request"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 17 November 2026. Equality Act 2010 sections 19, 20,
+      and 21 were read that day and are not a lawful basis. data_minimisation
+      is not marked as met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, disability, or wellbeing text a goal may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 17 November 2026."
+    safeguards:
+      - "A wellbeing or distress cue is flagged for a person. The cue text is not copied."
+      - "Skill is not inferred from a protected characteristic."
+      - "Course descriptions are not copied."
+      - "Samples in this repository are synthetic."
+      - "No solely automated enrolment. The sample does not spend."
+  data_minimisation:
+    - "The goals are not copied into the result."
+    - "Course descriptions are not copied. Identifier counts do not store the values."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on a shown or excluded course are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Goal text and course descriptions are untrusted. They may say the manager
+    has approved, that the person should be enrolled, or that a label should
+    be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Pretend approval, enrol, spend, and strip-label sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not a skill, a cue, or an inclusion."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until both record_approval calls succeed."
+    - control: "No enrol, book, or spend tool"
+      description: "enrol, book, and spend raise LearningPathForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The employee and
+    the manager are the control. There is no enrolment even if the note is
+    wrong. A paraphrase that uses none of the cue words is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-17"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the goals is treated as the manager's approval"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_approval reads only the separate approval object"
+      residual_risk: "Low"
+      owner: "Line manager"
+    - id: "R2"
+      risk: "The agent enrols, books, or spends"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "enrol, book, and spend raise"
+        - "An enrolment request leaves enrolled and booked false and spent_gbp null"
+      residual_risk: "Low"
+      owner: "Line manager"
+    - id: "R3"
+      risk: "Skill is inferred from a protected characteristic, or employees are ranked"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The outcome is inference_refused"
+        - "The rank and infer functions raise"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R4"
+      risk: "A reasonable adjustment is decided by the agent, or a distress cue is handled as a routine plan"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "adjustment_decided stays false"
+        - "A wellbeing outcome is not applied"
+      residual_risk: "Medium"
+      owner: "Line manager"
+    - id: "R5"
+      risk: "An unreadable cost, date, or budget is coerced to zero"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is excluded or flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "Line manager"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are copied onto the row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the employee reference
+    if it matched the synthetic pattern, the outcome, and whether an enrolment
+    request was recorded. This starter logs nothing because it keeps no store.
+    Do not put goals or a course description in an application trace.
+  logged_events:
+    - event: "Plan drafted"
+      data_logged:
+        - "Timestamp"
+        - "Employee reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Approval recorded"
+      data_logged:
+        - "Decision"
+        - "Whether the plan id matched"
+        - "enrolment_request_raised true or false"
+        - "enrolled false"
+      retention: "Organisation's schedule. The agent does not write this event to a learning system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Line manager"
+      contact: "learning.planner@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-17"
+  next_review_date: "2027-05-17"
+  review_frequency: "6 months, and sooner if the pinned legislation or the catalogue rules change"
+  reviewer: "The adopting organisation's learning lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Equality Act 2010 section 19, 20, or 21"
+    - "A change to Employment Rights Act 1996 Part 6A, including a repeal or a change to the qualifying regulations"
+    - "A change to the HMRC apprenticeship levy pay page or to the funding rules, once those rules are opened"
+    - "A proposal to add a connector that can enrol, book, or spend"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Planner core"
+      path: "src/plan.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The learning plan from this starter is also
+    not an approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 17 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Employment Rights Act 1996 Part 6A was on the statute on 17 November 2026 and the page did not show a repeal. S.I. 2010/303 was not opened. The 26-week and 250-person conditions are the GOV.UK summary, and that page did not show a last-updated date in the text returned."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "What the apprenticeship levy can buy was not read. The funding-rules document for 2026 to 2027 was not opened. The planner does not spend levy funds."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The 90-day pin window is a starter default. It is not a period in the Equality Act 2010 or the Employment Rights Act 1996."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "A review date on the as-of date is treated as stale. That is this starter's rule, aligned with Experiment 44's citation rule, not a statutory period."
+      section: "src/plan.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, and Application Insights were not opened on 17 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview opened on 17 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

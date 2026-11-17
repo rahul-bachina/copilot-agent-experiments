@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that a named person has seen an adjustment route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plan_id", "reviewer_ref", "seen", "item"],
+  "properties": {
+    "plan_id": {"type": "string", "pattern": "^LP-[0-9a-f]{12}$"},
+    "reviewer_ref": {"type": "string", "pattern": "^EMP-\\d{4}$"},
+    "seen": {"type": "boolean", "const": true},
+    "item": {"type": "string", "const": "adjustment-review"},
+    "adjustment_decided": {"type": "boolean", "const": false}
+  }
+}

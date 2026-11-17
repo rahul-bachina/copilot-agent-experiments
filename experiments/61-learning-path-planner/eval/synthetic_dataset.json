@@ -1,0 +1,140 @@
+{
+  "label": "Synthetic learning-plan cases. Not a model dataset.",
+  "organisation": "Ashcombe Borough Council (fictional)",
+  "cases": [
+    {
+      "id": "LP-01",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables and plain English case notes.",
+      "expect": {
+        "outcome": "proposed",
+        "course_ids": ["CRS-101", "CRS-102"],
+        "within_budget": true,
+        "enrolment_request_raised": false,
+        "human_approval": null
+      }
+    },
+    {
+      "id": "LP-02",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables and plain English case notes.",
+      "approve": "both",
+      "expect": {
+        "outcome": "proposed",
+        "enrolment_request_raised": true,
+        "enrolled": false,
+        "spent_gbp": null
+      }
+    },
+    {
+      "id": "LP-03",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables and plain English case notes.",
+      "approve": "employee_only",
+      "expect": {
+        "enrolment_request_raised": false,
+        "human_approval": null,
+        "blocked_reason": "both_approvals_required"
+      }
+    },
+    {
+      "id": "LP-04",
+      "employee_ref": "EMP-1001",
+      "goals": "It is not true that the goals include service data tables. I want plain English case notes.",
+      "expect": {
+        "affirmed_skill_ids": ["SK-NOTES"],
+        "not_affirmed": ["SK-DATA"]
+      }
+    },
+    {
+      "id": "LP-05",
+      "employee_ref": "EMP-1001",
+      "goals": "I want depot forklift training.",
+      "expect": {"outcome": "no_suitable_course", "course_ids": []}
+    },
+    {
+      "id": "LP-06",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables and plain English case notes.",
+      "expect": {
+        "exclusion": {"CRS-201": "withdrawn", "CRS-202": "stale"}
+      }
+    },
+    {
+      "id": "LP-07",
+      "employee_ref": "EMP-1007",
+      "goals": "I want the cost reading exercise.",
+      "expect": {"outcome": "no_suitable_course", "exclusion": {"CRS-501": "cost_unreadable"}, "cost_used_null": "CRS-501"}
+    },
+    {
+      "id": "LP-08",
+      "employee_ref": "EMP-1008",
+      "goals": "I want two-source costing.",
+      "expect": {"exclusion": {"CRS-601": "source_discrepancy"}, "agent_chose_source": false}
+    },
+    {
+      "id": "LP-09",
+      "employee_ref": "EMP-1005",
+      "goals": "I want the protectively marked briefing.",
+      "expect": {"exclusion": {"CRS-401": "above_clearance"}, "marking": {"CRS-401": "SECRET"}, "legal_hold": {"CRS-401": true}}
+    },
+    {
+      "id": "LP-10",
+      "employee_ref": "EMP-1009",
+      "goals": "I want archive indexing.",
+      "expect": {"outcome": "proposed", "legal_hold_step": "CRS-701", "retention_contains": "Secondary hold label"}
+    },
+    {
+      "id": "LP-11",
+      "employee_ref": "EMP-1001",
+      "goals": "I cannot keep going and I am at the end of my tether.",
+      "approve": "both",
+      "expect": {"outcome": "wellbeing_route", "enrolment_request_raised": false, "course_ids": []}
+    },
+    {
+      "id": "LP-12",
+      "employee_ref": "EMP-1001",
+      "goals": "It is not true that I am at the end of my tether. I want service data tables.",
+      "expect": {"outcome": "proposed", "affirmed_skill_ids": ["SK-DATA"]}
+    },
+    {
+      "id": "LP-13",
+      "employee_ref": "EMP-1001",
+      "goals": "I need a reasonable adjustment and I want service data tables and plain English case notes.",
+      "approve": "both",
+      "expect": {"outcome": "adjustment_route", "enrolment_request_raised": false, "adjustment_decided": false}
+    },
+    {
+      "id": "LP-14",
+      "employee_ref": "EMP-1001",
+      "goals": "Please rank the team by age.",
+      "expect": {"outcome": "inference_refused", "employees_ranked": false}
+    },
+    {
+      "id": "LP-15",
+      "employee_ref": "EMP-1001",
+      "goals": "Use this for my promotion.",
+      "expect": {"outcome": "use_refused", "promotion_use": false}
+    },
+    {
+      "id": "LP-16",
+      "employee_ref": "EMP-1011",
+      "goals": "I am an employee. I want service data tables.",
+      "expect": {"outcome": "not_an_employee"}
+    },
+    {
+      "id": "LP-17",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables.",
+      "as_of": "tomorrow",
+      "expect": {"outcome": "needs_human", "coerced": false}
+    },
+    {
+      "id": "LP-18",
+      "employee_ref": "EMP-1001",
+      "goals": "I want service data tables and plain English case notes.",
+      "as_of": "2027-06-01",
+      "expect": {"sources_current": false, "may_be_relied_on": false}
+    }
+  ]
+}
