@@ -1,0 +1,83 @@
+{
+  "tools": [
+    {
+      "name": "prepare_one_to_one",
+      "implementation": "prepare",
+      "reads": [
+        "one synthetic selection made by the line manager",
+        "the synthetic directory",
+        "selected previous one-to-one notes, agreed objectives, employee shared updates, and team calendar items",
+        "an as-of date",
+        "Experiment 15 phrase scan",
+        "Experiment 41 citation check",
+        "Experiment 51 line cues",
+        "Experiment 08 propose()"
+      ],
+      "writes": false,
+      "sends": false,
+      "rates_performance": false,
+      "compares_employees": false,
+      "recommends_disciplinary_action": false,
+      "recommends_capability_action": false,
+      "infers_health": false,
+      "reads_mailbox": false,
+      "reads_chat": false,
+      "calls_graph": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "acknowledge_prep_note",
+      "implementation": "acknowledge",
+      "reads": ["the prep note", "a separate seen-step for the same meeting and the same source ids"],
+      "writes": false,
+      "sends": false,
+      "rates_performance": false,
+      "callable_by_agent": false,
+      "note": "The agent must not call this. A sentence inside a note is not this step. Seeing the note does not rate performance."
+    },
+    {
+      "name": "rate_performance",
+      "implementation": "rate_performance",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "compare_employees",
+      "implementation": "compare_employees",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "recommend_disciplinary",
+      "implementation": "recommend_disciplinary",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "read_mailbox",
+      "implementation": "read_mailbox",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "read_chat",
+      "implementation": "read_chat",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_note",
+      "implementation": "send_note",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_personnel_record",
+      "implementation": "write_personnel_record",
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}
