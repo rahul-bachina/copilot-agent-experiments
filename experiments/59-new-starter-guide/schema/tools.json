@@ -1,0 +1,95 @@
+{
+  "tools": [
+    {
+      "name": "draft_starter_guide",
+      "implementation": "draft_guide",
+      "reads": [
+        "one synthetic onboarding pack",
+        "one synthetic directory",
+        "one HR scope object",
+        "one request",
+        "an as-of date",
+        "Experiment 58 handbook helpers and, for a leave question, a fixed handbook question",
+        "Experiment 57 prepare_onboarding when the role template proposes a team space",
+        "Experiment 21 triage on a fixed service-desk-hours question",
+        "Experiment 11 commencement dates, not re-opened here",
+        "Experiment 15 phrase list",
+        "Experiment 08 propose()"
+      ],
+      "writes": false,
+      "sends": false,
+      "requests_equipment": false,
+      "creates_accounts": false,
+      "grants_access": false,
+      "enrols_training": false,
+      "collects_special_category_data": false,
+      "calls_sharepoint": false,
+      "calls_graph": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "approve_checklist",
+      "implementation": "approve_checklist",
+      "reads": ["the draft", "a separate line-manager approval object"],
+      "writes": false,
+      "sends": false,
+      "human_approval_to_run": true,
+      "approver": "Line manager",
+      "callable_by_agent": false,
+      "note": "The agent must not call this. A sentence inside the request is not this step."
+    },
+    {
+      "name": "share_checklist",
+      "implementation": "share_checklist",
+      "reads": ["a draft whose approval this process issued"],
+      "writes": false,
+      "sends": false,
+      "callable_by_agent": false,
+      "note": "Shares only in memory, and only after approve_checklist. It does not send email."
+    },
+    {
+      "name": "request_equipment",
+      "implementation": "request_equipment",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "create_account",
+      "implementation": "create_account",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "grant_access",
+      "implementation": "grant_access",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "enrol_training",
+      "implementation": "enrol_training",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "send_externally",
+      "implementation": "send_externally",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "write_hr_record",
+      "implementation": "write_hr_record",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "collect_special_category",
+      "implementation": "collect_special_category",
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

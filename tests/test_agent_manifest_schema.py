@@ -2473,6 +2473,65 @@ class TestExperiment58Manifest:
         assert experiment_58_manifest["agent"]["id"] == "exp-58-employee-handbook"
 
 
+class TestExperiment59Manifest:
+    """Test the Experiment 59 new starter guide manifest."""
+
+    @pytest.fixture
+    def experiment_59_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "59-new-starter-guide"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_59_manifest):
+        """Experiment 59 manifest should be valid."""
+        validate(instance=experiment_59_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_59_manifest):
+        """Experiment 59 should be autonomy level A1. The line manager approves the checklist."""
+        level = experiment_59_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_59_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_59_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_59_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_59_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_59_manifest):
+        """Nothing is sent, and no HR record is written."""
+        assert experiment_59_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_59_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_line_manager_approves_the_checklist(self, experiment_59_manifest):
+        """The catalogue checkpoint is the line manager, and it is mandatory."""
+        points = experiment_59_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Approve the personalised checklist before it is shared"
+        )
+        assert confirm["approver"] == "Line manager"
+        assert confirm["mandatory"] is True
+        assert experiment_59_manifest["agent"]["id"] == "exp-59-new-starter-guide"
+
+
 class TestExperiment60Manifest:
     """Test the Experiment 60 one-to-one preparation manifest."""
 

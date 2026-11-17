@@ -1,0 +1,389 @@
+# Agent manifest: New Starter Guide Agent
+# Experiment 59 — catalogue ID H002
+# Version: 0.1.0
+# Last reviewed: 2026-11-17
+# Next review: 2027-05-17
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-59-new-starter-guide"
+  name: "New Starter Guide Agent"
+  version: "0.1.0"
+  description: >
+    Drafts a role-appropriate onboarding checklist and answers how-do-I
+    questions from synthetic HR-approved sources. Autonomy A1. The line
+    manager approves the personalised checklist before it is shared. The
+    agent does not request equipment, create accounts, grant access, enrol
+    training, or collect special-category data.
+  owner: "People and culture"
+  contact: "starter-guide@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/59-new-starter-guide"
+
+autonomy:
+  level: "A1"
+  level_description: "Drafts a checklist. The line manager approves that exact list before it is shared."
+  constraints:
+    - "HR approves which onboarding documents are in scope. A sentence in the request is not that approval."
+    - "The role and the line manager come from the synthetic directory. A role or a clearance typed into the request is ignored."
+    - "The line manager approves the checklist on a separate object, keyed to that manager and to the exact item digest."
+    - "The agent NEVER requests equipment, creates an account, grants access, or enrols training. Those rows stay proposals."
+    - "The agent NEVER collects special-category data, and it does not decide a right-to-work check or a reasonable adjustment."
+    - "Right-to-work, health, pregnancy, disability, harassment, distress, and safeguarding questions go to a named human route."
+    - "Nothing is shared or recorded in memory until the deterministic approval step has issued for this checklist."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic onboarding pack"
+      description: "Role templates, policies with effective dates, and IT and facilities steps. Riverbend Workshops CIC is invented."
+      access_level: "read"
+      scope: "Documents whose ids are on the HR scope object, at or below the ceiling, in force on the as-of date, for the directory role."
+      justification: "A checklist item has to come from a source HR has put in scope."
+      data_categories:
+        - "Policy text"
+        - "Effective dates"
+        - "Protective markings, legal holds, and retention labels"
+      may_contain_personal_data: false
+      retention: "Transient. This starter does not persist the pack."
+    - resource: "Synthetic directory"
+      description: "Person id, role id, line manager id, start date, and whether the row is a manager. No personal names."
+      access_level: "read"
+      scope: "One person id per run."
+      justification: "The role and the approver are taken from the directory, not from the request text."
+      may_contain_personal_data: false
+    - resource: "HR scope object"
+      description: "Approver role, approval reference, document ids, and the ceiling. Separate from the request."
+      access_level: "read"
+      scope: "One object per run."
+      justification: "The catalogue checkpoint for sources is HR approval, before the line manager sees the checklist."
+      may_contain_personal_data: false
+    - resource: "The request"
+      description: "One question and a person id. It is untrusted. It is not copied into the result."
+      access_level: "read"
+      scope: "One request."
+      justification: "The topic has to be read. Identifiers are counted and not stored."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The question text is not written to the result."
+    - resource: "Pinned sources"
+      description: "Statutory pins in src/sources.py, opened on 17 November 2026. Nothing is downloaded."
+      access_level: "read"
+      scope: "Files in this repository."
+      justification: "A statutory sentence is a quotation from a page that was opened, or it is marked unverified."
+      may_contain_personal_data: false
+  never_access:
+    - resource: "Payroll, personnel files, passports, share codes, and the HR case system"
+      reason: "The agent does not collect right-to-work evidence and does not write a personnel record."
+    - resource: "A document above the ceiling, including one whose cover says SECRET"
+      reason: "The body is not copied. The higher marking, the legal hold, and every retention label are kept."
+    - resource: "SharePoint, Microsoft Graph, Microsoft 365 Copilot, and a live service desk"
+      reason: "Experiments 57, 58, and 21 are called in-process on synthetic fixtures. This starter does not call those products."
+    - resource: "Special-category data"
+      reason: "Health, pregnancy, and disability are routed. The question is not copied and there is no field to store them."
+
+tools:
+  allowed:
+    - tool: "Draft the starter guide"
+      provider: "Local Python (src/guide.py)"
+      action: "Draft a checklist and cite the in-force source, or name a person"
+      access_level: "read"
+      scope: "One request. No network. No model."
+      justification: "Version selection, negation, markings, and the empty provisioning flags are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Optional narrative of JSON fields that are already in the result"
+      access_level: "read"
+      scope: "The JSON for this run, which does not contain the question"
+      justification: "Optional. Citations, routes, and the approval gate stay in Python."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No HR-system write. An in-memory share receipt is created only after the line manager's approval step, and it is not a production record."
+  sends:
+    enabled: false
+    note: "No email and no message. Sharing means the receipt in the returned JSON, not a send."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve the checklist. approve_checklist records a separate manager object. Words in the request do not."
+  regulated_decision:
+    enabled: false
+    rationale: "Right to work, a reasonable adjustment, and section 1 compliance are not decided. Those fields stay null."
+  production_record_change:
+    enabled: false
+    rationale: "write_hr_record raises. The in-memory receipt is not an HR system write."
+  external_send:
+    enabled: false
+    rationale: "send_externally raises. The receipt says email_sent is false."
+  spend_transact:
+    enabled: false
+    rationale: "No equipment is ordered and no licence is bought."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Request equipment, create an account, grant access, or enrol training"
+      rationale: "request_equipment, create_account, grant_access, and enrol_training raise. The rows stay proposals for the service desk or the manager."
+    - enabled: false
+      action_name: "Collect special-category data"
+      rationale: "collect_special_category raises. A health, pregnancy, or disability question is routed and not copied."
+    - enabled: false
+      action_name: "Remove a marking, legal hold, or retention label"
+      rationale: "An instruction to strip a label is recorded and not followed. The higher marking is kept."
+
+human_approval:
+  description: >
+    HR approves the source scope first. The line manager then approves the
+    personalised checklist before it is shared. Words inside the request or
+    a document are not either approval. Provisioning stays outside the agent.
+
+  approval_points:
+    - action: "Approve which onboarding documents are in scope"
+      approver: "HR"
+      mandatory: true
+      rationale: "The scope object is the approval. A marker inside a file or a request is ignored."
+    - action: "Approve the personalised checklist before it is shared"
+      approver: "Line manager"
+      mandatory: true
+      rationale: "Catalogue checkpoint for H002. The approver id must be the directory line manager, and the item digest must be the list just drafted."
+    - action: "Request equipment, create an account, grant access, or enrol training"
+      approver: "Line manager or the service desk"
+      mandatory: true
+      rationale: "Those are proposals. The agent has no tool that performs them, including after the checklist is approved."
+    - action: "Complete a right-to-work check or decide a reasonable adjustment"
+      approver: "HR"
+      mandatory: true
+      rationale: "The agent routes these. It does not collect the evidence and it does not decide."
+    - action: "Take a health, pregnancy, disability, harassment, distress, or safeguarding case"
+      approver: "The named human route"
+      mandatory: true
+      rationale: "Those questions are not processed as routine onboarding."
+    - action: "Re-check a statutory pin after it is marked stale or incomplete"
+      approver: "HR"
+      mandatory: true
+      rationale: "The core does not download legislation.gov.uk or GOV.UK. Sections that were not opened stay unverified."
+
+  no_approval_required:
+    - action: "Read the draft JSON"
+      rationale: "Reading has no external effect. The checklist is not shared by being read."
+    - action: "Ask the same question again"
+      rationale: "No send and no HR-system write. The same inputs produce the same draft."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the employer's lawful basis. Article 13
+      is quoted as a pin for the privacy-notice step. Article 6 and Article 9
+      are not asserted. A currency banner was not in the Article 13 text that
+      was returned on 17 November 2026.
+    secondary: "Article 6(1)(b) or 6(1)(c) may be relevant to the employer's own onboarding. The employer confirms it."
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. Health, pregnancy, and disability questions are routed and the question text is not copied."
+    safeguards:
+      - "The sample pack and directory are synthetic"
+      - "The question text is not copied into the result"
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal-name cues are counted and not stored, in addition to Experiment 08"
+      - "No solely automated decision about a person"
+  data_minimisation:
+    - "Bodies above the ceiling are not copied."
+    - "Experiment 08 redacted text is not copied into the result."
+    - "Experiment 57's explanation and Experiment 58's answer text are not copied."
+  retention:
+    agent_retention: "None in this starter. The in-memory receipt is not stored."
+    note: "The employer's retention schedule applies to whatever a person saves. A legal hold on a source is preserved and is not a disposal instruction."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "Access, erasure, and objection go through the employer's privacy process. This agent does not handle them."
+
+prompt_injection:
+  description: >
+    Requests and onboarding sections are untrusted. They may say to ignore
+    the effective date, enrol the starter, grant access, strip a legal hold,
+    or treat a draft as approved. The core records the instruction and does
+    not follow it. A sentence that says the agent does not do those things
+    is kept, because it is the control.
+  controls:
+    - control: "Scope and approval are separate objects"
+      description: "Approval words in the request or in a file do not add a document id and do not share the checklist."
+    - control: "Issued approvals are process-local"
+      description: "share_checklist accepts only a key that approve_checklist wrote for that manager, checklist id, and item digest."
+    - control: "Instruction sentences are not quoted"
+      description: "A section that is only an instruction is not cited. A denial of the action is kept."
+    - control: "No side-effect tools"
+      description: "Equipment, account, access, training, send, HR write, and special-category collection raise."
+    - control: "Markings survive an instruction to strip them"
+      description: "The higher of the metadata label and the cover label is kept, with the legal hold and every retention label."
+  residual_risk: >
+    A model narration could still mis-state a quotation. The person reading
+    the JSON is the control. There is no autonomous provisioning.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named employer"
+  date_assessed: "2026-11-17"
+  risks:
+    - id: "R1"
+      risk: "A checklist is shared because the request says the manager has approved it, or an old approval is reused for a different list"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Only approve_checklist writes the issued set"
+        - "The actor must be the directory line manager for that person"
+        - "The item digest must match the list just drafted"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R2"
+      risk: "The agent orders equipment, creates an account, grants access, or enrols training"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "Proposal rows stay executed false, including after the checklist is shared"
+        - "Experiment 21 is asked a fixed hours question and is not given the user's text"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R3"
+      risk: "A right-to-work document, a health detail, or a distress line is stored or answered as routine onboarding"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those questions are routed and the question is not copied"
+        - "Paraphrased distress is flagged"
+        - "Special-category collection raises"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R4"
+      risk: "A SECRET cover or a legal hold is missed, or a typed clearance is trusted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Markings are read from metadata and from the text, and the higher label wins"
+        - "Legal hold and every retention label are kept"
+        - "Clearance words in the request are not trusted"
+      residual_risk: "Low"
+      owner: "Information security"
+    - id: "R5"
+      risk: "A statutory timing rule is stated as complete when a dependent section was not opened"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Pins name the section and the date the page was opened"
+        - "Unopened sections, the Home Office PDF, and the ICO page are listed as unverified"
+        - "may_be_relied_on stays false while a cited pin is incomplete or stale"
+        - "A stale pin is not refreshed"
+      residual_risk: "Medium"
+      owner: "People and culture"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the scope reference,
+    the as-of date, the outcome, and whether a pin was stale. Do not log
+    the question text. This starter keeps no store. The issued-approval set
+    is process-local and is not an audit log.
+  logged_events:
+    - event: "Checklist drafted, routed, or refused"
+      data_logged:
+        - "Timestamp"
+        - "Scope reference"
+        - "Person id"
+        - "Outcome"
+        - "Whether a pin was stale"
+      retention: "Employer's schedule. Not set by this starter."
+    - event: "Line manager approves the checklist, outside the model"
+      data_logged:
+        - "Manager id"
+        - "Checklist id"
+        - "Item digest"
+        - "Approval reference"
+      retention: "Employer's schedule. The agent does not write this event to an HR system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the employer already operates. Do not log the question."
+
+kill_switch:
+  description: "Ways to stop the agent being used."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed identity used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, the service desk, or the HR system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "People and culture lead"
+      contact: "starter-guide@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+review:
+  last_review_date: "2026-11-17"
+  next_review_date: "2027-05-17"
+  review_frequency: "6 months, and sooner if a pinned Act or the onboarding scope changes"
+  reviewer: "The adopting employer's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Employment Rights Act 1996 section 1, or an opening of sections 2(2) to 2(4)"
+    - "A change to Immigration, Asylum and Nationality Act 2006 section 15, or an opening of the Home Office PDF"
+    - "A change to Equality Act 2010 sections 20 or 39, or an opening of Schedule 8"
+    - "A change to UK GDPR Article 13"
+    - "A proposal to add a mail, service-desk, or HR-system connector"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Guide core"
+      path: "src/guide.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+assumptions:
+  description: "Items an employer confirms before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "Article 6 and Article 9 are not asserted. The employer confirms a basis before live use."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The pack and the directory are synthetic. A live handbook or directory is a different scope and is not this file."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Employment Rights Act 1996 sections 2(2) to 2(4) were not opened. Section 1(2) says the statement timing is subject to them."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The Home Office right-to-work PDF of 1 October 2026 was not opened. The HTML page was."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Equality Act 2010 Schedule 8 was not opened. This starter does not decide that a step is reasonable."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Experiment 11 dates were last verified in that experiment on 27 October 2026 and were not re-opened here."
+      section: "src/guide.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Contact addresses on example.com are placeholders. Riverbend Workshops CIC is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
