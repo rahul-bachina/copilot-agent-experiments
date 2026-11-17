@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Fifty-eight starters are in `experiments/`. The folders are 01 to 58.
+Fifty-nine starters are in `experiments/`. The folders are 01 to 59.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -90,6 +90,7 @@ Fifty-eight starters are in `experiments/`. The folders are 01 to 58.
 | 56 | [Intranet Content Freshness Agent](experiments/56-intranet-content-freshness/) | Review one synthetic intranet inventory and propose update tasks for overdue pages, withdrawn guidance, stale links and contacts, orphans, and duplicates. Autonomy A1. The named content owner approves each task. The agent does not edit, publish, unpublish, delete, reassign, or message staff. | ✅ Starter |
 | 57 | [Collaboration Space Onboarding](experiments/57-collaboration-space-onboarding/) | Explain one synthetic Teams and SharePoint space and draft a membership proposal. Autonomy A1. The workspace owner approves membership, owner rights, and guest access. The sample does not call Microsoft Graph or share a file or a link externally. | ✅ Starter |
 | 58 | [Employee Handbook Agent](experiments/58-employee-handbook/) | Answer one question from the HR-approved handbook version in force on the date asked about, with the section and the effective date. Autonomy A0. The agent does not decide an individual's entitlement, give individual legal, medical, or tax advice, or treat a word in the question as approval of a source. | ✅ Starter |
+| 59 | [New Starter Guide Agent](experiments/59-new-starter-guide/) | Draft a role-appropriate onboarding checklist from HR-approved synthetic sources and answer a how-do-I question with the section and the effective date. Autonomy A1. The line manager approves that exact checklist before it is shared. The agent does not request equipment, create an account, grant access, enrol training, or collect special-category data. | ✅ Starter |
 
 ## Getting Started
 
@@ -325,6 +326,13 @@ cd ../58-employee-handbook
 pip install -r requirements.txt
 python -m pytest tests/ -q
 python src/answer.py --handbook fixtures/handbook.json --scope examples/sample_scope.json --question examples/sample_question.json --as-of 2026-11-16
+
+# Experiment 59 needs no credentials either. The checklist is deterministic.
+# Experiments 08, 11, 15, 21, 57, and 58 sit beside it. The assistant calls them in-process.
+cd ../59-new-starter-guide
+pip install -r requirements.txt
+python -m pytest tests/ -q
+python src/guide.py --pack fixtures/pack.json --directory fixtures/directory.json --scope examples/sample_scope.json --request examples/sample_request.json --as-of 2026-11-17
 ```
 
 ## Repository Structure

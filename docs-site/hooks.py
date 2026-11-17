@@ -190,6 +190,9 @@ DIAGRAMS = {
     "experiments/58-employee-handbook/docs/architecture_diagram.png": (
         "experiments/img/58-employee-handbook-architecture.png"
     ),
+    "experiments/59-new-starter-guide/docs/architecture_diagram.png": (
+        "experiments/img/59-new-starter-guide-architecture.png"
+    ),
 }
 
 
