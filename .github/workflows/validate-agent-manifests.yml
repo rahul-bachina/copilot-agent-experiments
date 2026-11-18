@@ -7,7 +7,9 @@ on:
       - 'experiments/**/agent-manifest.yaml'
       - 'schemas/agent-manifest.schema.json'
       - 'tests/test_agent_manifest_schema.py'
+      - 'tests/test_docs_html_balance.py'
       - 'tests/fixtures/**'
+      - 'docs-site/docs/**'
       - '.github/workflows/validate-agent-manifests.yml'
       - 'requirements-dev.txt'
   pull_request:
@@ -16,7 +18,9 @@ on:
       - 'experiments/**/agent-manifest.yaml'
       - 'schemas/agent-manifest.schema.json'
       - 'tests/test_agent_manifest_schema.py'
+      - 'tests/test_docs_html_balance.py'
       - 'tests/fixtures/**'
+      - 'docs-site/docs/**'
       - '.github/workflows/validate-agent-manifests.yml'
       - 'requirements-dev.txt'
   workflow_dispatch:
@@ -95,9 +99,9 @@ jobs:
               print(f'\nAll {len(manifests)} manifest(s) valid')
           "
 
-      - name: Run pytest schema validation tests
+      - name: Run root pytest suite
         run: |
-          python -m pytest tests/test_agent_manifest_schema.py -v
+          python -m pytest tests/ -v
 
       - name: Verify invalid fixtures are rejected
         run: |
