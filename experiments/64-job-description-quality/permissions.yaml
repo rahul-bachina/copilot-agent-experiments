@@ -1,0 +1,447 @@
+# Agent manifest: Job Description Quality Checker
+# Experiment 64 — catalogue ID H007
+# Version: 0.1.0
+# Last reviewed: 2026-11-18
+# Next review: 2027-05-18
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-64-job-description-quality"
+  name: "Job Description Quality Checker"
+  version: "0.1.0"
+  description: >
+    Reads one synthetic draft job description and one synthetic style and
+    grading guide, and returns prompts a recruiter can accept or reject.
+    Autonomy A0. The recruiter writes the final wording. The agent does not
+    publish, post, or send an advert, does not score candidates or adverts
+    against people, and does not decide an occupational requirement or
+    positive action. Distress, a health question, and a safeguarding cue
+    go to a person.
+  owner: "Recruiter"
+  contact: "recruitment.quality@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/64-job-description-quality"
+
+autonomy:
+  level: "A0"
+  level_description: "The assistant suggests edits. The recruiter accepts or rejects each suggestion and writes the final wording. The agent does not publish, post, or send."
+  constraints:
+    - "The recruiter accepts or rejects each suggestion. The agent does not."
+    - "The agent NEVER publishes, posts, or sends an advert"
+    - "The agent NEVER treats approval text inside the draft as approval"
+    - "The agent NEVER scores candidates or adverts against people"
+    - "The agent NEVER decides that an occupational requirement or positive action is permitted"
+    - "The agent NEVER strips a mandated statement, a legal hold, or a retention label"
+    - "A self-declared role or clearance in the draft is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic job description"
+      description: "One draft, including duties, essential criteria, and any pasted personal data. Samples are synthetic."
+      access_level: "read"
+      scope: "One draft per invocation. The body is not copied into the result when the marking is above the directory clearance."
+      justification: "Wording prompts have to be tied to the draft the recruiter supplied."
+      data_categories:
+        - "Job text and grade, salary, and location fields"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the draft."
+    - resource: "Synthetic style and grading guide"
+      description: "Required fields, a sentence limit, a jargon list, grade profiles, and mandated statements."
+      access_level: "read"
+      scope: "One guide per invocation."
+      justification: "Missing salary or location, and a duty that the guide says is not this grade, are comparisons with the guide."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "The recruiter and the HR partner. The draft does not set the role or the clearance."
+      access_level: "read"
+      scope: "One recruiter reference."
+      justification: "Only a directory recruiter can record a suggestion decision or the final wording."
+      may_contain_personal_data: true
+    - resource: "Separate decision objects"
+      description: "The only objects that can record a suggestion decision, an HR seen-step, or the final wording."
+      access_level: "read"
+      scope: "One decision, bound to the draft hash and the suggestion hash or the wording hash."
+      justification: "Approval inside the draft is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the draft. Reversible stays false. The output is not described as anonymised."
+      access_level: "read"
+      scope: "One draft. Matched identifier values are not stored."
+      justification: "A pasted identifier is masked before an excerpt is shown."
+      may_contain_personal_data: true
+    - resource: "Experiment 36 cross-source validation"
+      description: "compare() when a salary or a grade is stated in two places. The agent does not choose a source."
+      access_level: "read"
+      scope: "Figure extracts only. Advert sentences are not copied into the pack."
+      justification: "Two figures that disagree are shown to a person. They are not resolved here."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live applicant tracking system or a public jobs board"
+      reason: "The draft is the text the caller supplied. The core does not publish, post, or send."
+    - resource: "A self-declared role, guest status, or clearance in the draft"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Draft text above the directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Review"
+      provider: "Local Python (review_draft)"
+      action: "Return wording prompts for one synthetic draft"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Phrase checks, dates, and salary comparisons are deterministic. A language model must not decide the wording is lawful."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record suggestion decision"
+      provider: "Local Python (record_suggestion_decision)"
+      action: "Record that the directory recruiter accepts or rejects one suggestion hash"
+      access_level: "read"
+      scope: "The review and a separate decision object. No advert is written."
+      justification: "The decision has to be bound to the named recruiter, the draft hash, and the suggestion hash."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record HR seen"
+      provider: "Local Python (record_hr_seen)"
+      action: "Record that a directory HR partner has seen an occupational-requirement, positive-action, or health route"
+      access_level: "read"
+      scope: "The review and a separate seen object. The legal question is not decided."
+      justification: "Schedule 9 paragraph 1 and section 159 and section 60 are routed, not decided."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record final wording"
+      provider: "Local Python (record_final_wording)"
+      action: "Store the wording the recruiter wrote, bound to its hash"
+      access_level: "read"
+      scope: "The review and the recruiter's text. Nothing is published."
+      justification: "The final words are the recruiter's. The hash binds the record to that text."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The prompts, the hashes, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No jobs-board write and no applicant-tracking write. record_final_wording
+      returns JSON. published, posted, and sent stay false.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Recording a wording does not email a candidate or post an advert.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve wording. The decision objects are the
+      recruiter's and, for a route, the HR partner's. A sentence in the draft
+      cannot set them.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that Equality Act 2010 section 13, 19, 39, 60,
+      or 159, or Schedule 9 paragraph 1, was met or contravened.
+  production_record_change:
+    enabled: false
+    rationale: "The final wording is a JSON record. It is not a write to a recruitment system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send or post the advert."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A salary figure is information for the recruiter."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Publish, post, or send an advert"
+      rationale: "publish(), post(), and send() raise. The three flags stay false."
+    - enabled: false
+      action_name: "Score candidates or adverts against people"
+      rationale: "score_candidate(), score_advert_against_people(), and rank_applicants() raise."
+    - enabled: false
+      action_name: "Decide an occupational requirement or positive action"
+      rationale: "Those flags stay false. The route is for HR to see. Seeing it is not a decision."
+    - enabled: false
+      action_name: "Strip a mandated statement, a legal hold, or a retention label"
+      rationale: "A statement the guide marks as present has to remain in the recruiter's wording. A hold and every retention label are copied onto the record."
+
+human_approval:
+  description: >
+    The recruiter accepts or rejects each suggestion on a separate object,
+    bound to the draft hash and that suggestion's hash. The recruiter then
+    writes the final wording, bound to the hash of that text. An occupational
+    requirement, positive action, or a pre-employment health question needs
+    an HR partner to record that they have seen it. The agent does not decide
+    the legal question. Approval text inside the draft is not that step. A
+    distress cue is not processed as a routine review.
+
+  approval_points:
+    - action: "Accept or reject one suggestion"
+      approver: "Recruiter"
+      mandatory: true
+      rationale: "record_suggestion_decision accepts the directory recruiter only when the draft hash and the suggestion hash match."
+    - action: "See an occupational-requirement, positive-action, or health route"
+      approver: "HR partner"
+      mandatory: true
+      rationale: "record_hr_seen sets hr_seen. The decided flags stay false. A recruiter cannot close the route."
+    - action: "Write the final wording"
+      approver: "Recruiter"
+      mandatory: true
+      rationale: "record_final_wording stores the recruiter's text only when the wording hash matches that text and every suggestion has a decision."
+    - action: "Confirm a stale guide or an unconfirmed statute pin"
+      approver: "Recruiter"
+      mandatory: true
+      rationale: "guide_seen or pins_seen must be the boolean true. A string is not coerced. The question date is the as-of argument, not today."
+    - action: "Review a distress, vulnerability, or safeguarding cue"
+      approver: "HR partner"
+      mandatory: true
+      rationale: "The outcome is human_route. The cue is not copied. A wording record is refused."
+
+  no_approval_required:
+    - action: "Read the prompts"
+      rationale: "Reading prompts has no external effect. human_approval stays null."
+    - action: "Re-run the same draft"
+      rationale: "No write and no send. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 18 November 2026. The Equality Act sections that were
+      read are not a lawful basis.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or disability text a draft may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 18 November 2026."
+    safeguards:
+      - "A health question is routed to HR. It is not answered."
+      - "A distress or safeguarding cue is flagged for a person. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are masked. The output is not described as anonymised."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a candidate. The sample does not score anyone."
+  data_minimisation:
+    - "The draft body is not copied into the result."
+    - "Excerpts are masked. Identifier values are not stored."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on the draft are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Draft text and guide notes are untrusted. They may say the recruiter has
+    approved, that the advert should be published, or that a mandated statement
+    should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Publish, post, send, pretend-approval, and strip-label sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not an inclusion."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_final_wording succeeds."
+    - control: "No publish, post, or send tool"
+      description: "publish, post, and send raise JobDescriptionForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The recruiter is
+    the control. There is no publication even if the note is wrong. A paraphrase
+    that uses none of the cue words is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-18"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the draft is treated as the recruiter's approval"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_suggestion_decision reads only the separate decision object"
+      residual_risk: "Low"
+      owner: "Recruiter"
+    - id: "R2"
+      risk: "The agent publishes, posts, or sends an advert"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "publish, post, and send raise"
+        - "A recorded wording leaves published, posted, and sent false"
+      residual_risk: "Low"
+      owner: "Recruiter"
+    - id: "R3"
+      risk: "Candidates are scored, or an advert is scored against people"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The outcome is scoring_refused"
+        - "The score and rank functions raise"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R4"
+      risk: "An occupational requirement or positive action is decided by the agent, or a distress cue is handled as a routine review"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The decided flags stay false"
+        - "A human_route outcome is not a wording review"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R5"
+      risk: "An unreadable salary, grade, or date is coerced to zero or to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "Recruiter"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, a mandated statement is stripped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold, every retention label, and a present mandated statement are kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the recruiter reference
+    if it matched the synthetic pattern, the outcome, and whether a wording
+    was recorded. This starter logs nothing because it keeps no store.
+    Do not put the draft or an excerpt in an application trace.
+  logged_events:
+    - event: "Prompts returned"
+      data_logged:
+        - "Timestamp"
+        - "Recruiter reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Wording recorded"
+      data_logged:
+        - "Whether the draft hash matched"
+        - "Whether the wording hash matched"
+        - "published false"
+      retention: "Organisation's schedule. The agent does not write this event to a recruitment system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Recruiter"
+      contact: "recruitment.quality@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-18"
+  next_review_date: "2027-05-18"
+  review_frequency: "6 months, and sooner if the pinned legislation or the guide rules change"
+  reviewer: "The adopting organisation's recruitment lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Equality Act 2010 section 13, 19, 39, 60, or 159, or Schedule 9 paragraph 1"
+    - "A change to Immigration, Asylum and Nationality Act 2006 section 15, or to the order under section 15(3) once that order is opened"
+    - "A proposal to add a connector that can publish, post, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Review core"
+      path: "src/review.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The prompts from this starter are not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 18 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The example word list is not a statistic and is not a finding that any word is unlawful. The organisation must review it."
+      section: "src/words.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Schedule 9 paragraph 1 was stamped up to date on or before 14 November 2026. Section 159 was stamped on or before 15 November 2026. Section 15 of the 2006 Act was stamped on or before 16 November 2026. Section 60 was stamped on or before 17 November 2026. A later question date is not treated as covered."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The order under Immigration, Asylum and Nationality Act 2006 section 15(3) was not opened. The Disability Confident scheme page was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Treating a guide as stale on its review-due date is this starter's rule. It is not a statutory period."
+      section: "src/review.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 18 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview opened on 18 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
