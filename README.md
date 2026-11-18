@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Sixty-one starters are in `experiments/`. The folders are 01 to 61.
+Sixty-two starters are in `experiments/`. The folders are 01 to 62.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -93,6 +93,7 @@ Sixty-one starters are in `experiments/`. The folders are 01 to 61.
 | 59 | [New Starter Guide Agent](experiments/59-new-starter-guide/) | Draft a role-appropriate onboarding checklist from HR-approved synthetic sources and answer a how-do-I question with the section and the effective date. Autonomy A1. The line manager approves that exact checklist before it is shared. The agent does not request equipment, create an account, grant access, enrol training, or collect special-category data. | ✅ Starter |
 | 60 | [Manager One-to-One Preparation Agent](experiments/60-manager-one-to-one-prep/) | Draft a cited prep note from the previous notes, objectives, shared updates, and calendar items a line manager has selected. Autonomy A0. The agent does not rate performance, compare employees, infer health or a protected characteristic, recommend a sanction, or read a mailbox or a chat. | ✅ Starter |
 | 61 | [Learning Path Planner](experiments/61-learning-path-planner/) | Draft a sequenced learning plan from a synthetic course catalogue, a role skills framework, and the goals the employee states. Autonomy A1. The employee and their manager both approve the plan before an enrolment request is recorded. The agent does not enrol, book, or spend. | ✅ Starter |
+| 62 | [Internal Mobility Explorer](experiments/62-internal-mobility-explorer/) | Explain which open vacancies look relevant to the experience an employee states, with a citation to the vacancy and the HR eligibility rule. Autonomy A0. The agent does not apply, nominate, shortlist, contact anyone, or make a selection decision. HR validates eligibility. | ✅ Starter |
 
 ## Getting Started
 

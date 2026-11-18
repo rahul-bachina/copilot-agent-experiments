@@ -143,8 +143,17 @@ def summarise(results: list[dict]) -> dict:
     return {"passed": passed, "failed": failed, "errors": errors, "total_cases": total}
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    output = None
+    if "--output" in argv:
+        index = argv.index("--output")
+        output = Path(argv[index + 1])
     dataset = load_dataset()
+    ids = [case["id"] for case in dataset["cases"]]
+    if len(ids) != len(set(ids)):
+        sys.stderr.write("Duplicate case ids\n")
+        return 1
     vacancies = _load("vacancies.json")
     rules = _load("eligibility.json")
     framework = _load("framework.json")
@@ -152,20 +161,28 @@ def main() -> int:
     results = [evaluate_case(case, vacancies, rules, framework, directory) for case in dataset["cases"]]
     summary = summarise(results)
     report = {
-        "label": SMOKE_LABEL,
-        "synthetic": True,
-        "model_called": False,
+        "evaluation_label": SMOKE_LABEL,
+        "mode": "deterministic",
+        "not_a_model_evaluation": True,
+        "dataset_label": dataset.get("label"),
         "summary": summary,
         "cases": results,
     }
-    out = Path(__file__).parent / "smoke_report.json"
-    out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(SMOKE_LABEL)
+    text = json.dumps(report, indent=2) + "\n"
+    destination = Path(__file__).parent / "smoke_report.json"
+    destination.write_text(text, encoding="utf-8")
+    if output is not None:
+        output.write_text(text, encoding="utf-8")
     print(
-        f"{summary['passed']} passed, {summary['failed']} failed, "
+        f"Smoke test: {summary['passed']} passed, {summary['failed']} failed, "
         f"{summary['errors']} errors, {summary['total_cases']} cases"
     )
-    return 0 if summary["failed"] == 0 and summary["errors"] == 0 else 1
+    if summary["failed"] or summary["errors"]:
+        for item in results:
+            if item["status"] != "passed":
+                print(item["case_id"], item["status"], item["checks"])
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
