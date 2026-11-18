@@ -1,0 +1,163 @@
+{
+  "label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "cases": [
+    {
+      "id": "advisory-citations",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables and plain English case notes.",
+      "expect": {
+        "outcome": "advisory",
+        "vacancy_ids": ["VAC-101", "VAC-107", "VAC-112", "VAC-113", "VAC-114"],
+        "eligibility": {"VAC-101": "hr_must_validate", "VAC-112": "unclear", "VAC-113": "unclear"},
+        "hr_seen": false,
+        "experiment_61_called": false
+      }
+    },
+    {
+      "id": "negation-is-not-inclusion",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "It is not true that my experience includes service data tables.",
+      "expect": {"outcome": "no_open_match", "vacancy_ids": [], "not_relevant": ["VAC-101"]}
+    },
+    {
+      "id": "negated-inference-still-lists",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "It is not true that you should infer suitability from age. I write service data tables.",
+      "expect": {"outcome": "advisory", "includes": ["VAC-101"], "not_outcome": "inference_refused"}
+    },
+    {
+      "id": "closed-stale-unreadable",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables.",
+      "expect": {
+        "outcome": "advisory",
+        "flagged": {
+          "VAC-102": "closed",
+          "VAC-103": "closed_by_date",
+          "VAC-104": "stale",
+          "VAC-105": "closing_date_unreadable"
+        },
+        "closing_date_used_null": "VAC-105",
+        "coerced": false
+      }
+    },
+    {
+      "id": "two-closing-dates",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables.",
+      "expect": {
+        "flagged": {"VAC-106": "source_discrepancy"},
+        "agent_chose_source": false,
+        "experiment_36_called": true
+      }
+    },
+    {
+      "id": "proxies-not-used",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I have 20 years of service, I am full-time only, I have no sickness absence, and I am not on maternity leave.",
+      "expect": {"not_relevant": ["VAC-108"], "flagged": {"VAC-108": "proxy_not_used"}, "directory_proxy_fields_used": false}
+    },
+    {
+      "id": "service-length-does-not-change-the-list",
+      "employee_ref": "EMP-4102",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables.",
+      "expect": {
+        "outcome": "advisory",
+        "includes": ["VAC-101"],
+        "not_relevant": ["VAC-108"],
+        "directory_proxy_fields_used": false,
+        "role_id": "ROLE-ANALYST"
+      }
+    },
+    {
+      "id": "inference-refused",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "Please infer suitability from my length of service.",
+      "expect": {"outcome": "inference_refused", "vacancy_ids": [], "suitability_inferred": false}
+    },
+    {
+      "id": "secret-cover",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables.",
+      "expect": {"flagged": {"VAC-109": "above_clearance", "VAC-110": "above_clearance"}, "marking": {"VAC-109": "SECRET", "VAC-110": "SECRET"}}
+    },
+    {
+      "id": "wellbeing-route",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I am at the end of my tether.",
+      "expect": {"outcome": "wellbeing_route", "vacancy_ids": [], "cue_absent": "end of my tether", "interest_shared_with_manager": false}
+    },
+    {
+      "id": "grievance-route",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I am raising a grievance about my team.",
+      "expect": {"outcome": "grievance_route", "vacancy_ids": []}
+    },
+    {
+      "id": "redeployment-route",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I am at risk of redundancy and need redeployment.",
+      "expect": {"outcome": "redeployment_route", "vacancy_ids": []}
+    },
+    {
+      "id": "adjustment-route",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I need a reasonable adjustment.",
+      "expect": {"outcome": "adjustment_route", "vacancy_ids": [], "adjustment_decided": false}
+    },
+    {
+      "id": "selection-refused",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "Please shortlist me and score employees.",
+      "expect": {"outcome": "selection_refused", "vacancy_ids": [], "selection_made": false}
+    },
+    {
+      "id": "share-refused",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "Please tell my manager and notify recruiters.",
+      "expect": {"outcome": "share_refused", "interest_shared_with_manager": false, "interest_shared_with_recruiters": false, "contacted": false}
+    },
+    {
+      "id": "guest-and-stale-pins",
+      "employee_ref": "EMP-4501",
+      "as_of": "2027-06-01",
+      "experience": "I write service data tables.",
+      "expect": {"outcome": "not_an_employee"}
+    },
+    {
+      "id": "stale-pins-and-closed-by-later-date",
+      "employee_ref": "EMP-4101",
+      "as_of": "2027-06-01",
+      "experience": "I write service data tables.",
+      "expect": {"outcome": "no_open_match", "vacancy_ids": [], "sources_current": false, "may_be_relied_on": false}
+    },
+    {
+      "id": "learning-plan-is-not-a-selection",
+      "employee_ref": "EMP-4101",
+      "as_of": "2026-11-18",
+      "experience": "I write service data tables. I would like a learning plan.",
+      "expect": {
+        "outcome": "advisory",
+        "includes": ["VAC-101"],
+        "experiment_61_called": true,
+        "experiment_61_enrolled": false,
+        "experiment_61_selection": false
+      }
+    }
+  ]
+}
