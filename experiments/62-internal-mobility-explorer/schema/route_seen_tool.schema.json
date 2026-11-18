@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that HR has seen a human route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver_ref", "exploration_id", "content_hash", "decision", "item", "adjustment_decided"],
+  "properties": {
+    "approver_ref": {"type": "string", "pattern": "^EMP-\\d{4}$"},
+    "exploration_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "decision": {"type": "string", "const": "seen"},
+    "item": {"type": "string", "const": "human-route"},
+    "adjustment_decided": {"type": "boolean", "const": false},
+    "interest_shared_with_manager": {"type": "boolean", "const": false}
+  }
+}

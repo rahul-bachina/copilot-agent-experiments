@@ -199,6 +199,9 @@ DIAGRAMS = {
     "experiments/61-learning-path-planner/docs/architecture_diagram.png": (
         "experiments/img/61-learning-path-planner-architecture.png"
     ),
+    "experiments/62-internal-mobility-explorer/docs/architecture_diagram.png": (
+        "experiments/img/62-internal-mobility-explorer-architecture.png"
+    ),
 }
 
 

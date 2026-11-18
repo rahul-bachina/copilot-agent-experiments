@@ -1,0 +1,211 @@
+name: Experiment 62 - Internal mobility explorer tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/62-internal-mobility-explorer/**'
+      - 'experiments/36-cross-source-validation/**'
+      - 'experiments/58-employee-handbook/**'
+      - 'experiments/61-learning-path-planner/**'
+      - '.github/workflows/experiment-62-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/62-internal-mobility-explorer/**'
+      - 'experiments/36-cross-source-validation/**'
+      - 'experiments/58-employee-handbook/**'
+      - 'experiments/61-learning-path-planner/**'
+      - 'docs-site/docs/experiments/62-internal-mobility-explorer.md'
+      - '.github/workflows/experiment-62-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/62-internal-mobility-explorer
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: experiments/62-internal-mobility-explorer/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v --tb=short
+
+      - name: Run explore smoke test
+        run: |
+          python src/explore.py --request examples/sample_request.json --vacancies fixtures/vacancies.json --rules fixtures/eligibility.json --framework fixtures/framework.json --directory fixtures/directory.json --as-of 2026-11-18 > /tmp/explore.json
+          python -c "
+          import json
+          result = json.load(open('/tmp/explore.json'))
+          blob = json.dumps(result)
+          assert result['label'] == 'ADVISORY NOTE. NOT AN APPLICATION AND NOT A SELECTION DECISION.'
+          assert result['catalogue_id'] == 'H005'
+          assert result['autonomy'] == 'A0'
+          assert result['hr_seen']['recorded'] is False
+          assert result['outcome'] == 'advisory'
+          assert result['flags']['applied'] is False
+          assert result['flags']['nominated'] is False
+          assert result['flags']['shortlisted'] is False
+          assert result['flags']['contacted'] is False
+          assert result['flags']['selection_made'] is False
+          assert result['flags']['eligibility_decided'] is False
+          assert result['flags']['interest_shared_with_manager'] is False
+          assert result['flags']['interest_shared_with_recruiters'] is False
+          assert result['flags']['instructions_followed'] is False
+          assert result['role_id'] == 'ROLE-ANALYST'
+          assert result['clearance'] == 'OFFICIAL'
+          assert result['experiment_58']['eligibility_decided'] is False
+          assert result['experiment_61']['enrolled'] is False
+          assert result['experiment_61']['used_as_a_selection_factor'] is False
+          assert [row['vacancy_id'] for row in result['relevant']] == ['VAC-101', 'VAC-107', 'VAC-112', 'VAC-113', 'VAC-114']
+          assert 'learn@ashcombe.example.gov.uk' not in blob
+          assert '07700900123' not in blob
+          print('Explore smoke test passed')
+          "
+
+      - name: Run stale-data smoke test
+        run: |
+          python src/explore.py --request examples/sample_request.json --vacancies fixtures/vacancies.json --rules fixtures/eligibility.json --framework fixtures/framework.json --directory fixtures/directory.json --as-of 2027-06-01 > /tmp/stale.json
+          python -c "
+          import json
+          result = json.load(open('/tmp/stale.json'))
+          assert result['sources_current'] is False
+          assert result['may_be_relied_on'] is False
+          assert result['hr_seen']['recorded'] is False
+          assert result['flags']['applied'] is False
+          assert result['flags']['eligibility_decided'] is False
+          assert result['coerced'] is False
+          assert result['relevant'] == []
+          print('Stale-data smoke test passed')
+          "
+
+      - name: Run prohibited-action smoke test
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, '.')
+          from src.explore import MobilityForbidden, apply, contact, explore, record_hr_seen, shortlist
+          vacancies = json.loads(Path('fixtures/vacancies.json').read_text())
+          rules = json.loads(Path('fixtures/eligibility.json').read_text())
+          framework = json.loads(Path('fixtures/framework.json').read_text())
+          directory = json.loads(Path('fixtures/directory.json').read_text())
+          request = json.loads(Path('examples/sample_request.json').read_text())
+          result = explore(request, vacancies, rules, framework, directory, '2026-11-18')
+          forged = record_hr_seen(result, {
+              'exploration_id': 'EXPL-forged',
+              'approver_ref': 'EMP-4301',
+              'decision': 'seen',
+              'item': 'eligibility-note',
+              'content_hash': result['content_hash'],
+          }, directory)
+          assert forged['hr_seen']['recorded'] is False
+          assert forged['flags']['eligibility_decided'] is False
+          assert forged['flags']['applied'] is False
+          for function in (apply, shortlist, contact):
+              try:
+                  function()
+              except MobilityForbidden:
+                  pass
+              else:
+                  raise SystemExit('prohibited action should raise')
+          print('Prohibited-action smoke test passed')
+          "
+
+      - name: Run evaluation (deterministic smoke test)
+        run: |
+          python eval/evaluate.py --output /tmp/eval_report.json
+          python -c "
+          import json
+          report = json.load(open('/tmp/eval_report.json'))
+          assert report['mode'] == 'deterministic'
+          assert report['not_a_model_evaluation'] is True
+          assert 'DETERMINISTIC SMOKE TEST' in report['evaluation_label']
+          summary = report['summary']
+          print(f\"Smoke test {summary['passed']}/{summary['total_cases']} passed\")
+          if summary['errors'] or summary['failed']:
+              print(f\"ERROR: {summary['failed']} failed, {summary['errors']} errors\")
+              raise SystemExit(1)
+          if summary['total_cases'] != 18:
+              print('ERROR: expected 18 synthetic cases')
+              raise SystemExit(1)
+          if summary['passed'] + summary['failed'] + summary['errors'] != summary['total_cases']:
+              print('ERROR: smoke totals double-count or do not add up')
+              raise SystemExit(1)
+          ids = [case['case_id'] for case in report['cases']]
+          if len(ids) != len(set(ids)) or len(ids) != summary['total_cases']:
+              print('ERROR: case ids are not one row each')
+              raise SystemExit(1)
+          print('Smoke test passed')
+          "
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment-62-smoke-report
+          path: /tmp/eval_report.json
+          retention-days: 30
+
+  governance-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Brand name is Microsoft Foundry
+        run: |
+          if grep -RIn --exclude-dir=__pycache__ "Azure AI Foundry" experiments/62-internal-mobility-explorer docs-site/docs/experiments/62-internal-mobility-explorer.md; then
+            echo "Use 'Microsoft Foundry', not the retired product name."
+            exit 1
+          fi
+          echo "Brand check passed"
+
+      - name: No obvious secrets in Experiment 62
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          root = Path("experiments/62-internal-mobility-explorer")
+          patterns = [
+              re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+              re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+              re.compile(r"(?i)(api[_-]?key|secret|password)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+          ]
+          failed = False
+          for path in root.rglob("*"):
+              if not path.is_file() or path.suffix not in {".py", ".md", ".json", ".yaml", ".yml", ".txt"}:
+                  continue
+              text = path.read_text(errors="ignore")
+              for pattern in patterns:
+                  if pattern.search(text):
+                      print(f"Possible secret in {path}")
+                      failed = True
+          if failed:
+              sys.exit(1)
+          print("Secret check passed")
+          PY
+
+      - name: MIT licence is present and referenced
+        run: |
+          test -f LICENSE
+          grep -q "MIT" LICENSE
+          grep -q "MIT" experiments/62-internal-mobility-explorer/README.md
+          echo "Licence check passed"
