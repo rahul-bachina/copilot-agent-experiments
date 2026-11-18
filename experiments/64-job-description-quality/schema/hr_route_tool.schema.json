@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that HR has seen one route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["draft_hash", "suggestion_id", "suggestion_hash", "approver_ref", "decision", "item"],
+  "properties": {
+    "draft_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "suggestion_id": {"type": "string", "pattern": "^F-\\d{2}$"},
+    "suggestion_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "approver_ref": {"type": "string", "pattern": "^HR-\\d{4}$"},
+    "decision": {"type": "string", "const": "seen"},
+    "item": {"type": "string", "const": "hr-route"}
+  }
+}

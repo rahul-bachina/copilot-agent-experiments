@@ -1,0 +1,211 @@
+name: Experiment 64 - Job description quality tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/64-job-description-quality/**'
+      - 'experiments/08-uk-pii-redaction-gateway/**'
+      - 'experiments/36-cross-source-validation/**'
+      - '.github/workflows/experiment-64-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/64-job-description-quality/**'
+      - 'experiments/08-uk-pii-redaction-gateway/**'
+      - 'experiments/36-cross-source-validation/**'
+      - 'docs-site/docs/experiments/64-job-description-quality.md'
+      - '.github/workflows/experiment-64-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiments/64-job-description-quality
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: experiments/64-job-description-quality/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v --tb=short
+
+      - name: Run review smoke test
+        run: |
+          python src/review.py --request examples/sample_request.json --guide fixtures/guide.json --directory fixtures/directory.json --as-of 2026-11-14 > /tmp/review.json
+          python -c "
+          import json
+          result = json.load(open('/tmp/review.json'))
+          blob = json.dumps(result)
+          assert result['label'] == 'PROMPTS FOR A RECRUITER. NOT LEGAL ADVICE. NOT AN ADVERT.'
+          assert result['catalogue_id'] == 'H007'
+          assert result['autonomy'] == 'A0'
+          assert result['human_approval'] is None
+          assert result['outcome'] == 'prompts'
+          assert result['published'] is False
+          assert result['posted'] is False
+          assert result['sent'] is False
+          assert result['quality_score'] is None
+          assert result['candidates_scored'] is False
+          assert result['legal_advice'] is False
+          assert result['prompt_injection']['followed'] is False
+          assert result['instructions_followed'] is False
+          assert result['clearance'] == 'OFFICIAL'
+          assert result['occupational_requirement_decided'] is False
+          assert 'exclusionary_wording' in [row['category'] for row in result['findings']]
+          assert 'mandated_statement_kept' in [row['category'] for row in result['findings']]
+          assert result['prompt_count'] + result['hr_route_count'] <= result['finding_count']
+          assert 'TOP SECRET' not in blob
+          print('Review smoke test passed')
+          "
+
+      - name: Run stale-data smoke test
+        run: |
+          python src/review.py --request examples/sample_request.json --guide fixtures/guide.json --directory fixtures/directory.json --as-of 2027-06-01 > /tmp/stale.json
+          python -c "
+          import json
+          result = json.load(open('/tmp/stale.json'))
+          assert result['sources_current'] is False
+          assert result['may_be_relied_on'] is False
+          assert result['guide']['stale'] is True
+          assert result['human_approval'] is None
+          assert result['published'] is False
+          assert result['coerced'] is False
+          assert result['as_of'] == '2027-06-01'
+          print('Stale-data smoke test passed')
+          "
+
+      - name: Run prohibited-action smoke test
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, '.')
+          from src.review import JobDescriptionForbidden, publish, record_suggestion_decision, review_draft, score_candidate
+          guide = json.loads(Path('fixtures/guide.json').read_text())
+          directory = json.loads(Path('fixtures/directory.json').read_text())
+          request = json.loads(Path('examples/sample_request.json').read_text())
+          result = review_draft(request, guide, directory, '2026-11-14')
+          finding = next(row for row in result['findings'] if row['requires_decision'])
+          forged = record_suggestion_decision(result, directory, {
+              'draft_hash': result['draft_hash'],
+              'suggestion_id': finding['suggestion_id'],
+              'suggestion_hash': 'a' * 64,
+              'approver_ref': 'REC-1001',
+              'decision': 'accept',
+              'item': 'suggestion',
+          })
+          assert forged['human_approval'] is None
+          assert forged['published'] is False
+          assert forged['blocked_reason'] == 'suggestion_hash_mismatch'
+          try:
+              publish()
+          except JobDescriptionForbidden:
+              pass
+          else:
+              raise SystemExit('publish should raise')
+          try:
+              score_candidate()
+          except JobDescriptionForbidden:
+              pass
+          else:
+              raise SystemExit('score_candidate should raise')
+          print('Prohibited-action smoke test passed')
+          "
+
+      - name: Run evaluation (deterministic smoke test)
+        run: |
+          python eval/evaluate.py --output /tmp/eval_report.json
+          python -c "
+          import json
+          report = json.load(open('/tmp/eval_report.json'))
+          assert report['mode'] == 'deterministic'
+          assert report['not_a_model_evaluation'] is True
+          assert 'DETERMINISTIC SMOKE TEST' in report['evaluation_label']
+          summary = report['summary']
+          print(f\"Smoke test {summary['passed']}/{summary['total_cases']} passed\")
+          if summary['errors'] or summary['failed']:
+              print(f\"ERROR: {summary['failed']} failed, {summary['errors']} errors\")
+              raise SystemExit(1)
+          if summary['total_cases'] != 20:
+              print('ERROR: expected 20 synthetic cases')
+              raise SystemExit(1)
+          if summary['passed'] + summary['failed'] + summary['errors'] != summary['total_cases']:
+              print('ERROR: smoke totals double-count or do not add up')
+              raise SystemExit(1)
+          ids = [case['case_id'] for case in report['cases']]
+          if len(ids) != len(set(ids)) or len(ids) != summary['total_cases']:
+              print('ERROR: case ids are not one row each')
+              raise SystemExit(1)
+          print('Smoke test passed')
+          "
+
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment-64-smoke-report
+          path: /tmp/eval_report.json
+          retention-days: 30
+
+  governance-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Brand name is Microsoft Foundry
+        run: |
+          if grep -RIn --exclude-dir=__pycache__ "Azure AI Foundry" experiments/64-job-description-quality docs-site/docs/experiments/64-job-description-quality.md; then
+            echo "Use 'Microsoft Foundry', not the retired product name."
+            exit 1
+          fi
+          echo "Brand check passed"
+
+      - name: No obvious secrets in Experiment 64
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          root = Path("experiments/64-job-description-quality")
+          patterns = [
+              re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+              re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+              re.compile(r"(?i)(api[_-]?key|secret|password)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+          ]
+          failed = False
+          for path in root.rglob("*"):
+              if not path.is_file() or path.suffix not in {".py", ".md", ".json", ".yaml", ".yml", ".txt"}:
+                  continue
+              text = path.read_text(errors="ignore")
+              for pattern in patterns:
+                  if pattern.search(text):
+                      print(f"Possible secret in {path}")
+                      failed = True
+          if failed:
+              sys.exit(1)
+          print("Secret check passed")
+          PY
+
+      - name: MIT licence is present and referenced
+        run: |
+          test -f LICENSE
+          grep -q "MIT" LICENSE
+          grep -q "MIT" experiments/64-job-description-quality/README.md
+          echo "Licence check passed"
