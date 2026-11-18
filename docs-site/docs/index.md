@@ -1680,10 +1680,6 @@ The recruiter accepts or rejects each suggestion and writes the final wording. A
 
 </div>
 
-</article>
-
-</div>
-
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
 
 <div class="section-heading" markdown="1">
