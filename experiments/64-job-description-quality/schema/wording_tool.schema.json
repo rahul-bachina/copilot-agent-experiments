@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the recruiter's final wording",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["draft_hash", "approver_ref", "decision", "item", "wording", "wording_hash"],
+  "properties": {
+    "draft_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "approver_ref": {"type": "string", "pattern": "^REC-\\d{4}$"},
+    "decision": {"type": "string", "const": "record"},
+    "item": {"type": "string", "const": "final-wording"},
+    "wording": {"type": "string", "minLength": 1, "maxLength": 8000},
+    "wording_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "guide_seen": {"type": "boolean"},
+    "pins_seen": {"type": "boolean"},
+    "question_date_seen": {"type": "boolean"},
+    "labels_unreadable_seen": {"type": "boolean"},
+    "published": {"type": "boolean", "const": false},
+    "posted": {"type": "boolean", "const": false},
+    "sent": {"type": "boolean", "const": false}
+  }
+}

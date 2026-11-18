@@ -614,6 +614,16 @@ An explanation of a synthetic leave policy beside a curated statutory baseline. 
 
 </article>
 
+<article class="plan-card" id="h007" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · H007 · Autonomy A0</p>
+
+## Job description quality checker
+
+Prompts on one synthetic job description and a synthetic style and grading guide. Each prompt has a reason and a suggested alternative. Gendered or age-coded example phrases, an unnecessary degree or physical requirement, and "native English speaker" are flagged when a sentence affirms them. A missing salary or location is not invented. Two salary figures are compared and neither is chosen. An occupational requirement, positive action, or a pre-employment health question is routed to HR and is not decided. A right-to-work statement and a Disability Confident statement that the guide marks as mandated are kept. The recruiter accepts or rejects each suggestion and writes the final wording. The agent does not publish, post, or send, and it does not score candidates or adverts against people. [Read the briefing](experiments/64-job-description-quality.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64.

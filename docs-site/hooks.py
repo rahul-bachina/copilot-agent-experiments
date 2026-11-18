@@ -205,6 +205,9 @@ DIAGRAMS = {
     "experiments/63-leave-policy-explainer/docs/architecture_diagram.png": (
         "experiments/img/63-leave-policy-explainer-architecture.png"
     ),
+    "experiments/64-job-description-quality/docs/architecture_diagram.png": (
+        "experiments/img/64-job-description-quality-architecture.png"
+    ),
 }
 
 
