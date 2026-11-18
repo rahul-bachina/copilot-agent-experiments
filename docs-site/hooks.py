@@ -199,6 +199,9 @@ DIAGRAMS = {
     "experiments/61-learning-path-planner/docs/architecture_diagram.png": (
         "experiments/img/61-learning-path-planner-architecture.png"
     ),
+    "experiments/64-job-description-quality/docs/architecture_diagram.png": (
+        "experiments/img/64-job-description-quality-architecture.png"
+    ),
 }
 
 
