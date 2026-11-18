@@ -199,6 +199,12 @@ DIAGRAMS = {
     "experiments/61-learning-path-planner/docs/architecture_diagram.png": (
         "experiments/img/61-learning-path-planner-architecture.png"
     ),
+    "experiments/62-internal-mobility-explorer/docs/architecture_diagram.png": (
+        "experiments/img/62-internal-mobility-explorer-architecture.png"
+    ),
+    "experiments/63-leave-policy-explainer/docs/architecture_diagram.png": (
+        "experiments/img/63-leave-policy-explainer-architecture.png"
+    ),
     "experiments/64-job-description-quality/docs/architecture_diagram.png": (
         "experiments/img/64-job-description-quality-architecture.png"
     ),

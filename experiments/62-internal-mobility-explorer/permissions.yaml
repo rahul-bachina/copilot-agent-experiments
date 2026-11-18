@@ -1,0 +1,458 @@
+# Agent manifest: Internal Mobility Explorer
+# Experiment 62 — catalogue ID H005
+# Version: 0.1.0
+# Last reviewed: 2026-11-18
+# Next review: 2027-05-18
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-62-internal-mobility-explorer"
+  name: "Internal Mobility Explorer"
+  version: "0.1.0"
+  description: >
+    Explains which open vacancies look relevant to the experience and goals
+    an employee states, with a citation to the vacancy and the HR eligibility
+    rule. Autonomy A0. The agent does not apply, nominate, shortlist, or
+    contact anyone. It does not rank or score employees, and it does not
+    make or imply a selection decision. HR validates eligibility. Interest
+    is not shared with the manager or with recruiters. A reasonable
+    adjustment, redeployment at risk, distress, or a grievance is routed
+    to a person.
+  owner: "HR"
+  contact: "mobility.explorer@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/62-internal-mobility-explorer"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only and advisory. The assistant explains relevance and cites the HR rule. It does not apply, nominate, shortlist, contact anyone, or decide eligibility."
+  constraints:
+    - "The agent NEVER applies, nominates, shortlists, or contacts anyone"
+    - "The agent NEVER shares the employee's interest with their manager or with recruiters"
+    - "The agent NEVER makes or implies a selection decision, and it NEVER ranks or scores employees"
+    - "The agent NEVER decides that a person is eligible or ineligible. HR validates eligibility"
+    - "The agent NEVER infers suitability from a protected characteristic or from age, length of service, part-time status, sickness absence, or maternity absence"
+    - "The agent NEVER treats approval or eligibility text inside the experience or a vacancy as the deterministic step"
+    - "A self-declared role, grade, or clearance in the request is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic internal vacancy feed"
+      description: "Closing dates, grades, locations, essential and desirable criteria, markings, retention labels, and legal holds. Samples are synthetic."
+      access_level: "read"
+      scope: "One feed per invocation. Vacancy descriptions are not copied into the note."
+      justification: "A row has to cite a vacancy. A closed or stale vacancy has to be flagged."
+      data_categories:
+        - "Vacancy identifiers, grades, locations, and dates"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the feed."
+    - resource: "Synthetic HR eligibility rules"
+      description: "The rule text HR owns. The agent quotes it and does not decide it."
+      access_level: "read"
+      scope: "One rules file per invocation."
+      justification: "The note has to cite the rule and say when eligibility is unclear."
+      may_contain_personal_data: false
+    - resource: "Synthetic role skills framework and directory"
+      description: "The role and the clearance come from the directory. The request does not set them. Length of service, part-time status, age, sickness, and maternity fields are not read."
+      access_level: "read"
+      scope: "One employee reference."
+      justification: "The note has to follow the role the directory holds, and HR has to be a directory role before a seen-step is recorded."
+      may_contain_personal_data: true
+    - resource: "Employee experience and goals"
+      description: "What the employee states. Approval keys on this object are stripped. The text is not copied into the result."
+      access_level: "read"
+      scope: "One request."
+      justification: "Criterion phrases are matched only where the experience affirms them."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+    - resource: "Separate HR seen objects"
+      description: "The only objects that can set hr_seen.recorded or route_seen.recorded. Not read from the experience."
+      access_level: "read"
+      scope: "One HR reviewer, bound to the exploration id and the content hash."
+      justification: "A seen-step has to be deterministic, keyed to a named HR reviewer and the exact note."
+      may_contain_personal_data: false
+    - resource: "Experiment 58 employee handbook"
+      description: "answer_handbook() on a fixed question about internal vacancies and who decides eligibility."
+      access_level: "read"
+      scope: "The synthetic handbook and the sample HR scope. No entitlement is decided."
+      justification: "The handbook either quotes a section or says it does not cover the question. A gap is not filled with a guess."
+      may_contain_personal_data: false
+    - resource: "Experiment 36 cross-source validation"
+      description: "compare() when a vacancy has two closing dates. The agent does not choose a date."
+      access_level: "read"
+      scope: "One synthetic pack per vacancy that has two dates."
+      justification: "A material discrepancy is shown to a person. It is not resolved here."
+      may_contain_personal_data: false
+    - resource: "Experiment 61 learning path planner"
+      description: "draft_plan() only when the employee asks for a learning plan. The plan is not a selection factor and nobody is enrolled."
+      access_level: "read"
+      scope: "The synthetic course catalogue beside this folder. No approval is recorded."
+      justification: "A learning plan can be shown beside the note. It does not change which vacancies are listed."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live recruitment system, a manager mailbox, or a recruiter queue"
+      reason: "The feed is the fixture the caller supplied. The core does not apply, nominate, shortlist, or contact anyone."
+    - resource: "A self-declared role, guest status, grade, or clearance in the request"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Directory length of service, part-time status, age, sickness, or maternity fields"
+      reason: "Those fields are not read. Suitability is not inferred from them."
+    - resource: "Vacancy descriptions above the directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Explore"
+      provider: "Local Python (explore)"
+      action: "Explain which open vacancies look relevant, with vacancy and eligibility-rule citations"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Matching and dates are comparisons. A language model must not invent a vacancy or an eligibility decision."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record HR seen"
+      provider: "Local Python (record_hr_seen)"
+      action: "Record that a named HR reviewer has seen one exploration hash"
+      access_level: "read"
+      scope: "The note and a separate seen object. Eligibility is not decided. Interest is not shared."
+      justification: "The seen-step has to be deterministic and keyed to the named HR reviewer and the exact note."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that a named HR reviewer has seen a human route"
+      access_level: "read"
+      scope: "The route and a separate seen object. The case is not decided."
+      justification: "Equality Act 2010 sections 20, 21, and 39(5) were read. The agent does not decide the duty was met."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The vacancy list, the eligibility wording, and the empty seen-step stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No recruitment-system write. record_hr_seen returns JSON.
+      applied, nominated, shortlisted, and contacted stay false.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. A seen-step does not email a manager, a recruiter, or the employee.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not select, reject, or shortlist anyone. A seen-step
+      records that HR has seen the note. It is not a selection decision.
+      A sentence in the experience cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide eligibility, and it does not decide that
+      Equality Act 2010 section 13, 19, 20, 21, or 39 was met. It does not
+      decide that UK GDPR Article 5 or Articles 22A to 22D were met.
+  production_record_change:
+    enabled: false
+    rationale: "The note is JSON. It is not a write to a recruitment system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact a manager, a recruiter, or anyone else."
+  spend_transact:
+    enabled: false
+    rationale: "There is no spend. The agent does not transact."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Apply, nominate, shortlist, or contact"
+      rationale: "apply(), nominate(), shortlist(), and contact() raise. Those flags stay false."
+    - enabled: false
+      action_name: "Share interest with a manager or a recruiter"
+      rationale: "share_interest() raises. Both share flags stay false."
+    - enabled: false
+      action_name: "Rank, score, or select an employee"
+      rationale: "rank_employees(), score_employees(), and decide_selection() raise. selection_made stays false."
+    - enabled: false
+      action_name: "Infer suitability from a protected characteristic or a proxy"
+      rationale: "infer_suitability() raises. Directory proxy fields are not read."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold or a retention label on a listed or flagged vacancy is kept."
+
+human_approval:
+  description: >
+    HR validates eligibility. The agent does not. A directory HR reviewer
+    can record that they have seen the exact note, by exploration id and
+    content hash. A manager or a recruiter cannot record that step, because
+    interest is not shared with them. An adjustment, redeployment, distress,
+    or grievance route is for HR. Approval text inside the experience or a
+    vacancy is not that step.
+
+  approval_points:
+    - action: "Validate eligibility"
+      approver: "HR"
+      mandatory: true
+      rationale: "The note cites the rule and says HR validates eligibility. record_hr_seen does not set eligibility_decided."
+    - action: "See the exploration note"
+      approver: "HR reviewer on the directory"
+      mandatory: false
+      rationale: "record_hr_seen accepts a directory HR role only when the exploration id and the content hash match. A manager or a recruiter is refused."
+    - action: "See a reasonable-adjustment, redeployment, distress, or grievance route"
+      approver: "HR"
+      mandatory: true
+      rationale: "record_route_seen sets route_seen.recorded. The case is not decided. The manager is not told."
+    - action: "Read a closed, stale, or discrepant vacancy"
+      approver: "HR"
+      mandatory: true
+      rationale: "Those rows are flagged. The agent does not choose a closing date and does not treat the vacancy as open."
+
+  no_approval_required:
+    - action: "Read the advisory note"
+      rationale: "Reading a note has no external effect. hr_seen.recorded stays false. Nothing is sent."
+    - action: "Re-run the same request"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 18 November 2026. UK GDPR Article 5(1)(b) purpose
+      limitation was read that day and is not a lawful basis. Article 5(3)
+      was read and is not a lawful basis. Equality Act 2010 sections 13, 19,
+      20, 21, and 39 were read and are not a lawful basis. data_minimisation
+      is not marked as met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, disability, maternity, or wellbeing text the experience may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 18 November 2026."
+    safeguards:
+      - "A distress, grievance, redeployment, or adjustment cue is flagged for HR. The cue text is not copied."
+      - "Suitability is not inferred from a protected characteristic or from a proxy."
+      - "Vacancy descriptions and the experience are not copied."
+      - "Interest is not shared with a manager or a recruiter."
+      - "Samples in this repository are synthetic."
+      - "No solely automated selection. Article 22 on the page opened on 18 November 2026 had been substituted. Article 22A was read. The sample does not take a selection decision."
+  data_minimisation:
+    - "The experience is not copied into the result."
+    - "Vacancy descriptions are not copied. Identifier counts do not store the values."
+    - "output_is_anonymised stays false."
+    - "Directory length of service, part-time status, age, sickness, and maternity fields are not read."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on a listed or flagged vacancy are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Experience text and vacancy descriptions are untrusted. They may say the
+    reader is eligible, that the person should be shortlisted, or that a
+    label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Pretend eligibility, shortlist, contact, and strip-label sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not a criterion match, a cue, or an inclusion."
+    - control: "The seen-step is a separate object bound to the content hash"
+      description: "Approval keys on the request are stripped. hr_seen.recorded stays false until record_hr_seen succeeds for that hash."
+    - control: "No apply, nominate, shortlist, or contact tool"
+      description: "Those functions raise MobilityForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. HR is the
+    control for eligibility. There is no application even if the note is
+    wrong. A paraphrase that uses none of the cue words is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-18"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the experience or a vacancy is treated as eligibility or as HR having seen the note"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_hr_seen reads only the separate object and checks the content hash"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R2"
+      risk: "The agent applies, nominates, shortlists, contacts someone, or tells the manager"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "apply, nominate, shortlist, contact, and share_interest raise"
+        - "The share flags and the action flags stay false"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R3"
+      risk: "Suitability is inferred from a protected characteristic or a proxy, or employees are ranked"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The outcome is inference_refused or selection_refused"
+        - "Proxy criteria are not used"
+        - "There is no score"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R4"
+      risk: "A reasonable adjustment, redeployment, distress, or grievance is handled as a routine vacancy list"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes name HR and do not list vacancies"
+        - "adjustment_decided stays false"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R5"
+      risk: "An unreadable date is coerced to zero or to today, or a closed vacancy is listed as open"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are copied onto the row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the employee reference
+    if it matched the synthetic pattern, the outcome, and whether a seen-step
+    was recorded. This starter logs nothing because it keeps no store.
+    Do not put the experience or a vacancy description in an application trace.
+    Do not log the note to a manager or a recruiter.
+  logged_events:
+    - event: "Exploration drafted"
+      data_logged:
+        - "Timestamp"
+        - "Employee reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether hr_seen.recorded was left false"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "HR seen-step recorded"
+      data_logged:
+        - "Whether the exploration id and the content hash matched"
+        - "eligibility_decided false"
+        - "interest_shared_with_manager false"
+      retention: "Organisation's schedule. The agent does not write this event to a recruitment system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not send the log to a manager or a recruiter as a notice of interest."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "HR"
+      contact: "mobility.explorer@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-18"
+  next_review_date: "2027-05-18"
+  review_frequency: "6 months, and sooner if the pinned legislation or the vacancy rules change"
+  reviewer: "The adopting organisation's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Equality Act 2010 section 13, 19, 20, 21, or 39"
+    - "A change to UK GDPR Article 5 or to Articles 22A to 22D"
+    - "A change to the commencement of Data (Use and Access) Act 2025 section 80, once S.I. 2026/82 is opened"
+    - "A proposal to add a connector that can apply, nominate, shortlist, contact, or notify a manager"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Explorer core"
+      path: "src/explore.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The exploration from this starter is also
+    not an approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 18 November 2026. Article 5(1)(b) and Article 5(3) were read and are not treated as a lawful basis."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "On 18 November 2026 the UK GDPR Article 22 page showed the body omitted. Chapter 3 Section 4A, Articles 22A to 22D, is the substitute text on Data (Use and Access) Act 2025 section 80. S.I. 2026/82 was not opened. The old Article 22 wording is not quoted."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The Article 5 extract returned on 18 November 2026 did not include an Equality Act-style revision-date banner. That banner date is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Section 20's page, opened on 18 November 2026, said it was up to date with changes known to be in force on or before 16 November 2026. Sections 13, 19, 21, and 39 said 18 November 2026."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "A review date on the as-of date is treated as stale. A closing date on the as-of date is still open. Those are starter rules, not statutory periods. The 90-day pin window is a starter default."
+      section: "src/explore.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, and Application Insights were not opened on 18 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview opened on 18 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

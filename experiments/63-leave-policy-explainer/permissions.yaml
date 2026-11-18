@@ -1,0 +1,378 @@
+# Agent manifest: Leave Policy Explanation Agent
+# Experiment 63 — catalogue ID H006
+# Version: 0.1.0
+# Last reviewed: 2026-11-18
+# Next review: 2027-05-18
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-63-leave-policy-explainer"
+  name: "Leave Policy Explanation Agent"
+  version: "0.1.0"
+  description: >
+    Explains a synthetic employer leave policy and the UK statutory baseline
+    for the date the question is about. Autonomy A0. It quotes the policy
+    section, the effective date, and the statutory source, and it distinguishes
+    the contractual scheme from the statutory minimum. It does not decide
+    entitlement, approve leave, book leave, record leave, or calculate pay.
+  owner: "People and culture"
+  contact: "leave-explainer@example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/63-leave-policy-explainer"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only. HR approves which policy versions are in scope. The agent explains. It does not decide."
+  constraints:
+    - "HR approves which policy documents are in scope. A sentence in the question is not that approval."
+    - "The agent quotes the version in force on the date the question is about."
+    - "The agent NEVER decides entitlement, approves leave, books leave, or records leave."
+    - "The agent NEVER calculates pay as a decision and NEVER states a statutory pay rate that was not opened."
+    - "The agent NEVER treats a pregnancy, miscarriage, bereavement, domestic abuse, sickness, distress, or disability disclosure as a routine policy question."
+    - "Dates, versions, markings, and the empty entitlement come from src/explain.py."
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic leave policy set"
+      description: "Versioned policies for annual leave, sickness, family leave, bereavement, carer's leave, and jury service. Lindenmere Community Trust is invented."
+      access_level: "read"
+      scope: "Documents whose ids are on the HR scope object, at or below the ceiling."
+      justification: "An explanation cannot cite a section HR has not put in scope."
+      data_categories:
+        - "Policy text"
+        - "Effective dates and review dates"
+        - "Protective markings, legal holds, and retention labels"
+      may_contain_personal_data: false
+      retention: "Transient. This starter does not persist the policies."
+    - resource: "Curated statutory baseline"
+      description: "A snapshot whose quotes must match src/sources.py. Nothing is downloaded at run time."
+      access_level: "read"
+      scope: "fixtures/baseline.json and src/sources.py."
+      justification: "The statutory minimum is a quotation from a page that was opened, or it is marked unverified."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Role identifiers for HR, a line manager, and an employee. No personal names."
+      access_level: "read"
+      scope: "One synthetic directory."
+      justification: "A typed approver id is checked against the directory. A role in the question is not."
+      may_contain_personal_data: false
+    - resource: "The question"
+      description: "One question. It is untrusted. It is not copied into the explanation."
+      access_level: "read"
+      scope: "One question."
+      justification: "The topic has to be read. Identifiers are counted and not stored."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The question text is not written to the result."
+  never_access:
+    - resource: "Payroll, the HR case system, and the leave-booking system"
+      reason: "The agent does not look up a person, book leave, record leave, or calculate pay."
+    - resource: "A document above the ceiling, including one whose cover says SECRET"
+      reason: "The body is not copied. The higher marking, the legal hold, and every retention label are kept."
+    - resource: "SharePoint, Microsoft Graph, and Microsoft 365 Copilot"
+      reason: "This starter does not call them."
+    - resource: "Northern Ireland employment legislation"
+      reason: "The pages opened here are England and Wales and Scotland, or they say that Scotland or Northern Ireland rules differ. No Northern Ireland statute was opened."
+
+tools:
+  allowed:
+    - tool: "Leave policy explanation"
+      provider: "Local Python (src/explain.py)"
+      action: "Quote the approved in-force section and the statutory pin, or name a person"
+      access_level: "read"
+      scope: "One question. No network. No model."
+      justification: "Version selection, negation, and the empty entitlement are deterministic."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Optional narrative of JSON fields that are already in the result"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional. Citations, the empty entitlement, and pay staying empty remain in Python."
+      human_approval_required: false
+      output_requires_human_review: true
+  writes:
+    enabled: false
+    note: "No write. Recording leave is a person's step in the employer's own system."
+  sends:
+    enabled: false
+    note: "No send. The explanation is returned to the person who asked."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or refuse leave. A seen-step records that HR has seen the explanation. It does not approve leave."
+  regulated_decision:
+    enabled: false
+    rationale: "Entitlement and pay stay null. decide_entitlement and calculate_pay raise."
+  production_record_change:
+    enabled: false
+    rationale: "record_leave raises. No leave record is created or updated."
+  external_send:
+    enabled: false
+    rationale: "The agent does not email the employee, HR, or a court."
+  spend_transact:
+    enabled: false
+    rationale: "No pay is calculated and no leave is booked. book_leave raises."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Approve a policy version"
+      rationale: "HR approves document ids on the scope object, outside the agent. approve_policy raises."
+    - enabled: false
+      action_name: "Decide entitlement or calculate pay"
+      rationale: "A policy figure and a statutory quotation are not applied to a person. No statutory pay rate is stated."
+    - enabled: false
+      action_name: "Remove a marking, legal hold, or retention label"
+      rationale: "An instruction to strip a label is recorded and not followed. The higher marking is kept."
+
+human_approval:
+  description: >
+    HR approves the scope before a question is answered. Entitlement,
+    booking, recording, and pay stay with HR or the line manager. Words
+    inside the question do not count as approval. A seen-step is valid
+    only when it names an active HR id on the directory and the hash of
+    this explanation.
+
+  approval_points:
+    - action: "Approve which leave policy documents and versions are in scope"
+      approver: "HR"
+      mandatory: true
+      rationale: "Catalogue checkpoint for H006. The scope object is the approval. A marker inside a file or a question is ignored."
+    - action: "Decide entitlement, approve leave, book leave, or record leave"
+      approver: "HR or the line manager"
+      mandatory: true
+      rationale: "Outside the agent. entitlement_decision, leave_booked, and leave_recorded stay empty or false."
+    - action: "Calculate pay or state a statutory pay rate"
+      approver: "HR or payroll"
+      mandatory: true
+      rationale: "The agent does not calculate pay. A rate that was not opened on GOV.UK for a named tax year is not stated."
+    - action: "Take a pregnancy, miscarriage, bereavement, domestic abuse, sickness, distress, or disability disclosure"
+      approver: "HR or the line manager"
+      mandatory: true
+      rationale: "Those signals are routed with care. They are not answered as routine policy. A paraphrased distress signal is included."
+    - action: "Rely on the explanation, including a statutory pin"
+      approver: "The employee, and HR where the pin is stale, the policy is past review, or the version is superseded"
+      mandatory: true
+      rationale: "The explanation is a quotation or a gap. It is not a decision."
+    - action: "Re-check a statutory pin after it is marked stale or unverified"
+      approver: "HR"
+      mandatory: true
+      rationale: "The core does not download legislation.gov.uk or GOV.UK."
+
+  no_approval_required:
+    - action: "Read the explanation"
+      rationale: "Reading has no external effect."
+    - action: "Ask the same question again"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the employer's lawful basis. A candidate
+      for an internal policy explanation, which the employer confirms, is
+      Article 6(1)(f). A question about health, pregnancy, or disability may
+      be special-category data. Article 9 is not asserted.
+    secondary: "Article 6(1)(b) or 6(1)(c) may be relevant to the employer's own process. The employer confirms it."
+  special_category_data:
+    may_process: false
+    categories_possible: []
+    lawful_basis_special: "Not asserted. A personal health, pregnancy, miscarriage, or disability question is routed and the question text is not copied."
+    safeguards:
+      - "The sample policies are synthetic"
+      - "The question text is not copied into the result"
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal-name cues are counted and not stored, in addition to Experiment 08"
+      - "No solely automated decision about a person"
+  data_minimisation:
+    - "Bodies above the ceiling are not copied."
+    - "Experiment 08 redacted text is not copied into the result."
+    - "The report says what was copied. It does not describe the output as anonymised."
+  retention:
+    agent_retention: "None in this starter."
+    note: "The employer's retention schedule applies to whatever a person saves. A legal hold on a source is preserved and is not a disposal instruction."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "Access, erasure, and objection go through the employer's privacy process. This agent does not handle them."
+
+prompt_injection:
+  description: >
+    Questions and policy sections are untrusted. They may say to ignore the
+    effective date, book leave, grant a number of days, strip a legal hold,
+    or treat a draft as approved. The core records the instruction and does
+    not follow it.
+  controls:
+    - control: "Scope is a separate object"
+      description: "Approval words in the question or in a file do not add a document id."
+    - control: "Instruction sentences are not quoted"
+      description: "A sentence that is only an instruction is not cited."
+    - control: "No side-effect tools"
+      description: "Writes, sends, entitlement, booking, recording, and pay calculation are disabled."
+    - control: "Markings survive an instruction to strip them"
+      description: "The higher of the metadata label and the cover label is kept, with the legal hold and every retention label."
+    - control: "A seen-step is bound to the explanation hash"
+      description: "Only the deterministic approval step counts, and only for an active HR id on the directory and the exact hash."
+  residual_risk: >
+    A model narration could still mis-state a quotation. The person reading
+    the JSON is the control. There is no autonomous action to take.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named employer"
+  date_assessed: "2026-11-18"
+  risks:
+    - id: "R1"
+      risk: "A superseded or past-review policy is quoted as if it were the current scheme, or a draft is treated as approved because the question says so"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The version is chosen by effective dates on the scope ids and the date the question is about"
+        - "A superseded answer says so, and names the later version"
+        - "A review date before the date asked about is flagged"
+        - "File approval markers are ignored"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R2"
+      risk: "A policy figure or a statutory quotation is applied as the person's entitlement, or pay is calculated"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "entitlement_decision, pay_decision, and pay_rate stay null"
+        - "leave_booked and leave_recorded stay false"
+        - "An entitlement question says it depends on facts the agent does not have"
+        - "No statutory pay rate is stated"
+      residual_risk: "Low"
+      owner: "People and culture"
+    - id: "R3"
+      risk: "A pregnancy, miscarriage, bereavement, domestic abuse, sickness, distress, or disability disclosure is answered as routine policy"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Personal and paraphrased signals are routed with care"
+        - "A negation does not count as the signal"
+        - "The question text is not copied"
+      residual_risk: "Medium"
+      owner: "People and culture"
+    - id: "R4"
+      risk: "A SECRET cover or a legal hold is missed, or a user's claimed clearance or role is trusted"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Markings are read from metadata and from the text, and the higher label wins"
+        - "Legal hold and every retention label are kept"
+        - "Clearance and role words in the question are not trusted"
+        - "A seen-step checks the directory"
+      residual_risk: "Low"
+      owner: "Information security"
+    - id: "R5"
+      risk: "A statutory minimum is paraphrased, an Employment Rights Act 2025 change that is not fully in force is stated as in force, or a pay rate is invented"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Pins name the section or regulation and the date the page was opened"
+        - "Wider bereavement amendments are marked as specified purposes only"
+        - "Unopened pages, including statutory sick pay, are marked unverified and carry no figure"
+        - "A stale pin is not refreshed"
+      residual_risk: "Medium"
+      owner: "People and culture"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the scope reference,
+    the as-of date, the date the question is about, the outcome, and whether
+    a source was stale. Do not log the question text. This starter keeps no store.
+  logged_events:
+    - event: "Question explained or routed"
+      data_logged:
+        - "Timestamp"
+        - "Scope reference"
+        - "Outcome"
+        - "Whether a pin was stale or unverified"
+      retention: "Employer's schedule. Not set by this starter."
+    - event: "HR later sees the explanation, outside the agent"
+      data_logged:
+        - "HR identity on the directory"
+        - "Explanation hash"
+        - "Timestamp"
+      retention: "Employer's schedule. The seen-step does not approve leave."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the employer already operates. Do not log the question."
+
+kill_switch:
+  description: "Ways to stop the agent being used."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed identity used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+    - method: "Power Platform DLP"
+      action: "Block any connector added later for mail, SharePoint write, or the HR system"
+      time_to_effect: "Minutes"
+      who_can_activate: "Power Platform administrators"
+  escalation_contacts:
+    - role: "People and culture lead"
+      contact: "leave-explainer@example.com"
+    - role: "Data protection officer"
+      contact: "dpo@example.com"
+
+review:
+  last_review_date: "2026-11-18"
+  next_review_date: "2027-05-18"
+  review_frequency: "6 months, and sooner if a pinned Act or the leave policy set changes"
+  reviewer: "The adopting employer's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Working Time Regulations 1998 regulations 13 or 13A, or to regulation 15B if it is later opened"
+    - "A commencement instrument that brings the wider Employment Rights Act 2025 bereavement amendments fully into force"
+    - "A GOV.UK rates page for a tax year, if a later change decides to quote a rate"
+    - "A proposal to add a SharePoint, mail, payroll, or leave-booking connector"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Explanation core"
+      path: "src/explain.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+assumptions:
+  description: "Items an employer confirms before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "Article 6 is not asserted. The employer confirms a basis before live use. Article 9 is not asserted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The policies in this folder are synthetic. A live policy set is a different scope, approved by that employer's HR, and is not this file."
+      section: "data_access.reads"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Regulation 15B was not opened. The Maternity and Parental Leave etc. Regulations 1999 were not opened. No 52-week figure is stated."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Section 80K was not opened. Statutory carer's leave pay is not stated. No statutory pay rate for any tax year is stated."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Employment Rights Act 2025 section 18 bereavement amendments are footnoted for specified purposes on 6 January 2026. They are not treated as fully in force. The wider regulations were not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Contact addresses on example.com are placeholders. Lindenmere Community Trust is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

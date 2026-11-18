@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Sixty-two starters you can read today
+## Sixty-four starters you can read today
 
 </div>
 
@@ -1605,6 +1605,56 @@ The employee and their manager both approve that plan id. The agent does not enr
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 62 · H005 · HR · Autonomy A0</p>
+
+### Internal mobility explorer
+
+Explain which open vacancies look relevant to the experience an employee states. Each row cites the vacancy and the HR eligibility rule, or the result says eligibility is unclear.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+HR validates eligibility. The agent does not apply, nominate, shortlist, or contact anyone, and it does not share the employee's interest with their manager or with recruiters.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/62-internal-mobility-explorer.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/62-internal-mobility-explorer)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 63 · H006 · HR · Autonomy A0</p>
+
+### Leave policy explainer
+
+Explain a synthetic leave policy beside the UK statutory baseline. The answer quotes the section, its effective date, and the statutory source.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The explanation is not an entitlement. HR or the line manager decides. The agent does not book leave, record leave, or calculate pay.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/63-leave-policy-explainer.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/63-leave-policy-explainer)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 64 · H007 · HR · Autonomy A0</p>
 
 ### Job description quality checker
@@ -1650,7 +1700,7 @@ The recruiter accepts or rejects each suggestion and writes the final wording. A
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, and H007 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, and H007 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
