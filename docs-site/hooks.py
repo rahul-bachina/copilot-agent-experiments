@@ -202,6 +202,9 @@ DIAGRAMS = {
     "experiments/62-internal-mobility-explorer/docs/architecture_diagram.png": (
         "experiments/img/62-internal-mobility-explorer-architecture.png"
     ),
+    "experiments/63-leave-policy-explainer/docs/architecture_diagram.png": (
+        "experiments/img/63-leave-policy-explainer-architecture.png"
+    ),
 }
 
 

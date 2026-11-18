@@ -1,0 +1,71 @@
+{
+  "tools": [
+    {
+      "name": "explain_leave_policy",
+      "implementation": "explain",
+      "reads": [
+        "one synthetic leave policy set",
+        "one curated statutory baseline",
+        "one HR scope object",
+        "one synthetic directory",
+        "one question",
+        "an as-of date and the date the question is about"
+      ],
+      "writes": false,
+      "sends": false,
+      "decides_entitlement": false,
+      "books_leave": false,
+      "records_leave": false,
+      "calculates_pay": false,
+      "approves_policy": false,
+      "human_approval_to_run": false,
+      "human_approval_to_rely_on_output": true,
+      "callable_by_agent": true
+    },
+    {
+      "name": "record_seen",
+      "implementation": "record_seen",
+      "reads": ["the explanation hash", "a separate HR review object", "the synthetic directory"],
+      "writes": false,
+      "sends": false,
+      "decides_entitlement": false,
+      "books_leave": false,
+      "records_leave": false,
+      "calculates_pay": false,
+      "human_approval_to_run": true,
+      "approver": "HR on the synthetic directory",
+      "callable_by_agent": false,
+      "note": "The agent must not call this. A sentence inside the question is not this step. Seeing the explanation does not approve leave."
+    },
+    {
+      "name": "decide_entitlement",
+      "implementation": "decide_entitlement",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "book_leave",
+      "implementation": "book_leave",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "record_leave",
+      "implementation": "record_leave",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "calculate_pay",
+      "implementation": "calculate_pay",
+      "callable_by_agent": false,
+      "always_raises": true
+    },
+    {
+      "name": "approve_policy",
+      "implementation": "approve_policy",
+      "callable_by_agent": false,
+      "always_raises": true
+    }
+  ]
+}

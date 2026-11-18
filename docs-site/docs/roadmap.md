@@ -604,6 +604,16 @@ An advisory note on which open vacancies look relevant to the experience an empl
 
 </article>
 
+<article class="plan-card" id="h006" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · H006 · Autonomy A0</p>
+
+## Leave policy explainer
+
+An explanation of a synthetic leave policy beside a curated statutory baseline. The answer quotes the section, its effective date, and the statutory source, and it says when the contractual scheme is not the statutory minimum. A superseded or past-review version is flagged. A date or a balance that cannot be read is not replaced. It calls [Experiment 58](experiments/58-employee-handbook.md) for version dates, negation, and markings, [Experiment 08](experiments/08-uk-pii-redaction-gateway.md) for identifier counts, and [Experiment 03](experiments/03-agent-inventory-atrs-assurance.md) to validate the manifest. A disclosure is routed to a person. The agent does not decide entitlement, book leave, record leave, or calculate pay. [Read the briefing](experiments/63-leave-policy-explainer.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63.
