@@ -199,6 +199,9 @@ DIAGRAMS = {
     "experiments/61-learning-path-planner/docs/architecture_diagram.png": (
         "experiments/img/61-learning-path-planner-architecture.png"
     ),
+    "experiments/63-leave-policy-explainer/docs/architecture_diagram.png": (
+        "experiments/img/63-leave-policy-explainer-architecture.png"
+    ),
 }
 
 
