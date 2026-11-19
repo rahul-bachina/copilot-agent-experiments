@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HR records that a route was seen",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "reason_code", "approver_ref"],
+  "properties": {
+    "item": {"type": "string", "const": "human-route"},
+    "decision": {"type": "string", "const": "seen"},
+    "reason_code": {"type": "string"},
+    "approver_ref": {"type": "string", "pattern": "^EMP-\\d{4}$"},
+    "case_decided": {"type": "boolean", "const": false}
+  }
+}

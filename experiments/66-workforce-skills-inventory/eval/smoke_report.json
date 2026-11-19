@@ -1,0 +1,152 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "summary": {
+    "passed": 16,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 16
+  },
+  "cases": [
+    {
+      "case_id": "sample",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "distress",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "distress-negated",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "objection",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "redundancy",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "performance-purpose",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "performance-negated",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "protected",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "unreadable-date",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "article-13-gap",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "guest",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "stale-pins",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "purpose-blank",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "pay",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "promotion",
+      "status": "passed",
+      "problems": []
+    },
+    {
+      "case_id": "disciplinary",
+      "status": "passed",
+      "problems": []
+    }
+  ],
+  "paraphrase_recall": {
+    "note": "Not included in summary.total_cases. These are reworded variants, not extra smoke cases.",
+    "categories": [
+      {
+        "category": "distress",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 5,
+        "negatives_leaked": 0
+      },
+      {
+        "category": "misuse",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 5,
+        "negatives_leaked": 0
+      },
+      {
+        "category": "protected_or_health",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 5,
+        "negatives_leaked": 0
+      },
+      {
+        "category": "unsupplied",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 5,
+        "negatives_leaked": 0
+      },
+      {
+        "category": "objection",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 4,
+        "negatives_leaked": 0
+      },
+      {
+        "category": "injection",
+        "caught": 24,
+        "total": 24,
+        "recall": 1.0,
+        "missed": [],
+        "negatives": 4,
+        "negatives_leaked": 0
+      }
+    ]
+  }
+}
