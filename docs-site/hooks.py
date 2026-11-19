@@ -304,6 +304,13 @@ def _embed_stylesheets(html: str, html_path: Path, site_dir: Path, site_url: str
 def on_post_build(config, **kwargs):
     site_dir = Path(config.site_dir).resolve()
     site_url = config.site_url or ""
+    # Publish the hub-root llms.txt at the site root. The same file is also
+    # kept in docs/ so MkDocs copies it; this rewrite keeps the published
+    # copy identical to the repository root.
+    llms = _repo_root(config) / "llms.txt"
+    if not llms.is_file():
+        raise FileNotFoundError("llms.txt is missing from the repository root")
+    shutil.copy2(llms, site_dir / "llms.txt")
     for html_path in site_dir.rglob("*.html"):
         text = html_path.read_text(encoding="utf-8")
         updated = text.replace('<html lang="en"', '<html lang="en-GB"', 1)

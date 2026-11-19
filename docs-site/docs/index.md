@@ -98,6 +98,7 @@ No sending, no case-system writes, and no rejection of a request.
 
 [Read the briefing](experiments/01-foi-complaint-triage.md)
 [Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/01-foi-complaint-triage)
+[Standalone repo](https://github.com/rahul-bachina/foi-complaint-triage-copilot-agent)
 
 </div>
 
@@ -123,6 +124,7 @@ The clock and the mock intake run locally. Nothing in the folder calls a model.
 
 [Read the briefing](experiments/02-consumer-duty-complaint-intake.md)
 [Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/02-consumer-duty-complaint-intake)
+[Standalone repo](https://github.com/rahul-bachina/consumer-duty-complaints-copilot-agent)
 
 </div>
 

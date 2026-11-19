@@ -12,6 +12,13 @@ Expected address, once an administrator sets GitHub Pages to deploy from GitHub 
 
 <https://rahul-bachina.github.io/copilot-agent-experiments/>
 
+## Standalone repos
+
+Two flagship experiments also live as their own public repositories. More flagship experiments will get their own repos.
+
+- [Experiment 01, FOI and complaint triage](https://github.com/rahul-bachina/foi-complaint-triage-copilot-agent)
+- [Experiment 02, Consumer Duty complaint intake](https://github.com/rahul-bachina/consumer-duty-complaints-copilot-agent)
+
 ## About This Series
 
 Each experiment in this repository tackles a real-world problem with AI agents, providing:
