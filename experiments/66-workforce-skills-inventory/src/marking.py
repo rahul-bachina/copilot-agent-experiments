@@ -11,7 +11,10 @@ from __future__ import annotations
 
 import re
 
-from words import phrase_is_denied, sentences
+if __package__ in {None, ""}:
+    from words import phrase_is_denied, sentences
+else:
+    from .words import phrase_is_denied, sentences
 
 RANK = {
     "OFFICIAL": 1,

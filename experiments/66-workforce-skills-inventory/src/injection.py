@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import re
 
-from words import family_hit, sentences
+if __package__ in {None, ""}:
+    from words import family_hit, sentences
+else:
+    from .words import family_hit, sentences
 
 _STRIP = re.compile(
     r"\b(?:ignore|disregard) (?:all |any |the )?(?:previous |prior |above |earlier )?instructions\b"
