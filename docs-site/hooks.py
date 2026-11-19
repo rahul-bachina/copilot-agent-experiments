@@ -208,6 +208,9 @@ DIAGRAMS = {
     "experiments/64-job-description-quality/docs/architecture_diagram.png": (
         "experiments/img/64-job-description-quality-architecture.png"
     ),
+    "experiments/65-interview-pack-builder/docs/architecture_diagram.png": (
+        "experiments/img/65-interview-pack-builder-architecture.png"
+    ),
     "experiments/66-workforce-skills-inventory/docs/architecture_diagram.png": (
         "experiments/img/66-workforce-skills-inventory-architecture.png"
     ),

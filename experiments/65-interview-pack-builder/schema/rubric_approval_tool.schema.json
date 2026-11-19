@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve rubric",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pack", "directory", "decision"],
+  "properties": {
+    "pack": {"type": "object"},
+    "directory": {"type": "object"},
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item", "decision", "approver_ref", "pack_hash", "rubric_hash"],
+      "properties": {
+        "item": {"const": "rubric"},
+        "decision": {"enum": ["accept", "reject"]},
+        "approver_ref": {"type": "string"},
+        "pack_hash": {"type": "string"},
+        "rubric_hash": {"type": "string"}
+      }
+    }
+  }
+}

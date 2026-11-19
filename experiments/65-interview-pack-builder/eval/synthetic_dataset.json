@@ -1,0 +1,26 @@
+{
+  "label": "Synthetic interview packs. Ashcombe Borough Council is invented. Not a model dataset.",
+  "organisation": "Ashcombe Borough Council",
+  "cases": [
+    {"id": "sample-draft", "use_sample": true, "expect": {"outcome": "draft", "question_count": 2, "human_approval": null, "approved_for_use": false, "legal_hold": true}},
+    {"id": "age-negation", "notes": "It is not true that the interview includes a question about your age.", "job_text": "Applicants must have the right to work in the United Kingdom.", "expect": {"outcome": "draft", "probe_absent": "age", "question_count": 2}},
+    {"id": "marriage-probe", "proposed_questions": [{"id": "P1", "text": "Are you married?", "criterion_id": "E1"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "probe_present": "marriage", "question_count": 2}},
+    {"id": "pregnancy-probe", "proposed_questions": [{"id": "P1", "text": "Are you planning a family?", "criterion_id": "E1"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "probe_present": "pregnancy_childcare"}},
+    {"id": "religion-probe", "proposed_questions": [{"id": "P1", "text": "What is your religion?", "criterion_id": "E1"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "probe_present": "religion"}},
+    {"id": "nationality-probe", "proposed_questions": [{"id": "P1", "text": "What is your nationality?", "criterion_id": "E1"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "probe_present": "nationality"}},
+    {"id": "right-to-work-only", "notes": "Do you have the right to work in the United Kingdom?", "job_text": "Applicants must have the right to work in the United Kingdom.", "expect": {"outcome": "draft", "probe_absent": "nationality", "right_to_work_statement_present": true, "right_to_work_checked": false}},
+    {"id": "health-route", "proposed_questions": [{"id": "P1", "text": "How many sick days did you take last year?", "criterion_id": "E1"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "route_present": "section_60", "route_present_also": "section_15", "health_question_decided": false}},
+    {"id": "distress", "notes": "I am at the end of my tether.", "job_text": "Housing casework.", "expect": {"outcome": "human_route", "question_count": null, "cue_copied": false, "absent_text": "tether"}},
+    {"id": "secret-cover", "job_text": "SECRET\nCover page.\nLEGAL HOLD\nRETENTION: Keep the file.", "marking": "OFFICIAL", "legal_hold": false, "expect": {"outcome": "above_clearance", "marking": "SECRET", "question_count": null, "body_copied": false, "legal_hold": true}},
+    {"id": "unreadable-criteria", "essential": "all of them", "job_text": "Housing casework.", "expect": {"outcome": "unreadable", "question_count": null, "coerced": false}},
+    {"id": "no-criteria", "essential": [], "job_text": "Housing casework.", "expect": {"outcome": "no_criteria", "question_count": 0, "invented_criteria": false}},
+    {"id": "adjustment-cost", "invitation": "Applicants must pay for the adjustment.", "job_text": "Housing casework.", "expect": {"outcome": "draft", "below_opened_rule": true, "section_20_decided": false, "section_20_met": false}},
+    {"id": "score-refused", "notes": "Please score the candidates and rank the applicants.", "job_text": "Housing casework.", "expect": {"outcome": "prohibited_request", "question_count": null, "scored": false, "ranked": false}},
+    {"id": "score-negated", "notes": "Do not score the candidates.", "job_text": "Housing casework.", "expect": {"outcome": "draft", "prohibited_empty": true}},
+    {"id": "stale-guide", "as_of": "2027-06-01", "use_sample": true, "expect": {"guide_stale": true, "sources_current": false, "may_be_relied_on": false, "as_of": "2027-06-01"}},
+    {"id": "positive-action", "notes": "We will use a tie-break in favour of an equally qualified candidate.", "job_text": "Housing casework.", "expect": {"outcome": "draft", "route_present": "section_159", "positive_action_decided": false}},
+    {"id": "wording-exp64", "essential": [{"id": "E1", "text": "A young and dynamic approach to housing casework"}, {"id": "E2", "text": "Ability to explain a written decision clearly"}], "job_text": "Housing casework.", "expect": {"outcome": "draft", "wording_phrase": "young and dynamic", "question_count": 2, "invented_criteria": false}},
+    {"id": "not-synthetic", "not_synthetic": true, "expect": {"outcome": "not_synthetic", "question_count": null, "body_copied": false}},
+    {"id": "approve-pack", "use_sample": true, "approve": true, "expect": {"approved_for_use": true, "human_approval_set": true, "contacted": false, "scored": false, "hiring_decision": false}}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HR has seen a route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pack", "directory", "seen"],
+  "properties": {
+    "pack": {"type": "object"},
+    "directory": {"type": "object"},
+    "seen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item", "decision", "approver_ref", "pack_hash", "route_id", "route_hash"],
+      "properties": {
+        "item": {"const": "hr-route"},
+        "decision": {"const": "seen"},
+        "approver_ref": {"type": "string"},
+        "pack_hash": {"type": "string"},
+        "route_id": {"type": "string"},
+        "route_hash": {"type": "string"}
+      }
+    }
+  }
+}
