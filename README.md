@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Sixty-four starters are in `experiments/`. The folders are 01 to 64.
+Sixty-five starters are in `experiments/`. The folders are 01 to 65.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -96,6 +96,7 @@ Sixty-four starters are in `experiments/`. The folders are 01 to 64.
 | 62 | [Internal Mobility Explorer](experiments/62-internal-mobility-explorer/) | Explain which open vacancies look relevant to the experience an employee states, with a citation to the vacancy and the HR eligibility rule. Autonomy A0. The agent does not apply, nominate, shortlist, contact anyone, or make a selection decision. HR validates eligibility. | ✅ Starter |
 | 63 | [Leave Policy Explainer](experiments/63-leave-policy-explainer/) | Explain a synthetic leave policy and the UK statutory baseline. Autonomy A0. The answer quotes the section, its effective date, and the statutory source. It does not decide entitlement, book leave, record leave, or calculate pay. | ✅ Starter |
 | 64 | [Job Description Quality Checker](experiments/64-job-description-quality/) | Flag potentially exclusionary wording, missing salary or location, and unjustified essential criteria in one synthetic draft. Autonomy A0. The recruiter accepts or rejects each suggestion and writes the final wording. The agent does not publish, post, or send. | ✅ Starter |
+| 65 | [Interview Pack Builder](experiments/65-interview-pack-builder/) | Draft questions tied to each essential criterion, a behaviourally anchored rubric, adjustment prompts, and note-taking guidance. Autonomy A1. The recruiter approves the questions and the rubric before use. The agent does not contact candidates, schedule interviews, score or rank anyone, or make a hiring decision. | ✅ Starter |
 
 ## Getting Started
 
