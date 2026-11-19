@@ -211,6 +211,9 @@ DIAGRAMS = {
     "experiments/66-workforce-skills-inventory/docs/architecture_diagram.png": (
         "experiments/img/66-workforce-skills-inventory-architecture.png"
     ),
+    "experiments/67-contract-clause-review/docs/architecture_diagram.png": (
+        "experiments/img/67-contract-clause-review-architecture.png"
+    ),
 }
 
 

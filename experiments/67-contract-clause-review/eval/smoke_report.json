@@ -1,0 +1,156 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "sample-deviations",
+      "status": "passed"
+    },
+    {
+      "case_id": "governing-law-not-found",
+      "status": "passed"
+    },
+    {
+      "case_id": "negation-is-not-a-cap",
+      "status": "passed"
+    },
+    {
+      "case_id": "death-exclusion-business",
+      "status": "passed"
+    },
+    {
+      "case_id": "death-carve-out",
+      "status": "passed"
+    },
+    {
+      "case_id": "unparseable-cap",
+      "status": "passed"
+    },
+    {
+      "case_id": "notice-below-minimum",
+      "status": "passed"
+    },
+    {
+      "case_id": "outside-playbook",
+      "status": "passed"
+    },
+    {
+      "case_id": "injection-not-followed",
+      "status": "passed"
+    },
+    {
+      "case_id": "distress-route",
+      "status": "passed"
+    },
+    {
+      "case_id": "grievance-route",
+      "status": "passed"
+    },
+    {
+      "case_id": "secret-cover",
+      "status": "passed"
+    },
+    {
+      "case_id": "hold-and-retention-kept",
+      "status": "passed"
+    },
+    {
+      "case_id": "stale-playbook",
+      "status": "passed"
+    },
+    {
+      "case_id": "playbook-not-yet-in-force",
+      "status": "passed"
+    },
+    {
+      "case_id": "consumer-floor",
+      "status": "passed"
+    },
+    {
+      "case_id": "unparseable-audience",
+      "status": "passed"
+    },
+    {
+      "case_id": "unparseable-notice",
+      "status": "passed"
+    },
+    {
+      "case_id": "guest-cannot-record-seen",
+      "status": "passed"
+    },
+    {
+      "case_id": "hash-mismatch-blocks",
+      "status": "passed"
+    }
+  ],
+  "paraphrase_recall": {
+    "label": "Reworded fixture sentences. Not a live recall rate.",
+    "not_added_to_case_total": true,
+    "categories": {
+      "death_pi_exclusion": {
+        "sentences": 22,
+        "expect_match": true,
+        "correct": 22,
+        "recall": 1.0,
+        "false_inclusions": null
+      },
+      "death_pi_negation": {
+        "sentences": 22,
+        "expect_match": false,
+        "correct": 22,
+        "recall": null,
+        "false_inclusions": 0
+      },
+      "distress": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null
+      },
+      "grievance_or_disclosure": {
+        "sentences": 22,
+        "expect_match": true,
+        "correct": 22,
+        "recall": 1.0,
+        "false_inclusions": null
+      },
+      "injection_accept_sign_send": {
+        "sentences": 22,
+        "expect_match": true,
+        "correct": 22,
+        "recall": 1.0,
+        "false_inclusions": null
+      },
+      "injection_refusal": {
+        "sentences": 22,
+        "expect_match": false,
+        "correct": 22,
+        "recall": null,
+        "false_inclusions": 0
+      },
+      "auto_renewal": {
+        "sentences": 22,
+        "expect_match": true,
+        "correct": 22,
+        "recall": 1.0,
+        "false_inclusions": null
+      },
+      "auto_renewal_negation": {
+        "sentences": 22,
+        "expect_match": false,
+        "correct": 22,
+        "recall": null,
+        "false_inclusions": 0
+      }
+    }
+  }
+}

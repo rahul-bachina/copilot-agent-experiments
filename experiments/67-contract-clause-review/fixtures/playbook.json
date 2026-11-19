@@ -1,0 +1,75 @@
+{
+  "playbook_id": "PB-ASH-2026",
+  "organisation": "Ashcombe Borough Council",
+  "synthetic": true,
+  "effective_from": "2026-01-01",
+  "review_due": "2027-05-01",
+  "positions": {
+    "limitation_of_liability": {
+      "preferred_text": "Liability is capped at the fees paid in the 12 months before the claim, and liability for death or personal injury caused by negligence is not excluded.",
+      "fallback_text": "Liability is capped at the fees paid during the term, and liability for death or personal injury caused by negligence is not excluded.",
+      "unacceptable_text": "Liability is unlimited, or liability for death or personal injury caused by negligence is excluded.",
+      "preferred_signals": ["fees paid in the 12 months"],
+      "fallback_signals": ["fees paid during the term"],
+      "unacceptable_signals": ["liability is unlimited", "uncapped liability"],
+      "requires_death_carve_out": true
+    },
+    "indemnities": {
+      "preferred_text": "Any indemnity is capped at the same amount as the liability cap.",
+      "fallback_text": "Any indemnity is capped at the fees paid during the term.",
+      "unacceptable_text": "The indemnity is uncapped.",
+      "preferred_signals": ["capped at the same amount"],
+      "fallback_signals": ["indemnity is capped at the fees paid during the term"],
+      "unacceptable_signals": ["uncapped indemnity"]
+    },
+    "data_protection": {
+      "preferred_text": "Where a party is a processor, the contract states the Article 28(3) particulars and the points (a) to (h).",
+      "fallback_text": "Where a party is a processor, the contract incorporates a UK GDPR Article 28 addendum that states the same particulars.",
+      "unacceptable_text": "A processor is appointed and the contract says Article 28 does not apply.",
+      "preferred_signals": ["documented instructions", "subject-matter and duration"],
+      "fallback_signals": ["Article 28 addendum"],
+      "unacceptable_signals": ["Article 28 does not apply"]
+    },
+    "termination": {
+      "preferred_text": "Either party may terminate on 90 days' notice.",
+      "fallback_text": "Either party may terminate on 60 days' notice.",
+      "unacceptable_text": "Either party may terminate on fewer than 30 days' notice.",
+      "preferred_signals": ["90 days' notice"],
+      "fallback_signals": ["60 days' notice"],
+      "unacceptable_signals": ["immediate termination for convenience"],
+      "minimum_notice_days": 30
+    },
+    "governing_law": {
+      "preferred_text": "The agreement is governed by the laws of England and Wales.",
+      "fallback_text": "The agreement is governed by the laws of Scotland.",
+      "unacceptable_text": "The agreement is governed by the laws of the State of New York.",
+      "preferred_signals": ["laws of England and Wales"],
+      "fallback_signals": ["laws of Scotland"],
+      "unacceptable_signals": ["laws of the State of New York"]
+    },
+    "intellectual_property": {
+      "preferred_text": "New intellectual property vests in the Customer.",
+      "fallback_text": "New intellectual property is licensed to the Customer for the term.",
+      "unacceptable_text": "New intellectual property vests in the Supplier.",
+      "preferred_signals": ["vests in the Customer"],
+      "fallback_signals": ["licensed to the Customer"],
+      "unacceptable_signals": ["vests in the Supplier"]
+    },
+    "confidentiality": {
+      "preferred_text": "Confidential information stays confidential for 5 years after the agreement ends.",
+      "fallback_text": "Confidential information stays confidential for 3 years after the agreement ends.",
+      "unacceptable_text": "Confidentiality does not apply to the Customer's information.",
+      "preferred_signals": ["for 5 years"],
+      "fallback_signals": ["for 3 years"],
+      "unacceptable_signals": ["confidentiality does not apply"]
+    },
+    "auto_renewal": {
+      "preferred_text": "The agreement shall not automatically renew.",
+      "fallback_text": "The agreement renews only if the Customer opts in.",
+      "unacceptable_text": "The agreement shall automatically renew.",
+      "preferred_signals": ["shall not automatically renew"],
+      "fallback_signals": ["only if the Customer opts in"],
+      "unacceptable_signals": ["shall automatically renew"]
+    }
+  }
+}
