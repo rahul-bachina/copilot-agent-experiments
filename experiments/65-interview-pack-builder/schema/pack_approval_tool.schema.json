@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve pack for the recruiter's use",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pack", "directory", "approval"],
+  "properties": {
+    "pack": {"type": "object"},
+    "directory": {"type": "object"},
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item", "decision", "approver_ref", "pack_hash"],
+      "properties": {
+        "item": {"const": "pack"},
+        "decision": {"const": "approve"},
+        "approver_ref": {"type": "string"},
+        "pack_hash": {"type": "string"},
+        "guide_seen": {"type": "boolean"},
+        "pins_seen": {"type": "boolean"},
+        "rubric_gap_seen": {"type": "boolean"},
+        "question_date_seen": {"type": "boolean"},
+        "labels_unreadable_seen": {"type": "boolean"},
+        "adjustment_seen": {"type": "boolean"}
+      }
+    }
+  }
+}

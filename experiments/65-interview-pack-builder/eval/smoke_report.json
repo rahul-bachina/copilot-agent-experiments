@@ -1,0 +1,222 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "dataset_label": "Synthetic interview packs. Ashcombe Borough Council is invented. Not a model dataset.",
+  "organisation_in_fixtures": "Ashcombe Borough Council",
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "sample-draft",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "age-negation",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "marriage-probe",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "pregnancy-probe",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "religion-probe",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "nationality-probe",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "right-to-work-only",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "health-route",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "distress",
+      "status": "passed",
+      "checks": [],
+      "outcome": "human_route"
+    },
+    {
+      "case_id": "secret-cover",
+      "status": "passed",
+      "checks": [],
+      "outcome": "above_clearance"
+    },
+    {
+      "case_id": "unreadable-criteria",
+      "status": "passed",
+      "checks": [],
+      "outcome": "unreadable"
+    },
+    {
+      "case_id": "no-criteria",
+      "status": "passed",
+      "checks": [],
+      "outcome": "no_criteria"
+    },
+    {
+      "case_id": "adjustment-cost",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "score-refused",
+      "status": "passed",
+      "checks": [],
+      "outcome": "prohibited_request"
+    },
+    {
+      "case_id": "score-negated",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "stale-guide",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "positive-action",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "wording-exp64",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    },
+    {
+      "case_id": "not-synthetic",
+      "status": "passed",
+      "checks": [],
+      "outcome": "not_synthetic"
+    },
+    {
+      "case_id": "approve-pack",
+      "status": "passed",
+      "checks": [],
+      "outcome": "draft"
+    }
+  ],
+  "paraphrase_recall": {
+    "label": "PARAPHRASE RECALL. Not a model score. Idioms that miss are listed.",
+    "not_a_model_evaluation": true,
+    "categories": {
+      "age": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "How many winters have you seen?"
+        ]
+      },
+      "marriage": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "Is there a ring on your left hand?"
+        ]
+      },
+      "pregnancy_childcare": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "Will a new arrival at home change your hours?"
+        ]
+      },
+      "religion": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "What do you do on Sunday mornings?"
+        ]
+      },
+      "nationality": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "Which flag do you support?"
+        ]
+      },
+      "disability_health": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "How often are you under the weather?"
+        ]
+      },
+      "other_protected": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "What community do you come from originally?"
+        ]
+      },
+      "distress": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "The lights have gone out for them."
+        ]
+      },
+      "occupational_requirement": {
+        "caught": 22,
+        "variants": 23,
+        "recall": 0.957,
+        "misses": [
+          "We need someone who looks the part for this community."
+        ]
+      },
+      "prohibited_action": {
+        "caught": 24,
+        "variants": 25,
+        "recall": 0.96,
+        "misses": [
+          "Line them up from the one you want most to the one you want least."
+        ]
+      }
+    }
+  },
+  "recall_not_added_to_case_total": true
+}
