@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that a lawyer has seen a comparison",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver_ref", "item", "decision", "contract_hash", "deviations_hash"],
+  "properties": {
+    "approver_ref": {"type": "string"},
+    "item": {"enum": ["clause-review", "distress-seen", "grievance-seen"]},
+    "decision": {"const": "seen"},
+    "contract_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "deviations_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "playbook_seen": {"type": "boolean"},
+    "pins_seen": {"type": "boolean"},
+    "terms_accepted": {"const": false},
+    "signed": {"const": false},
+    "sent": {"const": false},
+    "redline_applied": {"const": false},
+    "legal_advice": {"const": false}
+  }
+}
