@@ -2,6 +2,8 @@
 
 UK Consumer Duty / DISP edition. Catalogue ID **C006**.
 
+Also available as a standalone repo: <https://github.com/rahul-bachina/consumer-duty-complaints-copilot-agent>
+
 A starter for FCA-regulated firms. It helps a complaints handler turn an inbound complaint into a structured intake: what was said, whether it meets the Handbook definition of a complaint, product and root cause, characteristics a handler should review, the DISP clock, the Consumer Duty outcome the facts appear to touch, and a draft acknowledgement.
 
 **Autonomy A1.** A handler validates every classification and every severity. The agent does not send, write a production record, close a case, uphold or reject a complaint, or decide redress.

@@ -2,6 +2,8 @@
 
 <span class="status status-available">Available</span> · Autonomy A1 · Experiment 01
 
+Also available as a standalone repo: <https://github.com/rahul-bachina/foi-complaint-triage-copilot-agent>
+
 An assistant for UK public sector staff who triage Freedom of Information (FOI) requests, Environmental Information Regulations (EIR) requests, subject access requests (SARs), and complaints.
 
 The agent prepares a structured brief. A person decides. The repository README marks the experiment complete, which means the starter is written: Python code, a permissions manifest, a security note, and build notes for both Copilot Studio harnesses. A live model evaluation is still marked as pending in that folder.

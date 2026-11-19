@@ -2,6 +2,8 @@
 
 An AI agent that helps UK public sector staff triage Freedom of Information (FOI) requests, Environmental Information Regulations (EIR) requests, Subject Access Requests (SARs), and complaints.
 
+Also available as a standalone repo: <https://github.com/rahul-bachina/foi-complaint-triage-copilot-agent>
+
 **Key principle: The agent ASSISTS staff. It never decides. Humans always make final decisions.**
 
 ![Architecture Diagram](docs/architecture_diagram.png)

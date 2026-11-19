@@ -2,6 +2,8 @@
 
 <span class="status status-available">Available</span> · Autonomy A1 · Experiment 02 · Catalogue ID C006
 
+Also available as a standalone repo: <https://github.com/rahul-bachina/consumer-duty-complaints-copilot-agent>
+
 A starter for FCA-regulated firms. It helps a complaints handler turn one inbound complaint into a structured intake: what was said, whether it meets the Handbook definition of a complaint, product and root cause, characteristics a handler should review, the DISP clock, the Consumer Duty outcome the facts appear to touch, and a draft acknowledgement.
 
 The repository README marks it as a starter. That is accurate. This revision contains the permissions manifest, a deterministic DISP clock, 22 synthetic fixtures, a mock intake used only as a smoke test, and build notes for both Copilot Studio harnesses, Microsoft Foundry, and Dynamics 365 Customer Service. Nothing in the folder calls a model.
