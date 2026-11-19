@@ -11,7 +11,10 @@ from __future__ import annotations
 
 import re
 
-from negate import denied_at, sentences
+if __package__ in {None, ""}:
+    from negate import denied_at, sentences
+else:
+    from .negate import denied_at, sentences
 
 RANK = {
     "OFFICIAL": 1,

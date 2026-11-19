@@ -8,7 +8,10 @@ from __future__ import annotations
 
 import re
 
-from negate import sentences
+if __package__ in {None, ""}:
+    from negate import sentences
+else:
+    from .negate import sentences
 
 _CUES = tuple(
     re.compile(pattern, re.I)
