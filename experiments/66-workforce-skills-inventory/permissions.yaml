@@ -1,0 +1,478 @@
+# Agent manifest: Workforce Skills Inventory
+# Experiment 66 — catalogue ID H010
+# Version: 0.1.0
+# Last reviewed: 2026-11-19
+# Next review: 2027-05-19
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-66-workforce-skills-inventory"
+  name: "Workforce Skills Inventory"
+  version: "0.1.0"
+  description: >
+    Proposes skills from synthetic evidence an employee supplied for a skills
+    inventory, each with a cited snippet, a confidence band, and the state
+    needs employee confirmation. Autonomy A0. The employee can reject or
+    correct any skill. HR validates only after that step. The agent does not
+    write to an HR system, rate performance, or feed pay, promotion,
+    redundancy, or disciplinary decisions. A team count suppresses small
+    numbers and does not list people.
+  owner: "HR"
+  contact: "skills.inventory@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/66-workforce-skills-inventory"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only proposals. The employee and HR each validate a skill. The agent does not write a record or take an employment decision."
+  constraints:
+    - "The agent NEVER writes to an HR system"
+    - "The agent NEVER rates performance or sets a numeric score"
+    - "The agent NEVER feeds pay, promotion, redundancy selection, or a disciplinary decision"
+    - "The agent NEVER infers a skill from a protected characteristic or from health data"
+    - "The agent NEVER profiles a person from data they did not supply for this purpose"
+    - "The agent NEVER treats confirmation text inside the evidence as the deterministic step"
+    - "A self-declared role or clearance in the request is not the directory"
+    - "The employee can reject or correct any inferred skill, including after HR has validated it"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic employee-supplied evidence"
+      description: "CV extracts, completed learning records, and project summaries the caller marks as supplied for a skills inventory. Samples are synthetic."
+      access_level: "read"
+      scope: "One pack per invocation. Raw evidence is not copied into the result. A snippet is a masked sentence."
+      justification: "A proposal has to cite the evidence the employee supplied for this purpose."
+      data_categories:
+        - "Evidence identifiers, kinds, and dates"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the pack."
+    - resource: "Synthetic example skills framework"
+      description: "An example list of skill phrases. It is not SFIA. The organisation must license any SFIA-style framework and review the phrases."
+      access_level: "read"
+      scope: "One framework file per invocation."
+      justification: "A proposal has to name a framework skill. A phrase that is not on the framework is not invented."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Role, clearance, and team come from the directory. Age, health, and other fields on the row are not read."
+      access_level: "read"
+      scope: "One employee reference, plus the HR role check on a later validation object."
+      justification: "The employee and HR steps have to match a directory role. A role in the request is not used."
+      may_contain_personal_data: true
+    - resource: "Synthetic Article 13 record"
+      description: "Booleans the controller says were included in the privacy information. A true value is not a finding that Article 13 was met."
+      access_level: "read"
+      scope: "One record per invocation."
+      justification: "A missing or unreadable field is flagged. It is not coerced to true."
+      may_contain_personal_data: false
+    - resource: "Separate employee and HR decision objects"
+      description: "The only objects that can change a skill state. Not read from the evidence."
+      access_level: "read"
+      scope: "One decision, bound to the inventory hash and the skill hash or the correction hash."
+      justification: "Confirmation has to be deterministic and bound to the exact proposal."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 redaction gateway"
+      description: "propose() on a snippet. reversible stays false. The output is not described as anonymised."
+      access_level: "read"
+      scope: "One sentence at a time. Matched values are not stored."
+      justification: "UK identifiers in a cited sentence are proposed for redaction before the snippet is kept."
+      may_contain_personal_data: true
+    - resource: "Experiment 61 learning path planner"
+      description: "draft_plan() only after the employee has confirmed a skill, and only with that skill name. Nobody is enrolled."
+      access_level: "read"
+      scope: "The synthetic catalogue beside this folder. No approval is recorded."
+      justification: "A learning plan can be shown beside a confirmed skill. It is not a rating and not a promotion factor."
+      may_contain_personal_data: true
+    - resource: "Experiment 62 internal mobility explorer"
+      description: "explore() only when the employee states experience in the request. Inferred skills are not passed in. No selection is made."
+      access_level: "read"
+      scope: "The synthetic vacancy feed beside this folder."
+      justification: "A vacancy note can sit beside the inventory. It does not decide eligibility or select anyone."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live HR system, a payroll system, or a disciplinary file"
+      reason: "The pack is the fixture the caller supplied. The core does not write a record."
+    - resource: "Monitoring, mailbox, absence, manager-note, or health-record channels"
+      reason: "Those items are skipped. Skills are not profiled from data the employee did not supply for this purpose."
+    - resource: "Directory age, disability, health, or other fields outside role, clearance, and team"
+      reason: "Those fields are not read. A skill is not inferred from them."
+    - resource: "A self-declared role or clearance in the request"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Evidence above the directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Propose"
+      provider: "Local Python (propose_inventory)"
+      action: "Propose skills with a snippet, a confidence band, and the state needs employee confirmation"
+      access_level: "read"
+      scope: "One synthetic pack. No network. No model."
+      justification: "Matching is a comparison with the example framework. A language model must not invent a skill or a rating."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record employee decision"
+      provider: "Local Python (record_employee_decision)"
+      action: "Record that the employee confirmed, rejected, or corrected one skill hash"
+      access_level: "read"
+      scope: "The proposal and a separate decision object. Nothing is written to HR."
+      justification: "The employee has to be able to reject or correct any inferred skill. The step is bound to the inventory hash and the skill hash."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record HR validation"
+      provider: "Local Python (record_hr_validation)"
+      action: "Record that HR has validated one skill the employee already confirmed or corrected"
+      access_level: "read"
+      scope: "The proposal and a separate validation object. No HR-system write and no performance rating."
+      justification: "HR validation is a second human step. It cannot override a rejection."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that HR has seen a distress, objection, or out-of-scope route"
+      access_level: "read"
+      scope: "The route reason code and a separate seen object. The case is not decided."
+      justification: "A cue is for a person. Seeing the route is not a decision."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text analysis"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The proposals, the bands, and the empty confirmation stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No HR-system write. record_employee_decision and record_hr_validation
+      return JSON. wrote_to_hr_system stays false.
+
+  sends:
+    enabled: false
+    note: "No sends. A validation does not email a manager, payroll, or the employee."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve or reject an employment decision. An employee
+      decision records confirmation, rejection, or a correction of one proposal.
+      It is not a performance outcome. A sentence in the evidence cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5, 6, 13, 21, or 22A was met,
+      and it does not decide a Data Protection Act 2018 section 10 condition.
+      It does not take a significant decision.
+  production_record_change:
+    enabled: false
+    rationale: "The proposal is JSON. It is not a write to an HR system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not contact a manager, payroll, or anyone else."
+  spend_transact:
+    enabled: false
+    rationale: "There is no spend. The agent does not transact."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Write to an HR system"
+      rationale: "write_hr() raises. wrote_to_hr_system stays false."
+    - enabled: false
+      action_name: "Rate performance or set pay"
+      rationale: "rate_performance() and set_pay() raise. performance_rating stays null."
+    - enabled: false
+      action_name: "Decide promotion, redundancy, or discipline"
+      rationale: "Those functions raise. A request for them is an out-of-scope route to HR."
+    - enabled: false
+      action_name: "Infer a skill from a protected characteristic or from health data"
+      rationale: "infer_from_protected() raises. A sentence that asks for that inference is refused."
+    - enabled: false
+      action_name: "Profile a person from data they did not supply"
+      rationale: "profile_unsupplied() raises. Monitoring and mailbox items are skipped."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold or a retention label on a proposal or a withheld item is kept."
+
+human_approval:
+  description: >
+    Every proposed skill starts as needs employee confirmation. The employee
+    confirms, rejects, or corrects that skill, bound to the inventory hash and
+    the skill hash. HR validates only after that, bound to the same hash or to
+    the correction hash. The employee can still reject afterwards. Distress,
+    an objection, and a use for redundancy, performance, pay, promotion, or
+    discipline go to HR. Approval text inside the evidence is not that step.
+
+  approval_points:
+    - action: "Confirm, reject, or correct one proposed skill"
+      approver: "The employee on the directory"
+      mandatory: true
+      rationale: "record_employee_decision accepts that employee only, for this inventory hash and this skill hash. A manager or HR cannot take the employee's step."
+    - action: "Validate a skill the employee has confirmed or corrected"
+      approver: "HR on the directory"
+      mandatory: true
+      rationale: "record_hr_validation does not write to an HR system and does not rate performance. A rejected skill cannot be validated."
+    - action: "See a distress, objection, or out-of-scope route"
+      approver: "HR"
+      mandatory: true
+      rationale: "record_route_seen sets route_seen.recorded. The case is not decided. The cue is not copied."
+    - action: "Read an Article 13 gap or an unreadable field"
+      approver: "The controller's privacy lead"
+      mandatory: true
+      rationale: "A missing field is flagged. article_13_met stays false. A string is not coerced to true."
+
+  no_approval_required:
+    - action: "Read the proposal"
+      rationale: "Reading a proposal has no external effect. employee_confirmed stays false. Nothing is sent."
+    - action: "Re-run the same request"
+      rationale: "No write and no send. The same inputs produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. UK GDPR
+      Article 6(1), including point (ea), was read on 19 November 2026.
+      Points (ea) and (f) shall not apply to processing carried out by public
+      authorities in the performance of their tasks. Article 5(1)(b) and
+      Article 5(3) were read and are not a lawful basis. Article 5(3) says
+      processing is not lawful by virtue only of being compatible with the
+      purposes for which the personal data was collected. data_minimisation
+      is not marked as met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or other special-category text the evidence may contain if the caller pastes it"
+    lawful_basis_special: "Not asserted. Article 9 was not opened as its own page. Data Protection Act 2018 section 10 was read. Schedule 1 was not opened."
+    safeguards:
+      - "A request to infer a skill from health or from a protected characteristic is refused. The sentence is not used as evidence."
+      - "A distress or safeguarding cue is flagged for HR. The cue text is not copied."
+      - "Monitoring, mailbox, absence, and health-record items are not used."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision. Article 22 on the page opened on 19 November 2026 had been substituted. Article 22A was read. The sample does not take a significant decision."
+  data_minimisation:
+    - "Raw evidence is not copied. A snippet is one masked sentence."
+    - "Identifier values are not stored. Counts do not include the values."
+    - "output_is_anonymised stays false. Small-number suppression is not described as anonymisation."
+    - "Directory fields other than role, clearance, and team are not read."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on a proposal or a withheld item are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry or Microsoft Fabric deployment should use a UK region the organisation has chosen. This repository cannot enforce that. Fabric region behaviour was not verified beyond the overview page."
+  data_subject_rights:
+    note: "An objection in the request stops the inventory and routes to HR. The agent does not decide Article 21(1) compelling grounds. Access, erasure, and the other rights go through the organisation's privacy process. Article 21(4) was read. The starter does not decide that the right was brought to the data subject's attention."
+
+prompt_injection:
+  description: >
+    Evidence text is untrusted. It may say the employee has confirmed every
+    skill, that HR has validated the inventory, or that a label should be
+    stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are removed from matching text"
+      description: "Ignore-instructions, pretend-confirmation, and strip-label sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not a skill, a cue, or an inclusion."
+    - control: "Confirmation is a separate object bound to the content hash"
+      description: "Approval keys on the request are stripped. employee_confirmed stays false until record_employee_decision succeeds for that hash."
+    - control: "No HR write, rating, or employment-decision tool"
+      description: "Those functions raise InventoryForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The employee and
+    HR are the control for each skill. There is no HR write even if the note
+    is wrong. A paraphrase that uses none of the patterns is not flagged.
+    Recall on the checked reworded set is in eval/smoke_report.json and is a
+    smoke figure, not a model score.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-19"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the evidence is treated as the employee having confirmed the skill"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_employee_decision reads only the separate object and checks both hashes"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R2"
+      risk: "The agent writes an HR record, rates performance, or feeds pay, promotion, redundancy, or discipline"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false and the purpose is an out-of-scope route"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R3"
+      risk: "A skill is inferred from health, a protected characteristic, or from monitoring data"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The outcome is inference_refused or the item is skipped"
+        - "A sentence that states health is not cited"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R4"
+      risk: "Distress, an objection, or a grievance is handled as a routine inventory"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those outcomes name HR and do not propose skills"
+        - "The cue text is not copied"
+      residual_risk: "Medium"
+      owner: "HR"
+    - id: "R5"
+      risk: "An unreadable date, consent flag, or threshold is coerced to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "HR"
+    - id: "R6"
+      risk: "A team count identifies a person, or a legal hold is dropped"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Small cells and small complements are suppressed"
+        - "Employee references are not listed on the team view"
+        - "Metadata and content markings are both read, and the higher marking is kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the employee reference
+    if it matched the synthetic pattern, the outcome, and whether a decision
+    was recorded. This starter logs nothing because it keeps no store.
+    Do not put the evidence text in an application trace.
+  logged_events:
+    - event: "Inventory drafted"
+      data_logged:
+        - "Timestamp"
+        - "Employee reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether employee_confirmed was left false"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Employee or HR step recorded"
+      data_logged:
+        - "Whether the inventory hash and the skill hash matched"
+        - "wrote_to_hr_system false"
+        - "performance_rating null"
+      retention: "Organisation's schedule. The agent does not write this event to an HR system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates. Do not send the log to a manager as a performance note."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional narrative"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "HR"
+      contact: "skills.inventory@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-19"
+  next_review_date: "2027-05-19"
+  review_frequency: "6 months, and sooner if the pinned legislation or the ICO pages change"
+  reviewer: "The adopting organisation's HR lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 5, 6, 13, 21, or 22A"
+    - "A change to Data Protection Act 2018 section 4 or section 10"
+    - "A change to the ICO monitoring-workers or AI lawfulness pages, which were marked under review on 19 November 2026"
+    - "A proposal to add a connector that can write to an HR system or set pay"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Inventory core"
+      path: "src/inventory.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The inventory from this starter is also not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 was read on 19 November 2026 and is not treated as decided. Article 9 was not opened. Schedule 1 was not opened."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "On 19 November 2026 the UK GDPR Article 22 page showed the body omitted. Article 22A was read. Articles 22B, 22C, and 22D were not opened. S.I. 2026/82 was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The Article 5, 6, 13, 21, 22, and 22A extracts did not include an up-to-date-on-or-before banner. Those date lines are unverified. Article 21 paragraphs 2 and 3 were not in the extract and are not quoted."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Data Protection Act 2018 section 4's page said it was up to date on or before 18 November 2026. Section 10's page said 19 November 2026. A question date after a stamp is not treated as covered."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold defaults to 5 when the framework omits it. That is a starter default, not a statutory number. The ICO anonymisation guidance was not opened. Suppression is not anonymisation."
+      section: "src/inventory.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The ICO monitoring-workers page and the AI lawfulness chapter were marked under review because of the Data (Use and Access) Act. The AI chapter said latest update 28 October 2024."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview as a configured policy, and Application Insights were not opened. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview opened on 19 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "The Fabric overview was opened on 19 November 2026. This starter does not deploy a lakehouse, a notebook, or a Power BI report. Fabric IQ is described on that page as preview. A Fabric connector for this package was not tested."
+      section: "docs/fabric.md"
+      verify_on_deployment: true
+    - id: "A10"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council is invented. The example framework is not SFIA and is not a licence."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

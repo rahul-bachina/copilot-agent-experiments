@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HR validates one skill the employee has already confirmed or corrected",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "inventory_id", "inventory_hash", "skill_id", "approver_ref"],
+  "properties": {
+    "item": {"type": "string", "const": "skill-validation"},
+    "decision": {"type": "string", "const": "validate"},
+    "inventory_id": {"type": "string"},
+    "inventory_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "skill_id": {"type": "string"},
+    "skill_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "correction_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "approver_ref": {"type": "string", "pattern": "^EMP-\\d{4}$"},
+    "wrote_to_hr_system": {"type": "boolean", "const": false},
+    "performance_rating": {"type": "null"}
+  }
+}
