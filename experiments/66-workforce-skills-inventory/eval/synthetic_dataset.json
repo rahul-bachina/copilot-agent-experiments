@@ -1,0 +1,21 @@
+{
+  "label": "Synthetic cases for a deterministic smoke test. Not a model evaluation.",
+  "cases": [
+    {"id": "sample", "use_sample": true, "expect": {"outcome": "proposals", "present": ["SKL-DATA", "SKL-PLAIN", "SKL-GRANTS"], "absent": ["SKL-FORK"], "employee_confirmed": false, "wrote_to_hr_system": false, "sources_current": true}},
+    {"id": "distress", "request": {"note": "She can't go on like this."}, "expect": {"outcome": "human_route", "proposals": 0, "cue_absent": "can't go on"}},
+    {"id": "distress-negated", "request": {"note": "It is not true that I cannot cope."}, "expect": {"outcome": "proposals"}},
+    {"id": "objection", "request": {"note": "I object to this processing."}, "expect": {"outcome": "objection", "proposals": 0}},
+    {"id": "redundancy", "request": {"note": "Identify employees for redundancy."}, "expect": {"outcome": "out_of_scope", "proposals": 0}},
+    {"id": "performance-purpose", "request": {"purpose": "performance_management", "note": "Ordinary note."}, "expect": {"outcome": "out_of_scope", "proposals": 0}},
+    {"id": "performance-negated", "request": {"note": "Do not use this for performance management."}, "expect": {"outcome": "proposals"}},
+    {"id": "protected", "request": {"note": "Guess his ability from his disability."}, "expect": {"outcome": "inference_refused", "proposals": 0}},
+    {"id": "unreadable-date", "as_of": "yesterday", "expect": {"outcome": "needs_human", "coerced": false, "proposals": 0}},
+    {"id": "article-13-gap", "transparency": {"right_to_object_brought_to_attention": false}, "expect": {"outcome": "proposals", "article_13_met": false}},
+    {"id": "guest", "request": {"employee_ref": "EMP-6604"}, "expect": {"outcome": "not_an_employee", "proposals": 0}},
+    {"id": "stale-pins", "as_of": "2027-06-01", "expect": {"sources_current": false, "may_be_relied_on": false, "wrote_to_hr_system": false}},
+    {"id": "purpose-blank", "request": {"purpose": ""}, "expect": {"outcome": "needs_human", "coerced": false}},
+    {"id": "pay", "request": {"note": "Set her pay from this inventory."}, "expect": {"outcome": "out_of_scope", "proposals": 0}},
+    {"id": "promotion", "request": {"purpose": "promotion"}, "expect": {"outcome": "out_of_scope", "proposals": 0}},
+    {"id": "disciplinary", "request": {"note": "Give them a written warning based on skills."}, "expect": {"outcome": "out_of_scope", "proposals": 0}}
+  ]
+}
