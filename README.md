@@ -28,7 +28,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Sixty-five starters are in `experiments/`. The folders are 01 to 64 and 67.
+Sixty-six starters are in `experiments/`. The folders are 01 to 64, 66 and 67.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -96,6 +96,7 @@ Sixty-five starters are in `experiments/`. The folders are 01 to 64 and 67.
 | 62 | [Internal Mobility Explorer](experiments/62-internal-mobility-explorer/) | Explain which open vacancies look relevant to the experience an employee states, with a citation to the vacancy and the HR eligibility rule. Autonomy A0. The agent does not apply, nominate, shortlist, contact anyone, or make a selection decision. HR validates eligibility. | ✅ Starter |
 | 63 | [Leave Policy Explainer](experiments/63-leave-policy-explainer/) | Explain a synthetic leave policy and the UK statutory baseline. Autonomy A0. The answer quotes the section, its effective date, and the statutory source. It does not decide entitlement, book leave, record leave, or calculate pay. | ✅ Starter |
 | 64 | [Job Description Quality Checker](experiments/64-job-description-quality/) | Flag potentially exclusionary wording, missing salary or location, and unjustified essential criteria in one synthetic draft. Autonomy A0. The recruiter accepts or rejects each suggestion and writes the final wording. The agent does not publish, post, or send. | ✅ Starter |
+| 66 | [Workforce Skills Inventory](experiments/66-workforce-skills-inventory/) | Propose skills from synthetic evidence an employee supplied, each with a cited snippet, a confidence band, and a state that needs employee confirmation. Autonomy A0. The employee can reject or correct any skill. HR validates only after that step. The agent does not write to an HR system, rate performance, or feed pay, promotion, redundancy, or disciplinary decisions. | ✅ Starter |
 | 67 | [Contract Clause Review](experiments/67-contract-clause-review/) | Quote limitation of liability, indemnities, processor terms, termination, governing law, intellectual property, confidentiality, and auto-renewal against a synthetic playbook. Autonomy A0. The lawyer owns the interpretation. The agent does not give legal advice, redline, accept terms, sign, or send. | ✅ Starter |
 
 ## Getting Started
