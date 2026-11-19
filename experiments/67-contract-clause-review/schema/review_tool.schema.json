@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Review clauses",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "text", "audience", "processing_role", "caller_ref", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "contract_id": {"type": "string", "maxLength": 80},
+    "title": {"type": "string"},
+    "audience": {"enum": ["business", "consumer"]},
+    "processing_role": {"enum": ["processor", "controller_only", "not_stated"]},
+    "contract_date": {"type": "string"},
+    "caller_ref": {"type": "string"},
+    "text": {"type": "string"},
+    "as_of": {"type": "string"},
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "marking": {"type": "string"},
+        "retention": {"type": "array", "items": {"type": "string"}},
+        "legal_hold": {"type": "boolean"}
+      }
+    }
+  }
+}

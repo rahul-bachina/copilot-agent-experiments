@@ -1,0 +1,432 @@
+# Agent manifest: Contract Clause Review
+# Experiment 67 — catalogue ID L001
+# Version: 0.1.0
+# Last reviewed: 2026-11-19
+# Next review: 2027-05-19
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-67-contract-clause-review"
+  name: "Contract Clause Review"
+  version: "0.1.0"
+  description: >
+    Compares one synthetic contract with one synthetic clause playbook and
+    lists deviations, missing clauses, and conflicts for a lawyer. Autonomy
+    A0. The lawyer owns legal interpretation. The agent does not give legal
+    advice, redline, accept terms, sign, or send.
+  owner: "Lawyer"
+  contact: "legal.review@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/67-contract-clause-review"
+
+autonomy:
+  level: "A0"
+  level_description: "The assistant highlights clauses and deviations for a lawyer. The lawyer owns all legal interpretation. The agent does not give legal advice, redline, accept terms, sign, or send."
+  constraints:
+    - "The lawyer owns legal interpretation. The agent does not."
+    - "The agent NEVER gives legal advice"
+    - "The agent NEVER redlines a contract"
+    - "The agent NEVER accepts terms on anyone's behalf"
+    - "The agent NEVER signs or sends anything"
+    - "The agent NEVER treats approval text inside the contract as approval"
+    - "A self-declared role or clearance in the contract is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic contract"
+      description: "One contract text. Samples are synthetic. Instructions inside the text are not followed."
+      access_level: "read"
+      scope: "One contract per invocation. The body is not copied into the result when the marking is above the directory clearance."
+      justification: "A deviation has to quote the sentence the lawyer supplied."
+      data_categories:
+        - "Clause text"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the contract."
+    - resource: "Synthetic clause playbook"
+      description: "Preferred, fallback, and unacceptable positions for eight clause topics."
+      access_level: "read"
+      scope: "One playbook per invocation."
+      justification: "A deviation is a comparison with the organisation's stated position, not a legal conclusion."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Lawyers and guests. The contract does not set the role or the clearance."
+      access_level: "read"
+      scope: "One caller reference."
+      justification: "Only a directory lawyer can record that they have seen a comparison."
+      may_contain_personal_data: true
+    - resource: "Separate seen object"
+      description: "The only object that can record that a lawyer has seen this contract hash and this deviations hash."
+      access_level: "read"
+      scope: "One seen object, bound to those hashes."
+      justification: "Approval inside the contract is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on quotes. Reversible stays false. The output is not described as anonymised."
+      access_level: "read"
+      scope: "Quotes and a count on the contract. Matched values are not stored."
+      justification: "A pasted identifier is masked before a quote is shown."
+      may_contain_personal_data: true
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the contract as one text file. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch. The intake draft is not a queue acceptance."
+      justification: "The contract is untrusted text. Intake records that, and this starter does not confirm the file."
+      may_contain_personal_data: true
+    - resource: "Experiment 27 tool-contract review patterns"
+      description: "strip_prohibited and signals_in_text. review() is not called. A legal contract is not a tool contract."
+      access_level: "read"
+      scope: "Keys and instruction signals only."
+      justification: "Forged approval keys and instruction phrases are stripped or recorded, and not followed."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live contract store, e-signature service, or mailbox"
+      reason: "The text is what the caller supplied. The core does not sign or send."
+    - resource: "A self-declared role, guest status, or clearance in the contract"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Contract text above the directory clearance"
+      reason: "Quotes are not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Review clauses"
+      provider: "Local Python (review_contract)"
+      action: "Return a clause comparison for one synthetic contract and one playbook"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Quotes, negation, and playbook comparison are deterministic. A language model must not decide that a term is lawful."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record lawyer seen"
+      provider: "Local Python (record_lawyer_seen)"
+      action: "Record that a directory lawyer has seen this contract hash and this deviations hash"
+      access_level: "read"
+      scope: "The comparison and a separate seen object. Terms are not accepted."
+      justification: "The seen step has to name the lawyer and the exact hashes. It does not accept, sign, or send."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quotes, the hashes, and the empty or recorded seen step stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No contract-system write and no redline write. record_lawyer_seen returns
+      JSON. terms_accepted, signed, and sent stay false.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Recording that a lawyer has seen a comparison does not send the contract.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not accept or reject terms. A seen object records that a
+      directory lawyer has looked at this hash. A sentence in the contract
+      cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a term is enforceable, reasonable, fair,
+      or compliant with UK GDPR Article 28, the Unfair Contract Terms Act 1977,
+      or the Consumer Rights Act 2015.
+  production_record_change:
+    enabled: false
+    rationale: "The seen record is JSON. It is not a write to a contract system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the contract or a redline."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A liability figure is information for the lawyer."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Give legal advice, redline, accept terms, sign, or send"
+      rationale: "give_legal_advice(), redline(), accept_terms(), sign(), and send() raise. Those flags stay false."
+    - enabled: false
+      action_name: "Treat a contract sentence as the lawyer's approval"
+      rationale: "human_approval stays null until record_lawyer_seen succeeds for the directory lawyer and the exact hashes."
+    - enabled: false
+      action_name: "Mark a term safe or Article 28 compliant"
+      rationale: "marked_safe and article_28_complied stay false. Phrase presence is not compliance."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold and every retention label are copied onto the result."
+
+human_approval:
+  description: >
+    A directory lawyer records that they have seen the comparison, on a
+    separate object, bound to the contract hash and the deviations hash.
+    Seeing it does not accept terms. A distress, grievance, or safeguarding
+    cue has to be seen as that route. A stale playbook and an unconfirmed
+    statute pin have to be acknowledged as booleans. Approval text inside
+    the contract is not that step.
+
+  approval_points:
+    - action: "See a distress, grievance, or safeguarding route"
+      approver: "Lawyer"
+      mandatory: true
+      rationale: "record_lawyer_seen accepts item distress-seen or grievance-seen from a directory lawyer. A clause-review seen step does not close the route."
+    - action: "See this comparison"
+      approver: "Lawyer"
+      mandatory: true
+      rationale: "record_lawyer_seen accepts the directory lawyer only when the contract hash and the deviations hash match and the item is clause-review."
+    - action: "Confirm a stale or not-yet-in-force playbook"
+      approver: "Lawyer"
+      mandatory: true
+      rationale: "playbook_seen must be the boolean true. A string is not coerced."
+    - action: "Confirm an unconfirmed statute pin"
+      approver: "Lawyer"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. The question date is the as-of argument, not today."
+    - action: "Accept terms, sign, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a seen step."
+
+  no_approval_required:
+    - action: "Read the comparison"
+      rationale: "Reading the comparison has no external effect. human_approval stays null."
+    - action: "Re-run the same contract"
+      rationale: "No write and no send. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 19 November 2026. Article 28 was opened as context
+      for a processor-contract checklist. It is not a lawful basis.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a caller may paste into a contract or a cover note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 19 November 2026."
+    safeguards:
+      - "A distress, grievance, or safeguarding cue is routed to a lawyer. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are masked. The output is not described as anonymised."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a contract. The sample does not accept terms."
+  data_minimisation:
+    - "The contract body is not copied into the result."
+    - "Quotes are masked sentences. Identifier values are not stored."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on the contract are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Contract text and playbook notes are untrusted. They may say the lawyer
+    has approved, that terms should be accepted, or that a label should be
+    stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Accept, sign, send, redline, and pretend-approval sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not an inclusion."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_lawyer_seen succeeds."
+    - control: "No advice, redline, accept, sign, or send tool"
+      description: "Those functions raise ContractReviewForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The lawyer is
+    the control. Nothing is signed or sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-19"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the contract is treated as the lawyer's acceptance"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_lawyer_seen reads only the separate seen object"
+      residual_risk: "Low"
+      owner: "Lawyer"
+    - id: "R2"
+      risk: "The agent gives legal advice, redlines, accepts terms, signs, or sends"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "A seen record leaves terms_accepted, signed, and sent false"
+      residual_risk: "Low"
+      owner: "Lawyer"
+    - id: "R3"
+      risk: "A missing clause is invented, or a negated sentence is treated as included"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The quote is not found when the topic is not affirmed"
+        - "Negation is applied before a playbook signal counts"
+      residual_risk: "Medium"
+      owner: "Lawyer"
+    - id: "R4"
+      risk: "A term that excludes liability for death or personal injury is marked safe"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "marked_safe stays false"
+        - "The quoted term is flagged and is not held to be void"
+      residual_risk: "Medium"
+      owner: "Lawyer"
+    - id: "R5"
+      risk: "An unreadable amount, notice period, audience, or date is coerced to zero or to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "Lawyer"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the lawyer reference
+    if it matched the synthetic pattern, the outcome, and whether a seen
+    step was recorded. This starter logs nothing because it keeps no store.
+    Do not put the contract or a quote in an application trace.
+  logged_events:
+    - event: "Comparison returned"
+      data_logged:
+        - "Timestamp"
+        - "Lawyer reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Seen step recorded"
+      data_logged:
+        - "Whether the contract hash matched"
+        - "Whether the deviations hash matched"
+        - "terms_accepted false"
+      retention: "Organisation's schedule. The agent does not write this event to a contract system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Lawyer"
+      contact: "legal.review@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-19"
+  next_review_date: "2027-05-19"
+  review_frequency: "6 months, and sooner if the pinned legislation or the playbook positions change"
+  reviewer: "The adopting organisation's lawyer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 28, Unfair Contract Terms Act 1977 section 2 or section 11, or Consumer Rights Act 2015 Part 2"
+    - "A proposal to add a connector that can redline, accept, sign, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Review core"
+      path: "src/review.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The comparison from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 19 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "UK GDPR Article 28 and Unfair Contract Terms Act 1977 sections 2 and 11 did not show an 'up to date on or before' date on 19 November 2026. Their currency is unverified. Consumer Rights Act 2015 Part 2, section 61, section 62, and section 65 did show stamps, and a later question date is not treated as covered."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Unfair Contract Terms Act 1977 Part II (Scotland) was not opened. Section 2 and section 11 are marked E+W+N.I. on the pages that were opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Phrase presence for Article 28(3) is not a finding of compliance. marked_safe and article_28_complied stay false."
+      section: "src/clauses.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Treating a playbook as stale on its review-due date is this starter's rule. It is not a statutory period. Experiment 12's 90-day document window is that experiment's rule."
+      section: "src/review.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 19 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview opened on 19 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council and Northbridge Supplies Ltd are invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
