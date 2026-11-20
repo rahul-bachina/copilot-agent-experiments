@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Propose mappings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "caller_ref", "policies", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "caller_ref": {"type": "string"},
+    "as_of": {"type": "string"},
+    "cover_note": {"type": "string"},
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["policy_id", "title"],
+        "properties": {
+          "policy_id": {"type": "string"},
+          "title": {"type": "string"},
+          "document_date": {"type": "string"},
+          "effective_from": {"type": "string"},
+          "review_due": {"type": "string"},
+          "marking": {"type": "string"},
+          "retention": {"type": "string"},
+          "legal_hold": {"type": "boolean"},
+          "body": {"type": "string"},
+          "clauses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["clause_ref", "text"],
+              "properties": {
+                "clause_ref": {"type": "string"},
+                "text": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
