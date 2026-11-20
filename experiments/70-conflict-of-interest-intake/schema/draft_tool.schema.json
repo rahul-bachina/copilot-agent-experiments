@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Draft a conflict-of-interest declaration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["declaration_id", "declarant_ref", "text", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "declaration_id": {"type": "string", "maxLength": 40},
+    "declarant_ref": {"type": "string"},
+    "text": {"type": "string", "maxLength": 20000},
+    "as_of": {"type": "string"},
+    "metadata": {"type": "object"}
+  }
+}

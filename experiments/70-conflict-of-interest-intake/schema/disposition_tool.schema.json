@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ethics or procurement records a disposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "declaration_id", "declaration_hash", "staged_hash", "disposition_text", "disposition_hash"],
+  "properties": {
+    "item": {"const": "disposition"},
+    "decision": {"const": "record"},
+    "approver_ref": {"type": "string"},
+    "declaration_id": {"type": "string"},
+    "declaration_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "staged_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "disposition_text": {"type": "string", "minLength": 1, "maxLength": 500},
+    "disposition_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "mitigation_text": {"type": "string", "minLength": 1, "maxLength": 500},
+    "mitigation_hash": {"type": "string", "minLength": 64, "maxLength": 64}
+  }
+}

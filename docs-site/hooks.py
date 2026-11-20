@@ -223,6 +223,9 @@ DIAGRAMS = {
     "experiments/69-policy-control-mapping/docs/architecture_diagram.png": (
         "experiments/img/69-policy-control-mapping-architecture.png"
     ),
+    "experiments/70-conflict-of-interest-intake/docs/architecture_diagram.png": (
+        "experiments/img/70-conflict-of-interest-intake-architecture.png"
+    ),
 }
 
 

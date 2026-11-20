@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Declarant confirms one draft hash",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "declaration_id", "declaration_hash", "pins_seen"],
+  "properties": {
+    "item": {"const": "declaration-confirm"},
+    "decision": {"const": "confirm"},
+    "approver_ref": {"type": "string"},
+    "declaration_id": {"type": "string"},
+    "declaration_hash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "pins_seen": {"const": true},
+    "register_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "criteria_seen": {"const": true},
+    "carve_out_seen": {"const": true}
+  }
+}

@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Sixty-nine starters are in `experiments/`. The folders are 01 to 69.
+Seventy starters are in `experiments/`. The folders are 01 to 70.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -108,6 +108,7 @@ Sixty-nine starters are in `experiments/`. The folders are 01 to 69.
 | 67 | [Contract Clause Review](experiments/67-contract-clause-review/) | Quote limitation of liability, indemnities, processor terms, termination, governing law, intellectual property, confidentiality, and auto-renewal against a synthetic playbook. Autonomy A0. The lawyer owns the interpretation. The agent does not give legal advice, redline, accept terms, sign, or send. | ✅ Starter |
 | 68 | [Regulatory Change Briefing](experiments/68-regulatory-change-briefing/) | Draft a briefing from one pinned synthetic regulator notice and a synthetic policy register. Autonomy A0. The compliance owner validates applicability. The agent does not decide that a change applies, change a policy, or send. | ✅ Starter |
 | 69 | [Policy Control Mapping](experiments/69-policy-control-mapping/) | Propose a policy sentence for each internal control, with the verbatim quote, clause reference, control id, rationale, and confidence band. Autonomy A0. The control owner approves each mapping. The agent does not mark a control as met, close a gap, edit a policy, or write to a GRC system. | ✅ Starter |
+| 70 | [Conflict-of-Interest Intake](experiments/70-conflict-of-interest-intake/) | Draft a structured declaration from a synthetic note, a supplier list, a procurement register, and a directory. Autonomy A1. The declarant confirms the exact draft before a synthetic staging write. The ethics or procurement team decides disposition. The agent does not decide that a conflict exists, clear, exclude, approve, or send. | ✅ Starter |
 
 ## Getting Started
 
