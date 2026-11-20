@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Sixty-seven starters are in `experiments/`. The folders are 01 to 67.
+Sixty-eight starters are in `experiments/`.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -106,6 +106,7 @@ Sixty-seven starters are in `experiments/`. The folders are 01 to 67.
 | 65 | [Interview Pack Builder](experiments/65-interview-pack-builder/) | Draft questions tied to each essential criterion, a behaviourally anchored rubric, adjustment prompts, and note-taking guidance. Autonomy A1. The recruiter approves the questions and the rubric before use. The agent does not contact candidates, schedule interviews, score or rank anyone, or make a hiring decision. | ✅ Starter |
 | 66 | [Workforce Skills Inventory](experiments/66-workforce-skills-inventory/) | Propose skills from synthetic evidence an employee supplied, each with a cited snippet, a confidence band, and a state that needs employee confirmation. Autonomy A0. The employee can reject or correct any skill. HR validates only after that step. The agent does not write to an HR system, rate performance, or feed pay, promotion, redundancy, or disciplinary decisions. | ✅ Starter |
 | 67 | [Contract Clause Review](experiments/67-contract-clause-review/) | Quote limitation of liability, indemnities, processor terms, termination, governing law, intellectual property, confidentiality, and auto-renewal against a synthetic playbook. Autonomy A0. The lawyer owns the interpretation. The agent does not give legal advice, redline, accept terms, sign, or send. | ✅ Starter |
+| 70 | [Conflict-of-Interest Intake](experiments/70-conflict-of-interest-intake/) | Draft a structured declaration from a synthetic note, a supplier list, a procurement register, and a directory. Autonomy A1. The declarant confirms the exact draft before a synthetic staging write. The ethics or procurement team decides disposition. The agent does not decide that a conflict exists, clear, exclude, approve, or send. | ✅ Starter |
 
 ## Getting Started
 
