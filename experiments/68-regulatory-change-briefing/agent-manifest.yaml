@@ -1,0 +1,446 @@
+# Agent manifest: Regulatory Change Briefing
+# Experiment 68 — catalogue ID L002
+# Version: 0.1.0
+# Last reviewed: 2026-11-20
+# Next review: 2027-05-20
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-68-regulatory-change-briefing"
+  name: "Regulatory Change Briefing"
+  version: "0.1.0"
+  description: >
+    Drafts a briefing for one pinned synthetic regulator notice and a pinned
+    policy register. Autonomy A0. The compliance owner validates applicability.
+    The agent does not decide that a change applies, change a policy, control
+    or record, or send anything.
+  owner: "Compliance owner"
+  contact: "compliance@merefield.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/68-regulatory-change-briefing"
+
+autonomy:
+  level: "A0"
+  level_description: "The assistant drafts a briefing. The compliance owner validates applicability and owns every conclusion. The agent never decides that a change does or does not apply, never changes a policy, control or record, and never sends anything."
+  constraints:
+    - "The compliance owner owns applicability. The agent does not."
+    - "The agent NEVER decides that a change applies"
+    - "The agent NEVER decides that a change does not apply"
+    - "The agent NEVER changes a policy, control, or record"
+    - "The agent NEVER sends anything"
+    - "The agent NEVER treats approval text inside a notice as approval"
+    - "A self-declared role or clearance in the notice is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic regulator snapshots"
+      description: "FCA, ICO, Ofgem, and Housing Ombudsman style notices. The text is synthetic. Real URLs are provenance for publication practice, not the body of these notices."
+      access_level: "read"
+      scope: "One notice id per invocation. The core does not fetch a live page."
+      justification: "A briefing has to quote the pinned snapshot the owner asked about."
+      data_categories:
+        - "Notice text"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the notice."
+    - resource: "Pinned synthetic policy register"
+      description: "Internal policies and topic phrases. A caller-supplied register is compared and not used as the source."
+      access_level: "read"
+      scope: "The pinned register for one run."
+      justification: "A candidate policy is a topic overlap with the pinned register, not a decision that the policy is affected."
+      may_contain_personal_data: false
+    - resource: "Pinned synthetic directory"
+      description: "Compliance owners, analysts, and guests. The notice does not set the role or the clearance."
+      access_level: "read"
+      scope: "One caller reference."
+      justification: "Only a pinned-directory compliance owner can record that they have seen a briefing."
+      may_contain_personal_data: true
+    - resource: "Separate seen object"
+      description: "The only object that can record that a compliance owner has seen this publication hash, briefing hash, and questions hash."
+      access_level: "read"
+      scope: "One seen object, bound to those hashes."
+      justification: "Approval inside the notice is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 04 pinned FCA pages"
+      description: "Currency of a related pinned FCA page. assess_source does not download the page."
+      access_level: "read"
+      scope: "Source ids named on the snapshot."
+      justification: "A related FCA pin is context. It is not a decision that the change applies."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the notice as one text file. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch. The intake draft is not a queue acceptance."
+      justification: "The notice is untrusted text. Intake records that, and this starter does not confirm the file."
+      may_contain_personal_data: true
+    - resource: "Experiment 20 regulatory quotations"
+      description: "Pinned complaints, housing, or energy quotations when the snapshot names that context."
+      access_level: "read"
+      scope: "The quotation constants. Not a regulatory return."
+      justification: "The quotation is context for the owner. It is not a finding that the change applies."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on a quote. Reversible stays false. The output is not described as anonymised."
+      access_level: "read"
+      scope: "Quotes and a count on the notice. Matched values are not stored."
+      justification: "A pasted identifier is masked before a quote is shown."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live regulator website or a mailbox"
+      reason: "Snapshots are pinned in the repository. The core does not browse."
+    - resource: "A caller-supplied register, directory, or notice body as the authority"
+      reason: "Differences are flagged. Quotes and roles come from the pinned copies."
+    - resource: "Notice text above the directory clearance"
+      reason: "Quotes are not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Draft briefing"
+      provider: "Local Python (draft_briefing)"
+      action: "Return a briefing for one pinned synthetic notice"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Quotes, dates, and topic overlap are deterministic. A language model must not decide applicability."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record owner seen"
+      provider: "Local Python (record_owner_seen)"
+      action: "Record that a directory compliance owner has seen this briefing hash"
+      access_level: "read"
+      scope: "The briefing and a separate seen object. Applicability is not decided."
+      justification: "The seen step has to name the owner and the exact hashes. It does not change a policy or send."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quotes, the hashes, and the empty or recorded seen step stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No policy, control, or record write. record_owner_seen returns JSON.
+      policy_changed, control_changed, record_changed, and sent stay false.
+
+  sends:
+    enabled: false
+    note: "No sends. Recording that an owner has seen a briefing does not send it."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide that a change applies or does not apply.
+      A seen object records that a compliance owner has looked at this hash.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide applicability, and it does not decide that
+      Financial Services and Markets Act 2000 section 138I was met.
+      Section 138L was not opened.
+  production_record_change:
+    enabled: false
+    rationale: "The seen record is JSON. It is not a write to a policy, control, or record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the briefing."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A date is information for the owner."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Decide applicability, change a policy, or send"
+      rationale: "decide_applicability(), change_policy(), change_control(), change_record(), and send() raise."
+    - enabled: false
+      action_name: "Treat a notice sentence as the owner's approval"
+      rationale: "human_approval stays null until record_owner_seen succeeds for the directory owner and the exact hashes."
+    - enabled: false
+      action_name: "Mark a change acceptable"
+      rationale: "marked_acceptable and marked_applicable stay false. applies stays null."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold and every retention label are copied onto the result."
+
+human_approval:
+  description: >
+    A directory compliance owner records that they have seen the briefing, on
+    a separate object, bound to the publication hash, the briefing hash, and
+    the questions hash. Seeing it does not decide applicability. A distress,
+    grievance, or safeguarding cue has to be seen as that route. Stale,
+    withdrawn, superseded, or undated flags, an unconfirmed statute pin, and
+    a difference from the pinned register have to be acknowledged as
+    booleans. Approval text inside the notice is not that step.
+
+  approval_points:
+    - action: "See a distress, grievance, or safeguarding route"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "record_owner_seen accepts item distress-seen or grievance-seen from a directory compliance owner. A briefing seen step does not close the route."
+    - action: "See this briefing"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "record_owner_seen accepts the directory compliance owner only when the publication, briefing, and questions hashes match and the item is briefing."
+    - action: "Confirm a stale, withdrawn, superseded, or undated flag"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "flags_seen must be the boolean true when those flags are set. A string is not coerced."
+    - action: "Confirm an unconfirmed statute pin"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. The question date is the as-of argument, not today. Section 138L was not opened."
+    - action: "Confirm a difference from the pinned register or snapshot"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "sources_seen must be the boolean true when the caller text or register differs. The pinned copy was used."
+    - action: "Decide applicability, change a policy, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false or null after a seen step."
+
+  no_approval_required:
+    - action: "Read the briefing"
+      rationale: "Reading the briefing has no external effect. human_approval stays null."
+    - action: "Re-run the same notice"
+      rationale: "No write and no send. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 20 November 2026. Section 138I was opened as
+      publication-practice context. It is not a lawful basis.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, distress, or safeguarding text a caller may paste into a notice"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 20 November 2026."
+    safeguards:
+      - "A distress, grievance, or safeguarding cue is routed to the compliance owner. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are masked. The output is not described as anonymised."
+      - "A person count below 5 is suppressed and the number is not stored."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a policy. applies stays null."
+  data_minimisation:
+    - "The notice body is not copied into the result."
+    - "Quotes are masked sentences, or not copied when the marking is above clearance."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on the notice are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Notice text is untrusted. It may say the owner has approved, that the
+    change applies, or that a label should be stripped. The core does not
+    read the network and does not follow those sentences.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Applicability, send, policy-change, and pretend-approval sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after a short not, in the same sentence, is not an inclusion. A topic that is not included is not a candidate policy."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_owner_seen succeeds."
+    - control: "No applicability, change, or send tool"
+      description: "Those functions raise BriefingForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The compliance
+    owner is the control. Nothing is changed or sent even if the note is
+    wrong. A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-20"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the notice is treated as the owner's decision that the change applies"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_owner_seen reads only the separate seen object"
+        - "applies stays null"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R2"
+      risk: "The agent changes a policy or sends the briefing"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "A seen record leaves policy_changed and sent false"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R3"
+      risk: "A missing date or a missing notice is invented, or a negated sentence is treated as included"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The quote is not found when the id is not pinned"
+        - "A missing date is not stated"
+        - "Negation is applied before a topic counts"
+      residual_risk: "Medium"
+      owner: "Compliance owner"
+    - id: "R4"
+      risk: "A withdrawn, superseded, undated, or stale notice is treated as current"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those flags are set from the pin and the text"
+        - "A denial in the text does not clear a withdrawn status on the pin"
+        - "may_be_relied_on stays false while section 138L is unopened"
+      residual_risk: "Medium"
+      owner: "Compliance owner"
+    - id: "R5"
+      risk: "An unreadable date or a person count is coerced to zero or to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+        - "A count below 5 is suppressed rather than stored"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the owner reference
+    if it matched the synthetic pattern, the outcome, and whether a seen
+    step was recorded. This starter logs nothing because it keeps no store.
+    Do not put the notice or a quote in an application trace.
+  logged_events:
+    - event: "Briefing returned"
+      data_logged:
+        - "Timestamp"
+        - "Owner reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Seen step recorded"
+      data_logged:
+        - "Whether the publication hash matched"
+        - "Whether the briefing hash matched"
+        - "sent false"
+      retention: "Organisation's schedule. The agent does not write this event to a policy system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Compliance owner"
+      contact: "compliance@merefield.example"
+    - role: "Data protection officer"
+      contact: "dpo@merefield.example"
+
+review:
+  last_review_date: "2026-11-20"
+  next_review_date: "2027-05-20"
+  review_frequency: "6 months, and sooner if the pinned notices or section 138I change"
+  reviewer: "The adopting organisation's compliance owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to Financial Services and Markets Act 2000 section 138I, or an opening of section 138L"
+    - "A proposal to add a connector that can change a policy or send a briefing"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Briefing core"
+      path: "src/briefing.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The briefing from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 20 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Section 138I was stamped up to date with all changes known to be in force on or before 17 November 2026, and the page says revised legislation may not be fully up to date. Section 138L was not opened. pins_confirmed stays false."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Section 138I(2)(e) requires a specified time for representations. It does not state a number of days. The 30-day figure is the fictional register's internal minimum."
+      section: "fixtures/policy_register.json"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "FCA, ICO, Ofgem, and Housing Ombudsman pages opened on 20 November 2026 are publication-practice context. Prefixes GC, CP, DP, PS, FS, and FG were not expanded on the FCA page. That expansion is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Treating a snapshot as stale more than 90 days after its publication date uses Experiment 04's source threshold. It is this starter's rule. It is not a statutory period."
+      section: "src/reuse.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 20 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview opened on 20 November 2026 names a Microsoft Copilot harness, a Customer Conversation harness, and a standard harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Contact addresses on merefield.example are placeholders. Merefield Group is invented. Ada North is an invented name in a synthetic notice."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

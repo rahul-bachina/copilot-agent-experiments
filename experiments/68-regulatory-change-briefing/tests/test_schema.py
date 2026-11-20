@@ -1,0 +1,49 @@
+"""Tool schemas stay least privilege, and the manifest validates."""
+
+import json
+from pathlib import Path
+
+import yaml
+from jsonschema import Draft7Validator, validate
+
+ROOT = Path(__file__).resolve().parents[1]
+REPO = ROOT.parents[1]
+
+
+def test_permissions_manifest_matches_the_schema():
+    schema = json.loads((REPO / "schemas" / "agent-manifest.schema.json").read_text(encoding="utf-8"))
+    Draft7Validator.check_schema(schema)
+    manifest = yaml.safe_load((ROOT / "agent-manifest.yaml").read_text(encoding="utf-8"))
+    permissions = yaml.safe_load((ROOT / "permissions.yaml").read_text(encoding="utf-8"))
+    assert manifest == permissions
+    assert manifest["agent"]["id"] == "exp-68-regulatory-change-briefing"
+    assert manifest["autonomy"]["level"] == "A0"
+    assert manifest["autonomy"]["auto_actions_enabled"] is False
+    assert manifest["tools"]["writes"]["enabled"] is False
+    assert manifest["tools"]["sends"]["enabled"] is False
+    for name in (
+        "approve_reject",
+        "regulated_decision",
+        "production_record_change",
+        "external_send",
+        "spend_transact",
+    ):
+        assert manifest["high_risk_actions"][name]["enabled"] is False
+    for extra in manifest["high_risk_actions"]["additional_high_risk"]:
+        assert extra["enabled"] is False
+    validate(manifest, schema)
+
+
+def test_tool_schemas_do_not_decide_or_send():
+    for name in ("briefing_tool.schema.json", "seen_tool.schema.json"):
+        schema = json.loads((ROOT / "schema" / name).read_text(encoding="utf-8"))
+        Draft7Validator.check_schema(schema)
+        assert schema["additionalProperties"] is False
+        blob = json.dumps(schema)
+        assert "decide_applicability" not in blob
+        assert "change_policy" not in blob
+    seen = json.loads((ROOT / "schema" / "seen_tool.schema.json").read_text(encoding="utf-8"))
+    assert seen["properties"]["decision"]["const"] == "seen"
+    assert seen["properties"]["sent"]["const"] is False
+    assert seen["properties"]["policy_changed"]["const"] is False
+    assert "applies" not in seen["properties"]
