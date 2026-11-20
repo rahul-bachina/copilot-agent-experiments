@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that a compliance owner has seen a briefing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "approver_ref",
+    "item",
+    "decision",
+    "publication_hash",
+    "briefing_hash",
+    "questions_hash"
+  ],
+  "properties": {
+    "approver_ref": {"type": "string"},
+    "item": {"enum": ["briefing", "distress-seen", "grievance-seen"]},
+    "decision": {"const": "seen"},
+    "publication_hash": {"type": "string"},
+    "briefing_hash": {"type": "string"},
+    "questions_hash": {"type": "string"},
+    "pins_seen": {"type": "boolean"},
+    "flags_seen": {"type": "boolean"},
+    "sources_seen": {"type": "boolean"},
+    "policy_changed": {"const": false},
+    "control_changed": {"const": false},
+    "record_changed": {"const": false},
+    "sent": {"const": false}
+  }
+}
