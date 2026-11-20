@@ -1,0 +1,89 @@
+{
+  "synthetic": true,
+  "library_id": "ashcombe-controls-2026",
+  "organisation": "Ashcombe Borough Council",
+  "note": "Ashcombe Borough Council is fictional. Objectives are the organisation's words. ISO/IEC 27001 text is not copied. Annex identifiers were not checked against a licensed copy.",
+  "controls": [
+    {
+      "control_id": "CTL-ACC-01",
+      "title": "Limit access to people the organisation has authorised",
+      "objective": "System access is limited to people the organisation has authorised.",
+      "expected_strength": "must",
+      "signal_groups": [["access"], ["authorised", "authorized"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.5.15",
+      "caf_objective": "Protecting against cyber attack"
+    },
+    {
+      "control_id": "CTL-ACC-02",
+      "title": "Remove access when a role ends",
+      "objective": "System access is removed when a role ends.",
+      "expected_strength": "must",
+      "signal_groups": [["access"], ["remove"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.5.18",
+      "caf_objective": "Protecting against cyber attack"
+    },
+    {
+      "control_id": "CTL-AUT-01",
+      "title": "Do not share passwords",
+      "objective": "Passwords are not shared.",
+      "expected_strength": "must_not",
+      "signal_groups": [["password"], ["share"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.5.17",
+      "caf_objective": "Protecting against cyber attack"
+    },
+    {
+      "control_id": "CTL-LOG-01",
+      "title": "Log security-relevant events",
+      "objective": "A person who administers a system records security-relevant events.",
+      "expected_strength": "must",
+      "signal_groups": [["log"], ["security"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.8.15",
+      "caf_objective": "Detecting cyber security events"
+    },
+    {
+      "control_id": "CTL-INC-01",
+      "title": "Report a suspected cyber incident",
+      "objective": "A suspected cyber incident is reported to the service desk on the same working day.",
+      "expected_strength": "must",
+      "signal_groups": [["incident"], ["report"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.5.24",
+      "caf_objective": "Minimising the impact of cyber security incidents"
+    },
+    {
+      "control_id": "CTL-BKP-01",
+      "title": "Back up critical systems and test a restore",
+      "objective": "A backup is taken and a restore is tested.",
+      "expected_strength": "must",
+      "signal_groups": [["backup"], ["restore"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.8.13",
+      "caf_objective": "Minimising the impact of cyber security incidents"
+    },
+    {
+      "control_id": "CTL-SUP-01",
+      "title": "Assess a supplier before granting access",
+      "objective": "A supplier with access to council systems is assessed before the contract is signed.",
+      "expected_strength": "must",
+      "signal_groups": [["supplier"], ["assess"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.5.19",
+      "caf_objective": "Managing security risk"
+    },
+    {
+      "control_id": "CTL-CHG-01",
+      "title": "Approve a production change first",
+      "objective": "A change to a production system is approved before it is made.",
+      "expected_strength": "must",
+      "signal_groups": [["change"], ["production"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.8.32",
+      "caf_objective": "Protecting against cyber attack"
+    },
+    {
+      "control_id": "CTL-TRN-01",
+      "title": "Give awareness before an account",
+      "objective": "A person completes information security awareness before an account is issued.",
+      "expected_strength": "must",
+      "signal_groups": [["awareness"], ["training"]],
+      "external_identifier": "ISO/IEC 27001:2022 A.6.3",
+      "caf_objective": "Managing security risk"
+    }
+  ]
+}

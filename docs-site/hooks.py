@@ -220,6 +220,9 @@ DIAGRAMS = {
     "experiments/68-regulatory-change-briefing/docs/architecture_diagram.png": (
         "experiments/img/68-regulatory-change-briefing-architecture.png"
     ),
+    "experiments/69-policy-control-mapping/docs/architecture_diagram.png": (
+        "experiments/img/69-policy-control-mapping-architecture.png"
+    ),
 }
 
 
