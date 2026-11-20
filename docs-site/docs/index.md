@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Sixty-seven starters you can read today
+## Sixty-eight starters you can read today
 
 </div>
 
@@ -1755,6 +1755,31 @@ The lawyer owns the interpretation. The agent quotes deviations and says not fou
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 69 · L003 · Assurance · Autonomy A0</p>
+
+### Policy control mapping
+
+Propose which policy sentence supports which internal control, with the verbatim quote, the clause reference, the control id, a rationale, and a confidence band.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The control owner approves each mapping. The agent says no evidence found when a control has no sentence. It does not mark a control as met, close a gap, edit a policy, or write to a GRC system.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/69-policy-control-mapping.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/69-policy-control-mapping)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -1773,7 +1798,7 @@ The lawyer owns the interpretation. The agent quotes deviations and says not fou
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, and L001 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, and L003 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
