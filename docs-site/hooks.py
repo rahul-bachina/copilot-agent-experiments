@@ -217,6 +217,9 @@ DIAGRAMS = {
     "experiments/67-contract-clause-review/docs/architecture_diagram.png": (
         "experiments/img/67-contract-clause-review-architecture.png"
     ),
+    "experiments/69-policy-control-mapping/docs/architecture_diagram.png": (
+        "experiments/img/69-policy-control-mapping-architecture.png"
+    ),
     "experiments/70-conflict-of-interest-intake/docs/architecture_diagram.png": (
         "experiments/img/70-conflict-of-interest-intake-architecture.png"
     ),

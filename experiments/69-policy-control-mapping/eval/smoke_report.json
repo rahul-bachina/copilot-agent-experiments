@@ -1,0 +1,157 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "sample-proposal",
+      "status": "passed"
+    },
+    {
+      "case_id": "negation-is-not-inclusion",
+      "status": "passed"
+    },
+    {
+      "case_id": "should-is-not-must",
+      "status": "passed"
+    },
+    {
+      "case_id": "qualification-weakens",
+      "status": "passed"
+    },
+    {
+      "case_id": "verbatim-must",
+      "status": "passed"
+    },
+    {
+      "case_id": "plant-maps-to-no-control",
+      "status": "passed"
+    },
+    {
+      "case_id": "distress-paraphrase",
+      "status": "passed"
+    },
+    {
+      "case_id": "grievance-paraphrase",
+      "status": "passed"
+    },
+    {
+      "case_id": "forged-approval-ignored",
+      "status": "passed"
+    },
+    {
+      "case_id": "guest-sees-no-quotes",
+      "status": "passed"
+    },
+    {
+      "case_id": "unknown-caller",
+      "status": "passed"
+    },
+    {
+      "case_id": "secret-cover",
+      "status": "passed"
+    },
+    {
+      "case_id": "compound-marking-higher",
+      "status": "passed"
+    },
+    {
+      "case_id": "self-declared-clearance",
+      "status": "passed"
+    },
+    {
+      "case_id": "tampered-approval-rejected",
+      "status": "passed"
+    },
+    {
+      "case_id": "unparseable-clause-ref",
+      "status": "passed"
+    },
+    {
+      "case_id": "biased-criterion-not-applied",
+      "status": "passed"
+    },
+    {
+      "case_id": "stale-as-of",
+      "status": "passed"
+    },
+    {
+      "case_id": "review-due-on-the-question-date",
+      "status": "passed"
+    },
+    {
+      "case_id": "no-evidence-for-training",
+      "status": "passed"
+    }
+  ],
+  "case_problems": [],
+  "paraphrase_recall": {
+    "not_a_live_recall_rate": true,
+    "not_added_to_case_total": true,
+    "categories": {
+      "positive_must": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "negation_not_inclusion": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "should_not_must": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "qualification_weakens": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "distress_route": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "grievance_route": {
+        "sentences": 20,
+        "hits": 20,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "embedded_instruction": {
+        "sentences": 22,
+        "hits": 22,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      },
+      "biased_criteria": {
+        "sentences": 22,
+        "hits": 22,
+        "recall": 1.0,
+        "expect_match": true,
+        "false_inclusions": 0
+      }
+    }
+  }
+}

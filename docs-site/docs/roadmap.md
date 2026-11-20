@@ -654,6 +654,16 @@ Quotes limitation of liability, indemnities, data protection and processor terms
 
 </article>
 
+<article class="plan-card" id="l003" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · L003 · Autonomy A0</p>
+
+## Policy control mapping
+
+Proposes a mapping from one synthetic policy set to a pinned synthetic control library. Each mapping keeps the verbatim sentence, the clause reference, the control id, a rationale, and a confidence band. A control with no sentence stays no evidence found. A sentence with no control is listed. should is not must. A carve-out such as except where weakens the sentence. Negation is not an inclusion. Two policies that conflict are both quoted and neither is chosen. The NCSC Cyber Assessment Framework collection page, version 4.0 as stated on that page on 20 November 2026, is optional context. The PDF was not opened. ISO/IEC 27001 text is not copied. The control owner approves each mapping. The agent does not mark a control as met, close a gap, edit a policy, or write to a GRC system. [Read the briefing](experiments/69-policy-control-mapping.md).
+
+</article>
+
 <article class="plan-card" id="l005" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · L005 · Autonomy A1</p>
@@ -666,4 +676,4 @@ Drafts a structured declaration from one synthetic note, a pinned supplier list,
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L005 is Experiment 70.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L003 is Experiment 69. L005 is Experiment 70.
