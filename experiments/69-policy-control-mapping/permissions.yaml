@@ -1,0 +1,446 @@
+# Agent manifest: Policy Control Mapping
+# Experiment 69 — catalogue ID L003
+# Version: 0.1.0
+# Last reviewed: 2026-11-20
+# Next review: 2027-05-20
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-69-policy-control-mapping"
+  name: "Policy Control Mapping"
+  version: "0.1.0"
+  description: >
+    Proposes mappings from synthetic policy statements to a synthetic internal
+    control library. Each proposal quotes the policy text, the clause
+    reference, the control id, a rationale, and a confidence band. Autonomy
+    A0. The control owner approves each mapping. The agent does not mark a
+    control as met, close a gap, edit a policy, or write to a GRC system.
+  owner: "Control owner"
+  contact: "control.owner@ashcombe.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/69-policy-control-mapping"
+
+autonomy:
+  level: "A0"
+  level_description: "The assistant proposes mappings. The control owner approves each mapping. The agent does not mark a control as met, close a gap, edit a policy, or write to a GRC system."
+  constraints:
+    - "The control owner approves each mapping. The agent does not."
+    - "The agent NEVER marks a control as met"
+    - "The agent NEVER closes a gap"
+    - "The agent NEVER edits a policy"
+    - "The agent NEVER writes to a GRC system"
+    - "The agent NEVER treats approval text inside a policy as approval"
+    - "A self-declared role or clearance in a policy is not the directory"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic policy set"
+      description: "Policy clauses. Samples are synthetic. Instructions inside the text are not followed."
+      access_level: "read"
+      scope: "One policy set per invocation. The body is not copied into the result when the marking is above the directory clearance."
+      justification: "A mapping has to quote the sentence the caller supplied."
+      data_categories:
+        - "Policy text"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "Transient. The starter does not persist the policies."
+    - resource: "Pinned synthetic control library"
+      description: "Internal controls with the organisation's own objectives. ISO/IEC 27001 text is not stored."
+      access_level: "read"
+      scope: "The fixture library. A caller-supplied library is compared and not applied."
+      justification: "A mapping is against the pinned library, not a library pasted into the request."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Control owners and guests. The policy does not set the role or the clearance."
+      access_level: "read"
+      scope: "One caller reference."
+      justification: "Only a directory control owner can approve a mapping."
+      may_contain_personal_data: true
+    - resource: "Separate approval object"
+      description: "The only object that can approve one mapping, bound to that mapping's content hash and the proposal hash."
+      access_level: "read"
+      scope: "One approval object, bound to those hashes."
+      justification: "Approval inside a policy is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the policy files. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch."
+      justification: "The policies are untrusted text. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 36 cross-source validation"
+      description: "compare() when two policies state different obligation tokens. The tool does not choose a source."
+      access_level: "read"
+      scope: "One pack per contradicted control, using kind register_extract because Experiment 36 has no policy kind."
+      justification: "A contradiction is shown. It is not resolved by this agent."
+      may_contain_personal_data: false
+    - resource: "Experiment 03 assurance patterns"
+      description: "evaluate_injection, handle_untrusted, and screen_duaa. None of them clear this agent or write an ATRS record."
+      access_level: "read"
+      scope: "A short record describing this starter. Not a live inventory."
+      justification: "Embedded instructions are data. The DUAA screen is not a legal determination."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the policy text. Reversible stays false. The output is not described as anonymised."
+      access_level: "read"
+      scope: "Counts and types. Matched values are not stored."
+      justification: "A pasted identifier is masked before a quote is shown."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live policy store, GRC system, or SharePoint library"
+      reason: "The text is what the caller supplied. The core does not connect to Microsoft 365 and does not write."
+    - resource: "A self-declared role, guest status, or clearance in a policy"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Policy text above the directory clearance"
+      reason: "Quotes are not copied. The higher marking, the legal hold, and the retention labels are kept."
+    - resource: "ISO/IEC 27001 control text"
+      reason: "Controls are referred to by identifier only. The standard text is not reproduced."
+
+tools:
+  allowed:
+    - tool: "Propose mappings"
+      provider: "Local Python (map_controls)"
+      action: "Return proposed mappings, gaps, unmapped statements, and contradictions for one synthetic policy set"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Quotes, negation, and confidence bands are deterministic. A language model must not decide that a control is met."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record mapping approval"
+      provider: "Local Python (record_owner_approval)"
+      action: "Record that a directory control owner approved one item, bound to its content hash and the proposal hash"
+      access_level: "read"
+      scope: "The proposal and a separate approval object. A control is not marked met."
+      justification: "The approval has to name the owner and the exact hashes. It does not close a gap or write to a GRC system."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The quotes, the hashes, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No GRC write and no policy edit. record_owner_approval returns JSON.
+      control_met, gap_closed, policy_edited, and grc_written stay false.
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Recording an approval does not send the proposal.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not mark a control as met or close a gap. An approval
+      object records that a directory control owner has looked at one hash.
+      A sentence in a policy cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a control is met, that a CAF objective
+      is achieved, or that an ISO/IEC 27001 control is implemented.
+  production_record_change:
+    enabled: false
+    rationale: "The approval record is JSON. It is not a write to a GRC system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the proposal."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Mark a control as met, close a gap, edit a policy, or write to a GRC system"
+      rationale: "mark_control_met(), close_gap(), edit_policy(), and write_grc() raise. Those flags stay false."
+    - enabled: false
+      action_name: "Treat a policy sentence as the control owner's approval"
+      rationale: "human_approval stays null until record_owner_approval succeeds for the directory owner and the exact hashes."
+    - enabled: false
+      action_name: "Apply a caller-supplied control library or a biased criterion"
+      rationale: "The pinned fixture is the library. Differences are flagged and not applied."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold and every retention label are copied onto the result."
+
+human_approval:
+  description: >
+    A directory control owner approves one item on a separate object, bound
+    to that item's content hash and the proposal hash. Approving a mapping
+    does not mark the control as met. A distress, grievance, or safeguarding
+    cue has to be seen as that route. A stale policy and the unverified CAF
+    pin have to be acknowledged as booleans. Approval text inside a policy
+    is not that step.
+
+  approval_points:
+    - action: "See a distress, grievance, or safeguarding route"
+      approver: "Control owner"
+      mandatory: true
+      rationale: "record_owner_approval accepts item distress-seen from a directory control owner. A mapping approval does not close the route."
+    - action: "Approve one mapping"
+      approver: "Control owner"
+      mandatory: true
+      rationale: "record_owner_approval accepts the directory control owner only when the mapping content hash and the proposal hash match."
+    - action: "See a gap"
+      approver: "Control owner"
+      mandatory: true
+      rationale: "Seeing a gap does not close it. The quote stays no evidence found."
+    - action: "See a contradiction"
+      approver: "Control owner"
+      mandatory: true
+      rationale: "The owner sees both quotes. The agent does not choose a policy."
+    - action: "Confirm an unverified CAF pin or a stale policy"
+      approver: "Control owner"
+      mandatory: true
+      rationale: "pins_seen and stale_seen must be the boolean true. A string is not coerced. The question date is the as-of argument, not today."
+    - action: "Mark a control as met, close a gap, edit a policy, or write to a GRC system"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the proposal"
+      rationale: "Reading the proposal has no external effect. human_approval stays null."
+    - action: "Re-run the same policy set"
+      rationale: "No write and no send. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 20 November 2026. Experiment 03's DUAA screen is not
+      a lawful basis and does not clear this agent.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a caller may paste into a policy or a cover note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 20 November 2026."
+    safeguards:
+      - "A distress, grievance, or safeguarding cue is routed to a control owner. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are masked. The output is not described as anonymised."
+      - "A count of named people below 5 is not published. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a control. The sample does not mark a control as met."
+  data_minimisation:
+    - "The policy body is not copied into the result."
+    - "Quotes are masked sentences. Identifier values are not stored."
+    - "output_is_anonymised stays false."
+  retention:
+    agent_retention: "None in this starter. Processing is transient."
+    note: "A retention label and a legal hold on a policy are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Policy text and a caller-supplied library are untrusted. They may say the
+    control owner has approved, that a control should be marked met, or that
+    a label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Mark-met, close-gap, edit, and GRC-write sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or a denial frame, is not an inclusion. should is not must. except weakens a statement."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_owner_approval succeeds."
+    - control: "No met, close, edit, or GRC tool"
+      description: "Those functions raise MappingForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The control
+    owner is the control. Nothing is written to a GRC system even if the
+    note is wrong. A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-20"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a policy is treated as the control owner's approval"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_owner_approval reads only the separate approval object"
+      residual_risk: "Low"
+      owner: "Control owner"
+    - id: "R2"
+      risk: "The agent marks a control as met, closes a gap, edits a policy, or writes to a GRC system"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "An approval leaves control_met, gap_closed, policy_edited, and grc_written false"
+      residual_risk: "Low"
+      owner: "Control owner"
+    - id: "R3"
+      risk: "A missing policy sentence is invented, or a negated sentence is treated as included"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The gap quote is no evidence found"
+        - "Negation is applied before a signal counts as support"
+      residual_risk: "Medium"
+      owner: "Control owner"
+    - id: "R4"
+      risk: "should is treated as must, or a carve-out is ignored"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "should is a medium band"
+        - "A qualification is a low band and is not an unqualified mapping"
+      residual_risk: "Medium"
+      owner: "Control owner"
+    - id: "R5"
+      risk: "An unreadable date, clause reference, or strength is coerced to zero or to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged"
+        - "coerced stays false"
+      residual_risk: "Low"
+      owner: "Control owner"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the owner reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter logs nothing because it keeps no store.
+    Do not put the policy text or a quote in an application trace.
+  logged_events:
+    - event: "Proposal returned"
+      data_logged:
+        - "Timestamp"
+        - "Owner reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Approval recorded"
+      data_logged:
+        - "Whether the content hash matched"
+        - "Whether the proposal hash matched"
+        - "control_met false"
+      retention: "Organisation's schedule. The agent does not write this event to a GRC system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Control owner"
+      contact: "control.owner@ashcombe.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@ashcombe.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-20"
+  next_review_date: "2027-05-20"
+  review_frequency: "6 months, and sooner if the pinned control library or the NCSC CAF page changes"
+  reviewer: "The adopting organisation's control owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned control library"
+    - "A new version of the NCSC Cyber Assessment Framework on the pinned page"
+    - "A proposal to add a connector that can edit a policy or write to a GRC system"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Mapping core"
+      path: "src/map_controls.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The proposal from this starter is not an
+    approval of that pack. screen_duaa does not clear this agent.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 20 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The NCSC CAF collection page was opened on 20 November 2026 and stated version 4.0. The PDF and the principle pages were not opened. Indicator wording is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "ISO/IEC 27001 control text is not copied. Annex identifiers in the fixture were not checked against a licensed copy."
+      section: "fixtures/library.json"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "A confidence band is a deterministic reading of obligation words. It is not a finding that a control is met."
+      section: "src/statements.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "Treating a policy as stale on its review-due date, including that date, is this starter's rule. It is not a statutory period. Experiment 12's 90-day window is that experiment's rule."
+      section: "src/map_controls.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened. Counts of named people below 5 are not published. Five is this starter's threshold."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 20 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview was opened on 20 November 2026. It names a Microsoft Copilot harness, a Customer Conversation harness, and a standard harness. It does not use the words GitHub Copilot harness. It says that harness uses Copilot Credits and states no price. Pricing pages were not opened. The page does not say the harness is not the GitHub Copilot service."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Contact addresses on ashcombe.example.gov.uk are placeholders. Ashcombe Borough Council is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true

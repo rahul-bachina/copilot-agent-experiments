@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record mapping approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver_ref", "decision", "item", "content_hash", "proposal_hash", "pins_seen"],
+  "properties": {
+    "approver_ref": {"type": "string"},
+    "decision": {"const": "approved"},
+    "item": {"enum": ["mapping", "gap-seen", "contradiction-seen", "distress-seen", "unmapped-seen"]},
+    "mapping_id": {"type": "string"},
+    "gap_id": {"type": "string"},
+    "contradiction_id": {"type": "string"},
+    "statement_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "proposal_hash": {"type": "string"},
+    "pins_seen": {"type": "boolean"},
+    "stale_seen": {"type": "boolean"},
+    "library_differences_seen": {"type": "boolean"},
+    "bias_seen": {"type": "boolean"},
+    "control_met": {"const": false},
+    "gap_closed": {"const": false},
+    "policy_edited": {"const": false},
+    "grc_written": {"const": false}
+  }
+}
