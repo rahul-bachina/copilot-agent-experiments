@@ -1,0 +1,164 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "not_a_live_recall_rate": true,
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "consultation-close",
+      "status": "passed"
+    },
+    {
+      "case_id": "computed-effective",
+      "status": "passed"
+    },
+    {
+      "case_id": "withdrawn",
+      "status": "passed"
+    },
+    {
+      "case_id": "superseded",
+      "status": "passed"
+    },
+    {
+      "case_id": "undated-secret",
+      "status": "passed"
+    },
+    {
+      "case_id": "distress-small-number",
+      "status": "passed"
+    },
+    {
+      "case_id": "grievance-effective",
+      "status": "passed"
+    },
+    {
+      "case_id": "unparseable-date",
+      "status": "passed"
+    },
+    {
+      "case_id": "negation",
+      "status": "passed"
+    },
+    {
+      "case_id": "below-register-window",
+      "status": "passed"
+    },
+    {
+      "case_id": "not-found",
+      "status": "passed"
+    },
+    {
+      "case_id": "guest-role",
+      "status": "passed"
+    },
+    {
+      "case_id": "caller-register",
+      "status": "passed"
+    },
+    {
+      "case_id": "in-text-approval",
+      "status": "passed"
+    },
+    {
+      "case_id": "stale-question-date",
+      "status": "passed"
+    },
+    {
+      "case_id": "seen-hashes",
+      "status": "passed"
+    },
+    {
+      "case_id": "hash-mismatch",
+      "status": "passed"
+    },
+    {
+      "case_id": "tamper-after-seen",
+      "status": "passed"
+    },
+    {
+      "case_id": "leading-not-applied",
+      "status": "passed"
+    },
+    {
+      "case_id": "compound-marking",
+      "status": "passed"
+    }
+  ],
+  "paraphrase_recall": {
+    "label": "Reworded fixture sentences. Not a live recall rate.",
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "grievance": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "withdrawn": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "superseded": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "injection": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "negation": {
+        "sentences": 24,
+        "expect_match": false,
+        "correct": 24,
+        "recall": null,
+        "false_inclusions": 0,
+        "denial_recall": 1.0
+      },
+      "leading": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      },
+      "carve_out": {
+        "sentences": 24,
+        "expect_match": true,
+        "correct": 24,
+        "recall": 1.0,
+        "false_inclusions": null,
+        "denial_recall": null
+      }
+    }
+  }
+}

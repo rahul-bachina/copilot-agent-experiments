@@ -1,0 +1,185 @@
+{
+  "label": "Synthetic regulatory notices. Not a model evaluation.",
+  "cases": [
+    {
+      "case_id": "consultation-close",
+      "publication_id": "SYN-FCA-CP-01",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "briefing",
+        "close": "2027-02-28",
+        "effective": "not stated",
+        "might": ["POL-COMPLAINTS", "POL-LEAD"],
+        "not_might": ["POL-CREDIT"]
+      }
+    },
+    {
+      "case_id": "computed-effective",
+      "publication_id": "SYN-FCA-PS-02",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "briefing",
+        "effective": "2026-08-30",
+        "close": "not stated",
+        "might": ["POL-PAYMENTS"],
+        "not_might": ["POL-CREDIT"],
+        "stale": true,
+        "superseded": false,
+        "fca_status": "pinned"
+      }
+    },
+    {
+      "case_id": "withdrawn",
+      "publication_id": "SYN-FCA-WD-03",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "briefing", "withdrawn": true, "stale": true}
+    },
+    {
+      "case_id": "superseded",
+      "publication_id": "SYN-FCA-SU-04",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "briefing", "superseded": true, "might": ["POL-PAYMENTS"]}
+    },
+    {
+      "case_id": "undated-secret",
+      "publication_id": "SYN-ICO-01",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "above_clearance",
+        "undated": true,
+        "marking": "SECRET",
+        "legal_hold": true,
+        "quote": "not copied",
+        "absent": ["subject access"]
+      }
+    },
+    {
+      "case_id": "distress-small-number",
+      "publication_id": "SYN-OFG-01",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "human_route",
+        "close": "2026-10-31",
+        "distress": true,
+        "people_suppressed": true,
+        "absent": ["cannot cope", "\"value\": 2"]
+      }
+    },
+    {
+      "case_id": "grievance-effective",
+      "publication_id": "SYN-HOS-01",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "human_route",
+        "effective": "2025-10-27",
+        "grievance": true,
+        "might": ["POL-DAMP"],
+        "not_might": ["POL-LEASE"],
+        "absent": ["raising a grievance"]
+      }
+    },
+    {
+      "case_id": "unparseable-date",
+      "publication_id": "SYN-FCA-BAD-05",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "briefing",
+        "effective": "not stated",
+        "unparseable_effective": true,
+        "fca_status": "not found",
+        "coerced": false
+      }
+    },
+    {
+      "case_id": "negation",
+      "publication_id": "SYN-FCA-NEG-06",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "briefing", "might": [], "negated": ["payment accounts", "consumer credit"]}
+    },
+    {
+      "case_id": "below-register-window",
+      "publication_id": "SYN-FCA-SHORT-07",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "briefing",
+        "close": "2026-11-11",
+        "below_register_window": true,
+        "marked_acceptable": false,
+        "statutory_minimum_days": null
+      }
+    },
+    {
+      "case_id": "not-found",
+      "publication_id": "SYN-NO-SUCH",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "not_found", "quote": "not found", "might": []}
+    },
+    {
+      "case_id": "guest-role",
+      "publication_id": "SYN-FCA-CP-01",
+      "caller_ref": "GST-1002",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "briefing", "role": "guest"}
+    },
+    {
+      "case_id": "caller-register",
+      "publication_id": "SYN-FCA-SHORT-07",
+      "as_of": "2026-11-14",
+      "caller_minimum": "soon",
+      "expect": {"outcome": "briefing", "below_register_window": true, "register_minimum_days": 30, "register_differs": true}
+    },
+    {
+      "case_id": "in-text-approval",
+      "use_sample": true,
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "briefing",
+        "human_approval": null,
+        "applies": null,
+        "instructions_followed": false,
+        "caller_text_used": false
+      }
+    },
+    {
+      "case_id": "stale-question-date",
+      "use_sample": true,
+      "as_of": "2027-06-01",
+      "expect": {"outcome": "briefing", "stale": true, "sources_current": false, "as_of": "2027-06-01"}
+    },
+    {
+      "case_id": "seen-hashes",
+      "use_sample": true,
+      "as_of": "2026-11-14",
+      "expect": {"seen": "ok"}
+    },
+    {
+      "case_id": "hash-mismatch",
+      "use_sample": true,
+      "as_of": "2026-11-14",
+      "expect": {"seen": "hash_mismatch"}
+    },
+    {
+      "case_id": "tamper-after-seen",
+      "use_sample": true,
+      "as_of": "2026-11-14",
+      "expect": {"seen": "tamper"}
+    },
+    {
+      "case_id": "leading-not-applied",
+      "publication_id": "SYN-FCA-CP-01",
+      "as_of": "2026-11-14",
+      "expect": {"outcome": "briefing", "leading_applied": false, "might": ["POL-COMPLAINTS", "POL-LEAD"]}
+    },
+    {
+      "case_id": "compound-marking",
+      "publication_id": "SYN-MARK-01",
+      "as_of": "2026-11-14",
+      "expect": {
+        "outcome": "above_clearance",
+        "marking": "SECRET",
+        "legal_hold": true,
+        "absent": ["TOP SECRET"]
+      }
+    }
+  ]
+}
