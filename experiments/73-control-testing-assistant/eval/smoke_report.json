@@ -1,0 +1,257 @@
+{
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a live model score.",
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "apr-route-does-not-pass",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_to_human"
+    },
+    {
+      "case_id": "rec-reproducible-sample",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "EV-REC-002,EV-REC-003"
+    },
+    {
+      "case_id": "rec-small-number-and-hold",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "suppressed"
+    },
+    {
+      "case_id": "rec-tester-approves-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "None"
+    },
+    {
+      "case_id": "forged-hash-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "content_hash_mismatch"
+    },
+    {
+      "case_id": "tampered-content-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "content_hash_mismatch"
+    },
+    {
+      "case_id": "control-owner-cannot-approve",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not_the_named_tester"
+    },
+    {
+      "case_id": "string-true-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "pins_seen_not_boolean_true"
+    },
+    {
+      "case_id": "secret-cover-withheld",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "withheld"
+    },
+    {
+      "case_id": "secret-tester-sees-refs-not-the-body",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "draft"
+    },
+    {
+      "case_id": "unreadable-clearance-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "clearance"
+    },
+    {
+      "case_id": "missing-population",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "missing_evidence"
+    },
+    {
+      "case_id": "policy-mapping-is-not-a-result",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "1"
+    },
+    {
+      "case_id": "non-supporting-sentence",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "1"
+    },
+    {
+      "case_id": "stale-on-the-question-date",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "2027-06-01"
+    },
+    {
+      "case_id": "unreadable-question-date",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "unreadable_date"
+    },
+    {
+      "case_id": "unreadable-seed-not-zero",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "needs_human"
+    },
+    {
+      "case_id": "negation-is-not-inclusion",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "denied"
+    },
+    {
+      "case_id": "pass-control-raises",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "True"
+    },
+    {
+      "case_id": "caller-library-not-applied",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "A purchase above the desk limit is approved by somebody who did not prepare it."
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "self_approval": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "back_dated": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "out_of_period": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "altered": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "missing_evidence": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "embedded_instruction": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "approval_marker": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "distress": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "carve_out": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "biased_criteria": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "sod_breach": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  }
+}

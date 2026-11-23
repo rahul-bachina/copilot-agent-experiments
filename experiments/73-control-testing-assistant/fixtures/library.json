@@ -1,0 +1,100 @@
+{
+  "synthetic": true,
+  "library_id": "ashcombe-control-tests-2026",
+  "organisation": "Ashcombe Borough Council",
+  "review_due": "2026-12-31",
+  "note": "Ashcombe Borough Council is fictional. These controls are the organisation's words. They are not a copy of a standard.",
+  "controls": [
+    {
+      "control_id": "CTL-APR-01",
+      "objective": "A purchase above the desk limit is approved by somebody who did not prepare it.",
+      "frequency": "quarterly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "approval",
+      "minimum_sample": 5,
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on", "amount_gbp"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"},
+        {"step_id": "S2", "check": "dates_within_period"},
+        {"step_id": "S3", "check": "approver_in_directory"},
+        {"step_id": "S4", "check": "approver_can_approve"},
+        {"step_id": "S5", "check": "not_self_approval"},
+        {"step_id": "S6", "check": "segregation_of_duties"},
+        {"step_id": "S7", "check": "not_backdated"},
+        {"step_id": "S8", "check": "not_altered"}
+      ]
+    },
+    {
+      "control_id": "CTL-REC-01",
+      "objective": "A reconciliation is prepared and then approved by a different person.",
+      "frequency": "monthly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "reconciliation",
+      "minimum_sample": 2,
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"},
+        {"step_id": "S2", "check": "dates_within_period"},
+        {"step_id": "S3", "check": "approver_in_directory"},
+        {"step_id": "S4", "check": "approver_can_approve"},
+        {"step_id": "S5", "check": "not_self_approval"},
+        {"step_id": "S6", "check": "segregation_of_duties"},
+        {"step_id": "S7", "check": "not_backdated"},
+        {"step_id": "S8", "check": "not_altered"}
+      ]
+    },
+    {
+      "control_id": "CTL-ACC-01",
+      "objective": "Access that is no longer needed is removed after a review.",
+      "frequency": "quarterly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "access_review",
+      "minimum_sample": 1,
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"},
+        {"step_id": "S2", "check": "dates_within_period"}
+      ]
+    },
+    {
+      "control_id": "CTL-CHG-01",
+      "objective": "A change to a production system is approved before the change is made.",
+      "frequency": "monthly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "change_ticket",
+      "minimum_sample": 1,
+      "policy_clause": "A change to a production system must be approved before the change is made.",
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"},
+        {"step_id": "S2", "check": "dates_within_period"},
+        {"step_id": "S8", "check": "not_altered"}
+      ]
+    },
+    {
+      "control_id": "CTL-EMP-01",
+      "objective": "Leavers are removed from the payroll calendar.",
+      "frequency": "monthly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "approval",
+      "minimum_sample": 1,
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"}
+      ]
+    },
+    {
+      "control_id": "CTL-NEG-01",
+      "objective": "A sentence that does not support this control is not treated as support.",
+      "frequency": "quarterly",
+      "owner_ref": "STF-2001",
+      "evidence_kind": "approval",
+      "minimum_sample": 1,
+      "policy_clause": "Staff may keep a small plant on their desk.",
+      "required_fields": ["evidence_id", "preparer_ref", "approver_ref", "prepared_on", "approved_on"],
+      "test_steps": [
+        {"step_id": "S1", "check": "required_fields"}
+      ]
+    }
+  ]
+}

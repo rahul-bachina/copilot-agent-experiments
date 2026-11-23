@@ -229,6 +229,9 @@ DIAGRAMS = {
     "experiments/72-compliance-obligation-register/docs/architecture_diagram.png": (
         "experiments/img/72-compliance-obligation-register-architecture.png"
     ),
+    "experiments/73-control-testing-assistant/docs/architecture_diagram.png": (
+        "experiments/img/73-control-testing-assistant-architecture.png"
+    ),
 }
 
 
