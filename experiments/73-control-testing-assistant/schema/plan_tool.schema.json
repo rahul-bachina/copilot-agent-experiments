@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prepare a control test",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "engagement_id", "tester_ref", "control_id", "period_start", "period_end", "sample_seed"],
+  "properties": {
+    "synthetic": {"const": true},
+    "engagement_id": {"type": "string"},
+    "tester_ref": {"type": "string"},
+    "control_id": {"type": "string"},
+    "period_start": {"type": "string"},
+    "period_end": {"type": "string"},
+    "sample_seed": {"type": "integer"},
+    "cover_note": {"type": "string"},
+    "supplied_library": {"type": "object"},
+    "supplied_population": {"type": "object"},
+    "supplied_directory": {"type": "object"},
+    "supplied_criteria": {"type": "object"}
+  }
+}
