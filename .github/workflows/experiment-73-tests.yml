@@ -109,9 +109,17 @@ jobs:
               send,
           )
           pinned = pinned_sources()
-          request = json.loads(Path('examples/sample_request.json').read_text())
-          request.pop('supplied_library', None)
+          request = {
+              'synthetic': True,
+              'engagement_id': 'ENG-PROHIBITED',
+              'tester_ref': 'STF-3001',
+              'control_id': 'CTL-REC-01',
+              'period_start': '2026-01-01',
+              'period_end': '2026-03-31',
+              'sample_seed': 73,
+          }
           result = prepare_test(request, as_of='2026-11-14')
+          assert result['outcome'] == 'draft'
           forged = record_tester_approval(result, pinned['directory'], {
               'item': 'working-paper',
               'decision': 'approve-draft',
