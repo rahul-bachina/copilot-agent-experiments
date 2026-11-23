@@ -1,0 +1,197 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "fin-single-rule",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "conflicting-rules",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "legal-hold",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "open-foi",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "open-sar",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "open-litigation",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "open-inquiry",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "missing-trigger",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "unparseable-trigger",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "ambiguous-trigger",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "leap-day",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "public-record",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "caller-schedule-shorter",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "injection-ignored",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "negated-personal-data",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "secret-cover",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "distress",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "stale-schedule",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "not-synthetic",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "minutes-no-personal-data",
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "legal_hold": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "open_matter": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "personal_data": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "distress": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "injection": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "support_positive": {
+        "sentences": 20,
+        "expect_match": true,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "support_negative": {
+        "sentences": 20,
+        "expect_match": false,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "legal_hold_negated": {
+        "sentences": 20,
+        "expect_match": false,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "open_matter_negated": {
+        "sentences": 20,
+        "expect_match": false,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "personal_data_negated": {
+        "sentences": 20,
+        "expect_match": false,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      },
+      "distress_negated": {
+        "sentences": 20,
+        "expect_match": false,
+        "recalled": 20,
+        "recall": 1.0,
+        "false_inclusions": 0
+      }
+    },
+    "support_precision": 1.0,
+    "support_recall": 1.0
+  }
+}
