@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy starters are in `experiments/`. The folders are 01 to 70.
+Seventy-one starters are in `experiments/`. The folders are 01 to 70 and 72.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -109,6 +109,7 @@ Seventy starters are in `experiments/`. The folders are 01 to 70.
 | 68 | [Regulatory Change Briefing](experiments/68-regulatory-change-briefing/) | Draft a briefing from one pinned synthetic regulator notice and a synthetic policy register. Autonomy A0. The compliance owner validates applicability. The agent does not decide that a change applies, change a policy, or send. | ✅ Starter |
 | 69 | [Policy Control Mapping](experiments/69-policy-control-mapping/) | Propose a policy sentence for each internal control, with the verbatim quote, clause reference, control id, rationale, and confidence band. Autonomy A0. The control owner approves each mapping. The agent does not mark a control as met, close a gap, edit a policy, or write to a GRC system. | ✅ Starter |
 | 70 | [Conflict-of-Interest Intake](experiments/70-conflict-of-interest-intake/) | Draft a structured declaration from a synthetic note, a supplier list, a procurement register, and a directory. Autonomy A1. The declarant confirms the exact draft before a synthetic staging write. The ethics or procurement team decides disposition. The agent does not decide that a conflict exists, clear, exclude, approve, or send. | ✅ Starter |
+| 72 | [Compliance Obligation Register](experiments/72-compliance-obligation-register/) | Draft obligation records from pinned synthetic extracts and a synthetic register. Autonomy A1. The named compliance owner approves the exact change before a synthetic staging write. The agent does not interpret the law as final advice, assign accountability, or send. | ✅ Starter |
 
 ## Getting Started
 
