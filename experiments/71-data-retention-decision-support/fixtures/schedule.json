@@ -1,0 +1,89 @@
+{
+  "schedule_id": "MBC-RET-2026",
+  "organisation": "Mereford Borough Council",
+  "synthetic": true,
+  "reviewed": "2026-06-01",
+  "next_review": "2027-06-01",
+  "note": "Synthetic schedule. Periods are not statutory periods.",
+  "rules": [
+    {
+      "line_id": "SCH-FIN-01",
+      "series_code": "FIN-INVOICES",
+      "title": "Paid invoices",
+      "status": "active",
+      "trigger": "date_closed",
+      "period_years": 6,
+      "period_months": 0,
+      "indicative_action": "review",
+      "personal_data": true,
+      "public_record": false,
+      "selected_for_permanent_preservation": false
+    },
+    {
+      "line_id": "SCH-OLD-01",
+      "series_code": "FIN-INVOICES",
+      "title": "Withdrawn one-year invoice line",
+      "status": "withdrawn",
+      "trigger": "date_closed",
+      "period_years": 1,
+      "period_months": 0,
+      "indicative_action": "review"
+    },
+    {
+      "line_id": "SCH-HR-01",
+      "series_code": "HR-FILES",
+      "title": "HR files from closure",
+      "status": "active",
+      "trigger": "date_closed",
+      "period_years": 6,
+      "period_months": 0,
+      "indicative_action": "review",
+      "conflicts_with": ["SCH-HR-02"]
+    },
+    {
+      "line_id": "SCH-HR-02",
+      "series_code": "HR-FILES",
+      "title": "HR files from creation",
+      "status": "active",
+      "trigger": "date_created",
+      "period_years": 7,
+      "period_months": 0,
+      "indicative_action": "review",
+      "conflicts_with": ["SCH-HR-01"]
+    },
+    {
+      "line_id": "SCH-MIN-01",
+      "series_code": "COMMITTEE-MINUTES",
+      "title": "Committee minutes",
+      "status": "active",
+      "trigger": "date_created",
+      "period_years": 6,
+      "period_months": 0,
+      "indicative_action": "review",
+      "personal_data": false
+    },
+    {
+      "line_id": "SCH-PRA-01",
+      "series_code": "COUNCIL-DEEDS",
+      "title": "Council deeds selected for permanent preservation",
+      "status": "active",
+      "trigger": "date_created",
+      "period_years": 20,
+      "period_months": 0,
+      "indicative_action": "transfer_review",
+      "public_record": true,
+      "selected_for_permanent_preservation": true
+    },
+    {
+      "line_id": "SCH-LEAP-01",
+      "series_code": "LEAP-SAMPLE",
+      "title": "Leap-day sample",
+      "status": "active",
+      "trigger": "date_closed",
+      "period_years": 1,
+      "period_months": 0,
+      "indicative_action": "review",
+      "personal_data": false
+    }
+  ]
+}

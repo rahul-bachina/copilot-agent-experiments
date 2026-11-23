@@ -226,6 +226,9 @@ DIAGRAMS = {
     "experiments/70-conflict-of-interest-intake/docs/architecture_diagram.png": (
         "experiments/img/70-conflict-of-interest-intake-architecture.png"
     ),
+    "experiments/71-data-retention-decision-support/docs/architecture_diagram.png": (
+        "experiments/img/71-data-retention-decision-support-architecture.png"
+    ),
     "experiments/72-compliance-obligation-register/docs/architecture_diagram.png": (
         "experiments/img/72-compliance-obligation-register-architecture.png"
     ),
