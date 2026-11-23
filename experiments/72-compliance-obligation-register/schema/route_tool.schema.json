@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that a human route was seen",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver_ref", "item", "decision", "route_hash", "pins_seen"],
+  "properties": {
+    "approver_ref": {"type": "string"},
+    "item": {"const": "route-seen"},
+    "decision": {"const": "seen"},
+    "route_hash": {"type": "string"},
+    "pins_seen": {"const": true}
+  }
+}

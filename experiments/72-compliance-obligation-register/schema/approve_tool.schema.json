@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stage one approved register change",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approver_ref", "item", "decision", "change_hash", "proposal_hash", "pins_seen"],
+  "properties": {
+    "approver_ref": {"type": "string"},
+    "item": {"type": "string", "description": "The change id, for example CHG-OBL-1001."},
+    "decision": {"const": "approve"},
+    "change_hash": {"type": "string"},
+    "proposal_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "flags_seen": {"const": true}
+  }
+}

@@ -1,0 +1,454 @@
+# Agent manifest: Compliance Obligation Register
+# Experiment 72 — catalogue ID L008
+# Version: 0.1.0
+# Last reviewed: 2026-11-23
+# Next review: 2027-05-23
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-72-compliance-obligation-register"
+  name: "Compliance Obligation Register"
+  version: "0.1.0"
+  description: >
+    Drafts obligation records from pinned synthetic extracts and a pinned
+    synthetic register. Autonomy A1. The named compliance owner approves the
+    exact change before it is written to a synthetic staging register. The
+    agent does not interpret the law as final advice, assign accountability,
+    or send.
+  owner: "Compliance owner"
+  contact: "compliance@halebridge.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/72-compliance-obligation-register"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant proposes new, changed, or retired obligation records and writes one change to a synthetic staging register only after the named compliance owner approves that exact change."
+  constraints:
+    - "The agent does not interpret the law as final advice"
+    - "The agent does not assign accountability"
+    - "The agent does not send anything"
+    - "The agent does not mark an obligation covered when the linked control does not address it"
+    - "A sentence in an extract is not an approval"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic source extracts"
+      description: "Pinned excerpts of a fictional regulation, rulebook, and internal policy. Instructions inside the text are not followed."
+      access_level: "read"
+      scope: "The pinned file. A caller-supplied extract is not this file."
+      justification: "Each proposed record quotes one pinned provision."
+      data_categories:
+        - "Obligation text"
+        - "Effective dates and review dates"
+      may_contain_personal_data: false
+      retention: "The extracts stay in the repository. This starter does not set a statutory retention period."
+    - resource: "Synthetic obligation register"
+      description: "Pinned register rows. A register inside the request is compared and not applied."
+      access_level: "read"
+      scope: "The pinned file."
+      justification: "The diff is against the pinned rows."
+      may_contain_personal_data: false
+    - resource: "Synthetic control library"
+      description: "Pinned controls. A control supports a duty only when it addresses that duty."
+      access_level: "read"
+      scope: "The pinned file."
+      justification: "A linked control that does not address the obligation is not treated as cover."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Compliance owner, analyst, and guest. The note does not set the role or the clearance."
+      access_level: "read"
+      scope: "The proposed owner reference, and the approver on a later step."
+      justification: "Only the directory compliance owner can approve a change."
+      may_contain_personal_data: true
+    - resource: "Separate approval object"
+      description: "The only object that can approve one change hash."
+      access_level: "read"
+      scope: "One approval object, bound to that hash."
+      justification: "Approval inside an extract is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 68 date check"
+      description: "parse_date_token on each date. A second calendar date is not chosen."
+      access_level: "read"
+      scope: "One date token at a time."
+      justification: "Month-name dates are checked against the neighbour parser. Two different readings are not reduced to one."
+      may_contain_personal_data: false
+    - resource: "Experiment 69 sentence reading"
+      description: "strength_of and qualified. assess_sentence is not called."
+      access_level: "read"
+      scope: "One sentence at a time."
+      justification: "A qualified must is counted and is not treated as support."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the extracts as text files. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch."
+      justification: "The extracts are untrusted text. Intake records that, and this starter does not confirm the file."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the note. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted before a proposal is shown."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live obligation register, a mailbox, or a case system"
+      reason: "The pinned files are what this starter reads. It does not send or write production."
+    - resource: "A self-declared role, guest status, or clearance in the note"
+      reason: "The directory is the source. The text is recorded as ignored."
+    - resource: "Obligation text above the directory clearance"
+      reason: "The quote is not copied. The higher marking, the legal hold, and the retention labels are kept."
+    - resource: "A caller-supplied register, directory, or control library"
+      reason: "Differences are flagged. Matching uses the pinned files."
+
+tools:
+  allowed:
+    - tool: "Propose register changes"
+      provider: "Local Python (propose_register)"
+      action: "Return proposed records and a diff for one synthetic request"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Quotes, dates, duplicates, and coverage are deterministic. A language model must not decide that an obligation is met."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Stage approved change"
+      provider: "Local Python (stage_approved_change)"
+      action: "Write one approved change to the synthetic staging register"
+      access_level: "write"
+      scope: "The proposal and a separate approval object, bound to the change hash."
+      justification: "The catalogue checkpoint is that the compliance owner approves the exact change before it is stored."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the compliance owner has seen a human route"
+      access_level: "read"
+      scope: "The proposal and a separate seen object. Nothing is staged."
+      justification: "Distress, a grievance, a disclosure, or a safeguarding concern is not a routine register edit."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hashes, the quotes, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after stage_approved_change matches the directory compliance owner
+      and the change hash. That write is not the production register.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (stage_approved_change)"
+        action: "Keep the approved change in cr72_obligation_staging"
+        access_level: "write"
+        scope: "The synthetic store in this process. production_written stays false."
+        justification: "The named compliance owner approves the exact change before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: "No sends. Approving a change does not email the owner, the firm, or a regulator."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve an obligation as met and does not assign
+      accountability. An approval object records that the compliance owner
+      has seen this change hash. A sentence in an extract cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not interpret SYSC 6.1.1R, FSMA 2000 section 59, 59ZA,
+      or 63E as final advice, and it does not decide that the fictional firm
+      is in scope.
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to cr72_obligation_register or a live GRC system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the register or the proposal."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Interpret the law as final advice or assign accountability"
+      rationale: "Those functions raise. final_advice and accountability_assigned_by_agent stay false."
+    - enabled: false
+      action_name: "Treat source text as the approval step"
+      rationale: "human_approval stays null until stage_approved_change succeeds for the directory owner and the exact hash."
+    - enabled: false
+      action_name: "Mark an obligation covered when the control does not address it"
+      rationale: "covered stays false unless a control addresses every affirmed theme on an unqualified must."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold and every retention label are copied onto the result and the proposal."
+
+human_approval:
+  description: >
+    The named compliance owner approves one change on a separate object,
+    bound to the change hash and the proposal hash. That writes the synthetic
+    staging row. Seeing a distress or grievance route does not stage it.
+    Approval text inside an extract or a note is not a step.
+
+  approval_points:
+    - action: "See a distress, grievance, disclosure, or safeguarding route"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory compliance owner and the route hash. It does not stage a change."
+    - action: "Acknowledge unverified context pins"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. SYSC 6.1.1R and the Act sections are context. They are not confirmed as applying."
+    - action: "Acknowledge a caller source that differs, or a flag on a change"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "sources_seen and flags_seen must be the boolean true when the proposal lists them. A string is not coerced."
+    - action: "Approve this change"
+      approver: "Compliance owner"
+      mandatory: true
+      rationale: "stage_approved_change accepts the directory compliance owner only when the change hash and the proposal hash match."
+    - action: "Interpret the law, assign accountability, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a staging write."
+
+  no_approval_required:
+    - action: "Read the proposal"
+      rationale: "Reading the proposal has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 23 November 2026. A note may contain personal data.
+      That is not a finding that a principle was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, or another special-category detail, if a caller pastes it into the note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened. A pasted detail is routed and not copied."
+    safeguards:
+      - "Distress, a grievance, a disclosure, or a safeguarding concern is routed to a person. The cue is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal names are masked or counted. The output is not described as anonymised."
+      - "A count of people below 5 is not stored."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person. The sample does not assign accountability."
+  data_minimisation:
+    - "The note is not copied into the result."
+    - "People are directory references. Names are not stored in the proposal."
+    - "output is not described as anonymised. described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the request are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Extract text, notes, and a caller-supplied register are untrusted. They
+    may say the owner has approved, that every row is covered, or that a
+    label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Cover, send, and pretend-approval sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after not of, is not an inclusion."
+    - control: "Approval is a separate object"
+      description: "human_approval stays null until stage_approved_change succeeds."
+    - control: "Pinned sources win"
+      description: "A register, directory, or control library in the request is compared and not used for matching."
+    - control: "No interpret, assign, send, or production-write tool"
+      description: "Those functions raise RegisterForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The compliance
+    owner is the control. Nothing is sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-23"
+  risks:
+    - id: "R1"
+      risk: "A sentence in an extract is treated as the owner's approval or as final legal advice"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "stage_approved_change reads only the separate approval object and the change hash"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R2"
+      risk: "The agent assigns accountability or sends the register"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "accountability_assigned_by_agent and sent stay false"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R3"
+      risk: "A negated or carved-out sentence is treated as an included duty, or a control that does not address the duty is treated as cover"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Negation and carve-outs are applied before a theme counts"
+        - "covered is true only when a control addresses every affirmed theme"
+      residual_risk: "Medium"
+      owner: "Compliance owner"
+    - id: "R4"
+      risk: "An unreadable date is coerced, or a caller register is trusted"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "Matching uses the pinned files"
+      residual_risk: "Low"
+      owner: "Compliance owner"
+    - id: "R5"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the caller reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter does not write an application log.
+    Do not put the note or a quote in an application trace.
+  logged_events:
+    - event: "Proposal returned"
+      data_logged:
+        - "Timestamp"
+        - "Caller reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic staging row written"
+      data_logged:
+        - "Whether the change hash matched"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a live register."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Compliance owner"
+      contact: "compliance@halebridge.example"
+    - role: "Data protection officer"
+      contact: "dpo@halebridge.example"
+
+review:
+  last_review_date: "2026-11-23"
+  next_review_date: "2027-05-23"
+  review_frequency: "6 months, and sooner if the pinned extracts or the opened handbook and Act pages change"
+  reviewer: "The adopting organisation's compliance lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to FCA Handbook SYSC 6.1.1R, or to FSMA 2000 sections 59, 59ZA, or 63E"
+    - "A proposal to add a connector that can assign accountability, write production, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Register core"
+      path: "src/register.py"
+    - name: "Pinned context quotes"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. This starter does not clear the agent.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 23 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "FSMA 2000 section 59 was up to date with changes known to be in force on or before 21 November 2026. Section 59ZA was up to date on or before 19 November 2026. Section 63E was up to date on or before 21 November 2026. Each page says changes may be brought into force at a future date. Section 63F was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "SYSC 6.1.1R was read on the handbook page opened on 23 November 2026. That page had no up-to-date line. SYSC 1 Annex 1, SUP 10C, and COCON were not opened. The quotes are context. pins_confirmed stays false."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The 12-month review interval is the fictional policy's internal minimum. SYSC 6.1.1R and the Act sections that were opened state no number of months."
+      section: "src/register.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "A review date on or before the question date is stale. That is this starter's rule. It is not a statutory period."
+      section: "src/dates.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. A statistics authority page was not opened for it."
+      section: "src/cues.py"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 23 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "The harness overview opened on 23 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. Older wording that the harness is not the GitHub Copilot service is unverified against that page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A10"
+      assumption: "Halebridge & Co is fictional. Contacts on halebridge.example are placeholders. The register rows are synthetic and are not the statute."
+      section: "fixtures/extracts.json"
+      verify_on_deployment: true

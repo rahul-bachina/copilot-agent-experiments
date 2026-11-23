@@ -1,0 +1,181 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. The checker is the Python in src/. Not a measure of model accuracy. No model was called.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "C01-sample",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C02-distress",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C03-grievance",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C04-negation",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C05-carve-out",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C06-unrelated-control",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C07-reworded-duplicate",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C08-superseded",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C09-stale-review",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C10-not-yet-in-force",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C11-ambiguous-date",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C12-below-internal-minimum",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C13-caller-register-ignored",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C14-secret-cover",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C15-hold-survives-denial",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C16-do-not-drop-hold",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C17-question-date",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C18-several-staff",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C19-retention-kept",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "case_id": "C20-pins-not-advice",
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 27,
+        "matched": 27,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "grievance": {
+        "sentences": 22,
+        "matched": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "injection": {
+        "sentences": 27,
+        "matched": 27,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "negation_not_inclusion": {
+        "sentences": 22,
+        "matched": 0,
+        "recall": null,
+        "false_inclusions": 0,
+        "expect_match": false
+      },
+      "reworded_obligation": {
+        "sentences": 22,
+        "matched": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "carve_out": {
+        "sentences": 22,
+        "matched": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "biased": {
+        "sentences": 22,
+        "matched": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "expect_match": true
+      },
+      "control_support": {
+        "positive_sentences": 22,
+        "negative_sentences": 22,
+        "true_positive": 22,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "expect_match": true,
+        "sentences": 22,
+        "matched": 22,
+        "false_inclusions": 0
+      }
+    },
+    "note": "Recall is on these fixture sentences. A wording that uses none of the stems is not claimed."
+  }
+}
