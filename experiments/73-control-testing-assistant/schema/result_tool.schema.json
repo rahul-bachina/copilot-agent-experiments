@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the tester's own words",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "approver_ref", "content_hash", "words"],
+  "properties": {
+    "item": {"const": "tester-result"},
+    "approver_ref": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "words": {"type": "string", "minLength": 1, "maxLength": 2000}
+  }
+}

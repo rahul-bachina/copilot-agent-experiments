@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve a working paper hash",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "engagement_id", "content_hash", "pins_seen"],
+  "properties": {
+    "item": {"const": "working-paper"},
+    "decision": {"const": "approve-draft"},
+    "approver_ref": {"type": "string"},
+    "engagement_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "stale_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "criteria_seen": {"const": true}
+  }
+}

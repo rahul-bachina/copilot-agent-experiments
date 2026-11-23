@@ -694,6 +694,26 @@ Explains which pinned synthetic retention line appears to apply to one series, c
 
 </article>
 
+<article class="plan-card" id="l008" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · L008 · Autonomy A1</p>
+
+## Compliance obligation register
+
+Drafts obligation records from pinned synthetic extracts and a pinned synthetic register. Each record keeps the source, the provision, and the obligation text. A reworded duplicate is flagged. A control is cover only when it addresses the duty. A negation or a carve-out is not an acceptable must. A superseded pin retires the row. The named compliance owner approves the exact change hash before a synthetic staging row is written. FCA Handbook SYSC 6.1.1R and Financial Services and Markets Act 2000 sections 59, 59ZA, and 63E are context quotes. They are not a finding that a firm is in scope. The agent does not interpret the law as final advice, assign accountability, or send. [Read the briefing](experiments/72-compliance-obligation-register.md).
+
+</article>
+
+<article class="plan-card" id="l009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · L009 · Autonomy A1</p>
+
+## Control testing assistant
+
+Prepares a test plan, a seeded sample, and a draft working paper from a pinned synthetic control library, a pinned evidence population, and a pinned directory. Dates are compared with the period the question is about. Approvers are checked against the directory. Exceptions cite the evidence id. A caller-supplied library is flagged and not applied. An approval marker in the evidence text is not the approval step. The named tester approves the content hash before a synthetic staging row is written, and records the result in their own words. The agent does not pass or fail a control, close a finding, or send. [Read the briefing](experiments/73-control-testing-assistant.md).
+
+</article>
+
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L002 is Experiment 68. L003 is Experiment 69. L005 is Experiment 70. L007 is Experiment 71.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L002 is Experiment 68. L003 is Experiment 69. L005 is Experiment 70. L007 is Experiment 71. L008 is Experiment 72. L009 is Experiment 73.

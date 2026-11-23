@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy-one starters are in `experiments/`. The folders are 01 to 71.
+Seventy-three starters are in `experiments/`. The folders are 01 to 73.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -110,6 +110,8 @@ Seventy-one starters are in `experiments/`. The folders are 01 to 71.
 | 69 | [Policy Control Mapping](experiments/69-policy-control-mapping/) | Propose a policy sentence for each internal control, with the verbatim quote, clause reference, control id, rationale, and confidence band. Autonomy A0. The control owner approves each mapping. The agent does not mark a control as met, close a gap, edit a policy, or write to a GRC system. | ✅ Starter |
 | 70 | [Conflict-of-Interest Intake](experiments/70-conflict-of-interest-intake/) | Draft a structured declaration from a synthetic note, a supplier list, a procurement register, and a directory. Autonomy A1. The declarant confirms the exact draft before a synthetic staging write. The ethics or procurement team decides disposition. The agent does not decide that a conflict exists, clear, exclude, approve, or send. | ✅ Starter |
 | 71 | [Data Retention Decision Support](experiments/71-data-retention-decision-support/) | Explain which pinned retention line appears to apply, and the indicative date from the trigger. Autonomy A0. The records or legal owner decides retention, disposal, transfer, and hold. The agent does not delete, move, relabel, archive, or send, and it does not suggest disposal for a legal hold or an open FOI, SAR, litigation, or inquiry. | ✅ Starter |
+| 72 | [Compliance Obligation Register](experiments/72-compliance-obligation-register/) | Draft obligation records from pinned synthetic extracts and a synthetic register. Autonomy A1. The named compliance owner approves the exact change before a synthetic staging write. The agent does not interpret the law as final advice, assign accountability, or send. | ✅ Starter |
+| 73 | [Control Testing Assistant](experiments/73-control-testing-assistant/) | Propose a seeded sample and a draft working paper from a synthetic control library, evidence population, and directory. Autonomy A1. The named tester approves the exact draft before a synthetic staging write and decides the result. The agent does not pass or fail a control, close a finding, or send. | ✅ Starter |
 
 ## Getting Started
 
