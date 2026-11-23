@@ -226,6 +226,9 @@ DIAGRAMS = {
     "experiments/70-conflict-of-interest-intake/docs/architecture_diagram.png": (
         "experiments/img/70-conflict-of-interest-intake-architecture.png"
     ),
+    "experiments/73-control-testing-assistant/docs/architecture_diagram.png": (
+        "experiments/img/73-control-testing-assistant-architecture.png"
+    ),
 }
 
 
