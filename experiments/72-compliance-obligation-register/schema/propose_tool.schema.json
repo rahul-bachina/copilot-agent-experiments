@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Propose obligation register changes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "as_of": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "The date the question is about. Not today's date unless that is the question."
+    },
+    "caller_ref": {"type": "string"},
+    "note": {"type": "string"},
+    "cover": {"type": "string"},
+    "marking": {"type": "string"},
+    "legal_hold": {"type": "boolean"},
+    "retention": {"type": "array", "items": {"type": "string"}},
+    "register": {
+      "type": "object",
+      "description": "Compared with the pinned register. Not applied."
+    },
+    "directory": {
+      "type": "object",
+      "description": "Compared with the pinned directory. Not applied."
+    },
+    "controls": {
+      "type": "object",
+      "description": "Compared with the pinned control library. Not applied."
+    }
+  }
+}
