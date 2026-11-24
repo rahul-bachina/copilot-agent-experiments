@@ -1,0 +1,45 @@
+{
+  "brief_id": "NF-MEALS-2027",
+  "synthetic": true,
+  "funder_name": "Northfold Community Foundation",
+  "programme": "Neighbourhood Meals 2027",
+  "pinned_on": "2026-09-01",
+  "review_due": "2027-09-01",
+  "deadline": "2027-03-31",
+  "income_under_gbp": 500000,
+  "required_area": "Northfold",
+  "match_funding_minimum_percent": 10,
+  "marking": "OFFICIAL",
+  "legal_hold": false,
+  "retention": ["funder brief: keep until the programme closes"],
+  "questions": [
+    {"question_id": "Q1", "prompt": "What did the charity deliver?", "word_limit": 40},
+    {"question_id": "Q2", "prompt": "Who benefited?", "word_limit": 40},
+    {"question_id": "Q3", "prompt": "What did people say?", "word_limit": 40},
+    {"question_id": "Q4", "prompt": "Who does the charity work with?", "word_limit": 30},
+    {"question_id": "Q5", "prompt": "What match funding is in place?", "word_limit": 40}
+  ],
+  "priorities": [
+    {
+      "priority_id": "PR-MEALS",
+      "text": "More meals for people who need them",
+      "evidence_row_ids": ["ME-OUT-01"]
+    },
+    {
+      "priority_id": "PR-MATCH",
+      "text": "Projects with match funding",
+      "evidence_row_ids": []
+    }
+  ],
+  "required_attachments": [
+    {"attachment_id": "ATT-ACCOUNTS", "name": "Latest accounts", "profile_field": "accounts_year"},
+    {"attachment_id": "ATT-SAFE", "name": "Safeguarding policy", "profile_field": "safeguarding_policy_date"},
+    {"attachment_id": "ATT-BUDGET", "name": "Project budget", "profile_field": "budget_on_file"}
+  ],
+  "plan_offsets_days": {
+    "applicant_sign_off": -7,
+    "funder_chaser": "soon",
+    "internal_draft": -28,
+    "trustee_review": -14
+  }
+}

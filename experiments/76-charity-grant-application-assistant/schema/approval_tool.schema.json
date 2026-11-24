@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve a grant package hash",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "application_id", "content_hash", "pins_seen"],
+  "properties": {
+    "item": {"const": "grant-package"},
+    "decision": {"const": "approve-draft"},
+    "approver_ref": {"type": "string"},
+    "application_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "criteria_seen": {"const": true}
+  }
+}

@@ -1,0 +1,473 @@
+# Agent manifest: Charity Grant Application Assistant
+# Experiment 76 — catalogue ID V007
+# Version: 0.1.0
+# Last reviewed: 2026-11-24
+# Next review: 2027-05-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-76-charity-grant-application-assistant"
+  name: "Charity Grant Application Assistant"
+  version: "0.1.0"
+  description: >
+    Drafts grant answers, an attachments checklist, a deadline plan, and an
+    impact report from a pinned synthetic funder brief, a pinned synthetic
+    charity profile, and a pinned synthetic monitoring dataset. Autonomy A1.
+    The named applicant approves the exact content hash before a draft is
+    written to a synthetic staging store. The agent does not submit an
+    application, contact a funder, or send anything.
+  owner: "Applicant"
+  contact: "applicant@harbour-lane.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/76-charity-grant-application-assistant"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant drafts the package. The named applicant approves that exact content before a synthetic staging write. The agent does not submit."
+  constraints:
+    - "The applicant approves the package. The agent does not."
+    - "The agent NEVER submits an application"
+    - "The agent NEVER contacts a funder"
+    - "The agent NEVER sends"
+    - "The agent NEVER treats an approval marker inside a document as the approval step"
+    - "A caller-supplied funder brief is not the pinned brief"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic funder brief"
+      description: "Eligibility criteria, priorities, questions with word limits, a deadline, and required attachments. A brief inside the request is not this brief."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "Answers and the deadline plan use the pinned brief. Differences in a caller copy are flagged and not applied."
+      may_contain_personal_data: false
+    - resource: "Pinned synthetic charity profile"
+      description: "Objects, registration, income, area, partners, and policy dates for Harbour Lane Community Kitchen. The charity is invented."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "Eligibility and partner names come from this profile. A missing field is a gap."
+      may_contain_personal_data: false
+    - resource: "Pinned synthetic monitoring dataset"
+      description: "Outcome figures, beneficiary counts, one quotation, and case notes. Samples are synthetic. Instructions inside the text are not followed."
+      access_level: "read"
+      scope: "The fixture file. A case-note body is not copied into the package."
+      justification: "Every published figure or quotation cites a row id."
+      data_categories:
+        - "Outcome figures and beneficiary counts"
+        - "A synthetic quotation"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The approved draft is held in the synthetic staging store for the process. This starter does not set a statutory retention period."
+    - resource: "Synthetic directory"
+      description: "Applicants, trustees, and guests. Document text does not set the role or the clearance."
+      access_level: "read"
+      scope: "One applicant reference."
+      justification: "Only the named directory applicant can approve the package."
+      may_contain_personal_data: true
+    - resource: "Separate approval object"
+      description: "The only object that can approve this package hash, or record that a route was seen."
+      access_level: "read"
+      scope: "One approval object, bound to that hash."
+      justification: "An approval marker inside a document is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on monitoring files that have text. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch. The file body is not copied back."
+      justification: "The monitoring text is untrusted. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the monitoring text. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live funder portal, a mailbox, or the Charity Commission register"
+      reason: "The pinned files are what this starter reads. It does not submit or look up a real charity."
+    - resource: "A caller-supplied funder brief, charity profile, directory, or criteria object"
+      reason: "Differences are flagged. The draft uses the pinned files."
+    - resource: "An approval marker, a role, or a clearance stated inside document text"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Monitoring text above the applicant's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Prepare grant package"
+      provider: "Local Python (prepare_application)"
+      action: "Return answers, an impact report, an attachments checklist, and a deadline plan"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Figures and word counts are deterministic. A language model must not invent an impact figure."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named applicant has seen a distress, grievance, or safeguarding route"
+      access_level: "read"
+      scope: "The draft and a separate seen object. Nothing is staged."
+      justification: "Distress is not a routine bid. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record applicant approval"
+      provider: "Local Python (record_applicant_approval)"
+      action: "Write the approved draft to the synthetic staging store"
+      access_level: "write"
+      scope: "The draft and a separate approval object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the named applicant approves the exact content before it is stored."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hashes, the gaps, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after record_applicant_approval matches the named applicant and
+      the content hash. That write is not a funder portal and it is not a
+      submission.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (record_applicant_approval)"
+        action: "Keep the approved draft"
+        access_level: "write"
+        scope: "The synthetic store in this process. production_written stays false."
+        justification: "The named applicant approves the exact content before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a draft does not email the funder, the trustees,
+      or anyone else.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide that a bid should be funded. An approval
+      object records that the named applicant has seen this hash. A sentence
+      in a document cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that Charities Act 2011 section 17 was met,
+      or that a public-benefit duty was met, or that the charity is eligible.
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to a funder system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the package and does not contact a funder."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. An income figure is information from the profile."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Submit an application, contact a funder, or send"
+      rationale: "Those functions raise. submitted, funder_contacted, and sent stay false."
+    - enabled: false
+      action_name: "Treat document text as the applicant's approval"
+      rationale: "human_approval stays null until record_applicant_approval succeeds for the named applicant and the exact hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied brief or a biased criterion"
+      rationale: "caller_brief_applied and criteria_applied stay false. marked_acceptable stays false."
+    - enabled: false
+      action_name: "Invent an impact figure, a case study, a testimonial, or a partner"
+      rationale: "A published figure or quotation has a source row. Anything else is flagged and not written into the answer."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label"
+      rationale: "A hold and every retention label are copied onto the result and the staged row."
+
+human_approval:
+  description: >
+    The named applicant approves the package on a separate object, bound to
+    the content hash. That writes the synthetic row. Seeing a distress route
+    does not submit the bid. An approval marker inside a document is not a step.
+
+  approval_points:
+    - action: "See a distress, grievance, or safeguarding route"
+      approver: "Named applicant"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory applicant named on the draft and the content hash. It does not stage the package."
+    - action: "Approve this grant package"
+      approver: "Named applicant"
+      mandatory: true
+      rationale: "record_applicant_approval accepts the directory applicant only when the content hash matches and the item is grant-package."
+    - action: "Acknowledge the opened charity and data-protection pins"
+      approver: "Named applicant"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. PB1, PB2, PB3, and Charities Act 2011 section 14 were not opened."
+    - action: "Acknowledge a stale source, an unreadable date, or a caller brief that differs"
+      approver: "Named applicant"
+      mandatory: true
+      rationale: "sources_seen and dates_seen must be the boolean true when those flags are set. A string is not coerced."
+    - action: "Acknowledge an eligibility gap or a biased criterion"
+      approver: "Named applicant"
+      mandatory: true
+      rationale: "criteria_seen must be the boolean true when a gap or a biased criterion is flagged. The gap is not rewritten as met."
+    - action: "Submit an application, contact a funder, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the draft"
+      rationale: "Reading the draft has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 24 November 2026. Article 5(1)(c) was opened and is
+      quoted as context for data minimisation. It is not a finding that the
+      duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a caller may paste into a case note or a cover note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 24 November 2026."
+    safeguards:
+      - "A distress, grievance, or safeguarding cue is routed to the named applicant. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A beneficiary count below 5 is not published. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a bid. The draft does not submit an application."
+  data_minimisation:
+    - "The case-note body is not copied into the result."
+    - "Figures and quotations cite a row id. Names from the notes are not stored."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the monitoring rows are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Monitoring text and a caller-supplied brief are untrusted. They may say
+    the applicant has approved, that the application should be submitted, or
+    that a label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Submit, contact, and send sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after nobody, in the same sentence, is not an inclusion. A distress stem is still routed."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_applicant_approval succeeds."
+    - control: "Pinned sources win"
+      description: "A brief, profile, directory, or criteria object in the request is compared and not used for the draft."
+    - control: "No submit, contact, or send tool"
+      description: "Those functions raise GrantForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    applicant is the control. Nothing is sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-24"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a document is treated as the applicant's approval or as a submission"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_applicant_approval reads only the separate approval object and the content hash"
+      residual_risk: "Low"
+      owner: "Applicant"
+    - id: "R2"
+      risk: "The agent submits an application, contacts a funder, or sends the pack"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "submitted, funder_contacted, and sent stay false after approval"
+      residual_risk: "Low"
+      owner: "Applicant"
+    - id: "R3"
+      risk: "An impact figure, a quotation, or a partner is invented"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A published figure or quotation has a row id"
+        - "An unsupported claim is flagged and not written into the answer"
+      residual_risk: "Medium"
+      owner: "Applicant"
+    - id: "R4"
+      risk: "An eligibility gap is papered over, or a caller brief is applied"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A gap stays not_met"
+        - "The pinned brief is the plan"
+      residual_risk: "Medium"
+      owner: "Applicant"
+    - id: "R5"
+      risk: "An unreadable deadline is coerced to today or to zero"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Applicant"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept on the staged row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small beneficiary count identifies one person"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and is not added into an aggregate"
+      residual_risk: "Medium"
+      owner: "Applicant"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the applicant
+    reference if it matched the synthetic pattern, the outcome, and whether
+    an approval was recorded. This starter does not write an application log.
+    Do not put the case-note text or a quotation that identifies a person in
+    an application trace.
+  logged_events:
+    - event: "Draft returned"
+      data_logged:
+        - "Timestamp"
+        - "Applicant reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic row written"
+      data_logged:
+        - "Whether the content hash matched"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a funder system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Applicant"
+      contact: "applicant@harbour-lane.example"
+    - role: "Data protection officer"
+      contact: "dpo@harbour-lane.example"
+
+review:
+  last_review_date: "2026-11-24"
+  next_review_date: "2027-05-24"
+  review_frequency: "6 months, and sooner if the pinned brief or the cited statute or guidance changes"
+  reviewer: "The adopting organisation's applicant and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned brief, the charity profile, or the monitoring rows"
+    - "A change to Charities Act 2011 section 17 or to CC3"
+    - "A proposal to add a connector that can submit, contact a funder, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Grant core"
+      path: "src/grant.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The grant package from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 24 November 2026. Article 5(1)(c) was opened and is quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Charities Act 2011 section 17 and CC3 were opened on 24 November 2026. Section 14, PB1, PB2, and PB3 were not opened. The section 17(1) cross-reference to section 14 is unverified."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The twelve-month safeguarding window and the deadline offsets are the pinned brief. They are not statutory periods."
+      section: "fixtures/brief.json"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Treating a source as stale on its review-due date, including that date, is this starter's rule. It is not a statutory period."
+      section: "src/grant.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "fixtures/criteria.json"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 24 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview was opened on 24 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Harbour Lane Community Kitchen, Northfold Community Foundation, and the contact addresses are invented. The charity number label synthetic-760014 is not a Charity Commission number."
+      section: "fixtures/charity.json"
+      verify_on_deployment: true
