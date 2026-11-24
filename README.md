@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy-four starters are in `experiments/`. The folders are 01 to 74.
+Seventy-five starters are in `experiments/`. The folders are 01 to 74 and 76.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -113,6 +113,7 @@ Seventy-four starters are in `experiments/`. The folders are 01 to 74.
 | 72 | [Compliance Obligation Register](experiments/72-compliance-obligation-register/) | Draft obligation records from pinned synthetic extracts and a synthetic register. Autonomy A1. The named compliance owner approves the exact change before a synthetic staging write. The agent does not interpret the law as final advice, assign accountability, or send. | ✅ Starter |
 | 73 | [Control Testing Assistant](experiments/73-control-testing-assistant/) | Propose a seeded sample and a draft working paper from a synthetic control library, evidence population, and directory. Autonomy A1. The named tester approves the exact draft before a synthetic staging write and decides the result. The agent does not pass or fail a control, close a finding, or send. | ✅ Starter |
 | 74 | [Board Governance Pack Assistant](experiments/74-board-governance-pack/) | Assemble a draft agenda and pack index from a pinned forward agenda, pinned terms of reference, and synthetic papers. Autonomy A1. The named company secretary approves the exact draft before a synthetic staging write. The agent does not circulate, publish, file, or send, and it does not record minutes or decisions as approved. | ✅ Starter |
+| 76 | [Charity Grant Application Assistant](experiments/76-charity-grant-application-assistant/) | Draft grant answers, an attachments checklist, a deadline plan, and an impact report from a synthetic funder brief, charity profile, and monitoring rows. Autonomy A1. The named applicant approves the exact package before a synthetic staging write. The agent does not submit, contact a funder, or send. | ✅ Starter |
 
 ## Getting Started
 
