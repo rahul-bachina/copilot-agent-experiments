@@ -238,6 +238,9 @@ DIAGRAMS = {
     "experiments/75-benefits-information-assistant/docs/architecture_diagram.png": (
         "experiments/img/75-benefits-information-assistant-architecture.png"
     ),
+    "experiments/76-charity-grant-application-assistant/docs/architecture_diagram.png": (
+        "experiments/img/76-charity-grant-application-assistant-architecture.png"
+    ),
 }
 
 
