@@ -724,6 +724,16 @@ Assembles a draft agenda, a pack index, and an action-log carry-forward from a p
 
 </article>
 
+<article class="plan-card" id="v009" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · V009 · Autonomy A0</p>
+
+## Benefits information assistant
+
+Answers a general question from pinned synthetic benefits pages. Each citation carries the page, the publisher, and the last-reviewed date. A page past its review date is not quoted. A caller-supplied rate is not applied. Distress, debt, eviction, domestic abuse, and safeguarding route to a person, including a paraphrase. The named resident approves the content hash before a synthetic staging row is written. The agent does not decide eligibility, estimate an entitlement, calculate an award, complete or submit a claim, or send. [Read the briefing](experiments/75-benefits-information-assistant.md).
+
+</article>
+
 <article class="plan-card" id="v007" markdown="1">
 
 <p class="card-kicker"><span class="status status-available">Available</span> · V007 · Autonomy A1</p>
@@ -736,4 +746,4 @@ Drafts grant answers, an attachments checklist, a deadline plan, and an impact r
 
 </div>
 
-Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L002 is Experiment 68. L003 is Experiment 69. L005 is Experiment 70. L007 is Experiment 71. L008 is Experiment 72. L009 is Experiment 73. L010 is Experiment 74. V007 is Experiment 76.
+Every card on this page now has a briefing. Nothing here is still only a name. UK04 is Experiment 20. Q009 is Experiment 21. UK07 is Experiment 22. UK08 is Experiment 23. G001 is Experiment 24. G003 is Experiment 25. G004 is Experiment 26. G005 is Experiment 27. G006 is Experiment 28. G007 is Experiment 29. G008 is Experiment 30. G009 is Experiment 31. H009 is Experiment 32. UK09 is Experiment 33. UK10 is Experiment 34. B007 is Experiment 35. B005 is Experiment 36. B006 is Experiment 37. B008 is Experiment 38. B009 is Experiment 39. C001 is Experiment 40. C002 is Experiment 41. C003 is Experiment 42. C004 is Experiment 43. C005 is Experiment 44. C007 is Experiment 45. C008 is Experiment 46. C009 is Experiment 47. C010 is Experiment 48. M009 is Experiment 49. M001 is Experiment 50. M002 is Experiment 51. M004 is Experiment 52. M005 is Experiment 53. M006 is Experiment 54. M007 is Experiment 55. M008 is Experiment 56. M010 is Experiment 57. H001 is Experiment 58. H002 is Experiment 59. H003 is Experiment 60. H004 is Experiment 61. H005 is Experiment 62. H006 is Experiment 63. H007 is Experiment 64. H008 is Experiment 65. H010 is Experiment 66. L001 is Experiment 67. L002 is Experiment 68. L003 is Experiment 69. L005 is Experiment 70. L007 is Experiment 71. L008 is Experiment 72. L009 is Experiment 73. L010 is Experiment 74. V009 is Experiment 75. V007 is Experiment 76.
