@@ -1,0 +1,417 @@
+# Agent manifest: Benefits Information Assistant
+# Experiment 75 — catalogue ID V009
+# Version: 0.1.0
+# Last reviewed: 2026-11-24
+# Next review: 2027-05-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-75-benefits-information-assistant"
+  name: "Benefits Information Assistant"
+  version: "0.1.0"
+  description: >
+    Answers general questions about what a benefit is, how to apply, what
+    evidence is usually needed, and where to get independent advice, from a
+    pinned synthetic knowledge base. Autonomy A0. The assistant does not
+    decide eligibility, estimate an entitlement, calculate an award, complete
+    or submit a claim, or send. A human adviser route is always offered. The
+    named resident approves the exact summary hash before a synthetic staging
+    write.
+  owner: "Benefits adviser"
+  contact: "benefits@northmarsh.example.gov.uk"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/75-benefits-information-assistant"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only information and signposting. The only write is a synthetic staging row after the named resident approves the exact summary hash. The agent does not decide."
+  constraints:
+    - "The agent NEVER decides eligibility or entitlement"
+    - "The agent NEVER calculates an award amount"
+    - "The agent NEVER completes or submits a claim"
+    - "The agent NEVER sends"
+    - "The agent NEVER treats an approval marker or a role inside the question as the approval step"
+    - "A caller-supplied page, rule, or rate is not the pinned knowledge base"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic benefits pages"
+      description: "Public-information pages for a fictional council and synthetic DWP-style pages. Each page has a URL, a publisher, and a last-reviewed date. A page inside the question is not this set."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "An answer quotes a current page only. A page past its review date is not quoted."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Residents, advisers, and guests. Question text does not set the role or the clearance."
+      access_level: "read"
+      scope: "One resident reference."
+      justification: "Only the named directory resident can approve the summary. A guest cannot."
+      may_contain_personal_data: false
+    - resource: "Separate approval object"
+      description: "The only object that can approve this summary hash."
+      access_level: "read"
+      scope: "One approval object, bound to that hash."
+      justification: "An approval marker inside the question is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 13 council contact front door"
+      description: "triage() on the masked question. The reply is not copied and eligibility is not decided."
+      access_level: "read"
+      scope: "One synthetic enquiry."
+      justification: "The contact route is recorded. The benefits answer stays in this starter."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the question. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+
+  never_access:
+    - resource: "A live benefits system, a DWP service, a council case system, or a mailbox"
+      reason: "The pinned pages are what this starter reads. It does not submit a claim and it does not send."
+    - resource: "A caller-supplied page, rule, rate, or directory"
+      reason: "Differences are flagged. The answer uses the pinned pages."
+    - resource: "An approval marker, a role, or a clearance stated inside the question"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Question text above the resident's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Answer benefits question"
+      provider: "Local Python (answer_question)"
+      action: "Return a cited answer or a handoff from the pinned pages"
+      access_level: "read"
+      scope: "One synthetic question. No network. No model."
+      justification: "Page selection and the refusal rules are deterministic. A language model must not decide eligibility."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record resident approval"
+      provider: "Local Python (record_resident_approval)"
+      action: "Write the approved summary to the synthetic staging store"
+      access_level: "write"
+      scope: "The summary and a separate approval object, bound to the content hash."
+      justification: "The resident approves the exact summary before it is staged for an adviser."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The citations, the refusals, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after record_resident_approval matches the named resident and the
+      content hash. The write is not a claim and not a production record.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (record_resident_approval)"
+        action: "Keep the approved summary"
+        access_level: "write"
+        scope: "The synthetic store in this process. production_written stays false."
+        justification: "The named resident approves the exact content before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: "No sends. Approving a summary does not email the adviser, the resident, or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not decide a claim. An approval object records that the named resident has seen this hash."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide eligibility, entitlement, or an award. Articles 22A to 22D are context, not a finding that a decision was taken."
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to a benefits system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the summary or a claim."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A figure on a synthetic illustration page is not an award."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Decide eligibility, estimate entitlement, calculate an award, submit a claim, or send"
+      rationale: "Those functions raise. eligibility_decided stays false. award_amount stays null. claim_submitted and sent stay false."
+    - enabled: false
+      action_name: "Treat question text as the resident's approval"
+      rationale: "human_approval stays null until record_resident_approval succeeds for the named resident and the exact hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied page, rule, or rate"
+      rationale: "caller_pages_applied and caller_rules_applied stay false. figures_stated_as_current stays false."
+    - enabled: false
+      action_name: "Drop a legal hold or a retention label, or answer from a stale page"
+      rationale: "A hold and every retention label are copied. A page past its review date is not quoted."
+
+human_approval:
+  description: >
+    The named resident approves the adviser summary on a separate object,
+    bound to the content hash. That writes the synthetic row. An approval
+    marker inside the question is not a step. Seeing an urgent route does
+    not decide a benefit.
+
+  approval_points:
+    - action: "Approve this adviser summary"
+      approver: "Named resident"
+      mandatory: true
+      rationale: "record_resident_approval accepts the directory resident only when the content hash matches and the item is adviser-summary."
+    - action: "Acknowledge the legislation pins"
+      approver: "Named resident"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. The quotes were opened on 24 November 2026. Regulation 5 of S.I. 2026/82 was not quoted."
+    - action: "Acknowledge an urgent route, a stale page, a caller source, an adjustment, or an unreadable date"
+      approver: "Named resident"
+      mandatory: true
+      rationale: "The matching acknowledgement must be the boolean true when the result lists it. A string is not coerced."
+    - action: "Decide eligibility, calculate an award, submit a claim, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the answer"
+      rationale: "Reading the answer has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same question"
+      rationale: "No write and no send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 24 November 2026. UK GDPR Article 22, as shown on
+      legislation.gov.uk that day, no longer carries the pre-substitution
+      text. Articles 22A to 22D were opened. See src/sources.py.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, distress, or safeguarding text a resident may paste into a question"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 24 November 2026."
+    safeguards:
+      - "A distress, debt, eviction, domestic abuse, or safeguarding cue is routed to a person. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, amounts, and national insurance numbers are masked and not stored. The output is not described as anonymised."
+      - "A count of people is not published. The small-number threshold of 5 is a starter control."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a benefit. eligibility_decided stays false."
+  data_minimisation:
+    - "The question is masked before it is placed in the summary. An urgent question is not copied."
+    - "The assistant does not ask for a national insurance number, income, or household details."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the question are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Question text and a caller-supplied page are untrusted. They may say the
+    resident has approved, that the person is eligible, or that a label
+    should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Eligibility, award, claim, and send sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after nobody, in the same sentence, is not an inclusion. A distress, domestic abuse, or safeguarding stem is still routed."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_resident_approval succeeds."
+    - control: "Pinned sources win"
+      description: "A page, a rule, a rate, or a directory in the request is compared and not used for the answer."
+    - control: "No eligibility, award, claim, or send tool"
+      description: "Those functions raise BenefitsForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The resident and
+    the adviser are the control. Nothing is sent even if the note is wrong.
+    A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-24"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the question is treated as an eligibility decision or as an award"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "eligibility_decided stays false and award_amount stays null"
+      residual_risk: "Low"
+      owner: "Benefits adviser"
+    - id: "R2"
+      risk: "The agent submits a claim or sends the summary"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "claim_submitted and sent stay false after approval"
+      residual_risk: "Low"
+      owner: "Benefits adviser"
+    - id: "R3"
+      risk: "A stale page or a caller-supplied rate is quoted as current"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A page on or after its review-due date is not quoted"
+        - "figures_stated_as_current stays false"
+      residual_risk: "Medium"
+      owner: "Benefits adviser"
+    - id: "R4"
+      risk: "Distress or a safeguarding concern is handled as a routine benefits question"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The cue routes to a person, including a paraphrase"
+        - "The cue text is not copied"
+      residual_risk: "Medium"
+      owner: "Benefits adviser"
+    - id: "R5"
+      risk: "An unreadable question date is coerced to today"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Benefits adviser"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept on the staged row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the resident reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter does not write an application log.
+    Do not put the question text or a quote in an application trace.
+  logged_events:
+    - event: "Answer returned"
+      data_logged:
+        - "Timestamp"
+        - "Resident reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic row written"
+      data_logged:
+        - "Whether the content hash matched"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a benefits system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Benefits adviser"
+      contact: "benefits@northmarsh.example.gov.uk"
+    - role: "Data protection officer"
+      contact: "dpo@northmarsh.example.gov.uk"
+
+review:
+  last_review_date: "2026-11-24"
+  next_review_date: "2027-05-24"
+  review_frequency: "6 months, and sooner if a pinned page or a cited section changes"
+  reviewer: "The adopting organisation's benefits lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to a pinned page, its review date, or its publisher"
+    - "A change to UK GDPR Articles 22A to 22D or to Equality Act 2010 sections 20 or 149"
+    - "A proposal to add a connector that can decide a claim, calculate an award, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Answer core"
+      path: "src/assistant.py"
+    - name: "Pinned pages"
+      path: "fixtures/knowledge_base.json"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The summary from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 24 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "UK GDPR Article 22 was opened on 24 November 2026 and did not show the pre-substitution text. Articles 22A(1) and 22C(2), Data (Use and Access) Act 2025 sections 80 and 142(2)(h), and S.I. 2026/82 regulation 2(j) were opened. Regulation 5 was not quoted. Equality Act 2010 sections 20 and 149 were opened. The section 20 page said it was up to date with all changes known to be in force on or before 23 November 2026. The section 149 page said 22 November 2026."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Treating a page as stale on its review-due date, including that date, is this starter's rule. It is not a statutory period. No GOV.UK benefit page was quoted. No figure is a current rate."
+      section: "src/knowledge.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 24 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview was opened on 24 November 2026. It names a Microsoft Copilot harness, a Customer Conversation harness, and a standard harness. It does not use the words GitHub Copilot harness, and it states no price. Copilot Credits are named. The licensing page was not opened."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Contact addresses on northmarsh.example.gov.uk are placeholders. Northmarsh Borough Council is invented. The same council name is used by Experiment 13."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
