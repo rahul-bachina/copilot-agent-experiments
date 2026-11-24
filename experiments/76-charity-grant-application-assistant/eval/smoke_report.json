@@ -1,0 +1,230 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "catalogue_id": "V007",
+  "experiment_id": "exp-76-charity-grant-application-assistant",
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "sample-routes-without-leaking",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_to_human"
+    },
+    {
+      "case_id": "reproducible-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "same"
+    },
+    {
+      "case_id": "small-number-suppressed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "suppressed"
+    },
+    {
+      "case_id": "hold-and-retention-kept",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "kept"
+    },
+    {
+      "case_id": "match-funding-gap",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "gap"
+    },
+    {
+      "case_id": "safeguarding-gap",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "gap"
+    },
+    {
+      "case_id": "income-evidenced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "186400"
+    },
+    {
+      "case_id": "quote-sourced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "quoted"
+    },
+    {
+      "case_id": "invented-figure-flagged",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "unsupported"
+    },
+    {
+      "case_id": "invented-partner-flagged",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "unsupported"
+    },
+    {
+      "case_id": "word-limits",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "within"
+    },
+    {
+      "case_id": "caller-brief-ignored",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "pinned"
+    },
+    {
+      "case_id": "biased-not-applied",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "flagged"
+    },
+    {
+      "case_id": "text-approval-ignored",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ignored"
+    },
+    {
+      "case_id": "negation-not-inclusion",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not-included"
+    },
+    {
+      "case_id": "past-deadline",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "past"
+    },
+    {
+      "case_id": "unparseable-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "flagged"
+    },
+    {
+      "case_id": "approval-stages-exact-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "staged"
+    },
+    {
+      "case_id": "tampered-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "rejected"
+    },
+    {
+      "case_id": "prohibited-and-wrong-role",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not_the_named_applicant"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 26,
+        "negatives": 10,
+        "caught": 26,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "embedded_instruction": {
+        "sentences": 24,
+        "negatives": 10,
+        "caught": 24,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "approval_marker": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "biased_criteria": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "strip_label": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "carve_out": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "registered_charity": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  }
+}

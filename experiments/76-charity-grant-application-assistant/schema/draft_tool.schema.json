@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prepare a grant package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "application_id", "applicant_ref", "brief_id", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "application_id": {"type": "string"},
+    "applicant_ref": {"type": "string"},
+    "brief_id": {"type": "string"},
+    "as_of": {"type": "string"},
+    "cover_note": {"type": "string"},
+    "eligibility_statement": {"type": "string"},
+    "proposed_claims": {"type": "array"},
+    "supplied_brief": {"type": "object"}
+  }
+}
