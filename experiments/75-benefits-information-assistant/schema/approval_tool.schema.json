@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resident approves one adviser-summary hash",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "enquiry_id", "content_hash", "pins_seen"],
+  "properties": {
+    "item": {"const": "adviser-summary"},
+    "decision": {"const": "approve-summary"},
+    "approver_ref": {"type": "string"},
+    "enquiry_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "urgent_seen": {"const": true},
+    "stale_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "adjustment_seen": {"const": true},
+    "date_seen": {"const": true}
+  }
+}

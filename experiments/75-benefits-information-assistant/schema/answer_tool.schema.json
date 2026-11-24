@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Answer one benefits question",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "enquiry_id", "resident_ref", "question"],
+  "properties": {
+    "synthetic": {"const": true},
+    "enquiry_id": {"type": "string"},
+    "resident_ref": {"type": "string"},
+    "channel": {"type": "string"},
+    "question": {"type": "string"},
+    "supplied_pages": {"type": "array"},
+    "supplied_rules": {},
+    "supplied_directory": {"type": "object"}
+  }
+}
