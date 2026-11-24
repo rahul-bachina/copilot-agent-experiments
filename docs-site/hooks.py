@@ -235,6 +235,9 @@ DIAGRAMS = {
     "experiments/73-control-testing-assistant/docs/architecture_diagram.png": (
         "experiments/img/73-control-testing-assistant-architecture.png"
     ),
+    "experiments/74-board-governance-pack/docs/architecture_diagram.png": (
+        "experiments/img/74-board-governance-pack-architecture.png"
+    ),
     "experiments/75-benefits-information-assistant/docs/architecture_diagram.png": (
         "experiments/img/75-benefits-information-assistant-architecture.png"
     ),

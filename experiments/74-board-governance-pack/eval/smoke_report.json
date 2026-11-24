@@ -1,0 +1,203 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST \u2014 not a model evaluation",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "sample-routes-without-approval",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_to_human"
+    },
+    {
+      "case_id": "reproducible-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "9756be0e2d00"
+    },
+    {
+      "case_id": "secretary-approves-exact-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "None"
+    },
+    {
+      "case_id": "forged-hash-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "content_hash_mismatch"
+    },
+    {
+      "case_id": "tampered-content-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "content_hash_mismatch"
+    },
+    {
+      "case_id": "sponsor-cannot-approve-the-pack",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not_the_named_secretary"
+    },
+    {
+      "case_id": "guest-cannot-approve",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not_the_named_secretary"
+    },
+    {
+      "case_id": "string-true-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "pins_seen_not_boolean_true"
+    },
+    {
+      "case_id": "approval-marker-in-paper-not-trusted",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "risk"
+    },
+    {
+      "case_id": "missing-treasury-paper",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "PAP-TRE-01"
+    },
+    {
+      "case_id": "superseded-and-duplicate",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ia"
+    },
+    {
+      "case_id": "late-secret-marking-and-hold",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "SECRET"
+    },
+    {
+      "case_id": "outside-terms-caller-ignored",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "grants"
+    },
+    {
+      "case_id": "negation-is-not-inclusion",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "denied"
+    },
+    {
+      "case_id": "unparseable-date-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "odd"
+    },
+    {
+      "case_id": "action-carry-forward",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "actions"
+    },
+    {
+      "case_id": "stale-on-the-question-date",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "2027-06-01"
+    },
+    {
+      "case_id": "distress-route-must-be-seen",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_not_seen"
+    },
+    {
+      "case_id": "conflict-likely-not-decided",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "declared,likely_from_register"
+    },
+    {
+      "case_id": "circulate-raises",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "True"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "approval_marker": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "embedded_instruction": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "conflict_declared": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "outside_remit": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "distress": {
+        "sentences": 22,
+        "caught": 22,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 8,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  }
+}

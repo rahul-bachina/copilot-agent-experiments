@@ -1,0 +1,477 @@
+# Agent manifest: Board Governance Pack Assistant
+# Experiment 74 — catalogue ID L010
+# Version: 0.1.0
+# Last reviewed: 2026-11-24
+# Next review: 2027-05-24
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-74-board-governance-pack"
+  name: "Board Governance Pack Assistant"
+  version: "0.1.0"
+  description: >
+    Assembles a draft agenda, a pack index, cover-sheet checks, and an
+    action-log carry-forward from a pinned synthetic forward agenda, pinned
+    terms of reference, synthetic submitted papers, and a pinned directory.
+    Autonomy A1. The named company secretary approves the exact content hash
+    before a draft is written to a synthetic staging store. The agent does
+    not circulate, publish, file, or send, and it does not record board
+    decisions or minutes as approved.
+  owner: "Company secretary"
+  contact: "secretary@northmere.example.com"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/74-board-governance-pack"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant assembles a draft pack. The named company secretary approves that exact content before a synthetic staging write. The secretary decides what is circulated."
+  constraints:
+    - "The company secretary approves the final pack. The agent does not."
+    - "The agent NEVER circulates, publishes, files, or sends"
+    - "The agent NEVER records board decisions or minutes as approved"
+    - "The agent NEVER treats an approval marker, a role, or an approved-by line inside a paper as the approval step"
+    - "A caller-supplied terms of reference or agenda is not the pinned source"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic submitted papers"
+      description: "Cover sheets and bodies. Instructions inside the text are not followed. The body is not copied into the result."
+      access_level: "read"
+      scope: "The pinned papers for one meeting, plus any additional synthetic paper the request submits for checking."
+      justification: "Each paper is checked against the cover-sheet standard. Flags keep the paper id."
+      data_categories:
+        - "Paper references, dates, versions, and directory refs"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The approved draft is held in the synthetic staging store for the process. This starter does not set a statutory retention period."
+    - resource: "Pinned synthetic forward agenda and terms of reference"
+      description: "The meeting, the deadline, and the matters in remit. A caller copy is not this source."
+      access_level: "read"
+      scope: "The fixture files for one committee."
+      justification: "The draft agenda uses the pinned files. Differences in a caller copy are flagged and not applied."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "The company secretary, sponsors, authors, directors, and guests. Paper text does not set the role or the clearance."
+      access_level: "read"
+      scope: "The secretary named on the request, and the author and sponsor refs on the papers."
+      justification: "Only the named directory company secretary can approve the pack. A sponsor has to be on the directory."
+      may_contain_personal_data: true
+    - resource: "Pinned conflict register"
+      description: "Open interests with a start and an end. A sentence in a paper does not decide that a conflict exists."
+      access_level: "read"
+      scope: "Interests for people on the attendance list or on a paper."
+      justification: "A declared sentence and a live register row are flagged for the secretary."
+      may_contain_personal_data: true
+    - resource: "Prior synthetic minutes"
+      description: "Open actions only. The narrative is not copied. The minutes are not marked approved."
+      access_level: "read"
+      scope: "One prior meeting for the committee."
+      justification: "The action-log carry-forward is a draft for the secretary."
+      may_contain_personal_data: true
+    - resource: "Sponsor approval ledger"
+      description: "The only object that can record sponsor approval of a paper hash."
+      access_level: "read"
+      scope: "One ledger row bound to that paper hash."
+      justification: "An approval marker inside a paper is not that step."
+      may_contain_personal_data: false
+    - resource: "Separate secretary approval object"
+      description: "The only object that can approve this pack hash, or record that a route was seen."
+      access_level: "read"
+      scope: "One approval object, bound to that hash."
+      justification: "An approval marker inside a paper or a note is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on papers at or below the secretary's directory clearance. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch of at most 12 files. The file body is not copied back."
+      justification: "The papers are untrusted text. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 70 conflict-of-interest intake"
+      description: "mentioned_supplier_ids() and procurement_view() on visible paper text. The call does not decide that a conflict exists."
+      access_level: "read"
+      scope: "Supplier ids. Names are not copied back."
+      justification: "A supplier mention is context for the secretary. It is not a conflict decision."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on visible paper text. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live board portal, a SharePoint library, a mailbox, or a filing system"
+      reason: "The pinned files are what this starter reads. It does not circulate, file, or write production."
+    - resource: "A caller-supplied terms of reference, agenda, directory, or register"
+      reason: "Differences are flagged. The draft uses the pinned files."
+    - resource: "An approval marker, a role, or a clearance stated inside a paper"
+      reason: "The directory, the sponsor ledger, and the separate approval object are the source."
+    - resource: "Paper text above the company secretary's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Assemble board pack"
+      provider: "Local Python (assemble_pack)"
+      action: "Return a draft agenda, a pack index, cover-sheet flags, and an action-log carry-forward"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "The checks are deterministic. A language model must not approve a pack or a minute."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named company secretary has seen a distress, grievance, or safeguarding route"
+      access_level: "read"
+      scope: "The draft and a separate seen object. Nothing is staged."
+      justification: "Distress is not a routine paper. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record secretary approval"
+      provider: "Local Python (record_secretary_approval)"
+      action: "Write the approved draft to the synthetic staging store"
+      access_level: "write"
+      scope: "The draft and a separate approval object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the named company secretary approves the exact content before it is stored."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hashes, the flags, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after record_secretary_approval matches the named company secretary
+      and the content hash. The write is not circulation and it does not
+      approve minutes.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (record_secretary_approval)"
+        action: "Keep the approved draft"
+        access_level: "write"
+        scope: "The synthetic store in this process. production_written stays false."
+        justification: "The named company secretary approves the exact content before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a draft does not circulate the pack, email the
+      directors, or file the papers.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not approve a paper, a minute, or a decision. An approval
+      object records that the named company secretary has seen this hash. A
+      sentence in a paper cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that a Companies Act duty was met, that a Code
+      principle was met, or that a conflict exists.
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to a board system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not circulate, publish, file, or send the pack."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A recommendation on a paper is information for the secretary."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Circulate, publish, file, or send"
+      rationale: "Those functions raise. circulated, published, filed, and sent stay false."
+    - enabled: false
+      action_name: "Record minutes or a board decision as approved"
+      rationale: "approve_minutes and record_decision raise. minutes_approved and decisions_recorded stay false."
+    - enabled: false
+      action_name: "Treat paper text as the secretary's approval or the sponsor's approval"
+      rationale: "human_approval stays null until record_secretary_approval succeeds for the named secretary and the exact hash. Sponsor approval is the ledger hash only."
+    - enabled: false
+      action_name: "Apply a caller-supplied agenda or terms of reference"
+      rationale: "caller_agenda_applied and caller_terms_applied stay false."
+    - enabled: false
+      action_name: "Drop a protective marking, a legal hold, or a retention label"
+      rationale: "A compound marking takes the higher tier. A hold and every retention label are copied onto the result and the staged row."
+
+human_approval:
+  description: >
+    The named company secretary approves the pack on a separate object, bound
+    to the content hash. That writes the synthetic row. Seeing a distress
+    route does not decide it and does not stage the pack. An approval marker
+    inside a paper is not a step. Staging is not circulation.
+
+  approval_points:
+    - action: "See a distress, grievance, or safeguarding route"
+      approver: "Named company secretary"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory company secretary named on the draft and the content hash. It does not stage the pack."
+    - action: "Approve this board pack"
+      approver: "Named company secretary"
+      mandatory: true
+      rationale: "record_secretary_approval accepts the directory company secretary only when the content hash matches and the item is board-pack."
+    - action: "Acknowledge unverified Code pins"
+      approver: "Named company secretary"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. The Code was not opened on legislation.gov.uk. The Companies Act quotes are context, not a finding."
+    - action: "Acknowledge a stale source, an unreadable date, or a caller source that differs"
+      approver: "Named company secretary"
+      mandatory: true
+      rationale: "sources_seen and dates_seen must be the boolean true when those flags are set. A string is not coerced."
+    - action: "Circulate, publish, file, send, or approve minutes"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the draft"
+      rationale: "Reading the draft has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 24 November 2026.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health or safeguarding text a caller may paste into a paper or a note"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 24 November 2026."
+    safeguards:
+      - "A distress, grievance, or safeguarding cue is routed to the named company secretary. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A count of people below 5 is not published. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person, a conflict, or a board matter."
+  data_minimisation:
+    - "The paper body is not copied into the result."
+    - "Flags cite a paper id. The cue text is not stored."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on a paper are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Paper text, minute notes, and a caller-supplied agenda or terms of
+    reference are untrusted. They may say the secretary has approved, that
+    the minutes are approved, or that a marking should be stripped. The core
+    does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Circulate, file, publish, and send sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after nobody, in the same sentence, is not an inclusion. A distress stem is still routed."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_secretary_approval succeeds."
+    - control: "Pinned sources win"
+      description: "An agenda, terms of reference, directory, register, or paper set in the request is compared and not used as the source."
+    - control: "No circulate, file, send, or minutes tool"
+      description: "Those functions raise PackForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    company secretary is the control. Nothing is sent even if the note is
+    wrong. A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-24"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a paper is treated as the secretary's approval or as sponsor approval"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "Sponsor approval is a ledger row bound to the paper hash"
+        - "record_secretary_approval reads only the separate approval object and the content hash"
+      residual_risk: "Low"
+      owner: "Company secretary"
+    - id: "R2"
+      risk: "The agent circulates the pack, files it, or records minutes as approved"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "circulated, filed, sent, and minutes_approved stay false after approval"
+      residual_risk: "Low"
+      owner: "Company secretary"
+    - id: "R3"
+      risk: "A negated interest or a negated remit sentence is treated as included"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Negation is applied before a text cue counts"
+        - "A missing paper is listed and is not invented"
+      residual_risk: "Medium"
+      owner: "Company secretary"
+    - id: "R4"
+      risk: "A caller-supplied agenda or terms of reference replaces the pinned source"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The pinned agenda and terms are the draft"
+        - "caller_agenda_applied and caller_terms_applied stay false"
+      residual_risk: "Low"
+      owner: "Company secretary"
+    - id: "R5"
+      risk: "An unreadable date or version is coerced to zero or to today"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Company secretary"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept on the staged row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the secretary reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter does not write an application log.
+    Do not put the paper text or a quote in an application trace.
+  logged_events:
+    - event: "Draft returned"
+      data_logged:
+        - "Timestamp"
+        - "Secretary reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic row written"
+      data_logged:
+        - "Whether the content hash matched"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a board system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Company secretary"
+      contact: "secretary@northmere.example.com"
+    - role: "Data protection officer"
+      contact: "dpo@northmere.example.com"
+
+review:
+  last_review_date: "2026-11-24"
+  next_review_date: "2027-05-24"
+  review_frequency: "6 months, and sooner if the pinned agenda or the cited Act or Code page changes"
+  reviewer: "The adopting organisation's company secretary and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned agenda, terms of reference, or sponsor ledger"
+    - "A change to Companies Act 2006 sections 171 to 177 or section 248, or to the UK Corporate Governance Code 2024"
+    - "A proposal to add a connector that can circulate, file, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Pack core"
+      path: "src/pack.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The board pack from this starter is not an
+    approval of that record.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 24 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Companies Act 2006 sections 171, 172, 173, 174, 175, 176, 177, and 248 were opened on legislation.gov.uk on 24 November 2026. Each page said it was up to date with all changes known to be in force on or before 23 November 2026. The quotes are context. They are not a finding that a duty was met."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "UK Corporate Governance Code 2024 Principles F and I and Provisions 7 and 16 were read from a company-hosted PDF of the January 2024 Code. The FRC media PDF was not opened. A byte-for-byte match to the FRC file is unverified. The Code was not opened on legislation.gov.uk. The FRC guidance page was opened and says the guidance is not part of the Code."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "A paper submitted on the deadline day is not late. That is this starter's rule. It is not a statutory period. An interest remains live on its end date. That is also this starter's rule."
+      section: "src/checks.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened. OFFICIAL-SENSITIVE is treated as above OFFICIAL."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "fixtures/standard.json"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 24 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview was not re-opened for this experiment. Experiment 70 recorded, on 20 November 2026, that the page names a Microsoft Copilot harness and does not use the words GitHub Copilot harness. That point remains unverified against a fresh opening of the page."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Contact addresses on northmere.example.com are placeholders. Northmere Holdings Limited is invented."
+      section: "kill_switch.escalation_contacts"
+      verify_on_deployment: true
