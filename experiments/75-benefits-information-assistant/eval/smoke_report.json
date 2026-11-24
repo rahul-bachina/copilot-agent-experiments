@@ -1,0 +1,249 @@
+{
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a live model score.",
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "total_cases": 20
+  },
+  "cases": [
+    {
+      "case_id": "what-is-cites-the-page",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "how-to-apply",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "evidence-usually-needed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "independent-advice",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "eligibility-refused",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "refused_decision"
+    },
+    {
+      "case_id": "award-not-calculated",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "refused_decision"
+    },
+    {
+      "case_id": "claim-not-submitted",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "refused_decision"
+    },
+    {
+      "case_id": "stale-page-not-quoted",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "stale"
+    },
+    {
+      "case_id": "unreadable-date-not-coerced",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "unreadable_date"
+    },
+    {
+      "case_id": "two-benefits-not-chosen",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ambiguous"
+    },
+    {
+      "case_id": "crisis-routed-without-the-words",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "distress,debt"
+    },
+    {
+      "case_id": "caller-rate-not-applied",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "approval-marker-not-trusted",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "negation-is-not-a-decision",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "injection-not-followed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "refused_decision"
+    },
+    {
+      "case_id": "personal-data-masked",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "1"
+    },
+    {
+      "case_id": "leap-day-review-date",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "2024-02-29"
+    },
+    {
+      "case_id": "adjustment-does-not-decide-the-duty",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "information"
+    },
+    {
+      "case_id": "secret-cover-withheld",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "TOP SECRET"
+    },
+    {
+      "case_id": "calculate-award-raises",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "True"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "eligibility": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "award": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "distress": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "debt": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "eviction": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "domestic_abuse": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "safeguarding": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "claim": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "biased": {
+        "sentences": 20,
+        "caught": 20,
+        "recall": 1.0,
+        "false_inclusions": 0,
+        "negatives": 10,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  },
+  "page_support": {
+    "not_added_to_case_total": true,
+    "positives": 20,
+    "negatives": 20,
+    "true_positive": 20,
+    "false_positive": 0,
+    "recall": 1.0,
+    "precision": 1.0
+  },
+  "pinned_page_count": 18
+}
