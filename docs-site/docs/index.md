@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Seventy-three starters you can read today
+## Seventy-four starters you can read today
 
 </div>
 
@@ -1905,6 +1905,31 @@ The named tester approves the exact draft before a synthetic staging write. The 
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 74 · L010 · Governance · Autonomy A1</p>
+
+### Board governance pack assistant
+
+Assemble a draft agenda and pack index from a pinned forward agenda, pinned terms of reference, and synthetic papers. Cover-sheet gaps, late or missing papers, and likely conflicts are flagged for the company secretary.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named company secretary approves the exact draft before a synthetic staging write. The agent does not circulate, publish, file, or send, and it does not record minutes or decisions as approved.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/74-board-governance-pack.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/74-board-governance-pack)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -1923,7 +1948,7 @@ The named tester approves the exact draft before a synthetic staging write. The 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, and L009 now have briefings. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
