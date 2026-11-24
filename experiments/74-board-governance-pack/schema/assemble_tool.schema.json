@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Assemble a draft board pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "meeting_id", "committee_id", "secretary_ref"],
+  "properties": {
+    "synthetic": {"const": true},
+    "meeting_id": {"type": "string"},
+    "committee_id": {"type": "string"},
+    "secretary_ref": {"type": "string"},
+    "include_paper_ids": {"type": "array", "items": {"type": "string"}},
+    "additional_papers": {"type": "array"},
+    "caller_agenda": {"type": "object"},
+    "caller_terms": {"type": "object"},
+    "caller_directory": {"type": "object"},
+    "caller_register": {"type": "object"},
+    "caller_papers": {"type": "object"},
+    "note": {"type": "string"}
+  }
+}
