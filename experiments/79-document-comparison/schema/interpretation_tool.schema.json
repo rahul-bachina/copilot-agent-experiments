@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that the reader owns the interpretation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "comparison_id", "content_hash", "interpretation_owned_by_user"],
+  "properties": {
+    "item": {"const": "interpretation"},
+    "decision": {"const": "seen"},
+    "approver_ref": {"type": "string"},
+    "comparison_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "interpretation_owned_by_user": {"const": true}
+  }
+}

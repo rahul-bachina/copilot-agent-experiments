@@ -247,6 +247,9 @@ DIAGRAMS = {
     "experiments/77-form-extraction-assistant/docs/architecture_diagram.png": (
         "experiments/img/77-form-extraction-assistant-architecture.png"
     ),
+    "experiments/79-document-comparison/docs/architecture_diagram.png": (
+        "experiments/img/79-document-comparison-architecture.png"
+    ),
 }
 
 

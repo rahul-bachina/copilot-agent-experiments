@@ -1,0 +1,27 @@
+{
+  "synthetic": true,
+  "not_a_model_evaluation": true,
+  "note": "Twenty authored cases. Paraphrase and alignment scores are not rows in this list.",
+  "cases": [
+    {"case_id": "shall-to-may", "expects": "obligation_strength is flagged and the statement is not no material change"},
+    {"case_id": "must-to-should", "expects": "obligation_strength is flagged"},
+    {"case_id": "removed-negation", "expects": "negation is flagged"},
+    {"case_id": "amount-changed", "expects": "amounts is flagged"},
+    {"case_id": "notice-window-changed", "expects": "notice_windows is flagged"},
+    {"case_id": "date-changed", "expects": "dates is flagged"},
+    {"case_id": "party-changed", "expects": "parties is flagged and neither name is chosen as correct"},
+    {"case_id": "carve-out-removed", "expects": "carve_outs is flagged and marked_acceptable stays false"},
+    {"case_id": "renumber-only", "expects": "renumbered is not substantive and the check list is still present"},
+    {"case_id": "number-inside-similar-wording", "expects": "a number change inside similar wording is changed"},
+    {"case_id": "clause-moved", "expects": "the same text in a different place is moved"},
+    {"case_id": "clause-split", "expects": "one clause that becomes two consecutive clauses is split"},
+    {"case_id": "added-and-deleted", "expects": "both sides are cited and the spans match the lines"},
+    {"case_id": "duplicate-not-chosen", "expects": "conflicting duplicates are cited and neither text is chosen"},
+    {"case_id": "tracked-change-and-instruction", "expects": "hidden text is flagged and the instruction is not followed"},
+    {"case_id": "distress-routed", "expects": "a distress stem is routed and the cue word is not copied"},
+    {"case_id": "no-material-change-lists-checks", "expects": "no material change is stated only with every check listed"},
+    {"case_id": "confirmation-does-not-edit", "expects": "confirming the held hashes does not approve or edit the document"},
+    {"case_id": "caller-directory-rejected", "expects": "a directory in the request is not the pinned directory"},
+    {"case_id": "secret-cover-withheld", "expects": "a SECRET cover above an OFFICIAL reader withholds the body and keeps the label"}
+  ]
+}
