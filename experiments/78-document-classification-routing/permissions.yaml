@@ -1,0 +1,484 @@
+# Agent manifest: Document Classification and Routing Assistant
+# Experiment 78 — catalogue ID O003
+# Version: 0.1.0
+# Last reviewed: 2026-11-25
+# Next review: 2027-05-25
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-78-document-classification-routing"
+  name: "Document Classification and Routing Assistant"
+  version: "0.1.0"
+  description: >
+    Proposes a document type and a destination queue or library for one
+    synthetic incoming document, against a pinned taxonomy and routing table.
+    Autonomy A1. The named reviewer confirms that class and destination
+    before the routing is written to a synthetic staging store. The agent
+    does not file, move, delete, or send.
+  owner: "Document reviewer"
+  contact: "reviewer@northwharf.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/78-document-classification-routing"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant proposes a class and a destination. The named reviewer confirms that exact content before a synthetic staging write. The agent does not file."
+  constraints:
+    - "The reviewer confirms the class and the destination. The agent does not."
+    - "The agent NEVER files, moves, deletes, or sends a document"
+    - "The agent NEVER treats an approval marker inside a document as the approval step"
+    - "A caller-supplied taxonomy, routing table, or directory is not the pinned source"
+    - "Low-confidence, multi-type, and unknown documents are not forced into a class"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic taxonomy"
+      description: "Correspondence classes for Northwharf Borough Council. The council is invented. A taxonomy inside the request is not this taxonomy."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "Class evidence is matched against these phrases. Differences in a caller copy are flagged and not applied."
+      may_contain_personal_data: false
+    - resource: "Pinned synthetic routing table"
+      description: "Queues and libraries for each class. A library name is a proposal, not a filing instruction."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "The destination comes from this table unless a human route overrides it."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Document reviewers, a guest, and a clerk. Document text does not set the role or the clearance."
+      access_level: "read"
+      scope: "One reviewer reference."
+      justification: "Only the named directory reviewer can confirm the routing."
+      may_contain_personal_data: true
+    - resource: "One synthetic document"
+      description: "The text and metadata the caller pastes. Instructions inside the text are not followed. The body is not copied into the result."
+      access_level: "read"
+      scope: "One document, marked synthetic, up to 20,000 characters."
+      justification: "Class evidence, markings, holds, and dates are read from this document."
+      data_categories:
+        - "Correspondence text"
+        - "Protective markings, legal-hold flags, and retention labels"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The approved routing row is held in the synthetic staging store for the process. This starter does not set a statutory retention period."
+    - resource: "Separate approval object"
+      description: "The only object that can record that a route was seen, or confirm the class and destination for the held hash."
+      access_level: "read"
+      scope: "One approval object, bound to the agent-held hash."
+      justification: "An approval marker inside a document is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the document text. The file is not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic file. The body is not copied back."
+      justification: "The document text is untrusted. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the document text. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+    - resource: "Experiment 49 marking rank"
+      description: "prepare_text() and MARKING_RANK. The file plan and the retention scheme are not used."
+      access_level: "read"
+      scope: "A body marking, if Experiment 49's pattern matches, and the rank order."
+      justification: "Metadata and content are both read. The higher marking is kept. A bare cover line is read here because Experiment 49's pattern requires the word marked or classification."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live mailbox, SharePoint library, or case system"
+      reason: "The pinned files and the pasted document are what this starter reads. It does not file or send."
+    - resource: "A caller-supplied taxonomy, routing table, or directory"
+      reason: "Differences are flagged. The proposal uses the pinned files."
+    - resource: "An approval marker, a role, or a clearance stated inside document text"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Document text above the reviewer's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Propose document class"
+      provider: "Local Python (classify_document)"
+      action: "Return a proposed class, evidence, a confidence, a top alternative, and a destination"
+      access_level: "read"
+      scope: "One synthetic document. No network. No model."
+      justification: "The class and the clock flags are deterministic. A language model must not choose the class."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named reviewer has seen a human route"
+      access_level: "read"
+      scope: "The agent-held proposal and a separate seen object. Nothing is staged."
+      justification: "Distress, a statutory clock, or a low-confidence document is not a routine file. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Confirm routing"
+      provider: "Local Python (record_routing_confirmation)"
+      action: "Write the confirmed routing to the synthetic staging store"
+      access_level: "write"
+      scope: "The agent-held proposal and a separate approval object, bound to the content hash, the class, and the destination."
+      justification: "The catalogue checkpoint is that the named reviewer confirms the class and the destination."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run. Not called by this starter."
+      justification: "Optional narrative. The hash, the class, and the approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after record_routing_confirmation matches the named reviewer, the
+      held content hash, the proposed class, and the proposed destination.
+      That write is not a file move and it is not a send.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (record_routing_confirmation)"
+        action: "Keep the confirmed routing"
+        access_level: "write"
+        scope: "The synthetic store in this process. filed, moved, deleted, and sent stay false."
+        justification: "The named reviewer confirms the exact content before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: "No sends. Confirming a route does not email the sender or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide the class. An approval object records that
+      the named reviewer has seen this hash. A sentence in a document cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that Freedom of Information Act 2000 section 10
+      was met, or that UK GDPR Article 12A was met.
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to a library or a case system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the document."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. An invoice class is a proposal, not a payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "File, move, delete, or send a document"
+      rationale: "Those functions raise. filed, moved, deleted, and sent stay false."
+    - enabled: false
+      action_name: "Treat document text as the reviewer's confirmation"
+      rationale: "human_approval stays null until record_routing_confirmation succeeds for the named reviewer and the held hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied taxonomy, routing table, or directory"
+      rationale: "caller_taxonomy_applied, caller_routing_applied, and caller_directory_applied stay false."
+    - enabled: false
+      action_name: "Force a low-confidence, multi-type, or unknown document into a class"
+      rationale: "selected_class stays null in those cases. forced_class stays false."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a higher marking"
+      rationale: "A hold and every retention label are copied onto the result and the staged row. The higher marking is kept."
+
+human_approval:
+  description: >
+    The named reviewer confirms the class and the destination on a separate
+    object, bound to the agent-held content hash. That writes the synthetic
+    row. Seeing a human route does not file the document. An approval marker
+    inside a document is not a step.
+
+  approval_points:
+    - action: "See a human route"
+      approver: "Named document reviewer"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory reviewer named on the proposal and the held hash. It does not stage the routing."
+    - action: "Confirm this class and destination"
+      approver: "Named document reviewer"
+      mandatory: true
+      rationale: "record_routing_confirmation accepts the directory reviewer only when the held hash, the class, and the destination match."
+    - action: "Acknowledge the opened statutory pins"
+      approver: "Named document reviewer"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. The quotes are context. They are not a finding that a duty was met."
+    - action: "Acknowledge a stale source, an unreadable date, or a caller source that differs"
+      approver: "Named document reviewer"
+      mandatory: true
+      rationale: "sources_seen and dates_seen must be the boolean true when those flags are set. A string is not coerced."
+    - action: "Acknowledge a statutory clock, a higher marking, a hold, or a suppressed count"
+      approver: "Named document reviewer"
+      mandatory: true
+      rationale: "clocks_seen, marking_seen, hold_seen, and suppression_seen must be the boolean true when they are listed. The clock is not marked as met."
+    - action: "File, move, delete, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a confirmation."
+
+  no_approval_required:
+    - action: "Read the proposal"
+      rationale: "Reading the proposal has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same document"
+      rationale: "No write and no send until the approval object matches the held copy. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 25 November 2026. Article 15 and Article 12 were
+      opened and are quoted as context for a subject access request. They
+      are not a finding that the duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or distress text a caller may paste into a document"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 25 November 2026."
+    safeguards:
+      - "A distress, grievance, whistleblowing, or safeguarding cue is routed to the named reviewer. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A count of people from 1 to 4 is not published. A percentage or a difference that could recover it is not published."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a document. The proposal does not file the document."
+  data_minimisation:
+    - "The document body is not copied into the result."
+    - "Evidence is a pinned phrase, not a snippet of the document."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the document are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. A subject access request is proposed as a class and routed to a person. The agent does not answer it."
+
+prompt_injection:
+  description: >
+    Document text and a caller-supplied taxonomy are untrusted. They may say
+    the reviewer has approved, that the document should be filed, or that a
+    label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "File, move, delete, and send sentences are recorded. followed stays false."
+    - control: "Negation is not a positive class match"
+      description: "A phrase after not true that, or after nobody, in the same sentence, is not a class. A distress stem is still routed."
+    - control: "Approval is a separate object bound to the held copy"
+      description: "Approval keys on the request are stripped. A caller who edits the proposal and re-hashes it is refused."
+    - control: "Pinned sources win"
+      description: "A taxonomy, routing table, or directory in the request is compared and not used."
+    - control: "No file, move, delete, or send tool"
+      description: "Those functions raise RoutingForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    reviewer is the control. Nothing is filed even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-25"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a document is treated as the reviewer's confirmation or as a filing instruction"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_routing_confirmation reads only the separate approval object and the held hash"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+    - id: "R2"
+      risk: "The agent files, moves, deletes, or sends the document"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "filed, moved, deleted, and sent stay false after confirmation"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+    - id: "R3"
+      risk: "A low-confidence, multi-type, or unknown document is forced into a class"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "selected_class stays null"
+        - "The destination is the human queue"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+    - id: "R4"
+      risk: "A caller taxonomy or directory is applied"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The pinned files are the proposal"
+        - "A differing caller copy is flagged"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+    - id: "R5"
+      risk: "An unreadable date or period is coerced to zero or to today"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept on the staged row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small count of people identifies one person"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count field is not published"
+        - "A percentage or a difference is not published"
+      residual_risk: "Medium"
+      owner: "Document reviewer"
+    - id: "R8"
+      risk: "A statutory clock is marked as met"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "clock_met stays false"
+        - "Bank holidays are not applied, and no statutory due date is produced"
+      residual_risk: "Low"
+      owner: "Document reviewer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the reviewer reference
+    if it matched the synthetic pattern, the outcome, and whether a
+    confirmation was recorded. This starter does not write an application log.
+    Do not put the document text or a cue sentence in an application trace.
+  logged_events:
+    - event: "Proposal returned"
+      data_logged:
+        - "Timestamp"
+        - "Reviewer reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic row written"
+      data_logged:
+        - "Whether the content hash matched"
+        - "filed false"
+      retention: "Organisation's schedule. The agent does not write this event to a library."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Document reviewer"
+      contact: "reviewer@northwharf.example"
+    - role: "Data protection officer"
+      contact: "dpo@northwharf.example"
+
+review:
+  last_review_date: "2026-11-25"
+  next_review_date: "2027-05-25"
+  review_frequency: "6 months, and sooner if the pinned taxonomy or the cited statute changes"
+  reviewer: "The adopting organisation's document reviewer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned taxonomy, routing table, or directory"
+    - "A change to Freedom of Information Act 2000 section 1 or section 10, or to UK GDPR Article 12, Article 12A, or Article 15"
+    - "A proposal to add a connector that can file, move, delete, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Classification core"
+      path: "src/classify.py"
+    - name: "Pinned quotes"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The routing proposal from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 25 November 2026. Article 15, Article 12, and Article 12A were opened and are quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Freedom of Information Act 2000 section 1 and section 10 were opened on 25 November 2026. The Banking and Financial Dealings Act 1971 and the time-for-compliance regulations were not opened. Bank holidays are not applied."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Article 12(3) as opened does not itself say one month. Article 12A(1) says the period of one month beginning with the relevant time, subject to paragraph 3. This starter does not decide that the period was met."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Treating a source as stale on its review-due date, including that date, is this starter's rule. It is not a statutory period."
+      section: "src/classify.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The marking order is Experiment 49's MARKING_RANK. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Count fields are not published. That is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/classify.py"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 25 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview was opened on 25 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "Northwharf Borough Council and the contact addresses are invented."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true

@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy-eight starters are in `experiments/`. The folders are 01 to 77 and 79.
+Seventy-nine starters are in `experiments/`. The folders are 01 to 79.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -116,6 +116,7 @@ Seventy-eight starters are in `experiments/`. The folders are 01 to 77 and 79.
 | 75 | [Benefits Information Assistant](experiments/75-benefits-information-assistant/) | Answer a general question about what a benefit is, how to apply, what evidence is usually needed, and where to get independent advice. Autonomy A0. The resident approves the exact summary before a synthetic staging write. The agent does not decide eligibility, calculate an award, submit a claim, or send. | ✅ Starter |
 | 76 | [Charity Grant Application Assistant](experiments/76-charity-grant-application-assistant/) | Draft grant answers, an attachments checklist, a deadline plan, and an impact report from a synthetic funder brief, charity profile, and monitoring rows. Autonomy A1. The named applicant approves the exact package before a synthetic staging write. The agent does not submit, contact a funder, or send. | ✅ Starter |
 | 77 | [Form Extraction Assistant](experiments/77-form-extraction-assistant/) | Extract fields from a synthetic council permit, HR change, or supplier bank-details form into a draft record. Autonomy A1. The named reviewer approves the exact record before a synthetic staging write. The agent does not decide an application, write production, call back, or send. | ✅ Starter |
+| 78 | [Document Classification and Routing Assistant](experiments/78-document-classification-routing/) | Propose a document type and a destination queue or library for one synthetic document, with evidence, a confidence, and a top alternative. Autonomy A1. The named reviewer confirms the class and the destination before a synthetic staging write. The agent does not file, move, delete, or send. | ✅ Starter |
 | 79 | [Document Comparison Assistant](experiments/79-document-comparison/) | Align two synthetic versions of a contract, an internal policy, or a guidance document and cite both. Autonomy A0. The named reader confirms which versions are being compared and which is the baseline, and owns the interpretation. The agent does not edit, approve, publish, or send a document, and it does not give legal advice. | ✅ Starter |
 
 ## Getting Started
