@@ -1,0 +1,48 @@
+{
+  "routing_id": "northwharf-routing-2026",
+  "pinned_on": "2026-11-25",
+  "review_due": "2027-11-25",
+  "note": "Synthetic queues and libraries. A row is not authority to file, move, or send a document.",
+  "queues": {
+    "complaint": {
+      "queue": "complaints-review",
+      "library": "correspondence/complaints",
+      "human_required": false
+    },
+    "foi_request": {
+      "queue": "foi-human",
+      "library": null,
+      "human_required": true
+    },
+    "subject_access_request": {
+      "queue": "sar-human",
+      "library": null,
+      "human_required": true
+    },
+    "invoice": {
+      "queue": "finance-invoices",
+      "library": "finance/invoices",
+      "human_required": false
+    },
+    "legal_letter": {
+      "queue": "legal-human",
+      "library": null,
+      "human_required": true
+    },
+    "safeguarding_referral": {
+      "queue": "safeguarding-human",
+      "library": null,
+      "human_required": true
+    },
+    "change_of_address": {
+      "queue": "address-updates",
+      "library": "correspondence/address",
+      "human_required": false
+    },
+    "human_review": {
+      "queue": "human-review",
+      "library": null,
+      "human_required": true
+    }
+  }
+}
