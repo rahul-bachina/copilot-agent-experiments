@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy-six starters are in `experiments/`. The folders are 01 to 76.
+Seventy-seven starters are in `experiments/`. The folders are 01 to 76 and 78.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -115,6 +115,7 @@ Seventy-six starters are in `experiments/`. The folders are 01 to 76.
 | 74 | [Board Governance Pack Assistant](experiments/74-board-governance-pack/) | Assemble a draft agenda and pack index from a pinned forward agenda, pinned terms of reference, and synthetic papers. Autonomy A1. The named company secretary approves the exact draft before a synthetic staging write. The agent does not circulate, publish, file, or send, and it does not record minutes or decisions as approved. | ✅ Starter |
 | 75 | [Benefits Information Assistant](experiments/75-benefits-information-assistant/) | Answer a general question about what a benefit is, how to apply, what evidence is usually needed, and where to get independent advice. Autonomy A0. The resident approves the exact summary before a synthetic staging write. The agent does not decide eligibility, calculate an award, submit a claim, or send. | ✅ Starter |
 | 76 | [Charity Grant Application Assistant](experiments/76-charity-grant-application-assistant/) | Draft grant answers, an attachments checklist, a deadline plan, and an impact report from a synthetic funder brief, charity profile, and monitoring rows. Autonomy A1. The named applicant approves the exact package before a synthetic staging write. The agent does not submit, contact a funder, or send. | ✅ Starter |
+| 78 | [Document Classification and Routing Assistant](experiments/78-document-classification-routing/) | Propose a document type and a destination queue or library for one synthetic document, with evidence, a confidence, and a top alternative. Autonomy A1. The named reviewer confirms the class and the destination before a synthetic staging write. The agent does not file, move, delete, or send. | ✅ Starter |
 
 ## Getting Started
 
