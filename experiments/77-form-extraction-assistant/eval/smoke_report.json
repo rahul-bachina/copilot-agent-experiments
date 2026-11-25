@@ -1,0 +1,191 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "experiment_id": "exp-77-form-extraction-assistant",
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "sample-routes-without-leaking",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_to_human"
+    },
+    {
+      "case_id": "reproducible-hash",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "same"
+    },
+    {
+      "case_id": "small-number-suppressed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "suppressed"
+    },
+    {
+      "case_id": "date-unambiguous",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "12/12/2024"
+    },
+    {
+      "case_id": "date-ambiguous",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ambiguous"
+    },
+    {
+      "case_id": "date-impossible",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "impossible"
+    },
+    {
+      "case_id": "amount-unparseable",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "unparseable"
+    },
+    {
+      "case_id": "amount-out-of-range",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "25000.00"
+    },
+    {
+      "case_id": "contradictory-duplicate",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not picked"
+    },
+    {
+      "case_id": "illegible-not-invented",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "illegible"
+    },
+    {
+      "case_id": "signature-not-verified",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "present"
+    },
+    {
+      "case_id": "bank-callback-not-performed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "high-risk"
+    },
+    {
+      "case_id": "caller-schema-ignored",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "pinned"
+    },
+    {
+      "case_id": "injection-not-followed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ignored"
+    },
+    {
+      "case_id": "text-approval-ignored",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "ignored"
+    },
+    {
+      "case_id": "stale-schema",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "stale"
+    },
+    {
+      "case_id": "negation-not-a-value",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "negated"
+    },
+    {
+      "case_id": "tampered-rehash-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "caller_copy_differs_from_agent_held"
+    },
+    {
+      "case_id": "guest-cannot-approve",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "not_the_named_reviewer"
+    },
+    {
+      "case_id": "prohibited-actions-raise",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "raised"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 24,
+        "expect_match": true,
+        "matched": 24,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "safeguarding": {
+        "sentences": 24,
+        "expect_match": true,
+        "matched": 24,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "whistleblowing": {
+        "sentences": 24,
+        "expect_match": true,
+        "matched": 24,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0
+      }
+    }
+  },
+  "field_match": {
+    "not_added_to_case_total": true,
+    "positives": 20,
+    "negatives": 20,
+    "recall": 1.0,
+    "precision": 1.0,
+    "false_inclusions": 0
+  }
+}
