@@ -1,0 +1,471 @@
+# Agent manifest: Form Extraction Assistant
+# Experiment 77 — catalogue ID O002
+# Version: 0.1.0
+# Last reviewed: 2026-11-25
+# Next review: 2027-05-25
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-77-form-extraction-assistant"
+  name: "Form Extraction Assistant"
+  version: "0.1.0"
+  description: >
+    Extracts fields from a synthetic completed form into a draft structured
+    record, with a source location and a confidence for each field. Autonomy
+    A1. The named reviewer validates the material fields and approves the
+    exact content hash before the draft is written to a synthetic staging
+    store. The agent does not write to a production system, decide an
+    application, perform a call-back, or send anything.
+  owner: "Form reviewer"
+  contact: "reviewer@north-quay.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/77-form-extraction-assistant"
+
+autonomy:
+  level: "A1"
+  level_description: "The assistant extracts a draft. The named reviewer approves that exact content before a synthetic staging write. The agent does not decide the form."
+  constraints:
+    - "The reviewer approves the record. The agent does not."
+    - "The agent NEVER decides an application"
+    - "The agent NEVER writes to a production system"
+    - "The agent NEVER sends"
+    - "The agent NEVER performs a bank-details call-back"
+    - "The agent NEVER treats an approval marker inside a form as the approval step"
+    - "A caller-supplied schema is not the pinned schema"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic form schemas"
+      description: "Council permit, HR change, and supplier bank-details change. A schema inside the request is not one of these."
+      access_level: "read"
+      scope: "The fixture file."
+      justification: "Fields, required flags, and ranges come from the pinned schema. Differences in a caller copy are flagged and not applied."
+      may_contain_personal_data: false
+    - resource: "Synthetic form text"
+      description: "One pasted form, including OCR-style text. Instructions inside the text are not followed. The body is not copied into the draft."
+      access_level: "read"
+      scope: "One form. Material field values are kept for the named reviewer. The audit log does not copy them."
+      justification: "The review sheet is built from labelled lines. A missing value is not invented."
+      data_categories:
+        - "Identity, address, and date fields the reviewer must check"
+        - "Bank details on a supplier change"
+        - "Retention labels and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The approved draft is held in the synthetic staging store for the process. This starter does not set a statutory retention period."
+    - resource: "Synthetic directory"
+      description: "Form reviewers, a clerk, and a guest. Form text does not set the role or the clearance."
+      access_level: "read"
+      scope: "One reviewer reference."
+      justification: "Only the named directory reviewer can approve the record."
+      may_contain_personal_data: true
+    - resource: "Separate approval object"
+      description: "The only object that can approve this record hash, or record that a route was seen."
+      access_level: "read"
+      scope: "One approval object, bound to the agent-held hash."
+      justification: "An approval marker inside a form is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the form text. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic file. The file body is not copied back."
+      justification: "The form text is untrusted. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the form text. Reversible stays false. The redacted text is not copied."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live case system, a bank, a mailbox, or a production form store"
+      reason: "The pinned files and the pasted synthetic form are what this starter reads. It does not decide or write production."
+    - resource: "A caller-supplied schema, directory, or register"
+      reason: "Differences are flagged. The draft uses the pinned files."
+    - resource: "An approval marker, a role, or a clearance stated inside the form"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Form text above the reviewer's directory clearance"
+      reason: "Field values are withheld. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Extract form"
+      provider: "Local Python (extract_form)"
+      action: "Return a draft record, a review sheet, and a content hash"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "Field values, dates, and amounts are deterministic. A language model must not fill a blank."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named reviewer has seen a distress, safeguarding, or whistleblowing route"
+      access_level: "read"
+      scope: "The draft and a separate seen object. Nothing is staged."
+      justification: "Distress is not a routine extraction. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record reviewer approval"
+      provider: "Local Python (record_reviewer_approval)"
+      action: "Write the approved draft to the synthetic staging store"
+      access_level: "write"
+      scope: "The agent-held draft and a separate approval object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the named reviewer validates the material fields and approves the exact record."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hashes, the gaps, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: true
+    note: >
+      The only write is a row in the in-memory synthetic staging store, and
+      only after record_reviewer_approval matches the named reviewer and the
+      agent-held content hash. That write is not a production system and it
+      is not a decision.
+    allowed_writes:
+      - tool: "Synthetic staging row"
+        provider: "Local Python (record_reviewer_approval)"
+        action: "Keep the approved draft"
+        access_level: "write"
+        scope: "The synthetic store in this process. production_written stays false."
+        justification: "The named reviewer approves the exact content before it is stored."
+        human_approval_required: true
+        output_requires_human_review: true
+
+  sends:
+    enabled: false
+    note: >
+      No sends. Approving a draft does not email the applicant, the supplier,
+      or anyone else, and it does not place a call-back.
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: >
+      The agent does not decide that an application should be granted. An
+      approval object records that the named reviewer has seen this hash. A
+      sentence in a form cannot set it.
+  regulated_decision:
+    enabled: false
+    rationale: >
+      The agent does not decide that UK GDPR Article 5 was met, or that a
+      permit, an HR change, or a bank-details change should proceed.
+  production_record_change:
+    enabled: false
+    rationale: "The staging row is in-memory JSON. It is not a write to a production system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the record and does not perform a call-back."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. An amount is a field from the form, flagged when it is out of range."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Decide an application, write production, perform a call-back, or send"
+      rationale: "Those functions raise. decided, production_written, call_back_performed, and sent stay false."
+    - enabled: false
+      action_name: "Treat form text as the reviewer's approval or as a verified signature"
+      rationale: "human_approval stays null until record_reviewer_approval succeeds for the named reviewer and the exact hash. verified stays false."
+    - enabled: false
+      action_name: "Apply a caller-supplied schema"
+      rationale: "caller_schema_applied stays false. The pinned schema is the only schema used."
+    - enabled: false
+      action_name: "Invent a missing value or coerce an unreadable amount or date"
+      rationale: "A blank, illegible, ambiguous, impossible, or unparseable value stays empty. coerced stays false."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold and every retention label are copied onto the result and the staged row. A compound marking takes the higher tier."
+
+human_approval:
+  description: >
+    The named reviewer approves the record on a separate object, bound to the
+    agent-held content hash. That writes the synthetic row. Seeing a distress
+    route does not decide the form. An approval marker inside a form is not a step.
+
+  approval_points:
+    - action: "See a distress, safeguarding, or whistleblowing route"
+      approver: "Named reviewer"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory reviewer named on the draft and the content hash. It does not stage the record."
+    - action: "Approve this form record"
+      approver: "Named reviewer"
+      mandatory: true
+      rationale: "record_reviewer_approval accepts the directory reviewer only when the content hash matches the agent-held copy and the item is form-record."
+    - action: "Validate the material fields"
+      approver: "Named reviewer"
+      mandatory: true
+      rationale: "material_fields_seen must be the boolean true. Identity, bank details, amounts, dates, and declarations are highlighted. The agent does not decide them."
+    - action: "Acknowledge the opened data-protection pins"
+      approver: "Named reviewer"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. Article 5(1)(c) and Article 5(1)(d) were opened. Article 6 and Article 9 were not."
+    - action: "Acknowledge a stale schema, an unreadable date, a caller schema, a bank-details change, or a flag"
+      approver: "Named reviewer"
+      mandatory: true
+      rationale: "The matching acknowledgement must be the boolean true when that flag is set. A string is not coerced. A call-back is not performed."
+    - action: "Decide an application, write production, perform a call-back, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the draft"
+      rationale: "Reading the draft has no external effect. human_approval stays null and nothing is staged."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 25 November 2026. Article 5(1)(c) and Article 5(1)(d)
+      were opened and are quoted as context for data minimisation and accuracy.
+      They are not a finding that either principle was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or distress text a caller may paste into a form"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 25 November 2026."
+    safeguards:
+      - "A distress, safeguarding, or whistleblowing cue is routed to the named reviewer. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, and personal names are counted for the audit log and are not stored there. Schema field values the reviewer must check stay on the review sheet. The output is not described as anonymised."
+      - "A person count below 5 is not published, and neither are percentages, differences, or the same count under another field name. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a form. The draft does not decide an application."
+  data_minimisation:
+    - "The form body is not copied into the result."
+    - "Unexpected lines keep a location and do not keep the value."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The synthetic store lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the form are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Form text and a caller-supplied schema are untrusted. They may say the
+    reviewer has approved, that the signature is verified, that a call-back
+    is complete, or that a label should be stripped. The core does not read
+    the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Decide, send, verify, and call-back sentences are recorded. followed stays false."
+    - control: "Negation is not a positive match"
+      description: "A phrase after not true that, or after nobody, in the same sentence, is not an inclusion. A safeguarding phrase that itself says the person is not safe is still routed."
+    - control: "Approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_reviewer_approval succeeds against the agent-held copy."
+    - control: "Pinned sources win"
+      description: "A schema or directory object in the request is compared and not used for the draft."
+    - control: "No decide, call-back, or send tool"
+      description: "Those functions raise FormForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    reviewer is the control. Nothing is sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-25"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a form is treated as the reviewer's approval, a verified signature, or a completed call-back"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_reviewer_approval reads only the separate approval object and the agent-held content hash"
+      residual_risk: "Low"
+      owner: "Form reviewer"
+    - id: "R2"
+      risk: "The agent decides an application, writes production, performs a call-back, or sends the record"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "decided, production_written, call_back_performed, and sent stay false after approval"
+      residual_risk: "Low"
+      owner: "Form reviewer"
+    - id: "R3"
+      risk: "A missing, illegible, or contradictory value is invented or one of two values is picked"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The value stays null and the locations are kept"
+        - "coerced stays false"
+      residual_risk: "Medium"
+      owner: "Form reviewer"
+    - id: "R4"
+      risk: "A caller-supplied schema is applied, or a bank-details change is treated as already checked"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The pinned schema is the only schema used"
+        - "call_back_performed stays false"
+      residual_risk: "Medium"
+      owner: "Form reviewer"
+    - id: "R5"
+      risk: "An unreadable date or amount is coerced to today or to zero"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Form reviewer"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept on the staged row"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small person count identifies one person through a percentage or another field name"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and nor are percentages, differences, or other count fields"
+      residual_risk: "Medium"
+      owner: "Form reviewer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the reviewer reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter does not write an application log. Do not put
+    the form text, a phone number, an email address, a date of birth, a postal
+    address, a name, or a bank value in an application trace. The audit_log
+    object in the draft does not copy those values. The review sheet still
+    holds material fields for the named reviewer. That is not the log.
+  logged_events:
+    - event: "Draft returned"
+      data_logged:
+        - "Timestamp"
+        - "Reviewer reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Synthetic row written"
+      data_logged:
+        - "Whether the content hash matched the agent-held copy"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a production system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Form reviewer"
+      contact: "reviewer@north-quay.example"
+    - role: "Data protection officer"
+      contact: "dpo@north-quay.example"
+
+review:
+  last_review_date: "2026-11-25"
+  next_review_date: "2027-05-25"
+  review_frequency: "6 months, and sooner if the pinned schemas or the cited statute changes"
+  reviewer: "The adopting organisation's form reviewer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned schemas or the synthetic directory"
+    - "A change to UK GDPR Article 5"
+    - "A proposal to add a connector that can decide, write production, call back, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Extraction core"
+      path: "src/extract.py"
+    - name: "Pinned sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The form record from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 25 November 2026. Article 5(1)(c) and Article 5(1)(d) were opened and are quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 5(1)(c) and Article 5(1)(d) showed no footnote marker on the page opened on 25 November 2026. Paragraphs (b) and (e), and paragraph 3, did. Those amended paragraphs are not quoted as if they were unchanged."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "The confidence bands 0.95, 0.55, and 0.15 are starter labels for a clean line, a line that needs review, and a low-confidence line. They are not a model probability."
+      section: "src/fields.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Treating a schema as stale on its review-due date, including that date, is this starter's rule. It is not a statutory period."
+      section: "src/extract.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The marking order is a starter rule. The Government Security Classifications policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "fixtures/schemas.json"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 25 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "The harness overview was opened on 25 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A9"
+      assumption: "North Quay, Sam River, River Supplies, and the contact addresses are invented. No real applicant, supplier, or council is described."
+      section: "examples/sample_request.json"
+      verify_on_deployment: true

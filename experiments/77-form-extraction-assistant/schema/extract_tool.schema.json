@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Extract one synthetic form",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["extraction_id", "form_id", "form_type", "text", "synthetic"],
+  "properties": {
+    "extraction_id": {"type": "string"},
+    "form_id": {"type": "string"},
+    "form_type": {"type": "string"},
+    "reviewer_ref": {"type": "string"},
+    "text": {"type": "string"},
+    "synthetic": {"const": true},
+    "metadata": {"type": "object"},
+    "schema": {"type": "object"}
+  }
+}

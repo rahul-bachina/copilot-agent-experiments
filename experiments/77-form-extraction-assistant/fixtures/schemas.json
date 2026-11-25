@@ -1,0 +1,53 @@
+{
+  "small_number_threshold": 5,
+  "reviewed_on": "2026-05-01",
+  "review_due": "2026-11-01",
+  "forms": {
+    "council_permit": {
+      "title": "Council permit application",
+      "bank_details_change": false,
+      "fields": [
+        {"field_id": "applicant_name", "labels": ["applicant name", "full name"], "kind": "text", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "date_of_birth", "labels": ["date of birth", "dob"], "kind": "date", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "address", "labels": ["address", "postal address"], "kind": "text", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "postcode", "labels": ["postcode", "post code"], "kind": "postcode", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "start_date", "labels": ["start date", "permit start"], "kind": "date", "material": true, "material_class": "date", "required": true},
+        {"field_id": "fee_amount", "labels": ["fee", "fee amount"], "kind": "amount", "material": true, "material_class": "amount", "required": true, "minimum": "0", "maximum": "10000"},
+        {"field_id": "occupants", "labels": ["occupants", "number of occupants"], "kind": "count", "material": false, "required": false},
+        {"field_id": "occupants_percent", "labels": ["occupants percent", "percentage of household"], "kind": "percent", "material": false, "required": false},
+        {"field_id": "occupants_difference", "labels": ["occupants difference", "occupants gap"], "kind": "difference", "material": false, "required": false},
+        {"field_id": "other_count", "labels": ["other count", "headcount"], "kind": "count", "material": false, "required": false},
+        {"field_id": "declaration_truth", "labels": ["declaration", "declaration of truth"], "kind": "checkbox", "material": true, "material_class": "declaration", "required": true},
+        {"field_id": "signature", "labels": ["signature"], "kind": "signature", "material": true, "material_class": "signature", "required": true}
+      ]
+    },
+    "hr_change": {
+      "title": "HR change form",
+      "bank_details_change": false,
+      "fields": [
+        {"field_id": "employee_name", "labels": ["employee name"], "kind": "text", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "employee_ref", "labels": ["employee reference", "employee ref"], "kind": "text", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "effective_date", "labels": ["effective date"], "kind": "date", "material": true, "material_class": "date", "required": true},
+        {"field_id": "new_salary", "labels": ["new salary", "salary"], "kind": "amount", "material": true, "material_class": "amount", "required": true, "minimum": "0", "maximum": "200000"},
+        {"field_id": "contracted_hours", "labels": ["contracted hours", "hours"], "kind": "count", "material": false, "required": false},
+        {"field_id": "bank_details_change", "labels": ["bank details change"], "kind": "checkbox", "material": true, "material_class": "bank", "required": true},
+        {"field_id": "declaration_accuracy", "labels": ["declaration of accuracy"], "kind": "checkbox", "material": true, "material_class": "declaration", "required": true},
+        {"field_id": "signature", "labels": ["signature"], "kind": "signature", "material": true, "material_class": "signature", "required": true}
+      ]
+    },
+    "supplier_bank_change": {
+      "title": "Supplier bank-details change",
+      "bank_details_change": true,
+      "fields": [
+        {"field_id": "supplier_name", "labels": ["supplier name"], "kind": "text", "material": true, "material_class": "identity", "required": true},
+        {"field_id": "account_name", "labels": ["account name"], "kind": "text", "material": true, "material_class": "bank", "required": true},
+        {"field_id": "sort_code", "labels": ["sort code"], "kind": "sort_code", "material": true, "material_class": "bank", "required": true},
+        {"field_id": "account_number", "labels": ["account number"], "kind": "account_number", "material": true, "material_class": "bank", "required": true},
+        {"field_id": "effective_date", "labels": ["effective date"], "kind": "date", "material": true, "material_class": "date", "required": true},
+        {"field_id": "amount_owed", "labels": ["amount owed"], "kind": "amount", "material": true, "material_class": "amount", "required": false, "minimum": "0", "maximum": "1000000"},
+        {"field_id": "declaration_authority", "labels": ["declaration of authority"], "kind": "checkbox", "material": true, "material_class": "declaration", "required": true},
+        {"field_id": "signature", "labels": ["signature"], "kind": "signature", "material": true, "material_class": "signature", "required": true}
+      ]
+    }
+  }
+}
