@@ -1,0 +1,231 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "catalogue_id": "O003",
+  "experiment_id": "exp-78-document-classification-routing",
+  "pinned_directory_id": "northwharf-directory-2026",
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "complaint-proposed",
+      "passed": true,
+      "failed": false,
+      "detail": "ready_for_confirmation"
+    },
+    {
+      "case_id": "foi-clock-human",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "sar-clock-human",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "invoice-ready",
+      "passed": true,
+      "failed": false,
+      "detail": "ready_for_confirmation"
+    },
+    {
+      "case_id": "legal-human",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "safeguarding-human",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "address-ready",
+      "passed": true,
+      "failed": false,
+      "detail": "ready_for_confirmation"
+    },
+    {
+      "case_id": "multi-type-not-forced",
+      "passed": true,
+      "failed": false,
+      "detail": "not_forced"
+    },
+    {
+      "case_id": "unknown-human",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "low-confidence-not-forced",
+      "passed": true,
+      "failed": false,
+      "detail": "not_forced"
+    },
+    {
+      "case_id": "negation-not-a-match",
+      "passed": true,
+      "failed": false,
+      "detail": "not_a_match"
+    },
+    {
+      "case_id": "embedded-instruction-ignored",
+      "passed": true,
+      "failed": false,
+      "detail": "ignored"
+    },
+    {
+      "case_id": "secret-cover-higher-marking",
+      "passed": true,
+      "failed": false,
+      "detail": "SECRET"
+    },
+    {
+      "case_id": "legal-hold-and-retention-kept",
+      "passed": true,
+      "failed": false,
+      "detail": "kept"
+    },
+    {
+      "case_id": "caller-taxonomy-not-applied",
+      "passed": true,
+      "failed": false,
+      "detail": "not_applied"
+    },
+    {
+      "case_id": "approval-in-text-not-staged",
+      "passed": true,
+      "failed": false,
+      "detail": "not_staged"
+    },
+    {
+      "case_id": "distress-routed",
+      "passed": true,
+      "failed": false,
+      "detail": "human_queue"
+    },
+    {
+      "case_id": "conflicting-dates-not-picked",
+      "passed": true,
+      "failed": false,
+      "detail": "not_picked"
+    },
+    {
+      "case_id": "stated-period-not-coerced",
+      "passed": true,
+      "failed": false,
+      "detail": "not_coerced"
+    },
+    {
+      "case_id": "stale-not-relied-on",
+      "passed": true,
+      "failed": false,
+      "detail": "stale"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "safeguarding": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "whistleblowing": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "urgent": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "foi": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "sar": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "embedded_instruction": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "approval_marker": {
+        "sentences": 22,
+        "negatives": 10,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  },
+  "class_precision": {
+    "not_added_to_case_total": true,
+    "positives": 44,
+    "negatives": 10,
+    "caught": 44,
+    "missed": 0,
+    "false_inclusions": 0,
+    "recall": 1.0,
+    "precision": 1.0
+  }
+}
