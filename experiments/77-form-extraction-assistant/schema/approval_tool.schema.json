@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve one form-record hash",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "extraction_id", "content_hash", "pins_seen", "material_fields_seen"],
+  "properties": {
+    "item": {"const": "form-record"},
+    "decision": {"const": "approve-draft"},
+    "approver_ref": {"type": "string"},
+    "extraction_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "material_fields_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "schema_seen": {"const": true},
+    "bank_callback_seen": {"const": true},
+    "flags_seen": {"const": true},
+    "suppression_seen": {"const": true},
+    "marking_seen": {"const": true},
+    "injection_seen": {"const": true}
+  }
+}
