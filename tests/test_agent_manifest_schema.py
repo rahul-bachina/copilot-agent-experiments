@@ -2589,3 +2589,62 @@ class TestExperiment60Manifest:
         assert confirm["approver"] == "Line manager"
         assert confirm["mandatory"] is True
         assert experiment_60_manifest["agent"]["id"] == "exp-60-manager-one-to-one-prep"
+
+
+class TestExperiment79Manifest:
+    """Test the Experiment 79 document comparison manifest."""
+
+    @pytest.fixture
+    def experiment_79_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "79-document-comparison"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_79_manifest):
+        """Experiment 79 manifest should be valid."""
+        validate(instance=experiment_79_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_79_manifest):
+        """Experiment 79 should be autonomy level A0. The reader confirms the versions."""
+        level = experiment_79_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_79_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_79_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_79_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_79_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_79_manifest):
+        """Nothing is sent, and no document is written."""
+        assert experiment_79_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_79_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_reader_confirms_the_versions(self, experiment_79_manifest):
+        """The catalogue checkpoint is the named reader, and it is mandatory."""
+        points = experiment_79_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Confirm which two versions are being compared and which is the baseline"
+        )
+        assert confirm["approver"] == "Named reader"
+        assert confirm["mandatory"] is True
+        assert experiment_79_manifest["agent"]["id"] == "exp-79-document-comparison"
