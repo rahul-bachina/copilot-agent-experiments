@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Confirm the two held document versions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item",
+    "decision",
+    "approver_ref",
+    "comparison_id",
+    "content_hash",
+    "baseline_version_id",
+    "other_version_id",
+    "baseline_document_hash",
+    "other_document_hash",
+    "versions_seen",
+    "pins_seen"
+  ],
+  "properties": {
+    "item": {"const": "version-pair"},
+    "decision": {"const": "confirm-versions"},
+    "approver_ref": {"type": "string"},
+    "comparison_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "baseline_version_id": {"type": "string"},
+    "other_version_id": {"type": "string"},
+    "baseline_document_hash": {"type": "string"},
+    "other_document_hash": {"type": "string"},
+    "versions_seen": {"const": true},
+    "pins_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "markings_seen": {"const": true},
+    "material_seen": {"const": true}
+  }
+}

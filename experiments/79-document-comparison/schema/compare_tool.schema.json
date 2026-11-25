@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prepare a document comparison",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "comparison_id", "reader_ref", "document_kind", "suggested_baseline_id", "versions"],
+  "properties": {
+    "synthetic": {"const": true},
+    "comparison_id": {"type": "string"},
+    "reader_ref": {"type": "string"},
+    "document_kind": {"enum": ["contract", "internal_policy", "guidance"]},
+    "suggested_baseline_id": {"type": "string"},
+    "note": {"type": "string"},
+    "versions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2
+    }
+  }
+}

@@ -1,0 +1,465 @@
+# Agent manifest: Document Comparison Assistant
+# Experiment 79 — catalogue ID O004
+# Version: 0.1.0
+# Last reviewed: 2026-11-25
+# Next review: 2027-05-25
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-79-document-comparison"
+  name: "Document Comparison Assistant"
+  version: "0.1.0"
+  description: >
+    Aligns two synthetic versions of a contract, an internal policy, or a
+    guidance document and cites both. Autonomy A0. The named reader confirms
+    which versions are being compared and which is the baseline. The reader
+    owns the interpretation. The agent does not edit, approve, publish, or
+    send a document, and it does not give legal advice.
+  owner: "Document owner"
+  contact: "documents@reedmarsh.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/79-document-comparison"
+
+autonomy:
+  level: "A0"
+  level_description: "Read-only comparison. The named reader confirms the versions and owns the interpretation. The agent never edits, approves, publishes, or sends a document."
+  constraints:
+    - "The reader confirms the versions. The agent does not."
+    - "The reader owns the interpretation. The agent does not give legal advice."
+    - "The agent NEVER edits, approves, publishes, or sends a document"
+    - "The agent NEVER treats a sentence in a document as the confirmation step"
+    - "A caller-supplied directory or taxonomy is not the pinned source"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Two synthetic document versions"
+      description: "Contracts, internal policies, or guidance. Instructions inside the text are not followed. A third version is not compared."
+      access_level: "read"
+      scope: "Exactly two versions in one synthetic request. Clause text above the reader's directory clearance is not copied out."
+      justification: "The comparison cites both versions. The reader confirms which pair, and which is the baseline."
+      data_categories:
+        - "Clause text"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The in-memory held copy lives for the process. This starter does not set a statutory retention period."
+    - resource: "Synthetic directory"
+      description: "Document owners, readers, and guests. Document text does not set the role or the clearance."
+      access_level: "read"
+      scope: "One reader reference."
+      justification: "Only the named directory reader can confirm the versions."
+      may_contain_personal_data: true
+    - resource: "Separate confirmation object"
+      description: "The only object that can confirm this comparison hash, record that a route was seen, or record that the reader owns the interpretation."
+      access_level: "read"
+      scope: "One object, bound to the agent-held hash and the agent-held document hashes."
+      justification: "A confirmation sentence inside a document is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 12 document intake"
+      description: "intake() on the two versions as text files. Files are not confirmed and no purpose is confirmed."
+      access_level: "read"
+      scope: "One synthetic batch. The file body is not copied back."
+      justification: "The document text is untrusted. Intake records that."
+      may_contain_personal_data: true
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on the clause text. Reversible stays false. The redacted text is not stored as a field."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+    - resource: "Experiment 33 pinpoint span"
+      description: "normalise and resolve_span. A paraphrase is not treated as the cited line."
+      access_level: "read"
+      scope: "One clause span."
+      justification: "A citation has to match the line it names."
+      may_contain_personal_data: true
+    - resource: "Experiment 29 number and date extraction"
+      description: "extract_numbers and extract_dates. An unreadable value is not turned into zero."
+      access_level: "read"
+      scope: "Figures already in the clause."
+      justification: "A changed number or date is a flag for the reader."
+      may_contain_personal_data: false
+
+  never_access:
+    - resource: "A live contract store, a mailbox, or a publication site"
+      reason: "The two synthetic versions are what this starter reads. It does not edit, publish, or send."
+    - resource: "A caller-supplied directory, taxonomy, or register"
+      reason: "Differences are flagged. Confirmation uses the pinned directory."
+    - resource: "An approval marker, a role, or a clearance stated inside document text"
+      reason: "The directory and the separate confirmation object are the source."
+    - resource: "Clause text above the reader's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+    - resource: "Experiment 38 policy-wording compare()"
+      reason: "That function is an insurance topic list. This starter does not call it and does not copy it."
+
+tools:
+  allowed:
+    - tool: "Prepare document comparison"
+      provider: "Local Python (prepare_comparison)"
+      action: "Align two synthetic versions and return citations and material flags"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "The alignment and the flags are deterministic. A language model must not decide that a change is immaterial."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named reader has seen a distress, safeguarding, whistleblowing, or grievance route"
+      access_level: "read"
+      scope: "The comparison and a separate seen object. Nothing is edited."
+      justification: "Those cues are not a routine comparison. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Confirm version pair"
+      provider: "Local Python (confirm_versions)"
+      action: "Record that the named reader confirms these two held versions and which is the baseline"
+      access_level: "read"
+      scope: "The comparison and a separate confirmation object, bound to the content hash and the document hashes."
+      justification: "The catalogue checkpoint is that the user confirms the versions. The step does not approve the document."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record interpretation seen"
+      provider: "Local Python (record_interpretation_seen)"
+      action: "Record that the named reader owns the interpretation of this comparison hash"
+      access_level: "read"
+      scope: "The confirmed comparison and a separate acknowledgement. Nothing is published."
+      justification: "Interpretation is for the reader. The step is not legal advice and it does not approve the document."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hashes, the flags, and the empty or recorded confirmation stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. confirm_versions keeps an in-memory acknowledgement for
+      this process. It does not edit, approve, publish, or send a document.
+
+  sends:
+    enabled: false
+    note: "No sends. Confirming the versions does not email the other party or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject a document. A confirmation object records that the named reader has seen this hash. A sentence in a document cannot set it."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide that a clause is enforceable, that Article 22A was met, or that a change is immaterial in law."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not edit a document or write a production record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the comparison or the document."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. An amount in a clause is a difference to flag, not a transaction."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Edit, approve, publish, or send a document"
+      rationale: "Those functions raise. document_edited, document_approved, published, and sent stay false."
+    - enabled: false
+      action_name: "Give legal advice or say which version is better"
+      rationale: "give_legal_advice raises. legal_advice and may_be_relied_on stay false."
+    - enabled: false
+      action_name: "Treat document text as the reader's confirmation"
+      rationale: "versions_confirmed stays false until confirm_versions succeeds for the named reader, the content hash, and the held document hashes."
+    - enabled: false
+      action_name: "Say there is no material change without listing the checks"
+      rationale: "The statement is set only when every check was run and none fired. The check list is always present."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold, every retention label, and the higher marking are copied onto the result and sit inside the hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied directory or taxonomy"
+      rationale: "caller_directory_applied and caller_taxonomy_applied stay false."
+
+human_approval:
+  description: >
+    The named reader confirms the two versions on a separate object, bound
+    to the agent-held content hash and the agent-held document hashes.
+    That confirmation does not approve, edit, or publish the document.
+    The reader then records that they own the interpretation. An approval
+    marker inside a document is not a step.
+
+  approval_points:
+    - action: "See a distress, safeguarding, whistleblowing, or grievance route"
+      approver: "Named reader"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory reader named on the comparison and the content hash. It does not confirm the versions."
+    - action: "Confirm which two versions are being compared and which is the baseline"
+      approver: "Named reader"
+      mandatory: true
+      rationale: "confirm_versions accepts the directory reader only when the content hash and both document hashes match the agent-held copies."
+    - action: "Acknowledge the opened data-protection pins"
+      approver: "Named reader"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. Article 22B, Article 22C, Article 22D, and Article 84B were not opened."
+    - action: "Acknowledge a stale source, an unreadable date, or a marking"
+      approver: "Named reader"
+      mandatory: true
+      rationale: "dates_seen, sources_seen, and markings_seen must be the boolean true when those flags are set. A string is not coerced."
+    - action: "Acknowledge the material flags and own the interpretation"
+      approver: "Named reader"
+      mandatory: true
+      rationale: "material_seen must be the boolean true when a flag is set. record_interpretation_seen does not give legal advice."
+    - action: "Edit, approve, publish, or send a document"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a confirmation."
+
+  no_approval_required:
+    - action: "Read the comparison"
+      rationale: "Reading the comparison has no external effect. versions_confirmed stays false and nothing is edited."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the confirmation object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 25 November 2026. Article 5(1)(c) was opened and is
+      quoted as context for data minimisation. It is not a finding that the
+      duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or other sensitive text a caller may paste into a clause"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 25 November 2026."
+    safeguards:
+      - "A distress, safeguarding, whistleblowing, or grievance cue is routed to the named reader. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A headcount below 5 is not published, and neither is a difference or a percentage of that count. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a document. The comparison does not approve a version."
+  data_minimisation:
+    - "A clause above the reader's clearance is not copied into the result."
+    - "Cue text is not copied."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The held copy lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the versions are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Clause text and a caller note are untrusted. They may say the versions
+    are already confirmed, that the agent should report no material change,
+    or that a label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Edit, approve, publish, and send sentences are recorded. followed stays false."
+    - control: "Negation is not a positive inclusion"
+      description: "A phrase after not true that, in the same sentence, is not an inclusion. A distress stem is still routed."
+    - control: "Confirmation is a separate object"
+      description: "Confirmation keys on the request are stripped. versions_confirmed stays false until confirm_versions succeeds against the agent-held copy."
+    - control: "Pinned directory wins"
+      description: "A directory or taxonomy in the request is not used for the confirmation."
+    - control: "No edit, approve, publish, or send tool"
+      description: "Those functions raise CompareForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    reader is the control. Nothing is sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-25"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a document is treated as the reader's confirmation or as legal advice"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "confirm_versions reads only the separate object, the content hash, and the held document hashes"
+      residual_risk: "Low"
+      owner: "Document owner"
+    - id: "R2"
+      risk: "The agent edits, approves, publishes, or sends a document"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false after a confirmation"
+      residual_risk: "Low"
+      owner: "Document owner"
+    - id: "R3"
+      risk: "A real change is hidden inside renumbering, reformatting, or tracked text"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Renumbering is not substantive unless a material check fires"
+        - "Hidden and tracked text is flagged"
+        - "No material change is stated only with the check list"
+      residual_risk: "Medium"
+      owner: "Document owner"
+    - id: "R4"
+      risk: "A low-confidence alignment or a conflicting duplicate is treated as settled"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Low confidence is flagged"
+        - "Conflicting duplicates are both cited and neither is chosen"
+      residual_risk: "Low"
+      owner: "Document owner"
+    - id: "R5"
+      risk: "An unreadable date or a bad version count is coerced to a default"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Document owner"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept inside the hash"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small headcount identifies one person through a difference or a percentage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and is not differenced"
+      residual_risk: "Medium"
+      owner: "Document owner"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the reader reference
+    if it matched the synthetic pattern, the outcome, and whether a
+    confirmation was recorded. This starter does not write an application
+    log. Do not put clause text that identifies a person in an application
+    trace.
+  logged_events:
+    - event: "Comparison returned"
+      data_logged:
+        - "Timestamp"
+        - "Reader reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether versions_confirmed was left false"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Versions confirmed in memory"
+      data_logged:
+        - "Whether the content hash matched the held copy"
+        - "Whether the document hashes matched the held copies"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a contract system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Document owner"
+      contact: "documents@reedmarsh.example"
+    - role: "Data protection officer"
+      contact: "dpo@reedmarsh.example"
+
+review:
+  last_review_date: "2026-11-25"
+  next_review_date: "2027-05-25"
+  review_frequency: "6 months, and sooner if the cited statute text changes"
+  reviewer: "The adopting organisation's document owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned directory"
+    - "A change to UK GDPR Article 5(1)(c) or Article 22A"
+    - "A proposal to add a connector that can edit, publish, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Comparison core"
+      path: "src/compare.py"
+    - name: "Opened sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The comparison from this starter is not an
+    approval of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 25 November 2026. Article 5(1)(c) and Article 22A(1)(a) and (b) were opened and are quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Article 22B, Article 22C, Article 22D, and Article 84B were not opened. S.I. 2026/82 was not opened. This starter does not decide that a comparison is a significant decision."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Treating a review date on the question date as stale, including that date, is this starter's rule. It is not a statutory period."
+      section: "src/compare.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/mask.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 25 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview was opened on 25 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Reedmarsh Internal Services, Reedmarsh Council, and Northfold Supplies Ltd are invented. The contact addresses are not real."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true
