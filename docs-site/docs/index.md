@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Seventy-eight starters you can read today
+## Seventy-nine starters you can read today
 
 </div>
 
@@ -2030,6 +2030,31 @@ The named reviewer confirms the class and the destination before a synthetic sta
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 79 · O004 · Documents · Autonomy A0</p>
+
+### Document comparison assistant
+
+Align two synthetic versions of a contract, an internal policy, or a guidance document. Cite added, deleted, moved, and changed clauses, and flag material wording for the reader.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named reader confirms which two versions are being compared and which is the baseline, and owns the interpretation. The agent does not edit, approve, publish, or send a document, and it does not give legal advice.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/79-document-comparison.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/79-document-comparison)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -2048,7 +2073,7 @@ The named reviewer confirms the class and the destination before a synthetic sta
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. O004 is Experiment 79. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 

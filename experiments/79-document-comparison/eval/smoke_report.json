@@ -1,0 +1,262 @@
+{
+  "evaluation_label": "DETERMINISTIC SMOKE TEST. Not a model evaluation.",
+  "mode": "deterministic",
+  "not_a_model_evaluation": true,
+  "catalogue_id": "O004",
+  "experiment_id": "exp-79-document-comparison",
+  "summary": {
+    "total_cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0
+  },
+  "cases": [
+    {
+      "case_id": "shall-to-may",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "obligation_strength"
+    },
+    {
+      "case_id": "must-to-should",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "obligation"
+    },
+    {
+      "case_id": "removed-negation",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "negation"
+    },
+    {
+      "case_id": "amount-changed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "amounts"
+    },
+    {
+      "case_id": "notice-window-changed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "notice"
+    },
+    {
+      "case_id": "date-changed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "dates"
+    },
+    {
+      "case_id": "party-changed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "parties"
+    },
+    {
+      "case_id": "carve-out-removed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "carve"
+    },
+    {
+      "case_id": "renumber-only",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "renumbered"
+    },
+    {
+      "case_id": "number-inside-similar-wording",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "changed"
+    },
+    {
+      "case_id": "clause-moved",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "moved"
+    },
+    {
+      "case_id": "clause-split",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "split"
+    },
+    {
+      "case_id": "added-and-deleted",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "added,deleted"
+    },
+    {
+      "case_id": "duplicate-not-chosen",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "duplicate"
+    },
+    {
+      "case_id": "tracked-change-and-instruction",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "tracked"
+    },
+    {
+      "case_id": "distress-routed",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "route_to_human"
+    },
+    {
+      "case_id": "no-material-change-lists-checks",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "no material change"
+    },
+    {
+      "case_id": "confirmation-does-not-edit",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "confirmed"
+    },
+    {
+      "case_id": "caller-directory-rejected",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "caller_directory_not_used"
+    },
+    {
+      "case_id": "secret-cover-withheld",
+      "passed": true,
+      "failed": false,
+      "error": false,
+      "detail": "SECRET"
+    }
+  ],
+  "paraphrase_recall": {
+    "not_added_to_case_total": true,
+    "categories": {
+      "distress": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "safeguarding": {
+        "sentences": 22,
+        "negatives": 21,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "whistleblowing": {
+        "sentences": 22,
+        "negatives": 21,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "grievance": {
+        "sentences": 22,
+        "negatives": 21,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "embedded_instruction": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "forged_confirmation": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "leading_criterion": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      },
+      "carve_out_included": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 0,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": null,
+        "precision": null,
+        "expect_match": false
+      },
+      "obligation_strength": {
+        "sentences": 22,
+        "negatives": 22,
+        "caught": 22,
+        "missed": 0,
+        "false_inclusions": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "expect_match": true
+      }
+    }
+  },
+  "alignment_score": {
+    "not_added_to_case_total": true,
+    "not_a_model_evaluation": true,
+    "true_positive": 22,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "positives": 22,
+    "negatives": 22
+  },
+  "dataset_ids_match": true
+}

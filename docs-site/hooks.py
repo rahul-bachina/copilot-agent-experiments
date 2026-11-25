@@ -250,6 +250,9 @@ DIAGRAMS = {
     "experiments/78-document-classification-routing/docs/architecture_diagram.png": (
         "experiments/img/78-document-classification-routing-architecture.png"
     ),
+    "experiments/79-document-comparison/docs/architecture_diagram.png": (
+        "experiments/img/79-document-comparison-architecture.png"
+    ),
 }
 
 
