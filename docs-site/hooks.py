@@ -256,6 +256,9 @@ DIAGRAMS = {
     "experiments/80-translation-quality-review/docs/architecture_diagram.png": (
         "experiments/img/80-translation-quality-review-architecture.png"
     ),
+    "experiments/81-approval-pack-coordinator/docs/architecture_diagram.png": (
+        "experiments/img/81-approval-pack-coordinator-architecture.png"
+    ),
 }
 
 

@@ -1,0 +1,74 @@
+{
+  "synthetic": true,
+  "pinned_on": "2026-11-26",
+  "authority": "pinned_synthetic_matrix",
+  "not_statutory": true,
+  "rules": [
+    {
+      "rule_id": "SPEND-UNDER-5000",
+      "request_type": "spend",
+      "min_pence": 0,
+      "max_pence": 500000,
+      "approver_roles": ["budget_holder"],
+      "evidence_ids": ["quote", "budget_code"]
+    },
+    {
+      "rule_id": "SPEND-5000-TO-25000",
+      "request_type": "spend",
+      "min_pence": 500000,
+      "max_pence": 2500000,
+      "approver_roles": ["finance_manager", "finance_checker"],
+      "evidence_ids": ["quote", "budget_code", "business_case"]
+    },
+    {
+      "rule_id": "SPEND-25000-AND-ABOVE",
+      "request_type": "spend",
+      "min_pence": 2500000,
+      "max_pence": null,
+      "approver_roles": ["director", "finance_checker"],
+      "evidence_ids": ["quote", "budget_code", "business_case", "procurement_check"]
+    },
+    {
+      "rule_id": "POLICY-LOW",
+      "request_type": "policy_exception",
+      "severity": "low",
+      "approver_roles": ["policy_owner"],
+      "evidence_ids": ["policy_extract", "exception_reason"]
+    },
+    {
+      "rule_id": "POLICY-MEDIUM",
+      "request_type": "policy_exception",
+      "severity": "medium",
+      "approver_roles": ["policy_owner", "risk_owner"],
+      "evidence_ids": ["policy_extract", "exception_reason", "risk_note"]
+    },
+    {
+      "rule_id": "POLICY-HIGH",
+      "request_type": "policy_exception",
+      "severity": "high",
+      "approver_roles": ["policy_owner", "risk_owner", "director"],
+      "evidence_ids": ["policy_extract", "exception_reason", "risk_note", "legal_note"]
+    },
+    {
+      "rule_id": "CHANGE-STANDARD",
+      "request_type": "change",
+      "change_class": "standard",
+      "approver_roles": ["change_manager"],
+      "evidence_ids": ["change_record", "test_evidence"]
+    },
+    {
+      "rule_id": "CHANGE-NORMAL",
+      "request_type": "change",
+      "change_class": "normal",
+      "approver_roles": ["change_manager", "service_owner"],
+      "evidence_ids": ["change_record", "test_evidence", "rollback_plan"]
+    },
+    {
+      "rule_id": "CHANGE-EMERGENCY",
+      "request_type": "change",
+      "change_class": "emergency",
+      "approver_roles": ["change_manager", "service_owner", "director"],
+      "evidence_ids": ["change_record", "test_evidence", "rollback_plan", "incident_note"]
+    }
+  ]
+}

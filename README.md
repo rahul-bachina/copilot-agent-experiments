@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Eighty starters are in `experiments/`. The folders are 01 to 80.
+Eighty-one starters are in `experiments/`. The folders are 01 to 81.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -119,6 +119,7 @@ Eighty starters are in `experiments/`. The folders are 01 to 80.
 | 78 | [Document Classification and Routing Assistant](experiments/78-document-classification-routing/) | Propose a document type and a destination queue or library for one synthetic document, with evidence, a confidence, and a top alternative. Autonomy A1. The named reviewer confirms the class and the destination before a synthetic staging write. The agent does not file, move, delete, or send. | ✅ Starter |
 | 79 | [Document Comparison Assistant](experiments/79-document-comparison/) | Align two synthetic versions of a contract, an internal policy, or a guidance document and cite both. Autonomy A0. The named reader confirms which versions are being compared and which is the baseline, and owns the interpretation. The agent does not edit, approve, publish, or send a document, and it does not give legal advice. | ✅ Starter |
 | 80 | [Translation Quality Review Assistant](experiments/80-translation-quality-review/) | Align a synthetic source text with its translation and flag omitted content, changed facts, negation, obligation strength, glossary terms, and register. Autonomy A0. The named bilingual reviewer validates every high-risk segment and owns the final translation. The agent does not publish, send, or overwrite a document. | ✅ Starter |
+| 81 | [Approval Pack Coordinator](experiments/81-approval-pack-coordinator/) | Assemble a draft approval pack for a synthetic spend request, policy exception, or change request. Autonomy A1. The named approver reviews the complete pack and decides. The agent does not approve, reject, sign, submit, pay, or send. | ✅ Starter |
 
 ## Getting Started
 
