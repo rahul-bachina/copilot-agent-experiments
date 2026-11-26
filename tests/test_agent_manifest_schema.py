@@ -2648,3 +2648,62 @@ class TestExperiment79Manifest:
         assert confirm["approver"] == "Named reader"
         assert confirm["mandatory"] is True
         assert experiment_79_manifest["agent"]["id"] == "exp-79-document-comparison"
+
+
+class TestExperiment80Manifest:
+    """Test the Experiment 80 translation quality review manifest."""
+
+    @pytest.fixture
+    def experiment_80_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "80-translation-quality-review"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_80_manifest):
+        """Experiment 80 manifest should be valid."""
+        validate(instance=experiment_80_manifest, schema=schema)
+
+    def test_autonomy_level_is_a0(self, experiment_80_manifest):
+        """Experiment 80 should be autonomy level A0. The reviewer owns the translation."""
+        level = experiment_80_manifest["autonomy"]["level"]
+        assert level == "A0"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_80_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_80_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_80_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_80_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_80_manifest):
+        """Nothing is sent, and no document is written."""
+        assert experiment_80_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_80_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_reviewer_owns_the_translation(self, experiment_80_manifest):
+        """The catalogue checkpoint is the named bilingual reviewer, and it is mandatory."""
+        points = experiment_80_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Own the final translation"
+        )
+        assert confirm["approver"] == "Named bilingual reviewer"
+        assert confirm["mandatory"] is True
+        assert experiment_80_manifest["agent"]["id"] == "exp-80-translation-quality-review"

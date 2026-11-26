@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that the named reviewer validated the high-risk segments",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "review_id", "content_hash", "source_document_hash", "target_document_hash", "validated_by_reviewer"],
+  "properties": {
+    "item": {"const": "high-risk"},
+    "decision": {"const": "validated"},
+    "approver_ref": {"type": "string"},
+    "review_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "source_document_hash": {"type": "string"},
+    "target_document_hash": {"type": "string"},
+    "validated_by_reviewer": {"const": true}
+  }
+}
