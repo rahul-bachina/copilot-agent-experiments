@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that the named reviewer owns this translation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "review_id", "content_hash", "source_document_hash", "target_document_hash", "translation_owned_by_reviewer", "pins_seen", "segments_seen"],
+  "properties": {
+    "item": {"const": "translation-owned"},
+    "decision": {"const": "own"},
+    "approver_ref": {"type": "string"},
+    "review_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "source_document_hash": {"type": "string"},
+    "target_document_hash": {"type": "string"},
+    "translation_owned_by_reviewer": {"const": true},
+    "pins_seen": {"const": true},
+    "segments_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "markings_seen": {"const": true},
+    "flags_seen": {"const": true},
+    "glossary_seen": {"const": true}
+  }
+}

@@ -253,6 +253,9 @@ DIAGRAMS = {
     "experiments/79-document-comparison/docs/architecture_diagram.png": (
         "experiments/img/79-document-comparison-architecture.png"
     ),
+    "experiments/80-translation-quality-review/docs/architecture_diagram.png": (
+        "experiments/img/80-translation-quality-review-architecture.png"
+    ),
     "experiments/81-approval-pack-coordinator/docs/architecture_diagram.png": (
         "experiments/img/81-approval-pack-coordinator-architecture.png"
     ),

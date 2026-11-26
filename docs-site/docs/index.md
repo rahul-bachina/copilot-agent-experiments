@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Eighty starters you can read today
+## Eighty-one starters you can read today
 
 </div>
 
@@ -2057,6 +2057,31 @@ The named reader confirms which two versions are being compared and which is the
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 80 · O006 · Translation · Autonomy A0</p>
+
+### Translation quality review assistant
+
+Align a synthetic source text with its translation. Flag omitted content, changed facts, negation, obligation strength, glossary terms, and register for the bilingual reviewer.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named bilingual reviewer validates every high-risk segment and owns the final translation. The agent does not publish, send, or overwrite a document.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/80-translation-quality-review.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/80-translation-quality-review)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 81 · O007 · Operations · Autonomy A1</p>
 
 ### Approval pack coordinator
@@ -2098,7 +2123,7 @@ The named approver reviews the complete pack and records approve, reject, or ret
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. O004 is Experiment 79. O007 is Experiment 81. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. O004 is Experiment 79. O006 is Experiment 80. O007 is Experiment 81. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
