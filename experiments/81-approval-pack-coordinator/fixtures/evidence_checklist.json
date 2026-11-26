@@ -1,0 +1,98 @@
+{
+  "synthetic": true,
+  "pinned_on": "2026-11-26",
+  "items": [
+    {
+      "evidence_id": "quote",
+      "label": "Supplier quote",
+      "requires_signature": true,
+      "currency_days": 90,
+      "must_mention_field": "supplier_name",
+      "required_for": [{"request_type": "spend", "min_pence": 0, "max_pence": null}]
+    },
+    {
+      "evidence_id": "budget_code",
+      "label": "Budget code",
+      "requires_signature": false,
+      "currency_days": 365,
+      "required_for": [{"request_type": "spend", "min_pence": 0, "max_pence": null}]
+    },
+    {
+      "evidence_id": "business_case",
+      "label": "Business case",
+      "requires_signature": true,
+      "currency_days": 180,
+      "required_for": [{"request_type": "spend", "min_pence": 500000, "max_pence": null}]
+    },
+    {
+      "evidence_id": "procurement_check",
+      "label": "Procurement check",
+      "requires_signature": true,
+      "currency_days": 90,
+      "required_for": [{"request_type": "spend", "min_pence": 2500000, "max_pence": null}]
+    },
+    {
+      "evidence_id": "policy_extract",
+      "label": "Policy extract",
+      "requires_signature": false,
+      "currency_days": 365,
+      "required_version": "3.1",
+      "required_for": [{"request_type": "policy_exception"}]
+    },
+    {
+      "evidence_id": "exception_reason",
+      "label": "Exception reason",
+      "requires_signature": true,
+      "currency_days": 90,
+      "required_for": [{"request_type": "policy_exception"}]
+    },
+    {
+      "evidence_id": "risk_note",
+      "label": "Risk note",
+      "requires_signature": false,
+      "currency_days": 180,
+      "required_for": [
+        {"request_type": "policy_exception", "severity": "medium"},
+        {"request_type": "policy_exception", "severity": "high"}
+      ]
+    },
+    {
+      "evidence_id": "legal_note",
+      "label": "Legal note",
+      "requires_signature": true,
+      "currency_days": 180,
+      "required_for": [{"request_type": "policy_exception", "severity": "high"}]
+    },
+    {
+      "evidence_id": "change_record",
+      "label": "Change record",
+      "requires_signature": true,
+      "currency_days": 30,
+      "required_for": [{"request_type": "change"}]
+    },
+    {
+      "evidence_id": "test_evidence",
+      "label": "Test evidence",
+      "requires_signature": false,
+      "currency_days": 30,
+      "required_for": [{"request_type": "change"}]
+    },
+    {
+      "evidence_id": "rollback_plan",
+      "label": "Rollback plan",
+      "requires_signature": false,
+      "currency_days": 30,
+      "required_for": [
+        {"request_type": "change", "change_class": "normal"},
+        {"request_type": "change", "change_class": "emergency"}
+      ]
+    },
+    {
+      "evidence_id": "incident_note",
+      "label": "Incident note",
+      "requires_signature": true,
+      "currency_days": 14,
+      "required_for": [{"request_type": "change", "change_class": "emergency"}]
+    }
+  ]
+}

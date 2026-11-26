@@ -1,0 +1,66 @@
+{
+  "synthetic": true,
+  "request_id": "REQ-SPEND-18400",
+  "request_type": "spend",
+  "requester_ref": "REQ-8101",
+  "title": "Replace the north depot roof",
+  "supplier_name": "Northfold Supplies",
+  "amount_gbp": 18400,
+  "description": "The covering on the north depot has failed. This is one request.",
+  "evidence": [
+    {
+      "evidence_id": "EV-QUOTE",
+      "checklist_id": "quote",
+      "version": "1.0",
+      "status": "current",
+      "document_date": "2026-10-01",
+      "expiry_date": "2027-04-01",
+      "signed": true,
+      "signed_by_ref": "SUP-0001",
+      "value_gbp": 18400,
+      "content": "Quote for Northfold Supplies. The price is 18400 pounds. Phone 07700900456. Email desk@reedmarsh.example.\n",
+      "metadata": {
+        "marking": "OFFICIAL",
+        "legal_hold": false,
+        "retention": ["keep 6 years"]
+      }
+    },
+    {
+      "evidence_id": "EV-BUDGET",
+      "checklist_id": "budget_code",
+      "version": "1.0",
+      "status": "current",
+      "document_date": "2026-11-01",
+      "signed": false,
+      "value_gbp": 18400,
+      "content": "Budget code B-14 covers this roof.\n",
+      "metadata": {
+        "marking": "OFFICIAL",
+        "legal_hold": false,
+        "retention": ["keep 6 years"]
+      }
+    },
+    {
+      "evidence_id": "EV-CASE",
+      "checklist_id": "business_case",
+      "version": "1.0",
+      "status": "current",
+      "document_date": "2026-10-15",
+      "expiry_date": "2027-04-15",
+      "signed": true,
+      "signed_by_ref": "SUP-0001",
+      "value_gbp": 18400,
+      "content": "The business case supports replacing the north depot roof.\n",
+      "metadata": {
+        "marking": "OFFICIAL",
+        "legal_hold": false,
+        "retention": ["keep 6 years"]
+      }
+    }
+  ],
+  "caller_matrix": {
+    "rules": [
+      {"rule_id": "CHEAP-SPEND", "request_type": "spend"}
+    ]
+  }
+}

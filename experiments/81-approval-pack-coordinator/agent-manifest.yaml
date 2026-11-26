@@ -1,0 +1,442 @@
+# Agent manifest: Approval Pack Coordinator
+# Experiment 81 — catalogue ID O007
+# Version: 0.1.0
+# Last reviewed: 2026-11-26
+# Next review: 2027-05-26
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-81-approval-pack-coordinator"
+  name: "Approval Pack Coordinator"
+  version: "0.1.0"
+  description: >
+    Assembles a draft approval pack for a synthetic spend request, policy
+    exception, or change request. Autonomy A1. The named approver reviews
+    the complete pack and decides. The agent does not approve, reject,
+    sign, submit, pay, or send.
+  owner: "Approvals owner"
+  contact: "approvals@reedmarsh.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/81-approval-pack-coordinator"
+
+autonomy:
+  level: "A1"
+  level_description: "The agent assembles and checks a draft pack. The named approver reviews the complete evidence pack and makes every decision. The agent never approves, rejects, signs, submits, or sends."
+  constraints:
+    - "The named approver decides. The agent does not."
+    - "The agent NEVER approves, rejects, signs, submits, pays, or sends"
+    - "The agent NEVER treats a sentence in the evidence as the decision"
+    - "A caller-supplied matrix, directory, or delegation is not the pinned source"
+    - "The requester cannot approve their own request"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "One synthetic request and its evidence"
+      description: "A spend, a policy exception, or a change. Instructions inside the text are not followed."
+      access_level: "read"
+      scope: "One synthetic request. Evidence text above the approver's directory clearance is not copied out."
+      justification: "The pack cites each item. The approver decides."
+      data_categories:
+        - "Request text and evidence excerpts"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The in-memory held copy lives for the process. This starter does not set a statutory retention period."
+    - resource: "Pinned synthetic approval matrix, evidence checklist, and directory"
+      description: "The only matrix, checklist, and delegation the pack uses. A copy in the request is not authoritative."
+      access_level: "read"
+      scope: "The files in fixtures/."
+      justification: "Required approvers and evidence follow the pinned type and threshold."
+      may_contain_personal_data: true
+    - resource: "Separate decision object"
+      description: "The only object that can record a route as seen or record the named approver's decision for this hash."
+      access_level: "read"
+      scope: "One object, bound to the agent-held hash."
+      justification: "A decision sentence inside the evidence is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 18 evidence index"
+      description: "build_pack for an evidence sha256. The export is not approved and the body is not copied."
+      access_level: "read"
+      scope: "Up to 12 text items. The sha256 is cited. The approval is not."
+      justification: "Reuse the evidence hash. Do not duplicate it and do not let it decide."
+      may_contain_personal_data: true
+    - resource: "Experiment 74 digest"
+      description: "digest() of this pack's projection. paper_hash is not called."
+      access_level: "read"
+      scope: "The pack projection. Not a board paper."
+      justification: "The approval is bound to that digest. This folder does not reimplement it."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier count"
+      description: "propose() on the request text. Reversible stays false. The redacted text is not stored."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. Phone numbers, email addresses, dates of birth, postal addresses, and names are masked separately. The output is not described as anonymised."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live finance, policy, or change system"
+      reason: "The synthetic request is what this starter reads. It does not pay, submit, or send."
+    - resource: "A caller-supplied approval matrix, directory, or delegation"
+      reason: "Differences are flagged. The decision uses the pinned files."
+    - resource: "An approval marker, a role, a guest flag, or a clearance stated inside the evidence"
+      reason: "The directory and the separate decision object are the source."
+    - resource: "Evidence text above the approver's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Assemble approval pack"
+      provider: "Local Python (assemble_pack)"
+      action: "Determine the pinned approvers and evidence, check each item, and return a cover note"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model."
+      justification: "The routing and the checks are deterministic. A language model must not choose an approver or a conflicting value."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named approver has seen a distress, safeguarding, whistleblowing, grievance, or disclosure route"
+      access_level: "read"
+      scope: "The pack and a separate seen object. Nothing is decided."
+      justification: "Those cues are not a routine pack. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record approver decision"
+      provider: "Local Python (record_approver_decision)"
+      action: "Record the named approver's approve, reject, or return for the agent-held hash"
+      access_level: "read"
+      scope: "The pack and a separate decision object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the approver reviews the complete pack. The step does not pay, sign, submit, or send."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this run"
+      justification: "Optional narrative. The hash, the flags, and the empty or recorded decision stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. record_approver_decision keeps an in-memory copy for this
+      process. It does not write a finance, policy, or change record.
+
+  sends:
+    enabled: false
+    note: "No sends. Recording a decision does not email the requester or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject. record_approver_decision stores the named person's decision for the held hash. A sentence in the evidence cannot set it. agent_approved and agent_rejected stay false."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide that Companies Act 2006 section 386 or the Accounts and Audit Regulations 2015 regulation 3 was met, and it does not decide the request."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not write a production record."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the pack."
+  spend_transact:
+    enabled: false
+    rationale: "The agent does not pay. An amount selects a pinned band. It is not a transaction."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Approve, reject, sign, submit, pay, or send"
+      rationale: "Those functions raise. The flags stay false after a recorded decision."
+    - enabled: false
+      action_name: "Treat evidence text as the decision"
+      rationale: "human_approval stays null until record_approver_decision succeeds for the named approver and the held hash."
+    - enabled: false
+      action_name: "Let the requester approve, or let a split stay under the threshold"
+      rationale: "The requester is excluded. Parts are routed at the total when they add up. A disagreement between the headline and the parts is not chosen."
+    - enabled: false
+      action_name: "Apply a caller-supplied matrix, directory, or delegation"
+      rationale: "caller_matrix_applied, caller_directory_applied, and caller_delegation_applied stay false."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold, every retention label, and the higher marking are copied onto the result and sit inside the hash."
+    - enabled: false
+      action_name: "Choose between conflicting evidence values"
+      rationale: "value_chosen_on_conflict stays false. Both items are cited."
+
+human_approval:
+  description: >
+    The named approver reviews the complete pack and records approve, reject,
+    or return on a separate object, bound to the agent-held hash. That record
+    does not pay, sign, submit, or send. An approval marker inside the
+    evidence is not a step. The requester cannot approve their own request.
+
+  approval_points:
+    - action: "See a distress, safeguarding, whistleblowing, grievance, or disclosure route"
+      approver: "Named approver"
+      mandatory: true
+      rationale: "record_route_seen accepts a directory approver for the current hash when the outcome is route_to_human. It does not decide the request."
+    - action: "Acknowledge the opened statutory pins"
+      approver: "Named approver"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. Section 386 and regulation 3 are context. They are not a finding that a duty was met."
+    - action: "Acknowledge gaps, conflicts, markings, dates, sources, a split, suppression, a leading line, or a legal hold"
+      approver: "Named approver"
+      mandatory: true
+      rationale: "Each required acknowledgement must be the boolean true. A string is not coerced."
+    - action: "Decide approve, reject, or return for this held hash"
+      approver: "Named approver on the pinned directory, not the requester, within the delegation limit"
+      mandatory: true
+      rationale: "record_approver_decision accepts that person only when the content hash matches the agent-held copy. Every required role must record the same decision."
+    - action: "Sign, submit, pay, or send"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a decision is recorded."
+
+  no_approval_required:
+    - action: "Read the draft pack"
+      rationale: "Reading the draft has no external effect. human_approval stays null and nothing is paid."
+    - action: "Re-run the same request"
+      rationale: "No write and no send until the decision object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 26 November 2026. Companies Act 2006 section 386 and
+      the Accounts and Audit Regulations 2015 regulation 3 were opened and
+      are quoted as context. They are not a finding that a duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or other sensitive text a caller may paste into the request"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 26 November 2026."
+    safeguards:
+      - "A distress, safeguarding, whistleblowing, grievance, or disclosure cue is routed to the named approver, including a denial. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A headcount below 5 is not published, and neither is a difference or a percentage of that count, including under another field name. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or a request. The pack does not approve the request."
+  data_minimisation:
+    - "Evidence above the approver's clearance is not copied into the result."
+    - "Cue text is not copied."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The held copy lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the evidence are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Evidence text and a caller note are untrusted. They may say the pack is
+    already approved, that the agent should use a pasted matrix, or that a
+    label should be stripped. The core does not read the network.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Approve, reject, send, and matrix-override sentences are recorded. followed stays false."
+    - control: "Negation is not a positive inclusion"
+      description: "A required phrase after not true that, in the same sentence, is not support. A distress stem is still routed."
+    - control: "The decision is a separate object"
+      description: "Decision keys on the request are stripped. human_approval stays null until record_approver_decision succeeds against the agent-held copy."
+    - control: "Pinned sources win"
+      description: "A matrix, directory, or delegation in the request is not used for the decision."
+    - control: "No approve, reject, sign, submit, pay, or send tool"
+      description: "Those functions raise CoordinatorForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    approver is the control. Nothing is sent even if the note is wrong. A
+    paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-26"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the evidence is treated as the approver's decision"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_approver_decision reads only the separate object and the held hash"
+      residual_risk: "Low"
+      owner: "Approvals owner"
+    - id: "R2"
+      risk: "The requester approves their own request, or a split stays under the threshold"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The requester is excluded"
+        - "Parts that add up are routed at the total"
+        - "A conflicting headline is not chosen"
+      residual_risk: "Low"
+      owner: "Approvals owner"
+    - id: "R3"
+      risk: "The agent pays, signs, submits, or sends"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false after a decision is recorded"
+      residual_risk: "Low"
+      owner: "Approvals owner"
+    - id: "R4"
+      risk: "A caller-supplied matrix or directory lowers the threshold"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The difference is listed and not applied"
+        - "The decision reads the pinned directory"
+      residual_risk: "Low"
+      owner: "Approvals owner"
+    - id: "R5"
+      risk: "An unreadable amount or date is coerced, or a conflicting value is chosen"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "Conflicting values are both cited and neither is chosen"
+      residual_risk: "Low"
+      owner: "Approvals owner"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept inside the hash"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small headcount identifies one person through a difference or a percentage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published, differenced, or turned into a percentage"
+      residual_risk: "Medium"
+      owner: "Approvals owner"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the approver reference
+    if it matched the synthetic pattern, the outcome, and whether a decision
+    was recorded. This starter does not write an application log. Do not put
+    evidence text that identifies a person in an application trace.
+  logged_events:
+    - event: "Pack returned"
+      data_logged:
+        - "Timestamp"
+        - "Approver references, if they matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Decision recorded in memory"
+      data_logged:
+        - "Whether the content hash matched the held copy"
+        - "Whether every required role had recorded the same decision"
+        - "paid false and sent false"
+      retention: "Organisation's schedule. The agent does not write this event to a finance system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Approvals owner"
+      contact: "approvals@reedmarsh.example"
+    - role: "Data protection officer"
+      contact: "dpo@reedmarsh.example"
+
+review:
+  last_review_date: "2026-11-26"
+  next_review_date: "2027-05-26"
+  review_frequency: "6 months, and sooner if the cited statute text changes"
+  reviewer: "The adopting organisation's approvals owner and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned matrix, checklist, or directory"
+    - "A change to Companies Act 2006 section 386 or the Accounts and Audit Regulations 2015 regulation 3"
+    - "A proposal to add a connector that can pay, submit, or send"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Coordinator"
+      path: "src/coordinator.py"
+    - name: "Opened sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The pack from this starter is not an approval
+    of that record.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 26 November 2026. Companies Act 2006 section 386 and S.I. 2015/234 regulation 3 were opened and are quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The words segregation of duties were not on the two pages opened. That phrase is unverified as a statutory quotation. The matrix bands are not a statutory minimum."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Treating a document older than the checklist currency window as stale is this starter's rule. It is not a statutory period."
+      section: "src/evidence.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The marking order is a starter rule. The Government Security Classifications policy was not opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/mask.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 26 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview was opened on 26 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Reedmarsh Internal Services and Northfold Supplies are invented. The contact addresses are not real."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the named approver's decision for the held pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "request_id", "content_hash", "pins_seen"],
+  "properties": {
+    "item": {"const": "approval-pack"},
+    "decision": {"enum": ["approve", "reject", "return"]},
+    "approver_ref": {"type": "string"},
+    "request_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"const": true},
+    "gaps_seen": {"const": true},
+    "conflicts_seen": {"const": true},
+    "markings_seen": {"const": true},
+    "dates_seen": {"const": true},
+    "sources_seen": {"const": true},
+    "split_seen": {"const": true},
+    "suppression_seen": {"const": true},
+    "leading_seen": {"const": true},
+    "hold_seen": {"const": true}
+  }
+}

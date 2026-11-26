@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that the named reviewer has seen the route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "review_id", "content_hash"],
+  "properties": {
+    "item": {"const": "route-seen"},
+    "decision": {"const": "seen"},
+    "approver_ref": {"type": "string"},
+    "review_id": {"type": "string"},
+    "content_hash": {"type": "string"}
+  }
+}
