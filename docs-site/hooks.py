@@ -259,6 +259,9 @@ DIAGRAMS = {
     "experiments/81-approval-pack-coordinator/docs/architecture_diagram.png": (
         "experiments/img/81-approval-pack-coordinator-architecture.png"
     ),
+    "experiments/82-workflow-exception-assistant/docs/architecture_diagram.png": (
+        "experiments/img/82-workflow-exception-assistant-architecture.png"
+    ),
 }
 
 

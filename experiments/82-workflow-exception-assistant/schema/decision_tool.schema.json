@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the process owner's decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "action_id", "approver_ref", "diagnosis_id", "content_hash", "pins_seen", "risks_seen"],
+  "properties": {
+    "item": {"type": "string", "const": "owner-decision"},
+    "decision": {"type": "string", "enum": ["retry", "route", "cancel"]},
+    "action_id": {"type": "string", "enum": ["retry", "route", "cancel"]},
+    "approver_ref": {"type": "string"},
+    "diagnosis_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"type": "boolean"},
+    "risks_seen": {"type": "boolean"},
+    "dates_seen": {"type": "boolean"},
+    "markings_seen": {"type": "boolean"},
+    "register_seen": {"type": "boolean"},
+    "partial_seen": {"type": "boolean"},
+    "suppression_seen": {"type": "boolean"},
+    "conflict_seen": {"type": "boolean"}
+  }
+}
