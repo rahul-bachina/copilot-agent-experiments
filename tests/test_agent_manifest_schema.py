@@ -2648,3 +2648,62 @@ class TestExperiment79Manifest:
         assert confirm["approver"] == "Named reader"
         assert confirm["mandatory"] is True
         assert experiment_79_manifest["agent"]["id"] == "exp-79-document-comparison"
+
+
+class TestExperiment82Manifest:
+    """Test the Experiment 82 workflow exception manifest."""
+
+    @pytest.fixture
+    def experiment_82_manifest(self):
+        manifest_path = (
+            REPO_ROOT
+            / "experiments"
+            / "82-workflow-exception-assistant"
+            / "agent-manifest.yaml"
+        )
+        with open(manifest_path) as handle:
+            return yaml.safe_load(handle)
+
+    def test_manifest_validates_against_schema(self, schema, experiment_82_manifest):
+        """Experiment 82 manifest should be valid."""
+        validate(instance=experiment_82_manifest, schema=schema)
+
+    def test_autonomy_level_is_a1(self, experiment_82_manifest):
+        """Experiment 82 should be autonomy level A1. The process owner chooses."""
+        level = experiment_82_manifest["autonomy"]["level"]
+        assert level == "A1"
+        assert level in {"A0", "A1", "A2"}
+        assert "A3" not in level
+        assert experiment_82_manifest["autonomy"]["human_in_the_loop"] is True
+        assert experiment_82_manifest["autonomy"]["auto_actions_enabled"] is False
+
+    def test_catalogue_high_risk_actions_stay_disabled(self, experiment_82_manifest):
+        """Decisions, production writes, sends, and payments stay off."""
+        high_risk = experiment_82_manifest["high_risk_actions"]
+        for action in [
+            "approve_reject",
+            "regulated_decision",
+            "production_record_change",
+            "external_send",
+            "spend_transact",
+        ]:
+            assert high_risk[action]["enabled"] is False, f"{action} should be disabled"
+        for extra in high_risk["additional_high_risk"]:
+            assert extra["enabled"] is False
+
+    def test_sends_and_writes_disabled(self, experiment_82_manifest):
+        """Nothing is sent, and no record is written."""
+        assert experiment_82_manifest["tools"]["writes"]["enabled"] is False
+        assert experiment_82_manifest["tools"]["sends"]["enabled"] is False
+
+    def test_owner_chooses_retry_route_or_cancel(self, experiment_82_manifest):
+        """The catalogue checkpoint is the named process owner, and it is mandatory."""
+        points = experiment_82_manifest["human_approval"]["approval_points"]
+        confirm = next(
+            point
+            for point in points
+            if point["action"] == "Choose retry, route, or cancel for this held proposal"
+        )
+        assert confirm["approver"] == "Named process owner"
+        assert confirm["mandatory"] is True
+        assert experiment_82_manifest["agent"]["id"] == "exp-82-workflow-exception-assistant"

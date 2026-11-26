@@ -253,6 +253,9 @@ DIAGRAMS = {
     "experiments/79-document-comparison/docs/architecture_diagram.png": (
         "experiments/img/79-document-comparison-architecture.png"
     ),
+    "experiments/82-workflow-exception-assistant/docs/architecture_diagram.png": (
+        "experiments/img/82-workflow-exception-assistant-architecture.png"
+    ),
 }
 
 

@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Seventy-nine starters are in `experiments/`. The folders are 01 to 79.
+Eighty starters are in `experiments/`. The folders are 01 to 79 and 82.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
@@ -118,6 +118,7 @@ Seventy-nine starters are in `experiments/`. The folders are 01 to 79.
 | 77 | [Form Extraction Assistant](experiments/77-form-extraction-assistant/) | Extract fields from a synthetic council permit, HR change, or supplier bank-details form into a draft record. Autonomy A1. The named reviewer approves the exact record before a synthetic staging write. The agent does not decide an application, write production, call back, or send. | ✅ Starter |
 | 78 | [Document Classification and Routing Assistant](experiments/78-document-classification-routing/) | Propose a document type and a destination queue or library for one synthetic document, with evidence, a confidence, and a top alternative. Autonomy A1. The named reviewer confirms the class and the destination before a synthetic staging write. The agent does not file, move, delete, or send. | ✅ Starter |
 | 79 | [Document Comparison Assistant](experiments/79-document-comparison/) | Align two synthetic versions of a contract, an internal policy, or a guidance document and cite both. Autonomy A0. The named reader confirms which versions are being compared and which is the baseline, and owns the interpretation. The agent does not edit, approve, publish, or send a document, and it does not give legal advice. | ✅ Starter |
+| 82 | [Workflow Exception Assistant](experiments/82-workflow-exception-assistant/) | Diagnose a failed or stuck synthetic workflow run, group related failures, and propose retry, route, or cancel with the risks. Autonomy A1. The named process owner chooses. The agent does not retry, cancel, edit a record, or re-run a flow. | ✅ Starter |
 
 ## Getting Started
 
