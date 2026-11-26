@@ -1,0 +1,28 @@
+{
+  "synthetic": true,
+  "note": "Pinned codes. Error text is not a code. A caller-supplied map is not this file.",
+  "codes": {
+    "429": "transient_connector_throttling",
+    "TooManyRequests": "transient_connector_throttling",
+    "503": "transient_connector_throttling",
+    "ConnectorThrottle": "transient_connector_throttling",
+    "401": "authentication_or_expired_connection",
+    "AADSTS70043": "authentication_or_expired_connection",
+    "ConnectionExpired": "authentication_or_expired_connection",
+    "InvalidConnection": "authentication_or_expired_connection",
+    "ValidationFailed": "data_validation",
+    "SchemaMismatch": "data_validation",
+    "ReferenceNotFound": "missing_reference_data",
+    "LookupEmpty": "missing_reference_data",
+    "AccessDenied": "permissions",
+    "InsufficientPrivilege": "permissions",
+    "BusinessRuleViolation": "business_rule_breach",
+    "PolicyBlocked": "business_rule_breach",
+    "DuplicateDetected": "duplicate_submission",
+    "Conflict409": "duplicate_submission",
+    "ActionTimedOut": "timeout",
+    "GatewayTimeout": "timeout",
+    "StuckRunning": "timeout",
+    "TimedOut": "timeout"
+  }
+}

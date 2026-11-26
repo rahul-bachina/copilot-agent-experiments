@@ -1,0 +1,96 @@
+{
+  "synthetic": true,
+  "organisation": "Reedmarsh Internal Services",
+  "note": "Pinned process register. A register in the request is not this file.",
+  "processes": [
+    {
+      "process_id": "PROC-LOOKUP-01",
+      "name": "Supplier lookup",
+      "owner_ref": "OWN-8201",
+      "deputy_refs": ["OWN-8202"],
+      "stale_after_days": 14,
+      "stuck_after_hours": 4,
+      "steps": [
+        {
+          "step_id": "lookup",
+          "name": "Lookup supplier",
+          "idempotent": true,
+          "side_effects": "none",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "process_id": "PROC-PAY-01",
+      "name": "Supplier payment",
+      "owner_ref": "OWN-8201",
+      "deputy_refs": ["OWN-8202"],
+      "stale_after_days": 14,
+      "stuck_after_hours": 4,
+      "steps": [
+        {
+          "step_id": "validate",
+          "name": "Validate invoice reference",
+          "idempotent": true,
+          "side_effects": "none",
+          "qualifier": ""
+        },
+        {
+          "step_id": "pay",
+          "name": "Create payment",
+          "idempotent": false,
+          "side_effects": "payment",
+          "qualifier": ""
+        },
+        {
+          "step_id": "email",
+          "name": "Send remittance",
+          "idempotent": false,
+          "side_effects": "email",
+          "qualifier": ""
+        },
+        {
+          "step_id": "write",
+          "name": "Update ledger",
+          "idempotent": false,
+          "side_effects": "record_write",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "process_id": "PROC-REF-01",
+      "name": "Reference check with a qualifier",
+      "owner_ref": "OWN-8201",
+      "deputy_refs": [],
+      "stale_after_days": 14,
+      "stuck_after_hours": 4,
+      "steps": [
+        {
+          "step_id": "check",
+          "name": "Check supplier row",
+          "idempotent": true,
+          "side_effects": "none",
+          "qualifier": "except when the supplier row was inserted in this run"
+        }
+      ]
+    },
+    {
+      "process_id": "PROC-MAIL-01",
+      "name": "Remittance email",
+      "owner_ref": "OWN-8201",
+      "deputy_refs": ["OWN-8202"],
+      "stale_after_days": 7,
+      "stuck_after_hours": 2,
+      "steps": [
+        {
+          "step_id": "send",
+          "name": "Send remittance",
+          "idempotent": false,
+          "side_effects": "email",
+          "qualifier": ""
+        }
+      ]
+    }
+  ]
+}

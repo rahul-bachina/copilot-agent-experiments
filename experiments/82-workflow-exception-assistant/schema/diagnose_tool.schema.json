@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Diagnose a synthetic workflow exception",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "diagnosis_id", "process_id", "runs"],
+  "properties": {
+    "synthetic": {"type": "boolean", "const": true},
+    "diagnosis_id": {"type": "string"},
+    "process_id": {"type": "string"},
+    "owner_ref": {"type": "string"},
+    "question_date": {"type": "string"},
+    "caller_note": {"type": "string"},
+    "runs": {"type": "array"},
+    "caller_register": {"type": ["object", "null"]},
+    "caller_taxonomy": {"type": ["object", "null"]},
+    "caller_directory": {"type": ["object", "null"]}
+  }
+}
