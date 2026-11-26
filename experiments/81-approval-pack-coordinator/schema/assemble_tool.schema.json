@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Assemble one synthetic approval pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "request_id", "request_type", "requester_ref", "as_of"],
+  "properties": {
+    "synthetic": {"const": true},
+    "request_id": {"type": "string"},
+    "request_type": {"enum": ["spend", "policy_exception", "change"]},
+    "requester_ref": {"type": "string"},
+    "as_of": {"type": "string"},
+    "amount_gbp": {},
+    "severity": {"type": "string"},
+    "change_class": {"type": "string"},
+    "supplier_name": {"type": "string"},
+    "title": {"type": "string"},
+    "description": {"type": "string"},
+    "evidence": {"type": "array"}
+  }
+}
