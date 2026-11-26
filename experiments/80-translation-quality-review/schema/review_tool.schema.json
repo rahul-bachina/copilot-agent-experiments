@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prepare a translation review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "review_id", "reviewer_ref", "source_language", "target_language", "document_kind", "source", "target"],
+  "properties": {
+    "synthetic": {"const": true},
+    "review_id": {"type": "string"},
+    "reviewer_ref": {"type": "string"},
+    "source_language": {"const": "en"},
+    "target_language": {"enum": ["en", "cy", "pl"]},
+    "document_kind": {"enum": ["public_information", "correspondence", "guidance"]},
+    "source": {"type": "object"},
+    "target": {"type": "object"},
+    "note": {"type": "string"},
+    "caller_glossary": {"type": "object"}
+  }
+}
