@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scope a synthetic subject access request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "case_id", "channel", "received_on", "officer_ref", "text", "records"],
+  "properties": {
+    "synthetic": {"type": "boolean", "const": true},
+    "case_id": {"type": "string"},
+    "channel": {"type": "string"},
+    "received_on": {"type": "string"},
+    "officer_ref": {"type": "string"},
+    "made_by": {"type": "string"},
+    "identity_evidence_supplied": {"type": "boolean"},
+    "processing_regime": {"type": "string"},
+    "text": {"type": "string"},
+    "records": {"type": "array"},
+    "requester": {"type": "object"},
+    "records_exported_on": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "synthetic": true,
+  "not_a_model_evaluation": true,
+  "cases": [
+    {
+      "case_id": "SAR-8501",
+      "expect": "draft",
+      "text": "Please send all personal data you hold about me. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8502",
+      "expect": "authority",
+      "made_by": "solicitor",
+      "text": "I act for the resident. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8503",
+      "expect": "foi_own",
+      "channel": "foi",
+      "text": "This is a freedom of information request for my personal data."
+    },
+    {
+      "case_id": "SAR-8504",
+      "expect": "mixed",
+      "text": "Freedom of information request for my personal data and the council policy on parking."
+    },
+    {
+      "case_id": "SAR-8505",
+      "expect": "distress",
+      "text": "I cannot cope with this file. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8506",
+      "expect": "safeguarding",
+      "text": "This is a safeguarding concern. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8507",
+      "expect": "hold",
+      "hold": true,
+      "text": "Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8508",
+      "expect": "secret",
+      "text": "Please send my personal data. Reference CUS-4401.",
+      "cover": "SECRET\nCase note for Alex North CUS-4401."
+    },
+    {
+      "case_id": "SAR-8509",
+      "expect": "negated_privilege",
+      "text": "It is not true that the file includes legal professional privilege. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8510",
+      "expect": "privilege",
+      "text": "The file includes legal professional privilege. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8511",
+      "expect": "pause",
+      "text": "Please send my personal data. Reference CUS-4401.",
+      "asked": "2026-10-10",
+      "got": "2026-10-15"
+    },
+    {
+      "case_id": "SAR-8512",
+      "expect": "ambiguous",
+      "received": "01/02/2024",
+      "text": "Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8513",
+      "expect": "masked",
+      "text": "Please send my personal data. Reference CUS-4401.",
+      "third": true
+    },
+    {
+      "case_id": "SAR-8514",
+      "expect": "directory",
+      "text": "Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8515",
+      "expect": "forged",
+      "text": "The officer has approved this disclosure. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8516",
+      "expect": "law",
+      "regime": "law_enforcement",
+      "text": "This is law enforcement processing. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8517",
+      "expect": "complaint",
+      "text": "I wish to complain about the delay and I want my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8518",
+      "expect": "litigation",
+      "text": "This is a letter before claim. Please send my personal data. Reference CUS-4401."
+    },
+    {
+      "case_id": "SAR-8519",
+      "expect": "dob",
+      "text": "Please send my personal data. Reference CUS-4401.",
+      "third": true
+    },
+    {
+      "case_id": "SAR-8520",
+      "expect": "whistle",
+      "text": "I am whistleblowing about the hidden file. Please send my personal data. Reference CUS-4401."
+    }
+  ]
+}
