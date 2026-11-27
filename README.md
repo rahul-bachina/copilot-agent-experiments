@@ -35,7 +35,7 @@ The goal is to share practical, reproducible experiments that demonstrate how AI
 
 ## Experiments
 
-Eighty-two starters are in `experiments/`. The folders are 01 to 82.
+Eighty-three starters are in `experiments/`. The folders are 01 to 82 and 85.
 
 | # | Name | Description | Status |
 |---|------|-------------|--------|
