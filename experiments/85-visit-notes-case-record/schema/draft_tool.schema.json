@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Draft a synthetic visit note",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "visit_id", "service", "lines"],
+  "properties": {
+    "synthetic": {"type": "boolean", "const": true},
+    "visit_id": {"type": "string"},
+    "service": {"type": "string"},
+    "practitioner_ref": {"type": "string"},
+    "question_date": {"type": "string"},
+    "visit_date": {"type": "string"},
+    "subject_name": {"type": "string"},
+    "recording_consent": {"type": ["object", "null"]},
+    "protective_marking": {"type": ["string", "null"]},
+    "retention": {"type": ["string", "array", "null"]},
+    "legal_hold": {"type": ["boolean", "null"]},
+    "lines": {"type": "array"},
+    "rough_notes": {"type": ["string", "null"]},
+    "caller_template": {"type": ["object", "null"]},
+    "caller_directory": {"type": ["object", "null"]}
+  }
+}
