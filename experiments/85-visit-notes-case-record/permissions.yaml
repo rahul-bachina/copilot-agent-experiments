@@ -1,0 +1,437 @@
+# Agent manifest: Visit and meeting notes to a structured case record
+# Experiment 85 — catalogue ID UK13
+# Version: 0.1.0
+# Last reviewed: 2026-11-27
+# Next review: 2027-05-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-85-visit-notes-case-record"
+  name: "Visit and Meeting Notes to Structured Case Record"
+  version: "0.1.0"
+  description: >
+    Drafts a structured case note from a synthetic adult social care or
+    housing-support visit transcript. Autonomy A1. The named practitioner
+    approves the exact note. The agent does not write the case record, share
+    the note, or assess eligibility, risk, or need.
+  owner: "Named practitioner"
+  contact: "visits@northmarsh.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/85-visit-notes-case-record"
+
+autonomy:
+  level: "A1"
+  level_description: "The agent drafts a note. The named practitioner approves that exact note on a separate object. The agent never writes the case record."
+  constraints:
+    - "The named practitioner approves. The agent does not."
+    - "The agent NEVER writes the case record, shares the note, or assesses eligibility, risk, or need"
+    - "The agent NEVER treats a sentence in the transcript as the approval, the role, or the clearance"
+    - "A statement is copied only when it is a span of the cited line"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic visit transcripts and rough notes"
+      description: "Line-numbered transcript and optional rough notes. Text is untrusted. Instructions in it are not followed."
+      access_level: "read"
+      scope: "One synthetic visit. Text above the practitioner's directory clearance is not copied out."
+      justification: "The draft cites the line. The practitioner approves the note."
+      data_categories:
+        - "Visit transcript lines"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The in-memory held copy lives for the process. This starter does not set a statutory retention period."
+    - resource: "Pinned synthetic template and directory"
+      description: "The note sections, and the practitioners who may approve. A template or directory in the request is not this file."
+      access_level: "read"
+      scope: "One template id and the practitioners named for the visit."
+      justification: "The draft uses the pinned template. Approval uses the pinned directory."
+      may_contain_personal_data: true
+    - resource: "Separate approval object"
+      description: "The only object that can record that a route was seen, or that the practitioner approves this hash."
+      access_level: "read"
+      scope: "One object, bound to the agent-held hash."
+      justification: "A sentence in the transcript is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on a line. Reversible stays false. The redacted text is not stored as a raw value."
+      access_level: "read"
+      scope: "A count of findings. Matched values are not stored."
+      justification: "A pasted identifier is counted. The output is not described as anonymised."
+      may_contain_personal_data: true
+    - resource: "Experiment 12 document intake"
+      description: "intake() on rough notes. The reply's content is not stored. The class is not applied."
+      access_level: "read"
+      scope: "Read status, date status, and whether the file was scanned."
+      justification: "Rough notes are inventoried. They are not accepted into a queue."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live case-management system or a production case record"
+      reason: "The synthetic transcript is what this starter reads. It does not write the record."
+    - resource: "A caller-supplied template, directory, or taxonomy"
+      reason: "Differences are flagged. The draft uses the pinned template and the pinned directory."
+    - resource: "An approval marker, a role, or a clearance stated inside the transcript"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Transcript text above the practitioner's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Draft visit note"
+      provider: "Local Python (draft_note)"
+      action: "Draft a structured note from a synthetic transcript, with a line citation on every statement"
+      access_level: "read"
+      scope: "One synthetic visit. No network. No model. No case-record write."
+      justification: "The draft is deterministic. A language model must not invent a quote or an assessment."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named practitioner has seen a concern or a refused-consent route"
+      access_level: "read"
+      scope: "The draft and a separate seen object. Nothing is written to a record."
+      justification: "Those cues are not a routine note. The cue text is not copied into the flag."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record practitioner approval"
+      provider: "Local Python (record_practitioner_approval)"
+      action: "Record that the named practitioner approves this held note, or returns it for edit"
+      access_level: "read"
+      scope: "The draft and a separate approval object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the practitioner approves the note. The step does not write the record."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this visit"
+      justification: "Optional narrative. The hash and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. record_practitioner_approval keeps an in-memory acknowledgement
+      for this process. It does not write a case record.
+
+  sends:
+    enabled: false
+    note: "No sends. Recording a route does not email the practitioner or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not approve or reject the note. An approval object records the practitioner's decision. A sentence in the transcript cannot set it, and the case record is not written."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not assess eligibility, risk, or need, and it does not decide a Care Act section 42 enquiry."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not write a case record or any other production system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not share or send the note."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Write the case record, share the note, or assess eligibility, risk, or need"
+      rationale: "Those functions raise. case_record_written, note_shared, and assessment_made stay false."
+    - enabled: false
+      action_name: "Invent a fact, a diagnosis, or a quote"
+      rationale: "A statement is kept only when it is a span of the cited line. facts_invented stays false."
+    - enabled: false
+      action_name: "Treat transcript text as the practitioner's approval"
+      rationale: "human_approval stays null until record_practitioner_approval succeeds for the named practitioner and the held hash."
+    - enabled: false
+      action_name: "Guess a speaker on unclear, crosstalk, or misattributed audio"
+      rationale: "The line is flagged. guessed stays false. It is not placed in the person's words."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold, every retention label, and the higher marking are copied onto the result and sit inside the hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied template or directory"
+      rationale: "caller_template_applied and caller_directory_applied stay false."
+
+human_approval:
+  description: >
+    The named practitioner approves the draft on a separate object, bound to
+    the agent-held note and its hash. That approval does not write the case
+    record. An approval marker inside the transcript is not a step.
+
+  approval_points:
+    - action: "See a safeguarding, self-neglect, domestic abuse, distress, suicidal, financial-abuse, or capacity route, or a refused recording"
+      approver: "Named practitioner"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory practitioner or their deputy and the content hash. It does not assess the concern."
+    - action: "Approve this held note, or return it for edit"
+      approver: "Named practitioner"
+      mandatory: true
+      rationale: "record_practitioner_approval accepts the directory practitioner or their deputy only when the content hash matches the agent-held copy. The case record is not written."
+    - action: "Acknowledge the opened Care Act, UK GDPR, Caldicott, and NHS scribe pins"
+      approver: "Named practitioner"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. Article 6 was not opened. Sections 1, 2, 4, and 11 of the Care Act were not opened."
+    - action: "Acknowledge missing consent, unresolved audio, a date problem, a marking, a hold, or a small count"
+      approver: "Named practitioner"
+      mandatory: true
+      rationale: "The matching acknowledgement must be the boolean true when that flag is set. A string is not coerced."
+    - action: "Write the case record, share the note, or assess eligibility, risk, or need"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after approval."
+
+  no_approval_required:
+    - action: "Read the draft"
+      rationale: "Reading the draft has no external effect. human_approval stays null and nothing is written."
+    - action: "Re-run the same request"
+      rationale: "No record is written until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      was not opened on 27 November 2026. Article 9(1) was opened and is
+      quoted. It is not a finding that a condition in Article 9(2) is met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or other special-category text a caller may paste into a transcript"
+    lawful_basis_special: "Not asserted. Article 9(2) is not applied. Data Protection Act 2018 sections 10 and 11 were not opened."
+    safeguards:
+      - "A safeguarding, self-neglect, domestic abuse, distress, suicidal, financial-abuse, or capacity cue is routed to the named practitioner. The cue text is not copied into the flag."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, NHS numbers, and UK identifiers are masked or counted and the raw values are not stored. The output is not described as anonymised."
+      - "A count of people below 5 is not published, and neither is a difference or a percentage of that count, including under another field name. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person. The draft does not assess eligibility, risk, or need."
+  data_minimisation:
+    - "Transcript text above the practitioner's clearance is not copied into the result."
+    - "Concern text is not copied into the flag."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The held copy lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the visit are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent does not handle access, erasure, or objection requests. Those go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Transcript lines, rough notes, and a caller template are untrusted. They
+    may say the note is already approved, that the agent should write the
+    record, or that a label should be stripped. The core does not read the
+    network and does not write a record.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Write, share, and drop-the-hold sentences are recorded. followed stays false."
+    - control: "Negation is not a positive inclusion"
+      description: "A phrase after not true that, in the same sentence, is not an instruction and is not support for the positive claim. A concern stem is still routed."
+    - control: "The approval is a separate object"
+      description: "Approval keys on the request are stripped. human_approval stays null until record_practitioner_approval succeeds against the agent-held copy."
+    - control: "The pinned template and directory win"
+      description: "A template or directory in the request is not used for the sections or the approval."
+    - control: "No write, share, or assessment tool"
+      description: "Those functions raise NotesForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    practitioner is the control. Nothing is written even if the note is wrong.
+    A paraphrase that uses none of the concern stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-27"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the transcript is treated as the practitioner's approval or as an instruction to write the record"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_practitioner_approval reads only the separate object, the content hash, and the held copy"
+      residual_risk: "Low"
+      owner: "Named practitioner"
+    - id: "R2"
+      risk: "The agent writes the case record, shares the note, or assesses eligibility, risk, or need"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false after approval"
+      residual_risk: "Low"
+      owner: "Named practitioner"
+    - id: "R3"
+      risk: "The draft invents a quote, a diagnosis, or a fact that was not said"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A statement has to be a span of the cited line"
+        - "Negative controls are scored for precision as well as recall"
+      residual_risk: "Low"
+      owner: "Named practitioner"
+    - id: "R4"
+      risk: "A safeguarding or suicidal paraphrase is treated as a routine line"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Twenty-two paraphrases in each of seven categories are in the fixture"
+        - "A negated stem is still routed and is not an affirmed finding"
+      residual_risk: "Medium"
+      owner: "Named practitioner"
+    - id: "R5"
+      risk: "An unreadable or future date is coerced, or an ambiguous day and month is picked"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "12/12/2024 is not treated as ambiguous. 01/02/2024 is"
+        - "The question date is the as-of argument"
+      residual_risk: "Low"
+      owner: "Named practitioner"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept inside the hash"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small count of people identifies one person through a difference or a percentage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and is not differenced, including under another field name"
+      residual_risk: "Medium"
+      owner: "Named practitioner"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the practitioner
+    reference if it matched the synthetic pattern, the outcome, and whether
+    an approval was recorded. This starter does not write an application log.
+    Do not put transcript text that identifies a person in an application
+    trace. The held hash is the audit link between the draft and the
+    practitioner's approval. That link is a starter control. It is not a
+    finding that a Care Act duty was met.
+  logged_events:
+    - event: "Draft returned"
+      data_logged:
+        - "Timestamp"
+        - "Practitioner reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether human_approval was left null"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Practitioner approval recorded in memory"
+      data_logged:
+        - "Whether the content hash matched the held copy"
+        - "The decision"
+        - "case_record_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a case system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Named practitioner"
+      contact: "visits@northmarsh.example"
+    - role: "Data protection officer"
+      contact: "dpo@northmarsh.example"
+
+review:
+  last_review_date: "2026-11-27"
+  next_review_date: "2027-05-27"
+  review_frequency: "6 months, and sooner if the cited statute text changes"
+  reviewer: "The adopting organisation's practitioner lead and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned template or the pinned directory"
+    - "A change to Care Act 2014 section 9 or section 42, or to UK GDPR Article 9"
+    - "A proposal to add a connector that can write a case record or send the note"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Draft core"
+      path: "src/notes.py"
+    - name: "Opened sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The note from this starter is not an approval
+    of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 was not opened on 27 November 2026. Article 9(1) was opened and is quoted. Article 9(2)(h) is not quoted in full."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "Care Act 2014 sections 1, 2, 4, and 11 were not opened. This starter does not carry out a section 9 assessment or a section 42 enquiry."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Working days skip Saturday and Sunday. Bank holidays are not applied. That is a starter rule, not a statutory calendar."
+      section: "src/dates.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/mask.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 27 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview was opened on 27 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified. The page says that harness retries and finds alternative paths. This starter does not enable that behaviour."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Northmarsh Council is invented. The contact addresses are not real. Published local-authority pilot pages were not opened. No supplier result is stated."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true

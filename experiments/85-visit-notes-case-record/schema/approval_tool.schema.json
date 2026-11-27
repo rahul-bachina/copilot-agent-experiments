@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the practitioner's approval of the held note",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "visit_id", "content_hash", "pins_seen"],
+  "properties": {
+    "item": {"type": "string", "const": "case-note"},
+    "decision": {"type": "string", "enum": ["approve", "return_for_edit"]},
+    "approver_ref": {"type": "string"},
+    "visit_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "pins_seen": {"type": "boolean"},
+    "consent_seen": {"type": "boolean"},
+    "audio_seen": {"type": "boolean"},
+    "dates_seen": {"type": "boolean"},
+    "markings_seen": {"type": "boolean"},
+    "suppression_seen": {"type": "boolean"},
+    "third_party_seen": {"type": "boolean"},
+    "hold_seen": {"type": "boolean"},
+    "retention_seen": {"type": "boolean"},
+    "caller_seen": {"type": "boolean"},
+    "qualifier_seen": {"type": "boolean"}
+  }
+}
