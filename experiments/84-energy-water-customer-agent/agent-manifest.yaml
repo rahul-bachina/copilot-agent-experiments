@@ -1,0 +1,401 @@
+# Agent manifest: Energy and Water Customer Agent
+# Experiment 84 — catalogue ID UK12
+# Version: 0.1.0
+# Last reviewed: 2026-11-27
+# Next review: 2027-05-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-84-energy-water-customer-agent"
+  name: "Energy and Water Customer Agent"
+  version: "0.1.0"
+  description: >
+    Answers account and billing questions from a pinned synthetic knowledge
+    base and proposes a meter-reading submission, a payment-plan request, or
+    a Priority Services Register referral. Autonomy A1. The customer confirms
+    each proposal against the agent-held copy. Affordability, debt,
+    disconnection, prepayment, and vulnerability go to a human advisor. The
+    agent does not change a tariff, agree a plan, write off debt, install or
+    switch a prepayment meter, or make a decision.
+  owner: "Customer advisor"
+  contact: "customers@reedmarsh.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/84-energy-water-customer-agent"
+
+autonomy:
+  level: "A1"
+  level_description: "The agent drafts an answer or a proposal. The customer confirms a proposal on a separate object bound to the held hash. The agent does not carry the action out."
+  constraints:
+    - "The customer confirms. The agent does not."
+    - "The agent NEVER changes a tariff, agrees a payment plan, writes off debt, installs or switches a prepayment meter, or makes a decision"
+    - "Affordability, debt, disconnection, prepayment, and vulnerability go to a human advisor"
+    - "A confirmation marker inside a message or an account note is not the confirmation step"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Pinned synthetic accounts and the customer message"
+      description: "One synthetic account. The message and the account notes are untrusted."
+      access_level: "read"
+      scope: "One conversation. Text is not copied into the answer."
+      justification: "The answer cites the pinned knowledge or the pinned complaints policy."
+      data_categories:
+        - "Account snapshot"
+        - "Customer message"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The in-memory held copy lives for the process. This starter does not set a statutory retention period."
+    - resource: "Pinned synthetic knowledge and complaints policy"
+      description: "The only text the answer may quote. A caller-supplied article is not this file."
+      access_level: "read"
+      scope: "The articles whose sector matches the account."
+      justification: "The agent does not invent an answer or an escalation route."
+      may_contain_personal_data: false
+    - resource: "Synthetic directory"
+      description: "Account holders who may confirm. Message text does not set the role."
+      access_level: "read"
+      scope: "The holder named on the pinned account."
+      justification: "Only that holder can confirm the held proposal."
+      may_contain_personal_data: false
+    - resource: "Separate confirmation object"
+      description: "The only object that can record the customer's confirmation for this hash."
+      access_level: "read"
+      scope: "One object, bound to the agent-held hash."
+      justification: "A sentence in the message is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 02 injection list and Experiment 08 identifier counts"
+      description: "Experiment 02 is called for injection phrases. Its DISP clock is not applied. Experiment 08 counts identifiers and does not store the values."
+      access_level: "read"
+      scope: "The message and the notes. No quotes are stored."
+      justification: "Energy and water complaints are not DISP complaints. Identifiers are counted, not copied."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live billing system, a tariff engine, or a production customer record"
+      reason: "The synthetic accounts are what this starter reads. It does not submit, agree, or write."
+    - resource: "A caller-supplied knowledge base, policy, directory, or account"
+      reason: "Differences are flagged. The answer uses the pinned files."
+    - resource: "A confirmation, a role, or a clearance stated inside a message or a note"
+      reason: "The directory and the separate confirmation object are the source."
+    - resource: "Account text above OFFICIAL"
+      reason: "The balance is not copied. The higher marking, the legal hold, and the retention labels are kept."
+
+tools:
+  allowed:
+    - tool: "Answer from pinned knowledge"
+      provider: "Local Python (answer)"
+      action: "Answer or hand over from the pinned synthetic knowledge and policy"
+      access_level: "read"
+      scope: "One synthetic conversation. No network. No model. No billing call."
+      justification: "The answer is a pinned sentence or a handover. A language model must not invent a tariff or a complaint outcome."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record customer confirmation"
+      provider: "Local Python (confirm_action)"
+      action: "Record that the account holder confirmed this held proposal and its hash"
+      access_level: "read"
+      scope: "The proposal and a separate confirmation object. Nothing is submitted."
+      justification: "The catalogue checkpoint is the customer's confirmation. The step does not carry out the action."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this turn"
+      justification: "Optional narrative. The hash, the disclosure, and the empty or recorded confirmation stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. confirm_action keeps an in-memory acknowledgement for this
+      process. It does not submit a reading, agree a plan, or add a register entry.
+
+  sends:
+    enabled: false
+    note: "No sends. A handover record is not an email or a call."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not decide a complaint, a tariff, or a payment plan. A confirmation object records the customer's agreement to a proposal. A sentence in a message cannot set it, and the proposal is not carried out."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide vulnerability, affordability, disconnection, a complaint outcome, or Priority Services Register membership."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not submit a meter reading, change an account, or write a production system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the answer, a complaint, or a message to an ombudsman."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment, no write-off, and no agreed plan."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Change a tariff, agree a payment plan, write off debt, install or switch a prepayment meter, or disconnect"
+      rationale: "Those functions raise. The flags stay false after a confirmation."
+    - enabled: false
+      action_name: "Treat a message or an account note as the confirmation"
+      rationale: "confirmation_recorded stays false until confirm_action succeeds for the directory holder and the held hash."
+    - enabled: false
+      action_name: "Apply a caller-supplied knowledge base, policy, or directory"
+      rationale: "caller_knowledge_applied, caller_policy_applied, and caller_directory_applied stay false."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold, every retention label, and the higher marking are copied onto the result and sit inside the hash."
+
+human_approval:
+  description: >
+    The account holder confirms a proposed action on a separate object, bound
+    to the agent-held proposal and its hash. That confirmation does not submit
+    the action. An approval marker inside a message is not a step. A human
+    advisor is offered on every turn and is used immediately on request, and
+    for vulnerability, affordability, debt, disconnection, prepayment, and complaints.
+
+  approval_points:
+    - action: "Confirm this held proposal"
+      approver: "Account holder"
+      mandatory: true
+      rationale: "confirm_action accepts the directory account holder only when the content hash matches the agent-held copy. The action is not carried out."
+    - action: "See a vulnerability, distress, safeguarding, complaint, or prohibited-action route"
+      approver: "Human advisor"
+      mandatory: true
+      rationale: "Those cues are not a routine answer. The cue text is not copied. The customer can ask for a person on any turn."
+    - action: "Acknowledge the AI disclosure and the human route"
+      approver: "Account holder"
+      mandatory: true
+      rationale: "disclosure_seen and human_route_seen must be the boolean true. A string is not coerced."
+    - action: "Change a tariff, agree a plan, write off debt, install or switch a meter, or decide a complaint"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after a confirmation."
+
+  no_approval_required:
+    - action: "Read the draft answer"
+      rationale: "Reading the draft has no external effect. confirmation_recorded stays false and nothing is submitted."
+    - action: "Re-run the same request"
+      rationale: "No billing call until the confirmation object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Articles 6 and 9
+      were not opened on 27 November 2026. The Ofgem AI blog opened that day names
+      UK GDPR, the Data Protection Act 2018, and the Data (Use and Access) Act 2025.
+      That is context. It is not a finding that a duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, disability, mental health, or other sensitive text a customer may paste"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 27 November 2026."
+    safeguards:
+      - "A vulnerability, distress, safeguarding, whistleblowing, grievance, SAR, or FOI cue is routed to a human advisor. The cue text is not copied."
+      - "Phone numbers, email addresses, dates of birth, postal addresses, personal names, account numbers, and UK identifiers are counted and not stored. The output is not described as anonymised."
+      - "A count of people below 5 is not published, and neither is a difference or a percentage of that count. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person or an account."
+  data_minimisation:
+    - "The customer message is not stored on the result."
+    - "Cue text is not copied."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The held copy lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on the account are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "A subject access request in the message is handed to a person. The agent does not fulfil it."
+
+prompt_injection:
+  description: >
+    The customer message, the account notes, and a caller-supplied policy are
+    untrusted. They may say the action is already confirmed, that the agent
+    should change the tariff, or that a label should be stripped. The core
+    does not read the network and does not call a billing system.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Change-tariff and drop-the-hold sentences are recorded. followed stays false."
+    - control: "Negation is not a positive inclusion"
+      description: "A phrase after not true that, in the same sentence, is not an instruction. A distress stem is still routed."
+    - control: "The confirmation is a separate object"
+      description: "Confirmation keys on the request are ignored. confirmation_recorded stays false until confirm_action succeeds against the agent-held copy."
+    - control: "The pinned policy wins"
+      description: "A knowledge base, policy, or directory in the request is not used for the answer or the confirmation."
+    - control: "No tariff, plan, write-off, meter, or decision tool"
+      description: "Those functions raise CustomerForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The customer and
+    the human advisor are the control. Nothing is submitted even if the note is wrong.
+    A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named supplier"
+  date_assessed: "2026-11-27"
+  risks:
+    - id: "R1"
+      risk: "A sentence in a message is treated as the customer's confirmation or as an instruction to change a tariff"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "confirm_action reads only the separate object, the content hash, and the held copy"
+      residual_risk: "Low"
+      owner: "Customer advisor"
+    - id: "R2"
+      risk: "The agent changes a tariff, agrees a plan, writes off debt, or installs a prepayment meter"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false after a confirmation"
+      residual_risk: "Low"
+      owner: "Customer advisor"
+    - id: "R3"
+      risk: "A vulnerable customer is given a routine answer"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Vulnerability, distress, and affordability cues, including paraphrases, go to a human advisor"
+        - "A stated category cannot drop a flag derived from the text"
+      residual_risk: "Medium"
+      owner: "Customer advisor"
+    - id: "R4"
+      risk: "A complaint is given the wrong escalation route"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "The sector on the pinned account selects the pinned policy text"
+        - "The DISP clock is not applied"
+      residual_risk: "Low"
+      owner: "Customer advisor"
+    - id: "R5"
+      risk: "A small fairness count identifies one person through a difference or a percentage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and is not differenced, including under another field name"
+      residual_risk: "Medium"
+      owner: "Customer advisor"
+    - id: "R6"
+      risk: "A legal hold or a SECRET cover is dropped"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept inside the hash"
+      residual_risk: "Medium"
+      owner: "Information governance"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the account reference
+    if it matched the synthetic pattern, the outcome, and whether a
+    confirmation was recorded. This starter does not write an application log.
+    Do not put message text that identifies a person in an application trace.
+    The held hash is the audit link between the proposal and the confirmation.
+    Fairness counts use synthetic group codes and small-number suppression.
+  logged_events:
+    - event: "Draft returned"
+      data_logged:
+        - "Timestamp"
+        - "Account reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether confirmation_recorded was left false"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Customer confirmation recorded in memory"
+      data_logged:
+        - "Whether the content hash matched the held copy"
+        - "The action id"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a billing system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Customer advisor"
+      contact: "customers@reedmarsh.example"
+    - role: "Data protection officer"
+      contact: "dpo@reedmarsh.example"
+
+review:
+  last_review_date: "2026-11-27"
+  next_review_date: "2027-05-27"
+  review_frequency: "6 months, and sooner if the cited pages change"
+  reviewer: "The adopting organisation's customer advisor and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to the pinned knowledge, the complaints policy, or the accounts"
+    - "A change to the Ofgem, Ofwat, or complaints pages cited in src/sources.py"
+    - "A proposal to add a connector that can submit, agree, send, or write"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Customer core"
+      path: "src/customer.py"
+    - name: "Opened sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Articles 6, 9, and 22A to 22D were not opened on 27 November 2026."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "The eight-week Energy Ombudsman wording is from the Ofgem complaints page opened on 27 November 2026. The 2008 regulations, as opened, define a specified time period and do not contain the words eight weeks. The Energy Ombudsman website was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Ofwat's customer-focused licence condition page calls the condition Condition G. No water Priority Services Register licence condition number was found on the pages opened. None is stated."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "Treating an article or a snapshot as stale when the gap is greater than 90 days is this starter's rule. It is not a statutory period."
+      section: "src/customer.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/fairness.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "The harness overview opened on 27 November 2026 names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified. The page says that harness retries and finds alternative paths. This starter does not enable that behaviour."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 27 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Reedmarsh Energy and Reedmarsh Water are invented. The contact addresses are not real. 01632 is Ofcom's drama number range used here as a synthetic contact, not a live line."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true
