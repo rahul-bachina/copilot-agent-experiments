@@ -68,7 +68,7 @@ hide:
 
 <p class="eyebrow">The experiments</p>
 
-## Eighty-three starters you can read today
+## Eighty-five starters you can read today
 
 </div>
 
@@ -2132,6 +2132,31 @@ The named process owner chooses retry, route, or cancel for the held proposal. T
 
 <article class="exp-card" markdown="1">
 
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 83 · UK11 · Information governance · Autonomy A1</p>
+
+### Subject access request assistant
+
+Scope a synthetic subject access request, illustrate the statutory period, and propose redactions and exemption candidates. The information governance officer approves the bundle.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named information governance officer approves every redaction, every exemption, and the held disclosure bundle. The agent does not send a response, delete or edit a record, or decide an exemption.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/83-subject-access-request-assistant.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/83-subject-access-request-assistant)
+
+</div>
+
+</article>
+
+<article class="exp-card" markdown="1">
+
 <p class="card-kicker"><span class="status status-available">Available</span> · Experiment 84 · UK12 · Utilities · Autonomy A1</p>
 
 ### Energy and water customer agent
@@ -2155,6 +2180,31 @@ The customer confirms the held proposal. Affordability, debt, and vulnerability 
 
 </article>
 
+<article class="exp-card" markdown="1">
+
+<p class="card-kicker"><span class="status status-available">Available</span> · Experiment 85 · UK13 · Adult social care · Autonomy A1</p>
+
+### Visit and meeting notes
+
+Draft a structured case note from a synthetic adult social care or housing-support visit. The practitioner approves the exact note.
+
+<div class="boundary" markdown="1">
+
+<span>The boundary</span>
+
+The named practitioner approves the held note. The agent does not write the case record, share the note, or assess eligibility, risk, or need.
+
+</div>
+
+<div class="card-links" markdown="1">
+
+[Read the briefing](experiments/85-visit-notes-case-record.md)
+[Source](https://github.com/rahul-bachina/copilot-agent-experiments/tree/main/experiments/85-visit-notes-case-record)
+
+</div>
+
+</article>
+
 </div>
 
 <p class="note">Available means the starter is in the repository and the briefing says what you can run. It does not mean a tenant is configured, or that a live model has been scored.</p>
@@ -2173,7 +2223,7 @@ The customer confirms the held proposal. Affordability, debt, and vulnerability 
 
 </div>
 
-<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. O004 is Experiment 79. O006 is Experiment 80. O007 is Experiment 81. O009 is Experiment 82. UK12 is Experiment 84. Nothing on this list is still only a name.</p>
+<p class="note"><a href="roadmap/">Open the roadmap</a>. B004, B005, B006, B007, B008, B009, F004, G001, G003, G004, G005, G006, G007, G008, G009, G010, H009, L004, L006, Q009, UK01, UK02, UK03, UK04, UK05, UK06, UK07, UK08, M003, V006, V010, O001, O005, O008, UK09, UK10, C001, C002, C003, C004, C005, C007, C008, C009, C010, M009, M001, M002, M004, M005, M006, M007, M008, M010, H001, H002, H003, H004, H005, H006, H007, H008, H010, L001, L002, L003, L005, L007, L008, L009, and L010 now have briefings. V009 is Experiment 75. V007 is Experiment 76. O002 is Experiment 77. O003 is Experiment 78. O004 is Experiment 79. O006 is Experiment 80. O007 is Experiment 81. O009 is Experiment 82. UK11 is Experiment 83. UK12 is Experiment 84. UK13 is Experiment 85. Nothing on this list is still only a name.</p>
 
 <section class="principles" markdown="1">
 
