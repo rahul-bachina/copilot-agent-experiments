@@ -262,6 +262,9 @@ DIAGRAMS = {
     "experiments/82-workflow-exception-assistant/docs/architecture_diagram.png": (
         "experiments/img/82-workflow-exception-assistant-architecture.png"
     ),
+    "experiments/83-subject-access-request-assistant/docs/architecture_diagram.png": (
+        "experiments/img/83-subject-access-request-assistant-architecture.png"
+    ),
 }
 
 
