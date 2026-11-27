@@ -265,6 +265,9 @@ DIAGRAMS = {
     "experiments/83-subject-access-request-assistant/docs/architecture_diagram.png": (
         "experiments/img/83-subject-access-request-assistant-architecture.png"
     ),
+    "experiments/84-energy-water-customer-agent/docs/architecture_diagram.png": (
+        "experiments/img/84-energy-water-customer-agent-architecture.png"
+    ),
     "experiments/85-visit-notes-case-record/docs/architecture_diagram.png": (
         "experiments/img/85-visit-notes-case-record-architecture.png"
     ),

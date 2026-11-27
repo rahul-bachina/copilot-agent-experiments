@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the customer's confirmation of one held proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "customer_ref",
+    "content_hash",
+    "explicit_confirm",
+    "confirmed_action",
+    "disclosure_seen",
+    "human_route_seen"
+  ],
+  "properties": {
+    "customer_ref": {"type": "string", "pattern": "^CUS-\\d{4}$"},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "explicit_confirm": {"type": "boolean"},
+    "confirmed_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "action_id", "account_ref", "exact_text", "sector"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["meter_reading_submission", "payment_plan_request", "psr_referral"]
+        },
+        "action_id": {"type": "string"},
+        "account_ref": {"type": "string"},
+        "exact_text": {"type": "string"},
+        "meter_reading": {"type": ["string", "null"]},
+        "reading_date": {"type": ["string", "null"]},
+        "amount": {"type": ["string", "null"]},
+        "sector": {"type": "string", "enum": ["energy", "water"]}
+      }
+    },
+    "disclosure_seen": {"type": "boolean"},
+    "human_route_seen": {"type": "boolean"},
+    "retention_seen": {"type": "boolean"},
+    "hold_seen": {"type": "boolean"},
+    "amount_seen": {"type": "boolean"}
+  }
+}
