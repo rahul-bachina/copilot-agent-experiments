@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record the disclosure approval for the held bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "case_id", "content_hash"],
+  "properties": {
+    "item": {"type": "string", "const": "disclosure-approval"},
+    "decision": {"type": "string", "const": "approve_disclosure"},
+    "approver_ref": {"type": "string"},
+    "case_id": {"type": "string"},
+    "content_hash": {"type": "string"},
+    "redaction_decisions": {"type": "object"},
+    "exemption_decisions": {"type": "object"},
+    "pins_seen": {"type": "boolean"},
+    "dates_seen": {"type": "boolean"},
+    "identity_seen": {"type": "boolean"},
+    "authority_seen": {"type": "boolean"},
+    "markings_seen": {"type": "boolean"},
+    "holds_seen": {"type": "boolean"},
+    "suppression_seen": {"type": "boolean"},
+    "clarification_seen": {"type": "boolean"},
+    "foi_seen": {"type": "boolean"},
+    "exemptions_seen": {"type": "boolean"},
+    "redactions_seen": {"type": "boolean"},
+    "sources_seen": {"type": "boolean"},
+    "conflicts_seen": {"type": "boolean"},
+    "carve_out_seen": {"type": "boolean"},
+    "leading_seen": {"type": "boolean"}
+  }
+}

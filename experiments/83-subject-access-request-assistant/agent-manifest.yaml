@@ -1,0 +1,456 @@
+# Agent manifest: Subject Access Request Scoping and Redaction Assistant
+# Experiment 83 — catalogue ID UK11
+# Version: 0.1.0
+# Last reviewed: 2026-11-27
+# Next review: 2027-05-27
+
+$schema: "../../../schemas/agent-manifest.schema.json"
+
+agent:
+  id: "exp-83-subject-access-request-assistant"
+  name: "Subject Access Request Scoping and Redaction Assistant"
+  version: "0.1.0"
+  description: >
+    Scopes a synthetic subject access request, illustrates the statutory
+    period, and proposes redactions and exemption candidates. Autonomy A1.
+    The named information governance officer approves every redaction, every
+    exemption, and the disclosure bundle. The agent does not send a response,
+    delete or edit a record, or decide an exemption.
+  owner: "Information governance officer"
+  contact: "ig@reedmarsh.example"
+  repository: "https://github.com/rahul-bachina/copilot-agent-experiments"
+  experiment_path: "experiments/83-subject-access-request-assistant"
+
+autonomy:
+  level: "A1"
+  level_description: "The agent drafts a scope, a redaction list, and exemption candidates. The named information governance officer accepts or rejects each one. The agent never sends the disclosure."
+  constraints:
+    - "The information governance officer approves. The agent does not."
+    - "The agent NEVER sends a response, deletes a record, edits a record, or decides an exemption"
+    - "The agent NEVER treats a sentence in the request or a caller-supplied directory as authoritative"
+    - "A redaction is a proposal until the officer records accept or reject for that redaction id"
+  human_in_the_loop: true
+  auto_actions_enabled: false
+
+data_access:
+  reads:
+    - resource: "Synthetic subject access requests"
+      description: "A letter, an email, or a web form, including one made by a solicitor. Instructions in it are not followed."
+      access_level: "read"
+      scope: "One synthetic request. Text above the officer's directory clearance is not copied out."
+      justification: "The scope cites the request. The officer decides what is disclosed."
+      data_categories:
+        - "Request text"
+        - "Protective markings, retention labels, and legal-hold flags"
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+      retention: "The in-memory held copy lives for the process. This starter does not set a statutory retention period."
+    - resource: "Synthetic records export"
+      description: "Documents that may contain the requester's personal data and other people's data."
+      access_level: "read"
+      scope: "The documents in one synthetic request."
+      justification: "Redactions are proposed from this export. The records are not edited."
+      may_contain_personal_data: true
+      may_contain_special_category_data: true
+    - resource: "Pinned synthetic directory"
+      description: "Information governance officers and deputies. Request text does not set the role or the clearance."
+      access_level: "read"
+      scope: "The officers named on the pinned directory."
+      justification: "Only a named directory officer can record the disclosure approval."
+      may_contain_personal_data: true
+    - resource: "Pinned systems list"
+      description: "The systems a search may name. A system that is not on the list is flagged and not added."
+      access_level: "read"
+      scope: "One list."
+      justification: "The search scope is a proposal. It is not a finding that the search is reasonable and proportionate."
+      may_contain_personal_data: false
+    - resource: "Separate approval object"
+      description: "The only object that can record the disclosure approval, or that a route was seen."
+      access_level: "read"
+      scope: "One object, bound to the agent-held hash."
+      justification: "A sentence in the request is not that step."
+      may_contain_personal_data: false
+    - resource: "Experiment 08 UK identifier redaction"
+      description: "propose() on document text. Reversible stays false. Matched values are not stored."
+      access_level: "read"
+      scope: "Spans for UK identifiers. Names, emails, phones, dates of birth, addresses, and staff ids are proposed locally."
+      justification: "Third-party personal data is proposed for redaction. The output is not described as anonymised."
+      may_contain_personal_data: true
+    - resource: "Experiment 12 document intake"
+      description: "intake() returns an inventory draft. files_confirmed stays false. The content is not copied back."
+      access_level: "read"
+      scope: "One synthetic batch."
+      justification: "The inventory is a draft. The officer does not confirm the files in this starter."
+      may_contain_personal_data: true
+
+  never_access:
+    - resource: "A live case-management system or a production disclosure"
+      reason: "The synthetic request and the synthetic export are what this starter reads. It does not send, delete, or edit."
+    - resource: "A caller-supplied directory, exemption schedule, or register"
+      reason: "Differences are flagged. The approval uses the pinned directory."
+    - resource: "An approval marker, a role, or a clearance stated inside the request"
+      reason: "The directory and the separate approval object are the source."
+    - resource: "Document text above the officer's directory clearance"
+      reason: "The body is not copied. The higher marking, the legal hold, and the retention labels are kept."
+    - resource: "Experiment 01 live FOI triage"
+      reason: "That path can call a model. This starter does not import it. FOI section 40(1) is applied as a route, not as a disclosure."
+
+tools:
+  allowed:
+    - tool: "Scope subject access request"
+      provider: "Local Python (scope)"
+      action: "Log the request in the draft, illustrate the period, and propose redactions and exemption candidates"
+      access_level: "read"
+      scope: "One synthetic request. No network. No model. No send."
+      justification: "The officer sees both deadline readings. Neither is selected."
+      human_approval_required: false
+      output_requires_human_review: true
+    - tool: "Record route seen"
+      provider: "Local Python (record_route_seen)"
+      action: "Record that the named officer has seen a distress, safeguarding, whistleblowing, complaint, grievance, litigation, or authority route"
+      access_level: "read"
+      scope: "The draft and a separate seen object. Nothing is sent."
+      justification: "Those cues are not a routine request. The cue text is not copied."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Record disclosure approval"
+      provider: "Local Python (record_disclosure_approval)"
+      action: "Record that the named officer accepts or rejects each redaction and exemption for this held hash"
+      access_level: "read"
+      scope: "The draft and a separate approval object, bound to the content hash."
+      justification: "The catalogue checkpoint is that the officer approves every redaction and the disclosure. The step does not send it."
+      human_approval_required: true
+      output_requires_human_review: true
+    - tool: "Text note"
+      provider: "Microsoft Foundry"
+      action: "Turn the JSON into a short note, using only fields already in the JSON"
+      access_level: "read"
+      scope: "The JSON for this request"
+      justification: "Optional narrative. The hash, the redactions, and the empty or recorded approval stay in the Python core."
+      human_approval_required: false
+      output_requires_human_review: true
+
+  writes:
+    enabled: false
+    note: >
+      No writes. record_disclosure_approval keeps an in-memory acknowledgement
+      for this process. It does not edit a record or write a case system.
+
+  sends:
+    enabled: false
+    note: "No sends. Recording an approval does not email the requester or anyone else."
+
+high_risk_actions:
+  approve_reject:
+    enabled: false
+    rationale: "The agent does not decide an exemption or a redaction. An approval object records the officer's accept or reject. A sentence in the request cannot set it, and the disclosure is not sent."
+  regulated_decision:
+    enabled: false
+    rationale: "The agent does not decide that a deadline was met, that a search was reasonable and proportionate, or that an exemption applies."
+  production_record_change:
+    enabled: false
+    rationale: "The agent does not edit a record, delete a record, or write a production system."
+  external_send:
+    enabled: false
+    rationale: "The agent does not send the disclosure or a message to the requester."
+  spend_transact:
+    enabled: false
+    rationale: "There is no payment. A fee date is an input to the relevant-time illustration. The agent does not decide that a fee is lawful."
+  additional_high_risk:
+    - enabled: false
+      action_name: "Send a response, delete a record, edit a record, or decide an exemption"
+      rationale: "Those functions raise. response_sent, records_deleted, records_edited, and exemption_decided_by_agent stay false."
+    - enabled: false
+      action_name: "Treat request text as the officer's approval"
+      rationale: "disclosure_approval_recorded stays false until record_disclosure_approval succeeds for the named officer and the held hash."
+    - enabled: false
+      action_name: "Select one statutory reading as the deadline"
+      rationale: "deadline_selected stays null. deadline_decided stays false. Public holidays are not applied."
+    - enabled: false
+      action_name: "Apply a caller-supplied directory or exemption schedule"
+      rationale: "caller_directory_applied and caller_schedule_applied stay false."
+    - enabled: false
+      action_name: "Drop a legal hold, a retention label, or a protective marking"
+      rationale: "A hold, every retention label, and the higher marking are copied onto the result and sit inside the hash."
+    - enabled: false
+      action_name: "Describe the masked text as anonymised"
+      rationale: "described_as_anonymised stays false. A count of third parties below 5 is not published."
+
+human_approval:
+  description: >
+    The named information governance officer accepts or rejects every
+    redaction and every exemption candidate, and approves the disclosure
+    bundle, on a separate object bound to the agent-held copy and its hash.
+    That approval does not send the response. An approval marker inside the
+    request is not a step.
+
+  approval_points:
+    - action: "See a distress, safeguarding, whistleblowing, complaint, grievance, litigation, authority, or stale-export route"
+      approver: "Named information governance officer"
+      mandatory: true
+      rationale: "record_route_seen accepts the directory officer or deputy named on the draft and the content hash. It does not send a response."
+    - action: "Accept or reject each redaction and each exemption, and approve this held bundle"
+      approver: "Named information governance officer"
+      mandatory: true
+      rationale: "record_disclosure_approval accepts the directory officer or deputy only when the content hash matches the agent-held copy. The disclosure is not sent."
+    - action: "Acknowledge the opened UK GDPR, DPA 2018, FOI, and ICO pins"
+      approver: "Named information governance officer"
+      mandatory: true
+      rationale: "pins_seen must be the boolean true. Sections 52 and 53, S.I. 2026/82, and the Banking and Financial Dealings Act 1971 were not opened."
+    - action: "Acknowledge identity, authority, a marking, a hold, or a suppressed count"
+      approver: "Named information governance officer"
+      mandatory: true
+      rationale: "The matching acknowledgement must be the boolean true when that flag is set. A string is not coerced."
+    - action: "Send the disclosure, delete a record, or edit a record"
+      approver: "Nobody"
+      mandatory: true
+      rationale: "Those actions are not tools. The flags stay false after an approval."
+
+  no_approval_required:
+    - action: "Read the draft scope"
+      rationale: "Reading the draft has no external effect. disclosure_approval_recorded stays false and nothing is sent."
+    - action: "Re-run the same request"
+      rationale: "No send until the approval object matches. The same inputs and the same question date produce the same JSON."
+
+uk_gdpr:
+  lawful_basis:
+    primary: "Not asserted"
+    description: >
+      This starter does not decide the controller's lawful basis. Article 6
+      and Article 9 were not opened on 27 November 2026. Articles 12, 12A, and
+      15 were opened and are quoted as the time period and the right of access.
+      A quote is not a finding that the duty was met.
+    secondary: "None asserted."
+  special_category_data:
+    may_process: true
+    categories_possible:
+      - "Health, safeguarding, or other sensitive text a caller may paste into a request or a record"
+    lawful_basis_special: "Not asserted. Article 9 was not opened on 27 November 2026."
+    safeguards:
+      - "A distress, safeguarding, whistleblowing, complaint, grievance, or litigation cue is routed to the named officer. The cue text is not copied."
+      - "Third-party phone numbers, email addresses, dates of birth, postal addresses, personal names, staff ids, and UK identifiers are proposed for redaction and are not stored. The output is not described as anonymised."
+      - "A count of third parties below 5 is not published, and neither is a difference or a percentage of that count. Five is this starter's threshold."
+      - "Samples in this repository are synthetic."
+      - "No solely automated decision about a person. The draft does not send a disclosure."
+  data_minimisation:
+    - "Document text above the officer's clearance is not copied into the result."
+    - "Cue text is not copied."
+    - "described_as_anonymised stays false."
+  retention:
+    agent_retention: "The held copy lives for the process. This starter does not set a disposal date."
+    note: "A retention label and a legal hold on a record are kept. They are not a decision to dispose."
+  data_residency:
+    region: "UK"
+    note: "A production Microsoft Foundry deployment should use UK South or UK West. This repository cannot enforce that."
+  data_subject_rights:
+    note: "The agent illustrates a subject access request. It does not send the response. Erasure and objection go through the organisation's privacy process."
+
+prompt_injection:
+  description: >
+    Request text, records, and a caller directory are untrusted. They may say
+    the disclosure is already approved, that the agent should send it, or that
+    a label should be stripped. The core does not read the network and does
+    not send a response.
+  controls:
+    - control: "Instruction sentences are not followed"
+      description: "Send, delete, and drop-the-hold sentences are recorded. followed stays false."
+    - control: "Negation is not a positive inclusion"
+      description: "A phrase after not true that, in the same sentence, is not an exemption and not an instruction. A distress stem is still routed."
+    - control: "The approval is a separate object"
+      description: "Approval keys on the request are stripped. disclosure_approval_recorded stays false until record_disclosure_approval succeeds against the agent-held copy."
+    - control: "The pinned directory wins"
+      description: "A directory or an exemption schedule in the request is not used for the approval."
+    - control: "No send, delete, edit, or decide tool"
+      description: "Those functions raise SarForbidden."
+  residual_risk: >
+    A manipulated model can still narrate a misleading note. The named
+    information governance officer is the control. Nothing is sent even if
+    the note is wrong. A paraphrase that uses none of the cue stems is not flagged.
+
+risk_assessment:
+  methodology: "Likelihood x impact, Low / Medium / High, for this starter rather than a named organisation"
+  date_assessed: "2026-11-27"
+  risks:
+    - id: "R1"
+      risk: "A sentence in the request is treated as the officer's approval or as an instruction to send the file"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those words are recorded and not followed"
+        - "record_disclosure_approval reads only the separate object, the content hash, and the held copy"
+      residual_risk: "Low"
+      owner: "Information governance officer"
+    - id: "R2"
+      risk: "The agent sends a response, deletes a record, edits a record, or decides an exemption"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Those functions raise"
+        - "The flags stay false after an approval"
+      residual_risk: "Low"
+      owner: "Information governance officer"
+    - id: "R3"
+      risk: "Third-party personal data is left in the disclosure copy"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Names, emails, phones, dates of birth, addresses, staff ids, and UK identifiers are proposed for redaction"
+        - "The officer accepts or rejects each redaction"
+        - "The requester's own values are not proposed for redaction"
+      residual_risk: "Medium"
+      owner: "Information governance officer"
+    - id: "R4"
+      risk: "One reading of the one-month period is presented as the statutory deadline"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "Both readings are returned and neither is selected"
+        - "An extension and a stop-the-clock pause are illustrative"
+      residual_risk: "Low"
+      owner: "Information governance officer"
+    - id: "R5"
+      risk: "An unreadable or future date is coerced, or a stale export is treated as current"
+      likelihood: "Medium"
+      impact: "Medium"
+      inherent_risk: "Medium"
+      controls:
+        - "The value is flagged and coerced stays false"
+        - "The question date is the as-of argument"
+        - "An export older than 30 days is flagged. Thirty days is a starter rule, not a statute."
+      residual_risk: "Low"
+      owner: "Information governance officer"
+    - id: "R6"
+      risk: "A legal hold or a retention label is dropped, or a SECRET cover is missed"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "Metadata and content are both read"
+        - "A compound marking takes the higher tier"
+        - "The hold and every retention label are kept inside the hash"
+      residual_risk: "Medium"
+      owner: "Information governance"
+    - id: "R7"
+      risk: "A small count of third parties identifies one person through a difference or a percentage"
+      likelihood: "Medium"
+      impact: "High"
+      inherent_risk: "High"
+      controls:
+        - "A count below 5 is not published and is not differenced"
+      residual_risk: "Medium"
+      owner: "Information governance officer"
+
+logging_and_audit:
+  description: >
+    A production deployment should log the invocation, the officer reference
+    if it matched the synthetic pattern, the outcome, and whether an approval
+    was recorded. This starter does not write an application log. Do not put
+    request text that identifies a person in an application trace. The held
+    hash is the audit link between the bundle and the officer's approval.
+    That link is a starter control. It is not a finding that a disclosure duty was met.
+  logged_events:
+    - event: "Scope returned"
+      data_logged:
+        - "Timestamp"
+        - "Officer reference, if it matched the synthetic pattern"
+        - "Outcome"
+        - "Whether disclosure_approval_recorded was left false"
+      retention: "Organisation's records schedule. Not set by this starter."
+    - event: "Disclosure approval recorded in memory"
+      data_logged:
+        - "Whether the content hash matched the held copy"
+        - "The case id"
+        - "production_written false"
+      retention: "Organisation's schedule. The agent does not write this event to a case system."
+  log_destination:
+    primary: "Not configured in this starter"
+    note: "Choose a UK-resident store the organisation already operates."
+
+kill_switch:
+  description: "Ways to stop the agent being used. Times are the platform's, not a measured drill."
+  methods:
+    - method: "Turn off the Copilot Studio agent"
+      action: "Set the agent to Off in Copilot Studio administration"
+      time_to_effect: "Immediate once an administrator does it"
+      who_can_activate: "Copilot Studio administrators"
+    - method: "Remove Microsoft Foundry access"
+      action: "Revoke the key or the managed-identity role used for an optional note"
+      time_to_effect: "Immediate for new calls"
+      who_can_activate: "Foundry or Key Vault administrators"
+  escalation_contacts:
+    - role: "Information governance officer"
+      contact: "ig@reedmarsh.example"
+    - role: "Data protection officer"
+      contact: "dpo@reedmarsh.example"
+
+review:
+  last_review_date: "2026-11-27"
+  next_review_date: "2027-05-27"
+  review_frequency: "6 months, and sooner if the cited statute text changes"
+  reviewer: "The adopting organisation's information governance officer and DPO. Not assigned to a named person in this starter."
+  review_triggers:
+    - "A change to UK GDPR Article 12, Article 12A, or Article 15"
+    - "A change to DPA 2018 Schedule 2, Schedule 3, Schedule 4, section 45, or section 54"
+    - "A proposal to add a connector that can send, delete, edit, or write a case system"
+  related_documents:
+    - name: "Experiment readme"
+      path: "README.md"
+    - name: "Scope core"
+      path: "src/sar.py"
+    - name: "Opened sources"
+      path: "src/sources.py"
+    - name: "Security and permissions"
+      path: "docs/security-and-permissions.md"
+
+atrs_mapping:
+  note: >
+    Not an ATRS record and not a scope decision. A body that wants a draft
+    pack uses Experiment 03. The draft from this starter is not an approval
+    of that pack.
+  mappings:
+    - atrs_field: "Name"
+      manifest_section: "agent.name"
+    - atrs_field: "Description"
+      manifest_section: "agent.description"
+    - atrs_field: "Human oversight"
+      manifest_section: "human_approval"
+
+assumptions:
+  description: "Items an organisation must confirm before relying on this starter."
+  items:
+    - id: "A1"
+      assumption: "No lawful basis is asserted. Article 6 and Article 9 were not opened on 27 November 2026. Articles 12, 12A, and 15 were opened and are quoted."
+      section: "uk_gdpr"
+      verify_on_deployment: true
+    - id: "A2"
+      assumption: "DPA 2018 sections 52 and 53 were not opened, so an identity date and a fee date are not applied on the law-enforcement path. S.I. 2026/82 was not opened. The Banking and Financial Dealings Act 1971 was not opened, so public holidays are not applied. The Interpretation Act 1978 was not opened."
+      section: "src/sources.py"
+      verify_on_deployment: true
+    - id: "A3"
+      assumption: "Both the ICO same-date month and the day-before reading of beginning with are shown. Neither is selected. An export older than 30 days is flagged. Thirty days is a starter rule, not a statutory period."
+      section: "src/deadline.py"
+      verify_on_deployment: true
+    - id: "A4"
+      assumption: "The marking order is a starter rule. The Government Security Classifications Policy was not re-opened."
+      section: "src/marking.py"
+      verify_on_deployment: true
+    - id: "A5"
+      assumption: "The small-number threshold of 5 is a starter control. It is not anonymisation. The ICO anonymisation guidance was not opened."
+      section: "src/sar.py"
+      verify_on_deployment: true
+    - id: "A6"
+      assumption: "Entra Agent ID, Conditional Access for agents, Power Platform DLP as a configured policy, Microsoft Foundry prompt shields, Key Vault, Purview, and Application Insights were not opened on 27 November 2026. Treat that product behaviour as unverified."
+      section: "docs/security-and-permissions.md"
+      verify_on_deployment: true
+    - id: "A7"
+      assumption: "The harness overview was opened on 27 November 2026. It names a Microsoft Copilot harness. It does not use the words GitHub Copilot harness. The common-brief sentence that this harness is not the GitHub Copilot service was not on that page. That sentence is unverified. The page says that harness retries and finds alternative paths. This starter does not enable that behaviour."
+      section: "docs/harness-comparison.md"
+      verify_on_deployment: true
+    - id: "A8"
+      assumption: "Reedmarsh Borough Council is invented. The contact addresses are not real. The exemption paragraph numbers were read on legislation.gov.uk on 27 November 2026. A phrase match is a candidate, not a decision that the exemption applies."
+      section: "fixtures/directory.json"
+      verify_on_deployment: true

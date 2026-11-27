@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Record that the named officer has seen the route",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "decision", "approver_ref", "case_id", "content_hash"],
+  "properties": {
+    "item": {"type": "string", "const": "route-seen"},
+    "decision": {"type": "string", "const": "seen"},
+    "approver_ref": {"type": "string"},
+    "case_id": {"type": "string"},
+    "content_hash": {"type": "string"}
+  }
+}
