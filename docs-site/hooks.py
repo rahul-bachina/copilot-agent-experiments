@@ -262,6 +262,9 @@ DIAGRAMS = {
     "experiments/82-workflow-exception-assistant/docs/architecture_diagram.png": (
         "experiments/img/82-workflow-exception-assistant-architecture.png"
     ),
+    "experiments/84-energy-water-customer-agent/docs/architecture_diagram.png": (
+        "experiments/img/84-energy-water-customer-agent-architecture.png"
+    ),
 }
 
 

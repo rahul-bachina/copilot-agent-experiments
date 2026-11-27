@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Answer one synthetic energy or water customer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["synthetic", "conversation_id", "account_ref", "message"],
+  "properties": {
+    "synthetic": {"type": "boolean", "const": true},
+    "conversation_id": {"type": "string", "pattern": "^CV-\\d{4}$"},
+    "account_ref": {"type": "string", "pattern": "^ACC-\\d{4}$"},
+    "message": {"type": "string", "maxLength": 4000},
+    "account_notes": {"type": "string", "maxLength": 4000},
+    "stated_category": {"type": "string", "maxLength": 80},
+    "caller_knowledge": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "body"],
+        "properties": {
+          "id": {"type": "string", "maxLength": 40},
+          "body": {"type": "string", "maxLength": 2000}
+        }
+      }
+    }
+  }
+}
